@@ -10,12 +10,9 @@ ErrorDocument 404 /404.php
 RewriteEngine On
 RewriteBase /
 RewriteRule ^index\.php$ - [L]
-
-# File or directory does not exist => redirect to index
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.php [L]
 </IfModule>
-
 
 # END WordPress

@@ -24,7 +24,7 @@ if ( isset($_POST['submitLogin']) ) { //login script
         $result = mysqli_fetch_assoc($stmt->get_result());
         $stmt->close();
 
-        if (password_verify($LoginFormPassword, $result['password'])) {
+        if ((password_verify($LoginFormPassword, $result['password']))) {
             // Create Prepared Statement. gets user information
             $stmt = $conn->prepare("SELECT * FROM nsca_user WHERE UserID = ?");
             $stmt->bind_param("i", $result['UserID']);
@@ -75,8 +75,8 @@ if ( isset($_POST['submitLogin']) ) { //login script
     }
 
 }
+
+echo "test";
 // Close connection
 mysqli_close($conn);
-
-?>
 
