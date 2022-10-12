@@ -7,7 +7,7 @@
         $dbuser = "";
         $dbpass = "";
         if ($_SERVER['SERVER_NAME'] == "localhost") {
-            $dbhost = "localhost:3307";
+            $dbhost = "localhost:3306";
             $dbuser = "root";
             $dbpass = "root";
         } else {
