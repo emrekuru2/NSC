@@ -1,7 +1,7 @@
-<?php 
-    // Close connection
-    mysqli_close($conn);
+<?php
+    $urlHeader = "/khurramaziz_cricketassociation/client/";
 ?>
+
 <!-- Footer -->
 <footer class="page-footer font-small light-blue py-4">
 
