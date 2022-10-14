@@ -1,44 +1,20 @@
 
 <?php
-include_once "../../db/database.php";
-include_once "../../db/dbFunctions.php";
+    $title = "Register";
+    $loginOrRegistrationPage = true;
 
-$conn = OpenCon();
-
-
-
+    include_once 'includes/components/header.php';
 ?>
-<!doctype html>
-<html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
-    <title>Register</title>
-
-    <link rel="icon" href="../../img/favicon.jpeg">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css">
-    <!-- Material Design Bootstrap -->
-    <link rel="stylesheet" type="text/css" href="../../css/mdb.min.css">
-    <!-- Your custom styles (optional) -->
-    <link rel="stylesheet" type="text/css" href="../../css/style.css">
-</head>
 
 <body class="light-blue">
-<style>
-
-</style>
 
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-10 col-lg-8 mx-auto">
             <div class="card card-signin my-5 border border-dark">
                 <div class="card-body">
-                    <a href="../../index.php"><img src="../../img/logo.png" class="img-fluid" alt="Responsive image"></a>
+                    <a href="index.php"><img src="img/logo.png" class="img-fluid" alt="Responsive image"></a>
                     <br>
 
 
@@ -118,6 +94,7 @@ $conn = OpenCon();
                             <label for="RegisterFormPostalCode"></label>
                             <div class="form-group col-sm-4">
                                 <input type="text" id="RegisterFormPostalCode" name="RegisterFormPostalCode" class="form-control" pattern="[0-9a-zA-Z]{6}" maxlength = "6" placeholder="Postal Code" value="<?php if(isset($_POST['RegisterFormPostalCode'])){ echo htmlentities($_POST['RegisterFormPostalCode']);}?>" required>
+                                <small class="form-text text-muted mb-0 mt-1"><i class="fas fa-exclamation-circle" style="color:orange"></i>&nbsp;Please follow the format X2X2X2</small>
                             </div>
                         </div>
 
@@ -137,9 +114,9 @@ $conn = OpenCon();
                         </div>
 
                         <!-- Role DropDown -->
-                        <div class="form-row">
-                            <label for="RegisterFormRole"></label>
+                        <div class="form-row">                            
                             <div class="form-group col-sm-12">
+                                <label for="RegisterFormRole" style="color: gray;">Please enter the role you want to join as in the association</label>
                                 <select id="RegisterFormRole" name="RegisterFormRole" class="form-control" required>
                                     <?php
                                     $roleResult = getRoles($conn);
@@ -191,14 +168,14 @@ $conn = OpenCon();
 
                             // Create User Image Directory
                             $folderName = uniqid($registerFirstName . "_" . $registerLastName . "_");
-                            if (is_dir("../../img/userPictures/".$folderName) === false) {
-                                mkdir("../../img/userPictures/".$folderName, 0700, true);
+                            if (is_dir("img/userPictures/".$folderName) === false) {
+                                mkdir("img/userPictures/".$folderName, 0700, true);
 
                                 //error checking below. In the very small chance that the folder generated already exists, create another one
                             } else {
                                 $folderName = uniqid($registerFirstName . "_" . $registerLastName . "_");
-                                if (is_dir("../../img/userPictures/".$folderName) === false) {
-                                    mkdir("../../img/userPictures/".$folderName, 0700, true);
+                                if (is_dir("img/userPictures/".$folderName) === false) {
+                                    mkdir("img/userPictures/".$folderName, 0700, true);
                                 } else {
                                     die(); //if they second folder generated exists too. Just give up and move on.
                                 }
@@ -207,7 +184,7 @@ $conn = OpenCon();
                             // Check To See If File Is Actually Uploaded
                             if (is_uploaded_file($_FILES["profilePicture"]["tmp_name"])) {
                                 // File Handling
-                                $target_dir = "../../img/userPictures/" . $folderName . "/";
+                                $target_dir = "img/userPictures/" . $folderName . "/";
                                 $target_file = $target_dir . basename($_FILES["profilePicture"]["name"]);
                                 $uploadOk = 1;
                                 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -216,13 +193,13 @@ $conn = OpenCon();
                                 // If File Is Too Large Give Error and remove folder
                                 if ($_FILES['profilePicture']['size'] > 3145728) {
                                     echo "<br><p class='text-danger'>File is too large, Please try again.</p>";
-                                    rmdir("../../img/userPictures/".$folderName);
+                                    rmdir("img/userPictures/".$folderName);
                                     die();
                                 }
                                 // If File Type is incorrect Give Error and remove folder
                                 if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
                                     echo "<br><p class='text-danger'>File type is incorrect, Please try again.</p>";
-                                    rmdir("../../img/userPictures/".$folderName);
+                                    rmdir("img/userPictures/".$folderName);
                                     die();
                                 }
                                 // Rename The File To profilePicture
@@ -230,14 +207,14 @@ $conn = OpenCon();
                                     rename($target_file, $target_dir . "profilePicture.jpg");
                                 } else {
                                     echo "<br><p class='text-danger'>File upload failed, Please try again.</p>";
-                                    rmdir("../../img/userPictures/".$folderName);
+                                    rmdir("img/userPictures/".$folderName);
                                     die();
                                 }
                             }
                             // If User Dose Not Upload File, Create Folder
                             else {
-                                $file_path = $target_dir = "../../img/userPictures/" . $folderName . "/";
-                                copy('../../img/playerImg.png', "../../img/userPictures/" . $folderName . "/ProfilePicture.jpg");
+                                $file_path = $target_dir = "img/userPictures/" . $folderName . "/";
+                                copy('img/playerImg.png', "img/userPictures/" . $folderName . "/ProfilePicture.jpg");
                             }
 
                             $UserDate = date("Y-m-d H:i:s");
@@ -283,7 +260,7 @@ $conn = OpenCon();
 
                                         if ($sqluserdataquery and $sqllogindataquery and $sqlUserRoleInsert) {
                                             echo "<br><p class='text-success'>You have registered successful!</p>";
-                                            echo "<meta http-equiv='refresh' content='0; url=../../index.php?postRegister=success'>";
+                                            echo "<meta http-equiv='refresh' content='0; url=../../loginform.php?postRegister=success'>";
                                             exit();
                                         } else {
                                             echo "ERROR: Could not execute " . $sqlUserRoleInsert . mysqli_error($conn);
@@ -318,6 +295,9 @@ $conn = OpenCon();
         </div>
     </div>
 </div>
-<script src="../../js/fileNameChange.js"></script>
-</body>
-</html>
+<script src="js/fileNameChange.js"></script>
+
+<?php
+    include_once 'includes/components/footer.php'
+?>
+

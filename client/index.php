@@ -7,11 +7,6 @@ include 'includes/components/header.php';
 $conn = OpenCon();
 //Adds one to the counter
 //mysqli_query($conn, "UPDATE NSCA_PageCounter SET counter = counter + 1");
-
-if (isset($_GET['postRegister']) && $_GET['postRegister'] == "success"){
-    echo "<br>";
-    echo "<p class='text-center text-success'>Registered successfully! Please login to access your account.</p>";
-}
 ?>
 <br>
 <div class="container">

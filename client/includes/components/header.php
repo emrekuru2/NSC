@@ -1,16 +1,29 @@
 <?php
-    $urlHeader = "";
+    // Prevent direct access
+    if(preg_match("/includes/", $_SERVER["PHP_SELF"]) == 1) {
+        header("Location: ../../index.php");
+        die();
+    }
 
+    include_once $_SERVER["DOCUMENT_ROOT"]."/db/database.php";
+    include_once $_SERVER["DOCUMENT_ROOT"]."/db/dbFunctions.php";
 
-if(session_status() !== PHP_SESSION_ACTIVE) session_start();
+    $conn = OpenCon();
 
-include_once $_SERVER["DOCUMENT_ROOT"]."/db/database.php";
-include_once $_SERVER["DOCUMENT_ROOT"]."/db/dbFunctions.php";
+    // If it is the login or registration page use the following header
+    if (isset($loginOrRegistrationPage) && $loginOrRegistrationPage) 
+    {
+        session_start();
+        $session_token = md5(uniqid(rand(), true));
 
-
-
+        $_SESSION['session_token'] = $session_token;
+    }
+    else 
+    {
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
+    }
+    
 ?>
-
 
 
 <!doctype html>
@@ -20,7 +33,6 @@ include_once $_SERVER["DOCUMENT_ROOT"]."/db/dbFunctions.php";
     <base href="header.php">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
 
     <title><?php echo $title ?></title>
 
@@ -34,10 +46,11 @@ include_once $_SERVER["DOCUMENT_ROOT"]."/db/dbFunctions.php";
     <link rel="stylesheet" type="text/css" href="../../css/style.css">
 </head>
 
+<?php  
+    if (!isset($loginOrRegistrationPage)) {
+?>
 
 <body>
-
-
 <nav class="navbar navbar-expand-lg navbar-dark light-blue">
     <a class="navbar-brand" href="../../">Nova Scotia Cricket Association</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -103,7 +116,7 @@ include_once $_SERVER["DOCUMENT_ROOT"]."/db/dbFunctions.php";
             } else {
                 ?>
                 <li class="nav-item">
-                <a class="nav-link waves-effect waves-light" href="includes/components/loginform.php">
+                <a class="nav-link waves-effect waves-light" href="loginform.php">
                     <i class="fas fa-user"></i> Login
                 </a>
                 </li>
@@ -118,21 +131,23 @@ include_once $_SERVER["DOCUMENT_ROOT"]."/db/dbFunctions.php";
 </nav>
 
 <?php
-$conn = OpenCon();
-if (getAlertStatus($conn) == "active"){
-    $row = getAlerts($conn);
-    echo mysqli_error($conn);
-    ?>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <h4 class="alert-heading"><?php echo $row['Alert_Title']; ?></h4>
-        <p><?php echo $row['Alert_Content']; ?></p>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+        $conn = OpenCon();
+        if (getAlertStatus($conn) == "active"){
+            $row = getAlerts($conn);
+            echo mysqli_error($conn);
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <h4 class="alert-heading"><?php echo $row['Alert_Title']; ?></h4>
+                <p><?php echo $row['Alert_Content']; ?></p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
 
-    <?php
-}
+            <?php
+        }
+
+    }
 ?>
 
 
