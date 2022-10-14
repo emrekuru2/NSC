@@ -93,7 +93,8 @@
 
                             <label for="RegisterFormPostalCode"></label>
                             <div class="form-group col-sm-4">
-                                <input type="text" id="RegisterFormPostalCode" name="RegisterFormPostalCode" class="form-control" pattern="[0-9a-zA-Z]{6}" maxlength = "7" placeholder="Postal Code" value="<?php if(isset($_POST['RegisterFormPostalCode'])){ echo htmlentities($_POST['RegisterFormPostalCode']);}?>" required>
+                                <input type="text" id="RegisterFormPostalCode" name="RegisterFormPostalCode" class="form-control" pattern="[0-9a-zA-Z]{6}" maxlength = "6" placeholder="Postal Code" value="<?php if(isset($_POST['RegisterFormPostalCode'])){ echo htmlentities($_POST['RegisterFormPostalCode']);}?>" required>
+                                <small class="form-text text-muted mb-0 mt-1"><i class="fas fa-exclamation-circle" style="color:orange"></i>&nbsp;Please follow the format X2X2X2</small>
                             </div>
                         </div>
 
@@ -259,7 +260,7 @@
 
                                         if ($sqluserdataquery and $sqllogindataquery and $sqlUserRoleInsert) {
                                             echo "<br><p class='text-success'>You have registered successful!</p>";
-                                            echo "<meta http-equiv='refresh' content='0; url=../../index.php?postRegister=success'>";
+                                            echo "<meta http-equiv='refresh' content='0; url=../../loginform.php?postRegister=success'>";
                                             exit();
                                         } else {
                                             echo "ERROR: Could not execute " . $sqlUserRoleInsert . mysqli_error($conn);

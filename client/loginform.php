@@ -2,7 +2,12 @@
     $title = "Login";
     $loginOrRegistrationPage = true;
     
-    include_once 'includes/components/header.php'
+    include_once 'includes/components/header.php';
+
+    if (isset($_GET['postRegister']) && $_GET['postRegister'] == "success"){
+        echo "<div class='bg-warning text-center font-weight-normal' style='padding: 1%'>You have registered successfully! Please login to access your account</div>";
+        echo "</div>";
+    }
 ?>
 
 <body class="light-blue">
