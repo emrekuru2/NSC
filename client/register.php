@@ -93,7 +93,7 @@
 
                             <label for="RegisterFormPostalCode"></label>
                             <div class="form-group col-sm-4">
-                                <input type="text" id="RegisterFormPostalCode" name="RegisterFormPostalCode" class="form-control" pattern="[0-9a-zA-Z]{6}" maxlength = "6" placeholder="Postal Code" value="<?php if(isset($_POST['RegisterFormPostalCode'])){ echo htmlentities($_POST['RegisterFormPostalCode']);}?>" required>
+                                <input type="text" id="RegisterFormPostalCode" name="RegisterFormPostalCode" class="form-control" pattern="[0-9a-zA-Z]{6}" maxlength = "7" placeholder="Postal Code" value="<?php if(isset($_POST['RegisterFormPostalCode'])){ echo htmlentities($_POST['RegisterFormPostalCode']);}?>" required>
                             </div>
                         </div>
 
@@ -113,9 +113,9 @@
                         </div>
 
                         <!-- Role DropDown -->
-                        <div class="form-row">
-                            <label for="RegisterFormRole"></label>
+                        <div class="form-row">                            
                             <div class="form-group col-sm-12">
+                                <label for="RegisterFormRole" style="color: gray;">Please enter the role you want to join as in the association</label>
                                 <select id="RegisterFormRole" name="RegisterFormRole" class="form-control" required>
                                     <?php
                                     $roleResult = getRoles($conn);
