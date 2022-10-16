@@ -1,0 +1,15 @@
+.banner_img{
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.banner_text{
+    position: absolute;
+    top: 15%;
+    right: 10%;
+    color: aliceblue; 
+    border:5px solid rgb(55, 149, 185);
+    background: rgb(55, 149, 185);
+}
+
