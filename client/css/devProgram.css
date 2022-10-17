@@ -13,3 +13,31 @@
     background: rgb(55, 149, 185);
 }
 
+.programs-board{
+    display: flex;
+    flex-direction: column;
+    padding: 5%;
+}
+
+.program{
+    display: flex;
+    gap: 5%;
+}
+
+#program2{
+    flex-direction: row-reverse;
+}
+
+.program-img{
+    width: 30%;
+    height: 20%;
+}
+
+.info-button{
+    background-color: rgb(55, 149, 185);
+    color: aliceblue; 
+    border: none;
+    font-size: 4vh;
+}
+
+
