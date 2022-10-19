@@ -1,5 +1,5 @@
 <?php
-$title = "News";
+$title = "Development Programs";
 include 'includes/components/header.php';
 ?>
 

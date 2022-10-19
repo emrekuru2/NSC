@@ -70,6 +70,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="../../TeamPage.php">Teams</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../../devProgram.php">Development Programs</a>
+            </li>
 
         </ul>
         <ul class="navbar-nav ml-auto">
