@@ -19,25 +19,43 @@ include 'includes/components/header.php';
             <div class="programs-board">
                 <div class="program" id="program1">
                     <img class="program-img" src="./img/dummyImg/program-pic1.jpeg" alt="program picture">
-                    <div class="program-info">
-                        <h2>Dummy text</h2>
-                        <button class="info-button" onclick="#">More info!</button>
+                    <div class="card h-100">
+                        <img class="card-img-top" src="http://placehold.it/300x200" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">Card title</h4>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn light-blue text-white">Find Out More!</a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="program" id="program2">
                     <img class="program-img" src="./img/dummyImg/program-pic2.jpeg" alt="program picture">
-                    <div class="program-info">
-                        <h2>Dummy text</h2>
-                        <button class="info-button" onclick="#">More info!</button>
+                    <div class="card h-100">
+                        <img class="card-img-top" src="http://placehold.it/300x200" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">Card title</h4>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn light-blue text-white">Find Out More!</a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="program" id="program3">
                     <img class="program-img" src="./img/dummyImg/program-pic3.jpeg" alt="program picture">
-                    <div class="program-info">
-                        <h2>Dummy text</h2>
-                        <button class="info-button" onclick="#">More info!</button>
+                    <div class="card h-100">
+                        <img class="card-img-top" src="http://placehold.it/300x200" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">Card title</h4>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn light-blue text-white">Find Out More!</a>
+                        </div>
                     </div>
                 </div>
             </div>
