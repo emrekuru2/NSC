@@ -225,7 +225,12 @@ CREATE TABLE `nsca_roletype` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `nsca_roletype` (`RoleID`, `Name`, `Description`) VALUES
-(1, 'Guest User', 'Guest User');
+(1, 'Guest User', 'Guest User'),
+(2, 'Umpire','Umpire'),
+(3, 'Player','Player'),
+(4, 'Admin','Admin'),
+(5, 'Coach','Coach')
+;
 
 CREATE TABLE `nsca_subcommittees` (
                                     `SubID` int(11) NOT NULL,
