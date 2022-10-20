@@ -43,16 +43,6 @@
 
 
                             <div class="d-flex justify-content-around">
-
-                                <!--
-                                <div>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" name="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
-                                        <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
-                                    </div>
-                                </div>
-                                -->
-
                                 <div>
                                     <!-- Forgot password -->
                                     <a href="">Forgot password?</a>

@@ -1,4 +1,10 @@
 <?php 
+    // Prevent direct access
+    if(!defined('_DEFVAR')) {
+        require_once("../functions/security.php");
+        RestrictIncludes();
+    }
+
     // Close connection
     mysqli_close($conn);
 ?>

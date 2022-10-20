@@ -1,8 +1,8 @@
 <?php
 
-$title = "Manage User Role";
-include "../db/dbFunctions.php";
-include "../includes/components/adminHeader.php";
+    $title = "Manage User Role";
+    include "../db/dbFunctions.php";
+    include "../includes/components/adminHeader.php";
 
 ?>
 

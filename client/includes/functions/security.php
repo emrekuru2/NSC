@@ -1,8 +1,15 @@
 <?php
     RestrictIncludes();
+
+    function DefineSecurity() {
+        // Method suggested by https://stackoverflow.com/questions/409496/prevent-direct-access-to-a-php-include-file
+        define('_DEFVAR', 1);
+        //defined('_DEFVAR') or exit('Restricted Access');
+    }
+
     function RestrictIncludes() {
         // If accessing file through URL, redirect
-        if(preg_match("/includes/", $_SERVER["PHP_SELF"]) == 1) {
+        if(preg_match("/includes/", $_SERVER["PHP_SELF"]) == 1 && !defined('_DEFVAR')){
             header("Location: ../../index.php");
             die();
         }

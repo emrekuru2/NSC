@@ -4,13 +4,19 @@
         header("Location: ../../index.php");
         die();
     }
+    else {
+        include_once("includes/functions/security.php");
+        RestrictIncludes();
+        DefineSecurity();
+    }
 
-    include_once $_SERVER["DOCUMENT_ROOT"]."/db/database.php";
-    include_once $_SERVER["DOCUMENT_ROOT"]."/db/dbFunctions.php";
+    include_once("db/database.php");
+    include_once("db/dbFunctions.php");
 
+    // Set cookie to prevent unauthorized access
+   
     $conn = OpenCon();
 
-    // If it is the login or registration page use the following header
     if (isset($loginOrRegistrationPage) && $loginOrRegistrationPage) 
     {
         session_start();
