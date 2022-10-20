@@ -1,6 +1,6 @@
 
-#create schema projectnsca;
-#use projectnsca;
+create schema projectnsca;
+use projectnsca;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -225,15 +225,12 @@ CREATE TABLE `nsca_roletype` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `nsca_roletype` (`RoleID`, `Name`, `Description`) VALUES
-(1, 'Guest', 'Guest');
-INSERT INTO `nsca_roletype` (`RoleID`, `Name`, `Description`) VALUES
-(2, 'Player', 'Player');
-INSERT INTO `nsca_roletype` (`RoleID`, `Name`, `Description`) VALUES
-(3, 'Sub-committe Member', 'Sub-committe Member');
-INSERT INTO `nsca_roletype` (`RoleID`, `Name`, `Description`) VALUES
-(4, 'Administrative Staff', 'Staff');
-INSERT INTO `nsca_roletype` (`RoleID`, `Name`, `Description`) VALUES
-(5, 'General Member', 'General Member');
+(1, 'Guest User', 'Guest User'),
+(2, 'Umpire','Umpire'),
+(3, 'Player','Player'),
+(4, 'Admin','Admin'),
+(5, 'Coach','Coach')
+;
 
 CREATE TABLE `nsca_subcommittees` (
                                     `SubID` int(11) NOT NULL,
