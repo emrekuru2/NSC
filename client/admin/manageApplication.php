@@ -1,9 +1,6 @@
 <?php
-
-$title = "Manage Team Application";
-include "../db/dbFunctions.php";
-include "../includes/components/adminHeader.php";
-
+    $title = "Manage Team Application";
+    include "../includes/components/adminHeader.php";
 ?>
 
     <div class="container-fluid">
@@ -32,6 +29,4 @@ include "../includes/components/adminHeader.php";
 
 
 
-<?php
-
-include "../includes/components/footer.php";
+<?php include "../includes/components/footer.php";?>

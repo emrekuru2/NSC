@@ -108,5 +108,5 @@ if (isset($_POST['submitEmail'])) {
 
 
 <?php
-
-include "../includes/components/footer.php";
+    include "../includes/components/footer.php";
+?>

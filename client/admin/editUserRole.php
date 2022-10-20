@@ -1,9 +1,6 @@
 <?php
-
     $title = "Manage User Role";
-    include "../db/dbFunctions.php";
-    include "../includes/components/adminHeader.php";
-
+    include_once "../includes/components/adminHeader.php";
 ?>
 
     <div class="container-fluid">
@@ -35,6 +32,4 @@
 
 
 
-<?php
-
-include "../includes/components/footer.php";
+<?php include "../includes/components/footer.php"; ?>

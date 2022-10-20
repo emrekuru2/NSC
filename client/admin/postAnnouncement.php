@@ -1,9 +1,6 @@
 <?php
-
-$title = "Post Announcement";
-
-include_once "../includes/components/adminHeader.php";
-include_once "../db/dbFunctions.php";
+    $title = "Post Announcement";
+    include_once "../includes/components/adminHeader.php";
 ?>
 
     <div class="container-fluid">

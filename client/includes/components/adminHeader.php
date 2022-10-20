@@ -4,12 +4,18 @@
         header("Location: ../../index.php");
         die();
     }
+    elseif(preg_match("/admin/", $_SERVER["PHP_SELF"]) == 1) {
+        include_once("../includes/functions/security.php");
+        //RestrictAdmin();
+        DefineSecurity();
+        include_once("../db/database.php");
+        include_once("../db/dbFunctions.php");
+    }
     else {
         include_once("includes/functions/security.php");
         RestrictIncludes();
     }
-
-
+    
     session_start();
 ?>
 <!DOCTYPE html>
@@ -118,7 +124,7 @@
 
 
            <?php
-            include "header.php";
+            include_once "../includes/components/header.php";
             ?>
 
         <br>

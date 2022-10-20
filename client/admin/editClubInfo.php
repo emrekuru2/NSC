@@ -1,13 +1,10 @@
 <?php
-include_once "../db/database.php";
-include_once "../db/dbFunctions.php";
-$conn = OpenCon();
+    $title = "Edit Club Information";
+    include "../includes/components/adminHeader.php";
 
-$title = "Edit Club Information";
-include "../includes/components/adminHeader.php";
+    $conn = OpenCon();
 
-$allClubs = getClubs($conn);
-
+    $allClubs = getClubs($conn);
 ?>
 <div class="col-7 offset-2">
     <br><br>
@@ -72,6 +69,4 @@ $allClubs = getClubs($conn);
 
 
 
-<?php
-
-include "../includes/components/footer.php";
+<?php include "../includes/components/footer.php"; ?>

@@ -1,35 +1,22 @@
 <?php
-include_once "../db/database.php";
-include_once "../db/dbFunctions.php";
-$conn = OpenCon();
+    $title = "Edit Alert Banner";
+    include "../includes/components/adminHeader.php";
 
-if (isset($_POST['submitAlert'])) {
-    if (setAlerts($conn, $_POST['alertFormTitle'], $_POST['alertFormTextBox'])) {
-        header("Location: editAlertBanner.php?AlertUpdated=true");
+    $conn = OpenCon();
+
+    if (isset($_POST['submitAlert'])) {
+        if (setAlerts($conn, $_POST['alertFormTitle'], $_POST['alertFormTextBox'])) {
+            header("Location: editAlertBanner.php?AlertUpdated=true");
+        }
+        echo mysqli_error($conn);
+
+    } else if (isset($_POST['disableAlert'])) {
+        setAlertStatus($conn, "inactive");
+        echo mysqli_error($conn);
+        header("Location: editAlertBanner.php?AlertDisabled=true");
     }
-    echo mysqli_error($conn);
 
-} else if (isset($_POST['disableAlert'])) {
-    setAlertStatus($conn, "inactive");
-    echo mysqli_error($conn);
-    header("Location: editAlertBanner.php?AlertDisabled=true");
-}
-?>
-
-
-<?php
-
-$title = "Edit Alert Banner";
-include "../includes/components/adminHeader.php";
-?>
-
-
-
-
-
-<?php
-$row = getAlerts($conn);
-
+    $row = getAlerts($conn);
 ?>
 
 <div class="row">
@@ -37,7 +24,6 @@ $row = getAlerts($conn);
         <div class="text-center">
             <h1 class="h1 mb-0 text-gray-800">Edit Alert Banner</h1>
         </div>
-
 
         <div class="text-center">
             <?php
@@ -70,19 +56,16 @@ $row = getAlerts($conn);
                           required><?php echo $row['Alert_Content']; ?></textarea>
             </div>
 
-
             <!-- Submit button -->
             <button class="btn light-blue text-white btn-block my-4" type="submit" name="submitAlert">Enable/Update
                 Alert
             </button>
             <button class="btn red text-white btn-block my-4" type="submit" name="disableAlert">Disable Alert</button>
 
-
         </form>
     </div>
 </div>
 
-
 <?php
-
-include "../includes/components/footer.php";
+    include "../includes/components/footer.php";
+?>
