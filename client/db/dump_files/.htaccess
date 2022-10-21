@@ -1,0 +1,3 @@
+# Prevent direct access
+# No user should be able to access the files in Dump Files as they are database scrips that do not have any functionality in
+deny from all

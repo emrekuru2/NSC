@@ -1,13 +1,13 @@
 <?php
-include_once "../db/database.php";
-include_once "../db/dbFunctions.php";
-$conn = OpenCon();
+    $title = "Edit Club Information";
+    include "../includes/components/adminHeader.php";
+    // Prevent Direct access and prevent non-admin's to access
+    RestrictAdmin(CheckRole($_SESSION['User_ID']));
+    defined('_DEFVAR') or exit(header('Location: ../index.php'));
+    
+    $conn = OpenCon();
 
-$title = "Edit Club Information";
-include "../includes/components/adminHeader.php";
-
-$allClubs = getClubs($conn);
-
+    $allClubs = getClubs($conn);
 ?>
 <div class="col-7 offset-2">
     <br><br>
@@ -72,6 +72,4 @@ $allClubs = getClubs($conn);
 
 
 
-<?php
-
-include "../includes/components/footer.php";
+<?php include "../includes/components/footer.php"; ?>

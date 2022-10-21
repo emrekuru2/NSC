@@ -1,19 +1,10 @@
 <?php
-include_once "../db/database.php";
-include_once "../db/dbFunctions.php";
-
+    $title = "Edit Competition Types";
+    include "../includes/components/adminHeader.php";
+    // Prevent Direct access and prevent non-admin's to access
+    RestrictAdmin(CheckRole($_SESSION['User_ID']));
+    defined('_DEFVAR') or exit(header('Location: ../index.php'));
 ?>
 
 
-<?php
-
-$title = "Edit Competition Types";
-include "../includes/components/adminHeader.php";
-
-?>
-
-
-
-<?php
-
-include "../includes/components/footer.php";
+<?php include "../includes/components/footer.php"; ?>
