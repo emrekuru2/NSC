@@ -276,11 +276,11 @@ CREATE TABLE `nsca_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `nsca_user` (`UserID`, `email`, `UserRole`, `FirstName`, `MiddleName`, `LastName`, `StreetAddress`, `City`, `Province`, `Country`, `PostalCode`, `Phone`, `UserDate`, `imgFolder`, `UserDescription`) VALUES
-(1, 'Guest@gmail.com', '1', 'Guest', '', 'User', 'street', 'city', 'province', 'Canada', 'PostalCode', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'guest user!'),
-(2, 'Umpire@gmail.com', '2', 'Umpire', '', 'User','street', 'city', 'province', 'Canada', 'PostalCode', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Umpire!'),
-(3, 'Player@gmail.com', '3', 'Player', '', 'User', 'street', 'city', 'province', 'Canada', 'PostalCode', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Player!'),
-(4, 'Admin@gmail.com', '4', 'Admin', '', 'User', 'street', 'city', 'province', 'Canada', 'PostalCode', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Admin!'),
-(5, 'Coach@gmail.com', '5', 'Coach', '', 'User', 'street', 'city', 'province', 'Canada', 'PostalCode', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Coach!');
+(1, 'Guest@gmail.com', '1', 'Guest', '', 'User', 'street', 'city', 'province', 'Canada', 'B3H0C7', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Guest user!'),
+(2, 'Umpire@gmail.com', '2', 'Umpire', '', 'User','street', 'city', 'province', 'Canada', 'B3H0C7', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Umpire!'),
+(3, 'Player@gmail.com', '3', 'Player', '', 'User', 'street', 'city', 'province', 'Canada', 'B3H0C7', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Player!'),
+(4, 'Admin@gmail.com', '4', 'Admin', '', 'User', 'street', 'city', 'province', 'Canada', 'B3H0C7', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Admin!'),
+(5, 'Coach@gmail.com', '5', 'Coach', '', 'User', 'street', 'city', 'province', 'Canada', 'B3H0C7', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Coach!');
 
 CREATE TABLE `nsca_userroles` (
                                 `UserRoleID` int(11) NOT NULL,
