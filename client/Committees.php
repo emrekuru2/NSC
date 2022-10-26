@@ -1,7 +1,6 @@
 <?php
     $title = "Committees";
     include_once 'includes/components/header.php'
-    // Admin?
 ?>
 
     <div class="container my-5">
@@ -62,5 +61,5 @@
     </div>
 
 <?php
-include 'includes/components/footer.php'
+    include 'includes/components/footer.php'
 ?>

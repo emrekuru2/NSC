@@ -8,6 +8,7 @@
     $conn = OpenCon();
 
 ?>
+    <h1> Sorry this page is not available yet.Please return to <a href="../index.php">home</a> </p>
     <div class="col-7 offset-2">
 
 

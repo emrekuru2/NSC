@@ -1,8 +1,10 @@
 
 <?php
     $title = "Add Team To Club";
-    include 'includes/components/header.php'
-    // Only Admin?
+    include_once "../includes/components/adminHeader.php";
+    // Prevent Direct access and prevent non-admin's to access
+    RestrictAdmin(CheckRole($_SESSION['User_ID']));
+    defined('_DEFVAR') or exit(header('Location: ../index.php'));
 ?>
 
 <div class="container my-5 py-5 z-depth-1">

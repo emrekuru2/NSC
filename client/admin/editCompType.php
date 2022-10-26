@@ -5,6 +5,6 @@
     RestrictAdmin(CheckRole($_SESSION['User_ID']));
     defined('_DEFVAR') or exit(header('Location: ../index.php'));
 ?>
-
+    <h1> Sorry this page is not available yet.Please return to <a href="../index.php">home</a> </p>
 
 <?php include "../includes/components/footer.php"; ?>

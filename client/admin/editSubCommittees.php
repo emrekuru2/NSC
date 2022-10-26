@@ -6,7 +6,7 @@
     defined('_DEFVAR') or exit(header('Location: ../index.php'));
     $conn = OpenCon();
 ?>
-
+    <h1> Sorry this page is not available yet.Please redurn to <a href="../index.php">home</a> </p>
     <div class="col-7 offset-2">
 
     </div>
