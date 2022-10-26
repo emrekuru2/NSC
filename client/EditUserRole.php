@@ -1,7 +1,8 @@
 
 <?php
-$title = "Edit User Role";
-include 'includes/components/header.php'
+    $title = "Edit User Role";
+    include_once 'includes/components/header.php';
+    include_once 'includes/components/security.php';
 ?>
 
 <div class="container my-5 py-5 z-depth-1">

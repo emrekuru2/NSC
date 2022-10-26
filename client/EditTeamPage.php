@@ -1,5 +1,6 @@
 <?php
-include 'includes/components/header.php';
+    include_once 'includes/components/header.php';
+    // Admin + Coach
 ?>
 
 
@@ -54,7 +55,7 @@ include 'includes/components/header.php';
 
 
 <?php
-include 'includes/components/footer.php'
+    include_once 'includes/components/footer.php'
 ?>
 
 

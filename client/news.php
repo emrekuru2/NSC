@@ -1,6 +1,6 @@
 <?php
-$title = "News";
-include 'includes/components/header.php';
+    $title = "News";
+    include 'includes/components/header.php';
 ?>
 
 <!-- Page Content -->

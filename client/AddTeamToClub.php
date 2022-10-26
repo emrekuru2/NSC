@@ -1,7 +1,8 @@
 
 <?php
-$title = "Add Team To Club";
-include 'includes/components/header.php'
+    $title = "Add Team To Club";
+    include 'includes/components/header.php'
+    // Only Admin?
 ?>
 
 <div class="container my-5 py-5 z-depth-1">

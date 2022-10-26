@@ -1,6 +1,7 @@
 <?php
-$title = "Team";
-include 'includes/components/header.php'
+    $title = "Team";
+    include 'includes/components/header.php'
+    // Coach can edit
 ?>
 
     <?php
