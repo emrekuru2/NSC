@@ -86,15 +86,11 @@ CREATE TABLE `nsca_login` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `nsca_login` (`LoginID`, `email`, `password`, `UserID`) VALUES
-(1, 'branfranke@gmail.com', '$2y$10$/wziDGnT5A.kzP1z8/RSEOQXkw0GKv6ZohA1o39kLMUo1caCUH/my', 1),
-(2, 'test@test.com', '$2y$10$45B8iat2s0YYjBOfn3tjPOUEtfSkZPJ7tPvRUZeJf/DtWeVV.LE5m', 2),
-(3, 'test@test.comf', '$2y$10$sRC.xIdHH35Aqa7zp6brx.Y1ndN0F5U8kSQoQuGzLztYpyao2rHJy', 3),
-(4, 'dsfsdfsd@fdsfsdfs.com', '$2y$10$dH3R53/XHnAJELdwFRag3.ka.g.XHzHF8Az8kFnkL0AD/KhxZZGPS', 4),
-(5, 'dfsdfsf@fdsfsdfs.com', '$2y$10$OOpaXH3/E6CgbY2Q7Q.bXuz.KndkXNMB1rVdmUpIjQV.wr4saubYK', 5),
-(6, 'news@member.com', '$2y$10$6d8AdoNYwsEp13YLuMT6l.5RHoiQi61XN13h3XQZYAuDQXfy3Svqm', 6),
-(7, 'carl@bryan.com', '$2y$10$TuMb2vwPLaJ.oH9hOH6SButRILjXttPvwNbS9daFm8audwvbNopBy', 7),
-(8, 'travis@scott.com', '$2y$10$C/DoSi.DQ/MZs9b5GAJHceqiIMGhBKk347jwPM4IycEaPajVjX6MO', 8),
-(10, 'safsdf@fdsfsd.com', '$2y$10$XKmBjrja9vqJ1h6kIiTS7u6ye8krjwg7DTk5UKeVDfJJC7kPVyMeq', 9);
+(1, 'Guest@gmail.com', 'thisisaguestuser@1', 1),
+(2, 'Umpire@gmail.com', 'thisisanumpire@2', 2),
+(3, 'Player@gmail.com', 'thisisaplayer@3', 3),
+(4, 'Admin@gmail.com', 'thisisanadmin@4', 4),
+(5, 'Coach@gmail.com', 'thisisacoach@5', 5);
 
 CREATE TABLE `nsca_news` (
                            `NewsID` int(11) NOT NULL,
@@ -229,8 +225,7 @@ INSERT INTO `nsca_roletype` (`RoleID`, `Name`, `Description`) VALUES
 (2, 'Umpire','Umpire'),
 (3, 'Player','Player'),
 (4, 'Admin','Admin'),
-(5, 'Coach','Coach')
-;
+(5, 'Coach','Coach');
 
 CREATE TABLE `nsca_subcommittees` (
                                     `SubID` int(11) NOT NULL,
@@ -281,15 +276,11 @@ CREATE TABLE `nsca_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `nsca_user` (`UserID`, `email`, `UserRole`, `FirstName`, `MiddleName`, `LastName`, `StreetAddress`, `City`, `Province`, `Country`, `PostalCode`, `Phone`, `UserDate`, `imgFolder`, `UserDescription`) VALUES
-(1, 'branfranke@gmail.com', '1', 'Brandon', '', 'Franke', 'dsfsdfdsfa', 'dfsdfdsfaa', 'QC', 'Canada', 'dsfsd1', '1111111112', '2019-11-22 05:16:46', '../../img/userPictures/Brandon_Franke_5dd76f3ebc071/', 'Hello! My name is Brandon! I love CS!'),
-(2, 'test@test.com', '1', 'test', '', 'test', 'sdfasfdsfsd', 'dsfsdfsdf', 'AB', 'Canada', 'dsfsdf', '1111111111', '2019-11-22 05:18:35', '../../img/userPictures/test_test_5dd76fab51201/', 'sfsdfsdf'),
-(3, 'test@test.comf', '1', 'test', '', 'test', 'sdfasfdsfsd', 'dsfsdfsdf', 'AB', 'Canada', 'dsfsdf', '1111111111', '2019-11-22 05:20:21', '../../img/userPictures/test_test_5dd77015c1f0b/', 'sfsdfsdf'),
-(4, 'dsfsdfsd@fdsfsdfs.com', '1', 'tedsfsdff', '', 'dsfsdfsdf', 'sadfsdfsfd', 'dfdsfsdf', 'AB', 'Canada', 'dsfsdf', '1111111111', '2019-11-22 05:20:56', '../../img/userPictures/tedsfsdff_dsfsdfsdf_5dd7703873467/', 'sfsdfsdf'),
-(5, 'dfsdfsf@fdsfsdfs.com', '1', 'dsfsdf', '', 'dfsfsdf', 'dfsfdsf', 'dsfsdfdsfsd', 'AB', 'Canada', 'dsfsdf', '1111111111', '2019-11-22 05:26:38', '../../img/userPictures/dsfsdf_dfsfsdf_5dd7718ec9652/', 'sfsdfsdf'),
-(6, 'news@member.com', '1', 'New', '', 'Member', 'dsfsdfdsfdfsdfsdf', 'dsfsdfs', 'AB', 'Canada', 'dfsdfs', '1111111111', '2019-11-24 02:03:51', '../../img/userPictures/New_Member_5dd9e507e5421/', 'Hello! My name is New Member!'),
-(7, 'carl@bryan.com', '1', 'Carl', '', 'Bryans', '15 Street avenue', 'Halifax', 'NS', 'Canada', 'dfsdfs', '1234567890', '2019-11-24 05:01:52', '../../img/userPictures/Carl_Bryan_5dda0ec09a5bf/', 'Hello! My name is Carl Bryan! Today is great day! Hello!'),
-(8, 'travis@scott.com', '1', 'Travis', '', 'Scotts', 'Street Address', 'City', 'NS', 'Canada', 'dfsfdf', '1234567890', '2019-11-24 05:39:36', '../../img/userPictures/Travis_Scott_5dda179864fd5/', 'Hello! My name is Travis Scott! I love CS!'),
-(9, 'safsdf@fdsfsd.com', '1', 'Brandon', '', 'Franke', 'asfasf', 'dsfsdf', 'AB', 'Canada', 'dsfdsf', '1234567890', '2019-11-24 06:49:29', '../../img/userPictures/Brandon_Franke_5dda27f98d7d4/', 'Hello! My name is Brandon Franke!');
+(1, 'Guest@gmail.com', '1', 'Guest', '', 'User', 'street', 'city', 'province', 'Canada', 'PostalCode', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'guest user!'),
+(2, 'Umpire@gmail.com', '2', 'Umpire', '', 'User','street', 'city', 'province', 'Canada', 'PostalCode', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Umpire!'),
+(3, 'Player@gmail.com', '3', 'Player', '', 'User', 'street', 'city', 'province', 'Canada', 'PostalCode', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Player!'),
+(4, 'Admin@gmail.com', '4', 'Admin', '', 'User', 'street', 'city', 'province', 'Canada', 'PostalCode', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Admin!'),
+(5, 'Coach@gmail.com', '5', 'Coach', '', 'User', 'street', 'city', 'province', 'Canada', 'PostalCode', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Coach!');
 
 CREATE TABLE `nsca_userroles` (
                                 `UserRoleID` int(11) NOT NULL,
@@ -298,12 +289,11 @@ CREATE TABLE `nsca_userroles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `nsca_userroles` (`UserRoleID`, `RoleID`, `UserID`) VALUES
-(1, 1, 1),
-(5, 1, 5),
-(6, 1, 6),
-(7, 1, 7),
-(8, 1, 8),
-(10, 1, 9);
+(1,1,1),
+(2,2,2),
+(3,3,3),
+(4,4,4),
+(5,5,5);
 
 
 ALTER TABLE `nsca_alerts`
