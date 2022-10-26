@@ -86,11 +86,11 @@ CREATE TABLE `nsca_login` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `nsca_login` (`LoginID`, `email`, `password`, `UserID`) VALUES
-(1, 'Guest@gmail.com', 'thisisaguestuser@1', 1),
-(2, 'Umpire@gmail.com', 'thisisanumpire@2', 2),
-(3, 'Player@gmail.com', 'thisisaplayer@3', 3),
-(4, 'Admin@gmail.com', 'thisisanadmin@4', 4),
-(5, 'Coach@gmail.com', 'thisisacoach@5', 5);
+(1, 'Guest@gmail.com', '$2y$10$xu5G5zLj/1TKuPeEcwNgYu3D8ULSJWBGxVCyvbZUDZUvIvN4Iqer2', 1),
+(2, 'Umpire@gmail.com', '$2y$10$xu5G5zLj/1TKuPeEcwNgYu3D8ULSJWBGxVCyvbZUDZUvIvN4Iqer2', 2),
+(3, 'Player@gmail.com', '$2y$10$xu5G5zLj/1TKuPeEcwNgYu3D8ULSJWBGxVCyvbZUDZUvIvN4Iqer2', 3),
+(4, 'Admin@gmail.com', '$2y$10$xu5G5zLj/1TKuPeEcwNgYu3D8ULSJWBGxVCyvbZUDZUvIvN4Iqer2', 4),
+(5, 'Coach@gmail.com', '$2y$10$xu5G5zLj/1TKuPeEcwNgYu3D8ULSJWBGxVCyvbZUDZUvIvN4Iqer2', 5);
 
 CREATE TABLE `nsca_news` (
                            `NewsID` int(11) NOT NULL,

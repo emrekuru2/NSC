@@ -30,34 +30,15 @@ When you are testing portion of the website that require different types of user
 **ADDING THESE CHANGES IS CRUCIAL TO FUNCTIONING WEBSITE**
 
 ### Userrole Development- Shreya
-I have added new users and userlogins(I have inserted into nsca_login, nsca_user, nsca_userroles) for testing purposes
+I have added new users and userlogins(I have inserted into nsca_login, nsca_user, nsca_userroles) for testing purposes.
 
-## The new users in nsca_user table are 
-
-(`UserID`, `email`, `UserRole`, `FirstName`, `MiddleName`, `LastName`, `StreetAddress`, `City`, `Province`, `Country`, `PostalCode`, `Phone`, `UserDate`, `imgFolder`, `UserDescription`)
-
-(1, 'Guest@gmail.com', '1', 'Guest', '', 'User', 'street', 'city', 'province', 'Canada', 'PostalCode', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'guest user!')
-
-(2, 'Umpire@gmail.com', '2', 'Umpire', '', 'User','street', 'city', 'province', 'Canada', 'PostalCode', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Umpire!')
-
-(3, 'Player@gmail.com', '3', 'Player', '', 'User', 'street', 'city', 'province', 'Canada', 'PostalCode', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Player!')
-
-(4, 'Admin@gmail.com', '4', 'Admin', '', 'User', 'street', 'city', 'province', 'Canada', 'PostalCode', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Admin!')
-
-(5, 'Coach@gmail.com', '5', 'Coach', '', 'User', 'street', 'city', 'province', 'Canada', 'PostalCode', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Coach!')
-
-
-
-## The new logins are 
-
-(`LoginID`, `email`, `password`, `UserID`)
-(1, 'Guest@gmail.com', 'thisisaguestuser@1', 1)
-(2, 'Umpire@gmail.com', 'thisisanumpire@2', 2)
-(3, 'Player@gmail.com', 'thisisaplayer@3', 3)
-(4, 'Admin@gmail.com', 'thisisanadmin@4', 4)
-(5, 'Coach@gmail.com', 'thisisacoach@5', 5)
+These are the test login credentials for the test users:
+Email              Password
+'Guest@gmail.com', 'Password2022'
+'Umpire@gmail.com', 'Password2022'
+'Player@gmail.com', 'Password2022'
+'Admin@gmail.com', 'Password2022'
+'Coach@gmail.com', 'Password2022'
 
 Use these emails and passwords for testing. 
-
-**ADDING THESE CHANGES IS CRUCIAL FOR TESTING**
 

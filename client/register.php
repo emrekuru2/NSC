@@ -138,7 +138,7 @@
                             $registerMiddleName = "";
                             $registerLastName = check_input($conn, $_POST['RegisterFormLastName']);
                             $registerEmail = check_input($conn, $_POST['RegisterFormEmail']);
-                            $registerUserRole = check_input($conn, $_POST['RegisterFormRole']);
+                            $registerUserRole = check_input($conn, 1); // Default is Guest User
                             $registerStreetAddress = check_input($conn, $_POST['RegisterFormStreetAddress']);
                             $registerCity = check_input($conn, $_POST['RegisterFormCity']);
                             $registerProvince = check_input($conn, $_POST['RegisterFormProvince']);
