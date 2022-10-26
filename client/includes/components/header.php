@@ -76,6 +76,41 @@
             <li class="nav-item">
                 <a class="nav-link" href="../../TeamPage.php">Teams</a>
             </li>
+            <?php
+            if (isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true) {
+                 if (isset($_SESSION['User_ID']) && (CheckRole($_SESSION['User_ID']) == 'Admin' || CheckRole($SESSION['User_ID']) == 'Coach')) {
+            ?>
+                <li class = "nav-item">
+                    <a class = "nav-link" href="../../ClubProfile.php">My Club</a>
+                </li>
+                <?php
+                }
+    
+            }
+            ?>
+            <?php
+            if (isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true) {
+                if (isset($_SESSION['User_ID']) && (CheckRole($SESSION['User_ID']) == 'Player')) {
+            ?>
+                   <li class = "nav- item">
+                       <a class = "nav-link" href = "../../PlayerProfile.php">Player Profile</a>
+                </li>
+                <?php
+                }
+            }
+            ?>
+            <?php
+            if (isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true) {
+                 if (isset($_SESSION['User_ID']) && (CheckRole($_SESSION['User_ID']) == 'Coach' || CheckRole($SESSION['User_ID']) == 'Player')) {
+            ?>
+                <li class = "nav-item">
+                    <a class = "nav-link" href="../../Team.php">My Team</a>
+                </li>
+                <?php
+                }
+    
+            }
+            ?>
 
         </ul>
         <ul class="navbar-nav ml-auto">
