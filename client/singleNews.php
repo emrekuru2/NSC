@@ -1,7 +1,7 @@
 
 <?php
-$title = "News";
-include 'includes/components/header.php'
+    $title = "News";
+    include_once 'includes/components/header.php'
 ?>
 
 <!-- Page Content -->
@@ -129,5 +129,5 @@ include 'includes/components/header.php'
 <!-- /.container -->
 
 <?php
-include 'includes/components/footer.php'
+    include_once 'includes/components/footer.php'
 ?>

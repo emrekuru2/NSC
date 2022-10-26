@@ -53,5 +53,5 @@
 </div>
 
 <?php
-include 'includes/components/footer.php'
+    include_once '../includes/components/footer.php'
 ?>

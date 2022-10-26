@@ -9,5 +9,5 @@
 <h1> Sorry this page is not available yet.Please redurn to <a href="../index.php">home</a> </p>
 
 <?php
-    include '../includes/components/footer.php'
+    include_once '../includes/components/footer.php'
 ?>

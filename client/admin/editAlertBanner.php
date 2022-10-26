@@ -1,6 +1,6 @@
 <?php
     $title = "Edit Alert Banner";
-    include "../includes/components/adminHeader.php";
+    include_once "../includes/components/adminHeader.php";
     // Prevent Direct access and prevent non-admin's to access
     RestrictAdmin(CheckRole($_SESSION['User_ID']));
     defined('_DEFVAR') or exit(header('Location: ../index.php'));
@@ -70,5 +70,5 @@
 </div>
 
 <?php
-    include "../includes/components/footer.php";
+    include_once "../includes/components/footer.php";
 ?>

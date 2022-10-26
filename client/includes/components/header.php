@@ -119,9 +119,6 @@
             <?php
                 checkHasATeam();
             ?>
-<!--            <li class="nav-item">-->
-<!--                <a class="nav-link" href="../../Team">My Team</a>-->
-<!--            </li>-->
 
             <li class="nav-item">
                 <a class="nav-link waves-effect waves-light" href="../../news.php">
