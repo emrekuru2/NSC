@@ -9,7 +9,7 @@ include 'includes/components/header.php';
     <div class = "content">
         <div class = "content-inside">
             <div class="banner">
-                <img class = "banner_img" src='./img/dummyImg/banner_DevProgram.jpg' alt='banner picture'>
+                <img class = "banner_img" src='./img/DevProgram_Dummy/banner1.jpg' alt='banner picture'>
                 <div class= "banner_text">
                     <h2>Dummy Text</h2>
                 </div>
@@ -20,7 +20,7 @@ include 'includes/components/header.php';
                 <div class="mb-5" >
                     <div class="row g-0">
                         <div class="col">
-                        <img src="./img/dummyImg/program-pic1.jpeg" style="width:100%" alt="...">
+                        <img src="./img/DevProgram_Dummy/program-pic1.jpeg" style="width:100%" alt="...">
                         </div>
                         <div class="col">
                             <div class="card-body">
@@ -36,7 +36,7 @@ include 'includes/components/header.php';
                 <div class="mb-5">
                     <div class="row g-0">
                         <div class="col order-last">
-                        <img src="./img/dummyImg/program-pic2.jpeg" style="width:100%" alt="...">
+                        <img src="./img/DevProgram_Dummy/program-pic2.jpeg" style="width:100%" alt="...">
                         </div>
                         <div class="col">
                             <div class="card-body">
@@ -52,7 +52,7 @@ include 'includes/components/header.php';
                 <div class="mb-5">
                     <div class="row g-0">
                         <div class="col">
-                        <img src="./img/dummyImg/program-pic3.jpeg" style="width:100%" alt="...">
+                        <img src="./img/DevProgram_Dummy/program-pic3.jpeg" style="width:100%" alt="...">
                         </div>
                         <div class="col">
                             <div class="card-body">
