@@ -10,36 +10,36 @@ include 'includes/components/header.php';
 
 <body>
     <div class = "content">
-    
-        <div id="carousel" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#carousel" data-slide-to="0" class="active"></li>
-                <li data-target="#carousel" data-slide-to="1"></li>
-                <li data-target="#carousel" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="d-block w-100" src="./img/DevProgram_Dummy/banner1.jpg" alt="First slide">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Dummy Text</h5>
+        <div class = "content-inside">
+            <div id="carousel" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel" data-slide-to="1"></li>
+                    <li data-target="#carousel" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="./img/DevProgram_Dummy/banner1.jpg" alt="First slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Dummy Text</h5>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="./img/DevProgram_Dummy/program-pic1.jpeg" alt="Second slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="./img/DevProgram_Dummy/program-pic2.jpeg" alt="Third slide">
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100" src="./img/DevProgram_Dummy/program-pic1.jpeg" alt="Second slide">
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100" src="./img/DevProgram_Dummy/program-pic2.jpeg" alt="Third slide">
-                </div>
+                <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
-            <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
         <!-- <div class = "content-inside">
             <div class="banner">
                 <img class = "banner_img" src='./img/DevProgram_Dummy/banner1.jpg' alt='banner picture'>
