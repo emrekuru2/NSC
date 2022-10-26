@@ -17,44 +17,50 @@ include 'includes/components/header.php';
 
 
             <div class="programs-board">
-                <div class="program" id="program1">
-                    <img class="program-img" src="./img/dummyImg/program-pic1.jpeg" alt="program picture">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="http://placehold.it/300x200" alt="">
-                        <div class="card-body">
-                            <h4 class="card-title">Card title</h4>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+                <div class="mb-5" >
+                    <div class="row g-0">
+                        <div class="col">
+                        <img src="./img/dummyImg/program-pic1.jpeg" style="width:100%" alt="...">
                         </div>
-                        <div class="card-footer">
-                            <a href="#" class="btn light-blue text-white">Find Out More!</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="program" id="program2">
-                    <img class="program-img" src="./img/dummyImg/program-pic2.jpeg" alt="program picture">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="http://placehold.it/300x200" alt="">
-                        <div class="card-body">
-                            <h4 class="card-title">Card title</h4>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="#" class="btn light-blue text-white">Find Out More!</a>
+                        <div class="col">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This text has no meaning but I just put it in here to see how it will appear on the website.</p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                <a href="#" class="btn btn-primary">Find out more!</a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="program" id="program3">
-                    <img class="program-img" src="./img/dummyImg/program-pic3.jpeg" alt="program picture">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="http://placehold.it/300x200" alt="">
-                        <div class="card-body">
-                            <h4 class="card-title">Card title</h4>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+                <div class="mb-5">
+                    <div class="row g-0">
+                        <div class="col order-last">
+                        <img src="./img/dummyImg/program-pic2.jpeg" style="width:100%" alt="...">
                         </div>
-                        <div class="card-footer">
-                            <a href="#" class="btn light-blue text-white">Find Out More!</a>
+                        <div class="col">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This text has no meaning but I just put it in here to see how it will appear on the website.</p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                <a href="#" class="btn btn-primary">Find out more!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-5">
+                    <div class="row g-0">
+                        <div class="col">
+                        <img src="./img/dummyImg/program-pic3.jpeg" style="width:100%" alt="...">
+                        </div>
+                        <div class="col">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This text has no meaning but I just put it in here to see how it will appear on the website.</p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                <a href="#" class="btn btn-primary">Find out more!</a>
+                            </div>
                         </div>
                     </div>
                 </div>
