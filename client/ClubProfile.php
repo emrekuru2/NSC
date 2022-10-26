@@ -1,5 +1,6 @@
 <?php
-include 'includes/components/header.php'
+    include_once 'includes/components/header.php'
+    // Manager + Admin
 ?>
 
     test datadffdsfsdfsdfsdfsdf

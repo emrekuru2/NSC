@@ -1,6 +1,7 @@
 <?php
-$title = "Committees";
-include 'includes/components/header.php'
+    $title = "Committees";
+    include_once 'includes/components/header.php'
+    // Admin?
 ?>
 
     <div class="container my-5">
