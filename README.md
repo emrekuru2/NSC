@@ -16,7 +16,9 @@ If a developer would like to work on the project locally, this will require an a
 ### Userrole Development- Shreya
 I have added new userroles inside the brandon_database nsca_roletypes table
 They are as follows:
+
 (RoleID, Name, Description)
+
 (1, 'Guest User', 'Guest User'),
 (2, 'Umpire','Umpire'),
 (3, 'Player','Player'),
@@ -26,4 +28,36 @@ They are as follows:
 When you are testing portion of the website that require different types of users such as access to different things depending on different user roles, please clone these changes from userroledevelop branch. 
 
 **ADDING THESE CHANGES IS CRUCIAL TO FUNCTIONING WEBSITE**
+
+### Userrole Development- Shreya
+I have added new users and userlogins(I have inserted into nsca_login, nsca_user, nsca_userroles) for testing purposes
+
+## The new users in nsca_user table are 
+
+(`UserID`, `email`, `UserRole`, `FirstName`, `MiddleName`, `LastName`, `StreetAddress`, `City`, `Province`, `Country`, `PostalCode`, `Phone`, `UserDate`, `imgFolder`, `UserDescription`)
+
+(1, 'Guest@gmail.com', '1', 'Guest', '', 'User', 'street', 'city', 'province', 'Canada', 'PostalCode', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'guest user!')
+
+(2, 'Umpire@gmail.com', '2', 'Umpire', '', 'User','street', 'city', 'province', 'Canada', 'PostalCode', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Umpire!')
+
+(3, 'Player@gmail.com', '3', 'Player', '', 'User', 'street', 'city', 'province', 'Canada', 'PostalCode', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Player!')
+
+(4, 'Admin@gmail.com', '4', 'Admin', '', 'User', 'street', 'city', 'province', 'Canada', 'PostalCode', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Admin!')
+
+(5, 'Coach@gmail.com', '5', 'Coach', '', 'User', 'street', 'city', 'province', 'Canada', 'PostalCode', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Coach!')
+
+
+
+## The new logins are 
+
+(`LoginID`, `email`, `password`, `UserID`)
+(1, 'Guest@gmail.com', 'thisisaguestuser@1', 1)
+(2, 'Umpire@gmail.com', 'thisisanumpire@2', 2)
+(3, 'Player@gmail.com', 'thisisaplayer@3', 3)
+(4, 'Admin@gmail.com', 'thisisanadmin@4', 4)
+(5, 'Coach@gmail.com', 'thisisacoach@5', 5)
+
+Use these emails and passwords for testing. 
+
+**ADDING THESE CHANGES IS CRUCIAL FOR TESTING**
 
