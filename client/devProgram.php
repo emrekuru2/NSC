@@ -1,8 +1,12 @@
+<!-- Development Programs
+This page contains current and upcoming devlopment programs.
+-->
 <?php
 $title = "Development Programs";
 include 'includes/components/header.php';
 ?>
 
+<!-- Css and script links -->
 <link rel="stylesheet" type="text/css" href="../../css/devProgram.css">
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -11,13 +15,20 @@ include 'includes/components/header.php';
 <body>
 
     <h1 class="text-center pt-5" id="pageTitle">Development Programs</h1>
-
+    <!-- Dummy Text: Page Discription -->
     <p class="text-center p-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi 
         ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non</p>
 
     <div class = "content">
         <div class = "content-inside">
+        <!-- 
+            Carousel
+            Page title: Caerousel.Bootsrtap
+            Code source: https://getbootstrap.com/docs/4.0/components/carousel/
+            Version: 4.0
+            Date accessed: Octover 25, 2022
+        -->
             <div id="carousel" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carousel" data-slide-to="0" class="active"></li>
@@ -47,15 +58,11 @@ include 'includes/components/header.php';
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-        <!-- <div class = "content-inside">
-            <div class="banner">
-                <img class = "banner_img" src='./img/DevProgram_Dummy/banner1.jpg' alt='banner picture'>
-                <div class= "banner_text">
-                    <h2>Dummy Text</h2>
-                </div>
-            </div> -->
 
-
+            <!-- Program list: Information on each developmental program  
+                images, 
+                program title, 
+                program discription and sign up  -->
             <div class="programs-board">
                 <div class="mb-5" >
                     <div class="row g-0">
@@ -107,8 +114,6 @@ include 'includes/components/header.php';
             </div>
         </div>
     </div>
-
-    <!-- issue -->
 
     <?php
         include 'includes/components/footer.php';
