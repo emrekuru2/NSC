@@ -5,9 +5,10 @@
     $isLoggedIn = isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true;
     $isCoach = isset($_SESSION['User_ID']) && CheckRole($_SESSION['User_ID']) == 'Coach';
     $isPlayer = isset($_SESSION['User_ID']) && CheckRole($_SESSION['User_ID']) == 'Player';
+    $isAdmin = isset($_SESSION['User_ID']) && CheckRole($_SESSION['User_ID']) == 'Admin';
     
     // Must be logged and must 
-    if(!$isLoggedIn || !($isCoach || $isPlayer)) { 
+    if(!$isLoggedIn || !($isCoach || $isPlayer || $isAdmin)) { 
         RedirectToIndex();
     }
 ?>
