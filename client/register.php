@@ -113,23 +113,6 @@
                             </div>
                         </div>
 
-                        <!-- Role DropDown -->
-                        <div class="form-row">                            
-                            <div class="form-group col-sm-12">
-                                <label for="RegisterFormRole" style="color: gray;">Please enter the role you want to join as in the association</label>
-                                <select id="RegisterFormRole" name="RegisterFormRole" class="form-control" required>
-                                    <?php
-                                    $roleResult = getRoles($conn);
-
-                                    while ($row = mysqli_fetch_assoc($roleResult)) { ?>
-                                        <option value="<?=$row['RoleID']?>"><?=$row['Name']?></option>
-                                    <?php
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
-
                         <!-- Profile Picture -->
                         <div class="form-row">
                             <div class="col-sm-12">
@@ -155,7 +138,7 @@
                             $registerMiddleName = "";
                             $registerLastName = check_input($conn, $_POST['RegisterFormLastName']);
                             $registerEmail = check_input($conn, $_POST['RegisterFormEmail']);
-                            $registerUserRole = check_input($conn, $_POST['RegisterFormRole']);
+                            $registerUserRole = check_input($conn, 1); // Default is Guest User
                             $registerStreetAddress = check_input($conn, $_POST['RegisterFormStreetAddress']);
                             $registerCity = check_input($conn, $_POST['RegisterFormCity']);
                             $registerProvince = check_input($conn, $_POST['RegisterFormProvince']);

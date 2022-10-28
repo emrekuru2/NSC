@@ -1,6 +1,16 @@
 <?php
-$title = "Team";
-include 'includes/components/header.php'
+    $title = "My Team";
+    include_once 'includes/components/header.php';
+    // Coach can edit, player can view (future implementation)
+    include_once 'includes/functions/security.php';
+    $isLoggedIn = isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true;
+    $isCoach = isset($_SESSION['User_ID']) && CheckRole($_SESSION['User_ID']) == 'Coach';
+    $isPlayer = isset($_SESSION['User_ID']) && CheckRole($_SESSION['User_ID']) == 'Player';
+    
+    // Must be logged and must Coach or Player to view this page
+    if(!$isLoggedIn || !($isCoach || $isPlayer)) { 
+        RedirectToIndex();
+    }
 ?>
 
     <?php

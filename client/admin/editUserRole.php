@@ -1,9 +1,9 @@
 <?php
-
-$title = "Manage User Role";
-include "../db/dbFunctions.php";
-include "../includes/components/adminHeader.php";
-
+    $title = "Manage User Role";
+    include_once "../includes/components/adminHeader.php";
+    // Prevent Direct access and prevent non-admin's to access
+    RestrictAdmin(CheckRole($_SESSION['User_ID']));
+    defined('_DEFVAR') or exit(header('Location: ../index.php'));
 ?>
 
     <div class="container-fluid">
@@ -35,6 +35,4 @@ include "../includes/components/adminHeader.php";
 
 
 
-<?php
-
-include "../includes/components/footer.php";
+<?php include "../includes/components/footer.php"; ?>

@@ -1,16 +1,22 @@
 <?php
     // Prevent direct access
-    if(preg_match("/includes/", $_SERVER["PHP_SELF"]) == 1) {
-        header("Location: ../../index.php");
-        die();
+    // If it the admin then all the validation is already handled in admin files.
+    if(preg_match("/admin/", $_SERVER["PHP_SELF"]) == 0) {
+        if(preg_match("/includes/", $_SERVER["PHP_SELF"]) == 1) {
+            header("Location: ../../index.php");
+            die();
+        }
+        else {
+            include_once("includes/functions/security.php");
+            RestrictIncludes();
+            DefineSecurity();
+        }
+
+        include_once("db/database.php");
+        include_once("db/dbFunctions.php");
+        $conn = OpenCon();
     }
 
-    include_once $_SERVER["DOCUMENT_ROOT"]."/db/database.php";
-    include_once $_SERVER["DOCUMENT_ROOT"]."/db/dbFunctions.php";
-
-    $conn = OpenCon();
-
-    // If it is the login or registration page use the following header
     if (isset($loginOrRegistrationPage) && $loginOrRegistrationPage) 
     {
         session_start();
@@ -70,6 +76,41 @@
             <li class="nav-item">
                 <a class="nav-link" href="../../TeamPage.php">Teams</a>
             </li>
+            <?php
+            if (isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true) {
+                 if (isset($_SESSION['User_ID']) && CheckRole($_SESSION['User_ID']) == 'Coach') {
+            ?>
+                <li class = "nav-item">
+                    <a class = "nav-link" href="../../ClubProfile.php">My Club</a>
+                </li>
+                <?php
+                }
+    
+            }
+            ?>
+            <?php
+            if (isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true) {
+                if (isset($_SESSION['User_ID']) && (CheckRole($_SESSION['User_ID']) == 'Player')) {
+            ?>
+                   <li class = "nav- item">
+                       <a class = "nav-link" href = "../../PlayerProfile.php">Player Profile</a>
+                </li>
+                <?php
+                }
+            }
+            ?>
+            <?php
+            if (isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true) {
+                 if (isset($_SESSION['User_ID']) && (CheckRole($_SESSION['User_ID']) == 'Coach' || CheckRole($_SESSION['User_ID']) == 'Player')) {
+            ?>
+                <li class = "nav-item">
+                    <a class = "nav-link" href="../../Team.php">My Team</a>
+                </li>
+                <?php
+                }
+    
+            }
+            ?>
 
         </ul>
         <ul class="navbar-nav ml-auto">
@@ -78,9 +119,6 @@
             <?php
                 checkHasATeam();
             ?>
-<!--            <li class="nav-item">-->
-<!--                <a class="nav-link" href="../../Team">My Team</a>-->
-<!--            </li>-->
 
             <li class="nav-item">
                 <a class="nav-link waves-effect waves-light" href="../../news.php">
@@ -90,8 +128,6 @@
 
 
             <?php
-
-            //$_SESSION['loggedin'] = true; //for testing
 
             if (isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true) { ?>
 
@@ -103,13 +139,18 @@
                     <a class="dropdown-item" href="../../UserProfile.php">My Profile</a>
                     <div class="dropdown-divider"></div>
                     <?php
-                    if (isset($_SESSION['UserRole']) && $_SESSION['UserRole'] == "3") { //<<<------ THIS NEEDS TO BE CHANGED WHEN ADMIN ROLE IS ADDED
-                        ?>
-                        <a class="dropdown-item" href="../../admin/dashboard.php">Admin Dashboard</a>
-                        <?php
-                    }
+                        if (isset($_SESSION['User_ID']) && CheckRole($_SESSION['User_ID']) == 'Admin') {
+                            ?>
+                            <a class="dropdown-item" href="../../admin/dashboard.php">Admin Dashboard</a>
+                            <?php
+                        }
+                        if(preg_match("/admin/", $_SERVER["PHP_SELF"]) == 1) {
+                            echo  '<a class="dropdown-item" href="../includes/components/logout.php">Logout</a>';
+                        }
+                        else {
+                            echo '<a class="dropdown-item" href="includes/components/logout.php">Logout</a>';
+                        }
                     ?>
-                    <a class="dropdown-item" href="includes/components/logout.php">Logout</a>
                 </div>
             </li>
             <?php
@@ -120,12 +161,9 @@
                     <i class="fas fa-user"></i> Login
                 </a>
                 </li>
-            
-
-    <?php
+        <?php
             }
             ?>
-
         </ul>
     </div>
 </nav>

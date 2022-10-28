@@ -1,5 +1,5 @@
 <?php
-
+    defined('_DEFVAR') or exit(header('Location: ../index.php'));
     function OpenCon() {
         $dbhost = "localhost";
         $dbuser = "root";

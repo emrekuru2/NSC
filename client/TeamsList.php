@@ -1,6 +1,15 @@
 <?php
-$title = "Team";
-include 'includes/components/header.php';
+    $title = "Team";
+    include_once 'includes/components/header.php';
+    include_once 'includes/functions/security.php';
+    $isLoggedIn = isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true;
+    $isCoach = isset($_SESSION['User_ID']) && CheckRole($_SESSION['User_ID']) == 'Coach';
+    $isPlayer = isset($_SESSION['User_ID']) && CheckRole($_SESSION['User_ID']) == 'Player';
+    
+    // Must be logged and must 
+    if(!$isLoggedIn || !($isCoach || $isPlayer)) { 
+        RedirectToIndex();
+    }
 ?>
     <div class="container mt-5 pt-5">
 
@@ -16,15 +25,11 @@ include 'includes/components/header.php';
                 displayTeamsForApply();
             ?>
 
-
-
-
         </section>
         <!--Section: Content-->
-
-
+        
     </div>
 
 <?php
-include 'includes/components/footer.php'
+    include 'includes/components/footer.php'
 ?>

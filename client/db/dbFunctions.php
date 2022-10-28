@@ -2,7 +2,7 @@
 // Function To Place To Create DB Functions
 // Created By Nicholas Deschenes 13/10/2019
 include_once "database.php";
-
+defined('_DEFVAR') or exit(header('Location: ../index.php'));
 function sanitize($conn, $str){
     mysqli_real_escape_string($conn, trim($str));
     return $str;
