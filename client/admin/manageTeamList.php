@@ -25,7 +25,7 @@
                         ?>
 
                     </table>
-                    <a href="../EditTeamPage.php"><button  class="btn light-blue text-white btn-md mx-0 btn-rounded"> Create A New Team </button>
+                    <a href="../admin/editTeamPage.php"><button  class="btn light-blue text-white btn-md mx-0 btn-rounded"> Create A New Team </button>
                     <br><br><br>
                 </div>
             </div>
