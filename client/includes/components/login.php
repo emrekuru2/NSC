@@ -68,10 +68,10 @@ if ( isset($_POST['submitLogin']) ) { //login script
             }
             header("location:../../index"); //redirects user
         } else {
-            header("location:../components/loginform?LoginError=true"); //redirects user with login error
+            header("location:../../loginform.php?LoginError=true"); //redirects user with login error
         }
     } else {
-        header("location:../components/loginform?sessionMismatch=true"); //redirects user with login error
+        header("location:../components/login?sessionMismatch=true"); //redirects user with login error
     }
 
 }
