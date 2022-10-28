@@ -295,6 +295,13 @@ INSERT INTO `nsca_userroles` (`UserRoleID`, `RoleID`, `UserID`) VALUES
 (4,4,4),
 (5,5,5);
 
+CREATE TABLE `nsca_viewcount` (
+								`count_ID` int(11) NOT NULL,
+                                `date` DATE,
+                                `count` int(255) DEFAULT 0
+);
+ALTER TABLE `nsca_viewcount`
+  ADD PRIMARY KEY (`count_ID`);
 
 ALTER TABLE `nsca_alerts`
   ADD PRIMARY KEY (`Alert_ID`);
