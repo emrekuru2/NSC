@@ -55,7 +55,8 @@ CREATE TABLE `nsca_devprograms` (
                                   `Time` varchar(64) DEFAULT NULL,
                                   `Charges` varchar(64) DEFAULT NULL,
                                   `Type` varchar(64) DEFAULT NULL,
-                                  `DaysRun` varchar(64) DEFAULT NULL
+                                  `DaysRun` varchar(64) DEFAULT NULL,
+                                  `imgFolder` varchar(128) DEFAULT './img/DevProgram/default.jpg'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `nsca_devroleuser` (
@@ -84,6 +85,21 @@ CREATE TABLE `nsca_login` (
                             `password` varchar(256) DEFAULT NULL,
                             `UserID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE `user_devprogram` (
+  `DevID` int(11) NOT NULL,
+  `UserID` int(11) NOT NULL,
+  `Time` datetime NOT NULL
+)
+
+ALTER TABLE `user_devprogram`
+  ADD UNIQUE KEY `UserID` (`UserID`,`DevID`);
+
+INSERT INTO `user_devprogram` (`DevID`, `UserID`, `Time`) VALUES
+(1, 14, '2022-10-27 20:43:42'),
+(2, 14, '2022-10-27 20:44:15');
 
 INSERT INTO `nsca_login` (`LoginID`, `email`, `password`, `UserID`) VALUES
 (1, 'Guest@gmail.com', '$2y$10$xu5G5zLj/1TKuPeEcwNgYu3D8ULSJWBGxVCyvbZUDZUvIvN4Iqer2', 1),
