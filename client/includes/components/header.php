@@ -71,11 +71,9 @@
                 <a class="nav-link" href="../../TeamPage.php">Teams</a>
             </li>
 
-            <?php if (isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true) { ?>
             <li class="nav-item">
                 <a class="nav-link" href="../../devProgram.php">Development Programs</a>
             </li>
-            <?php } ?>
 
         </ul>
         <ul class="navbar-nav ml-auto">

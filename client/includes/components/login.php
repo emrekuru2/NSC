@@ -5,6 +5,7 @@ session_start();
 
 include_once "../../db/database.php";
 include_once "../../db/dbFunctions.php";
+// include_once "../../regDevProgram.php";
 
 $conn = OpenCon();
 
@@ -66,7 +67,13 @@ if ( isset($_POST['submitLogin']) ) { //login script
                 $_SESSION['imgFolder'] = $imgFolder;
                 $_SESSION['LoggedIn'] = true;
             }
-            header("location:../../index"); //redirects user
+            if ($_SESSION['regDev'] == true){
+                $_SESSION['regDev'] = false;
+                $devID = $_SESSION['devID'];
+                header("Location: ../../regDevProgram.php?devID=$devID"); //if user came to login page from development programs page
+            } else {
+                header("location:../../index"); //redirects user to default index page
+            }
         } else {
             header("location:../../loginform.php?LoginError=true"); //redirects user with login error
         }
