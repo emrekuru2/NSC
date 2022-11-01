@@ -13,11 +13,15 @@
 
 <body>
 
-    <?php if ($conn->query($sql) === TRUE) { ?>
+    <?php if ($conn->query($sql) === TRUE) { 
+        $sql = "SELECT * FROM nsca_devPrograms WHERE `DevID`=$devID";
+        $result = $conn->query($sql);
+        while ($row = $result->fetch_assoc()) {
+        ?>
 
         <div class="content text-center" style="height: 80vh;">
             <img src="./img/tick.png" alt="success" class="rounded mx-auto d-block" style="height: 20%; margin: 10% 10% 3% 10%">
-            <p class="h5" style="color: #00A79D;">You have successfully registered for the program!</p>
+            <p class="h5" style="color: #00A79D;">You have successfully registered for <b><?php echo $row["Name"]; } ?></b>!</p>
             <br>
             <a class="btn light-blue text-white" href="./devProgram.php">Browse More</a>
         </div>
