@@ -4,7 +4,7 @@ include 'includes/components/header.php';
 ?>
 
 <!-- Page Content -->
-<div class="container">
+<div class="container pb-5">
     <!-- Heading -->
     <h3 class="text-center font-weight-bold dark-grey-text m-4">News</h3>
 
@@ -19,9 +19,9 @@ include 'includes/components/header.php';
 
     <div class="row">
         <!-- Post Content Column -->
-        <div class="col-md-8">
-            <br><br>
+        <div class="col-md-8 overflow-auto border" style="height: 600px;">
             <!--
+            <br><br>
             <h3 class="text-center font-weight-bold dark-grey-text mb-4 pb-2">News</h3>
             -->
             
@@ -43,6 +43,7 @@ include 'includes/components/header.php';
                         <!-- Preview Image -->
                         <img class="card-img-top" src="http://placehold.it/900x300" alt="">
                     </div>
+
                     <div class="card-body">
                         <!-- Title -->
                         <h2 class="card-title font-weight-bold"><?php echo $row['Title']; ?></h2>
