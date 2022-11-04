@@ -5,14 +5,26 @@ include 'includes/components/header.php';
 
 <!-- Page Content -->
 <div class="container">
+    <!-- Heading -->
+    <h3 class="text-center font-weight-bold dark-grey-text m-4">News</h3>
+
+    <!-- Search widget -->
+    <div class="input-group d-flex justify-content-center m-4">
+        <form class="form-inline" action="<?php $_SERVER['PHP_SELF']; ?>" method="GET" class="mw-100">
+                <input type="text" name="searchAnnouncement" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+                <button class="btn btn-sm light-blue text-white" type="submit" name="submitSearch">Go!</button></span>
+        </form>
+    </div>
 
     <div class="row">
-
         <!-- Post Content Column -->
         <div class="col-md-8">
             <br><br>
+            <!--
             <h3 class="text-center font-weight-bold dark-grey-text mb-4 pb-2">News</h3>
-
+            -->
+            
             <?php
 
             $conn = OpenCon();
@@ -59,7 +71,7 @@ include 'includes/components/header.php';
         <!-- Sidebar Widgets Column -->
         <div class="col-md-4">
 
-            <!-- Search Widget -->
+            <!-- Search Widget 
             <div class="card my-4">
                 <h5 class="card-header">Search</h5>
                 <div class="card-body">
@@ -72,6 +84,7 @@ include 'includes/components/header.php';
                     </div>
                 </div>
             </div>
+            -->
 
             <!-- Categories Widget -->
             <div class="card my-4">
