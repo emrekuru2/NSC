@@ -614,11 +614,11 @@ function displayAllTheTeam(){
                             <td>$teamName</td>";
 
         if($clubName == null){
-                                 echo "<td><a href=../AddTeamToClub.php?teamId=$teamID&type=2&teamName=$teamName>
+                                 echo "<td><a href=AddTeamToClub.php?teamId=$teamID&type=2&teamName=$teamName>
                                 <button type='button' >Set A Club</button>
                             </a></td>";
         }else{
-                                echo "<td>$clubName<a href=../AddTeamToClub.php?teamId=$teamID&type=3&teamName=$teamName>
+                                echo "<td>$clubName<a href=AddTeamToClub.php?teamId=$teamID&type=3&teamName=$teamName>
                                 <button type='button' >Edit</button>
                             </a></td>";
         }

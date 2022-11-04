@@ -1,0 +1,67 @@
+.banner_img{
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.banner_text{
+    position: absolute;
+    top: 15%;
+    right: 10%;
+    color: aliceblue; 
+    border:5px solid rgb(55, 149, 185);
+    background: rgb(55, 149, 185);
+}
+
+.programs-board{
+    display: flex;
+    flex-direction: column;
+    padding: 5%;
+}
+
+/*
+.program{
+    display: flex;
+    gap: 5%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+#program2{
+    flex-direction: row-reverse;
+}
+
+.program-img{
+    width: 30%;
+    height: 20%;
+}
+
+.info-button{
+    background-color: rgb(55, 149, 185);
+    color: aliceblue; 
+    border: none;
+    font-size: 4vh;
+}
+body{
+    height: 100%;
+    margin: 0;
+}
+
+.content{
+    min-height: 100%;
+}
+
+.content-inside{
+    padding: 20px;
+    padding-bottom: 50px;
+}
+*/
+
+footer{
+    height: 50px;
+    margin-top: -50px;
+
+}
+
+
+
