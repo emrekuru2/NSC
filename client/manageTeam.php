@@ -13,8 +13,14 @@ include 'includes/components/header.php';
 <body>
     <div class="search-bar">
         <form class="form-inline my-2 my-lg-0 d-flex justify-content-center" id= "search-form">
-            <input class="form-control" style="width: 75%" type="search" placeholder="Search Player" aria-label="Search">
-            <button class="btn btn-md" type="submit" id="search-button">Search</button>
+            <input class="form-control" style="width: 70%" type="search" placeholder="Search Player" aria-label="Search">
+            <button class="submit-icon border-0.5 border-info">
+                <span class="input-group-text border-0" id="search-addon">
+                    <i class="fas fa-search"></i>
+                </span>
+            </button>
+
+            <button class="ml-3 border-0.5 border-info">Unassigned <br>Players</button>
         </form>
     </div>
 
