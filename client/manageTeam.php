@@ -11,6 +11,7 @@ include 'includes/components/header.php';
 
 
 <body>
+    <!-- Search bar -->
     <div class="search-bar">
         <form class="form-inline my-2 my-lg-0 d-flex justify-content-center" id= "search-form">
             <input class="form-control" style="width: 70%" type="search" placeholder="Search Player" aria-label="Search">
@@ -26,6 +27,10 @@ include 'includes/components/header.php';
 
     <div class = "team-list">
         <div class = "team">
+            <!-- 3 functional buttons:
+                1. Exchange
+                2. Add
+                3. Remove player -->
             <div class = "buttons d-flex justify-content-end mt-3" style="width: 95%">
                     <button type="button" pButton class="fa fa-exchange-alt ml-3" ></button>
                     <button class="ml-3">&#43;</button>
