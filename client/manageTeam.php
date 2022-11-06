@@ -24,12 +24,12 @@ include 'includes/components/header.php';
         </form>
     </div>
 
-    <div class = "team list">
+    <div class = "team-list">
         <div class = "team">
-            <div class = "buttons">
-                    <button type="button" class="">Add</button>
-                    <button type="button" class="">Exchange</button>
-                    <button type="button" class="">Remove</button>
+            <div class = "buttons d-flex justify-content-end mt-3" style="width: 95%">
+                    <button type="button" pButton class="fa fa-exchange-alt ml-3" ></button>
+                    <button class="ml-3">&#43;</button>
+                    <button class="ml-3">&#10005;</button>
             </div>
             <h1>Team #</h1>
             <div class = "players">
