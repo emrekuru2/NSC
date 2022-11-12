@@ -1,6 +1,7 @@
 <?php
-$title = "Manage Teams";
-include 'includes/components/header.php';
+    $title = "Manage Teams";
+    include_once 'includes/components/header.php';
+    Include_once 'includes/functions/security.php';
 ?>
 
 <!-- change css ad js to bootstrap5 -->
@@ -134,5 +135,5 @@ include 'includes/components/header.php';
 </body>
 
 <?php
-        include 'includes/components/footer.php';
+    include_once 'includes/components/footer.php';
 ?>

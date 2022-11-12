@@ -78,10 +78,13 @@
             </li>
             <?php
             if (isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true) {
-                 if (isset($_SESSION['User_ID']) && CheckRole($_SESSION['User_ID']) == 'Coach') {
+                 if (isset($_SESSION['User_ID']) && CheckRole($_SESSION['User_ID']) == 'Manager') {
             ?>
                 <li class = "nav-item">
                     <a class = "nav-link" href="../../ClubProfile.php">My Club</a>
+                </li>
+                <li class = "nav-item">
+                    <a class = "nav-link" href="../../manageTeam.php">Manage Team</a>
                 </li>
                 <?php
                 }
