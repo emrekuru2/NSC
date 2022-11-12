@@ -3,12 +3,8 @@
     include_once 'includes/components/header.php';
     // Coach can edit, player can view (future implementation)
     include_once 'includes/functions/security.php';
-    $isLoggedIn = isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true;
-    $isGuestUser = isset($_SESSION['User_ID']) && CheckRole($_SESSION['User_ID']) == 'Guest User';
-
-    if(!$isLoggedIn || $isGuestUser) { 
-        RedirectToIndex();
-    }
+    CheckLoggedIn();
+    AccessControlBasedOnLevel(PLAYER_ACCESS_LVL, $_SESSION['User_ID']);
 ?>
 
     <?php

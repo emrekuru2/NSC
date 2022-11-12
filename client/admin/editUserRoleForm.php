@@ -1,7 +1,9 @@
 <?php
     $title = "Edit User Role";
-    include_once 'includes/components/header.php';
-    include_once 'includes/components/security.php';
+    include_once "../includes/components/adminHeader.php";
+    // Prevent Direct access and prevent non-admin's to access
+    RestrictAdmin(CheckRole($_SESSION['User_ID']));
+    defined('_DEFVAR') or exit(header('Location: ../index.php'));
 ?>
 
 <div class="container my-5 py-5 z-depth-1">
@@ -49,5 +51,5 @@
 </div>
 
 <?php
-include 'includes/components/footer.php'
+    include_once '../includes/components/footer.php'
 ?>

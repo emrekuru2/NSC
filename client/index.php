@@ -1,6 +1,6 @@
 <?php
     $title = "Homepage";
-    include 'includes/components/header.php';
+    include_once 'includes/components/header.php';
 
     $conn = OpenCon();
 ?>
