@@ -2,12 +2,8 @@
     $title = "Team";
     include_once 'includes/components/header.php';
     include_once 'includes/functions/security.php';
-    $isLoggedIn = isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true;
-    $isGuestUser = isset($_SESSION['User_ID']) && CheckRole($_SESSION['User_ID']) == 'Guest User';
-
-    if(!$isLoggedIn || $isGuestUser) { 
-        RedirectToIndex();
-    }
+    CheckLoggedIn();
+    AccessControlBasedOnLevel(PLAYER_ACCESS_LVL, $_SESSION['User_ID']);
 ?>
     <div class="container mt-5 pt-5">
 
