@@ -11,18 +11,18 @@
 
 
 <body>
-    <div class = "container my-5">
-        <!-- Search bar -->
+    <div class="container my-5">
+        <!-- Search bar  -->
         <div class="search-bar">
-            <form class="form-inline my-2 my-lg-0 d-flex justify-content-center" id= "search-form">
-                <input class="form-control" style="width: 70%" type="search" placeholder="Search Player" aria-label="Search">
-                <button class="submit-icon border-0.5 border-info">
-                    <span class="input-group-text border-0" id="search-addon">
+            <form class="form-inline d-flex  justify-content-center" id= "search-form">
+                <div class="input-group w-75git">
+                    <input class="form-control w-75 mt-1" type="search" placeholder="Search Player" aria-label="Search" id="bar-search-player">
+                    <button class="btn btn-secondary mt-1">
                         <i class="fas fa-search"></i>
-                    </span>
-                </button>
+                    </button>  
+                </div>
 
-                <button class="ml-3 border-0.5 border-info">Unassigned <br>Players</button>
+                <!-- <button type="button" class="btn btn-primary" id="btn-unassigned-player">Unassigned Players</button> -->
             </form>
         </div>
 
@@ -30,10 +30,10 @@
                     1. Exchange
                     2. Add
                     3. Remove player -->
-        <div class = "buttons d-flex justify-content-end mt-3" style="width: 95%">
-            <button type="button" pButton class="fa fa-exchange-alt ml-3" data-toggle="modal" data-target="#pop-up"></button>
-            <button class="ml-3">&#43;</button>
-            <button class="ml-3">&#10005;</button>
+        <div class = "buttons d-flex justify-content-end mt-3">
+            <button type="button" pButton class="btn btn-dark ml-3" data-toggle="modal" data-target="#pop-up" id="btn-exchange-player"><i class="fa fa-exchange-alt fa-lg"></i></button>
+            <button type="button" class="btn btn-info ml-3" id="btn-add-player"><i class="fa fa-plus fa-lg"></i></button>
+            <button class="btn btn-danger ml-3" id="btn-remove-player"><i class="fa fa-times fa-lg"></i></button>
         </div>
 
         <!-- Team Cards: 
@@ -110,6 +110,39 @@
         <div class="card mt-4" id="team-3">
             <div class="card-body">
                 <h5 class="card-title font-weight-bold">Team 3</h5>  
+                <div class="card-text" id="player-list">
+                <div class="form-check pl-5">
+                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
+                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
+                        <p>player info/team name if needed</p>
+                    </div>
+                    <div class="form-check pl-5">
+                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
+                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
+                        <p>player info/team name if needed</p>
+                    </div>
+                    <div class="form-check pl-5">
+                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
+                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
+                        <p>player info/team name if needed</p>
+                    </div>                  
+                    <div class="form-check pl-5">
+                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
+                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
+                        <p>player info/team name if needed</p>
+                    </div>
+                    <div class="form-check pl-5">
+                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
+                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
+                        <p>player info/team name if needed</p>
+                    </div>
+                </div>      
+            </div>  
+        </div>
+
+        <div class="card mt-4" id="team-3">
+            <div class="card-body">
+                <h5 class="card-title font-weight-bold">Unassigned</h5>  
                 <div class="card-text" id="player-list">
                 <div class="form-check pl-5">
                         <input class="form-check-input" type="checkbox" value="" id="Player1" />
