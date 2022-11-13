@@ -4,6 +4,7 @@
     Include_once 'includes/functions/security.php';
 ?>
 
+<link rel="stylesheet" type="text/css" href="../../css/manageTeam.css">
 <!-- change css ad js to bootstrap5 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -25,65 +26,118 @@
             </form>
         </div>
 
-        <div class = "team-list">
-            <div class = "team1">
-                <!-- 3 functional buttons:
+        <!-- 3 functional buttons:
                     1. Exchange
                     2. Add
                     3. Remove player -->
-                <div class = "buttons d-flex justify-content-end mt-3" style="width: 95%">
-                        <button type="button" pButton class="fa fa-exchange-alt ml-3" data-toggle="modal" data-target="#pop-up"></button>
-                        <button class="ml-3">&#43;</button>
-                        <button class="ml-3">&#10005;</button>
-                </div>
+        <div class = "buttons d-flex justify-content-end mt-3" style="width: 95%">
+            <button type="button" pButton class="fa fa-exchange-alt ml-3" data-toggle="modal" data-target="#pop-up"></button>
+            <button class="ml-3">&#43;</button>
+            <button class="ml-3">&#10005;</button>
+        </div>
 
-                <!-- Codes from https://mdbootstrap.com/docs/standard/extended/dropdown-checkbox/ -->
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="teamDropdown"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    Team1
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="teamDropdown">
-                        <li>
-                            <a class="dropdown-item">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="Player1" />
-                                    <label class="form-check-label" for="Player1">Player1</label>
-                                    <p>This is the information for the first player</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="Player2" />
-                                    <label class="form-check-label" for="Player2">Player2</label>
-                                    <p>This is the information for the second player</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="Player3" />
-                                    <label class="form-check-label" for="Player3">Player3</label>
-                                    <p>This is the information for the third player</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="Player4" />
-                                    <label class="form-check-label" for="Player4">Player4</label>
-                                    <p>This is the information for the fourth player</p>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>             
-            </div>
-            <!-- some other teams -->
+        <!-- Team Cards: 
+            Each Team card has a scroll bar, team name, player list
+        -->
+
+        <div class="card mt-4" id="team-1">
+            <div class="card-body">
+                <h5 class="card-title font-weight-bold mb-2">Team 1</h5>  
+                <div class="card-text" id="player-list">
+        
+                    <div class="form-check pl-5">
+                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
+                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
+                        <p>player info/team name if needed</p>
+                    </div>
+                    <div class="form-check pl-5">
+                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
+                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
+                        <p>player info/team name if needed</p>
+                    </div>
+                    <div class="form-check pl-5">
+                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
+                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
+                        <p>player info/team name if needed</p>
+                    </div>                  
+                    <div class="form-check pl-5">
+                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
+                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
+                        <p>player info/team name if needed</p>
+                    </div>
+                    <div class="form-check pl-5">
+                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
+                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
+                        <p>player info/team name if needed</p>
+                    </div>
+                </div>      
+            </div>  
+        </div>
+
+        <div class="card mt-4" id="team-2">
+            <div class="card-body">
+                <h5 class="card-title font-weight-bold">Team 2</h5>  
+                <div class="card-text" id="player-list">
+                <div class="form-check pl-5">
+                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
+                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
+                        <p>player info/team name if needed</p>
+                    </div>
+                    <div class="form-check pl-5">
+                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
+                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
+                        <p>player info/team name if needed</p>
+                    </div>
+                    <div class="form-check pl-5">
+                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
+                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
+                        <p>player info/team name if needed</p>
+                    </div>                  
+                    <div class="form-check pl-5">
+                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
+                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
+                        <p>player info/team name if needed</p>
+                    </div>
+                    <div class="form-check pl-5">
+                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
+                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
+                        <p>player info/team name if needed</p>
+                    </div>
+                </div>      
+            </div>  
+        </div>
+
+        <div class="card mt-4" id="team-3">
+            <div class="card-body">
+                <h5 class="card-title font-weight-bold">Team 3</h5>  
+                <div class="card-text" id="player-list">
+                <div class="form-check pl-5">
+                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
+                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
+                        <p>player info/team name if needed</p>
+                    </div>
+                    <div class="form-check pl-5">
+                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
+                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
+                        <p>player info/team name if needed</p>
+                    </div>
+                    <div class="form-check pl-5">
+                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
+                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
+                        <p>player info/team name if needed</p>
+                    </div>                  
+                    <div class="form-check pl-5">
+                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
+                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
+                        <p>player info/team name if needed</p>
+                    </div>
+                    <div class="form-check pl-5">
+                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
+                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
+                        <p>player info/team name if needed</p>
+                    </div>
+                </div>      
+            </div>  
         </div>
 
         <!-- Pop-up window for player exchange-->
