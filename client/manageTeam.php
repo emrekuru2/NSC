@@ -2,6 +2,17 @@
     $title = "Manage Teams";
     include_once 'includes/components/header.php';
     Include_once 'includes/functions/security.php';
+    $isLoggedIn = isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true;
+    if($isLoggedIn == false) {RedirectToIndex(); die();}
+    $isManager = isset($_SESSION['User_ID']) && CheckRole($_SESSION['User_ID']) == 'Manager';
+    if(!$isManager) {RedirectToIndex(); die();}
+
+    $managerID = $_SESSION['User_ID'];
+    $managerClubID = getManagerClubID($managerID);
+    // For each team make a card
+    // Populate the card with players in team. No player --> say no player.
+    // Order them in alphabetical order
+
 ?>
 
 <link rel="stylesheet" type="text/css" href="../../css/manageTeam.css">
@@ -12,10 +23,52 @@
 
 <body>
     <div class="container my-5">
+        <?php
+
+            /**
+             * Returns an array of players [object]
+             * Players obj: 
+             * teamName,teamID, userID, isClubManager, isTeamCaptain, isViceCaptain, waitingToJoin, firstName, middleName, lastName, userDecription
+             * Can access like: $obj_user->userID
+             */
+            $lstPlayers = getPlayersInClub($managerClubID);
+            $lstTeams = getTeamsInClub($managerClubID);
+            $lstTeamOne = array();
+            $lstTeamTwo = array();
+            $lstTeamThree = array();
+            $lstUnassigned = array();
+
+            $arr_length = count($lstPlayers);
+            if($arr_length>0)
+                for($i=0;$i<$arr_length;$i++)
+                {
+                    $player = $lstPlayers[$i];
+                    $playerTeamID = $player->teamID;
+
+                    /* If the player is in waiting to join then add to unassigned team. Note givig a team is mandatory in the database,
+                        every player in the club has a team, but the waitingToJoin field determines, if they are in a team or waiting.
+                        */
+                    if($player->waitingToJoin == 1) {
+                        $lstUnassigned[] = $player;
+                    }
+                    else {
+                        if($playerTeamID == $lstTeams[0]->teamID) {
+                            $lstTeamOne[] = $player;
+                        } elseif($playerTeamID == $lstTeams[1]->teamID) {
+                            $lstTeamTwo[] = $player;
+                        } elseif($playerTeamID == $lstTeams[2]->teamID) {
+                            $lstTeamThree[] = $player;
+                        }
+                    }
+                }
+            else {
+                echo "Sorry no player in the club.";
+            }
+        ?>
         <!-- Search bar  -->
         <div class="search-bar">
             <form class="form-inline d-flex  justify-content-center" id= "search-form">
-                <div class="input-group w-75git">
+                <div class="input-group w-75">
                     <input class="form-control w-75 mt-1" type="search" placeholder="Search Player" aria-label="Search" id="bar-search-player">
                     <button class="btn btn-secondary mt-1">
                         <i class="fas fa-search"></i>
@@ -32,7 +85,7 @@
                     3. Remove player -->
         <div class = "buttons d-flex justify-content-end mt-3">
             <button type="button" pButton class="btn btn-dark ml-3" data-toggle="modal" data-target="#pop-up" id="btn-exchange-player"><i class="fa fa-exchange-alt fa-lg"></i></button>
-            <button type="button" class="btn btn-info ml-3" id="btn-add-player"><i class="fa fa-plus fa-lg"></i></button>
+            <!--<button type="button" class="btn btn-info ml-3" id="btn-add-player"><i class="fa fa-plus fa-lg"></i></button>-->
             <button class="btn btn-danger ml-3" id="btn-remove-player"><i class="fa fa-times fa-lg"></i></button>
         </div>
 
@@ -42,100 +95,90 @@
 
         <div class="card mt-4" id="team-1">
             <div class="card-body">
-                <h5 class="card-title font-weight-bold mb-2">Team 1</h5>  
+                <h5 class="card-title font-weight-bold mb-2"><?php echo $lstTeams[0]->teamName ?></h5>  
+                <hr>
                 <div class="card-text" id="player-list">
-        
-                    <div class="form-check pl-5">
-                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
-                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
-                        <p>player info/team name if needed</p>
-                    </div>
-                    <div class="form-check pl-5">
-                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
-                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
-                        <p>player info/team name if needed</p>
-                    </div>
-                    <div class="form-check pl-5">
-                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
-                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
-                        <p>player info/team name if needed</p>
-                    </div>                  
-                    <div class="form-check pl-5">
-                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
-                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
-                        <p>player info/team name if needed</p>
-                    </div>
-                    <div class="form-check pl-5">
-                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
-                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
-                        <p>player info/team name if needed</p>
-                    </div>
+                    <?php
+                        $arr_length_lstOne = count($lstTeamOne);
+                        if ($arr_length_lstOne == 0) {
+                            echo
+                            '<div class="alert alert-warning" role="alert">
+                                No players added to this team. You can add players from other teams or from the unassigned group.
+                            </div>';
+                        } else {
+                            for($i=0;$i<$arr_length_lstOne;$i++)
+                            {
+                                
+                                $playerInTeam = $lstTeamOne[$i];
+                                $playerName = $playerInTeam->firstName.' '.$playerInTeam->middleName.' '.$playerInTeam->lastName;
+                                echo '<div class="form-check pl-5">
+                                    <input class="form-check-input" type="checkbox" value="" id="'.$playerInTeam->userID.'" />
+                                    <label class="form-check-label fs-6" for="'.$playerInTeam->userID.'"><strong>'.$playerName.'</strong></label>
+                                    <p>'.$playerInTeam->userDescription.'</p>
+                                </div>';
+                            }
+                        }
+                    ?>
                 </div>      
             </div>  
         </div>
 
         <div class="card mt-4" id="team-2">
             <div class="card-body">
-                <h5 class="card-title font-weight-bold">Team 2</h5>  
+                <h5 class="card-title font-weight-bold"><?php echo $lstTeams[1]->teamName ?></h5>
+                <hr>  
                 <div class="card-text" id="player-list">
-                <div class="form-check pl-5">
-                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
-                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
-                        <p>player info/team name if needed</p>
-                    </div>
-                    <div class="form-check pl-5">
-                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
-                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
-                        <p>player info/team name if needed</p>
-                    </div>
-                    <div class="form-check pl-5">
-                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
-                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
-                        <p>player info/team name if needed</p>
-                    </div>                  
-                    <div class="form-check pl-5">
-                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
-                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
-                        <p>player info/team name if needed</p>
-                    </div>
-                    <div class="form-check pl-5">
-                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
-                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
-                        <p>player info/team name if needed</p>
-                    </div>
+                <?php
+                        $arr_length_lstTwo = count($lstTeamTwo);
+                        if ($arr_length_lstTwo == 0) {
+                            echo
+                            '<div class="alert alert-warning" role="alert">
+                                No players added to this team. You can add players from other teams or from the unassigned group.
+                            </div>';
+                        } else {
+                            for($i=0;$i<$arr_length_lstTwo;$i++)
+                            {
+                                
+                                $playerInTeam = $lstTeamTwo[$i];
+                                $playerName = $playerInTeam->firstName.' '.$playerInTeam->middleName.' '.$playerInTeam->lastName;
+                                echo '<div class="form-check pl-5">
+                                    <input class="form-check-input" type="checkbox" value="" id="'.$playerInTeam->userID.'" />
+                                    <label class="form-check-label fs-6" for="'.$playerInTeam->userID.'"><strong>'.$playerName.'</strong></label>
+                                    <p>'.$playerInTeam->userDescription.'</p>
+                                </div>';
+                            }
+                        }
+                    ?>
                 </div>      
             </div>  
         </div>
 
         <div class="card mt-4" id="team-3">
             <div class="card-body">
-                <h5 class="card-title font-weight-bold">Team 3</h5>  
+                <h5 class="card-title font-weight-bold"><?php echo $lstTeams[2]->teamName ?></h5>  
+                <hr>
                 <div class="card-text" id="player-list">
-                <div class="form-check pl-5">
-                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
-                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
-                        <p>player info/team name if needed</p>
-                    </div>
-                    <div class="form-check pl-5">
-                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
-                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
-                        <p>player info/team name if needed</p>
-                    </div>
-                    <div class="form-check pl-5">
-                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
-                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
-                        <p>player info/team name if needed</p>
-                    </div>                  
-                    <div class="form-check pl-5">
-                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
-                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
-                        <p>player info/team name if needed</p>
-                    </div>
-                    <div class="form-check pl-5">
-                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
-                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
-                        <p>player info/team name if needed</p>
-                    </div>
+                <?php
+                        $arr_length_lstThree = count($lstTeamThree);
+                        if ($arr_length_lstThree == 0) {
+                            echo
+                            '<div class="alert alert-warning" role="alert">
+                                No players added to this team. You can add players from other teams or from the unassigned group.
+                            </div>';
+                        } else {
+                            for($i=0;$i<$arr_length_lstThree;$i++)
+                            {
+                                
+                                $playerInTeam = $lstTeamThree[$i];
+                                $playerName = $playerInTeam->firstName.' '.$playerInTeam->middleName.' '.$playerInTeam->lastName;
+                                echo '<div class="form-check pl-5">
+                                    <input class="form-check-input" type="checkbox" value="" id="'.$playerInTeam->userID.'" />
+                                    <label class="form-check-label fs-6" for="'.$playerInTeam->userID.'"><strong>'.$playerName.'</strong></label>
+                                    <p>'.$playerInTeam->userDescription.'</p>
+                                </div>';
+                            }
+                        }
+                    ?>
                 </div>      
             </div>  
         </div>
@@ -143,32 +186,29 @@
         <div class="card mt-4" id="team-3">
             <div class="card-body">
                 <h5 class="card-title font-weight-bold">Unassigned</h5>  
+                <hr>
                 <div class="card-text" id="player-list">
-                <div class="form-check pl-5">
-                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
-                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
-                        <p>player info/team name if needed</p>
-                    </div>
-                    <div class="form-check pl-5">
-                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
-                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
-                        <p>player info/team name if needed</p>
-                    </div>
-                    <div class="form-check pl-5">
-                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
-                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
-                        <p>player info/team name if needed</p>
-                    </div>                  
-                    <div class="form-check pl-5">
-                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
-                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
-                        <p>player info/team name if needed</p>
-                    </div>
-                    <div class="form-check pl-5">
-                        <input class="form-check-input" type="checkbox" value="" id="Player1" />
-                        <label class="form-check-label fs-6" for="Player1"><strong>Player</strong></label>
-                        <p>player info/team name if needed</p>
-                    </div>
+                <?php
+                        $arr_length_lstUnassigned = count($lstUnassigned);
+                        if ($arr_length_lstUnassigned == 0) {
+                            echo
+                            '<div class="alert alert-warning" role="alert">
+                                No players added to this team. You can add players from other teams or from the unassigned group.
+                            </div>';
+                        } else {
+                            for($i=0;$i<$arr_length_lstUnassigned;$i++)
+                            {
+                                
+                                $playerInTeam = $lstUnassigned[$i];
+                                $playerName = $playerInTeam->firstName.' '.$playerInTeam->middleName.' '.$playerInTeam->lastName;
+                                echo '<div class="form-check pl-5">
+                                    <input class="form-check-input" type="checkbox" value="" id="'.$playerInTeam->userID.'" />
+                                    <label class="form-check-label fs-6" for="'.$playerInTeam->userID.'"><strong>'.$playerName.'</strong></label>
+                                    <p>'.$playerInTeam->userDescription.'</p>
+                                </div>';
+                            }
+                        }
+                    ?>
                 </div>      
             </div>  
         </div>
@@ -217,6 +257,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 
 </body>
