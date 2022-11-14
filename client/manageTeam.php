@@ -9,10 +9,6 @@
 
     $managerID = $_SESSION['User_ID'];
     $managerClubID = getManagerClubID($managerID);
-    // For each team make a card
-    // Populate the card with players in team. No player --> say no player.
-    // Order them in alphabetical order
-
 ?>
 
 <link rel="stylesheet" type="text/css" href="../../css/manageTeam.css">
@@ -86,7 +82,7 @@
         <div class = "buttons d-flex justify-content-end mt-3">
             <button type="button" pButton class="btn btn-dark ml-3" data-toggle="modal" data-target="#pop-up" id="btn-exchange-player"><i class="fa fa-exchange-alt fa-lg"></i></button>
             <!--<button type="button" class="btn btn-info ml-3" id="btn-add-player"><i class="fa fa-plus fa-lg"></i></button>-->
-            <button class="btn btn-danger ml-3" id="btn-remove-player"><i class="fa fa-times fa-lg"></i></button>
+            <button type="button" data-toggle="modal" data-target="#pop-delete" class="btn btn-danger ml-3" id="btn-remove-player"><i class="fa fa-times fa-lg"></i></button>
         </div>
 
         <!-- Team Cards: 
@@ -110,9 +106,9 @@
                             {
                                 
                                 $playerInTeam = $lstTeamOne[$i];
-                                $playerName = $playerInTeam->firstName.' '.$playerInTeam->middleName.' '.$playerInTeam->lastName;
+                                $playerName = "$playerInTeam->firstName  $playerInTeam->middleName $playerInTeam->lastName";
                                 echo '<div class="form-check pl-5">
-                                    <input class="form-check-input" type="checkbox" value="" id="'.$playerInTeam->userID.'" />
+                                    <input class="form-check-input" type="checkbox" value="'.$playerName.'" id="player-team'.$playerInTeam->userID.'" onClick="changeLstSelected('.$playerInTeam->userID.')"/>
                                     <label class="form-check-label fs-6" for="'.$playerInTeam->userID.'"><strong>'.$playerName.'</strong></label>
                                     <p>'.$playerInTeam->userDescription.'</p>
                                 </div>';
@@ -142,7 +138,7 @@
                                 $playerInTeam = $lstTeamTwo[$i];
                                 $playerName = $playerInTeam->firstName.' '.$playerInTeam->middleName.' '.$playerInTeam->lastName;
                                 echo '<div class="form-check pl-5">
-                                    <input class="form-check-input" type="checkbox" value="" id="'.$playerInTeam->userID.'" />
+                                    <input class="form-check-input" type="checkbox" value="'.$playerName.'" id="player-team'.$playerInTeam->userID.'"  onClick="changeLstSelected('.$playerInTeam->userID.')"/>
                                     <label class="form-check-label fs-6" for="'.$playerInTeam->userID.'"><strong>'.$playerName.'</strong></label>
                                     <p>'.$playerInTeam->userDescription.'</p>
                                 </div>';
@@ -172,7 +168,7 @@
                                 $playerInTeam = $lstTeamThree[$i];
                                 $playerName = $playerInTeam->firstName.' '.$playerInTeam->middleName.' '.$playerInTeam->lastName;
                                 echo '<div class="form-check pl-5">
-                                    <input class="form-check-input" type="checkbox" value="" id="'.$playerInTeam->userID.'" />
+                                    <input class="form-check-input" type="checkbox" value="'.$playerName.'" id="player-team'.$playerInTeam->userID.'" onClick="changeLstSelected('.$playerInTeam->userID.')"/>
                                     <label class="form-check-label fs-6" for="'.$playerInTeam->userID.'"><strong>'.$playerName.'</strong></label>
                                     <p>'.$playerInTeam->userDescription.'</p>
                                 </div>';
@@ -202,7 +198,7 @@
                                 $playerInTeam = $lstUnassigned[$i];
                                 $playerName = $playerInTeam->firstName.' '.$playerInTeam->middleName.' '.$playerInTeam->lastName;
                                 echo '<div class="form-check pl-5">
-                                    <input class="form-check-input" type="checkbox" value="" id="'.$playerInTeam->userID.'" />
+                                    <input class="form-check-input" type="checkbox" value="'.$playerName.'" id="player-team'.$playerInTeam->userID.'" onClick="changeLstSelected('.$playerInTeam->userID.')" />
                                     <label class="form-check-label fs-6" for="'.$playerInTeam->userID.'"><strong>'.$playerName.'</strong></label>
                                     <p>'.$playerInTeam->userDescription.'</p>
                                 </div>';
@@ -230,8 +226,8 @@
                             <div class="col-5">
                                 <label for="PlayerSearch">Player Name:</label>
                             </div>
-                            <div class="col-7">
-                                <input class="form-control" type="search" style="width: 100%" placeholder="Search Player" aria-label="Search" id="PlayerSearch">
+                            <div class="col-7" id="player-team-input">
+                                <input class="form-control mt-1" placeholder="No Player Selected" id="display" disabled>
                             </div>
                         </div>
                         <!-- New Team input -->
@@ -242,8 +238,12 @@
                             <div class="col-7">
                                 <input type="text" class="form-control" list="select-team" id="newTeam" placeholder="Select Team">
                                 <datalist id="select-team">
-                                    <option value="Team 1"></option>
-                                    <option value="Team 2"></option>
+                                    <?php
+                                        for($i=0; $i<count($lstTeams); $i++) {
+                                            $team = $lstTeams[$i];
+                                            echo "<option value='$team->teamName' id='$team->teamID'>$team->teamName</option>";
+                                        }
+                                    ?>
                                 </datalist>
                             </div>
                         </div>
@@ -258,8 +258,57 @@
             </div>
         </div>
 
-    </div>
+        <div class="modal fade " id="pop-delete" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-danger" id="pop-upLabel">Move to unasssigned</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="form-inline my-2 my-lg-0 d-flex justify-content-center container" id= "search-form">
+                        <!-- Player Name input-->
+                        <div class="row mb-2">
+                            <div class="col-5">
+                                <label for="PlayerSearch">Player Name:</label>
+                            </div>
+                            <div class="col-7" id="player-team-input-unassign">
+                                <input class="form-control mt-1" placeholder="No Player Selected" id="display" disabled>
+                            </div>
+                        </div>
+                        <!-- New Team input -->
+                        <div class="row">
+                            <div class="col-5">
+                                <label for="newTeam"> New Team: </label>
+                            </div>
+                            <div class="col-7">
+                                <input type="text" class="form-control" list="select-team" id="newTeam" placeholder="Select Team">
+                                <datalist id="select-team">
+                                    <?php
+                                        for($i=0; $i<count($lstTeams); $i++) {
+                                            $team = $lstTeams[$i];
+                                            echo "<option value='$team->teamName' id='$team->teamID'>$team->teamName</option>";
+                                        }
+                                    ?>
+                                </datalist>
+                            </div>
+                        </div>
+                    </form>
 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger">Unassign</button>
+                </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <script src="../../js/manageTeam.js"></script>
 </body>
 
 <?php
