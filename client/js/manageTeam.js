@@ -1,6 +1,7 @@
 // function invoking ajax with pure javascript, no jquery required.
 'use strict';
 var lstSelected = [];
+var lstAllPlayers = [];
 
 function changeLstSelected(playerID, playerName) {
   // If the lst is empty add
@@ -66,7 +67,7 @@ function unassignPlayers(userID) {
 }
 
 function movePlayers(userID) {
-  let teamID = document.getElementById('newTeam').value;
+  let teamName = document.getElementById('newTeam').value;
   var stringIDs = "";
   for(var i = 0; i < lstSelected.length; i++) {
     stringIDs += lstSelected[i].id;
@@ -79,7 +80,7 @@ function movePlayers(userID) {
   let ajaxObj = new XMLHttpRequest();
   
   // Open Connection
-  ajaxObj.open("GET", "includes/functions/manageTeam.php?len="+lstSelected.length+"&m="+stringIDs+"&t="+teamID +"&id="+userID, false);
+  ajaxObj.open("GET", "includes/functions/manageTeam.php?len="+lstSelected.length+"&m="+stringIDs+"&t="+teamName +"&id="+userID, false);
   ajaxObj.setRequestHeader("X-Requested-With", "XMLHttpRequest");
   // Checking the response
   ajaxObj.onreadystatechange = function() {
@@ -93,4 +94,18 @@ function movePlayers(userID) {
   // Sending Get Request
   ajaxObj.send();
   location.reload(true);
+}
+
+function showHint(str) {
+  if (str.length == 0) {
+    document.getElementById("txtHint").innerHTML = "";
+    return;
+  } else {
+    const xmlhttp = new XMLHttpRequest();
+    xmlhttp.onload = function() {
+      document.getElementById("txtHint").innerHTML = this.responseText;
+    }
+  xmlhttp.open("GET", "gethint.php?q=" + str);
+  xmlhttp.send();
+  }
 }

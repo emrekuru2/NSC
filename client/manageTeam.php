@@ -241,7 +241,7 @@
                                     <?php
                                         for($i=0; $i<count($lstTeams); $i++) {
                                             $team = $lstTeams[$i];
-                                            echo "<option value='$team->teamID' id='$team->teamID'>$team->teamName</option>";
+                                            echo "<option value='$team->teamName' id='$team->teamID'>$team->teamName</option>";
                                         }
                                     ?>
                                 </datalist>

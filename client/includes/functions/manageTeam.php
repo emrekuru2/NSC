@@ -64,19 +64,29 @@
                                     $strIds .= ",";
                                 }
                             }
-                            echo $strIds;
+
                             // Change waiting to list, default team 1
                             $sql  = "UPDATE nsca_teamuser SET TeamID=1, waitingToJoin=1 WHERE UserID IN ($strIds)";
  
                             $stmt = $pdo->prepare($sql);
                             $stmt->execute();
                             $result = $stmt->get_result();
-                            $stmt->close(); 
+                            echo "<p class='alert-success'>Success!</p>";
                         }
                         elseif(isset($_GET['m'])) {
                             $lstPlayerStr = $_GET['m'];
                             $lstPlayers = (array) explode("-", $lstPlayerStr);
-                            $teamID = isset($_GET['t']) ? $_GET['t'] : -1;
+                            $teamName = isset($_GET['t']) ? $_GET['t'] : -1;
+                            $teamID = -1;
+                            $sql  = "SELECT nsca_team.TeamID FROM nsca_team WHERE nsca_team.TeamName='$teamName'";
+                            $stmt = $pdo->prepare($sql);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
+
+                            while($row  = mysqli_fetch_assoc($result)) {
+                                $teamID = $row['TeamID'];
+                            }
+
                             if ($teamID > 0 ) {
                             // Change waiting to list, default team 1
                             $strIds = "";
@@ -86,12 +96,13 @@
                                     $strIds .= ",";
                                 }
                             }
-                            echo $strIds;
+
                             $sql  = "UPDATE nsca_teamuser SET TeamID=$teamID, waitingToJoin=0 WHERE UserID IN ($strIds)";
  
                             $stmt = $pdo->prepare($sql);
                             $stmt->execute();
                             $result = $stmt->get_result();
+                            echo "<p class='alert-success'>Success!</p>";
                             }
                         }
                         $stmt->close(); 
