@@ -241,7 +241,7 @@
                                     <?php
                                         for($i=0; $i<count($lstTeams); $i++) {
                                             $team = $lstTeams[$i];
-                                            echo "<option value='$team->teamName' id='$team->teamID'>$team->teamName</option>";
+                                            echo "<option value='$team->teamID' id='$team->teamID'>$team->teamName</option>";
                                         }
                                     ?>
                                 </datalist>
@@ -252,7 +252,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-primary" onclick="movePlayers(<?php echo $managerID?>)">Save</button>
                 </div>
                 </div>
             </div>
@@ -278,29 +278,12 @@
                                 <input class="form-control mt-1" placeholder="No Player Selected" id="display" disabled>
                             </div>
                         </div>
-                        <!-- New Team input -->
-                        <div class="row">
-                            <div class="col-5">
-                                <label for="newTeam"> New Team: </label>
-                            </div>
-                            <div class="col-7">
-                                <input type="text" class="form-control" list="select-team" id="newTeam" placeholder="Select Team">
-                                <datalist id="select-team">
-                                    <?php
-                                        for($i=0; $i<count($lstTeams); $i++) {
-                                            $team = $lstTeams[$i];
-                                            echo "<option value='$team->teamName' id='$team->teamID'>$team->teamName</option>";
-                                        }
-                                    ?>
-                                </datalist>
-                            </div>
-                        </div>
                     </form>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger">Unassign</button>
+                    <button type="button" class="btn btn-danger" onclick="unassignPlayers(<?php echo $managerID ?>)">Unassign</button>
                 </div>
                 </div>
             </div>
