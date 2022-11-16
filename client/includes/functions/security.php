@@ -85,7 +85,7 @@
 
     function CheckRoleInArray($array, $user_role) {
         // If it is not in the list => redirect
-        if (!in_array($array, $user_role, true)) {
+        if (!in_array($user_role, $array,  true)) {
             RedirectToIndex();
             die();
         }
