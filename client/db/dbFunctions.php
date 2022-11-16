@@ -945,3 +945,69 @@ function displayUserEmail($conn){
 
 
 }
+/*Display all the name of development prorgam*/
+function displayAllTheProgram(){
+    $conn = OpenCon();
+
+
+    $statement = $conn->prepare("SELECT DevID, Name FROM nsca_devprograms");
+
+    $statement->execute();
+    $statement->store_result();
+    $statement->bind_result($DevID,$Name);
+
+    $count = 1;
+
+
+    //display
+    while($statement->fetch())
+    {
+        echo "<th>$DevID</th>";
+                            echo"
+                            <td>$Name</td>
+                        </tr>
+              </tbody>";
+        $count++;
+    }
+
+    $statement->close();
+    $conn->close();
+}
+/*Display all the development of team End*/
+
+/* method to create a new development prorgam*/
+function createNewProgram(){
+
+    $conn = OpenCon();
+    if(isset($_POST["programName"]) && isset($_POST["duration"]) && isset($_POST["programDescription"]) && isset($_POST["time"]) && isset($_POST["charges"]) && isset($_POST["type"]) && isset($_POST["days"])){
+        $programName = $_POST["programName"];
+        $duration = $_POST["duration"];
+        $prorgamDescription = $_POST["programDescription"];
+        $time = $_POST["time"];
+        $charges = $_POST["charges"];
+        $type = $_POST["type"];
+        $days = $_POST["days"];
+        $statement = $conn->prepare("SELECT * FROM nsca_devprograms WHERE Name ='$programName'");
+        $statement->execute();
+        $statement->store_result();
+        if($statement->num_rows>0){
+            echo "<p class='red-text text-center'>The program already exists!<br>Please make a new one.</p>";
+        }else{
+
+            if(isset($programName)){
+                $statement->close();
+                $statement = $conn->prepare("INSERT INTO `nsca_devprograms` (`Name`, `Duration`, `Description`, `Time`, `Charges`, `Type`, `DaysRun`) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                $statement->bind_param("sssssss",$programName,$duration,$prorgamDescription,$time,$charges,$type, $days);
+                $statement->execute();
+                echo "<p class='red-text text-center'>The Program '$programName' created successful!</p>";
+                echo "<meta http-equiv='refresh' content='0; url=../admin/editDevPrograms.php'>";
+            }
+
+        }
+        $statement->close();
+    }
+
+    $conn->close();
+}
+/* method to create a new development program END*/
+?>

@@ -95,10 +95,10 @@
                     <a class="collapse-item" href="../../admin/editAlertBanner.php">Edit Alert Banner</a>
                     <a class="collapse-item" href="../../admin/editClubInfo.php">Edit Clubs</a>
                     <a class="collapse-item" href="../../admin/editCompType.php">Edit Competition Types</a>
-                    <a class="collapse-item" href="../../admin/editLocations.php">Edit Locations</a>
                     <a class="collapse-item" href="../../admin/editSubCommittees.php">Edit Sub Committees</a>
+                    <a class="collapse-item" href="../../admin/editDevPrograms.php">Edit Devolepment Programs</a>
                     <a class="collapse-item" href="../../admin/editUserRole.php">Edit User Role</a>
-                    <a class="collapse-item" href="../../admin/postAnnouncement.php">Post Announcement</a>
+                    <a class="collapse-item" href="../../admin/postAnnouncement.php">Post News</a>
                     <a class="collapse-item" href="../../admin/sendEmail.php">Send Email</a>
                     <a class="collapse-item" href="../../admin/manageApplication.php">Manage Team Application</a>
                     <a class="collapse-item" href="../../admin/manageTeamList.php">Manage Team List</a>
