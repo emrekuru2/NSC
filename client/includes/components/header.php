@@ -83,6 +83,9 @@
                 <li class = "nav-item">
                     <a class = "nav-link" href="../../ClubProfile.php">My Club</a>
                 </li>
+                <li class = "nav-item">
+                    <a class = "nav-link" href="../../manageTeam.php">Manage Team</a>
+                </li>
                 <?php
                 }
     

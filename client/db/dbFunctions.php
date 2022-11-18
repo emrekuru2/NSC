@@ -945,3 +945,72 @@ function displayUserEmail($conn){
 
 
 }
+
+// Returns all players in a club
+function getPlayersInClub($clubIDGiven, $searchStr="") {
+    $conn = OpenCon();
+
+    $statement = $conn->prepare("SELECT nsca_team.TeamName, nsca_teamuser.*, concat(nsca_user.FirstName, ' ',nsca_user.MiddleName,' ', nsca_user.LastName) as name, nsca_user.UserDescription FROM nsca_team 
+    INNER JOIN nsca_teams ON nsca_team.TeamID = nsca_teams.TeamID AND nsca_teams.ClubID = $clubIDGiven
+    INNER JOIN nsca_teamuser ON nsca_teamuser.TeamID = nsca_teams.TeamID
+    INNER JOIN nsca_user ON nsca_teamuser.UserID = nsca_user.UserID
+    WHERE nsca_user.FirstName LIKE '%$searchStr%' OR nsca_user.MiddleName LIKE '%$searchStr%' OR nsca_user.LastName LIKE '%$searchStr%';
+    ");
+
+    $statement->execute();
+    $statement->store_result();
+    $statement->bind_result($teamName,$teamUserID, $userID, $teamID, $isClubManager, $isTeamCaptain, $isViceCaptain, $waitingToJoin, $name, $userDescription);
+    $lstAllPlayers = array();
+
+    while ($statement->fetch()){
+        $obj_user = new stdClass;
+        $obj_user->teamName = $teamName;
+        $obj_user->teamID = $teamID;
+        $obj_user->userID = $userID;
+        $obj_user->isClubManager = $isClubManager;
+        $obj_user->isTeamCaptain = $isTeamCaptain;
+        $obj_user->isViceCaptain = $isViceCaptain;
+        $obj_user->waitingToJoin = $waitingToJoin;
+        $obj_user->name = $name;
+        $obj_user->userDescription = $userDescription;
+        
+        $lstAllPlayers[] = $obj_user;
+    }
+    return $lstAllPlayers;
+}
+
+function getManagerClubID($managerIDGiven) {
+    $conn = OpenCon();
+
+    $statement = $conn->prepare("SELECT nsca_teams.ClubID FROM nsca_teams 
+        LEFT JOIN nsca_teamuser ON nsca_teamuser.TeamID = nsca_teams.TeamID 
+        WHERE nsca_teamuser.UserID = $managerIDGiven");
+    
+    $statement->execute();
+    $statement->store_result();
+    $statement->bind_result($clubID);
+
+    $statement->fetch();
+    return $clubID;
+}
+
+function getTeamsInClub($clubIDGiven) {
+    $conn = OpenCon();
+
+    $statement = $conn->prepare("SELECT nsca_teams.TeamID, nsca_team.TeamName FROM nsca_teams 
+        LEFT JOIN nsca_team ON nsca_team.TeamID = nsca_teams.TeamID 
+        WHERE nsca_teams.ClubID = $clubIDGiven");
+    
+    $statement->execute();
+    $statement->store_result();
+    $statement->bind_result($teamID, $teamName);
+
+    $lstTeams = array();
+    while($statement->fetch()) {
+        $obj_team = new stdClass;
+        $obj_team->teamID = $teamID;
+        $obj_team->teamName = $teamName;
+        $lstTeams[] = $obj_team;
+    }
+    return $lstTeams;
+}
