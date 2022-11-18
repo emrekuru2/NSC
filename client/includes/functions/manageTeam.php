@@ -108,6 +108,8 @@
                         $stmt->close(); 
                     }
                     
+                } elseif(isset($_GET['str'])) {
+                    
                 }
             }
                           

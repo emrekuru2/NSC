@@ -1,7 +1,6 @@
 // function invoking ajax with pure javascript, no jquery required.
 'use strict';
 var lstSelected = [];
-var lstAllPlayers = [];
 
 function changeLstSelected(playerID, playerName) {
   // If the lst is empty add
@@ -100,19 +99,5 @@ function movePlayers(userID) {
     location.reload(true);
   } else {
     document.getElementById('player-team-input').innerHTML = "<div class='alert alert-warning' role='alert'> No player selected </div>";
-  }
-}
-
-function showHint(str) {
-  if (str.length == 0) {
-    document.getElementById("txtHint").innerHTML = "";
-    return;
-  } else {
-    const xmlhttp = new XMLHttpRequest();
-    xmlhttp.onload = function() {
-      document.getElementById("txtHint").innerHTML = this.responseText;
-    }
-  xmlhttp.open("GET", "gethint.php?q=" + str);
-  xmlhttp.send();
   }
 }

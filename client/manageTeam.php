@@ -9,6 +9,7 @@
 
     $managerID = $_SESSION['User_ID'];
     $managerClubID = getManagerClubID($managerID);
+    if(isset($managerClubID)) {
 ?>
 
 <link rel="stylesheet" type="text/css" href="../../css/manageTeam.css">
@@ -27,7 +28,13 @@
              * teamName,teamID, userID, isClubManager, isTeamCaptain, isViceCaptain, waitingToJoin, firstName, middleName, lastName, userDecription
              * Can access like: $obj_user->userID
              */
-            $lstPlayers = getPlayersInClub($managerClubID);
+            $lstPlayers;
+            if(isset($_POST['btn-search'])) {
+                $lstPlayers = getPlayersInClub($managerClubID, $_POST['bar-search-player']);
+            }
+            else {
+                $lstPlayers = getPlayersInClub($managerClubID);
+            }
             $lstTeams = getTeamsInClub($managerClubID);
             $lstTeamOne = array();
             $lstTeamTwo = array();
@@ -58,15 +65,17 @@
                     }
                 }
             else {
-                echo "Sorry no player in the club.";
+                echo "<div class='d-flex justify-content-center'>
+                <p class='alert alert-warning w-75 text-center' id='search-warning'>Sorry no player found</p>
+            </div>";
             }
         ?>
         <!-- Search bar  -->
         <div class="search-bar">
-            <form class="form-inline d-flex  justify-content-center" id= "search-form">
+            <form class="form-inline d-flex  justify-content-center" id= "search-form" action="manageTeam.php" method="POST">
                 <div class="input-group w-75">
-                    <input class="form-control w-75 mt-1" type="search" placeholder="Search Player" aria-label="Search" id="bar-search-player">
-                    <button class="btn btn-secondary mt-1">
+                    <input class="form-control w-75 mt-1" type="search" placeholder="Search Player" aria-label="Search" id="bar-search-player" name="bar-search-player">
+                    <button class="btn btn-blue-grey mt-1" type="search" id="btn-search" name="btn-search">
                         <i class="fas fa-search"></i>
                     </button>  
                 </div>
@@ -77,7 +86,8 @@
                     1. Exchange
                     2. Add
                     3. Remove player -->
-        <div class = "buttons d-flex justify-content-end mt-3">
+        
+        <div class = "d-flex justify-content-end mt-3">
             <button type="button" pButton class="btn btn-dark ml-3" data-toggle="modal" data-target="#pop-up" id="btn-exchange-player"><i class="fa fa-exchange-alt fa-lg"></i></button>
             <button type="button" data-toggle="modal" data-target="#pop-delete" class="btn btn-danger ml-3" id="btn-remove-player"><i class="fa fa-times fa-lg"></i></button>
         </div>
@@ -85,7 +95,6 @@
         <!-- Team Cards: 
             Each Team card has a scroll bar, team name, player list
         -->
-
         <div class="card mt-4" id="team-1">
             <div class="card-body">
                 <h5 class="card-title font-weight-bold mb-2"><?php echo $lstTeams[0]->teamName ?></h5>  
@@ -101,9 +110,8 @@
                         } else {
                             for($i=0;$i<$arr_length_lstOne;$i++)
                             {
-                                
                                 $playerInTeam = $lstTeamOne[$i];
-                                $playerName = "$playerInTeam->firstName  $playerInTeam->middleName $playerInTeam->lastName";
+                                $playerName = "$playerInTeam->name";
                                 echo '<div class="form-check pl-5">
                                     <input class="form-check-input" type="checkbox" value="'.$playerName.'" id="player-team'.$playerInTeam->userID.'" onClick="changeLstSelected('.$playerInTeam->userID.')"/>
                                     <label class="form-check-label fs-6" for="'.$playerInTeam->userID.'"><strong>'.$playerName.'</strong></label>
@@ -133,7 +141,7 @@
                             {
                                 
                                 $playerInTeam = $lstTeamTwo[$i];
-                                $playerName = $playerInTeam->firstName.' '.$playerInTeam->middleName.' '.$playerInTeam->lastName;
+                                $playerName = $playerInTeam->name;
                                 echo '<div class="form-check pl-5">
                                     <input class="form-check-input" type="checkbox" value="'.$playerName.'" id="player-team'.$playerInTeam->userID.'"  onClick="changeLstSelected('.$playerInTeam->userID.')"/>
                                     <label class="form-check-label fs-6" for="'.$playerInTeam->userID.'"><strong>'.$playerName.'</strong></label>
@@ -163,7 +171,7 @@
                             {
                                 
                                 $playerInTeam = $lstTeamThree[$i];
-                                $playerName = $playerInTeam->firstName.' '.$playerInTeam->middleName.' '.$playerInTeam->lastName;
+                                $playerName = $playerInTeam->name;
                                 echo '<div class="form-check pl-5">
                                     <input class="form-check-input" type="checkbox" value="'.$playerName.'" id="player-team'.$playerInTeam->userID.'" onClick="changeLstSelected('.$playerInTeam->userID.')"/>
                                     <label class="form-check-label fs-6" for="'.$playerInTeam->userID.'"><strong>'.$playerName.'</strong></label>
@@ -193,7 +201,7 @@
                             {
                                 
                                 $playerInTeam = $lstUnassigned[$i];
-                                $playerName = $playerInTeam->firstName.' '.$playerInTeam->middleName.' '.$playerInTeam->lastName;
+                                $playerName = $playerInTeam->name;
                                 echo '<div class="form-check pl-5">
                                     <input class="form-check-input" type="checkbox" value="'.$playerName.'" id="player-team'.$playerInTeam->userID.'" onClick="changeLstSelected('.$playerInTeam->userID.')" />
                                     <label class="form-check-label fs-6" for="'.$playerInTeam->userID.'"><strong>'.$playerName.'</strong></label>
@@ -228,12 +236,12 @@
                             </div>
                         </div>
                         <!-- New Team input -->
-                        <div class="row">
+                        <div class="row mt-2">
                             <div class="col-5">
                                 <label for="newTeam"> New Team: </label>
                             </div>
                             <div class="col-7">
-                                <select id="newTeam" class="form-select mt-1" aria-label="Select team">
+                                <select id="newTeam" class="form-select mt-1 w-100" aria-label="Select team">
                                     <?php
                                         for($i=0; $i<count($lstTeams); $i++) {
                                             $team = $lstTeams[$i];
@@ -291,5 +299,12 @@
 </body>
 
 <?php
+    }
+    else {
+        echo
+            '<div class="alert alert-warning" role="alert">
+                No club assigned to you. Contact Admin to get a club to manage.
+            </div>';
+    }
     include_once 'includes/components/footer.php';
 ?>
