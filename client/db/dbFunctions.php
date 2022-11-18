@@ -963,12 +963,28 @@ function displayAllTheProgram(){
     while($statement->fetch())
     {
         echo "<th>$DevID</th>";
-                            echo"
-                            <td>$Name</td>
-                        </tr>
-              </tbody>";
+            echo"
+                <td>$Name</td>
+                <td>
+                <a href=../admin/editDevPrograms.php?programID=$DevID>
+                    <button type='button' >Delete</button>
+                </a>
+                </td>
+            </tr>
+        </tbody>";
         $count++;
     }
+
+
+if(isset($_GET["programID"])){
+    $statement->close();
+    $programID = $_GET["programID"];
+    $statement = $conn->prepare("DELETE FROM nsca_devprograms WHERE DevID = '$programID'");
+    $statement->execute();
+    $statement->close();
+
+    echo "<meta http-equiv='refresh' content='0; url=../admin/editDevPrograms.php'>";
+}
 
     $statement->close();
     $conn->close();
