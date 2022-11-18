@@ -70,8 +70,6 @@
                         <i class="fas fa-search"></i>
                     </button>  
                 </div>
-
-                <!-- <button type="button" class="btn btn-primary" id="btn-unassigned-player">Unassigned Players</button> -->
             </form>
         </div>
 
@@ -81,7 +79,6 @@
                     3. Remove player -->
         <div class = "buttons d-flex justify-content-end mt-3">
             <button type="button" pButton class="btn btn-dark ml-3" data-toggle="modal" data-target="#pop-up" id="btn-exchange-player"><i class="fa fa-exchange-alt fa-lg"></i></button>
-            <!--<button type="button" class="btn btn-info ml-3" id="btn-add-player"><i class="fa fa-plus fa-lg"></i></button>-->
             <button type="button" data-toggle="modal" data-target="#pop-delete" class="btn btn-danger ml-3" id="btn-remove-player"><i class="fa fa-times fa-lg"></i></button>
         </div>
 
@@ -93,7 +90,7 @@
             <div class="card-body">
                 <h5 class="card-title font-weight-bold mb-2"><?php echo $lstTeams[0]->teamName ?></h5>  
                 <hr>
-                <div class="card-text" id="player-list">
+                <div class="card-text" id="player-list-1">
                     <?php
                         $arr_length_lstOne = count($lstTeamOne);
                         if ($arr_length_lstOne == 0) {
@@ -123,7 +120,7 @@
             <div class="card-body">
                 <h5 class="card-title font-weight-bold"><?php echo $lstTeams[1]->teamName ?></h5>
                 <hr>  
-                <div class="card-text" id="player-list">
+                <div class="card-text" id="player-list-2">
                 <?php
                         $arr_length_lstTwo = count($lstTeamTwo);
                         if ($arr_length_lstTwo == 0) {
@@ -153,7 +150,7 @@
             <div class="card-body">
                 <h5 class="card-title font-weight-bold"><?php echo $lstTeams[2]->teamName ?></h5>  
                 <hr>
-                <div class="card-text" id="player-list">
+                <div class="card-text" id="player-list-3">
                 <?php
                         $arr_length_lstThree = count($lstTeamThree);
                         if ($arr_length_lstThree == 0) {
@@ -189,7 +186,7 @@
                         if ($arr_length_lstUnassigned == 0) {
                             echo
                             '<div class="alert alert-warning" role="alert">
-                                No players added to this team. You can add players from other teams or from the unassigned group.
+                                No players unassigned. You can unassign players from teams by clicking the X button.
                             </div>';
                         } else {
                             for($i=0;$i<$arr_length_lstUnassigned;$i++)
@@ -236,15 +233,14 @@
                                 <label for="newTeam"> New Team: </label>
                             </div>
                             <div class="col-7">
-                                <input type="text" class="form-control" list="select-team" id="newTeam" placeholder="Select Team">
-                                <datalist id="select-team">
+                                <select id="newTeam" class="form-select mt-1" aria-label="Select team">
                                     <?php
                                         for($i=0; $i<count($lstTeams); $i++) {
                                             $team = $lstTeams[$i];
                                             echo "<option value='$team->teamName' id='$team->teamID'>$team->teamName</option>";
                                         }
                                     ?>
-                                </datalist>
+                                </select>
                             </div>
                         </div>
                     </form>
