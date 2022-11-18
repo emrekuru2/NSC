@@ -1,14 +1,10 @@
 <?php
     include_once 'includes/components/header.php';
     // Only the coach can see this page
-    if (isset($_SESSION['User_ID']) && (CheckRole($_SESSION['User_ID']) == 'Coach' || CheckRole($_SESSION['User_ID']) == 'Admin')) { 
-    
+    CheckLoggedIn();
+    AccessControlBasedOnLevel(MANAGER_ACCESS_LVL, $_SESSION['User_ID'])
 ?>
-    <h1> Sorry this page is not available. Please return to <a href="index.php">home</a> </p>
+    <h1> Sorry this page is not available. Please return to <a href="index.php">home</a> </h1>
 <?php
-    }
-    else {
-        RedirectToIndex();
-    }
     include 'includes/components/footer.php'
 ?>

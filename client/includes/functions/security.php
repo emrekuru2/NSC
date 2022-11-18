@@ -3,7 +3,15 @@
     RestrictIncludes();
 
     // Constants
-    $_ADMIN_STR = 'Admin';
+    const ADMIN_ACCESS_LVL = 0;
+    const MANAGER_ACCESS_LVL = 1;
+    const PLAYER_ACCESS_LVL = 2;
+    const MINIMAL_ACCESS_LVL = 3;
+
+    $_ADMIN_ACCESS_LST = array('Admin');
+    $_MANAGER_ACCESS_LST = array('Manager') + $_ADMIN_ACCESS_LST;
+    $_PLAYER_ACCESS_LST = array('Player') + $_MANAGER_ACCESS_LST;
+    $_MINIMAL_ACCESS_LST = array('Guest User', 'Umpire') + $_PLAYER_ACCESS_LST;
 
     function RedirectToIndex() {
         header("Location: ../index.php");
@@ -24,6 +32,7 @@
     }
 
     function RestrictAdmin(string $userRole) {
+        global $_ADMIN_ACCESS_LST;
         // If accessing file through URL, redirect
         if(preg_match("/admin/", $_SERVER["PHP_SELF"]) == 1 && !defined('_DEFVAR')){
             RedirectToIndex();
@@ -32,10 +41,9 @@
         // If the user role is not set => not logged in => redirect
         if(isset($userRole)) {
             // If the userRole is set and it is not admin => redirect
-            if(preg_match("/admin/", $_SERVER["PHP_SELF"]) == 1 && $userRole != 'Admin') {
-                RedirectToIndex();
+            if(preg_match("/admin/", $_SERVER["PHP_SELF"]) == 1) {
+                CheckRoleInArray($_ADMIN_ACCESS_LST,$userRole);
             }
-
         }
         else {
             RedirectToIndex();
@@ -75,5 +83,41 @@
         }
     }
 
+    function CheckRoleInArray($array, $user_role) {
+        // If it is not in the list => redirect
+        if (!in_array($user_role, $array,  true)) {
+            RedirectToIndex();
+            die();
+        }
+        return true;
+    }
 
-    ?>
+    // Redirects to index, if not logged in
+    function CheckLoggedIn() {
+        if(!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] == false) { RedirectToIndex();}
+    }
+
+    /* Each page should provide a access lvl. If the user role is in the access lvl, then the page is loaded. Otherwise, 
+        redirected to index. Admin has access to all levels.
+    */
+    function AccessControlBasedOnLevel($access_level, $session_user_id) {
+      global $_ADMIN_ACCESS_LST, $_MANAGER_ACCESS_LST, $_PLAYER_ACCESS_LST, $_MINIMAL_ACCESS_LST;
+        
+       $user_role = CheckRole($session_user_id);
+
+       if($access_level == ADMIN_ACCESS_LVL) {
+        CheckRoleInArray($_ADMIN_ACCESS_LST, $user_role);
+       }
+       elseif($access_level == MANAGER_ACCESS_LVL) {
+        CheckRoleInArray($_MANAGER_ACCESS_LST, $user_role);
+       }
+       elseif($access_level == PLAYER_ACCESS_LVL) {
+        CheckRoleInArray($_PLAYER_ACCESS_LST, $user_role);
+       }
+       elseif($access_level == MINIMAL_ACCESS_LVL) {
+        CheckRoleInArray($_MINIMAL_ACCESS_LST, $user_role);
+       }
+
+    }
+
+?>

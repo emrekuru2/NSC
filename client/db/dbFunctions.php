@@ -795,7 +795,7 @@ function displayUserInformation(){
         }
         echo"
                             <td>
-                            <a href=../EditUserRole.php?userID=$UserID&userName=$fullName>
+                            <a href=../admin/editUserRoleForm.php?userID=$UserID&userName=$fullName>
                                 <button type='button' >Edit</button>
                             </a>
                             </td>
@@ -905,8 +905,8 @@ function changeUserInformation($userID){
 
                 }
             }else{
-                $statement = $conn->prepare("INSERT INTO nsca_teamuser(UserID,TeamID) VALUES (?,?)");
-                $statement->bind_param("ii",$userID,$teamID);
+                $statement = $conn->prepare("INSERT INTO nsca_teamuser(TeamUserID,UserID,TeamID) VALUES (?,?,?)");
+                $statement->bind_param("iii",$userID,$userID,$teamID);
                 $statement->execute();
             }
         }
