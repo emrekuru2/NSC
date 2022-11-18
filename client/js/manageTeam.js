@@ -63,7 +63,7 @@ function unassignPlayers(userID) {
 
     // Sending Get Request
     ajaxObj.send();
-    location.reload(true);
+    window.location.href = "/manageTeam.php";
   } else {
     document.getElementById('player-team-input-unassign').innerHTML = "<div class='alert alert-warning' role='alert'> No player selected </div>";
   }
@@ -96,7 +96,7 @@ function movePlayers(userID) {
 
     // Sending Get Request
     ajaxObj.send();
-    location.reload(true);
+    window.location.href = "/manageTeam.php";
   } else {
     document.getElementById('player-team-input').innerHTML = "<div class='alert alert-warning' role='alert'> No player selected </div>";
   }
