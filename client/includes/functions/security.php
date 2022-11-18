@@ -9,9 +9,9 @@
     const MINIMAL_ACCESS_LVL = 3;
 
     $_ADMIN_ACCESS_LST = array('Admin');
-    $_MANAGER_ACCESS_LST = array('Manager') + $_ADMIN_ACCESS_LST;
-    $_PLAYER_ACCESS_LST = array('Player') + $_MANAGER_ACCESS_LST;
-    $_MINIMAL_ACCESS_LST = array('Guest User', 'Umpire') + $_PLAYER_ACCESS_LST;
+    $_MANAGER_ACCESS_LST = array_merge(array('Manager'), $_ADMIN_ACCESS_LST);
+    $_PLAYER_ACCESS_LST =  array_merge(array('Player'), $_MANAGER_ACCESS_LST);
+    $_MINIMAL_ACCESS_LST = array_merge(array('Guest User', 'Umpire'), $_PLAYER_ACCESS_LST);
 
     function RedirectToIndex() {
         header("Location: ../index.php");
@@ -85,6 +85,7 @@
 
     function CheckRoleInArray($array, $user_role) {
         // If it is not in the list => redirect
+        print_r($array);
         if (!in_array($user_role, $array,  true)) {
             RedirectToIndex();
             die();
