@@ -39,7 +39,7 @@
 
                     <!-- Discription -->
                     <div class="form-group row">
-                        <label for="programDescription" class="col-form-label">Program Discription</label>
+                        <label for="programDescription" class="col-form-label">Program Description</label>
                         <textarea name="programDescription"  placeholder="Ex. Fun summer camp aiming to teach cricket to youth" class="form-control mb-4" required></textarea>
                     </div>
                     <!-- Time -->
