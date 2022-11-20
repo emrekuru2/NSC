@@ -641,6 +641,9 @@ function displayAllTheTeam(){
             $statement = $conn->prepare("DELETE FROM nsca_teamuser WHERE TeamID = '$teamId'");
             $statement->execute();
             $statement->close();
+            $statement = $conn->prepare("DELETE FROM nsca_teams WHERE TeamID = '$teamId'");
+            $statement->execute();
+            $statement->close();
             $statement = $conn->prepare("DELETE FROM nsca_team WHERE TeamID = '$teamId'");
             $statement->execute();
 
@@ -809,21 +812,39 @@ function displayUserInformation(){
         $count++;
     }
     //delete function
-    if(isset($_GET["type"])){
+    if(isset($_GET["type"])&& isset($_GET["userID"])){
         if ($_GET["type"] == 2){
-            if(isset($_GET["userID"])){
-                $id = $_GET["userID"];
-                $statement = $conn->prepare("DELETE FROM nsca_login WHERE UserID = $id" );
-                $statement->execute();
-                $statement = $conn->prepare("DELETE FROM nsca_news_comments WHERE UserID = $id" );
-                $statement->execute();
-                $statement = $conn->prepare("DELETE FROM nsca_TeamJoinList WHERE UserID = $id" );
-                $statement->execute();
-                $statement = $conn->prepare("DELETE FROM nsca_teamuser WHERE UserID = $id" );
-                $statement->execute();
-                $statement = $conn->prepare("DELETE FROM nsca_user WHERE UserID = $id" );
-                $statement->execute();
-            }
+            $statement->close();
+            $id = $_GET["userID"];
+            // $statement = $conn->prepare("DELETE FROM nsca_login WHERE UserID = '$id'" );
+            // $statement->execute();
+            // $statement->close();
+            // $statement = $conn->prepare("DELETE FROM nsca_news_comments WHERE UserID = '$id'" );
+            // $statement->execute();
+            // $statement->close();
+            // $statement = $conn->prepare("DELETE FROM nsca_news WHERE UserID = '$id'" );
+            // $statement->execute();
+            // $statement->close();
+            // $statement = $conn->prepare("DELETE FROM nsca_TeamJoinList WHERE UserID = '$id'" );
+            // $statement->execute();
+            // $statement->close();
+            // $statement = $conn->prepare("DELETE FROM nsca_teamuser WHERE UserID = '$id'" );
+            // $statement->execute();
+            // $statement->close();
+            // $statement = $conn->prepare("DELETE FROM nsca_userroles WHERE UserID = '$id'" );
+            // $statement->execute();
+            // $statement->close();
+            // $statement = $conn->prepare("DELETE FROM nsca_subuser WHERE UserID = '$id'" );
+            // $statement->execute();
+            // $statement->close();
+            // $statement = $conn->prepare("DELETE FROM nsca_locationuser WHERE UserID = '$id'" );
+            // $statement->execute();
+            // $statement->close();
+            // $statement = $conn->prepare("DELETE FROM nsca_devroleuser WHERE UserID = '$id'" );
+            // $statement->execute();
+            // $statement->close();
+            $statement = $conn->prepare("DELETE FROM nsca_user WHERE UserID = '$id'" );
+            $statement->execute();
             echo "<meta http-equiv='refresh' content='0; url=../admin/editUserRole.php'>";
         }
     }
@@ -925,6 +946,22 @@ function changeUserInformation($userID){
                     $statement->bind_param("i",$userRole);
                     $statement->execute();
                 }
+            }
+            $statement->close();
+            $statement = $conn->prepare("SELECT UserRoleID FROM nsca_userroles WHERE UserID = '$userID'");
+            $statement->execute();
+            $statement->store_result();
+            $statement->bind_result($UserRoleID);
+            if($statement->num_rows>0){
+                $statement->close();
+                $statement = $conn->prepare("UPDATE nsca_userroles SET RoleID = ? WHERE UserID = '$userID'");
+                $statement->bind_param("i",$userRole);
+                $statement->execute();
+            }
+            else{
+                $statement = $conn->prepare("INSERT INTO `nsca_userroles` (`RoleID`, `UserID`) VALUES (?, ?)");
+                $statement->bind_param("ii",$userRole,$userID);
+                $statement->execute();
             }
         }
     }
