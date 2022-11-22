@@ -1,5 +1,5 @@
 <!-- learning from https://mdbootstrap.com/docs/standard/navigation/footer/ -->
-<footer class=" text-center text-lg-start text-white bg-primary" style="height:35vh;">
+<footer class=" text-center text-lg-start text-white bg-primary" style="height:30vh;">
     <div class="container" >
         <div class="row pt-4">
             <div class="col-lg-3 col-6 p-2 bg-info">

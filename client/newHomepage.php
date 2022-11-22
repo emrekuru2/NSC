@@ -12,7 +12,7 @@ include 'includes/components/newheader.php';
 -->
     <div class="container position-relative" style="padding-top:2vw;">
         <img src="img/background.jpeg" alt="about-us" style="width:100%;height:40vw">
-        <div class="text-white" style="position:absolute; bottom:1vw; right:1px;">
+        <div class="text-white" style="position:absolute; bottom:2vw; right:4vw;">
             <h3>About us</h3>
             <p style="opacity:1;">
                 Some content Some content Some content  Some content
@@ -30,7 +30,7 @@ include 'includes/components/newheader.php';
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
         </ol>
         <div class="carousel-inner" >
-            <div class="carousel-item active" style="height: 15rem;width: 115vh; margin-right:5vh;">
+            <div class="carousel-item active" style="height: 15rem;width: 100vh; margin-right:5vh;">
                 <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"  preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
                 <div class="carousel-caption text-end">
                     <h1>Clubs</h1>
@@ -47,11 +47,11 @@ include 'includes/components/newheader.php';
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
+            <span class="sr-only"></span>
         </a>
         <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
+            <span class="sr-only"></span>
         </a>
         </div>
 
@@ -69,13 +69,15 @@ include 'includes/components/newheader.php';
     
     <!-- The New Section -->
     <div class="container d-flex flex-row justify-content-between" style="padding-top:2vw;">
-        <div class="card" style="width: 20vw; height: 30vw">
+        <div class="card d-flex flex-column " style="width: 20vw; height: 30vw">
 
             <div class="card-body text-center">
-                <h5 class="card-title ">News title</h5>
+                <h3 class="card-title mt-2">News title</h3>
                 <p class="card-text m-4 ">News content</p>
-                <a href="#" class="btn btn-primary position-absolute bottom-4vw start-50 translate-middle-x">Find out more</a>
+                <a href="#" class="btn btn-primary " style="margin-top:27vh; " >Find out more</a>
             </div>
+            
+            
         </div>
 
         <div class="card" style="width: 20vw;">
@@ -101,7 +103,7 @@ include 'includes/components/newheader.php';
     </div>
 
     <!-- The Team Section -->
-    <div class="container d-flex flex-row justify-content-between" style="padding-top:2vw;">
+    <div class="container d-flex flex-row justify-content-between" style="padding-top:2vw; padding-bottom:10vw;">
         <div style="padding:4vw">
             <h3>Team</h3>
             <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.  </p>
