@@ -11,7 +11,7 @@ include 'includes/components/newheader.php';
     It has an image background with text and link over it 
 -->
     <div class="about-us" style="margin-left:20%;width:60%;height:200px;background-image:url('img/background.jpeg');background-size:cover;background-position:center;position:relative;">
-        <div class="aboutus-context" style="width:100%;width:100%;background-color:rgba(0,0,0,0.6);position:absolute;bottom:0;text-align:center;color:white;">
+        <div class="aboutus-context" style="width:100%;width:100%;background-color:rgba(9,51,0,0.6);position:absolute;bottom:0;text-align:center;color:white;">
         <p class="fs-2">About us</p>
         <p>some context here about us</p>
 
