@@ -2,12 +2,10 @@
     $title = "Manage Teams";
     include_once 'includes/components/header.php';
     Include_once 'includes/functions/security.php';
-    $isLoggedIn = isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true;
-    if($isLoggedIn == false) {RedirectToIndex(); die();}
-    $isManager = isset($_SESSION['User_ID']) && CheckRole($_SESSION['User_ID']) == 'Manager';
-    if(!$isManager) {RedirectToIndex(); die();}
-
+    CheckLoggedIn();
     $managerID = $_SESSION['User_ID'];
+    AccessControlBasedOnLevel($_MANAGER_ACCESS_LST, $managerID);
+
     $managerClubID = getManagerClubID($managerID);
     if(isset($managerClubID)) {
 ?>
@@ -95,10 +93,13 @@
         <!-- Team Cards: 
             Each Team card has a scroll bar, team name, player list
         -->
+        <?php
+            if(count($lstTeamOne) != 0) {
+        ?>
         <div class="card mt-4" id="team-1">
             <div class="card-body">
                 <h5 class="card-title font-weight-bold mb-2"><?php echo $lstTeams[0]->teamName ?></h5>  
-                <hr>
+                <hr> 
                 <div class="card-text" id="player-list-1">
                     <?php
                         $arr_length_lstOne = count($lstTeamOne);
@@ -123,7 +124,9 @@
                 </div>      
             </div>  
         </div>
-
+        <?php } 
+        if(count($lstTeamTwo) != 0) {
+        ?>
         <div class="card mt-4" id="team-2">
             <div class="card-body">
                 <h5 class="card-title font-weight-bold"><?php echo $lstTeams[1]->teamName ?></h5>
@@ -153,7 +156,10 @@
                 </div>      
             </div>  
         </div>
-
+        <?php 
+            } 
+            if(count($lstTeamThree) != 0) {
+        ?>
         <div class="card mt-4" id="team-3">
             <div class="card-body">
                 <h5 class="card-title font-weight-bold"><?php echo $lstTeams[2]->teamName ?></h5>  
@@ -183,7 +189,10 @@
                 </div>      
             </div>  
         </div>
-
+        <?php 
+        } 
+        if(count($lstUnassigned) != 0) {
+        ?>
         <div class="card mt-4" id="team-3">
             <div class="card-body">
                 <h5 class="card-title font-weight-bold">Unassigned</h5>  
@@ -213,7 +222,9 @@
                 </div>      
             </div>  
         </div>
-
+        <?php 
+        } 
+        ?>
         <!-- Pop-up window for player exchange-->
         <div class="modal fade" id="pop-up" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog" role="document">
