@@ -16,7 +16,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col">
-                            <img src="img/headerImg.png" alt="logo" width="30" height="24">
+                            <img src="img/headerImg.png" alt="logo" width="80vw">
                         </div>
                         <div class="col" style="color: rgb(85, 128, 207);">
                             <h4>
@@ -29,10 +29,10 @@
             </a>
             <div class="d-flex bell-and-login ">
                 <a class="nav-link ml-auto p-4" href="../../news.php">
-                    <i class="bi bi-bell" style="color: cornflowerblue; font-size: 5vh; "></i>
+                    <i class="bi bi-bell" style="color: cornflowerblue; font-size: 3vw; "></i>
                 </a>
                 <a class="nav-link ml-auto p-4" href="../../loginform.php">
-                        <i class="bi bi-person-circle" style="color: cornflowerblue; font-size: 5vh;"></i> Login
+                        <i class="bi bi-person-circle" style="color: cornflowerblue; font-size: 3vw;"></i> Login
                 </a>
             </div>
 

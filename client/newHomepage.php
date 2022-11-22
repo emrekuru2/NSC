@@ -4,14 +4,14 @@ include 'includes/components/newheader.php';
 <head>
     <title>Home</title>
 </head>
-<body>
+<div style="padding-left:5vw;padding-left:5vw;">
     
 
 <!-- The about us section:
     It has an image background with text and link over it 
 -->
-    <div class="container" style="position:relative; width:50vw; margin-left:30vw">
-        <img src="img/background.jpeg" alt="about-us">
+    <div class="container" style="position:relative; padding-top:2vw; width:80vw">
+        <img src="img/background.jpeg" alt="about-us" style="width:80vw;height:40vw">
         <div class="bg-success p-2 text-dark bg-opacity-25" style="position:absolute; z-index:2; left:10px; top:10px;">
             <h3>About us</h3>
             <p style="opacity:1;">
@@ -68,4 +68,38 @@ include 'includes/components/newheader.php';
         </div>
     </div>
     
-</body>
+    <!-- The New Section -->
+    <div class="d-flex flex-row justify-content-between">
+        <div class="card" style="width: 20vw; height: 300px">
+
+            <div class="card-body">
+                <h5 class="card-title">News title</h5>
+                <img src="#" alt="New image">
+                <p class="card-text">News content.</p>
+                <a href="#" class="btn btn-primary" style="position: absolute;bottom: 30px;">Find out more</a>
+            </div>
+        </div>
+
+        <div class="card" style="width: 20vw;">
+            <div class="card-body">
+                <h5 class="card-title">News title</h5>
+                <p class="card-text">News content.</p>
+            </div>
+        </div>
+
+        <div class="card" style="width: 20vw;">
+            <div class="card-body">
+                <h5 class="card-title">News title</h5>
+                <p class="card-text">News content.</p>
+            </div>
+        </div>
+
+        <div class="card " style="width: 20vw;">
+            <div class="card-body">
+                <h5 class="card-title">News title</h5>
+                <p class="card-text">News content.</p>
+            </div>
+        </div>
+
+    </div>
+</>
