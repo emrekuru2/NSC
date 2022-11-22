@@ -6,6 +6,8 @@ $title = "Development Programs";
 include 'includes/components/header.php';
 ?>
 
+<?php if (isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true) { ?>
+
 <!-- Css and script links -->
 <link rel="stylesheet" type="text/css" href="../../css/devProgram.css">
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -112,6 +114,11 @@ include 'includes/components/header.php';
             </div>
         </div>
     </div>
+
+<?php } else {
+        header("location: loginform.php");
+    }
+     ?>
 
     <?php
         include 'includes/components/footer.php';

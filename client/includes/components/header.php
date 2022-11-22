@@ -76,6 +76,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="../../TeamPage.php">Teams</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../../devProgram.php">Development Programs</a>
+            </li>
             <?php
             if (isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true) {
                  if (isset($_SESSION['User_ID']) && CheckRole($_SESSION['User_ID']) == 'Manager') {
@@ -116,9 +119,7 @@
             ?>
 
             <?php if (isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true) { ?>
-            <li class="nav-item">
-                <a class="nav-link" href="../../devProgram.php">Development Programs</a>
-            </li>
+                <!-- there used to be something here, related to devPrograms :( -->
             <?php } ?>
 
         </ul>
