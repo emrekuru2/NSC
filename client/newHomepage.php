@@ -19,8 +19,8 @@ include 'includes/components/newheader.php';
             </p>
         </div>      
     </div>
-    <br><br><br><br>
-    <div class="container pl-0 ml-0 pr-0 mr-0">
+
+    <div class="container pl-0 ml-0 pr-0 mr-0" style="padding-top:2vw;">
         <div class="row">
             <div class="col-8">
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" >
@@ -69,35 +69,34 @@ include 'includes/components/newheader.php';
     </div>
     
     <!-- The New Section -->
-    <div class="d-flex flex-row justify-content-between">
-        <div class="card" style="width: 20vw; height: 300px">
+    <div class="d-flex flex-row justify-content-between" style="padding-top:2vw;">
+        <div class="card" style="width: 22vw; height: 30vw">
 
             <div class="card-body">
-                <h5 class="card-title">News title</h5>
-                <img src="#" alt="New image">
-                <p class="card-text">News content.</p>
+                <h5 class="card-title text-center">News title</h5>
+                <p class="card-text m-4 text-center">News content</p>
                 <a href="#" class="btn btn-primary" style="position: absolute;bottom: 30px;">Find out more</a>
             </div>
         </div>
 
-        <div class="card" style="width: 20vw;">
+        <div class="card" style="width: 22vw;">
             <div class="card-body">
-                <h5 class="card-title">News title</h5>
-                <p class="card-text">News content.</p>
+                <img src="img/teamProfilePictures/HomePageNews1.jpeg" alt="New image" style="width:100%;height:12vw;">
+                <p class="card-text m-4 text-center">News content</p>
             </div>
         </div>
 
-        <div class="card" style="width: 20vw;">
+        <div class="card" style="width: 22vw;">
             <div class="card-body">
-                <h5 class="card-title">News title</h5>
-                <p class="card-text">News content.</p>
+                <img src="img/teamProfilePictures/HomePageNews2.jpeg" alt="New image" style="width:100%;height:12vw;">
+                <p class="card-text m-4 text-center">News content</p>
             </div>
         </div>
 
-        <div class="card " style="width: 20vw;">
+        <div class="card " style="width: 22vw;">
             <div class="card-body">
-                <h5 class="card-title">News title</h5>
-                <p class="card-text">News content.</p>
+                <img src="img/teamProfilePictures/HomePageNews3.jpeg" alt="New image" style="width:100%;height:12vw;">
+                <p class="card-text m-4 text-center">News content</p>
             </div>
         </div>
 
