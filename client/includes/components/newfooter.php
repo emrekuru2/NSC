@@ -85,4 +85,5 @@
         <a class="text-white fs-4" href="https://mdbootstrap.com/">MDBootstrap.com</a>
     </div>
   
-</footer>
+</body>
+</html>
