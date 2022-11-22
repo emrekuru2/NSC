@@ -4,14 +4,14 @@ include 'includes/components/newheader.php';
 <head>
     <title>Home</title>
 </head>
-<div style="padding-left:5vw;padding-left:5vw;">
+<div >
     
 
 <!-- The about us section:
     It has an image background with text and link over it 
 -->
-    <div class="container position-relative" style="padding-top:2vw; width:80vw">
-        <img src="img/background.jpeg" alt="about-us" style="width:80vw;height:40vw">
+    <div class="container position-relative" style="padding-top:2vw;">
+        <img src="img/background.jpeg" alt="about-us" style="width:100%;height:40vw">
         <div class="bg-success p-2 text-white bg-opacity-25" style="position:absolute; bottom:1vw; right:1px;">
             <h3>About us</h3>
             <p style="opacity:1;">
@@ -29,7 +29,7 @@ include 'includes/components/newheader.php';
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
         </ol>
         <div class="carousel-inner" >
-            <div class="carousel-item active" style="height: 15rem;width: 130vh;">
+            <div class="carousel-item active" style="height: 15rem;width: 120vh;">
                 <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"  preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
                 <div class="carousel-caption text-end">
                     <h1>Clubs</h1>
@@ -99,4 +99,4 @@ include 'includes/components/newheader.php';
         </div>
 
     </div>
-</>
+</div>
