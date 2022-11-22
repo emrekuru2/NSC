@@ -1,6 +1,10 @@
 <?php
-$title = "Team";
-include 'includes/components/header.php'
+    $title = "My Team";
+    include_once 'includes/components/header.php';
+    // Coach can edit, player can view (future implementation)
+    include_once 'includes/functions/security.php';
+    CheckLoggedIn();
+    AccessControlBasedOnLevel(PLAYER_ACCESS_LVL, $_SESSION['User_ID']);
 ?>
 
     <?php

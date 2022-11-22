@@ -18,6 +18,16 @@
     <link rel="stylesheet" type="text/css" href="../../css/mdb.min.css">
     <!-- Your custom styles (optional) -->
     <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+    <?php 
+
+        $previous = "javascript:history.go(-1)";
+        if(isset($_SERVER['HTTP_REFERER'])) {
+            $previous = $_SERVER['HTTP_REFERER'];
+        }
+
+    ?>
+
 </head>
 
 <body>
@@ -30,7 +40,7 @@
         </p>
         <a class="btn light-blue text-white" href="..">Home</a>
         <br>
-        <a class="btn light-blue text-white" href="<?=$_SERVER['HTTP_REFERER']?>">Return To Last Page</a>
+        <a class="btn light-blue text-white" href="<?= $previous ?>">Return To Last Page</a>
     </div>
 </div>
 

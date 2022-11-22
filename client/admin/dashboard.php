@@ -1,8 +1,12 @@
 <?php
 
-$title = "Admin Dashboard";
+    $title = "Admin Dashboard";
 
-include "../includes/components/adminHeader.php";
+    include_once "../includes/components/adminHeader.php";
+    // Prevent Direct access and prevent non-admin's to access
+    RestrictAdmin(CheckRole($_SESSION['User_ID']));
+    defined('_DEFVAR') or exit(header('Location: ../index.php'));
+    
 ?>
 
     <div class="container-fluid">
@@ -14,21 +18,6 @@ include "../includes/components/adminHeader.php";
                 </div>
 
                 <div class="col-7 offset-4">
-
-
-
-                    <?php
-                    /* future functionality
-
-                    $conn = OpenCon();
-
-                    //Retrieves the current count
-                    $count = mysqli_fetch_row(mysqli_query($conn, "SELECT * FROM NSCA_PageCounter"));
-                    //Displays the count on your site
-                    */
-                    ?>
-
-
                     <div class="card w-50">
                         <div class="card-header">
                             Visitors Today
@@ -44,6 +33,4 @@ include "../includes/components/adminHeader.php";
     </div>
 
 
-<?php
-
-include "../includes/components/footer.php";
+<?php include "../includes/components/footer.php";?>

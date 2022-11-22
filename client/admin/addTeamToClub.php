@@ -1,10 +1,14 @@
 
 <?php
-$title = "Edit User Role";
-include 'includes/components/header.php'
+    $title = "Add Team To Club";
+    include_once "../includes/components/adminHeader.php";
+    // Prevent Direct access and prevent non-admin's to access
+    RestrictAdmin(CheckRole($_SESSION['User_ID']));
+    defined('_DEFVAR') or exit(header('Location: ../index.php'));
 ?>
 
 <div class="container my-5 py-5 z-depth-1">
+
 
     <!--Section: Content-->
     <section class="px-md-5 mx-md-5 text-center text-lg-left dark-grey-text">
@@ -18,26 +22,26 @@ include 'includes/components/header.php'
 
                 <!-- Default form login -->
                 <form class="text-center" method="post">
-                    <?php
-                        displayUserTeamAndRole();
-                        if(isset($_GET["userID"])){
-                            $userID = $_GET["userID"];
-                        }
-                    ?>
+                   <?php
+                    displayAllTheClub();
+                   ?>
+
                     <br>
                     <!-- Sign in button -->
-                    <button name="changeUserRole" class="btn btn-info btn-block my-4" type="submit">Submit</button>
+                    <button class="btn btn-info btn-block my-4" type="submit">Submit</button>
 
                 </form>
                 <!-- Default form login -->
                 <?php
-
-                if(isset($_POST["changeUserRole"])){
-                        changeUserInformation($userID);
-                }
+                    setClubToTeam();
                 ?>
+
+
+
+
             </div>
             <!--Grid column-->
+
         </div>
         <!--Grid row-->
 
@@ -49,5 +53,5 @@ include 'includes/components/header.php'
 </div>
 
 <?php
-include 'includes/components/footer.php'
+    include_once '../includes/components/footer.php'
 ?>

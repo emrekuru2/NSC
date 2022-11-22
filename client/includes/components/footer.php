@@ -1,9 +1,17 @@
 <?php 
+    // Prevent direct access
+    if(!defined('_DEFVAR')) {
+        require_once("../functions/security.php");
+        RestrictIncludes();
+    }
+
     // Close connection
-    mysqli_close($conn);
+    if(isset($conn)) {
+        mysqli_close($conn);
+    }
 ?>
 <!-- Footer -->
-<footer class="page-footer font-small light-blue py-4">
+<footer class="page-footer font-small light-blue py-5" style="height: 120px;">
 
     <!-- Footer Elements -->
     <div class="container">

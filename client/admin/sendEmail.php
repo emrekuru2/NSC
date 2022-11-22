@@ -1,50 +1,48 @@
 <?php
 
-$title = "Send Email";
+    $title = "Send Email";
 
-include "../includes/components/adminHeader.php";
+    include_once "../includes/components/adminHeader.php";
+    // Prevent Direct access and prevent non-admin's to access
+    RestrictAdmin(CheckRole($_SESSION['User_ID']));
+    defined('_DEFVAR') or exit(header('Location: ../index.php'));
 
+    // Swift Mailer Library
+    require_once '../../vendor/autoload.php';
 
-// Swift Mailer Library
-require_once '../../vendor/autoload.php';
+    if (isset($_POST['submitEmail'])) {
 
+        // Mail Transport
+        $transport = new Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl');
+        $transport->setUsername('novascotiacricketassociation@gmail.com')->setPassword('fSUN8LGR1Xj8');
 
-if (isset($_POST['submitEmail'])) {
-
-// Mail Transport
-    $transport = new Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl');
-    $transport->setUsername('novascotiacricketassociation@gmail.com')->setPassword('fSUN8LGR1Xj8');
-
-// Mailer
-    $mailer = new Swift_Mailer($transport);
-
-
-    //if they used a name to send as
-    if (isset($_POST['emailFormFullName'])) {
-        // Create a message
-            $message = (new Swift_Message($_POST['emailFormTitle']))
-                ->setFrom(array('novascotiacricketassociation@gmail.com' => $_POST['emailFormFullName']))
-                ->setTo($_POST['emailFormEmail'])
-                ->setBody($_POST['emailFormTextBox']);
+        // Mailer
+        $mailer = new Swift_Mailer($transport);
 
 
-    } else {
-        // Create a message
-            $message = (new Swift_Message($_POST['emailFormTitle']))
-                ->setFrom(array('novascotiacricketassociation@gmail.com'))
-                ->setTo($_POST['emailFormEmail'])
-                ->setBody($_POST['emailFormTextBox']);
+        //if they used a name to send as
+        if (isset($_POST['emailFormFullName'])) {
+            // Create a message
+                $message = (new Swift_Message($_POST['emailFormTitle']))
+                    ->setFrom(array('novascotiacricketassociation@gmail.com' => $_POST['emailFormFullName']))
+                    ->setTo($_POST['emailFormEmail'])
+                    ->setBody($_POST['emailFormTextBox']);
+
+        } else {
+            // Create a message
+                $message = (new Swift_Message($_POST['emailFormTitle']))
+                    ->setFrom(array('novascotiacricketassociation@gmail.com'))
+                    ->setTo($_POST['emailFormEmail'])
+                    ->setBody($_POST['emailFormTextBox']);
         }
 
-
-// Send the message
-    if ($mailer->send($message)) {
-        echo '<p class="text-center text-success">Mail sent successfully.</p>';
-    } else {
-        echo '<p class="text-center text-danger"> There was an error sending the email. Please try again later.</p>';
+        // Send the message
+        if ($mailer->send($message)) {
+            echo '<p class="text-center text-success">Mail sent successfully.</p>';
+        } else {
+            echo '<p class="text-center text-danger"> There was an error sending the email. Please try again later.</p>';
+        }
     }
-
-}
 ?>
 
     <div class="container-fluid">
@@ -108,5 +106,5 @@ if (isset($_POST['submitEmail'])) {
 
 
 <?php
-
-include "../includes/components/footer.php";
+    include_once "../includes/components/footer.php";
+?>

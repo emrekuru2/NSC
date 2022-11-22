@@ -1,6 +1,6 @@
 <?php
-$title = "Clubs";
-include 'includes/components/header.php';
+    $title = "Clubs";
+    include_once 'includes/components/header.php';
 
 ?>
 <div class="container mt-5">
@@ -96,5 +96,5 @@ include 'includes/components/header.php';
 </div>
 
 <?php
-include 'includes/components/footer.php'
+    include_once 'includes/components/footer.php'
 ?>

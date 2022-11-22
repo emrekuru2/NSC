@@ -94,6 +94,7 @@
                             <label for="RegisterFormPostalCode"></label>
                             <div class="form-group col-sm-4">
                                 <input type="text" id="RegisterFormPostalCode" name="RegisterFormPostalCode" class="form-control" pattern="[0-9a-zA-Z]{6}" maxlength = "6" placeholder="Postal Code" value="<?php if(isset($_POST['RegisterFormPostalCode'])){ echo htmlentities($_POST['RegisterFormPostalCode']);}?>" required>
+                                <small class="form-text text-muted mb-0 mt-1"><i class="fas fa-exclamation-circle" style="color:orange"></i>&nbsp;Please follow the format X2X2X2</small>
                             </div>
                         </div>
 
@@ -109,23 +110,6 @@
                             <label for="RegisterFormPasswordConfirm"></label>
                             <div class="form-group col-sm-6">
                                 <input type="password" id="RegisterFormPasswordConfirm" name="RegisterFormPasswordConfirm" class="form-control" placeholder="Confirm Password" required>
-                            </div>
-                        </div>
-
-                        <!-- Role DropDown -->
-                        <div class="form-row">
-                            <label for="RegisterFormRole"></label>
-                            <div class="form-group col-sm-12">
-                                <select id="RegisterFormRole" name="RegisterFormRole" class="form-control" required>
-                                    <?php
-                                    $roleResult = getRoles($conn);
-
-                                    while ($row = mysqli_fetch_assoc($roleResult)) { ?>
-                                        <option value="<?=$row['RoleID']?>"><?=$row['Name']?></option>
-                                    <?php
-                                    }
-                                    ?>
-                                </select>
                             </div>
                         </div>
 
@@ -154,7 +138,7 @@
                             $registerMiddleName = "";
                             $registerLastName = check_input($conn, $_POST['RegisterFormLastName']);
                             $registerEmail = check_input($conn, $_POST['RegisterFormEmail']);
-                            $registerUserRole = check_input($conn, $_POST['RegisterFormRole']);
+                            $registerUserRole = check_input($conn, 1); // Default is Guest User
                             $registerStreetAddress = check_input($conn, $_POST['RegisterFormStreetAddress']);
                             $registerCity = check_input($conn, $_POST['RegisterFormCity']);
                             $registerProvince = check_input($conn, $_POST['RegisterFormProvince']);
@@ -259,7 +243,7 @@
 
                                         if ($sqluserdataquery and $sqllogindataquery and $sqlUserRoleInsert) {
                                             echo "<br><p class='text-success'>You have registered successful!</p>";
-                                            echo "<meta http-equiv='refresh' content='0; url=../../index.php?postRegister=success'>";
+                                            echo "<meta http-equiv='refresh' content='0; url=../../loginform.php?postRegister=success'>";
                                             exit();
                                         } else {
                                             echo "ERROR: Could not execute " . $sqlUserRoleInsert . mysqli_error($conn);

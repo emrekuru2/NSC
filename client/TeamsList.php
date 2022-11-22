@@ -1,6 +1,9 @@
 <?php
-$title = "Team";
-include 'includes/components/header.php';
+    $title = "Team";
+    include_once 'includes/components/header.php';
+    include_once 'includes/functions/security.php';
+    CheckLoggedIn();
+    AccessControlBasedOnLevel(PLAYER_ACCESS_LVL, $_SESSION['User_ID']);
 ?>
     <div class="container mt-5 pt-5">
 
@@ -16,15 +19,11 @@ include 'includes/components/header.php';
                 displayTeamsForApply();
             ?>
 
-
-
-
         </section>
         <!--Section: Content-->
-
-
+        
     </div>
 
 <?php
-include 'includes/components/footer.php'
+    include 'includes/components/footer.php'
 ?>

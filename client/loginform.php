@@ -2,7 +2,12 @@
     $title = "Login";
     $loginOrRegistrationPage = true;
     
-    include_once 'includes/components/header.php'
+    include_once 'includes/components/header.php';
+
+    if (isset($_GET['postRegister']) && $_GET['postRegister'] == "success"){
+        echo "<div class='bg-warning text-center font-weight-normal' style='padding: 1%'>You have registered successfully! Please login to access your account</div>";
+        echo "</div>";
+    }
 ?>
 
 <body class="light-blue">
@@ -38,16 +43,6 @@
 
 
                             <div class="d-flex justify-content-around">
-
-                                <!--
-                                <div>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" name="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
-                                        <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
-                                    </div>
-                                </div>
-                                -->
-
                                 <div>
                                     <!-- Forgot password -->
                                     <a href="">Forgot password?</a>

@@ -1,17 +1,14 @@
 <?php
-include_once "../db/database.php";
-include_once "../db/dbFunctions.php";
-$conn = OpenCon();
-
-$title = "Edit Sub Committees";
-include "../includes/components/adminHeader.php";
-
+    $title = "Edit Sub Committees";
+    include_once "../includes/components/adminHeader.php";
+    // Prevent Direct access and prevent non-admin's to access
+    RestrictAdmin(CheckRole($_SESSION['User_ID']));
+    defined('_DEFVAR') or exit(header('Location: ../index.php'));
+    $conn = OpenCon();
 ?>
-
+    <h1> Sorry this page is not available yet.Please redurn to <a href="../index.php">home</a> </p>
     <div class="col-7 offset-2">
 
     </div>
 
-<?php
-
-include "../includes/components/footer.php";
+<?php include_once "../includes/components/footer.php";?>

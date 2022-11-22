@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-
 <?php
-$title = "Homepage";
-include 'includes/components/header.php';
+    $title = "Homepage";
+    include_once 'includes/components/header.php';
 
-$conn = OpenCon();
-//Adds one to the counter
-//mysqli_query($conn, "UPDATE NSCA_PageCounter SET counter = counter + 1");
-
-if (isset($_GET['postRegister']) && $_GET['postRegister'] == "success"){
-    echo "<br>";
-    echo "<p class='text-center text-success'>Registered successfully! Please login to access your account.</p>";
-}
+    $conn = OpenCon();
 ?>
 <br>
 <div class="container">
@@ -45,17 +36,8 @@ if (isset($_GET['postRegister']) && $_GET['postRegister'] == "success"){
                 <br><a href=https://m.me/novascotiacricket target="blank">Message Us on Facebook</a></br>
                 <br>
             </address>
-       <!--     <address>
-                <abbr title="Phone">P:</abbr>
-                (123) 456-7890
-                <br>
-                <abbr title="Email">E:</abbr>
-                <a href="mailto:#">novascotiacricket@gmail.com</a>
-            </address>
-		-->
         </div>
     </div>
-    <!-- /.row -->
 
     <div class="row">
         <div class="col-md-4 mb-5">
@@ -95,13 +77,11 @@ if (isset($_GET['postRegister']) && $_GET['postRegister'] == "success"){
             </div>
         </div>
     </div>
-    <!-- /.row -->
 
 </div>
-<!-- /.container -->
 
 
 <?php
-include 'includes/components/footer.php'
+    include 'includes/components/footer.php'
 ?>
 

@@ -1,6 +1,9 @@
 <?php
-$title = "News";
-include 'includes/components/header.php';
+    $title = "News";
+    include_once 'includes/components/header.php';
+    include_once 'includes/functions/security.php';
+
+    CheckLoggedIn();
 ?>
 
 <!-- Page Content -->
