@@ -70,10 +70,10 @@ include 'includes/components/newheader.php';
     <div class="d-flex flex-row justify-content-between" style="padding-top:2vw;">
         <div class="card" style="width: 22vw; height: 30vw">
 
-            <div class="card-body">
-                <h5 class="card-title text-center">News title</h5>
-                <p class="card-text m-4 text-center">News content</p>
-                <a href="#" class="btn btn-primary" style="position: absolute;bottom: 30px;">Find out more</a>
+            <div class="card-body text-center">
+                <h5 class="card-title ">News title</h5>
+                <p class="card-text m-4 ">News content</p>
+                <a href="#" class="btn btn-primary position-absolute bottom-0 start-50 translate-middle-x">Find out more</a>
             </div>
         </div>
 
