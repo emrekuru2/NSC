@@ -10,9 +10,9 @@ include 'includes/components/newheader.php';
 <!-- The about us section:
     It has an image background with text and link over it 
 -->
-    <div class="container" style="position:relative; padding-top:2vw; width:80vw">
+    <div class="container position-relative" style="padding-top:2vw; width:80vw">
         <img src="img/background.jpeg" alt="about-us" style="width:80vw;height:40vw">
-        <div class="bg-success p-2 text-dark bg-opacity-25" style="position:absolute; z-index:2; left:10px; top:10px;">
+        <div class="bg-success p-2 text-white bg-opacity-25" style="position:absolute; bottom:1vw; right:1px;">
             <h3>About us</h3>
             <p style="opacity:1;">
                 Some content Some content Some content  Some content
