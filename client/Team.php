@@ -8,8 +8,7 @@
 ?>
 
     <?php
-
-        displayTeamHomePage();
+        $teamID = displayTeamHomePage();
     ?>
 
 
@@ -72,142 +71,39 @@
                                 <div class="row">
                                     <!-- one row-->
                                     <!-- Grid column -->
-                                    <div class="col-md-3 mb-4">
+                                    <?php
+                                    if(isset($teamID)) {
+                                        $lstTeamPlayers = getPlayersInTeam($teamID);
+                                        $arr_length = count($lstTeamPlayers);
+                                        if($arr_length>0) {
+
+                                            for($i = 0; $i < $arr_length; $i++ ) {
+                                                $player = $lstTeamPlayers[$i];
+                                                if($player->waitingToJoin) continue; // Waiting to join means that are not in team
+                                                $name = $player->name;
+                                    ?> 
+                                    <div class="col-md-6 mb-4">
                                         <div class="view z-depth-1 mb-4">
-                                            <img src="img/playerImg.png" class="img-fluid mx-auto" alt="smaple image">
+                                        <?php
+                                            $target_dir = substr($player->img, 6) . "\profilePicture.jpg";
+                                            
+                                            echo "<img width=200 height=200 src=\"$target_dir\" class=\"mx-auto \"
+                                                alt=\"Sample avatar\">"; 
+                                        ?>
                                         </div>
-                                        <h6 class="font-weight-bold">Player Name</h6>
+                                        <h6 class="font-weight-bold"><?php echo $name; ?></h6>
 
                                     </div>
+                                    <?php }}} ?>                                    
                                     <!-- Grid column -->
 
-                                    <!-- Grid column -->
-                                    <div class="col-md-3 mb-4">
-                                        <div class="view z-depth-1 mb-4">
-                                            <img src="img/playerImg.png" class="img-fluid mx-auto" alt="smaple image">
-                                        </div>
-                                        <h6 class="font-weight-bold">Player Name</h6>
-
-                                    </div>
-                                    <!-- Grid column -->
-
-                                    <!-- Grid column -->
-                                    <div class="col-md-3 mb-4">
-                                        <div class="view z-depth-1 mb-4">
-                                            <img src="img/playerImg.png" class="img-fluid mx-auto" alt="smaple image">
-                                        </div>
-                                        <h6 class="font-weight-bold">Player Name</h6>
-
-                                    </div>
-                                    <!-- Grid column -->
-
-                                    <!-- Grid column -->
-                                    <div class="col-md-3 mb-4">
-                                        <div class="view z-depth-1 mb-4">
-                                            <img src="img/playerImg.png" class="img-fluid mx-auto" alt="smaple image">
-                                        </div>
-                                        <h6 class="font-weight-bold">Player Name</h6>
-
-                                    </div>
-                                    <!-- Grid column -->
-
-                                    <br><br>
-                                    <!-- one row -->
-                                </div>
-                                <br><br><br>
-
-                                <div class="row">
-                                    <!-- one row-->
-                                    <!-- Grid column -->
-                                    <div class="col-md-3 mb-4">
-                                        <div class="view z-depth-1 mb-4">
-                                            <img src="img/playerImg.png" class="img-fluid mx-auto" alt="smaple image">
-                                        </div>
-                                        <h6 class="font-weight-bold">Player Name</h6>
-
-                                    </div>
-                                    <!-- Grid column -->
-
-                                    <!-- Grid column -->
-                                    <div class="col-md-3 mb-4">
-                                        <div class="view z-depth-1 mb-4">
-                                            <img src="img/playerImg.png" class="img-fluid mx-auto" alt="smaple image">
-                                        </div>
-                                        <h6 class="font-weight-bold">Player Name</h6>
-
-                                    </div>
-                                    <!-- Grid column -->
-
-                                    <!-- Grid column -->
-                                    <div class="col-md-3 mb-4">
-                                        <div class="view z-depth-1 mb-4">
-                                            <img src="img/playerImg.png" class="img-fluid mx-auto" alt="smaple image">
-                                        </div>
-                                        <h6 class="font-weight-bold">Player Name</h6>
-
-                                    </div>
-                                    <!-- Grid column -->
-
-                                    <!-- Grid column -->
-                                    <div class="col-md-3 mb-4">
-                                        <div class="view z-depth-1 mb-4">
-                                            <img src="img/playerImg.png" class="img-fluid mx-auto" alt="smaple image">
-                                        </div>
-                                        <h6 class="font-weight-bold">Player Name</h6>
-
-                                    </div>
-                                    <!-- Grid column -->
-                                    <!-- one row -->
-                                </div>
-                                <br><br><br>
-
-                                <div class="row">
-                                    <!-- one row-->
-                                    <!-- Grid column -->
-                                    <div class="col-md-3 mb-4">
-                                        <div class="view z-depth-1 mb-4">
-                                            <img src="img/playerImg.png" class="img-fluid mx-auto" alt="smaple image">
-                                        </div>
-                                        <h6 class="font-weight-bold">Player Name</h6>
-
-                                    </div>
-                                    <!-- Grid column -->
-
-                                    <!-- Grid column -->
-                                    <div class="col-md-3 mb-4">
-                                        <div class="view z-depth-1 mb-4">
-                                            <img src="img/playerImg.png" class="img-fluid mx-auto" alt="smaple image">
-                                        </div>
-                                        <h6 class="font-weight-bold">Player Name</h6>
-
-                                    </div>
-                                    <!-- Grid column -->
-
-                                    <!-- Grid column -->
-                                    <div class="col-md-3 mb-4">
-                                        <div class="view z-depth-1 mb-4">
-                                            <img src="img/playerImg.png" class="img-fluid mx-auto" alt="smaple image">
-                                        </div>
-                                        <h6 class="font-weight-bold">Player Name</h6>
-
-                                    </div>
-                                    <!-- Grid column -->
-
-                                    <!-- Grid column -->
-                                    <div class="col-md-3 mb-4">
-                                        <div class="view z-depth-1 mb-4">
-                                            <img src="img/playerImg.png" class="img-fluid mx-auto" alt="smaple image">
-                                        </div>
-                                        <h6 class="font-weight-bold">Player Name</h6>
-
-                                    </div>
-                                    <!-- Grid column -->
-
-                                    <br><br>
-                                    <!-- one row -->
+                                    
 
                                 </div>
-                                <!-- Grid row -->
+                                    <!-- Grid column -->
+
+                                <br><br>
+                                <!-- one row -->
 
                             </section>
                             <!--Section: Content-->

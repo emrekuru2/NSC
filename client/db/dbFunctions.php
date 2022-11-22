@@ -339,7 +339,7 @@ function displayTeams(){
                     <div class=\"avatar mx-auto\">
                    
                         <a href=\"Team.php?id=$teamID\">
-                        <img height=\"60\" width=\"60\" src=\"img/teamProfilePictures/$teamProfilePicture\" class=\"rounded-circle z-depth-1\"
+                        <img height=\"120\" width=\"120\" src=\"img/teamProfilePictures/$teamProfilePicture\" class=\"rounded-circle z-depth-1\"
                              alt=\"Sample avatar\">
                              </a>
                     </div>
@@ -352,7 +352,7 @@ function displayTeams(){
                 <div class=\"col-lg-3 col-md-6 mb-lg-0 mb-5\">
                     <div class=\"avatar mx-auto\">
                         <a href=\"Team.php?id=$teamID\">
-                            <img height=\"60\" width=\"60\" src=\"img/teamProfilePictures/$teamProfilePicture\" class=\"rounded-circle z-depth-1\"
+                            <img height=\"120\" width=\"120\" src=\"img/teamProfilePictures/$teamProfilePicture\" class=\"rounded-circle z-depth-1\"
                                  alt=\"Sample avatar\" </img>
                         </a>
                     </div>
@@ -380,14 +380,14 @@ function displayTeamHomePage(){
         $conn = OpenCon();
 
         //sql statement
-        $statement = $conn->prepare("SELECT teamName,teamProfilePicture FROM nsca_team WHERE TeamID = '$teamID' LIMIT 1");
+        $statement = $conn->prepare("SELECT teamName, nsca_team.description, teamProfilePicture FROM nsca_team WHERE TeamID = '$teamID' LIMIT 1");
         // Execute
         $statement->execute();
         //Store
         $statement->store_result();
 
         //bind result
-        $statement->bind_result($teamName,$teamProfilePicture);
+        $statement->bind_result($teamName,$description, $teamProfilePicture);
 
         if($statement->num_rows>0){
             while ($statement->fetch()){
@@ -402,6 +402,7 @@ function displayTeamHomePage(){
                             <h3 class=\"py-3 font-weight-bold\">
                                 <strong>$teamName</strong>
                             </h3>
+                            <h4>$description</h4>
                         </div>
                     </div>
                 </div>
@@ -411,6 +412,7 @@ function displayTeamHomePage(){
         }
         $statement->close();
         $conn->close();
+        return $teamID;
     }
 
 }
@@ -977,6 +979,38 @@ function getPlayersInClub($clubIDGiven, $searchStr="") {
         $lstAllPlayers[] = $obj_user;
     }
     return $lstAllPlayers;
+}
+
+function getPlayersInTeam($teamIDGiven, $searchStr="") {
+    $conn = OpenCon();
+
+    $statement = $conn->prepare("SELECT nsca_team.TeamName, nsca_teamuser.*, concat(nsca_user.FirstName, ' ',nsca_user.MiddleName,' ', nsca_user.LastName) as name, nsca_user.UserDescription, nsca_user.imgFolder FROM nsca_team 
+    INNER JOIN nsca_teams ON nsca_team.TeamID = nsca_teams.TeamID AND nsca_teams.TeamID = $teamIDGiven
+    INNER JOIN nsca_teamuser ON nsca_teamuser.TeamID = nsca_teams.TeamID
+    INNER JOIN nsca_user ON nsca_teamuser.UserID = nsca_user.UserID
+    WHERE nsca_user.FirstName LIKE '%$searchStr%' OR nsca_user.MiddleName LIKE '%$searchStr%' OR nsca_user.LastName LIKE '%$searchStr%';
+    ");
+
+    $statement->execute();
+    $statement->store_result();
+    $statement->bind_result($teamName,$teamUserID, $userID, $teamID, $isClubManager, $isTeamCaptain, $isViceCaptain, $waitingToJoin, $name, $userDescription, $img);
+    $lstAllTeamPlayers = array();
+
+    while ($statement->fetch()){
+        $obj_user = new stdClass;
+        $obj_user->teamName = $teamName;
+        $obj_user->teamID = $teamID;
+        $obj_user->userID = $userID;
+        $obj_user->isClubManager = $isClubManager;
+        $obj_user->isTeamCaptain = $isTeamCaptain;
+        $obj_user->isViceCaptain = $isViceCaptain;
+        $obj_user->waitingToJoin = $waitingToJoin;
+        $obj_user->name = $name;
+        $obj_user->userDescription = $userDescription;
+        $obj_user->img = $img;
+        $lstAllTeamPlayers[] = $obj_user;
+    }
+    return $lstAllTeamPlayers;
 }
 
 function getManagerClubID($managerIDGiven) {

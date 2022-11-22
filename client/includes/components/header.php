@@ -102,18 +102,6 @@
                 }
             }
             ?>
-            <?php
-            if (isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true) {
-                 if (isset($_SESSION['User_ID']) && (CheckRole($_SESSION['User_ID']) == 'Manager' || CheckRole($_SESSION['User_ID']) == 'Player')) {
-            ?>
-                <li class = "nav-item">
-                    <a class = "nav-link" href="../../Team.php">My Team</a>
-                </li>
-                <?php
-                }
-    
-            }
-            ?>
 
             <?php if (isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true) { ?>
             <li class="nav-item">

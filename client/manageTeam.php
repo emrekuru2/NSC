@@ -72,7 +72,7 @@
         <div class="search-bar">
             <form class="form-inline d-flex  justify-content-center" id= "search-form" action="manageTeam.php" method="POST">
                 <div class="input-group w-75">
-                    <input class="form-control w-75 mt-1" type="search" placeholder="Search Player" aria-label="Search" id="bar-search-player" name="bar-search-player">
+                    <input class="form-control w-75 mt-1" type="search" placeholder="Search Player" aria-label="Search" id="bar-search-player" name="bar-search-player" required>
                     <button class="btn btn-blue-grey mt-1" type="search" id="btn-search" name="btn-search">
                         <i class="fas fa-search"></i>
                     </button>  
@@ -86,6 +86,7 @@
                     3. Remove player -->
         
         <div class = "d-flex justify-content-end mt-3">
+            <?php if(isset($_POST['bar-search-player'])) echo '<a href="manageTeam.php" class="btn btn-primary active" role="button" aria-pressed="true">Show All Players</a>';?>
             <button type="button" pButton class="btn btn-dark ml-3" data-toggle="modal" data-target="#pop-up" id="btn-exchange-player"><i class="fa fa-exchange-alt fa-lg"></i></button>
             <button type="button" data-toggle="modal" data-target="#pop-delete" class="btn btn-danger ml-3" id="btn-remove-player"><i class="fa fa-times fa-lg"></i></button>
         </div>
