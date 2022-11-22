@@ -111,5 +111,8 @@ include 'includes/components/newheader.php';
         </div>
     </div>
 
+<?php
+include "includes/components/newfooter.php"
+?>
 
 
