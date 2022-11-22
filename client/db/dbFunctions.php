@@ -1063,4 +1063,47 @@ function createNewProgram(){
     $conn->close();
 }
 /* method to create a new development program END*/
+
+/*method to display all the visitor of the day during each hour*/
+function displayVisitors(){
+    $conn = OpenCon();
+
+
+    $statement = $conn->prepare("SELECT CONCAT(HOUR(Time),' ',ampm), count FROM nsca_viewcount WHERE count>0");
+
+    $statement->execute();
+    $statement->store_result();
+    $statement->bind_result($time,$viewCount);
+    while($statement->fetch())
+    {
+            echo"
+                <td>$time</td>
+                <td>$viewCount</td>
+            </tr>
+        </tbody>";
+    }
+    $statement->close();
+    $conn->close();
+}
+
+/*method to count/increment the view */
+function countView()
+{   date_default_timezone_set('America/Halifax');
+    $conn = OpenCon();
+    $hourNow = date("H");
+    $stmt = $conn->prepare("UPDATE nsca_viewcount SET count = count+1 WHERE count_ID = $hourNow");
+    $stmt->execute();
+    $stmt->close();
+    $conn->close();
+}
+// to reset each day
+// delimiter |
+// CREATE EVENT e_daily
+//     ON SCHEDULE
+//       EVERY 1 DAY
+//     DO
+//       BEGIN
+//        UPDATE `nsca_viewcount` SET `count` = 0;
+//       END | delimiter;
+//SET GLOBAL event_scheduler="ON";
 ?>
