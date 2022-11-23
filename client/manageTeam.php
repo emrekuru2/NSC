@@ -99,7 +99,7 @@
         ?>
         <div class="card mt-4" id="team-1">
             <div class="card-body">
-                <h5 class="card-title font-weight-bold mb-2"><?php echo $lstTeams[0]->teamName ?></h5>  
+                <h5 class="card-title font-weight-bold mb-2"><?php echo "<a href=\"Team.php?id=".$lstTeams[0]->teamID."\" class=\"text-dark text-decoration-none\">".$lstTeams[0]->teamName."</a>"; ?></h5>  
                 <hr> 
                 <div class="card-text" id="player-list-1">
                     <?php
@@ -130,7 +130,7 @@
         ?>
         <div class="card mt-4" id="team-2">
             <div class="card-body">
-                <h5 class="card-title font-weight-bold"><?php echo $lstTeams[1]->teamName ?></h5>
+                <h5 class="card-title font-weight-bold"> <?php echo "<a href=\"Team.php?id=".$lstTeams[1]->teamID."\" class=\"text-dark text-decoration-none\">".$lstTeams[1]->teamName."</a>"; ?></h5>
                 <hr>  
                 <div class="card-text" id="player-list-2">
                 <?php
@@ -163,7 +163,7 @@
         ?>
         <div class="card mt-4" id="team-3">
             <div class="card-body">
-                <h5 class="card-title font-weight-bold"><?php echo $lstTeams[2]->teamName ?></h5>  
+                <h5 class="card-title font-weight-bold"><?php echo "<a href=\"Team.php?id=".$lstTeams[2]->teamID."\" class=\"text-dark text-decoration-none\">".$lstTeams[2]->teamName."</a>"; ?></h5>  
                 <hr>
                 <div class="card-text" id="player-list-3">
                 <?php

@@ -15,20 +15,6 @@
     <!-- container -->
     <div class="container my-5">
 
-            <style>
-                .md-pills .nav-link.active {
-                    color: #fff;
-                    background-color: #616161;
-                }
-                button.close {
-                    position: absolute;
-                    right: 0;
-                    z-index: 2;
-                    padding-right: 1rem;
-                    padding-top: .6rem;
-                }
-            </style>
-
             <!-- Modal -->
             <!--First row-->
             <div class="row">
@@ -63,52 +49,48 @@
 
                 <!--Player Profile-->
                 <div class="tab-pane fade show in active" id="panelPlayer" role="tabpanel">
-                    <!-- Grid row -->
-                    <div class="row " >
-                            <!--Section: Content-->
-                            <section class="text-center dark-grey-text">
-                                <!-- Grid row -->
-                                <div class="row">
-                                    <!-- one row-->
-                                    <!-- Grid column -->
-                                    <?php
-                                    if(isset($teamID)) {
-                                        $lstTeamPlayers = getPlayersInTeam($teamID);
-                                        $arr_length = count($lstTeamPlayers);
-                                        if($arr_length>0) {
+                    <!--Section: Content-->
+                    <section class="text-center dark-grey-text">
+                        <!-- Grid row -->
+                        <div class="row">
+                            <!-- one row-->
+                            <!-- Grid column -->
+                            <?php
+                            if(isset($teamID)) {
+                                $lstTeamPlayers = getPlayersInTeam($teamID);
+                                $arr_length = count($lstTeamPlayers);
+                                if($arr_length>0) {
 
-                                            for($i = 0; $i < $arr_length; $i++ ) {
-                                                $player = $lstTeamPlayers[$i];
-                                                if($player->waitingToJoin) continue; // Waiting to join means that are not in team
-                                                $name = $player->name;
-                                    ?> 
-                                    <div class="col-md-6 mb-4">
-                                        <div class="view z-depth-1 mb-4">
-                                        <?php
-                                            $target_dir = substr($player->img, 6) . "\profilePicture.jpg";
-                                            
-                                            echo "<img width=200 height=200 src=\"$target_dir\" class=\"mx-auto \"
-                                                alt=\"Sample avatar\">"; 
-                                        ?>
-                                        </div>
-                                        <h6 class="font-weight-bold"><?php echo $name; ?></h6>
-
-                                    </div>
-                                    <?php }}} ?>                                    
-                                    <!-- Grid column -->
-
+                                    for($i = 0; $i < $arr_length; $i++ ) {
+                                        $player = $lstTeamPlayers[$i];
+                                        if($player->waitingToJoin) continue; // Waiting to join means that are not in team
+                                        $name = $player->name;
+                            ?> 
+                            <div class="col-md-3 mb-4">
+                                <div class="view z-depth-1 mb-4">
+                                <?php
+                                    $target_dir = substr($player->img, 6) . "\profilePicture.jpg";
                                     
-
+                                    echo "<img width=100% height=250 src=\"$target_dir\" class=\"mx-auto rounded hover-overlay\"
+                                        alt=\"Sample avatar\">"; 
+                                ?>
                                 </div>
-                                    <!-- Grid column -->
+                                <h6 class="font-weight-bold"><?php echo $name; ?></h6>
 
-                                <br><br>
-                                <!-- one row -->
+                            </div>
+                            <?php }}} ?>                                    
+                            <!-- Grid column -->
 
-                            </section>
-                            <!--Section: Content-->
-                    </div>
-                    <!-- Grid row -->
+                            
+
+                        </div>
+                            <!-- Grid column -->
+
+                        <br><br>
+                        <!-- one row -->
+
+                    </section>
+                    <!--Section: Content-->
                 </div>
                 <!-- Player Profile -->
 
