@@ -8,6 +8,8 @@
 
 ?>
 
+<?php if (isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true) { ?>
+
 <body>
 
     <?php if ($conn->query($sql) === TRUE) { ?>
@@ -30,5 +32,10 @@
         </div>
 
     <?php } ?>
+
+<?php } else {
+    header("location: loginform.php");
+    }
+    ?>
 
 </body>
