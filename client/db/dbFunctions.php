@@ -1096,14 +1096,4 @@ function countView()
     $stmt->close();
     $conn->close();
 }
-// to reset each day
-// delimiter |
-// CREATE EVENT e_daily
-//     ON SCHEDULE
-//       EVERY 1 DAY
-//     DO
-//       BEGIN
-//        UPDATE `nsca_viewcount` SET `count` = 0;
-//       END | delimiter;
-//SET GLOBAL event_scheduler="ON";
 ?>
