@@ -20,7 +20,6 @@
     if (isset($loginOrRegistrationPage) && $loginOrRegistrationPage) 
     {
         session_start();
-        countView();
         $session_token = md5(uniqid(rand(), true));
 
         $_SESSION['session_token'] = $session_token;
