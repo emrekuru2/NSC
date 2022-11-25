@@ -14,18 +14,33 @@
 
 <body>
 
-    <?php if ($conn->query($sql) === TRUE) { ?>
+    <?php
 
-        <div class="content text-center" style="height: 80vh;">
-            <img src="./img/tick.png" alt="success" class="rounded mx-auto d-block" style="height: 20%; margin: 10% 10% 3% 10%">
-            <p class="h5" style="color: #00A79D;">You have successfully registered for the program!</p>
+        try {
+            $result = $conn->query($sql);
+
+            if ($result === TRUE) { ?>
+
+                <div class="content text-center" style="height: 80vh;">
+                    <img src="./img/tick.png" alt="success" class="rounded mx-auto d-block" style="height: 20%; margin: 10% 10% 3% 10%">
+                    <p class="h5" style="color: #00A79D;">You have successfully registered for the program!</p>
+                    <br>
+                    <a class="btn light-blue text-white" href="./devProgram.php">Browse More</a>
+                </div>
+        
+<?php } else { ?>
+    <div class="content text-center" style="height: 80vh;">
+            <img src="./img/error.png" alt="error" class="rounded mx-auto d-block" style="height: 20%; margin: 10% 10% 3% 10%">
+            <p class="h5" style="color: #E81A00;">There was an unexpected error while processing your request!</p>
             <br>
-            <a class="btn light-blue text-white" href="./devProgram.php">Browse More</a>
+            <a class="btn light-blue text-white" href="./devProgram.php">Back</a>
+            <?php echo $sql."<br>".$conn->error;?>
         </div>
-
-    <?php } else { ?>
-
-        <div class="content text-center" style="height: 80vh;">
+        <?php }
+            
+        } catch (mysqli_sql_exception $e) {
+?>
+            <div class="content text-center" style="height: 80vh;">
             <img src="./img/error.png" alt="error" class="rounded mx-auto d-block" style="height: 20%; margin: 10% 10% 3% 10%">
             <p class="h5" style="color: #E81A00;">There was an unexpected error while processing your request!</p>
             <br>
@@ -33,9 +48,9 @@
             <?php echo $sql."<br>".$conn->error;?>
         </div>
 
-    <?php } ?>
-
-<?php } else {
+<?php 
+        }
+} else {
     header("location: loginform.php");
         }
     } else {
