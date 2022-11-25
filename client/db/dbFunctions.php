@@ -1082,7 +1082,7 @@ function displayVisitors(){
             </tr>
         </tbody>";
     }
-
+}
 /*Display all the name of sub committees*/
 function displayAllTheSubCommitees(){
     $conn = OpenCon();
