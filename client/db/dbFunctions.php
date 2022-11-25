@@ -1062,7 +1062,6 @@ function createNewProgram(){
 
     $conn->close();
 }
-<<<<<<< Updated upstream
 /* method to create a new development program END*/
 
 /*method to display all the visitor of the day during each hour*/
@@ -1083,7 +1082,6 @@ function displayVisitors(){
             </tr>
         </tbody>";
     }
-=======
 
 /*Display all the name of sub committees*/
 function displayAllTheSubCommitees(){
@@ -1110,12 +1108,10 @@ function displayAllTheSubCommitees(){
         $count++;
     }
 
->>>>>>> Stashed changes
     $statement->close();
     $conn->close();
 }
 
-<<<<<<< Updated upstream
 /*method to count/increment the view */
 function countView()
 {   date_default_timezone_set('America/Halifax');
@@ -1136,8 +1132,7 @@ function countView()
 //        UPDATE `nsca_viewcount` SET `count` = 0;
 //       END | delimiter;
 //SET GLOBAL event_scheduler="ON";
-?>
-=======
+
 /* method to create a new subcommittees*/
 function createNewSubCommittees(){
 
@@ -1169,5 +1164,3 @@ function createNewSubCommittees(){
     $conn->close();
 }
 ?>
-
->>>>>>> Stashed changes
