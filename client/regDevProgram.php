@@ -1,10 +1,12 @@
 <?php
     $title = "Registration Page | Development Programs";
-    include 'includes/components/header.php';
+    include_once 'includes/components/header.php';
 
-    $devID = $_GET["devID"];
-    $userID = $_SESSION["User_ID"];
-    $sql = "INSERT INTO user_devprogram (`DevId`, `UserID`, `Time`) VALUES ($devID, $userID, now())";
+    if (isset($_GET["devID"])) {
+
+        $devID = $_GET["devID"];
+        $userID = $_SESSION["User_ID"];
+        $sql = "INSERT INTO user_devprogram (`DevId`, `UserID`, `Time`) VALUES ($devID, $userID, now())";
 
 ?>
 
@@ -35,7 +37,18 @@
 
 <?php } else {
     header("location: loginform.php");
-    }
+        }
+    } else {
+        echo "<h5 class='text-danger text-center' style='margin-top: 3%;'>Please select a valid development program to register!</h5>";
+?>
+<div class="row h-100" style="margin: 2%;">
+    <div class="col-sm-6 offset-3 text-center">
+        <a class="btn light-blue text-white" href="devProgram.php">Back to Development Programs</a>
+        <br>
+        <a class="btn light-blue text-white" href="<?= $previous ?>">Return To Last Page</a>
+    </div>
+</div>
+    <?php }
     ?>
 
 </body>
