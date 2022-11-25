@@ -1082,6 +1082,32 @@ function displayVisitors(){
             </tr>
         </tbody>";
     }
+}
+/*Display all the name of sub committees*/
+function displayAllTheSubCommitees(){
+    $conn = OpenCon();
+
+
+    $statement = $conn->prepare("SELECT SubID, Name FROM nsca_subcommittees");
+
+    $statement->execute();
+    $statement->store_result();
+    $statement->bind_result($SubID,$Name);
+
+    $count = 1;
+
+
+    //display
+    while($statement->fetch())
+    {
+        echo "<th>$SubID</th>";
+                            echo"
+                            <td>$Name</td>
+                        </tr>
+              </tbody>";
+        $count++;
+    }
+
     $statement->close();
     $conn->close();
 }
@@ -1094,6 +1120,37 @@ function countView()
     $stmt = $conn->prepare("UPDATE nsca_viewcount SET count = count+1 WHERE count_ID = $hourNow");
     $stmt->execute();
     $stmt->close();
+    $conn->close();
+}
+
+/* method to create a new subcommittees*/
+function createNewSubCommittees(){
+
+    $conn = OpenCon();
+    if(isset($_POST["SubCommittee_Name"]) && isset($_POST["SubCommittee_Description"]) && isset($_POST["Years"])){
+        $name = $_POST["SubCommittee_Name"];
+        $SubCommitteeDescription = $_POST["SubCommittee_Description"];
+        $Years = $_POST["Years"];
+        $statement = $conn->prepare("SELECT * FROM nsca_subcommittees WHERE Name ='$name'" );
+        $statement->execute();
+        $statement->store_result();
+        if($statement->num_rows>0){
+            echo "<p class='red-text text-center'>The Sub_Committee already exists!<br>Please make a new one.</p>";
+        }else{
+
+            if(isset($name)){
+                $statement->close();
+                $statement = $conn->prepare("INSERT INTO `nsca_subcommittees` ( `Name`, `Description`, `Years`) VALUES (?, ?, ?)");
+                $statement->bind_param("sss",$name,$SubCommitteeDescription,$Years);
+                $statement->execute();
+                echo "<p class='red-text text-center'>The Sub-Committee '$name' created successful!</p>";
+                echo "<meta http-equiv='refresh' content='0; url=../admin/editSubCommittees.php'>";
+            }
+
+        }
+        $statement->close();
+    }
+
     $conn->close();
 }
 ?>
