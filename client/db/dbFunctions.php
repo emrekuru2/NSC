@@ -1062,6 +1062,7 @@ function createNewProgram(){
 
     $conn->close();
 }
+<<<<<<< Updated upstream
 /* method to create a new development program END*/
 
 /*method to display all the visitor of the day during each hour*/
@@ -1082,10 +1083,39 @@ function displayVisitors(){
             </tr>
         </tbody>";
     }
+=======
+
+/*Display all the name of sub committees*/
+function displayAllTheSubCommitees(){
+    $conn = OpenCon();
+
+
+    $statement = $conn->prepare("SELECT SubID, Name FROM nsca_subcommittees");
+
+    $statement->execute();
+    $statement->store_result();
+    $statement->bind_result($SubID,$Name);
+
+    $count = 1;
+
+
+    //display
+    while($statement->fetch())
+    {
+        echo "<th>$SubID</th>";
+                            echo"
+                            <td>$Name</td>
+                        </tr>
+              </tbody>";
+        $count++;
+    }
+
+>>>>>>> Stashed changes
     $statement->close();
     $conn->close();
 }
 
+<<<<<<< Updated upstream
 /*method to count/increment the view */
 function countView()
 {   date_default_timezone_set('America/Halifax');
@@ -1107,3 +1137,37 @@ function countView()
 //       END | delimiter;
 //SET GLOBAL event_scheduler="ON";
 ?>
+=======
+/* method to create a new subcommittees*/
+function createNewSubCommittees(){
+
+    $conn = OpenCon();
+    if(isset($_POST["SubCommittee_Name"]) && isset($_POST["SubCommittee_Description"]) && isset($_POST["Years"])){
+        $name = $_POST["SubCommittee_Name"];
+        $SubCommitteeDescription = $_POST["SubCommittee_Description"];
+        $Years = $_POST["Years"];
+        $statement = $conn->prepare("SELECT * FROM nsca_subcommittees WHERE Name ='$name'" );
+        $statement->execute();
+        $statement->store_result();
+        if($statement->num_rows>0){
+            echo "<p class='red-text text-center'>The Sub_Committee already exists!<br>Please make a new one.</p>";
+        }else{
+
+            if(isset($name)){
+                $statement->close();
+                $statement = $conn->prepare("INSERT INTO `nsca_subcommittees` ( `Name`, `Description`, `Years`) VALUES (?, ?, ?)");
+                $statement->bind_param("sss",$name,$SubCommitteeDescription,$Years);
+                $statement->execute();
+                echo "<p class='red-text text-center'>The Sub-Committee '$name' created successful!</p>";
+                echo "<meta http-equiv='refresh' content='0; url=../admin/editSubCommittees.php'>";
+            }
+
+        }
+        $statement->close();
+    }
+
+    $conn->close();
+}
+?>
+
+>>>>>>> Stashed changes
