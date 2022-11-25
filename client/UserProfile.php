@@ -1,19 +1,23 @@
 <?php
-$title = "Profile";
-include 'includes/components/header.php';
+    $title = "Profile";
+    include_once 'includes/components/header.php';
+    include_once 'includes/functions/security.php';
+    CheckLoggedIn();
 
-
-$userInformation = getUserInfo($conn, $_SESSION['User_ID']);
-$userInformation = mysqli_fetch_assoc($userInformation);
-
-
-if (isset($_GET['profile'])) {
-
-
-    $userInformation = getUserInfo($conn, $_GET['profile']);
+    $userInformation = getUserInfo($conn, $_SESSION['User_ID']);
     $userInformation = mysqli_fetch_assoc($userInformation);
 
-}
+
+    if (isset($_GET['profile'])) {
+
+
+        $userInformation = getUserInfo($conn, $_GET['profile']);
+        $userInformation = mysqli_fetch_assoc($userInformation);
+
+    }
+    else {
+        //RedirectToIndex();
+    }
 
 
 if (isset($_GET['ProfileEdit']) && $_GET['ProfileEdit'] == "success") {

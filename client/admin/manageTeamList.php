@@ -1,9 +1,9 @@
 <?php
-
-$title = "Manage Team List";
-include "../db/dbFunctions.php";
-include "../includes/components/adminHeader.php";
-
+    $title = "Manage Team List";
+    include "../includes/components/adminHeader.php";
+    // Prevent Direct access and prevent non-admin's to access
+    RestrictAdmin(CheckRole($_SESSION['User_ID']));
+    defined('_DEFVAR') or exit(header('Location: ../index.php'));
 ?>
 
     <div class="container-fluid">
@@ -25,7 +25,7 @@ include "../includes/components/adminHeader.php";
                         ?>
 
                     </table>
-                    <a href="../EditTeamPage.php"><button  class="btn light-blue text-white btn-md mx-0 btn-rounded"> Create A New Team </button>
+                    <a href="../admin/editTeamPage.php"><button  class="btn light-blue text-white btn-md mx-0 btn-rounded"> Create A New Team </button>
                     <br><br><br>
                 </div>
             </div>
@@ -34,6 +34,4 @@ include "../includes/components/adminHeader.php";
 
 
 
-<?php
-
-include "../includes/components/footer.php";
+<?php include "../includes/components/footer.php"; ?>
