@@ -1034,7 +1034,7 @@ if(isset($_GET["programID"])&& $_GET["task"]==2){
 /*Display all the development of team End*/
 
 /* method to create a new development prorgam*/
-function createNewProgram(){
+function createNewProgram($img){
 
     $conn = OpenCon();
     if(isset($_POST["programName"]) && isset($_POST["duration"]) && isset($_POST["programDescription"]) && isset($_POST["time"]) && isset($_POST["charges"]) && isset($_POST["type"]) && isset($_POST["days"])){
@@ -1054,8 +1054,8 @@ function createNewProgram(){
 
             if(isset($programName)){
                 $statement->close();
-                $statement = $conn->prepare("INSERT INTO `nsca_devprograms` (`Name`, `Duration`, `Description`, `Time`, `Charges`, `Type`, `DaysRun`) VALUES (?, ?, ?, ?, ?, ?, ?)");
-                $statement->bind_param("sssssss",$programName,$duration,$prorgamDescription,$time,$charges,$type, $days);
+                $statement = $conn->prepare("INSERT INTO `nsca_devprograms` (`Name`, `Duration`, `Description`, `Time`, `Charges`, `Type`, `DaysRun`, `imgFolder`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                $statement->bind_param("ssssssss",$programName,$duration,$prorgamDescription,$time,$charges,$type, $days, $img);
                 $statement->execute();
                 echo "<p class='red-text text-center'>The Program '$programName' created successful!</p>";
                 echo "<meta http-equiv='refresh' content='0; url=../admin/editDevPrograms.php'>";
@@ -1190,12 +1190,12 @@ function getProgram($devID) {
 }
 
 /*change/edit current program */
-function setProrgam($id, $Name, $Duration, $Description, $Time, $Charges, $Type, $DaysRun){
+function setProrgam($id, $Name, $Duration, $Description, $Time, $Charges, $Type, $DaysRun, $img){
     $conn = OpenCon();
     $stmt = $conn->prepare("UPDATE nsca_devprograms
-                 SET Name = ?, Duration = ?, Description = ?, Time = ?, Charges = ?, Type = ?, DaysRun = ?
-                 WHERE DevID = ?");
-    $stmt->bind_param("sssssssi", $Name, $Duration, $Description, $Time, $Charges, $Type, $DaysRun, $id);
+                 SET Name = ?, Duration = ?, Description = ?, Time = ?, Charges = ?, Type = ?, DaysRun = ?, imgFolder = ?
+                 WHERE DevID = ? ");
+    $stmt->bind_param("ssssssssi", $Name, $Duration, $Description, $Time, $Charges, $Type, $DaysRun, $img, $id);
     $programSet = $stmt->execute();
     $stmt->close();
     return $programSet;

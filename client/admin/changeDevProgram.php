@@ -68,13 +68,66 @@
                         <input type="text"  name="days" class="form-control mb-4" placeholder="Ex. Saturdays and Sundays" value="<?php echo $row['DaysRun']; ?>" required>
                     </div>
 
+                    <!-- Picture -->
+                    <div class="form-row">
+                        <div class="col-sm-12">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="profilePictureAddon">Upload</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" accept="image/*"  id="file-upload" class="custom-file-input" name="profilePicture" aria-describedby="profilePictureAddon">
+                                    <label class="custom-file-label" id="file-name" for="profilePicture">Profile Picture</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Submit button -->
                     <button class="btn light-blue text-white btn-block my-4" type="submit" name="changeProgram">Submit</button>
         </form>
         <?php
 
         if(isset($_POST["changeProgram"])){
-            if(setProrgam($pID , $_POST["programName"] , $_POST["duration"] , $_POST["programDescription"] , $_POST["time"] , $_POST["charges"] , $_POST["type"] , $_POST["days"]))
+            // Create User Image Directory
+            $folderName = uniqid($registerFirstName . "_" . $registerLastName . "_");
+            if (is_dir("img/userPictures/".$folderName) === false) {
+                mkdir("img/userPictures/".$folderName, 0700, true);
+
+                //error checking below. In the very small chance that the folder generated already exists, create another one
+            } else {
+                $folderName = uniqid($registerFirstName . "_" . $registerLastName . "_");
+                if (is_dir("img/userPictures/".$folderName) === false) {
+                    mkdir("img/userPictures/".$folderName, 0700, true);
+                } else {
+                    die(); //if they second folder generated exists too. Just give up and move on.
+                }
+            }
+
+            // Check To See If File Is Actually Uploaded
+            if (is_uploaded_file($_FILES["profilePicture"]["tmp_name"])) {
+                // File Handling
+                $target_dir = "img/userPictures/" . $folderName . "/";
+                $target_file = $target_dir . basename($_FILES["profilePicture"]["name"]);
+                $uploadOk = 1;
+                $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+                $file_path = $target_dir;
+
+                // If File Is Too Large Give Error and remove folder
+                if ($_FILES['profilePicture']['size'] > 3145728) {
+                    echo "<br><p class='text-danger'>File is too large, Please try again.</p>";
+                    rmdir("img/userPictures/".$folderName);
+                    die();
+                }
+                // If File Type is incorrect Give Error and remove folder
+                if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+                    echo "<br><p class='text-danger'>File type is incorrect, Please try again.</p>";
+                    rmdir("img/userPictures/".$folderName);
+                    die();
+                }
+            }
+
+            if(setProrgam($pID , $_POST["programName"] , $_POST["duration"] , $_POST["programDescription"] , $_POST["time"] , $_POST["charges"] , $_POST["type"] , $_POST["days"], $file_path))
             {
                 header("Location: editDevPrograms.php");
             }
