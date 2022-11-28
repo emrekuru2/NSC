@@ -1105,13 +1105,31 @@ function displayAllTheSubCommitees(){
     //display
     while($statement->fetch())
     {
-        echo "<th>$SubID</th>";
-                            echo"
-                            <td>$Name</td>
-                        </tr>
-              </tbody>";
-        $count++;
+        echo "<th>$count</th>";
+        echo"
+            <td>$Name</td>
+            <td>
+            <a href=../admin/editSubCommittees.php?Name = $Name>
+                <button type='button' >Delete</button>
+            </a>
+            </td>
+        </tr>
+    </tbody>";
+    $count++;
     }
+
+    if(isset($_GET["Name"])){
+        $statement->close();
+        $Name = $_GET["Name"];
+        $statement = $conn->prepare("DELETE FROM nsca_subuser WHERE SubID = '$SubID'");
+        $statement->execute();
+        $statement->close();
+        $statement = $conn->prepare("DELETE FROM nsca_subcommittees WHERE SubID = '$SubID'");
+        $statement->execute();
+    
+        echo "<meta http-equiv='refresh' content='0; url=../admin/editSubCommittees.php'>";
+    }
+    
 
     $statement->close();
     $conn->close();

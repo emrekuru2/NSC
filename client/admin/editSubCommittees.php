@@ -1,5 +1,5 @@
 <?php
-    $title = "Edit Development Porgrams";
+    $title = "Edit Sub Committees";
     include_once "../includes/components/adminHeader.php";
     // Prevent Direct access and prevent non-admin's to access
     RestrictAdmin(CheckRole($_SESSION['User_ID']));
@@ -16,6 +16,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Sub-Committees Name</th>
+                            <th scope="col">Edit</th>
                         </tr>
                         </thead>
                         <?php
