@@ -999,13 +999,18 @@ function displayAllTheProgram(){
     //display
     while($statement->fetch())
     {
-        echo "<th>$DevID</th>";
+        echo "<th>$count</th>";
             echo"
                 <td>$Name</td>
                 <td>
-                <a href=../admin/editDevPrograms.php?programID=$DevID>
-                    <button type='button' >Delete</button>
-                </a>
+                    <a href=../admin/changeDevProgram.php?programID=$DevID&task=1>
+                        <button type='button'>Edit</button>
+                    </a>
+                </td>
+                <td>
+                    <a href=../admin/editDevPrograms.php?programID=$DevID&task=2>
+                        <button type='button'>Delete</button>
+                    </a>
                 </td>
             </tr>
         </tbody>";
@@ -1013,7 +1018,7 @@ function displayAllTheProgram(){
     }
 
 
-if(isset($_GET["programID"])){
+if(isset($_GET["programID"])&& $_GET["task"]==2){
     $statement->close();
     $programID = $_GET["programID"];
     $statement = $conn->prepare("DELETE FROM nsca_devprograms WHERE DevID = '$programID'");
@@ -1153,4 +1158,30 @@ function createNewSubCommittees(){
 
     $conn->close();
 }
+
+/* Get get program details */
+function getProgram($devID) {
+    $conn = OpenCon();
+    $stmt = $conn->prepare("SELECT * FROM nsca_devprograms where DevID = ?");
+    $stmt->bind_param("i", $devID);
+    $stmt->execute();
+    $getprogram = $stmt->get_result();
+    $stmt->close();
+    return mysqli_fetch_assoc($getprogram);
+    $conn->close();
+}
+
+/*change/edit current program */
+function setProrgam($id, $Name, $Duration, $Description, $Time, $Charges, $Type, $DaysRun){
+    $conn = OpenCon();
+    $stmt = $conn->prepare("UPDATE nsca_devprograms
+                 SET Name = ?, Duration = ?, Description = ?, Time = ?, Charges = ?, Type = ?, DaysRun = ?
+                 WHERE DevID = ?");
+    $stmt->bind_param("sssssssi", $Name, $Duration, $Description, $Time, $Charges, $Type, $DaysRun, $id);
+    $programSet = $stmt->execute();
+    $stmt->close();
+    return $programSet;
+    $conn->close();
+}
+
 ?>
