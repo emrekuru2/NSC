@@ -7,15 +7,27 @@
 ?>
 
 <!-- Page Content -->
-<div class="container">
+<div class="container pb-5">
+    <!-- Heading -->
+    <h3 class="text-center font-weight-bold dark-grey-text m-4">News</h3>
+
+    <!-- Search widget -->
+    <div class="input-group d-flex justify-content-center m-4">
+        <form class="form-inline" action="<?php $_SERVER['PHP_SELF']; ?>" method="GET" class="mw-100">
+                <input type="text" name="searchAnnouncement" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+                <button class="btn btn-sm light-blue text-white" type="submit" name="submitSearch">Go!</button></span>
+        </form>
+    </div>
 
     <div class="row">
-
         <!-- Post Content Column -->
-        <div class="col-md-8">
+        <div class="col-md-8 overflow-auto border" style="height: 600px;">
+            <!--
             <br><br>
             <h3 class="text-center font-weight-bold dark-grey-text mb-4 pb-2">News</h3>
-
+            -->
+            
             <?php
 
             $conn = OpenCon();
@@ -34,6 +46,7 @@
                         <!-- Preview Image -->
                         <img class="card-img-top" src="http://placehold.it/900x300" alt="">
                     </div>
+
                     <div class="card-body">
                         <!-- Title -->
                         <h2 class="card-title font-weight-bold"><?php echo $row['Title']; ?></h2>
@@ -62,7 +75,7 @@
         <!-- Sidebar Widgets Column -->
         <div class="col-md-4">
 
-            <!-- Search Widget -->
+            <!-- Search Widget 
             <div class="card my-4">
                 <h5 class="card-header">Search</h5>
                 <div class="card-body">
@@ -75,9 +88,10 @@
                     </div>
                 </div>
             </div>
+            -->
 
             <!-- Categories Widget -->
-            <div class="card my-4">
+            <div class="card mb-4">
                 <h5 class="card-header">Categories</h5>
                 <div class="card-body">
                     <div class="row">
@@ -112,7 +126,7 @@
             </div>
 
             <!-- Side Widget -->
-            <div class="card my-4">
+            <div class="card mb-4">
                 <h5 class="card-header">Side Widget</h5>
                 <div class="card-body">
                     You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
