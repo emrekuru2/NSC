@@ -123,10 +123,22 @@
                                 rmdir("img/userPictures/".$folderName);
                                 die();
                             }
+                            // Rename The File To profilePicture
+                            if (move_uploaded_file($_FILES["profilePicture"]["tmp_name"], $target_file)) {
+                                rename($target_file, $target_dir . "profilePicture.jpg");
+                            } else {
+                                echo "<br><p class='text-danger'>File upload failed, Please try again.</p>";
+                                rmdir("img/userPictures/".$folderName);
+                                die();
+                            }
                         }
+                        // If User Dose Not Upload File, Create Folder
+                        else {
+                            $file_path = $target_dir = "img/userPictures/" . $folderName . "/";
+                            copy('img/playerImg.png', "img/userPictures/" . $folderName . "/ProfilePicture.jpg");
+                        }
+                        createNewProgram($file_path);
                     }
-                    createNewProgram($file_path);
-                    
                 ?>
 
             </div>
