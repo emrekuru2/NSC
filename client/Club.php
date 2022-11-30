@@ -16,7 +16,7 @@
     <section class="mx-md-5 dark-grey-text">
 
         <!-- Section heading -->
-        <h1 class="text-center font-weight-bold mb-4 pb-2">HCL CLUBS</h3>
+        <h1 class="display-2 text-center font-weight-bold">HCL CLUBS</h3>
         <!-- Section description -->
         <p class="text-center mx-auto mb-5"> The following clubs play in the Halifax Cricket League (HCL) outdoor summer competition.
             <br>If you wish to play outdoor summer cricket, please contact the following clubs.</p>
@@ -33,7 +33,7 @@
 
             ?>
             <!-- Post title -->
-            <h2 class="font-weight-bold mb-3 text-center"><strong><?=$row['Name']?></strong></h4>
+            <h1 class="display-5 mb-3 text-center font-weight-normal"><?=$row['Name']?></h4>
 
             <div class="club-container">
                 <img class="feature-img rounded-circle" src="<?=$row['TeamImage']?>"
@@ -43,24 +43,24 @@
                 <div class="club-info">
                     <div class="info-container">
                         <i class="fa-solid fa-envelope"></i>
-                        <a href="Mailto:<?=$row['Email']?>"><?=$row['Email']?></a>
+                        <a href="Mailto:<?=$row['Email']?>">: <?=$row['Email']?></a>
                     </div>
 
                     <div class="info-container">
                         <i class="fa-solid fa-phone"></i>
-                        <a href="tel:<?=$row['Phone']?>"><?=$row['Phone']?></a>
+                        <a href="tel:<?=$row['Phone']?>">: <?=$row['Phone']?></a>
                     </div>
 
                     <div class="info-container">
                         <i class="fa-brands fa-facebook"></i>
-                        <a href="<?=$row['Facebook']?>"><?=$row['Name']?></a>
+                        <a href="<?=$row['Facebook']?>">: <?=$row['Name']?></a>
                     </div>
                     <?php
                         if (!empty($row['Website'])) {
                             ?>
                             <div class = "info-container">
                                 <i class="fa-solid fa-window-maximize"></i>
-                                <a href="<?=$row['Website']?>"><?=$row['Website']?></a>
+                                <a href="<?=$row['Website']?>">: <?=$row['Website']?></a>
                             </div>
                             <?php
                         }
