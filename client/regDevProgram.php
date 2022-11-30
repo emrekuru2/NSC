@@ -1,6 +1,6 @@
 <?php
     $title = "Registration Page | Development Programs";
-    include_once 'includes/components/header.php';
+    include 'includes/components/header.php';
 
     if (isset($_GET["devID"])) {
 
