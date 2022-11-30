@@ -11,6 +11,8 @@
 
 ?>
 
+<?php if (isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true) { ?>
+
 <body>
 
     <?php if ($conn->query($sql) === TRUE) { 
@@ -48,5 +50,10 @@
         $_SESSION['regDev'] = true;
         header("Location: ./404.php?loggedIn=false");
     } ?>
+
+<?php } else {
+    header("location: loginform.php");
+    }
+    ?>
 
 </body>
