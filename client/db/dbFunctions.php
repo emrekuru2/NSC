@@ -198,24 +198,108 @@ function getSingleNewscontent($id){
 
         echo "
                     <!-- Title -->
-                    <h1 class=\"mt-4\">" . $title . "</h1>
+                    <div class=\"flex-d row justify-content-between mx-1\">
+                        <div class=\"float-left mt-4\">
+                            <input type=\"test\" readonly class=\"h1 form-control-plaintext\" placeholder=\"$title\">
+                        </div>
+                        <div class=\"float-right mt-4\">
+                            <a href=\"singleNews.php?id=$id&e=1\" class=\"btn btn-secondary\">Edit</a>
+                        </div>
+                    </div>
 
                     <!-- Author -->
-                    <p class=\"lead\">
-                        by " . $firstName ." ". $lastName . "
-                    </p>
+                    <div class=\"flex-d row justify-content-between mx-1 border-bottom\">
+                        <p>
+                            by " . $firstName ." ". $lastName . "
+                        </p>
 
-                    <hr>
-
-
-                    <!-- Date/Time -->
-                    <p>Posted on " . date("F j, Y", strtotime($date)) . " at ". date("g:i A", strtotime($date)) . "</p>
-
-                    <hr>
+                        <!-- Date/Time -->
+                        <p>Posted on " . date("F j, Y", strtotime($date)) . " at ". date("g:i A", strtotime($date)) . "</p>
+                    </div>
+                    
 
                     <!-- Preview Image -->
-                   <img class=\"card-img-top\" src=\"http://placehold.it/900x300\" alt=\"\">
-                    $post;
+                    <div class=\"flex-d row my-3 mx-1\">
+                        <div class=\"float-left w-50\">
+                            <img class=\"card-img-top rounded  mr-2 my-1\" src=\"img/sample.jpg\" alt=\"Image\" >
+                        </div>
+
+                        <div>
+                            <textarea type\"text\" readonly class=\"form-control-plaintext\" rows=\"20\" cols=\"50\">$post</textarea>
+                        </div>
+                    </div>
+
+                    
+                  ";
+
+
+    }
+    $stmt->close();
+    $conn->close();
+}
+
+function editSingleNewscontent($id){
+    $conn = OpenCon();
+    //sql statement
+    $stmt = $conn->prepare( "SELECT Title,Pictures,Date,content,FirstName,LastName FROM nsca_news
+                    WHERE NewsID = $id");
+    //execute
+    $stmt->execute();
+    //save the data
+    $stmt->store_result();
+    //bind the data
+    $stmt->bind_result($title,$image,$date,$post,$firstName,$lastName);
+
+
+
+    while ($stmt->fetch()) {
+
+        echo "
+                    <!-- Title -->
+                    <div class=\"flex-d row justify-content-between mx-1\">
+                        <div class=\"float-left mt-4\">
+                            <input type=\"test\" readonly class=\"h1 form-control-plaintext\" placeholder=\"$title\">
+                        </div>
+                        <div class=\"float-right mt-4\">
+                            <button class=\"btn btn-success\">Save Update</button>
+                        </div>
+                    </div>
+
+                    <!-- Author -->
+                    <div class=\"flex-d row justify-content-between mx-1 border-bottom\">
+                        <p>
+                            by " . $firstName ." ". $lastName . "
+                        </p>
+
+                        <!-- Date/Time -->
+                        <p>Posted on " . date("F j, Y", strtotime($date)) . " at ". date("g:i A", strtotime($date)) . "</p>
+                    </div>
+                    
+
+                    <!-- Preview Image -->
+                    <div class=\"flex-d row my-3 mx-1\">
+                        <div class=\"float-left w-50\">
+                            <img class=\"card-img-top rounded  mr-2 my-1\" src=\"img/sample.jpg\" alt=\"Image\" >
+                            <div class=\"my-1\">
+                                <div class=\"input-group\">
+                                    <div class=\"custom-file\">
+                                        <input type=\"file\" accept=\"image/*\" id=\"file-upload\" class=\"custom-file-input\"
+                                            name=\"profilePicture\" aria-describedby=\"profilePictureAddon\">
+                                        <label class=\"custom-file-label\" id=\"file-name\" for=\"profilePicture\">Change Profile
+                                            Picture</label>
+                                    </div>
+                                    <input type=\"submit\" class=\"btn-primary\" name=\"submitPhotoChange\" value=\"Submit\">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <textarea type\"text\" class=\"form-control-plaintext border-dark \" rows=\"18\" cols=\"60\">$post</textarea>
+                        </div>
+                    </div>
+
+                    
                   ";
 
 
