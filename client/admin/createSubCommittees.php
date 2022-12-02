@@ -27,13 +27,22 @@
                     <br><br>
                     
                     <!-- Sub-Committee Name -->
+                    <div class="form-group row">
+                    <label for="SubCommittee_Name" class="col-form-label">Sub-Committee Name</label>
                     <input type="text"  name="SubCommittee_Name" class="form-control mb-4" placeholder="Name of the Sub-Committee" required>
-
+                    </div>
+                    
                     <!-- Discription -->
+                    <div class="form-group row">
+                    <label for="SubCommittee_Description" class="col-form-label">Sub-Committee Description</label>
                     <textarea name="SubCommittee_Description"  placeholder="Description of the Sub-Committee" class="form-control mb-4" required></textarea>
+                    </div>
 
                     <!-- Years -->
+                    <div class="form-group row">
+                    <label for="Years" class="col-form-label">Sub-Committee Year</label>
                     <input type="text"  name="Years" class="form-control mb-4" placeholder="Year it was created." required>    
+                    </div>
 
                     <!-- Sign in button -->
                     <button class="btn btn-info btn-block my-4" type="submit">Submit</button>

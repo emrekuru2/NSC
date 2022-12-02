@@ -1102,14 +1102,19 @@ function displayAllTheSubCommitees(){
     $count = 1;
 
 
-    //display
+    
     while($statement->fetch())
     {
         echo "<th>$count</th>";
         echo"
             <td>$Name</td>
             <td>
-            <a href=../admin/editSubCommittees.php?Name = $Name>
+                <a href=../admin/changeSubCommittees.php?SubID=$SubID>
+                    <button type='button'>Edit</button>
+                </a>
+            </td>
+            <td>
+            <a href=../admin/editSubCommittees.php?SubID=$SubID&task=1>
                 <button type='button' >Delete</button>
             </a>
             </td>
@@ -1118,9 +1123,10 @@ function displayAllTheSubCommitees(){
     $count++;
     }
 
-    if(isset($_GET["Name"])){
+    //Delete Sub-committees function
+    if(isset($_GET["SubID"])&& $_GET["task"]==1){
         $statement->close();
-        $Name = $_GET["Name"];
+        $SubID = $_GET["SubID"];
         $statement = $conn->prepare("DELETE FROM nsca_subuser WHERE SubID = '$SubID'");
         $statement->execute();
         $statement->close();
@@ -1176,6 +1182,32 @@ function createNewSubCommittees(){
 
     $conn->close();
 }
+
+function getSubCommittees($SubID) {
+    $conn = OpenCon();
+    $stmt = $conn->prepare("SELECT * FROM nsca_subcommittees where SubID = ?");
+    $stmt->bind_param("i", $SubID);
+    $stmt->execute();
+    $getSubCommittees = $stmt->get_result();
+    $stmt->close();
+    return mysqli_fetch_assoc($getSubCommittees);
+    $conn->close();
+}
+
+/*change/edit existing sub-committees */
+function setSubCommittee( $Name, $Description, $Years,$SubID){
+    
+    $conn = OpenCon();
+    $stmt = $conn->prepare("UPDATE nsca_subcommittees
+                 SET Name = ?, Description = ?, Years = ?
+                 WHERE SubID = ? ");
+    $stmt->bind_param("sssi", $Name, $Description,$Years,$SubID);
+    $subCommitteeSet = $stmt->execute();
+    $stmt->close();
+    return $subCommitteeSet;
+    $conn->close();
+}
+
 
 /* Get get program details */
 function getProgram($devID) {

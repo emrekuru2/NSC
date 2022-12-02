@@ -17,6 +17,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Sub-Committees Name</th>
                             <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
                         </tr>
                         </thead>
                         <?php
