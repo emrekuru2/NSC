@@ -1,5 +1,0 @@
-## Code for general security settings can be added her
-# Only the localhost can access this folder
-order deny,allow
-deny from all
-allow from 127.0.0.1

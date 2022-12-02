@@ -1,9 +1,7 @@
 <?php
-include 'includes/components/newheader.php';
+$title = "Homepage"; 
+include 'includes/components/newheader.php'; 
 ?>
-<head>
-    <title>Home</title>
-</head>
 
     
 
