@@ -18,6 +18,7 @@
 
 <body>
     <div class="container my-5">
+    <h1 class="text-center font-weight-bold dark-grey-text m-4 h1">Manage Team</h1>
         <?php
 
             /**

@@ -5,131 +5,70 @@
     include_once 'includes/functions/security.php';
 
     CheckLoggedIn();
+    $firstName = $_SESSION["FirstName"];
+    $lastName = $_SESSION["LastName"];
+    $userID = $_SESSION["User_ID"];
+
 ?>
-
-<!-- Page Content -->
-<div class="container">
-
-    <div class="row">
+    <div class="w-75 m-auto">
 
         <!-- Post Content Column -->
-        <div class="col-lg-8">
-
-
-            <hr>
-
+        <div>
             <!-- Post Content -->
 
             <?php
-                $newsID = $_GET['id'];
-                getSingleNewscontent($newsID);
-            ?>
-            <hr>
-
-            <!-- Comments Form -->
-            <div class="card my-4">
-                <h5 class="card-header">Leave a Comment:</h5>
-                <div class="card-body">
-                    <form method="post">
-                        <div class="form-group">
-                            <textarea name ="comment" class="form-control" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Single Comment -->
-
-                <?php
-
-
-                if (isset($_POST['submitComment'])){
-
-                    $id = $_GET['id'];
-                    $comment = $_POST['comment'];
-
-                    if ($comment != null) {
-
-                        writeComment($id, $comment);
+                if(isset($_GET['id'])) {
+                    if(isset($_GET['e']) && $_GET['e'] == 1) {
+                        editSingleNewscontent($_GET['id']);
+                    }
+                    else{
+                        getSingleNewscontent($_GET['id']);
                     }
                 }
-
-
-                    generateAllComments($newsID);
-
-                ?>
-
-
-        </div>
-
-        <!-- Sidebar Widgets Column -->
-        <div class="col-md-4">
-
-            <!-- Search Widget -->
-            <div class="card my-4">
-                <h5 class="card-header">Search</h5>
-                <div class="card-body">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
-                        <span class="input-group-btn">
-                <button class="btn btn-secondary" type="button">Go!</button>
-              </span>
-                    </div>
+                elseif(isset($_GET['new']) && $_GET['new'] == '1') {
+            ?>
+            <!-- Title -->
+            <div class="flex-d row justify-content-between mx-1\">
+                <div class="float-left mt-4 mx-2">
+                    <input type="test" class="h1 form-control-plaintext" placeholder="Insert Title">
+                </div>
+                <div class="float-right mt-4">
+                    <button class="btn btn-success">Save</button>
                 </div>
             </div>
 
-            <!-- Categories Widget -->
-            <div class="card my-4">
-                <h5 class="card-header">Categories</h5>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled mb-0">
-                                <li>
-                                    <a href="#">Web Design</a>
-                                </li>
-                                <li>
-                                    <a href="#">HTML</a>
-                                </li>
-                                <li>
-                                    <a href="#">Freebies</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled mb-0">
-                                <li>
-                                    <a href="#">JavaScript</a>
-                                </li>
-                                <li>
-                                    <a href="#">CSS</a>
-                                </li>
-                                <li>
-                                    <a href="#">Tutorials</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- Author -->
+            <div class="flex-d row justify-content-between mx-1 border-bottom">
+                <p>
+                    <?php echo "by $firstName  $lastName"; ?>
+                </p>
 
-            <!-- Side Widget -->
-            <div class="card my-4">
-                <h5 class="card-header">Logout</h5>
-                <div class="card-body">
-                    <p>You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!</p>
-                    <p>
-                </div>
+                <!-- Date/Time -->
+                <p> <?php echo "Today is ". date("F j, Y") .". The time is ". date("g:i A") . "</p>"; ?>
             </div>
+                
+            <!-- Preview Image -->
+            <div>
+                <textarea type="text" class="form-control border-dark" rows="20" cols="50"></textarea>
+            </div>
+            
+            <div class="flex-d row justify-content-between my-1">
+                <div class="custom-file w-50 mt-2 ml-2">
+                    <input type="file" accept="image/*" id="file-upload" class="custom-file-input"
+                        name="profilePicture" aria-describedby="profilePictureAddon">
+                    <label class="custom-file-label" id="file-name" for="profilePicture">Insert news image</label>
+                </div>
+                <div class="float-right">
+                    <button class="btn btn-success">Save</button>
+                </div>
 
+            </div>
+            <?php } ?>
+            <hr class="">
         </div>
 
     </div>
     <!-- /.row -->
-
-</div>
-<!-- /.container -->
 
 <?php
     include_once 'includes/components/footer.php'
