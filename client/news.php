@@ -4,6 +4,7 @@
     include_once 'includes/functions/security.php';
 
     CheckLoggedIn();
+    $userID = $_SESSION["User_ID"];
 ?>
 
 <!-- Page Content -->
@@ -22,15 +23,16 @@
             </div>
         </form>
     </div>
-
+    <?php if(isset($userID) && CheckRole($userID) == "Admin") { ?>
     <div class = "d-flex justify-content-end my-3">
         <a href="singleNews.php?new=1" id="btn-add-news" class="btn btn-sml btn-black"><i class="fa fa-plus fa-lg"></i></a>
         <button type="button" data-toggle="modal" data-target="#delete-news" class="btn btn-sml btn-danger ml-3" id="btn-remove-player"><i class="fa fa-times fa-lg"></i></button>
     </div>
+    <?php } ?>
 
     <div class="flex-d row">
         <!-- Post Content Column -->
-        <div class="overflow-auto border rounded bg-dark p-3" style="height: 600px;">
+        <div class="overflow-auto border rounded bg-dark p-3" style="height: 600px; max-width:72%">
             
             <?php
 
@@ -42,9 +44,16 @@
             } else {
                 $allAnnouncements = getAnnouncements($conn);
             }
+            if(mysqli_num_rows($allAnnouncements) == 0) {
+            ?>
+                 <div class="card mb-4 border-info ">
+                    <p class="alert alert-warning" id="noNews"> No news found. Try changing search input or come back later for more news. </p>
+                </div> 
+            <?php
+            }
+            else {
             while($row = mysqli_fetch_array($allAnnouncements)) {
-                ?>
-
+            ?>
                 <div class="card mb-4 border-info ">
 
                     <div class="card-body">
@@ -61,12 +70,14 @@
                             <?php
                             } 
                             ?>
-                            <label class="h2 font-weight-bolder ml-2" for="checkboxNews-<?php echo $row['NewsID']; ?>"><?php echo $row['Title']; ?></label>
+                            <label class="h2 font-weight-bolder ml-2" for="checkboxNews-<?php echo $row['NewsID']; ?>"><?php echo $newsTitle; ?></label>
                             
                         </div>
                         <hr>
                         <!-- Post Content -->
                         <?php
+                        // echo substr($row['Pictures'], 0, -1);
+                        // rmdir(substr($row['Pictures'], 0, -1));
                         $content = substr($row['Content'],0 ,  300);
                         ?>
                         <p class="card-text"><?php echo $content;?></p>
@@ -80,16 +91,16 @@
                         </div>
                         <div>
                             <?php
-                                $userID = $_SESSION['User_ID'];
                                 if(isset($userID) && CheckRole($userID) == 'Admin') { echo '<a href="singleNews.php?id='.$row["NewsID"].'&e=1" class= "btn btn-secondary">Edit</a>';}?>
                             <a href="singleNews.php?id=<?php echo $row['NewsID']?>" class= "btn btn-primary">Read More</a>
                         </div>
                     </div>
                 </div>
+               
                 <br>
 
                 <?php
-            }
+            }}
             ?>
 
         </div>
