@@ -32,7 +32,7 @@
 
     <div class="flex-d row">
         <!-- Post Content Column -->
-        <div class="overflow-auto border rounded bg-dark p-3" style="height: 600px; max-width:72%">
+        <div class="overflow-auto border rounded bg-dark p-3" style="height: 600px; width:72%">
             
             <?php
 

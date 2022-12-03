@@ -180,7 +180,7 @@ function getRoles($conn) {
 
 
 /*Generate single announcement with singleNews.php*/
-function getSingleNewscontent($id){
+function getSingleNewscontent($id, $userID){
     $conn = OpenCon();
     //sql statement
     $stmt = $conn->prepare( "SELECT Title,Pictures,Date,content,FirstName,LastName FROM nsca_news
@@ -197,8 +197,8 @@ function getSingleNewscontent($id){
         while ($stmt->fetch()) {
 
             $editBtn = "";
-            if(isset($userID) && CheckRole($userID) == 'Admin') {
-                $editBtn =  "<a href=\"singleNews.php?id=$id&e=1\" class=\"btn btn-secondary\">Edit</a>";
+            if(CheckRole($userID) == 'Admin') {
+                $editBtn =  "<a href=\"singleNews.php?id=$id&e=1\" class=\"btn btn-primary\">Edit</a>";
             }
             echo "
                 <!-- Title -->
@@ -206,7 +206,9 @@ function getSingleNewscontent($id){
                     <div class=\"float-left mt-4\">
                         <input type=\"test\" readonly class=\"h1 form-control-plaintext\" placeholder=\"$title\">
                     </div>
-                    <div class=\"float-right mt-4\">".$editBtn."
+                    <div class=\"float-right mt-4\">
+                        <a href=\"news.php\" class=\"btn btn-secondary\">All News</a>
+                    ".$editBtn."
                     </div>
                 </div>
 
@@ -223,12 +225,12 @@ function getSingleNewscontent($id){
 
                 <!-- Preview Image -->
                 <div class=\"flex-d row my-3 mx-1\">
-                    <div class=\"float-left w-50\">
+                    <div class=\"float-left\" style=\"width:40%\">
                         <img class=\"card-img-top rounded  mr-2 my-1\" src=\"$image/newsImage.jpg\" alt=\"Image\" >
                     </div>
 
                     <div>
-                        <textarea type\"text\" readonly class=\"form-control-plaintext\" rows=\"20\" cols=\"50\">$post</textarea>
+                        <textarea type\"text\" readonly class=\"form-control-plaintext\" rows=\"20\" cols=\"69\">$post</textarea>
                     </div>
                 </div>  
                     ";
