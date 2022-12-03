@@ -198,24 +198,108 @@ function getSingleNewscontent($id){
 
         echo "
                     <!-- Title -->
-                    <h1 class=\"mt-4\">" . $title . "</h1>
+                    <div class=\"flex-d row justify-content-between mx-1\">
+                        <div class=\"float-left mt-4\">
+                            <input type=\"test\" readonly class=\"h1 form-control-plaintext\" placeholder=\"$title\">
+                        </div>
+                        <div class=\"float-right mt-4\">
+                            <a href=\"singleNews.php?id=$id&e=1\" class=\"btn btn-secondary\">Edit</a>
+                        </div>
+                    </div>
 
                     <!-- Author -->
-                    <p class=\"lead\">
-                        by " . $firstName ." ". $lastName . "
-                    </p>
+                    <div class=\"flex-d row justify-content-between mx-1 border-bottom\">
+                        <p>
+                            by " . $firstName ." ". $lastName . "
+                        </p>
 
-                    <hr>
-
-
-                    <!-- Date/Time -->
-                    <p>Posted on " . date("F j, Y", strtotime($date)) . " at ". date("g:i A", strtotime($date)) . "</p>
-
-                    <hr>
+                        <!-- Date/Time -->
+                        <p>Posted on " . date("F j, Y", strtotime($date)) . " at ". date("g:i A", strtotime($date)) . "</p>
+                    </div>
+                    
 
                     <!-- Preview Image -->
-                   <img class=\"card-img-top\" src=\"http://placehold.it/900x300\" alt=\"\">
-                    $post;
+                    <div class=\"flex-d row my-3 mx-1\">
+                        <div class=\"float-left w-50\">
+                            <img class=\"card-img-top rounded  mr-2 my-1\" src=\"img/sample.jpg\" alt=\"Image\" >
+                        </div>
+
+                        <div>
+                            <textarea type\"text\" readonly class=\"form-control-plaintext\" rows=\"20\" cols=\"50\">$post</textarea>
+                        </div>
+                    </div>
+
+                    
+                  ";
+
+
+    }
+    $stmt->close();
+    $conn->close();
+}
+
+function editSingleNewscontent($id){
+    $conn = OpenCon();
+    //sql statement
+    $stmt = $conn->prepare( "SELECT Title,Pictures,Date,content,FirstName,LastName FROM nsca_news
+                    WHERE NewsID = $id");
+    //execute
+    $stmt->execute();
+    //save the data
+    $stmt->store_result();
+    //bind the data
+    $stmt->bind_result($title,$image,$date,$post,$firstName,$lastName);
+
+
+
+    while ($stmt->fetch()) {
+
+        echo "
+                    <!-- Title -->
+                    <div class=\"flex-d row justify-content-between mx-1\">
+                        <div class=\"float-left mt-4\">
+                            <input type=\"test\" readonly class=\"h1 form-control-plaintext\" placeholder=\"$title\">
+                        </div>
+                        <div class=\"float-right mt-4\">
+                            <button class=\"btn btn-success\">Save Update</button>
+                        </div>
+                    </div>
+
+                    <!-- Author -->
+                    <div class=\"flex-d row justify-content-between mx-1 border-bottom\">
+                        <p>
+                            by " . $firstName ." ". $lastName . "
+                        </p>
+
+                        <!-- Date/Time -->
+                        <p>Posted on " . date("F j, Y", strtotime($date)) . " at ". date("g:i A", strtotime($date)) . "</p>
+                    </div>
+                    
+
+                    <!-- Preview Image -->
+                    <div class=\"flex-d row my-3 mx-1\">
+                        <div class=\"float-left w-50\">
+                            <img class=\"card-img-top rounded  mr-2 my-1\" src=\"img/sample.jpg\" alt=\"Image\" >
+                            <div class=\"my-1\">
+                                <div class=\"input-group\">
+                                    <div class=\"custom-file\">
+                                        <input type=\"file\" accept=\"image/*\" id=\"file-upload\" class=\"custom-file-input\"
+                                            name=\"profilePicture\" aria-describedby=\"profilePictureAddon\">
+                                        <label class=\"custom-file-label\" id=\"file-name\" for=\"profilePicture\">Change Profile
+                                            Picture</label>
+                                    </div>
+                                    <input type=\"submit\" class=\"btn-primary\" name=\"submitPhotoChange\" value=\"Submit\">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <textarea type\"text\" class=\"form-control-plaintext border-dark \" rows=\"18\" cols=\"60\">$post</textarea>
+                        </div>
+                    </div>
+
+                    
                   ";
 
 
@@ -339,7 +423,7 @@ function displayTeams(){
                     <div class=\"avatar mx-auto\">
                    
                         <a href=\"Team.php?id=$teamID\">
-                        <img height=\"60\" width=\"60\" src=\"img/teamProfilePictures/$teamProfilePicture\" class=\"rounded-circle z-depth-1\"
+                        <img height=\"120\" width=\"120\" src=\"img/teamProfilePictures/$teamProfilePicture\" class=\"rounded-circle z-depth-1\"
                              alt=\"Sample avatar\">
                              </a>
                     </div>
@@ -352,7 +436,7 @@ function displayTeams(){
                 <div class=\"col-lg-3 col-md-6 mb-lg-0 mb-5\">
                     <div class=\"avatar mx-auto\">
                         <a href=\"Team.php?id=$teamID\">
-                            <img height=\"60\" width=\"60\" src=\"img/teamProfilePictures/$teamProfilePicture\" class=\"rounded-circle z-depth-1\"
+                            <img height=\"120\" width=\"120\" src=\"img/teamProfilePictures/$teamProfilePicture\" class=\"rounded-circle z-depth-1\"
                                  alt=\"Sample avatar\" </img>
                         </a>
                     </div>
@@ -380,14 +464,14 @@ function displayTeamHomePage(){
         $conn = OpenCon();
 
         //sql statement
-        $statement = $conn->prepare("SELECT teamName,teamProfilePicture FROM nsca_team WHERE TeamID = '$teamID' LIMIT 1");
+        $statement = $conn->prepare("SELECT teamName, nsca_team.description, teamProfilePicture FROM nsca_team WHERE TeamID = '$teamID' LIMIT 1");
         // Execute
         $statement->execute();
         //Store
         $statement->store_result();
 
         //bind result
-        $statement->bind_result($teamName,$teamProfilePicture);
+        $statement->bind_result($teamName,$description, $teamProfilePicture);
 
         if($statement->num_rows>0){
             while ($statement->fetch()){
@@ -402,6 +486,7 @@ function displayTeamHomePage(){
                             <h3 class=\"py-3 font-weight-bold\">
                                 <strong>$teamName</strong>
                             </h3>
+                            <h4>$description</h4>
                         </div>
                     </div>
                 </div>
@@ -411,6 +496,7 @@ function displayTeamHomePage(){
         }
         $statement->close();
         $conn->close();
+        return $teamID;
     }
 
 }
@@ -982,6 +1068,7 @@ function displayUserEmail($conn){
 
 
 }
+
 /*Display all the name of development prorgam*/
 function displayAllTheProgram(){
     $conn = OpenCon();
@@ -1234,4 +1321,104 @@ function setProrgam($id, $Name, $Duration, $Description, $Time, $Charges, $Type,
     $conn->close();
 }
 
+// Returns all players in a club
+function getPlayersInClub($clubIDGiven, $searchStr="") {
+    $conn = OpenCon();
+
+    $statement = $conn->prepare("SELECT nsca_team.TeamName, nsca_teamuser.*, concat(nsca_user.FirstName, ' ',nsca_user.MiddleName,' ', nsca_user.LastName) as name, nsca_user.UserDescription FROM nsca_team 
+    INNER JOIN nsca_teams ON nsca_team.TeamID = nsca_teams.TeamID AND nsca_teams.ClubID = $clubIDGiven
+    INNER JOIN nsca_teamuser ON nsca_teamuser.TeamID = nsca_teams.TeamID
+    INNER JOIN nsca_user ON nsca_teamuser.UserID = nsca_user.UserID
+    WHERE nsca_user.FirstName LIKE '%$searchStr%' OR nsca_user.MiddleName LIKE '%$searchStr%' OR nsca_user.LastName LIKE '%$searchStr%';
+    ");
+
+    $statement->execute();
+    $statement->store_result();
+    $statement->bind_result($teamName,$teamUserID, $userID, $teamID, $isClubManager, $isTeamCaptain, $isViceCaptain, $waitingToJoin, $name, $userDescription);
+    $lstAllPlayers = array();
+
+    while ($statement->fetch()){
+        $obj_user = new stdClass;
+        $obj_user->teamName = $teamName;
+        $obj_user->teamID = $teamID;
+        $obj_user->userID = $userID;
+        $obj_user->isClubManager = $isClubManager;
+        $obj_user->isTeamCaptain = $isTeamCaptain;
+        $obj_user->isViceCaptain = $isViceCaptain;
+        $obj_user->waitingToJoin = $waitingToJoin;
+        $obj_user->name = $name;
+        $obj_user->userDescription = $userDescription;
+        
+        $lstAllPlayers[] = $obj_user;
+    }
+    return $lstAllPlayers;
+}
+
+function getPlayersInTeam($teamIDGiven, $searchStr="") {
+    $conn = OpenCon();
+
+    $statement = $conn->prepare("SELECT nsca_team.TeamName, nsca_teamuser.*, concat(nsca_user.FirstName, ' ',nsca_user.MiddleName,' ', nsca_user.LastName) as name, nsca_user.UserDescription, nsca_user.imgFolder FROM nsca_team 
+    INNER JOIN nsca_teams ON nsca_team.TeamID = nsca_teams.TeamID AND nsca_teams.TeamID = $teamIDGiven
+    INNER JOIN nsca_teamuser ON nsca_teamuser.TeamID = nsca_teams.TeamID
+    INNER JOIN nsca_user ON nsca_teamuser.UserID = nsca_user.UserID
+    WHERE nsca_user.FirstName LIKE '%$searchStr%' OR nsca_user.MiddleName LIKE '%$searchStr%' OR nsca_user.LastName LIKE '%$searchStr%';
+    ");
+
+    $statement->execute();
+    $statement->store_result();
+    $statement->bind_result($teamName,$teamUserID, $userID, $teamID, $isClubManager, $isTeamCaptain, $isViceCaptain, $waitingToJoin, $name, $userDescription, $img);
+    $lstAllTeamPlayers = array();
+
+    while ($statement->fetch()){
+        $obj_user = new stdClass;
+        $obj_user->teamName = $teamName;
+        $obj_user->teamID = $teamID;
+        $obj_user->userID = $userID;
+        $obj_user->isClubManager = $isClubManager;
+        $obj_user->isTeamCaptain = $isTeamCaptain;
+        $obj_user->isViceCaptain = $isViceCaptain;
+        $obj_user->waitingToJoin = $waitingToJoin;
+        $obj_user->name = $name;
+        $obj_user->userDescription = $userDescription;
+        $obj_user->img = $img;
+        $lstAllTeamPlayers[] = $obj_user;
+    }
+    return $lstAllTeamPlayers;
+}
+
+function getManagerClubID($managerIDGiven) {
+    $conn = OpenCon();
+
+    $statement = $conn->prepare("SELECT nsca_teams.ClubID FROM nsca_teams 
+        LEFT JOIN nsca_teamuser ON nsca_teamuser.TeamID = nsca_teams.TeamID 
+        WHERE nsca_teamuser.UserID = $managerIDGiven");
+    
+    $statement->execute();
+    $statement->store_result();
+    $statement->bind_result($clubID);
+
+    $statement->fetch();
+    return $clubID;
+}
+
+function getTeamsInClub($clubIDGiven) {
+    $conn = OpenCon();
+
+    $statement = $conn->prepare("SELECT nsca_teams.TeamID, nsca_team.TeamName FROM nsca_teams 
+        LEFT JOIN nsca_team ON nsca_team.TeamID = nsca_teams.TeamID 
+        WHERE nsca_teams.ClubID = $clubIDGiven");
+    
+    $statement->execute();
+    $statement->store_result();
+    $statement->bind_result($teamID, $teamName);
+
+    $lstTeams = array();
+    while($statement->fetch()) {
+        $obj_team = new stdClass;
+        $obj_team->teamID = $teamID;
+        $obj_team->teamName = $teamName;
+        $lstTeams[] = $obj_team;
+    }
+    return $lstTeams;
+}
 ?>

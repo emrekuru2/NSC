@@ -123,7 +123,7 @@ CREATE TABLE `nsca_devprograms` (
   `Charges` varchar(64) DEFAULT NULL,
   `Type` varchar(64) DEFAULT NULL,
   `DaysRun` varchar(64) DEFAULT NULL,
-  `imgFolder` varchar(120) NOT NULL
+  `imgFolder` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT './img/DevProgram/default.jpg'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
@@ -401,8 +401,9 @@ CREATE TABLE `nsca_team` (
 --
 
 INSERT INTO `nsca_team` (`TeamID`, `TeamName`, `Description`, `TeamProfilePicture`) VALUES
-(1, 'LionsTeam', 'Lions of Halifax', ''),
-(2, 'Snakes', 'Snakes of Dartmouth', '');
+(1, 'Lions', 'Lions of Halifax', ''),
+(2, 'Falcons', 'Falcons of Dartmouth', ''),
+(3, 'Tigers', 'Tigers of Bedford', '');
 
 -- --------------------------------------------------------
 
@@ -422,7 +423,8 @@ CREATE TABLE `nsca_teams` (
 
 INSERT INTO `nsca_teams` (`TeamID`, `ClubID`, `CompID`) VALUES
 (1, 1, 1),
-(2, 4, 1);
+(2, 1, 1),
+(3, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -439,6 +441,19 @@ CREATE TABLE `nsca_teamuser` (
   `isViceCaptain` int DEFAULT '0',
   `waitingToJoin` int DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Dumping data for table `nsca_teamuser`
+--
+
+INSERT INTO `nsca_teamuser` (`TeamUserID`, `UserID`, `TeamID`, `isClubManager`, `isTeamCaptain`, `isViceCaptain`, `waitingToJoin`) VALUES
+(5, 5, 1, 1, 0, 0, 0),
+(6, 6, 1, 0, 0, 0, 0),
+(7, 7, 1, 0, 0, 0, 0),
+(8, 8, 2, 0, 0, 0, 0),
+(9, 9, 2, 0, 1, 0, 0),
+(10, 10, 3, 0, 1, 0, 0),
+(11, 11, 3, 0, 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -473,7 +488,13 @@ INSERT INTO `nsca_user` (`UserID`, `email`, `UserRole`, `FirstName`, `MiddleName
 (2, 'Umpire@gmail.com', '2', 'Umpire', '', 'User', 'street', 'city', 'province', 'Canada', 'B3H0C7', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Umpire!'),
 (3, 'Player@gmail.com', '3', 'Player', '', 'User', 'street', 'city', 'province', 'Canada', 'B3H0C7', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Player!'),
 (4, 'Admin@gmail.com', '4', 'Admin', '', 'User', 'street', 'city', 'province', 'Canada', 'B3H0C7', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Admin!'),
-(5, 'Manager@gmail.com', '5', 'Manager', '', 'User', 'street', 'city', 'province', 'Canada', 'B3H0C7', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Manager!');
+(5, 'Manager@gmail.com', '5', 'Manager', '', 'User', 'street', 'city', 'province', 'Canada', 'B3H0C7', '1111111111', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Manager!'),
+(6, 'rohit@india.com', '3', 'Rohit', '', 'Sharma', '12 avenue', 'New Delhi', 'Delhi', 'India', 'B2W0E8', '9024455991', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Captain of team Lions'),
+(7, 'kohli@gmail.com', '3', 'Virat', '', 'Kohli', '15 avenue', 'Halifax', 'Nova Scotia', 'Canada', 'B2W0E8', '9024455991', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Batter of team Lions'),
+(8, 'nawaz@gmail.com', '3', 'Mohammed', '', 'Nawaz', '15 avenue', 'Halifax', 'Nova Scotia', 'Canada', 'B2W0E8', '9024455991', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'All Rounder of team Falcons'),
+(9, 'rohit@india.com', '3', 'Sarfaraz', '', 'Ahmed', '15 avenue', 'Dartmouth', 'NovaScotia', 'Canada', 'B2W0E8', '9024455991', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Captain of team Falcons'),
+(10, 'iqbal@gmail.com', '3', 'Tamim', '', 'Iqbal', '12 avenue', 'Bedford', 'Nova Scotia', 'Canada', 'B2W0E8', '9024455991', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Captain of team Tigers'),
+(11, 'hasan@gmail.com', '3', 'Shakib', 'Al', 'Hasan', '12 avanue', 'Bedford', 'Nova Scotia', 'Canada', 'B2W0E8', '9024455991', '2019-11-22 05:16:46', '../../img/userPictures/Khurram_Aziz_5df7e4b1ceccc/', 'Batter of team Tigers');
 
 -- --------------------------------------------------------
 
@@ -496,7 +517,15 @@ INSERT INTO `nsca_userroles` (`UserRoleID`, `RoleID`, `UserID`) VALUES
 (2, 2, 2),
 (3, 3, 3),
 (4, 4, 4),
-(5, 5, 5);
+(5, 5, 5),
+(6, 3, 6),
+(7, 3, 7),
+(8, 3, 8),
+(9, 3, 9),
+(10, 3, 10),
+(11, 3, 11);
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `nsca_viewcount`
@@ -673,7 +702,7 @@ ALTER TABLE `nsca_competitiontype`
 -- AUTO_INCREMENT for table `nsca_devprograms`
 --
 ALTER TABLE `nsca_devprograms`
-  MODIFY `DevID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `DevID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `nsca_devroleuser`
@@ -727,25 +756,25 @@ ALTER TABLE `nsca_subuser`
 -- AUTO_INCREMENT for table `nsca_team`
 --
 ALTER TABLE `nsca_team`
-  MODIFY `TeamID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `TeamID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `nsca_teams`
 --
 ALTER TABLE `nsca_teams`
-  MODIFY `TeamID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `TeamID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `nsca_teamuser`
 --
 ALTER TABLE `nsca_teamuser`
-  MODIFY `TeamUserID` int NOT NULL AUTO_INCREMENT;
+  MODIFY `TeamUserID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `nsca_user`
 --
 ALTER TABLE `nsca_user`
-  MODIFY `UserID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `UserID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `nsca_userroles`

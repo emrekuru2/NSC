@@ -1,0 +1,17 @@
+.search-bar{
+    margin-top: 4%;
+}
+
+#search-form{
+    width: 100%;
+}
+
+.card-text{
+    height: 15em;
+    overflow-y: scroll;
+    width: 100%;
+}
+
+.form-check-input{
+    scale: 1.5;
+}
