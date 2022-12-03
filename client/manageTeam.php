@@ -93,7 +93,7 @@
             <div class="card-body">
                 <h5 class="card-title font-weight-bold mb-2"><?php echo $lstTeams[0]->teamName ?></h5>  
                 <hr>
-                <div class="card-text" id="player-list">
+                <div class="card-text text-dark" id="player-list">
                     <?php
                         $arr_length_lstOne = count($lstTeamOne);
                         if ($arr_length_lstOne == 0) {
@@ -123,7 +123,7 @@
             <div class="card-body">
                 <h5 class="card-title font-weight-bold"><?php echo $lstTeams[1]->teamName ?></h5>
                 <hr>  
-                <div class="card-text" id="player-list">
+                <div class="card-text text-dark" id="player-list">
                 <?php
                         $arr_length_lstTwo = count($lstTeamTwo);
                         if ($arr_length_lstTwo == 0) {
@@ -153,7 +153,7 @@
             <div class="card-body">
                 <h5 class="card-title font-weight-bold"><?php echo $lstTeams[2]->teamName ?></h5>  
                 <hr>
-                <div class="card-text" id="player-list">
+                <div class="card-text text-dark" id="player-list">
                 <?php
                         $arr_length_lstThree = count($lstTeamThree);
                         if ($arr_length_lstThree == 0) {
@@ -183,7 +183,7 @@
             <div class="card-body">
                 <h5 class="card-title font-weight-bold">Unassigned</h5>  
                 <hr>
-                <div class="card-text" id="player-list">
+                <div class="card-text text-dark" id="player-list">
                 <?php
                         $arr_length_lstUnassigned = count($lstUnassigned);
                         if ($arr_length_lstUnassigned == 0) {
