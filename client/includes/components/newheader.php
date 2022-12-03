@@ -12,13 +12,21 @@
     <!-- Logo, bell and login -->
     <nav class="navbar bg-light">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <!-- Logo -->
+            <div class="m-auto d-flex">
+                <img src="img/headerImg.png" alt="logo" width="80vw">
+                <h2 class="m-auto">
+                Nova Scotia <br>
+                Cricket Association
+                </h2>
+            </div>
+            <!-- <a class="navbar-brand" href="#">
                 <div class="container">
                     <div class="row">
-                        <div class="col">
+                        <div class="col-6">
                             <img src="img/headerImg.png" alt="logo" width="80vw">
                         </div>
-                        <div class="col" style="color: rgb(85, 128, 207);">
+                        <div class="col-6 offset-5" style="color: rgb(85, 128, 207);">
                             <h4>
                             Nova Scotia <br>
                             Cricket Association
@@ -26,15 +34,15 @@
                         </div>
                     </div>
                 </div>
-            </a>
-            <div class="d-flex bell-and-login ">
+            </a> -->
+            <!-- <div class="d-flex bell-and-login ">
                 <a class="nav-link ml-auto p-4" href="../../news.php">
                     <i class="bi bi-bell" style="color: cornflowerblue; font-size: 3vw; "></i>
                 </a>
                 <a class="nav-link ml-auto p-4" href="../../loginform.php">
                         <i class="bi bi-person-circle" style="color: cornflowerblue; font-size: 3vw;"></i> Login
                 </a>
-            </div>
+            </div> -->
 
         </div>
     </nav>
@@ -42,7 +50,7 @@
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg bg-primary " >
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav" style="width:50vw; margin-left:2vw; font-size: 1.5vw; ">
+                <ul class="navbar-nav" style="width:50vw; margin-left:3vw; font-size: 1.5vw; ">
                     <li class="nav-item">
                     <a class="nav-link text-white " href="../../">Home</a>
                     </li>
@@ -54,6 +62,19 @@
                     </li>
                     <li class="nav-item">
                     <a class="nav-link text-white" href="../../TeamPage.php">Teams</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav" style="width:50vw; margin-left:32vw; font-size: 1.5vw; ">
+                    <!-- <li class="nav-item">
+                        <a class="nav-link " href="../../news.php">
+                            <i class="bi bi-bell" style="color: white; font-size: 2vw; "></i>
+                        </a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="../../loginform.php">
+                                <i class="bi bi-person-circle" style="color: white; font-size: 2vw;"></i>
+                                Login 
+                        </a>
                     </li>
                 </ul>
             </div>
