@@ -67,38 +67,34 @@ include 'includes/components/newheader.php';
     
     <!-- The New Section -->
     <div class="container d-flex flex-row justify-content-between" style="padding-top:2vw;">
+        <?php 
+            $sql = "SELECT NewsID, Title, Content, Pictures FROM nsca_news ORDER BY NewsID DESC LIMIT 3";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $stmt->store_result();
+            $stmt->bind_result($newsID, $newsTitle, $newsContent, $newsImagePath);
+
+            while($stmt->fetch()) {
+            
+        ?>
         <div class="card d-flex flex-column " style="width: 20vw; height: 30vw">
-
-            <div class="card-body text-center">
-                <h3 class="card-title mt-2">News title</h3>
-                <p class="card-text m-4 ">News content</p>
-                <a href="#" class="btn btn-primary " style="margin-top:27vh; " >Find out more</a>
-            </div>
-            
-            
-        </div>
-
-        <div class="card" style="width: 20vw;">
+        <!-- <img class="card-img-top" src="<?php echo $newsImagePath ?>" alt="Card image cap"> -->
+            <img class="card-img-top" src="img\teamProfilePictures\HomePageNews1.jpeg" alt="Card image cap">
             <div class="card-body">
-                <img src="img/teamProfilePictures/HomePageNews1.jpeg" alt="New image" style="width:100%;height:12vw;">
-                <p class="card-text m-4 text-center">News content</p>
+                <div class="text-center" style="height:4rem">
+                    <h4 class="card-title mt-2"><?php echo substr($newsTitle, 0, 25); ?></h4>
+                </div>
+                <p class="card-text" style="height:7rem"><?php echo substr($newsContent,0 ,  150); ?></p>
+                <div class="text-center">
+                    <a href="singleNews.php?id=<?php echo $newsID;?>" class="btn btn-primary mt-3" >Find out more</a>
+                </div>
             </div>
         </div>
 
-        <div class="card" style="width: 20vw;">
-            <div class="card-body">
-                <img src="img/teamProfilePictures/HomePageNews2.jpeg" alt="New image" style="width:100%;height:12vw;">
-                <p class="card-text m-4 text-center">News content</p>
-            </div>
-        </div>
-
-        <div class="card " style="width: 20vw;">
-            <div class="card-body">
-                <img src="img/teamProfilePictures/HomePageNews3.jpeg" alt="New image" style="width:100%;height:12vw;">
-                <p class="card-text m-4 text-center">News content</p>
-            </div>
-        </div>
+        <?php }?>
     </div>
+
 
     <!-- The Team Section -->
     <div class="container d-flex flex-row justify-content-between" style="padding-top:2vw; padding-bottom:10vw;">

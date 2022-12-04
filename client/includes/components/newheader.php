@@ -1,3 +1,34 @@
+<?php 
+    // Prevent direct access
+    // If it the admin then all the validation is already handled in admin files.
+    if(preg_match("/admin/", $_SERVER["PHP_SELF"]) == 0) {
+        if(preg_match("/includes/", $_SERVER["PHP_SELF"]) == 1) {
+            header("Location: ../../index.php");
+            die();
+        }
+        else {
+            include_once("includes/functions/security.php");
+            RestrictIncludes();
+            DefineSecurity();
+        }
+
+        include_once("db/database.php");
+        include_once("db/dbFunctions.php");
+        $conn = OpenCon();
+    }
+
+    if (isset($loginOrRegistrationPage) && $loginOrRegistrationPage) 
+    {
+        session_start();
+        $session_token = md5(uniqid(rand(), true));
+
+        $_SESSION['session_token'] = $session_token;
+    }
+    else 
+    {
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
+    }
+?>
 <!doctype html>
 <html lang="en">
   <head>
