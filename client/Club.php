@@ -16,7 +16,7 @@
     <section class="mx-md-5 dark-grey-text">
 
         <!-- Section heading -->
-        <h1 class="display-2 text-center font-weight-bold">HCL CLUBS</h3>
+        <h1 class="display-3 text-center font-weight-bold">HCL CLUBS</h3>
         <!-- Section description -->
         <p class="text-center mx-auto mb-5"> The following clubs play in the Halifax Cricket League (HCL) outdoor summer competition.
             <br>If you wish to play outdoor summer cricket, please contact the following clubs.</p>
@@ -33,8 +33,9 @@
 
             ?>
             <!-- Post title -->
-            <h1 class="display-5 mb-3 text-center font-weight-normal"><?=$row['Name']?></h4>
-
+            <h2 class="display-5 mb-2 text-center font-weight-normal"><?=$row['Name']?></h4>
+            <br>
+            
             <div class="club-container">
                 <img class="feature-img rounded-circle" src="<?=$row['TeamImage']?>"
                              alt="Sample image">   
