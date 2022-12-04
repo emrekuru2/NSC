@@ -55,23 +55,41 @@
                     if($lstLength <50) {
                         $pdo = OpenCon();
                         if(isset($_GET['d'])) {
-                            $lstPlayerStr = $_GET['d'];
-                            $lstPlayers = explode("-", $lstPlayerStr);
+                            $lstNewsStr = $_GET['d'];
+                            $lstNews = explode("-", $lstNewsStr);
                             $strIds = "";
-                            for($i = 0; $i < count($lstPlayers); $i++) {
-                                $strIds .= $lstPlayers[$i];
-                                if($i != count($lstPlayers)-1) {
+                            for($i = 0; $i < count($lstNews); $i++) {
+                                $strIds .= $lstNews[$i];
+                                if($i != count($lstNews)-1) {
                                     $strIds .= ",";
                                 }
                             }
 
+                            $sqlLstFolderPaths = "SELECT Pictures FROM nsca_news WHERE NewsID IN ($strIds)";
+                            
+                            $stmt = $pdo->prepare($sqlLstFolderPaths);
+                            $stmt->execute();
+                            $stmt->store_result();
+                            $stmt->bind_result($path);
+                            
+                            if($stmt->num_rows > 0) {
+                                while($stmt->fetch()) {
+                                    if (is_dir("../../".$path) === true) {
+                                        rrmdir("../../".$path);
+                                    }
+                                }
+                            }
+
+                            $stmt->close();
+
                             // Change waiting to list, default team 1
-                            $sql  = "DELETE FROM nsca_NEWS WHERE NewsID IN ($strIds)";
+                            $sql  = "DELETE FROM nsca_news WHERE NewsID IN ($strIds)";
  
                             $stmt = $pdo->prepare($sql);
                             $stmt->execute();
                             $result = $stmt->get_result();
                             echo "<p class='alert-success'>Success!</p>";
+                            
                         }
                         $stmt->close(); 
                     }
@@ -79,5 +97,22 @@
                           
             }
         }
+    }
+
+    function rrmdir($src) {
+        $dir = opendir($src);
+        while(false !== ( $file = readdir($dir)) ) {
+            if (( $file != '.' ) && ( $file != '..' )) {
+                $full = $src . '/' . $file;
+                if ( is_dir($full) ) {
+                    rrmdir($full);
+                }
+                else {
+                    unlink($full);
+                }
+            }
+        }
+        closedir($dir);
+        rmdir($src);
     }
 ?>
