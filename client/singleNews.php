@@ -4,13 +4,6 @@
     $newsNotFound = false;
     include_once 'includes/components/header.php';
     include_once 'includes/functions/security.php';
-
-    CheckLoggedIn();
-    $userID = $_SESSION["User_ID"];
-    $firstName = $_SESSION["FirstName"];
-    $lastName = $_SESSION["LastName"];
-    $email = $_SESSION["Email"];
-
 ?>
     <div class="w-75 m-auto">
 
@@ -19,6 +12,7 @@
             <!-- Post Content -->
            
             <?php
+                $userID = isset($_SESSION["User_ID"]) ? $_SESSION["User_ID"] : null;
                 $edit = false;
                 $newsID = -1;
                 $newNews = isset($_GET['new']) && $_GET['new'] == '1';
@@ -38,13 +32,73 @@
                         if($stmt->num_rows >0){ $stmt->fetch(); } else { $newsNotFound = true; }
                     }
                     else{
-                        getSingleNewscontent($_GET['id'], $userID);
+                        //sql statement
+                        $stmt = $conn->prepare( "SELECT Title,Pictures,Date,content,FirstName,LastName FROM nsca_news
+                                                WHERE NewsID = $newsID");
+                        //execute
+                        $stmt->execute();
+                        //save the data
+                        $stmt->store_result();
+                        //bind the data
+                        $stmt->bind_result($title,$image,$date,$post,$firstName,$lastName);
+
+                        if($stmt->num_rows >0){
+                            while ($stmt->fetch()) {
+
+                                $editBtn = "";
+                                if(isset($userID) && CheckRole($userID) == 'Admin') {
+                                    $editBtn =  "<a href=\"singleNews.php?id=$newsID&e=1\" class=\"btn btn-primary\">Edit</a>";
+                                }
+                                echo "
+                                    <!-- Title -->
+                                    <div class=\"flex-d row justify-content-between mx-1\">
+                                        <div class=\"float-left mt-4\">
+                                            <input type=\"test\" readonly class=\"h1 form-control-plaintext\" placeholder=\"$title\">
+                                        </div>
+                                        <div class=\"float-right mt-4\">
+                                            <a href=\"news.php\" class=\"btn btn-secondary\">All News</a>
+                                        ".$editBtn."
+                                        </div>
+                                    </div>
+
+                                    <!-- Author -->
+                                    <div class=\"flex-d row justify-content-between mx-1 border-bottom\">
+                                        <p>
+                                            by " . $firstName ." ". $lastName . "
+                                        </p>
+
+                                        <!-- Date/Time -->
+                                        <p>Posted on " . date("F j, Y", strtotime($date)) . " at ". date("g:i A", strtotime($date)) . "</p>
+                                    </div>
+
+
+                                    <!-- Preview Image -->
+                                    <div class=\"flex-d row my-3 mx-1\">
+                                        <div class=\"float-left\" style=\"width:40%\">
+                                            <img class=\"card-img-top rounded  mr-2 my-1\" src=\"$image/newsImage.jpg\" alt=\"Image\" >
+                                        </div>
+
+                                        <div>
+                                            <textarea type\"text\" readonly class=\"form-control-plaintext\" rows=\"20\" cols=\"69\">$post</textarea>
+                                        </div>
+                                    </div>  
+                                        ";
+                            }
+                        }
+                        else {
+                            echo "<p class=\"alert alert-warning w-75mx-auto my-5 p-5 text-lg-center\" style=\"font-size:4rem\"> Sorry, could not find the requested news. Please check another news.</p>";
+                            }
                     }
                 }
                 if($newsNotFound) {
                     echo "<p class=\"alert alert-warning w-75mx-auto my-5 p-5 text-lg-center\" style=\"font-size:4rem\"> Sorry, could not find the requested news. Please check another news.</p>";
                 }
-                else {
+                elseif($newNews || ($editNews && $newsID > 0)) {
+                    CheckLoggedIn();
+                    $userID = $_SESSION["User_ID"];
+                    $firstName = $_SESSION["FirstName"];
+                    $lastName = $_SESSION["LastName"];
+                    $email = $_SESSION["Email"];
                     AccessControlBasedOnLevel($_ADMIN_ACCESS_LST, $userID);
                     if(isset($_POST["saveNews"])) {
                         $titleNews = check_input($conn, $_POST['newsTitle']);
