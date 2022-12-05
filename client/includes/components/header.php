@@ -28,7 +28,6 @@
     {
         if(session_status() !== PHP_SESSION_ACTIVE) session_start();
     }
-    
 ?>
 
 
@@ -76,6 +75,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="../../TeamPage.php">Teams</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../../devProgram.php">Development Programs</a>
+            </li>
             <?php
             if (isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true) {
                  if (isset($_SESSION['User_ID']) && CheckRole($_SESSION['User_ID']) == 'Manager') {
@@ -102,24 +104,10 @@
                 }
             }
             ?>
-            <?php
-            if (isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true) {
-                 if (isset($_SESSION['User_ID']) && (CheckRole($_SESSION['User_ID']) == 'Manager' || CheckRole($_SESSION['User_ID']) == 'Player')) {
-            ?>
-                <li class = "nav-item">
-                    <a class = "nav-link" href="../../Team.php">My Team</a>
-                </li>
-                <?php
-                }
-    
-            }
-            ?>
 
-            <?php if (isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true) { ?>
             <li class="nav-item">
                 <a class="nav-link" href="../../devProgram.php">Development Programs</a>
             </li>
-            <?php } ?>
 
         </ul>
         <ul class="navbar-nav ml-auto">

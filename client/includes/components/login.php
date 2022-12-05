@@ -1,8 +1,6 @@
 <?php
-
-
     session_start();
-
+    
     define('_DEFVAR', 1);
     include_once "../../db/database.php";
     include_once "../../db/dbFunctions.php";
@@ -70,6 +68,13 @@
                 header("location:../../index"); //redirects user
             } else {
                 header("location:../../loginform?LoginError=true"); //redirects user with login error
+            }
+            if ($_SESSION['regDev'] == true){
+                $_SESSION['regDev'] = false;
+                $devID = $_SESSION['devID'];
+                header("Location: ../../regDevProgram.php?devID=$devID"); //if user came to login page from development programs page
+            } else {
+                header("location:../../index"); //redirects user to default index page
             }
         } else {
             header("location:../../loginform?sessionMismatch=true"); //redirects user with login error

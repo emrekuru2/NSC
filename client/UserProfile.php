@@ -1,6 +1,6 @@
 <?php
     $title = "Profile";
-    include_once 'includes/components/header.php';
+    include_once 'includes/components/newheader.php';
     include_once 'includes/functions/security.php';
     CheckLoggedIn();
 
@@ -425,5 +425,5 @@ if (isset ($_POST['submitPhotoChange'])) {
     </div>
 
 <?php
-include 'includes/components/footer.php'
+include 'includes/components/newfooter.php'
 ?>

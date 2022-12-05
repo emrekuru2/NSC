@@ -3,7 +3,7 @@ This page contains current and upcoming devlopment programs.
 -->
 <?php
 $title = "Development Programs";
-include 'includes/components/header.php';
+include 'includes/components/newheader.php';
 ?>
 
 <!-- Css and script links -->
@@ -14,11 +14,11 @@ include 'includes/components/header.php';
 
 <body>
 
-    <!-- <h1 class="text-center pt-5" id="pageTitle">Development Programs</h1> -->
-    <!-- Dummy Text: Page Discription -->
-    <!-- <p class="text-center p-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi 
+    <h1 class="text-center pt-5" id="pageTitle">Development Programs</h1>
+    Dummy Text: Page Discription
+    <p class="text-center p-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi 
         ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non</p> -->
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non</p>
 
     <div class = "content">
         <div class = "content-inside">
@@ -114,7 +114,7 @@ include 'includes/components/header.php';
     </div>
 
     <?php
-        include 'includes/components/footer.php';
+        include 'includes/components/newfooter.php';
     ?>
 </body>
 
