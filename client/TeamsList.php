@@ -1,6 +1,6 @@
 <?php
     $title = "Team";
-    include_once 'includes/components/header.php';
+    include_once 'includes/components/newheader.php';
     include_once 'includes/functions/security.php';
     CheckLoggedIn();
     AccessControlBasedOnLevel(PLAYER_ACCESS_LVL, $_SESSION['User_ID']);
@@ -25,5 +25,5 @@
     </div>
 
 <?php
-    include 'includes/components/footer.php'
+    include "includes/components/footer.php";
 ?>

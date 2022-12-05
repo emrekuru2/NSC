@@ -1,6 +1,6 @@
 <?php
     $title = "Committees";
-    include_once 'includes/components/header.php'
+    include_once 'includes/components/newheader.php'
 ?>
 
     <div class="container my-5">
@@ -9,8 +9,8 @@
         <!-- Section: Block Content -->
         <section class="dark-grey-text text-center">
 
-            <h3 class="font-weight-bold mb-4 pb-2">Committees</h3>
-            <p class="text-muted w-responsive mx-auto mb-5">The Nova Scotia Cricket Association (NSCA) and Halifax Cricket League (HCL) Sub-committee is pleased to unveil the schedule for the 2019 HCL season.</p>
+            <h1 class="display-3 text-center font-weight-bold">Committees</h3>
+            <p class="text-center mx-auto mb-5">The Nova Scotia Cricket Association (NSCA) and Halifax Cricket League (HCL) Sub-committee is pleased to unveil the schedule for the 2019 HCL season.</p>
 
             <!-- Grid row -->
             <div class="row">
@@ -18,7 +18,7 @@
                 <!-- Grid column -->
                 <div class="col-md-6 mb-4">
 
-                    <div class="view overlay rounded z-depth-1 text-center">
+                    <div class="view overlay rounded text-center">
                         <img  height="200" width="200" src="img/committees/HCL.png" class="img-fluid mx-auto" alt="Sample project image">
                         <a>
                             <div class="mask rgba-white-slight"></div>
@@ -36,7 +36,7 @@
                 <!-- Grid column -->
                 <div class="col-md-6 mb-4">
 
-                    <div class="view overlay rounded z-depth-1">
+                    <div class="view overlay rounded">
                         <img height="200" width="200" src="img/committees/nsca.png" class="img-fluid mx-auto" alt="Sample project image">
                         <a>
                             <div class="mask rgba-white-slight"></div>
@@ -45,7 +45,7 @@
 
                     <div class="px-3 pt-3 mx-1 mt-1 pb-0">
                         <h4 class="font-weight-bold mb-3">NSCA Board</h4>
-                        <a  href="https://www.nsca.com" class="btn light-blue text-white btn-md mx-0 btn-rounded"> View more</a>
+                        <a  href="http://www.novascotiacricket.com/" class="btn light-blue text-white btn-md mx-0 btn-rounded"> View more</a>
                     </div>
 
                 </div>
@@ -61,5 +61,5 @@
     </div>
 
 <?php
-    include 'includes/components/footer.php'
+    include 'includes/components/newfooter.php'
 ?>

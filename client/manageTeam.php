@@ -1,13 +1,11 @@
 <?php
     $title = "Manage Teams";
-    include_once 'includes/components/header.php';
+    include_once 'includes/components/newheader.php';
     Include_once 'includes/functions/security.php';
-    $isLoggedIn = isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true;
-    if($isLoggedIn == false) {RedirectToIndex(); die();}
-    $isManager = isset($_SESSION['User_ID']) && CheckRole($_SESSION['User_ID']) == 'Manager';
-    if(!$isManager) {RedirectToIndex(); die();}
-
+    CheckLoggedIn();
     $managerID = $_SESSION['User_ID'];
+    AccessControlBasedOnLevel($_MANAGER_ACCESS_LST, $managerID);
+
     $managerClubID = getManagerClubID($managerID);
     if(isset($managerClubID)) {
 ?>
@@ -20,6 +18,7 @@
 
 <body>
     <div class="container my-5">
+    <h1 class="text-center font-weight-bold dark-grey-text m-4 h1">Manage Team</h1>
         <?php
 
             /**
@@ -74,7 +73,7 @@
         <div class="search-bar">
             <form class="form-inline d-flex  justify-content-center" id= "search-form" action="manageTeam.php" method="POST">
                 <div class="input-group w-75">
-                    <input class="form-control w-75 mt-1" type="search" placeholder="Search Player" aria-label="Search" id="bar-search-player" name="bar-search-player">
+                    <input class="form-control w-75 mt-1" type="search" placeholder="Search Player" aria-label="Search" id="bar-search-player" name="bar-search-player" required>
                     <button class="btn btn-blue-grey mt-1" type="search" id="btn-search" name="btn-search">
                         <i class="fas fa-search"></i>
                     </button>  
@@ -88,6 +87,7 @@
                     3. Remove player -->
         
         <div class = "d-flex justify-content-end mt-3">
+            <?php if(isset($_POST['bar-search-player'])) echo '<a href="manageTeam.php" class="btn btn-primary active" role="button" aria-pressed="true">Show All Players</a>';?>
             <button type="button" pButton class="btn btn-dark ml-3" data-toggle="modal" data-target="#pop-up" id="btn-exchange-player"><i class="fa fa-exchange-alt fa-lg"></i></button>
             <button type="button" data-toggle="modal" data-target="#pop-delete" class="btn btn-danger ml-3" id="btn-remove-player"><i class="fa fa-times fa-lg"></i></button>
         </div>
@@ -95,10 +95,13 @@
         <!-- Team Cards: 
             Each Team card has a scroll bar, team name, player list
         -->
+        <?php
+            if(count($lstTeamOne) != 0) {
+        ?>
         <div class="card mt-4" id="team-1">
             <div class="card-body">
-                <h5 class="card-title font-weight-bold mb-2"><?php echo $lstTeams[0]->teamName ?></h5>  
-                <hr>
+                <h5 class="card-title font-weight-bold mb-2"><?php echo "<a href=\"Team.php?id=".$lstTeams[0]->teamID."\" class=\"text-dark text-decoration-none\">".$lstTeams[0]->teamName."</a>"; ?></h5>  
+                <hr> 
                 <div class="card-text" id="player-list-1">
                     <?php
                         $arr_length_lstOne = count($lstTeamOne);
@@ -123,10 +126,12 @@
                 </div>      
             </div>  
         </div>
-
+        <?php } 
+        if(count($lstTeamTwo) != 0) {
+        ?>
         <div class="card mt-4" id="team-2">
             <div class="card-body">
-                <h5 class="card-title font-weight-bold"><?php echo $lstTeams[1]->teamName ?></h5>
+                <h5 class="card-title font-weight-bold"> <?php echo "<a href=\"Team.php?id=".$lstTeams[1]->teamID."\" class=\"text-dark text-decoration-none\">".$lstTeams[1]->teamName."</a>"; ?></h5>
                 <hr>  
                 <div class="card-text" id="player-list-2">
                 <?php
@@ -153,10 +158,13 @@
                 </div>      
             </div>  
         </div>
-
+        <?php 
+            } 
+            if(count($lstTeamThree) != 0) {
+        ?>
         <div class="card mt-4" id="team-3">
             <div class="card-body">
-                <h5 class="card-title font-weight-bold"><?php echo $lstTeams[2]->teamName ?></h5>  
+                <h5 class="card-title font-weight-bold"><?php echo "<a href=\"Team.php?id=".$lstTeams[2]->teamID."\" class=\"text-dark text-decoration-none\">".$lstTeams[2]->teamName."</a>"; ?></h5>  
                 <hr>
                 <div class="card-text" id="player-list-3">
                 <?php
@@ -183,12 +191,15 @@
                 </div>      
             </div>  
         </div>
-
+        <?php 
+        } 
+        if(count($lstUnassigned) != 0) {
+        ?>
         <div class="card mt-4" id="team-3">
             <div class="card-body">
                 <h5 class="card-title font-weight-bold">Unassigned</h5>  
                 <hr>
-                <div class="card-text" id="player-list">
+                <div class="card-text text-dark" id="player-list">
                 <?php
                         $arr_length_lstUnassigned = count($lstUnassigned);
                         if ($arr_length_lstUnassigned == 0) {
@@ -213,7 +224,9 @@
                 </div>      
             </div>  
         </div>
-
+        <?php 
+        } 
+        ?>
         <!-- Pop-up window for player exchange-->
         <div class="modal fade" id="pop-up" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -306,5 +319,5 @@
                 No club assigned to you. Contact Admin to get a club to manage.
             </div>';
     }
-    include_once 'includes/components/footer.php';
+    include "includes/components/footer.php";
 ?>

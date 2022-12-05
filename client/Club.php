@@ -1,16 +1,22 @@
 <?php
     $title = "Clubs";
-    include_once 'includes/components/header.php';
-
+    include_once 'includes/components/newheader.php';
 ?>
-<div class="container mt-5">
 
+
+
+<div class="container mt-5">
+    <!-- Icon imported from fontawesome.com -->
+    <script src="https://kit.fontawesome.com/723c51cb84.js" crossorigin="anonymous"></script>
+
+    <!-- CSS file -->
+    <link rel="stylesheet" href="css/club.css">
 
     <!--Section: Content-->
     <section class="mx-md-5 dark-grey-text">
 
         <!-- Section heading -->
-        <h3 class="text-center font-weight-bold mb-4 pb-2">HCL CLUBS</h3>
+        <h1 class="display-3 text-center font-weight-bold">HCL CLUBS</h3>
         <!-- Section description -->
         <p class="text-center mx-auto mb-5"> The following clubs play in the Halifax Cricket League (HCL) outdoor summer competition.
             <br>If you wish to play outdoor summer cricket, please contact the following clubs.</p>
@@ -26,61 +32,43 @@
         while ($row = mysqli_fetch_array($allClubs)) {
 
             ?>
-
-            <!-- Grid row -->
-            <div class="row">
-
-                <!-- Grid column -->
-                <div class="col-lg-5 col-xl-4">
-                    <!-- Featured image -->
-                    <div class="view overlay rounded z-depth-1-half mb-lg-0 mb-4" style="height: 200px;width:200px">
-                        <img class="img-fluid z-depth-1 rounded-circle" src="<?=$row['TeamImage']?>"
-                             alt="Sample image">
-                        <a href="ClubProfile?id=<?=$row['ClubID']?>">
-                            <div class="mask rgba-white-slight"></div>
-                        </a>
+            <!-- Post title -->
+            <h2 class="display-7 mb-2 text-center font-weight-normal"><?=$row['Name']?></h4>
+            <br>
+            
+            <div class="club-container">
+                <img class="feature-img rounded-circle" src="<?=$row['TeamImage']?>"
+                             alt="Sample image">   
+                
+                  
+                <div class="club-info">
+                    <div class="info-container">
+                        <i class="fa-solid fa-envelope"></i>
+                        <a href="Mailto:<?=$row['Email']?>">: <?=$row['Email']?></a>
                     </div>
 
-                </div>
-                <!-- Grid column -->
+                    <div class="info-container">
+                        <i class="fa-solid fa-phone"></i>
+                        <a href="tel:<?=$row['Phone']?>">: <?=$row['Phone']?></a>
+                    </div>
 
-                <!-- Grid column -->
-                <div class="col-lg-7 col-xl-8">
-                    <!-- Post title -->
-                    <h4 class="font-weight-bold mb-3"><strong><?=$row['Name']?></strong></h4>
-                    <!-- Excerpt -->
-                    <p class="dark-grey-text">
-                        <strong class="font-weight-bold mb-3">Email:</strong>
-                        <a href="Mailto:<?=$row['Email']?>"><?=$row['Email']?></a><br>
-
-                        <br>
-
-                        <strong class="font-weight-bold mb-3">Phone:</strong>
-                        <a href="tel:<?=$row['Phone']?>"><?=$row['Phone']?></a><br>
-
-                        <br>
-
-                        <strong class="font-weight-bold mb-3">Facebook: </strong><a href="<?=$row['Facebook']?>"><?=$row['Facebook']?></a>
-
-                        <br>
-
-                        <?php
+                    <div class="info-container">
+                        <i class="fa-brands fa-facebook"></i>
+                        <a href="<?=$row['Facebook']?>">: <?=$row['Name']?></a>
+                    </div>
+                    <?php
                         if (!empty($row['Website'])) {
                             ?>
-                            <br><strong class="font-weight-bold mb-3">Website: </strong><a href="<?=$row['Website']?>"><?=$row['Website']?></a>
+                            <div class = "info-container">
+                                <i class="fa-solid fa-window-maximize"></i>
+                                <a href="<?=$row['Website']?>">: <?=$row['Website']?></a>
+                            </div>
                             <?php
                         }
-                        ?>
-
-                    </p>
+                    ?>
                 </div>
-                <!-- Grid column -->
-
             </div>
-            <!-- Grid row -->
-            <hr class="my-5">
-
-
+            <br><br><br><br><br>
             <?php
         }
         ?>
@@ -91,10 +79,10 @@
         <br><br><br>
     </section>
     <!--Section: Content-->
-
+    
 
 </div>
 
 <?php
-    include_once 'includes/components/footer.php'
+    include "includes/components/footer.php";
 ?>

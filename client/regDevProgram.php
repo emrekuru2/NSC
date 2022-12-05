@@ -1,6 +1,6 @@
 <?php
     $title = "Registration Page | Development Programs";
-    include 'includes/components/header.php';
+    include 'includes/components/newheader.php';
 
     if (isset($_GET["devID"])) {
 
@@ -45,7 +45,13 @@
             <p class="h5" style="color: #E81A00;">There was an unexpected error while processing your request!</p>
             <br>
             <a class="btn light-blue text-white" href="./devProgram.php">Back</a>
-            <?php echo $sql."<br>".$conn->error;?>
+            <br>
+            <br>
+            <?php 
+                if ($conn->errno == 1062) {
+            ?>
+            <p class="text-danger">You have already registered for this program!</p>
+            <?php } ?>
         </div>
 
 <?php 
