@@ -51,7 +51,7 @@
                                 }
                                 echo "
                                     <!-- Title -->
-                                    <div class=\"flex-d row justify-content-between mx-1\">
+                                    <div class=\"d-flex flex-row justify-content-between mx-1\">
                                         <div class=\"float-left mt-4\">
                                             <input type=\"test\" readonly class=\"h1 form-control-plaintext\" placeholder=\"$title\">
                                         </div>
@@ -62,7 +62,7 @@
                                     </div>
 
                                     <!-- Author -->
-                                    <div class=\"flex-d row justify-content-between mx-1 border-bottom\">
+                                    <div class=\"d-flex flex-row justify-content-between mx-1 border-bottom\">
                                         <p>
                                             by " . $firstName ." ". $lastName . "
                                         </p>
@@ -73,12 +73,12 @@
 
 
                                     <!-- Preview Image -->
-                                    <div class=\"flex-d row my-3 mx-1\">
+                                    <div class=\"d-flex flex-row my-3 mx-1\">
                                         <div class=\"float-left\" style=\"width:40%\">
                                             <img class=\"card-img-top rounded  mr-2 my-1\" src=\"$image/newsImage.jpg\" alt=\"Image\" >
                                         </div>
 
-                                        <div>
+                                        <div style=\"width:58%\">
                                             <textarea type\"text\" readonly class=\"form-control-plaintext\" rows=\"20\" cols=\"69\">$post</textarea>
                                         </div>
                                     </div>  
@@ -201,7 +201,7 @@
             ?>
             <!-- Title -->
             <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
-                <div class="flex-d row justify-content-between mx-1\">
+                <div class="d-flex flex-row justify-content-between mx-1">
                     <div class="float-left mt-4 mx-2">
                         <input type="test" class="h1 form-control-plaintext border <?php if(isset($invalidTitle) && $invalidTitle) { echo "alert-danger";} ?>" 
                         placeholder="<?php 
@@ -219,7 +219,7 @@
                 </div>
 
                 <!-- Author -->
-                <div class="flex-d row justify-content-between mx-1 border-bottom">
+                <div class="d-flex flex-row justify-content-between mx-1 border-bottom">
                     <p>
                         <?php if($newNews) {echo "by $firstName  $lastName"; } else {echo "by $firstNameSaved $lastNameSaved";} ?>
                     </p>
@@ -228,21 +228,21 @@
                     <p> <?php echo "Today is ". $date .". The time is ". $time . "</p>"; ?>
                 </div>
                 <!-- Preview Image -->
-                <div class="flex-d row">
+                <div class="d-flex flex-row">
                     <img class="card-img-top rounded  mr-2 my-1" style="width:40%" src="<?php if(isset($imagePathSaved)) {echo $imagePathSaved."/newsImage.jpg";} else { echo "https://via.placeholder.com/150
 
 C/O https://placeholder.com/#How_To_Use_Our_Placeholders ";} ?>" alt="Image" >
-                    <div class="my-1">
-                    <textarea type="text" class="form-control border-dark <?php if(isset($invalidContent) && $invalidContent) { echo "alert-danger";} ?>" rows="20" cols="70" id="postContent" name="postContent" 
-                    placeholder="<?php 
-                    if($newNews) {
-                        echo "Please Insert post content here"; 
-                    } 
-                    ?>"> <?php if($editNews) { echo $postContentSaved;} elseif(isset($invalidContent) && !$invalidContent) { echo $_POST['postContent'];} ?></textarea>
+                    <div class="my-1" style="width:58%">
+                        <textarea type="text" class="form-control border-dark <?php if(isset($invalidContent) && $invalidContent) { echo "alert-danger";} ?>" rows="20" cols="70" id="postContent" name="postContent" 
+                        placeholder="<?php 
+                        if($newNews) {
+                            echo "Please Insert post content here"; 
+                        } 
+                        ?>"> <?php if($editNews) { echo $postContentSaved;} elseif(isset($invalidContent) && !$invalidContent) { echo $_POST['postContent'];} ?></textarea>
                     </div>
                 </div>
                 <hr>
-                <div class="flex-d justify-content-end">
+                <div class="d-flex flex-row justify-content-end">
                     <div class="custom-file w-75 mt-2 ml-2">
                         <input type="file" accept="image/*" id="file-upload" class="custom-file-input"
                                 name="newsImage" aria-describedby="newsPicture">
