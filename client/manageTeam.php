@@ -1,6 +1,6 @@
 <?php
     $title = "Manage Teams";
-    include_once 'includes/components/header.php';
+    include_once 'includes/components/newheader.php';
     Include_once 'includes/functions/security.php';
     CheckLoggedIn();
     $managerID = $_SESSION['User_ID'];
@@ -319,5 +319,5 @@
                 No club assigned to you. Contact Admin to get a club to manage.
             </div>';
     }
-    include_once 'includes/components/footer.php';
+    include_once 'includes/components/newfooter.php';
 ?>

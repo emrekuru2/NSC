@@ -2,7 +2,7 @@
 <?php
     $title = "News";
     $newsNotFound = false;
-    include_once 'includes/components/header.php';
+    include_once 'includes/components/newheader.php';
     include_once 'includes/functions/security.php';
 ?>
     <div class="w-75 m-auto">
@@ -265,5 +265,5 @@ C/O https://placeholder.com/#How_To_Use_Our_Placeholders ";} ?>" alt="Image" >
     <!-- /.row -->
 
 <?php
-    include_once 'includes/components/footer.php'
+    include_once 'includes/components/newfooter.php'
 ?>

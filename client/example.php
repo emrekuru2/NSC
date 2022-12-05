@@ -1,6 +1,6 @@
 <?php
     $title = "Clubs";
-    include_once 'includes/components/header.php';
+    include_once 'includes/components/newheader.php';
 ?>
 
 
@@ -96,5 +96,5 @@
 </div>
 
 <?php
-    include_once 'includes/components/footer.php'
+    include_once 'includes/components/newfooter.php'
 ?>

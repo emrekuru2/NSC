@@ -1,6 +1,6 @@
 <?php
     $title = "News";
-    include_once 'includes/components/header.php';
+    include_once 'includes/components/newheader.php';
     include_once 'includes/functions/security.php';
     if(isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] == true) {
         CheckLoggedIn();
@@ -193,5 +193,5 @@
         </div>
 <script src="../../js/newsList.js"></script>
 <?php
-    include_once 'includes/components/footer.php'
+    include_once 'includes/components/newfooter.php'
 ?>

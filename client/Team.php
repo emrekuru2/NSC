@@ -1,6 +1,6 @@
 <?php
     $title = "My Team";
-    include_once 'includes/components/header.php';
+    include_once 'includes/components/newheader.php';
     // Coach can edit, player can view (future implementation)
     include_once 'includes/functions/security.php';
     CheckLoggedIn();
@@ -232,5 +232,5 @@
 
 
 <?php
-include 'includes/components/footer.php'
+include 'includes/components/newfooter.php'
 ?>

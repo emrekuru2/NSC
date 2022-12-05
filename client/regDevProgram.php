@@ -1,6 +1,6 @@
 <?php
     $title = "Registration Page | Development Programs";
-    include 'includes/components/header.php';
+    include 'includes/components/newheader.php';
 
     $devID = $_GET["devID"];
     $_SESSION['devID'] = $devID;

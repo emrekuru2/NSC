@@ -26,7 +26,7 @@
             $previous = $_SERVER['HTTP_REFERER'];
         }
 
-        include_once "./includes/components/header.php";
+        include_once "./includes/components/newheader.php";
 
     ?>
 
