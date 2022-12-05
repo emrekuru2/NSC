@@ -1,10 +1,11 @@
 <?php
     $title = "News";
-    include_once 'includes/components/header.php';
+    include_once 'includes/components/newheader.php';
     include_once 'includes/functions/security.php';
-
-    CheckLoggedIn();
-    $userID = $_SESSION["User_ID"];
+    if(isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] == true) {
+        CheckLoggedIn();
+        $userID = $_SESSION["User_ID"];
+    }
 ?>
 
 <!-- Page Content -->
@@ -60,9 +61,10 @@
                         <!-- Title -->
                         <div class="flex-d">
                             <?php 
-                            $userID = $_SESSION['User_ID'];
+                            
                             $newsTitle = $row['Title'];
                             $newsID = $row['NewsID'];
+                            $userID = isset($_SESSION['User_ID']) ? $_SESSION['User_ID'] : null;
                             if(isset($userID) && CheckRole($userID) == 'Admin') {
                             ?>
                             <input type="checkbox" class="form-control position-relative float-left" style="width:5%" value="<?php echo $newsTitle; ?>" id="checkboxNews-<?php echo $newsID; ?>" onClick="changeLstSelected('<?php echo $newsID ?>')"/>
@@ -191,5 +193,5 @@
         </div>
 <script src="../../js/newsList.js"></script>
 <?php
-    include_once 'includes/components/footer.php'
+    include_once 'includes/components/newfooter.php'
 ?>

@@ -3,7 +3,7 @@ This page contains current and upcoming devlopment programs.
 -->
 <?php
 $title = "Development Programs";
-include 'includes/components/header.php';
+include 'includes/components/newheader.php';
 ?>
 
 <!-- Css and script links -->
@@ -114,7 +114,7 @@ include 'includes/components/header.php';
     </div>
 
     <?php
-        include 'includes/components/footer.php';
+        include 'includes/components/newfooter.php';
     ?>
 </body>
 

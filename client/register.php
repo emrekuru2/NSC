@@ -3,7 +3,7 @@
     $title = "Register";
     $loginOrRegistrationPage = true;
 
-    include_once 'includes/components/header.php';
+    include_once 'includes/components/newheader.php';
 ?>
 
 
@@ -281,6 +281,6 @@
 <script src="js/fileNameChange.js"></script>
 
 <?php
-    include_once 'includes/components/footer.php'
+    include_once 'includes/components/newfooter.php'
 ?>
 
