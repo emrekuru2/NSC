@@ -33,7 +33,7 @@
 
             ?>
             <!-- Post title -->
-            <h2 class="display-5 mb-2 text-center font-weight-normal"><?=$row['Name']?></h4>
+            <h2 class="display-7 mb-2 text-center font-weight-normal"><?=$row['Name']?></h4>
             <br>
             
             <div class="club-container">
@@ -84,5 +84,5 @@
 </div>
 
 <?php
-    include_once 'includes/components/newfooter.php'
+    include "includes/components/footer.php";
 ?>

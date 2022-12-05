@@ -193,5 +193,5 @@
         </div>
 <script src="../../js/newsList.js"></script>
 <?php
-    include_once 'includes/components/newfooter.php'
+    include "includes/components/footer.php";
 ?>

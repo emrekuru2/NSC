@@ -14,8 +14,8 @@ include 'includes/components/newheader.php';
 
 <body>
 
-    <h1 class="text-center pt-5" id="pageTitle">Development Programs</h1>
-    Dummy Text: Page Discription
+    <h1 class="text-center font-weight-bold pt-5">DEVELOPMENT PROGRAMS</h1>
+    
     <p class="text-center p-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi 
         ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non</p>
@@ -114,7 +114,7 @@ include 'includes/components/newheader.php';
     </div>
 
     <?php
-        include 'includes/components/newfooter.php';
+        include "includes/components/footer.php";
     ?>
 </body>
 

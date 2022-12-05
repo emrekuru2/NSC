@@ -319,5 +319,5 @@
                 No club assigned to you. Contact Admin to get a club to manage.
             </div>';
     }
-    include_once 'includes/components/newfooter.php';
+    include "includes/components/footer.php";
 ?>
