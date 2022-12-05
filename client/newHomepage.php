@@ -4,6 +4,8 @@ include 'includes/components/newheader.php';
 ?>
 
     
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 
 <!-- The about us section:
     It has an image background with text and link over it 
@@ -98,18 +100,40 @@ include 'includes/components/newheader.php';
 
     <!-- The Team Section -->
     <div class="container d-flex flex-row justify-content-between" style="padding-top:2vw; padding-bottom:10vw;">
-        <div style="padding:4vw">
-            <h3>Team</h3>
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.  </p>
-            <a href="#" class="btn btn-primary">Find out more</a>
-        </div>
-        <div>
-            <img src="img/teamProfilePictures/HomePageTeam.jpeg" alt="Homme Page Team"  style="width:40vw">
+        <div class="row">
+            <div class="col-7" style="padding:4vw">
+                <h3>Provincial Team</h3>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec. </p>
+                <a href="#" class="btn btn-primary">Find out more</a>
+            </div>
+       
+            <div class="col-5" style="padding:4vw">
+            <!-- Contact Us -->
+                <div class="card" style="background-color: blue;">
+                <div class="card-body">
+                    <h5 class="card-title text-white">Contact Us</h5>
+                    <div class="container text-white">
+                        <div class="row">
+                            <div class="col-2">
+                                <a href="https://www.facebook.com/novascotiacricket/" class="mr-2 text-white fs-2" role="button"><i class="bi bi-facebook"></i></a>
+                            </div>
+                            <div class="col m-auto"><h5>Facebook</h5></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <a href="http://www.novascotiacricket.com" class="mr-2 text-white fs-2" role="button"><i class="bi bi-envelope"></i></a>
+                            </div>
+                            <div class="col m-auto"><h5>Email</h5></div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
         </div>
     </div>
 
 <?php
-include "includes/components/newfooter.php"
+include "includes/components/footer.php"
 ?>
 
 
