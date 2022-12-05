@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql8001.site4now.net
--- Generation Time: Nov 13, 2022 at 06:08 AM
+-- Generation Time: Nov 04, 2022 at 09:50 AM
 -- Server version: 8.0.28
 -- PHP Version: 7.4.26
 
@@ -17,12 +17,9 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- Database: `db_a8ec98_nsca`
---
-DROP DATABASE IF EXISTS projectnsca;
-CREATE DATABASE IF NOT EXISTS projectnsca;
-USE projectnsca;
+CREATE DATABASE IF NOT EXISTS `projectnsca` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `projectnsca`;
+
 -- --------------------------------------------------------
 
 --

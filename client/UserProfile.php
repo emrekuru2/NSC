@@ -2,7 +2,7 @@
     $title = "Profile";
     include_once 'includes/components/header.php';
     include_once 'includes/functions/security.php';
-    if(!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] == false) { RedirectToIndex();}
+    CheckLoggedIn();
 
     $userInformation = getUserInfo($conn, $_SESSION['User_ID']);
     $userInformation = mysqli_fetch_assoc($userInformation);

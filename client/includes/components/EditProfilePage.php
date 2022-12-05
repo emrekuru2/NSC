@@ -10,7 +10,7 @@
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
     $title = "Edit Profile Page";
-    include "header.php";
+    include_once "header.php";
 
     if (isset($_GET['ProfileEdit']) && $_GET['ProfileEdit'] == "error"){
         echo "<p class='text-center text-danger'>Error updating profile. Please check your inputs and try again.</p>";

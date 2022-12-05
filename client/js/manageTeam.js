@@ -1,7 +1,6 @@
 // function invoking ajax with pure javascript, no jquery required.
 'use strict';
 var lstSelected = [];
-var lstAllPlayers = [];
 
 function changeLstSelected(playerID, playerName) {
   // If the lst is empty add
@@ -39,73 +38,66 @@ function changeLstSelected(playerID, playerName) {
 
 function unassignPlayers(userID) {
   var stringIDs = "";
-  for(var i = 0; i < lstSelected.length; i++) {
-    stringIDs += lstSelected[i].id
-    if(i != lstSelected.length -1) {
-      stringIDs += "-"
-    }
-  }
-
-  // Initialize connection and Get Request with complete attribute
-  let ajaxObj = new XMLHttpRequest();
-  
-  // Open Connection
-  ajaxObj.open("GET", "includes/functions/manageTeam.php?len="+lstSelected.length+"&u="+stringIDs+"&id="+userID, false);
-  ajaxObj.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-  // Checking the response
-  ajaxObj.onreadystatechange = function() {
-      if (ajaxObj.readyState == 4 && ajaxObj.status == 200) {
-          console.log(ajaxObj.status);
-          document.getElementById('player-team-input').innerHTML = ajaxObj.responseText;
-          console.log(ajaxObj.responseText)
+  if(lstSelected.length > 0) {
+    for(var i = 0; i < lstSelected.length; i++) {
+      stringIDs += lstSelected[i].id
+      if(i != lstSelected.length -1) {
+        stringIDs += "-"
       }
-  }
+    }
 
-  // Sending Get Request
-  ajaxObj.send();
-  location.reload(true);
+    // Initialize connection and Get Request with complete attribute
+    let ajaxObj = new XMLHttpRequest();
+    
+    // Open Connection
+    ajaxObj.open("GET", "includes/functions/manageTeam.php?len="+lstSelected.length+"&u="+stringIDs+"&id="+userID, false);
+    ajaxObj.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+    // Checking the response
+    ajaxObj.onreadystatechange = function() {
+        if (ajaxObj.readyState == 4 && ajaxObj.status == 200) {
+            console.log(ajaxObj.status);
+            document.getElementById('player-team-input').innerHTML = ajaxObj.responseText;
+            console.log(ajaxObj.responseText)
+        }
+    }
+
+    // Sending Get Request
+    ajaxObj.send();
+    window.location.href = "/manageTeam.php";
+  } else {
+    document.getElementById('player-team-input-unassign').innerHTML = "<div class='alert alert-warning' role='alert'> No player selected </div>";
+  }
 }
 
 function movePlayers(userID) {
   let teamName = document.getElementById('newTeam').value;
   var stringIDs = "";
-  for(var i = 0; i < lstSelected.length; i++) {
-    stringIDs += lstSelected[i].id;
-    if(i != lstSelected.length -1) {
-      stringIDs += "-";
-    }
-  }
 
-  // Initialize connection and Get Request with complete attribute
-  let ajaxObj = new XMLHttpRequest();
-  
-  // Open Connection
-  ajaxObj.open("GET", "includes/functions/manageTeam.php?len="+lstSelected.length+"&m="+stringIDs+"&t="+teamName +"&id="+userID, false);
-  ajaxObj.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-  // Checking the response
-  ajaxObj.onreadystatechange = function() {
-      if (ajaxObj.readyState == 4 && ajaxObj.status == 200) {
-          console.log(ajaxObj.status);
-          document.getElementById('player-team-input').innerHTML = ajaxObj.responseText;
-          console.log(ajaxObj.responseText)
+  if(lstSelected.length > 0) {
+    for(var i = 0; i < lstSelected.length; i++) {
+      stringIDs += lstSelected[i].id;
+      if(i != lstSelected.length -1) {
+        stringIDs += "-";
       }
-  }
-
-  // Sending Get Request
-  ajaxObj.send();
-  location.reload(true);
-}
-
-function showHint(str) {
-  if (str.length == 0) {
-    document.getElementById("txtHint").innerHTML = "";
-    return;
-  } else {
-    const xmlhttp = new XMLHttpRequest();
-    xmlhttp.onload = function() {
-      document.getElementById("txtHint").innerHTML = this.responseText;
     }
-  xmlhttp.open("GET", "gethint.php?q=" + str);
-  xmlhttp.send();
+
+    // Initialize connection and Get Request with complete attribute
+    let ajaxObj = new XMLHttpRequest();
+    
+    // Open Connection
+    ajaxObj.open("GET", "includes/functions/manageTeam.php?len="+lstSelected.length+"&m="+stringIDs+"&t="+teamName +"&id="+userID, false);
+    ajaxObj.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+    // Checking the response
+    ajaxObj.onreadystatechange = function() {
+        if (ajaxObj.readyState == 4 && ajaxObj.status == 200) {
+            document.getElementById('player-team-input').innerHTML = ajaxObj.responseText;
+        }
+    }
+
+    // Sending Get Request
+    ajaxObj.send();
+    window.location.href = "/manageTeam.php";
+  } else {
+    document.getElementById('player-team-input').innerHTML = "<div class='alert alert-warning' role='alert'> No player selected </div>";
   }
 }
