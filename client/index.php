@@ -26,7 +26,7 @@ include 'includes/components/newheader.php';
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" >
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators2" data-slide-to="1"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
         </ol>
         <div class="carousel-inner" >
@@ -38,11 +38,11 @@ include 'includes/components/newheader.php';
                     <p><a class="btn btn-primary" href="Club.php">Find out more</a></p>
                 </div>
             </div>
-            <div class="carousel-item">
-            <img class="d-block" src="../../img/clubs/EastCoastCricketClub.jpg" alt="Second slide">
+            <div class="carousel-item" style="height: 15rem;width: 100vh; margin-right:5vh;">
+                <img class="d-block" src="../../img/clubs/EastCoastCricketClub.jpg" alt="Second slide" object-fit="fill">
             </div>
-            <div class="carousel-item">
-            <img class="d-block w-100" src="..." alt="Third slide">
+            <div class="carousel-item" style="height: 15rem;width: 100vh; margin-right:5vh;">
+                <img class="d-block" src="../../img/clubs/HalifaxCricketClub.jpg" alt="Third slide" object-fit="fill">
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
