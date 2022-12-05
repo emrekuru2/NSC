@@ -1,5 +1,5 @@
 <?php
-    $title = "Post Announcement";
+    $title = "Post News";
     include_once "../includes/components/adminHeader.php";
     // Prevent Direct access and prevent non-admin's to access
     RestrictAdmin(CheckRole($_SESSION['User_ID']));
@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-7 offset-2">
                 <div class="text-center">
-                    <h1 class="h1 mb-0 text-gray-800">Post Announcement</h1>
+                    <h1 class="h1 mb-0 text-gray-800">Post News</h1>
                 </div>
                     <!-- Default form login -->
 

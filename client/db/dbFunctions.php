@@ -663,6 +663,9 @@ function displayAllTheTeam(){
             $statement = $conn->prepare("DELETE FROM nsca_teamuser WHERE TeamID = '$teamId'");
             $statement->execute();
             $statement->close();
+            $statement = $conn->prepare("DELETE FROM nsca_teams WHERE TeamID = '$teamId'");
+            $statement->execute();
+            $statement->close();
             $statement = $conn->prepare("DELETE FROM nsca_team WHERE TeamID = '$teamId'");
             $statement->execute();
 
@@ -831,21 +834,39 @@ function displayUserInformation(){
         $count++;
     }
     //delete function
-    if(isset($_GET["type"])){
+    if(isset($_GET["type"])&& isset($_GET["userID"])){
         if ($_GET["type"] == 2){
-            if(isset($_GET["userID"])){
-                $id = $_GET["userID"];
-                $statement = $conn->prepare("DELETE FROM nsca_login WHERE UserID = $id" );
-                $statement->execute();
-                $statement = $conn->prepare("DELETE FROM nsca_news_comments WHERE UserID = $id" );
-                $statement->execute();
-                $statement = $conn->prepare("DELETE FROM nsca_TeamJoinList WHERE UserID = $id" );
-                $statement->execute();
-                $statement = $conn->prepare("DELETE FROM nsca_teamuser WHERE UserID = $id" );
-                $statement->execute();
-                $statement = $conn->prepare("DELETE FROM nsca_user WHERE UserID = $id" );
-                $statement->execute();
-            }
+            $statement->close();
+            $id = $_GET["userID"];
+            // $statement = $conn->prepare("DELETE FROM nsca_login WHERE UserID = '$id'" );
+            // $statement->execute();
+            // $statement->close();
+            // $statement = $conn->prepare("DELETE FROM nsca_news_comments WHERE UserID = '$id'" );
+            // $statement->execute();
+            // $statement->close();
+            // $statement = $conn->prepare("DELETE FROM nsca_news WHERE UserID = '$id'" );
+            // $statement->execute();
+            // $statement->close();
+            // $statement = $conn->prepare("DELETE FROM nsca_TeamJoinList WHERE UserID = '$id'" );
+            // $statement->execute();
+            // $statement->close();
+            // $statement = $conn->prepare("DELETE FROM nsca_teamuser WHERE UserID = '$id'" );
+            // $statement->execute();
+            // $statement->close();
+            // $statement = $conn->prepare("DELETE FROM nsca_userroles WHERE UserID = '$id'" );
+            // $statement->execute();
+            // $statement->close();
+            // $statement = $conn->prepare("DELETE FROM nsca_subuser WHERE UserID = '$id'" );
+            // $statement->execute();
+            // $statement->close();
+            // $statement = $conn->prepare("DELETE FROM nsca_locationuser WHERE UserID = '$id'" );
+            // $statement->execute();
+            // $statement->close();
+            // $statement = $conn->prepare("DELETE FROM nsca_devroleuser WHERE UserID = '$id'" );
+            // $statement->execute();
+            // $statement->close();
+            $statement = $conn->prepare("DELETE FROM nsca_user WHERE UserID = '$id'" );
+            $statement->execute();
             echo "<meta http-equiv='refresh' content='0; url=../admin/editUserRole.php'>";
         }
     }
@@ -948,6 +969,22 @@ function changeUserInformation($userID){
                     $statement->execute();
                 }
             }
+            $statement->close();
+            $statement = $conn->prepare("SELECT UserRoleID FROM nsca_userroles WHERE UserID = '$userID'");
+            $statement->execute();
+            $statement->store_result();
+            $statement->bind_result($UserRoleID);
+            if($statement->num_rows>0){
+                $statement->close();
+                $statement = $conn->prepare("UPDATE nsca_userroles SET RoleID = ? WHERE UserID = '$userID'");
+                $statement->bind_param("i",$userRole);
+                $statement->execute();
+            }
+            else{
+                $statement = $conn->prepare("INSERT INTO `nsca_userroles` (`RoleID`, `UserID`) VALUES (?, ?)");
+                $statement->bind_param("ii",$userRole,$userID);
+                $statement->execute();
+            }
         }
     }
     $statement->close();
@@ -966,6 +1003,258 @@ function displayUserEmail($conn){
    return $allEmails;
 
 
+}
+
+/*Display all the name of development prorgam*/
+function displayAllTheProgram(){
+    $conn = OpenCon();
+
+
+    $statement = $conn->prepare("SELECT DevID, Name FROM nsca_devprograms");
+
+    $statement->execute();
+    $statement->store_result();
+    $statement->bind_result($DevID,$Name);
+
+    $count = 1;
+
+
+    //display
+    while($statement->fetch())
+    {
+        echo "<th>$count</th>";
+            echo"
+                <td>$Name</td>
+                <td>
+                    <a href=../admin/changeDevProgram.php?programID=$DevID&task=1>
+                        <button type='button'>Edit</button>
+                    </a>
+                </td>
+                <td>
+                    <a href=../admin/editDevPrograms.php?programID=$DevID&task=2>
+                        <button type='button'>Delete</button>
+                    </a>
+                </td>
+            </tr>
+        </tbody>";
+        $count++;
+    }
+
+
+if(isset($_GET["programID"])&& $_GET["task"]==2){
+    $statement->close();
+    $programID = $_GET["programID"];
+    $statement = $conn->prepare("DELETE FROM nsca_devprograms WHERE DevID = '$programID'");
+    $statement->execute();
+    $statement->close();
+
+    echo "<meta http-equiv='refresh' content='0; url=../admin/editDevPrograms.php'>";
+}
+
+    $statement->close();
+    $conn->close();
+}
+/*Display all the development of team End*/
+
+/* method to create a new development prorgam*/
+function createNewProgram($img){
+
+    $conn = OpenCon();
+    if(isset($_POST["programName"]) && isset($_POST["duration"]) && isset($_POST["programDescription"]) && isset($_POST["time"]) && isset($_POST["charges"]) && isset($_POST["type"]) && isset($_POST["days"])){
+        $programName = $_POST["programName"];
+        $duration = $_POST["duration"];
+        $prorgamDescription = $_POST["programDescription"];
+        $time = $_POST["time"];
+        $charges = $_POST["charges"];
+        $type = $_POST["type"];
+        $days = $_POST["days"];
+        $statement = $conn->prepare("SELECT * FROM nsca_devprograms WHERE Name ='$programName'");
+        $statement->execute();
+        $statement->store_result();
+        if($statement->num_rows>0){
+            echo "<p class='red-text text-center'>The program already exists!<br>Please make a new one.</p>";
+        }else{
+
+            if(isset($programName)){
+                $statement->close();
+                $statement = $conn->prepare("INSERT INTO `nsca_devprograms` (`Name`, `Duration`, `Description`, `Time`, `Charges`, `Type`, `DaysRun`, `imgFolder`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                $statement->bind_param("ssssssss",$programName,$duration,$prorgamDescription,$time,$charges,$type, $days, $img);
+                $statement->execute();
+                echo "<p class='red-text text-center'>The Program '$programName' created successful!</p>";
+                echo "<meta http-equiv='refresh' content='0; url=../admin/editDevPrograms.php'>";
+            }
+
+        }
+        $statement->close();
+    }
+
+    $conn->close();
+}
+/* method to create a new development program END*/
+
+/*method to display all the visitor of the day during each hour*/
+function displayVisitors(){
+    $conn = OpenCon();
+
+
+    $statement = $conn->prepare("SELECT CONCAT(HOUR(Time),' ',ampm), count FROM nsca_viewcount WHERE count>0");
+
+    $statement->execute();
+    $statement->store_result();
+    $statement->bind_result($time,$viewCount);
+    while($statement->fetch())
+    {
+            echo"
+                <td>$time</td>
+                <td>$viewCount</td>
+            </tr>
+        </tbody>";
+    }
+}
+/*Display all the name of sub committees*/
+function displayAllTheSubCommitees(){
+    $conn = OpenCon();
+
+
+    $statement = $conn->prepare("SELECT SubID, Name FROM nsca_subcommittees");
+
+    $statement->execute();
+    $statement->store_result();
+    $statement->bind_result($SubID,$Name);
+
+    $count = 1;
+
+
+    
+    while($statement->fetch())
+    {
+        echo "<th>$count</th>";
+        echo"
+            <td>$Name</td>
+            <td>
+                <a href=../admin/changeSubCommittees.php?SubID=$SubID>
+                    <button type='button'>Edit</button>
+                </a>
+            </td>
+            <td>
+            <a href=../admin/editSubCommittees.php?SubID=$SubID&task=1>
+                <button type='button' >Delete</button>
+            </a>
+            </td>
+        </tr>
+    </tbody>";
+    $count++;
+    }
+
+    //Delete Sub-committees function
+    if(isset($_GET["SubID"])&& $_GET["task"]==1){
+        $statement->close();
+        $SubID = $_GET["SubID"];
+        $statement = $conn->prepare("DELETE FROM nsca_subuser WHERE SubID = '$SubID'");
+        $statement->execute();
+        $statement->close();
+        $statement = $conn->prepare("DELETE FROM nsca_subcommittees WHERE SubID = '$SubID'");
+        $statement->execute();
+    
+        echo "<meta http-equiv='refresh' content='0; url=../admin/editSubCommittees.php'>";
+    }
+    
+
+    $statement->close();
+    $conn->close();
+}
+
+/*method to count/increment the view */
+function countView()
+{   date_default_timezone_set('America/Halifax');
+    $conn = OpenCon();
+    $hourNow = date("H");
+    $stmt = $conn->prepare("UPDATE nsca_viewcount SET count = count+1 WHERE count_ID = $hourNow");
+    $stmt->execute();
+    $stmt->close();
+    $conn->close();
+}
+
+/* method to create a new subcommittees*/
+function createNewSubCommittees(){
+
+    $conn = OpenCon();
+    if(isset($_POST["SubCommittee_Name"]) && isset($_POST["SubCommittee_Description"]) && isset($_POST["Years"])){
+        $name = $_POST["SubCommittee_Name"];
+        $SubCommitteeDescription = $_POST["SubCommittee_Description"];
+        $Years = $_POST["Years"];
+        $statement = $conn->prepare("SELECT * FROM nsca_subcommittees WHERE Name ='$name'" );
+        $statement->execute();
+        $statement->store_result();
+        if($statement->num_rows>0){
+            echo "<p class='red-text text-center'>The Sub_Committee already exists!<br>Please make a new one.</p>";
+        }else{
+
+            if(isset($name)){
+                $statement->close();
+                $statement = $conn->prepare("INSERT INTO `nsca_subcommittees` ( `Name`, `Description`, `Years`) VALUES (?, ?, ?)");
+                $statement->bind_param("sss",$name,$SubCommitteeDescription,$Years);
+                $statement->execute();
+                echo "<p class='red-text text-center'>The Sub-Committee '$name' created successful!</p>";
+                echo "<meta http-equiv='refresh' content='0; url=../admin/editSubCommittees.php'>";
+            }
+
+        }
+        $statement->close();
+    }
+
+    $conn->close();
+}
+
+function getSubCommittees($SubID) {
+    $conn = OpenCon();
+    $stmt = $conn->prepare("SELECT * FROM nsca_subcommittees where SubID = ?");
+    $stmt->bind_param("i", $SubID);
+    $stmt->execute();
+    $getSubCommittees = $stmt->get_result();
+    $stmt->close();
+    return mysqli_fetch_assoc($getSubCommittees);
+    $conn->close();
+}
+
+/*change/edit existing sub-committees */
+function setSubCommittee( $Name, $Description, $Years,$SubID){
+    
+    $conn = OpenCon();
+    $stmt = $conn->prepare("UPDATE nsca_subcommittees
+                 SET Name = ?, Description = ?, Years = ?
+                 WHERE SubID = ? ");
+    $stmt->bind_param("sssi", $Name, $Description,$Years,$SubID);
+    $subCommitteeSet = $stmt->execute();
+    $stmt->close();
+    return $subCommitteeSet;
+    $conn->close();
+}
+
+
+/* Get get program details */
+function getProgram($devID) {
+    $conn = OpenCon();
+    $stmt = $conn->prepare("SELECT * FROM nsca_devprograms where DevID = ?");
+    $stmt->bind_param("i", $devID);
+    $stmt->execute();
+    $getprogram = $stmt->get_result();
+    $stmt->close();
+    return mysqli_fetch_assoc($getprogram);
+    $conn->close();
+}
+
+/*change/edit current program */
+function setProrgam($id, $Name, $Duration, $Description, $Time, $Charges, $Type, $DaysRun, $img){
+    $conn = OpenCon();
+    $stmt = $conn->prepare("UPDATE nsca_devprograms
+                 SET Name = ?, Duration = ?, Description = ?, Time = ?, Charges = ?, Type = ?, DaysRun = ?, imgFolder = ?
+                 WHERE DevID = ? ");
+    $stmt->bind_param("ssssssssi", $Name, $Duration, $Description, $Time, $Charges, $Type, $DaysRun, $img, $id);
+    $programSet = $stmt->execute();
+    $stmt->close();
+    return $programSet;
+    $conn->close();
 }
 
 // Returns all players in a club
@@ -1068,3 +1357,4 @@ function getTeamsInClub($clubIDGiven) {
     }
     return $lstTeams;
 }
+?>

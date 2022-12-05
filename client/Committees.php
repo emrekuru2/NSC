@@ -45,7 +45,7 @@
 
                     <div class="px-3 pt-3 mx-1 mt-1 pb-0">
                         <h4 class="font-weight-bold mb-3">NSCA Board</h4>
-                        <a  href="https://www.nsca.com" class="btn light-blue text-white btn-md mx-0 btn-rounded"> View more</a>
+                        <a  href="http://www.novascotiacricket.com/" class="btn light-blue text-white btn-md mx-0 btn-rounded"> View more</a>
                     </div>
 
                 </div>

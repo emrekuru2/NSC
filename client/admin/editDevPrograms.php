@@ -1,5 +1,5 @@
 <?php
-    $title = "Manage Team Application";
+    $title = "Edit Development Porgrams";
     include_once "../includes/components/adminHeader.php";
     // Prevent Direct access and prevent non-admin's to access
     RestrictAdmin(CheckRole($_SESSION['User_ID']));
@@ -15,16 +15,18 @@
                         <thead class="black white-text">
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Team To Join</th>
-                            <th scope="col">Agree / Decline</th>
+                            <th scope="col">Program Name</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
                         </tr>
                         </thead>
-                       <?php
-                            manageApplyToTeam();
-                       ?>
+                        <?php
+                            displayAllTheProgram();
+                        ?>
 
                     </table>
+                    <a href="../admin/editProgramPage.php"><button  class="btn light-blue text-white btn-md mx-0 btn-rounded"> Add New Program</button>
+                    <br><br><br>
                 </div>
             </div>
         </div>
@@ -32,4 +34,4 @@
 
 
 
-<?php include "../includes/components/footer.php";?>
+<?php include "../includes/components/footer.php"; ?>
