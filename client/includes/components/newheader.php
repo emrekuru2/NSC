@@ -85,7 +85,7 @@
             </li>
             <?php
             if (isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true) {
-                 if (isset($_SESSION['User_ID']) && CheckRole($_SESSION['User_ID']) == 'Manager') {
+                 if (isset($_SESSION['User_ID']) && CheckRole($_SESSION['User_ID']) == 'Manager' || CheckRole($_SESSION['User_ID']) == 'Admin') {
             ?>
                 <li class = "nav-item">
                     <a class = "nav-link" href="../../ClubProfile.php">My Club</a>
