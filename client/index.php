@@ -79,7 +79,7 @@ include 'includes/components/newheader.php';
             while($stmt->fetch()) {
             
         ?>
-        <div class="card d-flex flex-column " style="width: 28vw; height: 38vw; padding: 10px;">
+        <div class="card d-flex flex-column " style="width: 20vw; height: 30vw; padding: 10px;">
         <!-- <img class="card-img-top" src="<?php echo $newsImagePath ?>" alt="Card image cap"> -->
             <img class="card-img-top" src="img\teamProfilePictures\HomePageNews1.jpeg" alt="Card image cap">
             <div class="card-body">
