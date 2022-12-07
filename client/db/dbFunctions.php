@@ -835,6 +835,240 @@ function displayUserInformation(){
 }
 /* Method to Display User Information End */
 
+/*Method to Display sorted User Information Start */
+function displaySortedUserInformation($sort_option){
+
+    $conn = OpenCon();
+
+    //display user account information
+    $statement = $conn->prepare("SELECT nsca_roletype.Name,nsca_user.UserID,FirstName,MiddleName,LastName,teamName,nsca_clubs.Name FROM nsca_user 
+    LEFT JOIN nsca_teamuser ON nsca_user.UserID = nsca_teamuser.UserID 
+    LEFT JOIN nsca_team ON nsca_team.TeamID = nsca_teamuser.TeamID
+    LEFT JOIN nsca_roletype ON nsca_roletype.RoleID = nsca_user.UserRole
+    LEFT JOIN nsca_teams ON nsca_team.TeamID = nsca_teams.TeamID
+    LEFT JOIN nsca_clubs ON nsca_teams.ClubID = nsca_clubs.ClubID ORDER BY FirstName $sort_option" );
+
+    $statement->execute();
+    $statement->store_result();
+    $statement->bind_result($userRole,$UserID,$firstName,$middleName,$lastName,$teamName,$clubName);
+
+    //display
+    $count = 1;
+    while ($statement->fetch()){
+        $fullName = $firstName." ".$middleName." ".$lastName;
+        echo "<th>$count</th>
+                            
+                            <td>$fullName</td>";
+
+        if($teamName == null){
+            echo "<td class='red-text'>No Team</td>";
+            echo "<td class='red-text'>No Club</td>";
+
+        }else{
+            echo "<td>$teamName</td>";
+            echo "<td>$clubName</td>";
+        }
+        if($userRole == "Admin"){
+            echo "<td class='red-text'>$userRole</td>";
+        }else{
+            echo "<td>$userRole</td>";
+        }
+        echo"
+                            <td>
+                            <a href=../admin/editUserRoleForm.php?userID=$UserID&userName=$fullName>
+                                <button type='button' >Edit</button>
+                            </a>
+                            </td>
+                           <td>
+                            <a href=../admin/editUserRole.php?userID=$UserID&type=2>
+                                <button type='button' >Delete</button>
+                            </a>
+                            </td>
+                        </tr>
+              </tbody>";
+        $count++;
+    }
+    //delete function
+    if(isset($_GET["type"])){
+        if ($_GET["type"] == 2){
+            if(isset($_GET["userID"])){
+                $id = $_GET["userID"];
+                $statement = $conn->prepare("DELETE FROM nsca_login WHERE UserID = $id" );
+                $statement->execute();
+                $statement = $conn->prepare("DELETE FROM nsca_news_comments WHERE UserID = $id" );
+                $statement->execute();
+                $statement = $conn->prepare("DELETE FROM nsca_TeamJoinList WHERE UserID = $id" );
+                $statement->execute();
+                $statement = $conn->prepare("DELETE FROM nsca_teamuser WHERE UserID = $id" );
+                $statement->execute();
+                $statement = $conn->prepare("DELETE FROM nsca_user WHERE UserID = $id" );
+                $statement->execute();
+            }
+            echo "<meta http-equiv='refresh' content='0; url=../admin/editUserRole.php'>";
+        }
+    }
+
+    $statement->close();
+    $conn->close();
+}
+/* Method to Display sorted User Information End */
+
+
+/*Method to Display Unasign User Information Start */
+function displayunassignUserInformation(){
+
+    $conn = OpenCon();
+
+    //display user account information
+    $statement = $conn->prepare("SELECT nsca_roletype.Name,nsca_user.UserID,FirstName,MiddleName,LastName,teamName,nsca_clubs.Name FROM nsca_user 
+    LEFT JOIN nsca_teamuser ON nsca_user.UserID = nsca_teamuser.UserID 
+    LEFT JOIN nsca_team ON nsca_team.TeamID = nsca_teamuser.TeamID
+    LEFT JOIN nsca_roletype ON nsca_roletype.RoleID = nsca_user.UserRole
+    LEFT JOIN nsca_teams ON nsca_team.TeamID = nsca_teams.TeamID
+    LEFT JOIN nsca_clubs ON nsca_teams.ClubID = nsca_clubs.ClubID WHERE nsca_user.UserRole = 1" );
+
+    $statement->execute();
+    $statement->store_result();
+    $statement->bind_result($userRole,$UserID,$firstName,$middleName,$lastName,$teamName,$clubName);
+
+    //display
+    $count = 1;
+    while ($statement->fetch()){
+        $fullName = $firstName." ".$middleName." ".$lastName;
+        echo "<th>$count</th>
+                            
+                            <td>$fullName</td>";
+
+        if($teamName == null){
+            echo "<td class='red-text'>No Team</td>";
+            echo "<td class='red-text'>No Club</td>";
+
+        }else{
+            echo "<td>$teamName</td>";
+            echo "<td>$clubName</td>";
+        }
+        if($userRole == "Admin"){
+            echo "<td class='red-text'>$userRole</td>";
+        }else{
+            echo "<td>$userRole</td>";
+        }
+        echo"
+                            <td>
+                            <a href=../admin/editUserRoleForm.php?userID=$UserID&userName=$fullName>
+                                <button type='button' >Edit</button>
+                            </a>
+                            </td>
+                           <td>
+                            <a href=../admin/editUserRole.php?userID=$UserID&type=2>
+                                <button type='button' >Delete</button>
+                            </a>
+                            </td>
+                        </tr>
+              </tbody>";
+        $count++;
+    }
+    //delete function
+    if(isset($_GET["type"])){
+        if ($_GET["type"] == 2){
+            if(isset($_GET["userID"])){
+                $id = $_GET["userID"];
+                $statement = $conn->prepare("DELETE FROM nsca_login WHERE UserID = $id" );
+                $statement->execute();
+                $statement = $conn->prepare("DELETE FROM nsca_news_comments WHERE UserID = $id" );
+                $statement->execute();
+                $statement = $conn->prepare("DELETE FROM nsca_TeamJoinList WHERE UserID = $id" );
+                $statement->execute();
+                $statement = $conn->prepare("DELETE FROM nsca_teamuser WHERE UserID = $id" );
+                $statement->execute();
+                $statement = $conn->prepare("DELETE FROM nsca_user WHERE UserID = $id" );
+                $statement->execute();
+            }
+            echo "<meta http-equiv='refresh' content='0; url=../admin/editUserRole.php'>";
+        }
+    }
+
+    $statement->close();
+    $conn->close();
+}
+/* Method to Display Unasign User Information End */
+
+/* Method to Display Searched User Information */
+function displaySearchedUserInformation($searchValue){
+    $conn = OpenCon();
+
+    //display user account information
+    $statement = $conn->prepare("SELECT nsca_roletype.Name,nsca_user.UserID,FirstName,MiddleName,LastName,teamName,nsca_clubs.Name FROM nsca_user 
+    LEFT JOIN nsca_teamuser ON nsca_user.UserID = nsca_teamuser.UserID 
+    LEFT JOIN nsca_team ON nsca_team.TeamID = nsca_teamuser.TeamID
+    LEFT JOIN nsca_roletype ON nsca_roletype.RoleID = nsca_user.UserRole
+    LEFT JOIN nsca_teams ON nsca_team.TeamID = nsca_teams.TeamID
+    LEFT JOIN nsca_clubs ON nsca_teams.ClubID = nsca_clubs.ClubID WHERE CONCAT(FirstName, MiddleName, LastName) LIKE '%$searchValue%'");
+
+    $statement->execute();
+    $statement->store_result();
+    $statement->bind_result($userRole,$UserID,$firstName,$middleName,$lastName,$teamName,$clubName);
+
+    //display
+    $count = 1;
+    while ($statement->fetch()){
+        $fullName = $firstName." ".$middleName." ".$lastName;
+        echo "<th>$count</th>
+                            
+                            <td>$fullName</td>";
+
+        if($teamName == null){
+            echo "<td class='red-text'>No Team</td>";
+            echo "<td class='red-text'>No Club</td>";
+
+        }else{
+            echo "<td>$teamName</td>";
+            echo "<td>$clubName</td>";
+        }
+        if($userRole == "Admin"){
+            echo "<td class='red-text'>$userRole</td>";
+        }else{
+            echo "<td>$userRole</td>";
+        }
+        echo"
+                            <td>
+                            <a href=../admin/editUserRoleForm.php?userID=$UserID&userName=$fullName>
+                                <button type='button' >Edit</button>
+                            </a>
+                            </td>
+                           <td>
+                            <a href=../admin/editUserRole.php?userID=$UserID&type=2>
+                                <button type='button' >Delete</button>
+                            </a>
+                            </td>
+                        </tr>
+              </tbody>";
+        $count++;
+    }
+    //delete function
+    if(isset($_GET["type"])){
+        if ($_GET["type"] == 2){
+            if(isset($_GET["userID"])){
+                $id = $_GET["userID"];
+                $statement = $conn->prepare("DELETE FROM nsca_login WHERE UserID = $id" );
+                $statement->execute();
+                $statement = $conn->prepare("DELETE FROM nsca_news_comments WHERE UserID = $id" );
+                $statement->execute();
+                $statement = $conn->prepare("DELETE FROM nsca_TeamJoinList WHERE UserID = $id" );
+                $statement->execute();
+                $statement = $conn->prepare("DELETE FROM nsca_teamuser WHERE UserID = $id" );
+                $statement->execute();
+                $statement = $conn->prepare("DELETE FROM nsca_user WHERE UserID = $id" );
+                $statement->execute();
+            }
+            echo "<meta http-equiv='refresh' content='0; url=../admin/editUserRole.php'>";
+        }
+    }
+
+    $statement->close();
+    $conn->close();
+}
+/* Method to Display User Information End */
+
 /* Method to display the user role*/
 function displayUserTeamAndRole(){
     $conn = OpenCon();

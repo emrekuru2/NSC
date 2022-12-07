@@ -17,6 +17,7 @@
     }
     
     session_start();
+    inactiveLogout();
 ?>
 <!DOCTYPE html>
 <html lang="en">
