@@ -43,7 +43,7 @@
 
             <div class="col-3 w-20" id="edit-clubs">
                 <a href="../admin/editClubInfo.php" style="text-decoration:none">
-                    <div class="card" style="height: 9vw;">
+                    <div class="card" style="height: 8vw;">
                         <i class="fa fa-users fa-2x  m-auto mt-2 mb-2" style="font-size: 3vw;"></i>
                         <div class="card-body text-center">
                         <p class="card-text text-dark">Edit Clubs</p>
@@ -63,12 +63,12 @@
                 </a>
             </div>
 
-            <div class="col-3 w-20" id="edit-location">
-                <a href="../admin/editLocations.php" style="text-decoration:none">
+            <div class="col-3 w-20" id="edit-devPrograms">
+                <a href="../admin/editDevPrograms.php" style="text-decoration:none">
                     <div class="card">
-                        <i class="bi bi-geo-alt-fill bi-2x  m-auto" style="font-size: 3vw;"></i>
+                        <i class="bi bi-mortarboard-fill m-auto" style="font-size: 3vw;"></i>
                         <div class="card-body text-center">
-                        <p class="card-text text-dark">Edit Location</p>
+                        <p class="card-text text-dark">Edit Development Program</p>
                         </div>
                     </div>
                 </a>
@@ -107,7 +107,7 @@
             </div>
 
             <div class="col-3 w-20" id="post-announcements">
-                <a href="../admin/postAnnouncement.php" style="text-decoration:none">
+                <a href="../singleNews.php?new=1" style="text-decoration:none">
                     <div class="card">
                         <i class="bi bi-megaphone-fill bi-2x  m-auto" style="font-size: 3vw;"></i>
                         <div class="card-body text-center">
