@@ -53,7 +53,7 @@
             </div>
 
             <div class="col-3 w-20" id="edit-competition-type">
-                <a href="../admin/editCompType.ph" style="text-decoration:none">
+                <a href="../admin/editCompType.php" style="text-decoration:none">
                     <div class="card">
                         <i class="bi bi-grid-fill bi-2x  m-auto" style="font-size: 3vw;"></i>
                         <div class="card-body text-center">
