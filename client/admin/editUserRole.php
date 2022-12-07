@@ -10,7 +10,7 @@
     <div class="container-fluid">
 
         <form action="" method="GET">
-            <div class="row">
+            <div class="row d-flex justify-content-center">
                 <div class="col-md-4">
                     <div class="input-group mb-3">
                     <input type="text" name="search" required value="<?php if(isset($_GET['search'])){echo $_GET['search'];} ?>" placeholder="Search Name">
@@ -21,7 +21,7 @@
         </form>
 
         <form action="" method="GET">
-            <div class="row">
+            <div class="row d-flex justify-content-center">
                 <div class="col-md-4">
                     <div class="input-group mb-3">
                         <select name="sort-method" class="form-control">
