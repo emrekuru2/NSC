@@ -117,9 +117,8 @@ include 'includes/components/newheader.php';
             </div>
         </div>
     </div>
-
-    <?php
-        include "includes/components/footer.php";
-    ?>
 </body>
+<?php
+    include "includes/components/footer.php";
+?>
 

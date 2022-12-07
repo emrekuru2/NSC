@@ -23,4 +23,6 @@
 
     </div>
 
-<?php include_once 'includes/components/newfooter.php'?>
+<?php
+    include "includes/components/footer.php";
+?>
