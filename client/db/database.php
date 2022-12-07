@@ -17,6 +17,8 @@
         return $conn;
     }
 
+ 
+
     function CloseCon($conn) {
         mysqli_close($conn);
     }

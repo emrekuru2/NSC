@@ -1,6 +1,6 @@
 <?php
     $title = "Manage Teams";
-    include_once 'includes/components/header.php';
+    include_once 'includes/components/newheader.php';
     Include_once 'includes/functions/security.php';
     CheckLoggedIn();
     $managerID = $_SESSION['User_ID'];
@@ -18,6 +18,7 @@
 
 <body>
     <div class="container my-5">
+    <h1 class="text-center font-weight-bold dark-grey-text m-4 h1">Manage Team</h1>
         <?php
 
             /**
@@ -198,7 +199,7 @@
             <div class="card-body">
                 <h5 class="card-title font-weight-bold">Unassigned</h5>  
                 <hr>
-                <div class="card-text" id="player-list">
+                <div class="card-text text-dark" id="player-list">
                 <?php
                         $arr_length_lstUnassigned = count($lstUnassigned);
                         if ($arr_length_lstUnassigned == 0) {
@@ -318,5 +319,5 @@
                 No club assigned to you. Contact Admin to get a club to manage.
             </div>';
     }
-    include_once 'includes/components/footer.php';
+    include "includes/components/footer.php";
 ?>
