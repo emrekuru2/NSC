@@ -107,7 +107,7 @@
             </div>
 
             <div class="col-3 w-20" id="post-announcements">
-                <a href="../admin/postAnnouncement.php" style="text-decoration:none">
+                <a href="../singleNews.php?new=1" style="text-decoration:none">
                     <div class="card">
                         <i class="bi bi-megaphone-fill bi-2x  m-auto" style="font-size: 3vw;"></i>
                         <div class="card-body text-center">
