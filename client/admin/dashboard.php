@@ -16,7 +16,10 @@
 
 
 <body class="mb-9">
-    <div class="container p-0">
+    <div class="container p-0 mt-3">
+
+        <!-- <h1 style="text-align: center;">COMPONENTS</h1> -->
+        <h1 class="display-3 text-center font-weight-bold">Components</h1>
 
         <!-- Navigation Cards:
             Each card has an icon and text
@@ -147,7 +150,7 @@
                 </a>
             </div>
 
-            <div class="col-3 w-20" id="manage-team-list">
+            <div class="col-3 w-20 mb-5" id="manage-team-list">
                 <a href="../admin/manageTeamList.php" style="text-decoration:none">
                     <div class="card">
                         <i class="bi bi-list-ul bi-2x  m-auto  m-auto" style="font-size: 3vw;"></i>

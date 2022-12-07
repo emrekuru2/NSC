@@ -15,11 +15,8 @@ include 'includes/components/newheader.php';
 
         <!-- Section heading -->
         <h1 class="display-3 text-center font-weight-bold">Development Programs</h1>
-        <hr class="w-25 my-5">
-        <br><br>
-
     </section>
-<div>
+</div>
     
     <p class="text-center p-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi 
         ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -40,7 +37,7 @@ include 'includes/components/newheader.php';
                     <li data-target="#carousel" data-slide-to="1"></li>
                     <li data-target="#carousel" data-slide-to="2"></li>
                 </ol>
-                <div class="carousel-inner" style="height: 70vh; width: 90vw; margin: auto; margin-top: 2vh;">
+                <div class="carousel-inner" style="height: 90vh; width: 90vw; margin: auto; margin-top: 2vh;">
                     <div class="carousel-item active">
                         <img class="d-block w-100" src="./img/DevProgram/banner1-1.jpg" alt="First slide">
                         <div class="carousel-caption d-none d-md-block">
@@ -118,6 +115,7 @@ include 'includes/components/newheader.php';
         </div>
     </div>
 </body>
+
 <?php
     include "includes/components/footer.php";
 ?>
