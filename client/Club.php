@@ -16,7 +16,7 @@
     <section class="mx-md-5 dark-grey-text">
 
         <!-- Section heading -->
-        <h1 class="display-3 text-center font-weight-bold">HCL CLUBS</h3>
+        <h1 class="display-3 text-center font-weight-bold">HCL CLUBS</h1>
         <!-- Section description -->
         <p class="text-center mx-auto mb-5"> The following clubs play in the Halifax Cricket League (HCL) outdoor summer competition.
             <br>If you wish to play outdoor summer cricket, please contact the following clubs.</p>

@@ -5,14 +5,14 @@
     CheckLoggedIn();
     AccessControlBasedOnLevel(PLAYER_ACCESS_LVL, $_SESSION['User_ID']);
 ?>
-    <div class="container mt-5 pt-5">
+    <div class="container mt-5">
 
 
         <!--Section: Content-->
         <section class="team-section text-center dark-grey-text">
 
             <!-- Section heading -->
-            <h3 class="font-weight-bold mb-4 pb-2">Our Amazing Teams</h3>
+            <h1 class="display-3 text-center font-weight-bold">Our Amazing Teams</h1>
             <hr class="w-25 my-5">
             <br><br>
             <?php
