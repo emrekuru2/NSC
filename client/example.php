@@ -96,5 +96,5 @@
 </div>
 
 <?php
-    include_once 'includes/components/newfooter.php'
+    include_once 'includes/components/footer.php'
 ?>

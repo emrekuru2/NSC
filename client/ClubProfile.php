@@ -7,5 +7,5 @@
 ?>
     <h1> Sorry this page is not available. Please return to <a href="index.php">home</a> </h1>
 <?php
-    include 'includes/components/newfooter.php'
+    include 'includes/components/footer.php'
 ?>

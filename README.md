@@ -23,7 +23,7 @@ They are as follows:
 (2, 'Umpire','Umpire'),
 (3, 'Player','Player'),
 (4, 'Admin','Admin'),
-(5, 'Coach','Coach').
+(5, 'Manager','Manager').
 
 When you are testing portion of the website that require different types of users such as access to different things depending on different user roles, please clone these changes from userroledevelop branch. 
 
@@ -38,7 +38,7 @@ Email              Password
 'Umpire@gmail.com', 'Password2022'
 'Player@gmail.com', 'Password2022'
 'Admin@gmail.com', 'Password2022'
-'Coach@gmail.com', 'Password2022'
+'Manager@gmail.com', 'Password2022'
 
 Use these emails and passwords for testing. 
 

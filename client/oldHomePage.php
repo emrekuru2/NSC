@@ -82,6 +82,6 @@
 
 
 <?php
-    include 'includes/components/newfooter.php'
+    include 'includes/components/footer.php'
 ?>
 

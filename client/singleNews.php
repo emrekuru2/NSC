@@ -265,5 +265,5 @@ C/O https://placeholder.com/#How_To_Use_Our_Placeholders ";} ?>" alt="Image" >
     <!-- /.row -->
 
 <?php
-    include_once 'includes/components/newfooter.php'
+    include_once 'includes/components/footer.php'
 ?>
