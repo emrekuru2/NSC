@@ -73,6 +73,3 @@
         </div>
     </div>
 
-<?php
-    include_once 'includes/components/newfooter.php'
-?>

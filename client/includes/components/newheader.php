@@ -70,7 +70,7 @@
         <span class="navbar-toggler-icon"></span>
     </button> -->
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav" style="font-size:1.6vw;">
+        <ul class="navbar-nav" style="font-size:1.3vw;">
             <li class="nav-item">
                 <a class="nav-link" href="../../">Home <span class="sr-only">(current)</span></a>
             </li>
@@ -83,13 +83,14 @@
             <li class="nav-item">
                 <a class="nav-link" href="../../TeamPage.php">Teams</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../../devProgram.php">Development Programs</a>
+            </li>
             <?php
             if (isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true) {
                  if (isset($_SESSION['User_ID']) && CheckRole($_SESSION['User_ID']) == 'Manager' || CheckRole($_SESSION['User_ID']) == 'Admin') {
             ?>
-                <li class = "nav-item">
-                    <a class = "nav-link" href="../../ClubProfile.php">My Club</a>
-                </li>
+                
                 <li class = "nav-item">
                     <a class = "nav-link" href="../../manageTeam.php">Manage Team</a>
                 </li>
@@ -122,14 +123,8 @@
             }
             ?>
 
-            <?php if (isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == true) { ?>
-            <li class="nav-item">
-                <a class="nav-link" href="../../devProgram.php">Development Programs</a>
-            </li>
-            <?php } ?>
-
         </ul>
-        <ul class="navbar-nav ml-auto" style="font-size:1.6vw;">
+        <ul class="navbar-nav ml-auto" style="font-size:1.3vw;">
 
             <!-- Join a team or My Team -->
             <?php

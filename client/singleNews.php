@@ -79,7 +79,7 @@
                                         </div>
 
                                         <div style=\"width:58%\">
-                                            <textarea type\"text\" readonly class=\"form-control-plaintext\" rows=\"20\" cols=\"69\">$post</textarea>
+                                            <textarea type\"text\" readonly class=\"form-control-plaintext ml-2\" rows=\"20\" cols=\"69\">$post</textarea>
                                         </div>
                                     </div>  
                                         ";

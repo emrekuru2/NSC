@@ -20,10 +20,9 @@ include 'includes/components/newheader.php';
         </div>      
     </div>
 
-
     <div class="container d-flex" style="padding-top:2vw;">
         
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" >
+        <div id="carouselExampleIndicators" class="carousel" data-ride="carousel" >
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators2" data-slide-to="1"></li>
@@ -38,11 +37,11 @@ include 'includes/components/newheader.php';
                     <p><a class="btn btn-primary" href="Club.php">Find out more</a></p>
                 </div>
             </div>
-            <div class="carousel-item" style="height: 15rem;width: 100vh; margin-right:5vh;">
-                <img class="d-block" src="../../img/clubs/EastCoastCricketClub.jpg" alt="Second slide" object-fit="fill">
+            <div class="carousel-item" style="height: 15rem; width: 100vh; margin-right:5vh; background-color: grey;">
+                <img class="d-block" src="" alt="Second slide" object-fit="fill">
             </div>
-            <div class="carousel-item" style="height: 15rem;width: 100vh; margin-right:5vh;">
-                <img class="d-block" src="../../img/clubs/HalifaxCricketClub.jpg" alt="Third slide" object-fit="fill">
+            <div class="carousel-item" style="height: 15rem; width: 100vh; margin-right:5vh; background-color: grey;">
+                <img class="d-block" src="" alt="Third slide" object-fit="fill">
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -80,7 +79,7 @@ include 'includes/components/newheader.php';
             while($stmt->fetch()) {
             
         ?>
-        <div class="card d-flex flex-column " style="width: 20vw; height: 30vw">
+        <div class="card d-flex flex-column " style="width: 20vw; height: 30vw; padding: 10px;">
         <!-- <img class="card-img-top" src="<?php echo $newsImagePath ?>" alt="Card image cap"> -->
             <img class="card-img-top" src="img\teamProfilePictures\HomePageNews1.jpeg" alt="Card image cap">
             <div class="card-body">
@@ -89,14 +88,13 @@ include 'includes/components/newheader.php';
                 </div>
                 <p class="card-text" style="height:7rem"><?php echo substr($newsContent,0 ,  150); ?></p>
                 <div class="text-center">
-                    <a href="singleNews.php?id=<?php echo $newsID;?>" class="btn btn-primary mt-3" >Find out more</a>
+                    <a href="singleNews.php?id=<?php echo $newsID;?>" class="btn btn-primary mt-3; padding: 10px" >Find out more</a>
                 </div>
             </div>
         </div>
 
         <?php }?>
     </div>
-
 
     <!-- The Team Section -->
     <div class="container d-flex flex-row justify-content-between" style="padding-top:2vw; padding-bottom:10vw;">
@@ -132,8 +130,8 @@ include 'includes/components/newheader.php';
         </div>
     </div>
 
+
+
 <?php
 include "includes/components/footer.php"
 ?>
-
-

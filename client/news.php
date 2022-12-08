@@ -67,12 +67,11 @@
                             $userID = isset($_SESSION['User_ID']) ? $_SESSION['User_ID'] : null;
                             if(isset($userID) && CheckRole($userID) == 'Admin') {
                             ?>
-                            <input type="checkbox" class="form-control position-relative float-left" style="width:5%" value="<?php echo $newsTitle; ?>" id="checkboxNews-<?php echo $newsID; ?>" onClick="changeLstSelected('<?php echo $newsID ?>')"/>
-
+                                <input type="checkbox" class="form-check-input mx-1"  value="<?php echo $newsTitle; ?>" id="checkboxNews-<?php echo $newsID; ?>" onClick="changeLstSelected('<?php echo $newsID ?>')"  style="width:2rem; height: 2rem; position:relative"/>
                             <?php
                             } 
                             ?>
-                            <label class="h2 font-weight-bolder ml-2" for="checkboxNews-<?php echo $row['NewsID']; ?>"><?php echo $newsTitle; ?></label>
+                            <label class="h2 font-weight-bolder mx-1" for="checkboxNews-<?php echo $row['NewsID']; ?>"><?php echo $newsTitle; ?></label>
                             
                         </div>
                         <hr>
@@ -193,5 +192,5 @@
         </div>
 <script src="../../js/newsList.js"></script>
 <?php
-    include_once 'includes/components/newfooter.php'
+    include "includes/components/footer.php";
 ?>
