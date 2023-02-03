@@ -1,4 +1,10 @@
 <?php
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+
+    require '../../vendor/composer/src/Exception.php';
+    require '../../vendor/composer/src/PHPMailer.php';
+    require '../../vendor/composer/src/SMTP.php';
 
     $title = "Send Email";
 
@@ -10,38 +16,49 @@
     // Swift Mailer Library
     require_once '../../vendor/autoload.php';
 
-    if (isset($_POST['submitEmail'])) {
 
+    function sendMail($toAddress, $subject, $body, $fromName = "") {
         // Mail Transport
-        $transport = new Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl');
-        $transport->setUsername('novascotiacricketassociation@gmail.com')->setPassword('fSUN8LGR1Xj8');
+        echo "Sending Email...";
+        $mail = new PHPMailer(true);
+        // remove the following line if you want to see the debug output
+        $mail->isSMTP();      
+        $mail->Mailer = 'smtp';
+        $mail->SMTPDebug  = 0;  
+        $mail->SMTPAuth   = TRUE;
+        $mail->SMTPSecure = "tls";
+        $mail->Port       = 26;
+        $mail->Host       = "mail.cricketnovascotia.ca";
+        $mail->Username   = "testadmin@cricketnovascotia.ca";
+        $mail->Password   = "CricketNSCA";
 
-        // Mailer
-        $mailer = new Swift_Mailer($transport);
-
-
+        $mail->isHTML(true);
+        $mail->Subject = $subject;
+        $mail->Body    = $body;
+        if ($fromName != "") {
+            $mail->SetFrom("testadmin@cricketnovascotia.ca", $fromName);
+        } else {
+            $mail->SetFrom("testadmin@cricketnovascotia.ca", "testadmin");
+        }
+        $mail->AddAddress($toAddress, "Yuval Mashiach");
+        $content = $body;
+        $mail->MsgHTML($content); 
+        if(!$mail->Send()) {
+            echo "Error while sending Email.";
+            var_dump($mail);
+        } else {
+            echo "Email sent successfully";
+        }
+    }
+    if (isset($_POST['submitEmail'])) {
         //if they used a name to send as
         if (isset($_POST['emailFormFullName'])) {
-            // Create a message
-                $message = (new Swift_Message($_POST['emailFormTitle']))
-                    ->setFrom(array('novascotiacricketassociation@gmail.com' => $_POST['emailFormFullName']))
-                    ->setTo($_POST['emailFormEmail'])
-                    ->setBody($_POST['emailFormTextBox']);
-
+            // send the mail with a name
+            sendMail($_POST['emailFormEmail'],$_POST['emailFormTitle'], $_POST['emailFormTextBox'], $_POST['emailFormFullName']);
         } else {
-            // Create a message
-                $message = (new Swift_Message($_POST['emailFormTitle']))
-                    ->setFrom(array('novascotiacricketassociation@gmail.com'))
-                    ->setTo($_POST['emailFormEmail'])
-                    ->setBody($_POST['emailFormTextBox']);
-        }
-
-        // Send the message
-        if ($mailer->send($message)) {
-            echo '<p class="text-center text-success">Mail sent successfully.</p>';
-        } else {
-            echo '<p class="text-center text-danger"> There was an error sending the email. Please try again later.</p>';
-        }
+            // send the mail without a name
+            sendMail($_POST['emailFormEmail'],$_POST['emailFormTitle'], $_POST['emailFormTextBox']);
+        }        
     }
 ?>
 
