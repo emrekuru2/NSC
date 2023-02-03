@@ -1,3 +1,35 @@
 body{
      height: 100vh;
 }
+
+/* ~~~ Admin Send Email Page ~~~ */
+.send-email-title {
+     margin: auto;
+}
+
+.send-email-row {
+     display: flex;
+     flex-wrap: wrap;
+     margin: auto;
+     width: 55vw;
+}
+
+.send-email-input-label {
+     font-size: inherit;
+     line-height: 1.5;
+     margin: calc(0.375rem + 1px) 0 calc(0.375rem + 1px) 0;
+     width: 100%;
+}
+
+.send-email-input-warning-icon {
+     color:orange;
+     margin: 0.25rem 0.25rem 0 0;
+}
+
+.send-email-input-body {
+     width: 55vw;
+}
+
+.send-email-submit-btn {
+     margin: 0;
+}
