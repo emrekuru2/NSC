@@ -40,7 +40,7 @@
         } else {
             $mail->SetFrom("testadmin@cricketnovascotia.ca", "testadmin");
         }
-        $mail->AddAddress($toAddress, "Yuval Mashiach");
+        $mail->AddAddress($toAddress, "toAddress");
         $content = $body;
         $mail->MsgHTML($content); 
         if(!$mail->Send()) {
