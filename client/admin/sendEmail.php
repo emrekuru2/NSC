@@ -103,7 +103,7 @@
 
     </form>
 
-
+    <script src="../js/admin-email-pages.js"></script>
 <?php
     include_once "../includes/components/footer.php";
 ?>
