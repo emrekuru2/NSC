@@ -71,27 +71,28 @@
 
         <!-- Subject -->
         <div class="send-email-row">
-            <label for="emailFormTitle" class="col-form-label">Email Subject</label>
+            <label for="emailFormTitle" class="col-form-label">Subject</label>
             <input type="text" id="emailFormTitle" name="emailFormTitle" class="form-control" placeholder="Subject" required>
         </div>
 
         <!-- Full Name -->
         <div class="send-email-row">
-            <label for="emailFormFullName" class="col-form-label">Full Name (Optional)</label>
-            <input type="text" id="emailFormFullName" name="emailFormFullName" class="form-control" placeholder="Full Name">
+            <label for="emailFormFullName" class="col-form-label">Name (Optional)</label>
+            <input type="text" id="emailFormFullName" name="emailFormFullName" class="form-control" placeholder="Name">
             <i class="fas fa-exclamation-circle send-email-input-warning-icon"></i>
             <p id="send-email-name-message">Leave this blank if you do not want your name to be displayed as the sender.</p>
         </div>
 
         <!-- Recipients -->
         <div class="send-email-row">
-            <label for="emailFormEmail" class="col-form-label">Recipient Email</label>
-            <input type="email" id="emailFormEmail" name="emailFormEmail" class="form-control" placeholder="E-mail">
+            <label for="emailFormEmail" class="send-email-input-label">Recipients</label>
+            <input type="email" id="emailFormEmail" name="emailFormEmail" class="form-control" placeholder="recipient@email.com">
+            <button class="send-email-edit-group-btn" type="button" id="edit-email-group-btn" title="Edit Email Groups"><i class="fa-solid fa-user-pen"></i></button>
         </div>
 
         <!-- Email Body -->
         <div class="send-email-row">
-            <label for="emailFormTextBox" class="send-email-input-label">Email Content</label>
+            <label for="emailFormTextBox" class="send-email-input-label">Email Body</label>
             <textarea class="send-email-input-body" name="emailFormTextBox" id="emailFormTextBox" cols="100" rows="14" required></textarea>
         </div>
 

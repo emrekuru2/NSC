@@ -30,9 +30,37 @@ body{
      margin: 0;
 }
 
+#emailFormEmail {
+     width: calc(100% - 44px);
+}
+
+.send-email-edit-group-btn {
+     background-color: lightgray;
+     border: 2px solid lightgray;
+     border-radius: 0.25rem;
+     color: var(--gray-dark);
+     margin-left: 6px;
+     outline: none;
+     width: 2.375rem;
+}
+.send-email-edit-group-btn:hover {
+     border-color: darkgray;
+}
+.send-email-edit-group-btn:active {
+     background-color: darkgray;
+     border-color: darkgray;
+     outline: none;
+}
+.send-email-edit-group-btn::selection {
+     outline: none;
+}
+
+
 .send-email-input-body {
      border-color: lightgrey;
      border-radius: 0.25rem;
+     outline: none;
+     padding: 0.6rem;
      width: 55vw;
 }
 
