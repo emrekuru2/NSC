@@ -55,6 +55,27 @@ body{
      outline: none;
 }
 
+.send-email-alert-success {
+     color: var(--gray-dark);
+     padding: 0.75rem 1.25rem;
+     margin-bottom: 0.5rem;
+     border: 2px solid #03a9f4;
+     border-radius: 0.25rem;
+     background-color: #cce5ff;
+     text-align: center;
+     width: 400px;
+}
+
+.send-email-alert-error {
+     color: var(--gray-dark);
+     padding: 0.75rem 1.25rem;
+     margin-bottom: 0.5rem;
+     border: 2px solid var(--red);
+     border-radius: 0.25rem;
+     background-color: #ffc3c9;
+     text-align: center;
+     width: 400px;
+}
 
 .send-email-input-body {
      border-color: lightgrey;

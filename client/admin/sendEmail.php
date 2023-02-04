@@ -69,6 +69,14 @@
             <h1 class="send-email-title h1 mb-0 text-gray-800">Send Email</h1>
         </div>
 
+        <!-- Email Sent Feedback -->
+        <div class="send-email-row" style="justify-content: center;">
+            <div class="send-email-alert-success">Email sent successfully!</div>
+        </div>
+        <div class="send-email-row" style="justify-content: center;">
+            <div class="send-email-alert-error">Error occurred while sending email.</div>
+        </div>
+
         <!-- Subject -->
         <div class="send-email-row">
             <label for="emailFormTitle" class="col-form-label">Subject</label>
