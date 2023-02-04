@@ -22,11 +22,17 @@ body{
 }
 
 .send-email-input-warning-icon {
-     color:orange;
+     color: orange;
      margin: 0.25rem 0.25rem 0 0;
 }
 
+#send-email-name-message {
+     margin: 0;
+}
+
 .send-email-input-body {
+     border-color: lightgrey;
+     border-radius: 0.25rem;
      width: 55vw;
 }
 

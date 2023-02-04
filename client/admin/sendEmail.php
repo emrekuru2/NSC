@@ -77,9 +77,10 @@
 
         <!-- Full Name -->
         <div class="send-email-row">
-            <label for="emailFormFirstName" class="col-form-label">Full Name (Optional)</label>
+            <label for="emailFormFullName" class="col-form-label">Full Name (Optional)</label>
             <input type="text" id="emailFormFullName" name="emailFormFullName" class="form-control" placeholder="Full Name">
-            <i class="fas fa-exclamation-circle send-email-input-warning-icon"></i> <p>Leave this blank if you do not want your name to be displayed as the sender.</p>
+            <i class="fas fa-exclamation-circle send-email-input-warning-icon"></i>
+            <p id="send-email-name-message">Leave this blank if you do not want your name to be displayed as the sender.</p>
         </div>
 
         <!-- Recipients -->
