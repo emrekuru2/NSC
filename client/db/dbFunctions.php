@@ -16,6 +16,11 @@ function check_input($conn, $data) {
     return $data;
 }
 
+function sanitizeData($data) {
+    // This function sanitizes data without the need for a database connection.
+    return stripslashes(htmlspecialchars(trim($data)));
+}
+
 /* Announcement Functions */
 function postAnnouncement($conn, $postFormUserID, $announcementTitle, $announcementFirstName, $announcementLastName,
                           $announcementEmail, $announcementDate, $announcementContent) {
