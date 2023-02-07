@@ -4,7 +4,7 @@ body{
 
 /* ~~~ Admin Send Email Page ~~~ */
 .send-email-title {
-     margin: auto;
+     margin: 1rem auto 0.5rem auto;
 }
 
 .send-email-row {
@@ -28,6 +28,7 @@ body{
 
 #send-email-name-message {
      margin: 0;
+     line-height: 1.65rem;
 }
 
 #emailFormEmail {
@@ -55,10 +56,18 @@ body{
      outline: none;
 }
 
+/* ~~~ Email Group List ~~~ */
+.send-email-group-list {}
+
+.send-email-group-list-btn {}
+
+.send-email-group-list-title {}
+
 .send-email-alert-success {
      color: var(--gray-dark);
      padding: 0.75rem 1.25rem;
      margin-bottom: 0.5rem;
+     margin-top: 1.5rem;
      border: 2px solid #03a9f4;
      border-radius: 0.25rem;
      background-color: #cce5ff;
@@ -70,6 +79,7 @@ body{
      color: var(--gray-dark);
      padding: 0.75rem 1.25rem;
      margin-bottom: 0.5rem;
+     margin-top: 1.5rem;
      border: 2px solid var(--red);
      border-radius: 0.25rem;
      background-color: #ffc3c9;

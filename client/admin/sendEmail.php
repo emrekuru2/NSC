@@ -13,13 +13,18 @@
             <h1 class="send-email-title h1 mb-0 text-gray-800">Send Email</h1>
         </div>
 
-        <!-- Email Sent Feedback -->
-        <div class="send-email-row" style="justify-content: center;">
-            <div class="send-email-alert-success">Email sent successfully!</div>
-        </div>
-        <div class="send-email-row" style="justify-content: center;">
-            <div class="send-email-alert-error">Error occurred while sending email.</div>
-        </div>
+        <?php
+        if (isset($_GET['success'])) {
+            echo "<div class=\"send-email-row\" style=\"justify-content: center;\">\n" .
+                    "<div class=\"send-email-alert-success\">Email sent successfully!</div>\n" .
+                "</div>";
+        }
+        else if (isset($_GET['error'])) {
+            echo "<div class=\"send-email-row\" style=\"justify-content: center;\">\n" .
+                    "<div class=\"send-email-alert-error\">An error occurred. Please try again.</div>\n" .
+                "</div>";
+        }
+        ?>
 
         <!-- Subject -->
         <div class="send-email-row">
@@ -40,6 +45,14 @@
             <label for="emailFormEmail" class="send-email-input-label">Recipients</label>
             <input type="email" id="emailFormEmail" name="emailFormEmail" class="form-control" placeholder="recipient@email.com">
             <button class="send-email-edit-group-btn" type="button" id="edit-email-group-btn" title="Edit Email Groups"><i class="fa-solid fa-user-pen"></i></button>
+        </div>
+
+        <!-- Email Group List -->
+        <div class="send-email-row">
+            <div class="send-email-group-list">
+                <button class="send-email-group-list-btn"></button>
+                <p class="send-email-group-list-title">Email Groups</p>
+            </div>
         </div>
 
         <!-- Email Body -->

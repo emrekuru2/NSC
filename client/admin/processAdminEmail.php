@@ -47,13 +47,13 @@
             try {
                 $mail->SetFrom("testadmin@cricketnovascotia.ca", $emailName);
             } catch (Exception $e) {
-                header("Location: sendEmail.php?error=3");
+                header("Location: sendEmail.php?error");  // Error: Email processing exception
             }
         } else {
             try {
                 $mail->SetFrom("testadmin@cricketnovascotia.ca", "Test Admin");
             } catch (Exception $e) {
-                header("Location: sendEmail.php?error=3");
+                header("Location: sendEmail.php?error");  // Error: Email processing exception
             }
         }
 
@@ -61,7 +61,7 @@
         try {
             $mail->AddAddress($emailRecipients, "toAddress");
         } catch (Exception $e) {
-            header("Location: sendEmail.php?error=3");
+            header("Location: sendEmail.php?error"); // Error: Email processing exception
         }
 
         // Assigning body
@@ -69,25 +69,25 @@
         try {
             $mail->MsgHTML($emailBody);
         } catch (Exception $e) {
-            header("Location: sendEmail.php?error=3"); // Error 3: Email processing exception
+            header("Location: sendEmail.php?error"); // Error: Email processing exception
         }
 
         // Sending email
         if($mail->Send()) {
             var_dump($mail);
-            header("Location: sendEmail.php?success=1"); // Success: Email sent
+            header("Location: sendEmail.php?success"); // Success: Email sent
         } else {
             var_dump($mail);
-            header("Location: sendEmail.php?error=2"); // Error 2: Email sending error
+            header("Location: sendEmail.php?error"); // Error: Email sending error
         }
     }
     else {
-        header("Location: sendEmail.php?error=1"); // Error 1: Form not submitted
+        header("Location: sendEmail.php?error"); // Error: Form not submitted
     }
 ?>
 
 <head>
     <meta charset="utf-8">
     <title>Sending Email...</title>
-    <link rel="icon" href="../../img/favicon.jpeg">
+    <link rel="icon" href="../img/favicon.jpeg">
 </head>
