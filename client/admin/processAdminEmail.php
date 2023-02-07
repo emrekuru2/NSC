@@ -9,21 +9,22 @@
     require_once '../../vendor/composer/src/SMTP.php';
     require_once '../../vendor/autoload.php';
 
-    include_once("../db/database.php");
-    include_once("../db/dbFunctions.php");
-    include_once("../includes/functions/security.php");
-
+    include_once "../includes/functions/security.php";
     DefineSecurity();
-    RestrictAdmin(CheckRole($_SESSION['User_ID'])); // Prevent direct access and prevent non-admin's to access
+    include_once "../db/database.php";
+    include_once "../db/dbFunctions.php";
+
+    // Prevent direct access and prevent non-admin's to access
+    RestrictAdmin(CheckRole($_SESSION['User_ID']));
     defined('_DEFVAR') or exit(header('Location: ../index.php'));
 
-    // Processing email
-    if (isset($_REQUEST['submitEmail'])) {
+    // Checking if form button was pressed
+    if (isset($_REQUEST['submitEmail'])) { // Processing email
         // Reading email inputs
-        $emailSubject = sanitizeData($_REQUEST['emailFormTitle']); // Subject
-        $emailName = sanitizeData($_REQUEST['emailFormFullName']); // Name
-        $emailRecipients = sanitizeData($_REQUEST['emailFormEmail']); // Recipients
-        $emailBody = sanitizeData($_REQUEST['emailFormTextBox']); // Body
+        $emailSubject = sanitizeData($_REQUEST['emailFormTitle']);
+        $emailName = sanitizeData($_REQUEST['emailFormFullName']);
+        $emailRecipients = sanitizeData($_REQUEST['emailFormEmail']);
+        $emailBody = sanitizeData($_REQUEST['emailFormTextBox']);
 
         // Configuring email
         $mail = new PHPMailer(true);
@@ -40,17 +41,36 @@
 
         // Assigning subject
         $mail->Subject = $emailSubject;
+
         // Assigning name
         if ($emailName != "") {
-            $mail->SetFrom("testadmin@cricketnovascotia.ca", $emailName);
+            try {
+                $mail->SetFrom("testadmin@cricketnovascotia.ca", $emailName);
+            } catch (Exception $e) {
+                header("Location: sendEmail.php?error=3");
+            }
         } else {
-            $mail->SetFrom("testadmin@cricketnovascotia.ca", "Test Admin");
+            try {
+                $mail->SetFrom("testadmin@cricketnovascotia.ca", "Test Admin");
+            } catch (Exception $e) {
+                header("Location: sendEmail.php?error=3");
+            }
         }
+
         // Assigning recipients
-        $mail->AddAddress($emailRecipients, "toAddress");
+        try {
+            $mail->AddAddress($emailRecipients, "toAddress");
+        } catch (Exception $e) {
+            header("Location: sendEmail.php?error=3");
+        }
+
         // Assigning body
         $mail->Body = $emailBody;
-        $mail->MsgHTML($emailBody);
+        try {
+            $mail->MsgHTML($emailBody);
+        } catch (Exception $e) {
+            header("Location: sendEmail.php?error=3"); // Error 3: Email processing exception
+        }
 
         // Sending email
         if($mail->Send()) {
@@ -60,7 +80,6 @@
             var_dump($mail);
             header("Location: sendEmail.php?error=2"); // Error 2: Email sending error
         }
-
     }
     else {
         header("Location: sendEmail.php?error=1"); // Error 1: Form not submitted
