@@ -1,3 +1,100 @@
 body{
      height: 100vh;
 }
+
+/* ~~~ Admin Send Email Page ~~~ */
+.send-email-title {
+     margin: 1rem auto 0.5rem auto;
+}
+
+.send-email-row {
+     display: flex;
+     flex-wrap: wrap;
+     margin: auto;
+     width: 55vw;
+}
+
+.send-email-input-label {
+     font-size: inherit;
+     line-height: 1.5;
+     margin: calc(0.375rem + 1px) 0 calc(0.375rem + 1px) 0;
+     width: 100%;
+}
+
+.send-email-input-warning-icon {
+     color: orange;
+     margin: 0.25rem 0.25rem 0 0;
+}
+
+#send-email-name-message {
+     margin: 0;
+     line-height: 1.65rem;
+}
+
+#emailFormEmail {
+     width: calc(100% - 44px);
+}
+
+.send-email-edit-group-btn {
+     background-color: lightgray;
+     border: 2px solid lightgray;
+     border-radius: 0.25rem;
+     color: var(--gray-dark);
+     margin-left: 6px;
+     outline: none;
+     width: 2.375rem;
+}
+.send-email-edit-group-btn:hover {
+     border-color: darkgray;
+}
+.send-email-edit-group-btn:active {
+     background-color: darkgray;
+     border-color: darkgray;
+     outline: none;
+}
+.send-email-edit-group-btn::selection {
+     outline: none;
+}
+
+/* ~~~ Email Group List ~~~ */
+.send-email-group-list {}
+
+.send-email-group-list-btn {}
+
+.send-email-group-list-title {}
+
+.send-email-alert-success {
+     color: var(--gray-dark);
+     padding: 0.75rem 1.25rem;
+     margin-bottom: 0.5rem;
+     margin-top: 1.5rem;
+     border: 2px solid #03a9f4;
+     border-radius: 0.25rem;
+     background-color: #cce5ff;
+     text-align: center;
+     width: 400px;
+}
+
+.send-email-alert-error {
+     color: var(--gray-dark);
+     padding: 0.75rem 1.25rem;
+     margin-bottom: 0.5rem;
+     margin-top: 1.5rem;
+     border: 2px solid var(--red);
+     border-radius: 0.25rem;
+     background-color: #ffc3c9;
+     text-align: center;
+     width: 400px;
+}
+
+.send-email-input-body {
+     border-color: lightgrey;
+     border-radius: 0.25rem;
+     outline: none;
+     padding: 0.6rem;
+     width: 55vw;
+}
+
+.send-email-submit-btn {
+     margin: 0;
+}

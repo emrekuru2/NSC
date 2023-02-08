@@ -32,7 +32,9 @@
     <title><?php echo $title?></title>
 
     <link rel="icon" href="../../img/favicon.jpeg">
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css">
     <!-- Material Design Bootstrap -->
