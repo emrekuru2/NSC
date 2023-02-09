@@ -56,19 +56,73 @@
         <!-- Email Group List -->
         <div class="send-email-row" id="email-group-list">
             <!-- General List -->
-            <label class="send-email-group-list-title">General</label>
-            <div class="send-email-group-row">
-                <input class="send-email-group-checkbox" type="checkbox" id="group-all-registered-users" name="email-group" value="All registered users">
-                <label class="send-email-group-checkbox-label" for="group-all-registered-users">All registered users</label>
+            <div class="send-email-group-section">
+                <label class="send-email-group-list-title">General</label>
+                <div class="send-email-group-row">
+                    <input class="send-email-group-checkbox" type="checkbox" id="group-all-registered-users" name="email-group" value="All registered users">
+                    <label class="send-email-group-checkbox-label" for="group-all-registered-users">All registered users</label>
+                </div>
+                <div class="send-email-group-row">
+                    <input class="send-email-group-checkbox" type="checkbox" id="group-all-development-users" name="email-group" value="All development program users">
+                    <label class="send-email-group-checkbox-label" for="group-all-development-users">All development program users</label>
+                </div>
+                <div class="send-email-group-row">
+                    <input class="send-email-group-checkbox" type="checkbox" id="group-all-club-users" name="email-group" value="All club players">
+                    <label class="send-email-group-checkbox-label" for="group-all-club-users">All club players</label>
+                </div>
             </div>
-            <div class="send-email-group-row">
-                <input class="send-email-group-checkbox" type="checkbox" id="group-all-development-users" name="email-group" value="All development program users">
-                <label class="send-email-group-checkbox-label" for="group-all-development-users">All development program users</label>
+
+            <!-- Clubs -->
+            <div class="send-email-group-section">
+                <label class="send-email-group-list-title">Clubs</label>
+                <div class="send-email-group-row">
+                    <input class="send-email-group-checkbox" type="checkbox" id="group-club-A" name="email-group" value="Club A">
+                    <label class="send-email-group-checkbox-label" for="group-club-A">Club A</label>
+                </div>
+                <div class="send-email-group-row">
+                    <input class="send-email-group-checkbox" type="checkbox" id="group-club-B" name="email-group" value="Club B">
+                    <label class="send-email-group-checkbox-label" for="group-club-B">Club B</label>
+                </div>
+                <div class="send-email-group-row">
+                    <input class="send-email-group-checkbox" type="checkbox" id="group-club-C" name="email-group" value="Club C">
+                    <label class="send-email-group-checkbox-label" for="group-club-C">Club C</label>
+                </div>
             </div>
-            <div class="send-email-group-row">
-                <input class="send-email-group-checkbox" type="checkbox" id="group-all-club-users" name="email-group" value="All club players">
-                <label class="send-email-group-checkbox-label" for="group-all-club-users">All club players</label>
+
+            <!-- Committees -->
+            <div class="send-email-group-section">
+                <label class="send-email-group-list-title">Committees</label>
+                <div class="send-email-group-row">
+                    <input class="send-email-group-checkbox" type="checkbox" id="group-comm-A" name="email-group" value="Committee A">
+                    <label class="send-email-group-checkbox-label" for="group-comm-A">Committee A</label>
+                </div>
+                <div class="send-email-group-row">
+                    <input class="send-email-group-checkbox" type="checkbox" id="group-comm-B" name="email-group" value="Committee B">
+                    <label class="send-email-group-checkbox-label" for="group-comm-B">Committee B</label>
+                </div>
+                <div class="send-email-group-row">
+                    <input class="send-email-group-checkbox" type="checkbox" id="group-comm-C" name="email-group" value="Committee C">
+                    <label class="send-email-group-checkbox-label" for="group-comm-C">Committee C</label>
+                </div>
             </div>
+
+            <!-- Regions -->
+            <div class="send-email-group-section">
+                <label class="send-email-group-list-title">Regions</label>
+                <div class="send-email-group-row">
+                    <input class="send-email-group-checkbox" type="checkbox" id="group-region-A" name="email-group" value="Region A">
+                    <label class="send-email-group-checkbox-label" for="group-region-A">Region A</label>
+                </div>
+                <div class="send-email-group-row">
+                    <input class="send-email-group-checkbox" type="checkbox" id="group-region-B" name="email-group" value="Region B">
+                    <label class="send-email-group-checkbox-label" for="group-region-B">Region B</label>
+                </div>
+                <div class="send-email-group-row">
+                    <input class="send-email-group-checkbox" type="checkbox" id="group-region-C" name="email-group" value="Region C">
+                    <label class="send-email-group-checkbox-label" for="group-region-C">Region C</label>
+                </div>
+            </div>
+
         </div>
 
         <!-- Email Body -->
