@@ -49,9 +49,28 @@
 
         <!-- Email Group List -->
         <div class="send-email-row">
-            <div class="send-email-group-list">
-                <button class="send-email-group-list-btn"></button>
-                <p class="send-email-group-list-title">Email Groups</p>
+            <div class="send-email-group-header">
+                <button class="send-email-group-header-btn"><i class="fa-solid fa-caret-down"></i></button>
+                <label class="send-email-group-list-title">Email Groups</label>
+            </div>
+
+            <div class="send-email-group-section">
+                <label class="send-email-group-list-title">Default Groups</label>
+            </div>
+
+            <div>
+                <label class="send-email-group-list-title" for="group-all-registered-users">All registered users</label>
+                <input type="checkbox" id="group-all-registered-users" name="email-group" value="All registered users">
+            </div>
+
+            <div>
+                <label class="send-email-group-list-title" for="group-all-development-users">All development program users</label>
+                <input type="checkbox" id="group-all-development-users" name="email-group" value="All development program users">
+            </div>
+
+            <div>
+                <label class="send-email-group-list-title" for="group-all-club-users">All club players</label>
+                <input type="checkbox" id="group-all-club-users" name="email-group" value="All club players">
             </div>
         </div>
 

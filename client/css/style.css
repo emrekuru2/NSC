@@ -42,6 +42,7 @@ body{
      color: var(--gray-dark);
      margin-left: 6px;
      outline: none;
+     transition: 0.15s ease-in-out;
      width: 2.375rem;
 }
 .send-email-edit-group-btn:hover {
@@ -57,11 +58,36 @@ body{
 }
 
 /* ~~~ Email Group List ~~~ */
-.send-email-group-list {}
+.send-email-group-header {}
 
-.send-email-group-list-btn {}
+.send-email-group-header-btn {
+     background-color: lightgray;
+     border: 2px solid lightgray;
+     border-radius: 0.25rem;
+     color: var(--gray-dark);
+     height: 2rem;
+     margin-top: 0.25rem;
+     outline: none;
+     transition: 0.15s ease-in-out;
+     width: 2rem;
+}
+.send-email-group-header-btn:hover {
+     border-color: darkgray;
+}
+.send-email-group-header-btn:active {
+     background-color: darkgray;
+     border-color: darkgray;
+     outline: none;
+}
+.send-email-group-header-btn::selection {
+     outline: none;
+}
 
-.send-email-group-list-title {}
+/* ~~~ Email Group List Section ~~~ */
+.send-email-group-list-title {
+     display: flex;
+     width: 100%;
+}
 
 .send-email-alert-success {
      color: var(--gray-dark);
