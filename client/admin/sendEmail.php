@@ -47,30 +47,27 @@
             <button class="send-email-edit-group-btn" type="button" id="edit-email-group-btn" title="Edit Email Groups"><i class="fa-solid fa-user-pen"></i></button>
         </div>
 
-        <!-- Email Group List -->
+        <!-- Email Group Button -->
         <div class="send-email-row">
-            <div class="send-email-group-header">
-                <button class="send-email-group-header-btn"><i class="fa-solid fa-caret-down"></i></button>
-                <label class="send-email-group-list-title">Email Groups</label>
-            </div>
+            <button class="send-email-group-btn"><i class="fa-solid fa-caret-down"></i></button>
+            <label class="send-email-group-btn-label">Email Groups</label>
+        </div>
 
-            <div class="send-email-group-section">
-                <label class="send-email-group-list-title">Default Groups</label>
+        <!-- Email Group List -->
+        <div class="send-email-row" id="email-group-list">
+            <!-- General List -->
+            <label class="send-email-group-list-title">General</label>
+            <div class="send-email-group-row">
+                <input class="send-email-group-checkbox" type="checkbox" id="group-all-registered-users" name="email-group" value="All registered users">
+                <label class="send-email-group-checkbox-label" for="group-all-registered-users">All registered users</label>
             </div>
-
-            <div>
-                <label class="send-email-group-list-title" for="group-all-registered-users">All registered users</label>
-                <input type="checkbox" id="group-all-registered-users" name="email-group" value="All registered users">
+            <div class="send-email-group-row">
+                <input class="send-email-group-checkbox" type="checkbox" id="group-all-development-users" name="email-group" value="All development program users">
+                <label class="send-email-group-checkbox-label" for="group-all-development-users">All development program users</label>
             </div>
-
-            <div>
-                <label class="send-email-group-list-title" for="group-all-development-users">All development program users</label>
-                <input type="checkbox" id="group-all-development-users" name="email-group" value="All development program users">
-            </div>
-
-            <div>
-                <label class="send-email-group-list-title" for="group-all-club-users">All club players</label>
-                <input type="checkbox" id="group-all-club-users" name="email-group" value="All club players">
+            <div class="send-email-group-row">
+                <input class="send-email-group-checkbox" type="checkbox" id="group-all-club-users" name="email-group" value="All club players">
+                <label class="send-email-group-checkbox-label" for="group-all-club-users">All club players</label>
             </div>
         </div>
 
