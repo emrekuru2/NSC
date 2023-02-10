@@ -1,5 +1,5 @@
 <?php
-    $title = "Login";
+    $title = "Forgot Password?";
     $loginOrRegistrationPage = true;
     
     include_once 'includes/components/newheader.php';
@@ -45,7 +45,7 @@
                             <div class="d-flex justify-content-around">
                                 <div>
                                     <!-- Forgot password -->
-                                    <a href="forgotPassword.php">Forgot password?</a>
+                                    <a href="">Forgot password?</a>
                                 </div>
                             </div>
 
