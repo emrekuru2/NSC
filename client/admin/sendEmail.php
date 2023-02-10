@@ -49,13 +49,19 @@
         </div>
 
         <!-- Email Group Button -->
-        <div class="send-email-row email-group-list-row">
-            <button class="send-email-group-btn"><i class="fa-solid fa-caret-down"></i></button>
+        <div class="send-email-row email-group-list-row" id="email-group-lists-closed">
+            <button class="send-email-group-btn"><i class="fa-solid fa-caret-down" style="margin-left: 3px;"></i></button>
             <label class="send-email-group-btn-label">Email Groups</label>
         </div>
 
         <!-- Email Group List -->
-        <div class="send-email-row email-group-list-column" id="email-group-list">
+        <div class="send-email-row email-group-list-column" id="email-group-lists-open">
+            <!-- Email Group Button -->
+            <div class="send-email-group-row">
+                <button class="send-email-group-btn"><i class="fa-solid fa-caret-up" style="margin-left: 3px;"></i></button>
+                <label class="send-email-group-btn-label">Email Groups</label>
+            </div>
+
             <!-- General List -->
             <div class="send-email-group-section">
                 <label class="send-email-group-list-title">General</label>
