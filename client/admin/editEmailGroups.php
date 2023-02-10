@@ -8,16 +8,16 @@ defined('_DEFVAR') or exit(header('Location: ../index.php'));
 
 ?>
 
-    <form class="container-fluid dark-grey-text">
-        <h1 class="display-3 text-center font-weight-bold">Manage Groups</h1>
-    </form>
+<form class="container-fluid dark-grey-text">
+    <h1 class="display-3 text-center font-weight-bold">Manage Groups</h1>
+</form>
 
-    <script>
-        console.log("Email Subject: " + sessionStorage.getItem('emailSubject'))
-        console.log("Email Name: " + sessionStorage.getItem('emailName'))
-        console.log("Email Recipients: " + sessionStorage.getItem('emailRecipients'))
-        console.log("Email Body: " + sessionStorage.getItem('emailBody'))
-    </script>
+<script>
+    console.log("Email Subject: " + sessionStorage.getItem('emailSubject'))
+    console.log("Email Name: " + sessionStorage.getItem('emailName'))
+    console.log("Email Recipients: " + sessionStorage.getItem('emailRecipients'))
+    console.log("Email Body: " + sessionStorage.getItem('emailBody'))
+</script>
 
 
 <div class="container-fluid">
@@ -45,20 +45,31 @@ defined('_DEFVAR') or exit(header('Location: ../index.php'));
                     <thead class="black white-text">
                     <tr>
                         <th scope="col">Group</th>
-                        <th scope="col">Edit</th>
-                        <th scope="col">Delete</th>
+                        <th scope="col">Actions</th>
                     </tr>
                     </thead>
-<!--                    --><?php
-//                    $path = 'test.json';
-//                    $json = file_get_contents($path);
-//                    $data = json_decode($json, true);
-//                    $groupNames = array_keys($data);
-//                    for($i = 0; $i < count($groupNames); $i++) {
-//
-//                        echo '<h1>' . $groupNames[$i] . '</h1>';
-//                    }
-//                    ?>
+                    <?php
+                    $path = 'test.json';
+                    $json = file_get_contents($path);
+                    $data = json_decode($json, true);
+                    $groupNames = array_keys($data);
+                    for($i = 0; $i < count($groupNames); $i++) {
+
+                        echo "  
+                           <tr>
+                                <td>
+                                  <a>test</a>
+                                </td>
+                                <td>
+                                <a href=../admin/editEmailGroupsForm.php?userID=$UserID&userName=$fullName>
+                                    <button type='button' >Edit</button>
+                                </a>
+                                <a href=../admin/editEmailGroupsForm.php?userID=$UserID&type=2>
+                                    <button type='button' >Delete</button>
+                                </a>
+                        </tr>";
+                    }
+                    ?>
                 </table>
             </div>
         </div>
@@ -67,3 +78,5 @@ defined('_DEFVAR') or exit(header('Location: ../index.php'));
 <?php
 include_once "../includes/components/footer.php";
 ?>
+
+
