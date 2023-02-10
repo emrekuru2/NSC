@@ -49,16 +49,17 @@ document.getElementById('add-email-recipients').addEventListener('click', () => 
     for (let i = 0; i < emailGroupChecks.length; i++) {
         // If the recipient is not checked already
         if (emailGroupChecks[i].checked && !containsRecipient(emailGroupChecks[i].value)) {
-
+            recipientsInput.value += emailGroupChecks[i].value + ';\ ';
+            emailGroupsArray += emailGroupChecks[i].value;
             // If the recipients input is empty
-            if (recipientsInput.value === '' || emailGroupsArray.length === 0) {
-                recipientsInput.value += emailGroupChecks[i].value + ';';
-                emailGroupsArray += emailGroupChecks[i].value;
-            }
-            else {
-                recipientsInput.value += ' ' + emailGroupChecks[i].value + ';';
-                emailGroupsArray += emailGroupChecks[i].value;
-            }
+            // if (recipientsInput.value === '' && emailGroupsArray.length === 0) {
+            //     recipientsInput.value += emailGroupChecks[i].value + ';';
+            //     emailGroupsArray += emailGroupChecks[i].value;
+            // }
+            // else {
+            //     recipientsInput.value += ' ' + emailGroupChecks[i].value + ';';
+            //     emailGroupsArray += emailGroupChecks[i].value;
+            // }
 
         }
     }
@@ -99,3 +100,38 @@ function clickEmailGroupsButton() {
 function isEmailGroupListOpen() {
     return emailGroupsClosed.classList.contains('inactive')
 }
+
+// Creates JSON of all recipients and submits email form
+function clickSendEmail() {
+
+    let recipientsJSON = {
+        "individualEmails": [
+            "test@email.com",
+            "secondtest@email.com"
+        ],
+        "emailGroups": [
+            "all_clubs",
+            "region_b"
+        ]
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
