@@ -51,16 +51,6 @@ document.getElementById('add-email-recipients').addEventListener('click', () => 
         if (emailGroupChecks[i].checked && !containsRecipient(emailGroupChecks[i].value)) {
             recipientsInput.value += emailGroupChecks[i].value + ';\ ';
             emailGroupsArray += emailGroupChecks[i].value;
-            // If the recipients input is empty
-            // if (recipientsInput.value === '' && emailGroupsArray.length === 0) {
-            //     recipientsInput.value += emailGroupChecks[i].value + ';';
-            //     emailGroupsArray += emailGroupChecks[i].value;
-            // }
-            // else {
-            //     recipientsInput.value += ' ' + emailGroupChecks[i].value + ';';
-            //     emailGroupsArray += emailGroupChecks[i].value;
-            // }
-
         }
     }
 });
