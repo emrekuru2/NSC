@@ -13,6 +13,18 @@ body{
      margin: auto;
      width: 55vw;
 }
+.send-email-row.active {
+     display: flex;
+     flex-wrap: wrap;
+     margin: auto;
+     width: 55vw;
+}
+.send-email-row.inactive {
+     display: none;
+     flex-wrap: wrap;
+     margin: auto;
+     width: 55vw;
+}
 
 .send-email-input-label {
      font-size: inherit;
@@ -91,7 +103,7 @@ body{
      display: flex;
 }
 
-#email-group-lists-closed, #email-group-lists-open {
+#email-group-lists-closed, #email-group-lists-opened {
      margin-top: 0.5rem;
 }
 
