@@ -49,13 +49,13 @@
         </div>
 
         <!-- Email Group Button -->
-        <div class="send-email-row">
+        <div class="send-email-row email-group-list-row">
             <button class="send-email-group-btn"><i class="fa-solid fa-caret-down"></i></button>
             <label class="send-email-group-btn-label">Email Groups</label>
         </div>
 
         <!-- Email Group List -->
-        <div class="send-email-row" id="email-group-list">
+        <div class="send-email-row email-group-list-column" id="email-group-list">
             <!-- General List -->
             <div class="send-email-group-section">
                 <label class="send-email-group-list-title">General</label>

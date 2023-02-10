@@ -46,7 +46,7 @@ document.getElementById('clear-all-recipients-btn').addEventListener('click', ()
 document.getElementById('add-email-recipients').addEventListener('click', () => {
     for (let i = 0; i < emailGroupChecks.length; i++) {
         if (emailGroupChecks[i].checked && !containsRecipient(emailGroupChecks[i].value)) {
-            recipientsInput.value += emailGroupChecks[i].value + '; ';
+            recipientsInput.value += (emailGroupChecks[i].value + "; ");
             emailRecipientsArray += emailGroupChecks[i].value;
         }
     }

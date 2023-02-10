@@ -58,11 +58,18 @@ body{
 }
 
 /* ~~~ Email Group List ~~~ */
-#email-group-list {
+.email-group-list-column {
      background-color: lightgray;
      border: 2px solid darkgray;
      border-radius: 0.25rem;
      flex-direction: column;
+     padding: 0.75rem 0 0 0.75rem;
+}
+.email-group-list-row {
+     background-color: lightgray;
+     border: 2px solid darkgray;
+     border-radius: 0.25rem;
+     flex-direction: row;
      padding: 0.75rem 0 0 0.75rem;
 }
 
