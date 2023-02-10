@@ -14,16 +14,6 @@ body{
      width: 55vw;
 }
 
-.send-email-group-section {
-     display: flex;
-     flex-wrap: wrap;
-     margin-bottom: 0.75rem;
-     width: 100%;
-}
-.send-email-group-section:nth-child(1) {
-     flex-direction: column;
-}
-
 .send-email-input-label {
      font-size: inherit;
      line-height: 1.5;
@@ -42,7 +32,7 @@ body{
 }
 
 #emailFormEmail {
-     width: calc(100% - 44px);
+     width: calc(100% - 88px);
 }
 
 .send-email-edit-group-btn {
@@ -74,6 +64,20 @@ body{
      border-radius: 0.25rem;
      flex-direction: column;
      padding: 0.75rem 0 0 0.75rem;
+}
+
+.send-email-group-section {
+     display: flex;
+     flex-wrap: wrap;
+     margin-bottom: 0.75rem;
+     width: 100%;
+}
+.send-email-group-section:nth-child(1) {
+     flex-direction: column;
+}
+
+.send-email-group-add-btn {
+     margin: 0 !important;
 }
 
 .send-email-group-row {

@@ -44,6 +44,7 @@
         <div class="send-email-row">
             <label for="emailFormEmail" class="send-email-input-label">Recipients</label>
             <input type="email" id="emailFormEmail" name="emailFormEmail" class="form-control" placeholder="recipient@email.com">
+            <button class="send-email-edit-group-btn" type="button" id="clear-all-recipients-btn" title="Clear All Recipients"><i class="fa-solid fa-delete-left fa-lg"></i></button>
             <button class="send-email-edit-group-btn" type="button" id="edit-email-group-btn" title="Edit Email Groups"><i class="fa-solid fa-user-pen"></i></button>
         </div>
 
@@ -59,15 +60,15 @@
             <div class="send-email-group-section">
                 <label class="send-email-group-list-title">General</label>
                 <div class="send-email-group-row">
-                    <input class="send-email-group-checkbox" type="checkbox" id="group-all-registered-users" name="email-group" value="All registered users">
+                    <input class="send-email-group-checkbox" type="checkbox" id="group-all-registered-users" name="email-group" value="all_users@nsca.ca">
                     <label class="send-email-group-checkbox-label" for="group-all-registered-users">All registered users</label>
                 </div>
                 <div class="send-email-group-row">
-                    <input class="send-email-group-checkbox" type="checkbox" id="group-all-development-users" name="email-group" value="All development program users">
+                    <input class="send-email-group-checkbox" type="checkbox" id="group-all-development-users" name="email-group" value="all_development@nsca.ca">
                     <label class="send-email-group-checkbox-label" for="group-all-development-users">All development program users</label>
                 </div>
                 <div class="send-email-group-row">
-                    <input class="send-email-group-checkbox" type="checkbox" id="group-all-club-users" name="email-group" value="All club players">
+                    <input class="send-email-group-checkbox" type="checkbox" id="group-all-club-users" name="email-group" value="all_clubs@nsca.ca">
                     <label class="send-email-group-checkbox-label" for="group-all-club-users">All club players</label>
                 </div>
             </div>
@@ -76,15 +77,15 @@
             <div class="send-email-group-section">
                 <label class="send-email-group-list-title">Clubs</label>
                 <div class="send-email-group-row">
-                    <input class="send-email-group-checkbox" type="checkbox" id="group-club-A" name="email-group" value="Club A">
+                    <input class="send-email-group-checkbox" type="checkbox" id="group-club-A" name="email-group" value="club_a@nsca.ca">
                     <label class="send-email-group-checkbox-label" for="group-club-A">Club A</label>
                 </div>
                 <div class="send-email-group-row">
-                    <input class="send-email-group-checkbox" type="checkbox" id="group-club-B" name="email-group" value="Club B">
+                    <input class="send-email-group-checkbox" type="checkbox" id="group-club-B" name="email-group" value="club_b@nsca.ca">
                     <label class="send-email-group-checkbox-label" for="group-club-B">Club B</label>
                 </div>
                 <div class="send-email-group-row">
-                    <input class="send-email-group-checkbox" type="checkbox" id="group-club-C" name="email-group" value="Club C">
+                    <input class="send-email-group-checkbox" type="checkbox" id="group-club-C" name="email-group" value="club_c@nsca.ca">
                     <label class="send-email-group-checkbox-label" for="group-club-C">Club C</label>
                 </div>
             </div>
@@ -93,15 +94,15 @@
             <div class="send-email-group-section">
                 <label class="send-email-group-list-title">Committees</label>
                 <div class="send-email-group-row">
-                    <input class="send-email-group-checkbox" type="checkbox" id="group-comm-A" name="email-group" value="Committee A">
+                    <input class="send-email-group-checkbox" type="checkbox" id="group-comm-A" name="email-group" value="committee_a@nsca.ca">
                     <label class="send-email-group-checkbox-label" for="group-comm-A">Committee A</label>
                 </div>
                 <div class="send-email-group-row">
-                    <input class="send-email-group-checkbox" type="checkbox" id="group-comm-B" name="email-group" value="Committee B">
+                    <input class="send-email-group-checkbox" type="checkbox" id="group-comm-B" name="email-group" value="committee_b@nsca.ca">
                     <label class="send-email-group-checkbox-label" for="group-comm-B">Committee B</label>
                 </div>
                 <div class="send-email-group-row">
-                    <input class="send-email-group-checkbox" type="checkbox" id="group-comm-C" name="email-group" value="Committee C">
+                    <input class="send-email-group-checkbox" type="checkbox" id="group-comm-C" name="email-group" value="committee_c@nsca.ca">
                     <label class="send-email-group-checkbox-label" for="group-comm-C">Committee C</label>
                 </div>
             </div>
@@ -110,18 +111,25 @@
             <div class="send-email-group-section">
                 <label class="send-email-group-list-title">Regions</label>
                 <div class="send-email-group-row">
-                    <input class="send-email-group-checkbox" type="checkbox" id="group-region-A" name="email-group" value="Region A">
+                    <input class="send-email-group-checkbox" type="checkbox" id="group-region-A" name="email-group" value="region_a@nsca.ca">
                     <label class="send-email-group-checkbox-label" for="group-region-A">Region A</label>
                 </div>
                 <div class="send-email-group-row">
-                    <input class="send-email-group-checkbox" type="checkbox" id="group-region-B" name="email-group" value="Region B">
+                    <input class="send-email-group-checkbox" type="checkbox" id="group-region-B" name="email-group" value="region_b@nsca.ca">
                     <label class="send-email-group-checkbox-label" for="group-region-B">Region B</label>
                 </div>
                 <div class="send-email-group-row">
-                    <input class="send-email-group-checkbox" type="checkbox" id="group-region-C" name="email-group" value="Region C">
+                    <input class="send-email-group-checkbox" type="checkbox" id="group-region-C" name="email-group" value="region_c@nsca.ca">
                     <label class="send-email-group-checkbox-label" for="group-region-C">Region C</label>
                 </div>
             </div>
+
+            <!-- 'Add Recipient' Button -->
+            <div class="send-email-group-section">
+                <button class="send-email-group-add-btn btn light-blue text-white my-4" type="button" id="add-email-recipients">Add</button>
+            </div>
+            <!-- 'Edit Email Groups' Button -->
+            <!-- 'Uncheck All Boxes' Button -->
 
         </div>
 
