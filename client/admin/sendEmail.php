@@ -43,7 +43,7 @@
         <!-- Recipients -->
         <div class="send-email-row">
             <label for="emailFormEmail" class="send-email-input-label">Recipients</label>
-            <input type="email" id="emailFormEmail" name="emailFormEmail" class="form-control" placeholder="recipient@email.com">
+            <input type="email" id="emailFormEmail" name="emailFormEmail" class="form-control" placeholder="recipient@email.com;">
             <button class="send-email-edit-group-btn" type="button" id="clear-all-recipients-btn" title="Clear All Recipients"><i class="fa-solid fa-delete-left fa-lg"></i></button>
             <button class="send-email-edit-group-btn" type="button" id="edit-email-group-btn" title="Edit Email Groups"><i class="fa-solid fa-user-pen"></i></button>
         </div>
@@ -149,6 +149,8 @@
         <div class="send-email-row">
             <button class="btn light-blue text-white btn-block my-4 send-email-submit-btn" type="submit" id="submitEmail" name="submitEmail">Send Email</button>
         </div>
+
+        <input type="hidden" name="email-recipient-json" value="">
 
     </form>
 
