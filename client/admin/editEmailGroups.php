@@ -44,21 +44,18 @@ defined('_DEFVAR') or exit(header('Location: ../index.php'));
                 <table class="table">
                     <thead class="black white-text">
                     <tr>
-                        <th scope="col">Group</th>
+                        <th scope="col">Club Groups</th>
                         <th scope="col">Actions</th>
                     </tr>
                     </thead>
                     <?php
-                    $path = 'test.json';
-                    $json = file_get_contents($path);
-                    $data = json_decode($json, true);
-                    $groupNames = array_keys($data);
+                    $groupNames = array("Club A", "Club B", "Club C");
                     for($i = 0; $i < count($groupNames); $i++) {
 
                         echo "  
                            <tr>
                                 <td>
-                                  <a>test</a>
+                                  <a>$groupNames[$i]</a>
                                 </td>
                                 <td>
                                 <a href=../admin/editEmailGroupsForm.php?userID=$UserID&userName=$fullName>
@@ -74,6 +71,75 @@ defined('_DEFVAR') or exit(header('Location: ../index.php'));
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-7 offset-2">
+            <div class="text-center">
+                <table class="table">
+                    <thead class="black white-text">
+                    <tr>
+                        <th scope="col">Committee Groups</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <?php
+                    $groupNames = array("Committee A", "Committee B", "Committee C");
+                    for($i = 0; $i < count($groupNames); $i++) {
+
+                        echo "  
+                           <tr>
+                                <td>
+                                  <a>$groupNames[$i]</a>
+                                </td>
+                                <td>
+                                <a href=../admin/editEmailGroupsForm.php?userID=$UserID&userName=$fullName>
+                                    <button type='button' >Edit</button>
+                                </a>
+                                <a href=../admin/editEmailGroupsForm.php?userID=$UserID&type=2>
+                                    <button type='button' >Delete</button>
+                                </a>
+                        </tr>";
+                    }
+                    ?>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-7 offset-2">
+            <div class="text-center">
+                <table class="table">
+                    <thead class="black white-text">
+                    <tr>
+                        <th scope="col">Region Groups</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <?php
+                    $groupNames = array("Region A", "Region B", "Region C");
+                    for($i = 0; $i < count($groupNames); $i++) {
+
+                        echo "  
+                           <tr>
+                                <td>
+                                  <a>$groupNames[$i]</a>
+                                </td>
+                                <td>
+                                <a href=../admin/editEmailGroupsForm.php?userID=$UserID&userName=$fullName>
+                                    <button type='button' >Edit</button>
+                                </a>
+                                <a href=../admin/editEmailGroupsForm.php?userID=$UserID&type=2>
+                                    <button type='button' >Delete</button>
+                                </a>
+                        </tr>";
+                    }
+                    ?>
+                </table>
+            </div>
+        </div>
+    </div>
+    <a href="../admin/editEmailGroupsForm.php"><button  class="btn light-blue text-white btn-md mx-0 btn-rounded"> Add New Group</button>
 </div>
 <?php
 include_once "../includes/components/footer.php";
