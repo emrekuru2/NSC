@@ -588,6 +588,17 @@ CREATE TABLE `nsca_viewcount` (
   `count` int NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `nsca_resetcodes`
+-- 
+CREATE TABLE `nsca_resetcodes` (
+  `UserID` int DEFAULT NULL,
+  `code` varchar(32) NULL,
+  `Date` datetime DEFAULT DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 1 HOUR)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
 --
 -- Dumping data for table `nsca_viewcount`
 --

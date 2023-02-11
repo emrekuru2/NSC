@@ -3,11 +3,6 @@
     $loginOrRegistrationPage = true;
     
     include_once 'includes/components/newheader.php';
-
-    if (isset($_GET['postRegister']) && $_GET['postRegister'] == "success"){
-        echo "<div class='bg-warning text-center font-weight-normal' style='padding: 1%'>You have registered successfully! Please login to access your account</div>";
-        echo "</div>";
-    }
 ?>
 
 <body class="light-blue">
@@ -21,48 +16,30 @@
                         <br>
 
                         <!-- Default form login -->
-                        <form class="text-center" action="includes/components/login.php" method="POST">
+                        <form class="text-center" action="includes/components/reset.php" method="POST">
 
-                            <p class="h4 mb-4">Sign in</p>
+                            <p class="h4 mb-4">Forgot Password?</p>
 
                             <div class="form-group row">
                                 <label for="LoginFormEmail" class="col-sm-1 col-form-label"><i class="fas fa-envelope"></i></label>
                                 <div class="col-sm-11">
-                                    <input type="email" id="LoginFormEmail" name="LoginFormEmail" class="form-control" placeholder="E-mail" required>
+                                    <input type="email" id="resetEmail" name="resetEmail" class="form-control" placeholder="E-mail" required>
                                 </div>
                             </div>
-
-                            <div class="form-group row">
-                                <label for="LoginFormPassword" class="col-sm-1 col-form-label"><i class="fas fa-key"></i></label>
-                                <div class="col-sm-11">
-                                    <input type="password" id="LoginFormPassword" name="LoginFormPassword" class="form-control" placeholder="Password" required>
-                                </div>
-                            </div>
-
-                            <input type="hidden" id="login_token" name="LoginFormToken" value="<?php echo $_SESSION['session_token'] ?>" required>
-
-
-                            <div class="d-flex justify-content-around">
-                                <div>
-                                    <!-- Forgot password -->
-                                    <a href="">Forgot password?</a>
-                                </div>
-                            </div>
-
                             <!-- Sign in button -->
-                            <button class="btn light-blue text-white btn-block my-4" type="submit" name="submitLogin" id="submitLogin" >Sign in</button>
+                            <button class="btn light-blue text-white btn-block my-4" type="submit" name="submitReset" id="submitReset" >Send email</button>
                             <?php
-                            if (isset ($_GET['LoginError']) && $_GET['LoginError'] == true){
-                                echo "<br><p class='text-danger'>You have entered incorrect credentials. Please try again.</p>";
+                            if (isset ($_GET['error']) && $_GET['error'] == true){
+                                echo "<br><p class='text-danger'>You have entered a wrong email</p>";
                             }
-                            if (isset ($_GET['sessionMismatch']) && $_GET['sessionMismatch'] == true){
-                                echo "<br><p class='text-danger'>There was an error with your login. Please try again later.</p>";
+                            if (isset ($_GET['reset']) && $_GET['reset'] == true){
+                                echo "<br><p class='text-success'>Email sent successfully. <br>Code is valid for 1 hour</p>";
                             }
 
                             ?>
                             <!-- Register -->
-                            <p>Not a member?
-                                <a href="register.php">Register</a>
+                            <p>Already a member?
+                                <a href="loginform.php">Login</a>
                             </p>
 
                         </form>
