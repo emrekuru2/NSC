@@ -150,7 +150,7 @@
             <button class="btn light-blue text-white btn-block my-4 send-email-submit-btn" type="button" id="submitEmail" name="submitEmail">Send Email</button>
         </div>
 
-        <input type="hidden" id="email-recipient-json" value="">
+        <input type="hidden" id="email-recipient-json" name="email-recipient-json" value=""/>
 
     </form>
 
