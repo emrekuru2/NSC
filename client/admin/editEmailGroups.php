@@ -121,7 +121,7 @@ defined('_DEFVAR') or exit(header('Location: ../index.php'));
             </div>
         </div>
     </div>
-    <a href="../admin/sendEmail.php"<button class="btn light-blue text-white btn-md mx-0 btn-rounded">Go Back</button>
+    <a href="../admin/sendEmail.php"<button class="btn light-blue text-white btn-md mx-0 btn-rounded">Return to Send Email Page</button>
     <a href="../admin/editEmailGroupsForm.php"><button  class="btn light-blue text-white btn-md mx-0 btn-rounded"> Add New Group</button>
 </div>
 <?php
