@@ -11,7 +11,7 @@
     }
 ?>
 <!-- Footer -->
-<footer class="page-footer font-small light-blue py-5" style="height: 120px; min-width: 100vw; margin: auto;">
+<footer class="page-footer font-small light-blue py-5" style="height: 120px; min-width: 100%; margin: auto;">
 
     <!-- Footer Elements -->
     <div class="container">

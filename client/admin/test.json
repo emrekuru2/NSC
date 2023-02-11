@@ -1,0 +1,8 @@
+{
+    "all_clubs": ["email1@gmail.com"],
+    "all_players": ["email2@gmail.com"],
+    "all_teams": ["email3@gmail.com"],
+    "region_a": ["email4@gmail.com"],
+    "region_b": ["email5@gmail.com"],
+    "region_c": ["email6@gmail.com"]
+}
