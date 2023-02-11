@@ -51,16 +51,6 @@ document.getElementById('add-email-recipients').addEventListener('click', () => 
         if (emailGroupChecks[i].checked && !containsRecipient(emailGroupChecks[i].value)) {
             recipientsInput.value += emailGroupChecks[i].value + ';\ ';
             emailGroupsArray += emailGroupChecks[i].value;
-            // If the recipients input is empty
-            // if (recipientsInput.value === '' && emailGroupsArray.length === 0) {
-            //     recipientsInput.value += emailGroupChecks[i].value + ';';
-            //     emailGroupsArray += emailGroupChecks[i].value;
-            // }
-            // else {
-            //     recipientsInput.value += ' ' + emailGroupChecks[i].value + ';';
-            //     emailGroupsArray += emailGroupChecks[i].value;
-            // }
-
         }
     }
 });
@@ -71,6 +61,8 @@ document.getElementById('email-group-lists-open-btn').addEventListener('click', 
 // 'Close Email List' Button
 document.getElementById('email-group-lists-close-btn').addEventListener('click', clickEmailGroupsButton)
 
+// 'Send Email' Button
+document.getElementById('submitEmail').addEventListener('click', clickSendEmail)
 
 // ~~~ Functions ~~~
 
@@ -81,8 +73,6 @@ function containsRecipient(groupName) {
 
 // Opens/closes the email groups list
 function clickEmailGroupsButton() {
-    console.log('clicked')
-
     // Currently Opened
     if (isEmailGroupListOpen()) {
         emailGroupsOpened.classList.replace('active','inactive');
@@ -98,25 +88,51 @@ function clickEmailGroupsButton() {
 
 // Checks if the email groups list is open
 function isEmailGroupListOpen() {
-    return emailGroupsClosed.classList.contains('inactive')
+    return emailGroupsOpened.classList.contains('active')
 }
 
 // Creates JSON of all recipients and submits email form
 function clickSendEmail() {
-
     let recipientsJSON = {
-        "individualEmails": [
-            "test@email.com",
-            "secondtest@email.com"
-        ],
-        "emailGroups": [
-            "all_clubs",
-            "region_b"
-        ]
+        "individualEmails": [],
+        "emailGroups": []
     }
 
+    // Removing spaces
+    let recipients = recipientsInput.value;
+    recipients = recipients.replaceAll(/\s/g,'');
+
+    // Adding recipient emails and groups to JSON
+    const recipientsArray = recipients.split(';');
+    for (let i = 0; i < recipientsArray.length; i++) {
+        // Group Email
+        if (containsEmailGroupKeyword(recipientsArray[i])) {
+            recipientsJSON.emailGroups.push(recipientsArray[i]);
+        }
+
+        // Individual Email
+        else {
+            recipientsJSON.individualEmails.push(recipientsArray[i]);
+        }
+    }
+
+    // Setting value of hidden value input
+    document.getElementById('email-recipient-json').value = JSON.stringify(recipientsJSON);
+
+    // Submitting 'Send Email' form
+    document.getElementById('send-email-form').submit();
 }
 
+// Checks if string contains any email group keywords
+const emailGroupKeywords = [ 'all_', 'club_', 'committee_', 'region_' ]
+function containsEmailGroupKeyword(string) {
+    for (let i = 0; i < emailGroupKeywords.length; i++) {
+        if (string.includes(emailGroupKeywords[i])) {
+            return true;
+        }
+    }
+    return false;
+}
 
 
 
