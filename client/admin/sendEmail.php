@@ -4,6 +4,10 @@
     // Prevent Direct access and prevent non-admin's to access
     RestrictAdmin(CheckRole($_SESSION['User_ID']));
     defined('_DEFVAR') or exit(header('Location: ../index.php'));
+
+    $conn = OpenCon();
+
+
 ?>
 
     <form class="container-fluid" id="send-email-form" action="processAdminEmail.php" method="POST">
@@ -77,23 +81,29 @@
                     <input class="send-email-group-checkbox" type="checkbox" id="group-all-club-users" name="email-group" value="all_clubs">
                     <label class="send-email-group-checkbox-label" for="group-all-club-users">All club players</label>
                 </div>
+                <?php
+                ?>
             </div>
 
             <!-- Clubs -->
             <div class="send-email-group-section">
                 <label class="send-email-group-list-title">Clubs</label>
-                <div class="send-email-group-row">
-                    <input class="send-email-group-checkbox" type="checkbox" id="group-club-A" name="email-group" value="club_a">
-                    <label class="send-email-group-checkbox-label" for="group-club-A">Club A</label>
-                </div>
-                <div class="send-email-group-row">
-                    <input class="send-email-group-checkbox" type="checkbox" id="group-club-B" name="email-group" value="club_b">
-                    <label class="send-email-group-checkbox-label" for="group-club-B">Club B</label>
-                </div>
-                <div class="send-email-group-row">
-                    <input class="send-email-group-checkbox" type="checkbox" id="group-club-C" name="email-group" value="club_c">
-                    <label class="send-email-group-checkbox-label" for="group-club-C">Club C</label>
-                </div>
+                <?php
+                    $allClubs = getClubs($conn);
+
+                    while ($row = mysqli_fetch_assoc($allClubs)) {
+                        $clubID = $row['ClubID'];
+                        $clubName = $row['Name'];
+                        ?>
+
+                        <div class="send-email-group-row">
+                            <input class="send-email-group-checkbox" type="checkbox" id="group-club-<?php echo $clubID ?>" name="email-group" value="club_<?php echo $clubID ?>">
+                            <label class="send-email-group-checkbox-label" for="group-club-<?php echo $clubID ?>"><?php echo $clubName ?></label>
+                        </div>
+
+                        <?php
+                    }
+                ?>
             </div>
 
             <!-- Committees -->
@@ -111,6 +121,27 @@
                     <input class="send-email-group-checkbox" type="checkbox" id="group-comm-C" name="email-group" value="committee_c">
                     <label class="send-email-group-checkbox-label" for="group-comm-C">Committee C</label>
                 </div>
+                <?php
+
+
+
+                ?>
+                <?php
+                $allSubCommittees = getSubCommitteeList($conn);
+
+                while ($row = mysqli_fetch_assoc($allSubCommittees)) {
+                    $committeeID = $row['SubID'];
+                    $committeeName = $row['Name'];
+                    ?>
+
+                    <div class="send-email-group-row">
+                        <input class="send-email-group-checkbox" type="checkbox" id="group-club-<?php echo $committeeID ?>" name="email-group" value="club_<?php echo $committeeID ?>">
+                        <label class="send-email-group-checkbox-label" for="group-club-<?php echo $committeeID ?>"><?php echo $committeeName ?></label>
+                    </div>
+
+                    <?php
+                }
+                ?>
             </div>
 
             <!-- Regions -->
@@ -128,6 +159,8 @@
                     <input class="send-email-group-checkbox" type="checkbox" id="group-region-C" name="email-group" value="region_c">
                     <label class="send-email-group-checkbox-label" for="group-region-C">Region C</label>
                 </div>
+                <?php
+                ?>
             </div>
 
             <!-- 'Add Recipient' Button -->
