@@ -45,7 +45,7 @@
                             <div class="d-flex justify-content-around">
                                 <div>
                                     <!-- Forgot password -->
-                                    <a href="">Forgot password?</a>
+                                    <a href="forgotPassword.php">Forgot password?</a>
                                 </div>
                             </div>
 
@@ -57,6 +57,9 @@
                             }
                             if (isset ($_GET['sessionMismatch']) && $_GET['sessionMismatch'] == true){
                                 echo "<br><p class='text-danger'>There was an error with your login. Please try again later.</p>";
+                            }
+                            if (isset($_GET['reset']) && $_GET['reset'] == true){
+                                echo "<br><p class='text-success'>Your password has been reset successfully. Please login to access your account.</p>";
                             }
 
                             ?>
