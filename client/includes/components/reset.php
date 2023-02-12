@@ -67,6 +67,12 @@
             if ($result==null) {
                 header("location: ../../forgotPassword.php?error=true");
             }
+            // delete any previous reset codes for the user
+            $stmt = $conn->prepare("DELETE FROM nsca_resetcodes WHERE UserID = ?");
+            $stmt->bind_param("i", $result['UserID']);
+            $stmt->execute();
+            $stmt->close();
+            
             // generate a random code with 32 characters
             $code = generateCode();
             // create a prepared statement to insert the code into nsca_resetcodes
@@ -79,9 +85,6 @@
             sendEmail($resetEmail, $code);
             // redirect to the login page
             header("location: ../../forgotPassword.php?reset=true");
-            
-        
-
     } 
     // Close connection
     mysqli_close($conn);

@@ -596,7 +596,7 @@ CREATE TABLE `nsca_viewcount` (
 CREATE TABLE `nsca_resetcodes` (
   `UserID` int DEFAULT NULL,
   `code` varchar(32) NULL,
-  `Date` datetime DEFAULT DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 1 HOUR)
+  `expiry_date` datetime DEFAULT DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 1 HOUR)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
