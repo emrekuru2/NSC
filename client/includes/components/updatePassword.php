@@ -21,37 +21,39 @@
             if ($newPassword != $confirmedPassword) {
                 header("location: ../../passwordReset.php?code=".$code."&error=true");
             }
-            // check if password is valid
-            if (preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/', $newPassword)){
-                // check if code exists in the database
-                $sql = "SELECT * FROM nsca_resetcodes WHERE code = '$code'";
-                $result = mysqli_query($conn, $sql);
-                $row = mysqli_fetch_assoc($result);
-                if($row==null){
-                    echo "<br><p class='text-danger'>Invalid code</p>";
-                }else{
-                    // get the user id from the code
-                    $userID = $row['UserID'];
-                    // hash the password
-                    $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-                    // create a prepared statement to update the password
-                    $stmt = $conn->prepare("UPDATE NSCA_Login SET password = ? WHERE UserID = ?");
-                    $stmt->bind_param("si", $hashedPassword, $userID);
-                    // execute the statement
-                    $stmt->execute();
-                    $stmt->close();
-                    // delete the code from the database
-                    $stmt = $conn->prepare("DELETE FROM nsca_resetcodes WHERE UserID = ?");
-                    $stmt->bind_param("i", $userID);
-                    $stmt->execute();
-                    $stmt->close();
-                    // redirect to the login page
-                    header("location: ../../loginform.php?reset=true");
-                }
-            }
             else{
-                header("location: ../../passwordReset.php?code=".$code."&valid=true");
-            }
+                // check if password is valid
+                if (preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/', $newPassword)){
+                    // check if code exists in the database
+                    $sql = "SELECT * FROM nsca_resetcodes WHERE code = '$code'";
+                    $result = mysqli_query($conn, $sql);
+                    $row = mysqli_fetch_assoc($result);
+                    if($row==null){
+                        echo "<br><p class='text-danger'>Invalid code</p>";
+                    }else{
+                        // get the user id from the code
+                        $userID = $row['UserID'];
+                        // hash the password
+                        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+                        // create a prepared statement to update the password
+                        $stmt = $conn->prepare("UPDATE NSCA_Login SET password = ? WHERE UserID = ?");
+                        $stmt->bind_param("si", $hashedPassword, $userID);
+                        // execute the statement
+                        $stmt->execute();
+                        $stmt->close();
+                        // delete the code from the database
+                        $stmt = $conn->prepare("DELETE FROM nsca_resetcodes WHERE UserID = ?");
+                        $stmt->bind_param("i", $userID);
+                        $stmt->execute();
+                        $stmt->close();
+                        // redirect to the login page
+                        header("location: ../../loginform.php?reset=true");
+                    }
+                }
+                else{
+                    header("location: ../../passwordReset.php?code=".$code."&valid=true");
+                }
+        }
 
             // // create prepared statement to get the user id
             // $stmt = $conn->prepare("select * from NSCA_Login where email= ?");
