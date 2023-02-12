@@ -1456,6 +1456,16 @@ function getSubCommittees($SubID) {
     $conn->close();
 }
 
+
+function getSubCommitteeList($conn) {
+    $stmt = $conn->prepare("SELECT * FROM nsca_subcommittees");
+    $stmt->execute();
+    $allSubCommittees = $stmt->get_result();
+    $stmt->close();
+
+    return $allSubCommittees;
+}
+
 /*change/edit existing sub-committees */
 function setSubCommittee( $Name, $Description, $Years,$SubID){
     
