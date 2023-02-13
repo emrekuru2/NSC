@@ -18,9 +18,7 @@
 
 workflow:
   name: '$PHP Lint'
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  
 
 before_script:
   - DEBIAN_FRONTEND=noninteractive apt-get update -yqq
