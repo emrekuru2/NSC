@@ -24,4 +24,4 @@ lint:
   script:
     - find . -name "*.php" -exec php -l {} \;
   only:
-    - main
+    - develop
