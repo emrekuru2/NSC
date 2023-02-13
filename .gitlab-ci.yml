@@ -17,8 +17,8 @@
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
 
 before_script:
-  - apt-get update -yqq
-  - apt-get install -yqq php-cli
+  - DEBIAN_FRONTEND=noninteractive apt-get update -yqq
+  - DEBIAN_FRONTEND=noninteractive apt-get install -yqq php-cli
   - DEBIAN_FRONTEND=noninteractive
 
 lint:
