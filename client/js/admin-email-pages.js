@@ -49,6 +49,9 @@ document.getElementById('add-email-recipients').addEventListener('click', () => 
     for (let i = 0; i < emailGroupChecks.length; i++) {
         // If the recipient is not checked already
         if (emailGroupChecks[i].checked && !containsRecipient(emailGroupChecks[i].value)) {
+
+            //If the last character is not ';'
+
             recipientsInput.value += emailGroupChecks[i].value + ';\ ';
             emailGroupsArray += emailGroupChecks[i].value;
         }
@@ -63,6 +66,15 @@ document.getElementById('email-group-lists-close-btn').addEventListener('click',
 
 // 'Send Email' Button
 document.getElementById('submitEmail').addEventListener('click', clickSendEmail)
+
+// 'All registered users' checkbox
+document.getElementById('group-all-registered-users').addEventListener('click', (event) => {})
+
+// 'All program users' checkbox
+document.getElementById('group-all-development-users').addEventListener('click', (event) => {})
+
+// 'All club players' checkbox
+document.getElementById('group-all-club-users').addEventListener('click', (event) => {})
 
 // ~~~ Functions ~~~
 
@@ -124,7 +136,7 @@ function clickSendEmail() {
 }
 
 // Checks if string contains any email group keywords
-const emailGroupKeywords = [ 'all_', 'club_', 'committee_', 'region_' ]
+const emailGroupKeywords = [ 'team_', 'all_', 'club_', 'committee_', 'region_', 'program_' ]
 function containsEmailGroupKeyword(string) {
     for (let i = 0; i < emailGroupKeywords.length; i++) {
         if (string.includes(emailGroupKeywords[i])) {
