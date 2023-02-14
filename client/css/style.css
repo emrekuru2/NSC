@@ -91,7 +91,7 @@ body{
      margin-bottom: 0.75rem;
      width: 100%;
 }
-.send-email-group-section:nth-child(1) {
+.send-email-group-section:nth-child(2) {
      flex-direction: column;
 }
 
