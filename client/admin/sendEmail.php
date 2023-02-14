@@ -49,16 +49,15 @@
             <label for="emailFormEmail" class="send-email-input-label">Recipients</label>
             <input type="text" id="emailFormEmail" name="emailFormEmail" class="form-control" placeholder="recipient@email.com;">
             <button class="send-email-edit-group-btn" type="button" id="clear-all-recipients-btn" title="Clear All Recipients"><i class="fa-solid fa-delete-left fa-lg"></i></button>
-            <button class="send-email-edit-group-btn" type="button" id="edit-email-group-btn" title="Edit Email Groups"><i class="fa-solid fa-user-pen"></i></button>
         </div>
 
-        <!-- Email Group Button -->
+        <!-- Email Group List Closed -->
         <div class="send-email-row email-group-list-row active" id="email-group-lists-closed">
             <button class="send-email-group-btn" type="button" id="email-group-lists-open-btn"><i class="fa-solid fa-caret-down" style="margin-left: 3px;"></i></button>
             <label class="send-email-group-btn-label" for="email-group-lists-open-btn">Email Groups</label>
         </div>
 
-        <!-- Email Group List -->
+        <!-- Email Group List Opened -->
         <div class="send-email-row email-group-list-column inactive" id="email-group-lists-opened">
             <!-- Email Group Button -->
             <div class="send-email-group-row">
@@ -185,13 +184,12 @@
                 ?>
             </div>
 
-            <!-- 'Add Recipient' Button -->
+            <!-- Buttons -->
             <div class="send-email-group-section">
                 <button class="send-email-group-add-btn btn light-blue text-white my-4" type="button" id="add-email-recipients">Add</button>
+                <button class="send-email-group-edit-groups-btn btn light-blue text-white my-4" type="button" id="uncheck-all">Uncheck All</button>
+                <button class="send-email-group-edit-groups-btn btn light-blue text-white my-4" type="button" id="edit-email-group-btn" title="Edit Email Groups">Edit Email Groups</button>
             </div>
-            <!-- 'Edit Email Groups' Button -->
-            <!-- 'Uncheck All Boxes' Button -->
-
         </div>
 
         <!-- Email Body -->

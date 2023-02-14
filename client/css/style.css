@@ -44,7 +44,7 @@ body{
 }
 
 #emailFormEmail {
-     width: calc(100% - 88px);
+     width: calc(100% - 44px);
 }
 
 .send-email-edit-group-btn {
@@ -94,9 +94,17 @@ body{
 .send-email-group-section:nth-child(2) {
      flex-direction: column;
 }
+#edit-email-group-btn {
+     margin-left: auto !important;
+     margin-right: 0.75rem !important;
+}
 
 .send-email-group-add-btn {
      margin: 0 !important;
+}
+
+.send-email-group-edit-groups-btn {
+     margin: 0 0 0 0.75rem !important;
 }
 
 .send-email-group-row {
