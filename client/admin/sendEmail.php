@@ -187,7 +187,7 @@
             <!-- Buttons -->
             <div class="send-email-group-section">
                 <button class="send-email-group-add-btn btn light-blue text-white my-4" type="button" id="add-email-recipients">Add</button>
-                <button class="send-email-group-edit-groups-btn btn light-blue text-white my-4" type="button" id="uncheck-all">Uncheck All</button>
+                <button class="send-email-group-edit-groups-btn btn light-blue text-white my-4" type="button" id="uncheck-all-groups">Uncheck All</button>
                 <button class="send-email-group-edit-groups-btn btn light-blue text-white my-4" type="button" id="edit-email-group-btn" title="Edit Email Groups">Edit Email Groups</button>
             </div>
         </div>

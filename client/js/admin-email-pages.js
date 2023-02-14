@@ -58,6 +58,13 @@ document.getElementById('add-email-recipients').addEventListener('click', () => 
     }
 });
 
+//'Uncheck All' Button Listener
+document.getElementById('uncheck-all-groups').addEventListener('click', () => {
+    for (let i = 0; i < emailGroupChecks.length; i++) {
+        emailGroupChecks[i].checked = false;
+    }
+})
+
 // 'Open Email List' Button
 document.getElementById('email-group-lists-open-btn').addEventListener('click', clickEmailGroupsButton)
 
@@ -67,13 +74,13 @@ document.getElementById('email-group-lists-close-btn').addEventListener('click',
 // 'Send Email' Button
 document.getElementById('submitEmail').addEventListener('click', clickSendEmail)
 
-// 'All registered users' checkbox
+// 'All registered users' checkbox listener
 document.getElementById('group-all-registered-users').addEventListener('click', (event) => {})
 
-// 'All program users' checkbox
+// 'All program users' checkbox listener
 document.getElementById('group-all-development-users').addEventListener('click', (event) => {})
 
-// 'All club players' checkbox
+// 'All club players' checkbox listener
 document.getElementById('group-all-club-users').addEventListener('click', (event) => {})
 
 // ~~~ Functions ~~~
