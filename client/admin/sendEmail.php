@@ -157,7 +157,7 @@
                     <label class="send-email-group-checkbox-label" for="region-moncton">Moncton</label>
                 </div>
                 <div class="send-email-group-row">
-                    <input class="send-email-group-checkbox" type="checkbox" id="region-saint-johns" name="email-saint-johns" value="region_saint_johns">
+                    <input class="send-email-group-checkbox" type="checkbox" id="region-saint-johns" name="email-group" value="region_saint_johns">
                     <label class="send-email-group-checkbox-label" for="region-saint-johns">Saint John's</label>
                 </div>
                 <!-- TODO: Populate database with region/location data. -->
