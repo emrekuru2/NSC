@@ -340,6 +340,16 @@ function checkHasATeam(){
 }
 /*Check if user has a team or not(AND SET SESSIONS) END*/
 
+/* Returns team list */
+function getTeams($conn) {
+    $stmt = $conn->prepare("SELECT * FROM nsca_team");
+    $stmt->execute();
+    $allTeams = $stmt->get_result();
+    $stmt->close();
+
+    return $allTeams;
+}
+
 /* Display all the teams */
 function displayTeams(){
     $conn = OpenCon();
@@ -1456,6 +1466,16 @@ function getSubCommittees($SubID) {
     $conn->close();
 }
 
+
+function getAllSubCommittees($conn) {
+    $stmt = $conn->prepare("SELECT * FROM nsca_subcommittees");
+    $stmt->execute();
+    $allSubCommittees = $stmt->get_result();
+    $stmt->close();
+
+    return $allSubCommittees;
+}
+
 /*change/edit existing sub-committees */
 function setSubCommittee( $Name, $Description, $Years,$SubID){
     
@@ -1470,6 +1490,15 @@ function setSubCommittee( $Name, $Description, $Years,$SubID){
     $conn->close();
 }
 
+/* Get all development programs */
+function getAllPrograms($conn) {
+    $stmt = $conn->prepare("SELECT * FROM nsca_devprograms");
+    $stmt->execute();
+    $allPrograms = $stmt->get_result();
+    $stmt->close();
+
+    return $allPrograms;
+}
 
 /* Get get program details */
 function getProgram($devID) {
