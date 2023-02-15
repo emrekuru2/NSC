@@ -12,11 +12,11 @@ sessionStorage.removeItem('emailBody');
 
 
 // ~~~ Variables ~~~
-const emailGroupChecks = document.getElementsByName('email-group'); // List of all email group checkboxes
+const emailGroupChecks = document.getElementsByName('email-group'); // All email group checkboxes
 const recipientsInput = document.getElementById('emailFormEmail'); // Email recipients input
-let emailRecipientsArray = []; // Array of email recipients to compare with
 const emailGroupsClosed = document.getElementById('email-group-lists-closed'); // Email groups menu closed
 const emailGroupsOpened = document.getElementById('email-group-lists-opened'); // Email groups menu opened
+let emailGroupsArray = []; // Array of email group recipients to compare with
 
 
 // ~~~ Listeners ~~~
@@ -41,18 +41,29 @@ document.getElementById('edit-email-group-btn').addEventListener('click', () => 
 // 'Clear Email Recipients' Button Listener
 document.getElementById('clear-all-recipients-btn').addEventListener('click', () => {
     recipientsInput.value = '';
-    emailRecipientsArray = [];
+    emailGroupsArray = [];
 })
 
 // 'Add Email Recipients' Button Listener
 document.getElementById('add-email-recipients').addEventListener('click', () => {
     for (let i = 0; i < emailGroupChecks.length; i++) {
+        // If the recipient is not checked already
         if (emailGroupChecks[i].checked && !containsRecipient(emailGroupChecks[i].value)) {
-            recipientsInput.value += (emailGroupChecks[i].value + "; ");
-            emailRecipientsArray += emailGroupChecks[i].value;
+
+            //If the last character is not ';'
+
+            recipientsInput.value += emailGroupChecks[i].value + ';\ ';
+            emailGroupsArray += emailGroupChecks[i].value;
         }
     }
 });
+
+//'Uncheck All' Button Listener
+document.getElementById('uncheck-all-groups').addEventListener('click', () => {
+    for (let i = 0; i < emailGroupChecks.length; i++) {
+        emailGroupChecks[i].checked = false;
+    }
+})
 
 // 'Open Email List' Button
 document.getElementById('email-group-lists-open-btn').addEventListener('click', clickEmailGroupsButton)
@@ -60,18 +71,27 @@ document.getElementById('email-group-lists-open-btn').addEventListener('click', 
 // 'Close Email List' Button
 document.getElementById('email-group-lists-close-btn').addEventListener('click', clickEmailGroupsButton)
 
+// 'Send Email' Button
+document.getElementById('submitEmail').addEventListener('click', clickSendEmail)
+
+// 'All registered users' checkbox listener
+document.getElementById('group-all-registered-users').addEventListener('click', (event) => {})
+
+// 'All program users' checkbox listener
+document.getElementById('group-all-development-users').addEventListener('click', (event) => {})
+
+// 'All club players' checkbox listener
+document.getElementById('group-all-club-users').addEventListener('click', (event) => {})
 
 // ~~~ Functions ~~~
 
 // Checks if an email group is already listed inside the recipients input
 function containsRecipient(groupName) {
-    return emailRecipientsArray.includes(groupName)
+    return emailGroupsArray.includes(groupName)
 }
 
 // Opens/closes the email groups list
 function clickEmailGroupsButton() {
-    console.log('clicked')
-
     // Currently Opened
     if (isEmailGroupListOpen()) {
         emailGroupsOpened.classList.replace('active','inactive');
@@ -87,5 +107,66 @@ function clickEmailGroupsButton() {
 
 // Checks if the email groups list is open
 function isEmailGroupListOpen() {
-    return emailGroupsClosed.classList.contains('inactive')
+    return emailGroupsOpened.classList.contains('active')
 }
+
+// Creates JSON of all recipients and submits email form
+function clickSendEmail() {
+    let recipientsJSON = {
+        "individualEmails": [],
+        "emailGroups": []
+    }
+
+    // Removing spaces
+    let recipients = recipientsInput.value;
+    recipients = recipients.replaceAll(/\s/g,'');
+
+    // Adding recipient emails and groups to JSON
+    const recipientsArray = recipients.split(';');
+    for (let i = 0; i < recipientsArray.length; i++) {
+        // Group Email
+        if (containsEmailGroupKeyword(recipientsArray[i])) {
+            recipientsJSON.emailGroups.push(recipientsArray[i]);
+        }
+
+        // Individual Email
+        else {
+            recipientsJSON.individualEmails.push(recipientsArray[i]);
+        }
+    }
+
+    // Setting value of hidden value input
+    document.getElementById('email-recipient-json').value = JSON.stringify(recipientsJSON);
+
+    // Submitting 'Send Email' form
+    document.getElementById('send-email-form').submit();
+}
+
+// Checks if string contains any email group keywords
+const emailGroupKeywords = [ 'team_', 'all_', 'club_', 'committee_', 'region_', 'program_' ]
+function containsEmailGroupKeyword(string) {
+    for (let i = 0; i < emailGroupKeywords.length; i++) {
+        if (string.includes(emailGroupKeywords[i])) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
