@@ -1,5 +1,6 @@
 <?php
     session_start();
+    require_once "../includes/functions/getEmailGroups.php";
 function getEmailList($emailRecipientsJSON) {
     // create an array to store all the emails
     $emailList = array();
