@@ -1,6 +1,7 @@
 image: node
 
 before_script:
+  npm init
   npm init @eslint/config
 
 
