@@ -13,6 +13,18 @@ body{
      margin: auto;
      width: 55vw;
 }
+.send-email-row.active {
+     display: flex;
+     flex-wrap: wrap;
+     margin: auto;
+     width: 55vw;
+}
+.send-email-row.inactive {
+     display: none;
+     flex-wrap: wrap;
+     margin: auto;
+     width: 55vw;
+}
 
 .send-email-input-label {
      font-size: inherit;
@@ -42,6 +54,7 @@ body{
      color: var(--gray-dark);
      margin-left: 6px;
      outline: none;
+     transition: 0.15s ease-in-out;
      width: 2.375rem;
 }
 .send-email-edit-group-btn:hover {
@@ -57,11 +70,93 @@ body{
 }
 
 /* ~~~ Email Group List ~~~ */
-.send-email-group-list {}
+.email-group-list-column {
+     background-color: lightgray;
+     border: 2px solid darkgray;
+     border-radius: 0.25rem;
+     flex-direction: column;
+     padding: 0.75rem 0 0 0.75rem;
+}
+.email-group-list-row {
+     background-color: lightgray;
+     border: 2px solid darkgray;
+     border-radius: 0.25rem;
+     flex-direction: row;
+     padding: 0.75rem 0 0 0.75rem;
+}
 
-.send-email-group-list-btn {}
+.send-email-group-section {
+     display: flex;
+     flex-wrap: wrap;
+     margin-bottom: 0.75rem;
+     width: 100%;
+}
+.send-email-group-section:nth-child(2) {
+     flex-direction: column;
+}
+#edit-email-group-btn {
+     margin-left: auto !important;
+     margin-right: 0.75rem !important;
+}
 
-.send-email-group-list-title {}
+.send-email-group-add-btn {
+     margin: 0 !important;
+}
+
+.send-email-group-edit-groups-btn {
+     margin: 0 0 0 0.75rem !important;
+}
+
+.send-email-group-row {
+     display: flex;
+}
+
+#email-group-lists-closed, #email-group-lists-opened {
+     margin-top: 0.5rem;
+}
+
+.send-email-group-btn-label {
+     font-weight: 500;
+     line-height: 2rem;
+     margin-left: 0.5rem;
+     width: calc(100% - 40px);
+}
+
+.send-email-group-btn {
+     background-color: lightgray;
+     border: 2px solid lightgray;
+     border-radius: 0.25rem;
+     color: var(--gray-dark);
+     height: 2rem;
+     outline: none;
+     transition: 0.15s ease-in-out;
+     width: 2rem;
+}
+.send-email-group-btn:hover {
+     border-color: darkgray;
+}
+.send-email-group-btn:active {
+     background-color: darkgray;
+     border-color: darkgray;
+     outline: none;
+}
+.send-email-group-btn::selection {
+     outline: none;
+}
+
+/* ~~~ Email Group List Section ~~~ */
+.send-email-group-list-title {
+     font-weight: 500;
+     margin: 0;
+     text-decoration: underline;
+     width: 100%;
+}
+.send-email-group-checkbox {}
+.send-email-group-checkbox-label {
+     font-weight: 400;
+     padding: 0.25rem 0.75rem 0.25rem 0.3rem;
+     margin: 0;
+}
 
 .send-email-alert-success {
      color: var(--gray-dark);
