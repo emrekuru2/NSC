@@ -24,6 +24,7 @@ before_script:
   - DEBIAN_FRONTEND=noninteractive apt-get update -yqq
   - DEBIAN_FRONTEND=noninteractive apt-get install -yqq php-cli
   - DEBIAN_FRONTEND=noninteractive
+  - npm install -g eslint
 
 PHP-lint:
   script:
@@ -34,11 +35,11 @@ PHP-lint:
     - push
 
 eslint:
+  stage: JS lint
   script:
-    # install eslint
-    - npm i eslint
+    
     # Run eslint
-    - node_modules/eslint/bin/eslint.js.
+    - eslint .
   only:
     - develop
     - merge_requests
