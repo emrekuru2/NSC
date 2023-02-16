@@ -17,7 +17,7 @@
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
 
 workflow:
-  name: '$PHP Lint'
+  name: 'Linting'
   
 
 before_script:
@@ -25,9 +25,21 @@ before_script:
   - DEBIAN_FRONTEND=noninteractive apt-get install -yqq php-cli
   - DEBIAN_FRONTEND=noninteractive
 
-lint:
+PHP-lint:
   script:
     - find . -name "*.php" -exec php -l {} \;
+  only:
+    - develop
+    - merge_requests
+    - push
+
+eslint:
+  stage: JS lint
+  script:
+    # install eslint
+    - npm i eslint
+    # Run eslint
+    - node_modules/eslint/bin/eslint.js .
   only:
     - develop
     - merge_requests
