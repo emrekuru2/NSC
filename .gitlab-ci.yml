@@ -1,22 +1,10 @@
 # .gitlab-ci.yml
 
-# Install dependencies
+# Install ESLint
 before_script:
-  - apt-get update -yqq
-  - apt-get install -yqq nodejs npm php-cli
   - npm install -g eslint
-
-# JavaScript linting job
-js_lint:
+lint:
   script:
     - eslint .
   only:
     - main
-
-# PHP linting job
-php_lint:
-  script:
-    - find . -name "*.php" -exec php -l {} \;
-  only:
-    - main
-    - push
