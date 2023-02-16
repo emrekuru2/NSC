@@ -39,7 +39,7 @@ eslint:
     # install eslint
     - npm i eslint
     # Run eslint
-    - node_modules/eslint/bin/eslint.js .
+    - node_modules/eslint/bin/eslint.js.
   only:
     - develop
     - merge_requests
