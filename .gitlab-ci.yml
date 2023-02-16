@@ -2,7 +2,7 @@
 
 # Install ESLint
 before_script:
-  - npm install -g eslint
+  - npx eslint -v
 lint:
   script:
     - eslint .
