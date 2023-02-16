@@ -19,3 +19,4 @@ php_lint:
     - find . -name "*.php" -exec php -l {} \;
   only:
     - main
+    - push
