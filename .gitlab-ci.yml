@@ -8,7 +8,7 @@ eslint:
  # What scripts do we want to run?
  script:
     # install eslint
-    - npm help init
+    
     - npm init @eslint/config
    
     - npm i eslint
