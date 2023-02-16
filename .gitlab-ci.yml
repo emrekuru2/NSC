@@ -1,14 +1,13 @@
 image: node
 
-before_script:
-  - npm init
-  - npm init @eslint/config
-  - npm install -g eslint
 
 
-lint:
-  script:
-    - eslint **/*.js
-  only:
-    - push
-    - develop
+# Lets name our Job eslint, because that's what it's doing.
+eslint:
+
+ # What scripts do we want to run?
+ script:
+    # install eslint
+    - npm i eslint
+    # Run eslint
+    - node_modules/eslint/bin/eslint.js .
