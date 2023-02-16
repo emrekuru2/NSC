@@ -1,17 +1,11 @@
 image: node
 
-stages:
-  - lint
+before_script:
+  - npm install -g eslint
 
-eslint:
-  stage: lint
+
+lint:
   script:
-    # Install eslint
-    - |
-      npm install eslint \
-      eslint-config-airbnb \
-      eslint-config-prettier \
-      eslint-plugin-flowtype
-    # Run eslint
-    - npm init @eslint/config
-    - node_modules/eslint/bin/eslint.js .
+    - eslint **/*.js
+  only:
+    - main
