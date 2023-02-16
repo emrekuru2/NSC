@@ -8,4 +8,5 @@ lint:
   script:
     - eslint **/*.js
   only:
-    - main
+    - push
+    - develop
