@@ -34,7 +34,6 @@ PHP-lint:
     - push
 
 eslint:
-  stage: JS lint
   script:
     # install eslint
     - npm i eslint
