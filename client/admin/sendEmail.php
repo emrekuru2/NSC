@@ -1,6 +1,7 @@
 <?php
     $title = "Send Email";
-    include_once "../includes/components/adminHeader.php";
+    require_once "../includes/components/adminHeader.php";
+    require_once "../includes/functions/getEmailGroups.php";
     // Prevent Direct access and prevent non-admin's to access
     RestrictAdmin(CheckRole($_SESSION['User_ID']));
     defined('_DEFVAR') or exit(header('Location: ../index.php'));
