@@ -3,6 +3,7 @@ image: node
 before_script:
   - npm install -g eslint
 
+
 lint:
   script:
     - eslint **/*.js
