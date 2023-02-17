@@ -1,42 +1,6 @@
 <?php
     session_start();
-    require_once "../includes/functions/getEmailGroups.php";
-function getEmailList($emailRecipientsJSON) {
-    // create an array to store all the emails
-    $emailList = array();
-    // loop through individual emails
-    foreach ($emailRecipientsJSON->individualEmails as $email) {
-        // check if email is already in list
-        if (!in_array($email, $emailList)) {
-            array_push($emailList, $email);
-        }
-    }
 
-    // create an array to store all the email groups
-    $emailGroups = array();
-    // loop through email groups
-    foreach($emailRecipientsJSON->emailGroups as $emailGroup) {
-        // check if email group is already in list
-        if (!in_array($emailGroup, $emailGroups)) {
-            array_push($emailGroups, $emailGroup);
-        }
-    }
-    
-    // connect to JSON file
-    $path = 'test.json';
-    $json = file_get_contents($path);
-    $data = json_decode($json, true);
-    // loop through email groups and get all emails from data
-    foreach ($emailGroups as $emailGroup) {
-        foreach ($data[$emailGroup] as $email) {
-            // check if email is already in list
-            if (!in_array($email, $emailList)) {
-                array_push($emailList, $email);
-            }
-        }
-    }
-    return $emailList;
-}
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
 
@@ -45,6 +9,7 @@ function getEmailList($emailRecipientsJSON) {
     require_once '../../vendor/composer/src/SMTP.php';
     require_once '../../vendor/autoload.php';
 
+    require_once "../includes/functions/getEmailGroups.php";
     include_once "../includes/functions/security.php";
     DefineSecurity();
     include_once "../db/database.php";
@@ -53,6 +18,7 @@ function getEmailList($emailRecipientsJSON) {
     // Prevent direct access and prevent non-admin's to access
     RestrictAdmin(CheckRole($_SESSION['User_ID']));
     defined('_DEFVAR') or exit(header('Location: ../index.php'));
+
 
     // Checking if form button was pressed
     if ($_SERVER["REQUEST_METHOD"] == "POST") { // Processing email
@@ -81,7 +47,7 @@ function getEmailList($emailRecipientsJSON) {
         // Assigning subject
         $mail->Subject = $emailSubject;
 
-        // Assigning name
+        // Assigning From name
         if ($emailName != "") {
             try {
                 $mail->SetFrom("testadmin@cricketnovascotia.ca", $emailName);
@@ -129,6 +95,46 @@ function getEmailList($emailRecipientsJSON) {
     else {
         header("Location: sendEmail.php?error"); // Error: Form not submitted
     }
+
+
+    // Functions
+    function getEmailList($emailRecipientsJSON) {
+    // create an array to store all the emails
+    $emailList = array();
+    // loop through individual emails
+    foreach ($emailRecipientsJSON->individualEmails as $email) {
+        // check if email is already in list
+        if (!in_array($email, $emailList)) {
+            array_push($emailList, $email);
+        }
+    }
+
+    // create an array to store all the email groups
+    $emailGroups = array();
+    // loop through email groups
+    foreach($emailRecipientsJSON->emailGroups as $emailGroup) {
+        // check if email group is already in list
+        if (!in_array($emailGroup, $emailGroups)) {
+            array_push($emailGroups, $emailGroup);
+        }
+    }
+
+    // connect to JSON file
+    $path = 'test.json';
+    $json = file_get_contents($path);
+    $data = json_decode($json, true);
+    // loop through email groups and get all emails from data
+    foreach ($emailGroups as $emailGroup) {
+        foreach ($data[$emailGroup] as $email) {
+            // check if email is already in list
+            if (!in_array($email, $emailList)) {
+                array_push($emailList, $email);
+            }
+        }
+    }
+    return $emailList;
+}
+
 ?>
 
 <head>
