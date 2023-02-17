@@ -1,7 +1,5 @@
 image: node
 
-
-
 # Lets name our Job eslint, because that's what it's doing.
 eslint:
 
@@ -9,6 +7,5 @@ eslint:
  script:
     # install eslint
     
-    - npm init @eslint/config
-    # Run eslint
-    - ./node_modules/.bin/eslint.js .
+    - npm init @eslint/config & ./node_modules/.bin/eslint **/*.js
+    
