@@ -11,4 +11,4 @@ eslint:
     
     - npm init @eslint/config
     # Run eslint
-    - eslint.js .
+    - ./node_modules/.bin/eslint.js .
