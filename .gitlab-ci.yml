@@ -8,7 +8,9 @@ eslint:
  # What scripts do we want to run?
  script:
     # install eslint
+    - DEBIAN_FRONTEND=noninteractive npm init
     - npm init @eslint/config
+   
     - npm i eslint
     # Run eslint
     - node_modules/eslint/bin/eslint.js .
