@@ -26,7 +26,7 @@
         // Adding user IDs to array
         while ($row = mysqli_fetch_assoc($allClubTeamUsers)) {
             $userID = array($row['UserID']);
-            array_push($allClubTeamEmails, getUserEmails($userID));
+            $allClubTeamEmails = array_merge($allClubTeamEmails, getUserEmails($userID));
 
         }
 
@@ -43,24 +43,24 @@
         // Adding user IDs to array
         while ($row = mysqli_fetch_assoc($allProgramUsers)) {
             $userID = array($row['UserID']);
-            array_push($allProgramUserEmails, getUserEmails($userID));
+            $allProgramUserEmails = array_merge($allProgramUserEmails, getUserEmails($userID));
 
         }
 
         return $allProgramUserEmails;
     }
 
-    // Receives an array TeamIDs and returns an array with emails of all users associated with the club
+    // Receives a ClubID and returns an array with emails of all users associated with the club
     function getClubUserEmails($clubID): array {
         $clubUserEmails = array();
 
         $conn = OpenCon();
         $clubTeams = getAllClubTeams($conn, $clubID); // Getting all associated teams of the club
 
-        // Getting all user IDs of each team
-        for ($i = 0; $i < count($clubTeams); $i++) {
-            $teamUserEmails = getTeamUserEmails($clubTeams[$i]); // Getting team users emails
-            $clubUserEmails = array_merge($clubUserEmails, $teamUserEmails);
+        // Adding all club users IDs to array
+        while ($row = mysqli_fetch_assoc($clubTeams)) {
+            $teamUserEmails = getTeamUserEmails($row['TeamID']); // Getting team users emails
+            $clubUserEmails = array_merge($clubUserEmails, $teamUserEmails); // Merging club teams users
         }
 
         return getUserEmails($clubUserEmails); // Returning array of club user emails
@@ -130,15 +130,17 @@
     // ~~~ Getting Individual Users ~~~
 
     // Receives an array of UserIDs, and returns an array with their associated emails.
-    function getUserEmails($userIdArray): array {
+    function getUserEmails($userIdArray) {
         $userEmailArray = array();
 
-        // Getting each user's email
+        //Getting each user's email
         for ($i = 0; $i < count($userIdArray); $i++) {
             $conn = OpenCon();
-            $user = getUserInfo($conn, $userIdArray[$i]);
+            $user = getUser($conn, $userIdArray[$i]);
 
-            array_push($userEmailArray, $user['email']); // Adding user email to final list
+            // Adding user email to array
+            $row = mysqli_fetch_assoc($user);
+            array_push($userEmailArray, $row['email']); // Adding user email to list
         }
 
         return $userEmailArray;

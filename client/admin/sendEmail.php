@@ -136,8 +136,8 @@
                     ?>
 
                     <div class="send-email-group-row">
-                        <input class="send-email-group-checkbox" type="checkbox" id="group-club-<?php echo $committeeID ?>" name="email-group" value="club_<?php echo $committeeID ?>">
-                        <label class="send-email-group-checkbox-label" for="group-club-<?php echo $committeeID ?>"><?php echo $committeeName ?></label>
+                        <input class="send-email-group-checkbox" type="checkbox" id="committee-<?php echo $committeeID ?>" name="email-group" value="committee_<?php echo $committeeID ?>">
+                        <label class="send-email-group-checkbox-label" for="committee-<?php echo $committeeID ?>"><?php echo $committeeName ?></label>
                     </div>
 
                     <?php
@@ -148,19 +148,22 @@
             <!-- Regions -->
             <div class="send-email-group-section">
                 <label class="send-email-group-list-title">Regions</label>
-                <div class="send-email-group-row">
-                    <input class="send-email-group-checkbox" type="checkbox" id="region-halifax" name="email-group" value="region_halifax">
-                    <label class="send-email-group-checkbox-label" for="region-halifax">Halifax</label>
-                </div>
-                <div class="send-email-group-row">
-                    <input class="send-email-group-checkbox" type="checkbox" id="region-moncton" name="email-group" value="region_moncton">
-                    <label class="send-email-group-checkbox-label" for="region-moncton">Moncton</label>
-                </div>
-                <div class="send-email-group-row">
-                    <input class="send-email-group-checkbox" type="checkbox" id="region-saint-johns" name="email-group" value="region_saint_johns">
-                    <label class="send-email-group-checkbox-label" for="region-saint-johns">Saint John's</label>
-                </div>
-                <!-- TODO: Populate database with region/location data. -->
+                <?php
+                $allRegions = getAllLocations($conn);
+
+                while ($row = mysqli_fetch_assoc($allRegions)) {
+                    $regionID = $row['LocationID'];
+                    $regionName = $row['Name'];
+                    ?>
+
+                    <div class="send-email-group-row">
+                        <input class="send-email-group-checkbox" type="checkbox" id="region-<?php echo $regionID ?>" name="email-group" value="region_<?php echo $regionID ?>">
+                        <label class="send-email-group-checkbox-label" for="region-<?php echo $regionID ?>"><?php echo $regionName ?></label>
+                    </div>
+
+                    <?php
+                }
+                ?>
             </div>
 
             <!-- Programs -->
@@ -168,6 +171,7 @@
                 <label class="send-email-group-list-title">Programs</label>
                 <?php
                 $allPrograms = getAllPrograms($conn);
+
 
                 while ($row = mysqli_fetch_assoc($allPrograms)) {
                     $programID = $row['DevID'];
@@ -208,6 +212,7 @@
     </form>
 
     <script src="../js/admin-email-pages.js"></script>
+
 <?php
     include_once "../includes/components/footer.php";
 ?>

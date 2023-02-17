@@ -1663,6 +1663,16 @@ function getTeamsInClub($clubIDGiven) {
     return $lstTeams;
 }
 
+// Returns all locations/regions
+function getAllLocations($conn) {
+    $stmt = $conn->prepare("SELECT * FROM nsca_location");
+    $stmt->execute();
+    $allLocations = $stmt->get_result();
+    $stmt->close();
+
+    return $allLocations;
+}
+
 // Returns all users associated in a region/location
 function getAllRegionUsers($conn, $locationID) {
     $stmt = $conn->prepare("SELECT * FROM nsca_locationuser WHERE LocationID = {$locationID}");
@@ -1701,6 +1711,16 @@ function getAllProgramUsers($conn) {
     $stmt->close();
 
     return $allProgramUsers;
+}
+
+// Returns user info
+function getUser($conn, $userID) {
+    $stmt = $conn->prepare("SELECT * FROM nsca_user WHERE UserID = {$userID}");
+    $stmt->execute();
+    $user = $stmt->get_result();
+    $stmt->close();
+
+    return $user;
 }
 
 ?>
