@@ -49,7 +49,7 @@ $conn = OpenCon();
                                   <a>$clubName</a>
                                 </td>
                                 <td>
-                                <a href=../admin/editEmailGroupsForm.php?>
+                                <a href=../admin/editEmailGroupsForm.php?clubID=$clubID>
                                     <button type='button' >Edit</button>
                                 </a>
                                 <a href=../admin/editEmailGroupsForm.php>
@@ -86,14 +86,13 @@ $conn = OpenCon();
                     ?>
 
                     <?php
-
                         echo "  
                            <tr>
                                 <td>
                                   <a>$committeeName</a>
                                 </td>
                                 <td>
-                                <a href=../admin/editEmailGroupsForm.php?>
+                                <a href=../admin/editEmailGroupsForm.php?committeeID=$committeeID>
                                     <button type='button'>Edit</button>
                                 </a>
                                 <a href=../admin/editEmailGroupsForm.php>
@@ -131,7 +130,7 @@ $conn = OpenCon();
                                   <a>$groupNames[$i]</a>
                                 </td>
                                 <td>
-                                <a href=../admin/editEmailGroupsForm.php>
+                                <a href=../admin/editEmailGroupsForm.php?groupNames=$groupNames[$i]>
                                     <button type='button' >Edit</button>
                                 </a>
                                 <a href=../admin/editEmailGroupsForm.php>
@@ -173,7 +172,7 @@ $conn = OpenCon();
                                   <a>$teamName</a>
                                 </td>
                                 <td>
-                                <a href=../admin/editEmailGroupsForm.php>
+                                <a href=../admin/editEmailGroupsForm.php?teamID=$teamID>
                                     <button type='button' >Edit</button>
                                 </a>
                                 <a href=../admin/editEmailGroupsForm.php>
