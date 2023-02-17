@@ -1,16 +1,19 @@
-image: node
+image: node:latest
 
+stages:
+  - lint
 
-
-# Lets name our Job eslint, because that's what it's doing.
 eslint:
+  stage: lint
+  script:
+    # Install ESLint in this docker container
+    - npm install -g eslint
+    # Configure ESLint (will read your .eslintrc file)
+    - eslint --init
+    # Run ESLint
+    - eslint **/*.js
+    
+    #npx eslint
 
- # What scripts do we want to run?
- script:
-    # install eslint
-    - DEBIAN_FRONTEND=noninteractive npm init
-    - npm init @eslint/config
-   
-    - npm i eslint
-    # Run eslint
-    - node_modules/eslint/bin/eslint.js .
+  
+    
