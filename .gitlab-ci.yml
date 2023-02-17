@@ -7,7 +7,7 @@ eslint:
  script:
     # install eslint
     
-    - npm init @eslint/config 
+    - npm init @eslint/config & npx eslint **/*.js
     - ls
-    - npx eslint **/*.js
+  
     
