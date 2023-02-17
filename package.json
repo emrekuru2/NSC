@@ -1,0 +1,15 @@
+{
+  "name": "cricket-nova-scotia",
+  "version": "1.0.0",
+  "description": "The front end web portal can be viewed by going to this [Link](​https://web.cs.dal.ca/~projectnsca/khurramaziz_cricketassociation/client/). We have retrieved a CS account from the CS helpdesk so we can use Bluenose to host the site, and database on. To connect to **bluenose.cs.dal.ca** you are able to SSH into the server using the following credentials: **username:** `projectnsca` and the ​**password**: `projectNSCA`​.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.cs.dal.ca/courses/csci-x691/cricket-nova-scotia.git"
+  },
+  "author": "Zicheng Wang",
+  "license": "ISC"
+}
