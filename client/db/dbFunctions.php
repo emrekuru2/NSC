@@ -360,7 +360,7 @@ function getTeams($conn) {
     return $allTeams;
 }
 
-function getAllTeamUsers($conn, $teamID) {
+function getTeamUsers($conn, $teamID) {
     $stmt = $conn->prepare("SELECT * FROM `nsca_teamuser` WHERE `TeamID` = {$teamID}");
     $stmt->execute();
     $allUsersTeams = $stmt->get_result();
@@ -1540,7 +1540,7 @@ function getProgram($devID) {
     $conn->close();
 }
 
-function getAllProgramUsers($conn, $programID) {
+function getProgramUsers($conn, $programID) {
     $stmt = $conn->prepare("SELECT * FROM nsca_devroleuser WHERE DevID = {$programID}");
     $stmt->execute();
     $allPrograms = $stmt->get_result();
@@ -1663,7 +1663,7 @@ function getTeamsInClub($clubIDGiven) {
     return $lstTeams;
 }
 
-// Returns an array of all users associated in a region/location
+// Returns all users associated in a region/location
 function getAllRegionUsers($conn, $locationID) {
     $stmt = $conn->prepare("SELECT * FROM nsca_locationuser WHERE LocationID = {$locationID}");
     $stmt->execute();
@@ -1671,6 +1671,36 @@ function getAllRegionUsers($conn, $locationID) {
     $stmt->close();
 
     return $allRegionUsers;
+}
+
+// Returns all users
+function getAllUsers($conn) {
+    $stmt = $conn->prepare("SELECT * FROM nsca_user");
+    $stmt->execute();
+    $allUsers = $stmt->get_result();
+    $stmt->close();
+
+    return $allUsers;
+}
+
+// Returns all users in a team/club
+function getAllClubTeamUsers($conn) {
+    $stmt = $conn->prepare("SELECT * FROM nsca_teamuser");
+    $stmt->execute();
+    $allTeamUsers = $stmt->get_result();
+    $stmt->close();
+
+    return $allTeamUsers;
+}
+
+// Returns all users in a program
+function getAllProgramUsers($conn) {
+    $stmt = $conn->prepare("SELECT * FROM nsca_devroleuser");
+    $stmt->execute();
+    $allProgramUsers = $stmt->get_result();
+    $stmt->close();
+
+    return $allProgramUsers;
 }
 
 ?>

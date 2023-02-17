@@ -1,6 +1,55 @@
 <?php
     // ~~~ Getting Groups ~~~
 
+    // Returns an array with emails of all users
+    function getAllUserEmails(): array {
+        $allUserEmails = array();
+
+        $conn = OpenCon();
+        $allUsers = getAllUsers($conn);
+
+        // Adding user IDs to array
+        while ($row = mysqli_fetch_assoc($allUsers)) {
+            array_push($allUserEmails, $row['email']);
+        }
+
+        return $allUserEmails;
+    }
+
+    // Returns an array with emails of all users in a club/team
+    function getAllClubTeamUserEmails(): array {
+        $allClubTeamEmails = array();
+
+        $conn = OpenCon();
+        $allClubTeamUsers = getAllClubTeamUsers($conn);
+
+        // Adding user IDs to array
+        while ($row = mysqli_fetch_assoc($allClubTeamUsers)) {
+            $userID = array($row['UserID']);
+            array_push($allClubTeamEmails, getUserEmails($userID));
+
+        }
+
+        return $allClubTeamEmails;
+    }
+
+    // Returns an array with emails of all users in a club/team
+    function getAllProgramUserEmails(): array {
+        $allProgramUserEmails = array();
+
+        $conn = OpenCon();
+        $allProgramUsers = getAllProgramUsers($conn);
+
+        // Adding user IDs to array
+        while ($row = mysqli_fetch_assoc($allProgramUsers)) {
+            $userID = array($row['UserID']);
+            array_push($allProgramUserEmails, getUserEmails($userID));
+
+        }
+
+        return $allProgramUserEmails;
+    }
+
     // Receives an array TeamIDs and returns an array with emails of all users associated with the club
     function getClubUserEmails($clubID): array {
         $clubUserEmails = array();
@@ -22,7 +71,7 @@
         $teamUserEmails = array();
 
         $conn = OpenCon();
-        $teamUsers = getAllTeamUsers($conn, $teamID); // Getting users associated with team
+        $teamUsers = getTeamUsers($conn, $teamID); // Getting users associated with team
 
         // Adding user IDs to array
         while ($row = mysqli_fetch_assoc($teamUsers)) {
@@ -52,7 +101,7 @@
         $programUserEmails = array();
 
         $conn = OpenCon();
-        $programUsers = getAllProgramUsers($conn, $programID); // Getting users associated with program
+        $programUsers = getProgramUsers($conn, $programID); // Getting users associated with program
 
         // Adding user IDs to array
         while ($row = mysqli_fetch_assoc($programUsers)) {
@@ -78,7 +127,7 @@
     }
 
 
-    // ~~~ Getting Users ~~~
+    // ~~~ Getting Individual Users ~~~
 
     // Receives an array of UserIDs, and returns an array with their associated emails.
     function getUserEmails($userIdArray): array {
@@ -89,7 +138,7 @@
             $conn = OpenCon();
             $user = getUserInfo($conn, $userIdArray[$i]);
 
-            array_push($userEmailArray, $user['UserID']); // Adding user email to final list
+            array_push($userEmailArray, $user['email']); // Adding user email to final list
         }
 
         return $userEmailArray;
