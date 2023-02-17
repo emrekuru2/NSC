@@ -11,5 +11,8 @@
     "url": "https://git.cs.dal.ca/courses/csci-x691/cricket-nova-scotia.git"
   },
   "author": "Zicheng Wang",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.34.0"
+  }
 }
