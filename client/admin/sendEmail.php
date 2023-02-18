@@ -1,6 +1,6 @@
 <?php
     $title = "Send Email";
-    include_once "../includes/components/adminHeader.php";
+    require_once "../includes/components/adminHeader.php";
     // Prevent Direct access and prevent non-admin's to access
     RestrictAdmin(CheckRole($_SESSION['User_ID']));
     defined('_DEFVAR') or exit(header('Location: ../index.php'));
@@ -36,12 +36,10 @@
             <input type="text" id="emailFormTitle" name="emailFormTitle" class="form-control" placeholder="Subject" required>
         </div>
 
-        <!-- Full Name -->
+        <!-- 'From' Name -->
         <div class="send-email-row">
-            <label for="emailFormFullName" class="col-form-label">Name (Optional: Leave this blank if you do not want your name to be displayed as the sender.)</label>
+            <label for="emailFormFullName" class="col-form-label">From Name(Optional)</label>
             <input type="text" id="emailFormFullName" name="emailFormFullName" class="form-control" placeholder="Name">
-            <i class="fas fa-exclamation-circle send-email-input-warning-icon"></i>
-            <p id="send-email-name-message">Leave this blank if you do not want your name to be displayed as the sender.</p>
         </div>
 
         <!-- Recipients -->
@@ -136,8 +134,8 @@
                     ?>
 
                     <div class="send-email-group-row">
-                        <input class="send-email-group-checkbox" type="checkbox" id="group-club-<?php echo $committeeID ?>" name="email-group" value="club_<?php echo $committeeID ?>">
-                        <label class="send-email-group-checkbox-label" for="group-club-<?php echo $committeeID ?>"><?php echo $committeeName ?></label>
+                        <input class="send-email-group-checkbox" type="checkbox" id="committee-<?php echo $committeeID ?>" name="email-group" value="committee_<?php echo $committeeID ?>">
+                        <label class="send-email-group-checkbox-label" for="committee-<?php echo $committeeID ?>"><?php echo $committeeName ?></label>
                     </div>
 
                     <?php
@@ -148,19 +146,22 @@
             <!-- Regions -->
             <div class="send-email-group-section">
                 <label class="send-email-group-list-title">Regions</label>
-                <div class="send-email-group-row">
-                    <input class="send-email-group-checkbox" type="checkbox" id="region-halifax" name="email-group" value="region_halifax">
-                    <label class="send-email-group-checkbox-label" for="region-halifax">Halifax</label>
-                </div>
-                <div class="send-email-group-row">
-                    <input class="send-email-group-checkbox" type="checkbox" id="region-moncton" name="email-group" value="region_moncton">
-                    <label class="send-email-group-checkbox-label" for="region-moncton">Moncton</label>
-                </div>
-                <div class="send-email-group-row">
-                    <input class="send-email-group-checkbox" type="checkbox" id="region-saint-johns" name="email-group" value="region_saint_johns">
-                    <label class="send-email-group-checkbox-label" for="region-saint-johns">Saint John's</label>
-                </div>
-                <!-- TODO: Populate database with region/location data. -->
+                <?php
+                $allRegions = getAllLocations($conn);
+
+                while ($row = mysqli_fetch_assoc($allRegions)) {
+                    $regionID = $row['LocationID'];
+                    $regionName = $row['Name'];
+                    ?>
+
+                    <div class="send-email-group-row">
+                        <input class="send-email-group-checkbox" type="checkbox" id="region-<?php echo $regionID ?>" name="email-group" value="region_<?php echo $regionID ?>">
+                        <label class="send-email-group-checkbox-label" for="region-<?php echo $regionID ?>"><?php echo $regionName ?></label>
+                    </div>
+
+                    <?php
+                }
+                ?>
             </div>
 
             <!-- Programs -->
@@ -168,6 +169,7 @@
                 <label class="send-email-group-list-title">Programs</label>
                 <?php
                 $allPrograms = getAllPrograms($conn);
+
 
                 while ($row = mysqli_fetch_assoc($allPrograms)) {
                     $programID = $row['DevID'];
@@ -186,9 +188,9 @@
 
             <!-- Buttons -->
             <div class="send-email-group-section">
-                <button class="send-email-group-add-btn btn light-blue text-white my-4" type="button" id="add-email-recipients" title="Add Checked Groups to Recipients">Add</button>
+                <!-- <button class="send-email-group-add-btn btn light-blue text-white my-4" type="button" id="add-email-recipients" title="Add Checked Groups to Recipients">Add</button> -->
                 <button class="send-email-group-edit-groups-btn btn light-blue text-white my-4" type="button" id="uncheck-all-groups" title="Uncheck All Groups">Uncheck All</button>
-                <button class="send-email-group-edit-groups-btn btn light-blue text-white my-4" type="button" id="edit-email-group-btn" title="Edit Email Groups">Edit Email Groups</button>
+                <!-- <button class="send-email-group-edit-groups-btn btn light-blue text-white my-4" type="button" id="edit-email-group-btn" title="Edit Email Groups">Edit Email Groups</button> -->
             </div>
         </div>
 
@@ -208,6 +210,7 @@
     </form>
 
     <script src="../js/admin-email-pages.js"></script>
+
 <?php
     include_once "../includes/components/footer.php";
 ?>
