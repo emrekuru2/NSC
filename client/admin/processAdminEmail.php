@@ -66,9 +66,9 @@
         foreach ($emailList as $email) {
             try {
                 $mail->addBcc($email, "toAddress");
-                if ($email != null) echo "<script> console.log('GOOD: Added " . $email . " email to BCC.') </script>";
+                echo "<script> console.log('GOOD: Added " . $email . " to BCC.') </script>";
             } catch (Exception $e) {
-                if ($email != null) echo "<script> console.log('ERROR: Unable to add " . $email . " to BCC.') </script>";
+                if ($email != "") echo "<script> console.log('ERROR: Unable to add " . $email . " to BCC.') </script>";
             }
         }
 
@@ -84,14 +84,7 @@
         try {
             if ($mail->Send()) {
                 var_dump($mail);
-
-                // Removing JS session variables from 'sendEmail.php'
-                echo "<script>\nsessionStorage.removeItem('emailSubject');\n" .
-                     "sessionStorage.removeItem('emailName');\n" .
-                     "sessionStorage.removeItem('emailRecipients');\n" .
-                     "sessionStorage.removeItem('emailBody')\n</script>";
-
-                //header("Location: sendEmail.php?success"); // Success: Email sent
+                header("Location: sendEmail.php?success"); // Success: Email sent
             } else {
                 var_dump($mail);
                 header("Location: sendEmail.php?error"); // Error: Email sending error

@@ -36,12 +36,10 @@
             <input type="text" id="emailFormTitle" name="emailFormTitle" class="form-control" placeholder="Subject" required>
         </div>
 
-        <!-- Full Name -->
+        <!-- 'From' Name -->
         <div class="send-email-row">
-            <label for="emailFormFullName" class="col-form-label">Name (Optional: Leave this blank if you do not want your name to be displayed as the sender.)</label>
+            <label for="emailFormFullName" class="col-form-label">From Name(Optional)</label>
             <input type="text" id="emailFormFullName" name="emailFormFullName" class="form-control" placeholder="Name">
-            <i class="fas fa-exclamation-circle send-email-input-warning-icon"></i>
-            <p id="send-email-name-message">Leave this blank if you do not want your name to be displayed as the sender.</p>
         </div>
 
         <!-- Recipients -->
@@ -190,9 +188,9 @@
 
             <!-- Buttons -->
             <div class="send-email-group-section">
-                <button class="send-email-group-add-btn btn light-blue text-white my-4" type="button" id="add-email-recipients" title="Add Checked Groups to Recipients">Add</button>
+                <!-- <button class="send-email-group-add-btn btn light-blue text-white my-4" type="button" id="add-email-recipients" title="Add Checked Groups to Recipients">Add</button> -->
                 <button class="send-email-group-edit-groups-btn btn light-blue text-white my-4" type="button" id="uncheck-all-groups" title="Uncheck All Groups">Uncheck All</button>
-                <button class="send-email-group-edit-groups-btn btn light-blue text-white my-4" type="button" id="edit-email-group-btn" title="Edit Email Groups">Edit Email Groups</button>
+                <!-- <button class="send-email-group-edit-groups-btn btn light-blue text-white my-4" type="button" id="edit-email-group-btn" title="Edit Email Groups">Edit Email Groups</button> -->
             </div>
         </div>
 
