@@ -2,7 +2,7 @@
 .DS_Store
 
 
-### PhpStorm Default ignored files ###
+### PhpStorm Default Ignored Files ###
 /shelf/
 /workspace.xml
 # Editor-based HTTP Client requests
@@ -11,6 +11,8 @@
 /dataSources/
 /dataSources.local.xml
 
+
+### Toptal gitignore.io Generator ###
 # Created by https://www.toptal.com/developers/gitignore/api/phpstorm
 # Edit at https://www.toptal.com/developers/gitignore?templates=phpstorm
 
