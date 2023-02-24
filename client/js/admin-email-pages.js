@@ -183,15 +183,21 @@ function clickSendEmail() {
     }
 
     let recipients = recipientsInput.value; // Getting recipients input
-    //recipients = addSemicolons(recipients); //Adding semicolon if the user forgot
+    recipients = addSemicolons(recipients); //Adding semicolons if the user forgot
     recipients = recipients.replaceAll(/\s/g,''); // Removing spaces
 
     // Adding email recipients to JSON
     const recipientsArray = recipients.split(';');
     for (let i = 0; i < recipientsArray.length; i++) {
-        // TODO: RegEx email filter.
-        // TODO: Implement isValidEmail() method.
-        recipientsJSON.individualEmails.push(recipientsArray[i]);
+        // Valid Email
+        if (isValidEmail(recipientsArray[i])) {
+            recipientsJSON.individualEmails.push(recipientsArray[i]);
+        }
+
+        //Invalid email
+        else {
+            if (recipientsArray[i] !== '') recipientsJSON.invalidEmails.push(recipientsArray[i]);
+        }
     }
 
     document.getElementById('email-recipient-json').value = JSON.stringify(recipientsJSON); // Setting value of hidden value input
@@ -210,14 +216,21 @@ function containsEmailGroupKeyword(string) {
     return false;
 }
 
-// Adds semicolon if there are none in-between words
+// Adds semicolon if there are none in-between words/emails
 function addSemicolons(string) {
-    //TODO: Finish addSemicolons() method.
+    string = string.replaceAll(/\s+/g,'\ '); // Removing all but one space between emails
+
+    let noSemiColonPattern = /[^\s;]\s+[^\s;]/gi
+    if (string.match(noSemiColonPattern)) {
+        string = string.replaceAll(/\s+/g, ';') // Replacing spaces with semicolons
+    }
+
+    return string
 }
 
-// Checks if an email string is a valid email
+// Checks if an email string is a valid email using RegEx
 function isValidEmail(email) {
-    //TODO: Finish isValidEmail() method.
+    return email.toLowerCase().match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g) != null
 }
 
 

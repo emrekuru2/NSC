@@ -38,7 +38,7 @@
 
         <!-- 'From' Name -->
         <div class="send-email-row">
-            <label for="emailFormFullName" class="col-form-label">From Name(Optional)</label>
+            <label for="emailFormFullName" class="col-form-label">From Name (Optional)</label>
             <input type="text" id="emailFormFullName" name="emailFormFullName" class="form-control" placeholder="Name">
         </div>
 
@@ -71,34 +71,13 @@
                     <label class="send-email-group-checkbox-label" for="group-all-registered-users">All registered users</label>
                 </div>
                 <div class="send-email-group-row">
-                    <input class="send-email-group-checkbox" type="checkbox" id="group-all-development-users" name="email-group" value="all_programs">
-                    <label class="send-email-group-checkbox-label" for="group-all-development-users">All programs users</label>
-                </div>
-                <div class="send-email-group-row">
                     <input class="send-email-group-checkbox" type="checkbox" id="group-all-club-users" name="email-group" value="all_clubs">
                     <label class="send-email-group-checkbox-label" for="group-all-club-users">All club players</label>
                 </div>
-            </div>
-
-            <!-- Teams -->
-            <div class="send-email-group-section">
-                <label class="send-email-group-list-title">Teams</label>
-                <?php
-                $allTeams = getTeams($conn);
-
-                while ($row = mysqli_fetch_assoc($allTeams)) {
-                    $teamID = $row['TeamID'];
-                    $teamName = $row['TeamName'];
-                    ?>
-
-                    <div class="send-email-group-row">
-                        <input class="send-email-group-checkbox" type="checkbox" id="team-<?php echo $teamID ?>" name="email-group" value="team_<?php echo $teamID ?>">
-                        <label class="send-email-group-checkbox-label" for="team-<?php echo $teamID ?>"><?php echo $teamName ?></label>
-                    </div>
-
-                    <?php
-                }
-                ?>
+                <div class="send-email-group-row">
+                    <input class="send-email-group-checkbox" type="checkbox" id="group-all-development-users" name="email-group" value="all_programs">
+                    <label class="send-email-group-checkbox-label" for="group-all-development-users">All development program users</label>
+                </div>
             </div>
 
             <!-- Clubs -->
@@ -106,6 +85,14 @@
                 <label class="send-email-group-list-title">Clubs</label>
                 <?php
                     $allClubs = getClubs($conn);
+
+                    if ($allClubs->num_rows == 0) {
+                        ?>
+                        <div class="send-email-group-row">
+                            <label class="send-email-group-no-checkbox-label">No clubs.</label>
+                        </div>
+                        <?php
+                    }
 
                     while ($row = mysqli_fetch_assoc($allClubs)) {
                         $clubID = $row['ClubID'];
@@ -122,11 +109,77 @@
                 ?>
             </div>
 
+            <!-- Teams -->
+            <div class="send-email-group-section">
+                <label class="send-email-group-list-title">Teams</label>
+                <?php
+                $allTeams = getTeams($conn);
+
+                if ($allTeams->num_rows == 0) {
+                    ?>
+                    <div class="send-email-group-row">
+                        <label class="send-email-group-no-checkbox-label">No teams.</label>
+                    </div>
+                    <?php
+                }
+
+                while ($row = mysqli_fetch_assoc($allTeams)) {
+                    $teamID = $row['TeamID'];
+                    $teamName = $row['TeamName'];
+                    ?>
+
+                    <div class="send-email-group-row">
+                        <input class="send-email-group-checkbox" type="checkbox" id="team-<?php echo $teamID ?>" name="email-group" value="team_<?php echo $teamID ?>">
+                        <label class="send-email-group-checkbox-label" for="team-<?php echo $teamID ?>"><?php echo $teamName ?></label>
+                    </div>
+
+                    <?php
+                }
+                ?>
+            </div>
+
+            <!-- Development Programs -->
+            <div class="send-email-group-section">
+                <label class="send-email-group-list-title">Development Programs</label>
+                <?php
+                $allPrograms = getAllPrograms($conn);
+
+                if ($allPrograms->num_rows == 0) {
+                    ?>
+                    <div class="send-email-group-row">
+                        <label class="send-email-group-no-checkbox-label">No development programs.</label>
+                    </div>
+                    <?php
+                }
+
+                while ($row = mysqli_fetch_assoc($allPrograms)) {
+                    $programID = $row['DevID'];
+                    $programName = $row['Name'];
+                    ?>
+
+                    <div class="send-email-group-row">
+                        <input class="send-email-group-checkbox" type="checkbox" id="program-<?php echo $programID ?>" name="email-group" value="program_<?php echo $programID ?>">
+                        <label class="send-email-group-checkbox-label" for="program-<?php echo $programID ?>"><?php echo $programName ?></label>
+                    </div>
+
+                    <?php
+                }
+                ?>
+            </div>
+
             <!-- Committees -->
             <div class="send-email-group-section">
-                <label class="send-email-group-list-title">Committees</label>
+                <label class="send-email-group-list-title">Sub-Committees</label>
                 <?php
                 $allSubCommittees = getAllSubCommittees($conn);
+
+                if ($allSubCommittees->num_rows == 0) {
+                    ?>
+                    <div class="send-email-group-row">
+                        <label class="send-email-group-no-checkbox-label">No sub-committees.</label>
+                    </div>
+                    <?php
+                }
 
                 while ($row = mysqli_fetch_assoc($allSubCommittees)) {
                     $committeeID = $row['SubID'];
@@ -149,6 +202,14 @@
                 <?php
                 $allRegions = getAllLocations($conn);
 
+                if ($allRegions->num_rows == 0) {
+                    ?>
+                    <div class="send-email-group-row">
+                        <label class="send-email-group-no-checkbox-label">No regions.</label>
+                    </div>
+                    <?php
+                }
+
                 while ($row = mysqli_fetch_assoc($allRegions)) {
                     $regionID = $row['LocationID'];
                     $regionName = $row['Name'];
@@ -157,28 +218,6 @@
                     <div class="send-email-group-row">
                         <input class="send-email-group-checkbox" type="checkbox" id="region-<?php echo $regionID ?>" name="email-group" value="region_<?php echo $regionID ?>">
                         <label class="send-email-group-checkbox-label" for="region-<?php echo $regionID ?>"><?php echo $regionName ?></label>
-                    </div>
-
-                    <?php
-                }
-                ?>
-            </div>
-
-            <!-- Programs -->
-            <div class="send-email-group-section">
-                <label class="send-email-group-list-title">Programs</label>
-                <?php
-                $allPrograms = getAllPrograms($conn);
-
-
-                while ($row = mysqli_fetch_assoc($allPrograms)) {
-                    $programID = $row['DevID'];
-                    $programName = $row['Name'];
-                    ?>
-
-                    <div class="send-email-group-row">
-                        <input class="send-email-group-checkbox" type="checkbox" id="program-<?php echo $programID ?>" name="email-group" value="program_<?php echo $programID ?>">
-                        <label class="send-email-group-checkbox-label" for="program-<?php echo $programID ?>"><?php echo $programName ?></label>
                     </div>
 
                     <?php
