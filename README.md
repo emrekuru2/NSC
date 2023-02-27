@@ -1,4 +1,106 @@
-# CodeIgniter 4 Application Starter
+# Cricket Nova Scotia 
+
+## Project structure
+```
+.
+└── cricket-nova-scotia/
+    ├── app/                Main application. Source files are here!
+    │   ├── Config/         Stores the configuration files.
+    │   ├── Controllers/    Controllers determine the program flow.
+    │   ├── Database/       Stores the database migrations and seeds files.
+    │   ├── Filters/        Stores filter classes that can run before and after controller.
+    │   ├── Helpers/        Helpers store collections of standalone functions.
+    │   ├── Language/       Multiple language support reads the language strings from here.
+    │   ├── Libraries/      Useful classes that don't fit in another category.
+    │   ├── Models/         Models work with the database to represent the business entities.
+    │   ├── ThirdParty/     ThirdParty libraries that can be used in application.
+    │   └── Views/          Views make up the HTML that is displayed to the client.       
+    ├── public/             Where the web server serves the application. CSS, JS, and images go here.
+    ├── tests/              Application tests
+    ├── vendor/             Project dependencies are stored here. CodeIgniter4 is here as well.
+    ├── .env                A file used for setting up general environment variables.
+    ├── .gitignore          Gitignore properties.
+    ├── builds              Framework specific. Shouldn't be touched.
+    ├── composer.json       Composer dependency list
+    ├── composer.lock       Dependency locking
+    ├── LICENSE             MIT License
+    ├── phpunit.xml.dist    Framework specific. Shouldn't be touched.
+    ├── preload.php         Framework specific. Shouldn't be touched.
+    └── spark               Framework specific. Shouldn't be touched.
+```
+
+## Setup for development environment
+
+1. Make sure you have **composer** installed. It should come pre-installed with xampp, mamp. Run below command to check if it's installed.
+
+```
+composer -v
+```
+
+2. `CD` to you project folder and run below command to install required dependencies
+```
+composer install
+```
+
+3.  Make sure your local web server **(apache or nginx)** is pointing to the **public** folder inside the project folder. After, edit the **baseURL** and **database** properties to enable debugging and database connection
+
+```php
+#--------------------------------------------------------------------
+# ENVIRONMENT
+#--------------------------------------------------------------------
+
+CI_ENVIRONMENT = development
+
+#--------------------------------------------------------------------
+# APP
+#--------------------------------------------------------------------
+
+app.baseURL = 'http://localhost/'
+# If you have trouble with `.`, you could also use `_`.
+# app_baseURL = ''
+# app.forceGlobalSecureRequests = false
+# app.CSPEnabled = false
+
+#--------------------------------------------------------------------
+# DATABASE
+#--------------------------------------------------------------------
+
+database.default.database = cricket
+database.default.hostname = localhost
+database.default.username = root
+database.default.password = 
+database.default.DBDriver = MySQLi
+database.default.DBPrefix =
+database.default.port = 3306
+
+```
+
+4. Drop the current project database to run the migrations and seeds. Those will create the new structred tables and populate them. Recreate a new empty database matching the name on the **.env** file.
+
+5. Finally, go back to your project, make sure your terminal is still in project folder and run these two commands to populate the database. First run:
+
+```
+php spark migrate 
+```
+6. then run:
+
+```
+php db:seed Nsca
+```
+
+7. The user emails are shown below. The password is same for all of them: **Password2023!**
+    * admin@gmail.com
+    * manager@gmail.com
+    * player@gmail.com
+    * umpire@gmail.com
+    * guest@gmail.com
+
+8. Dynamic navbar hasn't been implemented yet. To access admin dashboard simply type: `admin/dashboard` in the address bar.
+
+
+## CodeIgniter 4 Application Starter
+
+<details><summary>Click to expand</summary>
 
 ## What is CodeIgniter?
 
@@ -60,3 +162,5 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 - json (enabled by default - don't turn it off)
 - [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
 - [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+
+</details>
