@@ -26,13 +26,10 @@ class AdminFilter implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
 
-        if (auth()->loggedIn()) {
-            if (!auth()->user()->inGroup('admin')) {
-                return redirect()->to('/');
-            }
+        if (!auth()->loggedIn() || !auth()->user()->inGroup('admin')) {
+            return redirect()->to('/');
         }
 
-        return redirect()->to('/');
 
     }
 
