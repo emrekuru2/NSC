@@ -31,19 +31,17 @@
 
 ## Setup for development environment
 
-1. Make sure you have **composer** installed. It should come pre-installed with xampp, mamp. Run below command to check if it's installed.
-
-```
+> Make sure you have **composer** installed. It should come pre-installed with xampp, mamp. Run below command to check if it's installed.
+```sh
 composer -v
 ```
 
-2. `CD` to you project folder and run below command to install required dependencies
-```
+> `CD` to you project folder and run below command to install required dependencies. :exclamation: Make sure your local web server **(apache or nginx)** is pointing to the **public** folder inside the project folder. After, edit the   **baseURL** and **database** properties to enable debugging and database connection
+```sh
 composer install
 ```
 
-3.  Make sure your local web server **(apache or nginx)** is pointing to the **public** folder inside the project folder. After, edit the **baseURL** and **database** properties to enable debugging and database connection
-
+> Drop the current project database to run the migrations and seeds. Those will create the new structred tables and populate them. Recreate a new empty database matching the name on the **.env** file.
 ```php
 #--------------------------------------------------------------------
 # ENVIRONMENT
@@ -75,27 +73,28 @@ database.default.port = 3306
 
 ```
 
-4. Drop the current project database to run the migrations and seeds. Those will create the new structred tables and populate them. Recreate a new empty database matching the name on the **.env** file.
+> Finally, go back to your project, make sure your terminal is still in project folder and run these two commands to populate the database. First run
 
-5. Finally, go back to your project, make sure your terminal is still in project folder and run these two commands to populate the database. First run:
-
-```
+```sh
 php spark migrate 
 ```
-6. then run:
+> Then run
 
+```sh
+php spark db:seed Nsca
 ```
-php db:seed Nsca
-```
 
-7. The user emails are shown below. The password is same for all of them: **Password2023!**
-    * admin@gmail.com
-    * manager@gmail.com
-    * player@gmail.com
-    * umpire@gmail.com
-    * guest@gmail.com
+> The user emails, passwords and their roles are shown below. 
 
-8. Dynamic navbar hasn't been implemented yet. To access admin dashboard simply type: `admin/dashboard` in the address bar.
+| email             | password      | role    |
+|-------------------|---------------|---------|
+| admin@gmail.com   | Password2023! | admin   |
+| manager@gmail.com | Password2023! | manager |
+| player@gmail.com  | Password2023! | player  |
+| umpire@gmail.com  | Password2023! | umpire  |
+| guest@gmail.com   | Password2023! | guest   |
+
+> :exclamation: Dynamic navbar hasn't been implemented yet. To access admin dashboard simply login as admin and type: `admin/dashboard` in the address bar.
 
 
 ## CodeIgniter 4 Application Starter
