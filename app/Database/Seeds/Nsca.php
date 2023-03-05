@@ -12,7 +12,7 @@ class Nsca extends Seeder
     public function run()
     {
         $password = service('passwords');
-        
+
         $dataUsers = [
             [
                 'email'      => 'admin@gmail.com',
@@ -184,5 +184,91 @@ class Nsca extends Seeder
 
         $this->db->table('auth_groups_users')->insertBatch($dataAuthGroups);
 
+        $dataNews = [
+            [
+                'userID' => '1',
+                'title' => 'erat neque',
+                'content' => '<h4>This is an example news!&nbsp;</h4>
+                <p><code>checking editor functions...</code></p>
+                <p><img src="https://www.planetware.com/wpimages/2019/11/canada-in-pictures-beautiful-places-to-photograph-morraine-lake.jpg" alt="" width="242" height="161"></p>
+                <p>&nbsp;</p>',
+                'created_at' => Time::now(),
+
+            ],
+            [
+                'userID' => '1',
+                'title' => 'Duis dignissim',
+                'content' => '<h4>This is an example news!&nbsp;</h4>
+                <p><code>checking editor functions...</code></p>
+                <p><img src="https://www.planetware.com/wpimages/2019/11/canada-in-pictures-beautiful-places-to-photograph-morraine-lake.jpg" alt="" width="242" height="161"></p>
+                <p>&nbsp;</p>',
+                'created_at' => Time::now(),
+            ],
+            [
+                'userID' => '1',
+                'title' => 'aliquet libero.',
+                'content' => '<h4>This is an example news!&nbsp;</h4>
+                <p><code>checking editor functions...</code></p>
+                <p><img src="https://www.planetware.com/wpimages/2019/11/canada-in-pictures-beautiful-places-to-photograph-morraine-lake.jpg" alt="" width="242" height="161"></p>
+                <p>&nbsp;</p>',
+                'created_at' => Time::now(),
+            ],
+            [
+                'userID' => '1',
+                'title' => 'mauris, rhoncus',
+                'content' => '<h4>This is an example news!&nbsp;</h4>
+                <p><code>checking editor functions...</code></p>
+                <p><img src="https://www.planetware.com/wpimages/2019/11/canada-in-pictures-beautiful-places-to-photograph-morraine-lake.jpg" alt="" width="242" height="161"></p>
+                <p>&nbsp;</p>',
+                'created_at' => Time::now(),
+            ],
+            [
+                'userID' => '1',
+                'title' => 'consequat nec,',
+                'content' => '<h4>This is an example news!&nbsp;</h4>
+                <p><code>checking editor functions...</code></p>
+                <p><img src="https://www.planetware.com/wpimages/2019/11/canada-in-pictures-beautiful-places-to-photograph-morraine-lake.jpg" alt="" width="242" height="161"></p>
+                <p>&nbsp;</p>',
+                'created_at' => Time::now(),
+            ]
+        ];
+
+
+        $this->db->table('nsca_news')->insertBatch($dataNews);
+
+        $dataComments = [
+            [
+                'newsID' => '3',
+                'userID' => '4',
+                'comment' => 'consequat enim diam vel arcu. Curabitur',
+                'created_at' => Time::now(),
+            ],
+            [
+                'newsID' => '2',
+                'userID' => '5',
+                'comment' => 'consectetuer euismod est arcu',
+                'created_at' => Time::now(),
+            ],
+            [
+                'newsID' => '5',
+                'userID' => '3',
+                'comment' => 'feugiat. Sed nec metus',
+                'created_at' => Time::now(),
+            ],
+            [
+                'newsID' => '1',
+                'userID' => '4',
+                'comment' => 'est. Nunc ullamcorper, velit',
+                'created_at' => Time::now(),
+            ],
+            [
+                'newsID' => '1',
+                'userID' => '4',
+                'comment' => 'vel pede blandit',
+                'created_at' => Time::now(),
+            ]
+        ];
+
+        $this->db->table('nsca_news_comments')->insertBatch($dataComments);
     }
 }

@@ -11,7 +11,7 @@
                     <a class="nav-link <?= ($title == 'Clubs') ? "active" : "" ?>" href="/clubs"><i class="fa-solid fa-list me-2"></i>Clubs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= ($title == 'Teams') ? "active" : "" ?>"  href="/teams"><i class="fa-solid fa-people-group me-2"></i>Teams</a>
+                    <a class="nav-link <?= ($title == 'Teams') ? "active" : "" ?>" href="/teams"><i class="fa-solid fa-people-group me-2"></i>Teams</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?= ($title == 'Committees') ? "active" : "" ?>" href="/committees"><i class="fa-solid fa-chalkboard-user me-2"></i>Committees</a>
@@ -25,9 +25,108 @@
                 <li class="nav-item">
                     <a class="nav-link <?= ($title == 'News') ? "active" : "" ?>" href="/news"><i class="fa-solid fa-newspaper me-2"></i>News</a>
                 </li>
-                <li class="nav-item">
+                <?php if (auth()->loggedIn()) : ?>
+                    <div class="vr text-light d-lg-block d-none"></div>
+                    <hr class="text-light d-lg-none d-block">
+                    <?php if (auth()->user()->inGroup('admin')) : ?>
+                        <li class="nav-item">
+                            <a class="nav-link <?= ($title == 'Join Team') ? "active" : "" ?>" href="/development">Join Team</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link dropdown-toggle d-flex flex-row align-items-center gap-1" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                <img src="assets/images/Users/defaultUser.png" width="20px" height="20px" class="bg-dark rounded-circle" alt="profile_img">
+                                <span><?= auth()->user()->first_name ?></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-lg-end">
+                                <li><a class="dropdown-item" href="/admin/dashboard">Dashboard</a></li>
+                                <li><a class="dropdown-item" href="/settings">Settings</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                            </ul>
+                        </li>
+                    <?php elseif (auth()->user()->inGroup('manager')) : ?>
+                        <li class="nav-item">
+                            <a class="nav-link <?= ($title == 'My Club') ? "active" : "" ?>" href="/development">My Club</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?= ($title == 'Manage Team') ? "active" : "" ?>" href="/development">Manage Team</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?= ($title == 'Join Team') ? "active" : "" ?>" href="/development">Join Team</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link dropdown-toggle d-flex flex-row align-items-center gap-1" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                <img src="assets/images/Users/defaultUser.png" width="20px" height="20px" class="bg-dark rounded-circle" alt="profile_img">
+                                <span><?= auth()->user()->first_name ?></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-lg-end">
+                                <li><a class="dropdown-item" href="/settings">My Profile</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                            </ul>
+                        </li>
+                    <?php elseif (auth()->user()->inGroup('player')) : ?>
+                        <li class="nav-item">
+                            <a class="nav-link <?= ($title == 'Player Profile') ? "active" : "" ?>" href="/development">Player Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?= ($title == 'My Team') ? "active" : "" ?>" href="/development">My Team</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?= ($title == 'Join Team') ? "active" : "" ?>" href="/development">Join Team</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link dropdown-toggle d-flex flex-row align-items-center gap-1" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                <img src="assets/images/Users/defaultUser.png" width="20px" height="20px" class="bg-dark rounded-circle" alt="profile_img">
+                                <span><?= auth()->user()->first_name ?></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-lg-end">
+                                <li><a class="dropdown-item" href="/settings">My Profile</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                            </ul>
+                        </li>
+                    <?php elseif (auth()->user()->inGroup('umpire')) : ?>
+                        <li class="nav-item">
+                            <a class="nav-link <?= ($title == 'Join Team') ? "active" : "" ?>" href="/development">Join Team</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link dropdown-toggle d-flex flex-row align-items-center gap-1" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                <img src="assets/images/Users/defaultUser.png" width="20px" height="20px" class="bg-dark rounded-circle" alt="profile_img">
+                                <span><?= auth()->user()->first_name ?></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-lg-end">
+                                <li><a class="dropdown-item" href="/settings">My Profile</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                            </ul>
+                        </li>
+                    <?php elseif (auth()->user()->inGroup('guest')) : ?>
+                        <li class="nav-item">
+                            <a class="nav-link dropdown-toggle d-flex flex-row align-items-center gap-1" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                <img src="assets/images/Users/defaultUser.png" width="20px" height="20px" class="bg-dark rounded-circle" alt="profile_img">
+                                <span><?= auth()->user()->first_name ?></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-lg-end">
+                                <li><a class="dropdown-item" href="/settings">My Profile</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                            </ul>
+                        </li>
+                    <?php endif ?>
+                <?php else : ?>
                     <a class="nav-link" href="/login"><i class="fa-solid fa-right-to-bracket me-2"></i>Login</a>
-                </li>
+                <?php endif ?>
             </ul>
         </div>
     </div>

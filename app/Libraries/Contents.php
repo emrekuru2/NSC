@@ -1,11 +1,21 @@
-<?php namespace App\Libraries;
+<?php
 
-class Contents {
+namespace App\Libraries;
 
-    public function accordion() {
+class Contents
+{
+    public function accordion()
+    {
         return view('components/accordion');
-
     }
 
-   
+    public function editor()
+    {
+        return view('components/editor');
+    }
+
+    public function comment($content)
+    {
+        return view('components/comment', $content);
+    }
 }
