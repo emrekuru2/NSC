@@ -94,7 +94,11 @@ php spark db:seed Nsca
 | umpire@gmail.com  | Password2023! | umpire  |
 | guest@gmail.com   | Password2023! | guest   |
 
-> :exclamation: Dynamic navbar hasn't been implemented yet. To access admin dashboard simply login as admin and type: `admin/dashboard` in the address bar.
+> For any changes on database tables or dummy rows, you can use these commands down below to keep the database features up to date
+```sh
+php spark migrate:rollback
+php spark db:seed Nsca
+```
 
 
 ## CodeIgniter 4 Application Starter
