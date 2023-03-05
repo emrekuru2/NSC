@@ -41,7 +41,7 @@ composer -v
 composer install
 ```
 
-> Drop the current project database to run the migrations and seeds. Those will create the new structred tables and populate them. Recreate a new empty database matching the name on the **.env** file.
+> Create or copy the **env** file to **.env** and comment out the lines shown down below. Then adjust your database, webserver url and environment type to your local environment needs.
 ```php
 #--------------------------------------------------------------------
 # ENVIRONMENT
@@ -72,6 +72,12 @@ database.default.DBPrefix =
 database.default.port = 3306
 
 ```
+
+> If you were working with another database before, drop that database and create a new one from your database manager or with this command down below.:exclamation: The name must be written without quotes.
+```sh
+php spark db:create 'your database name that matches the name inside .env file'
+```
+
 
 > Finally, go back to your project, make sure your terminal is still in project folder and run these two commands to populate the database. First run
 
