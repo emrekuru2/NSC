@@ -200,7 +200,7 @@ class Nsca extends Migration
             'charges'       => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
             'type'          => ['type' => 'varchar', 'constraint' => 512, 'null' => true],
             'daysRun'       => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
-            'image'         => ['type' => 'varchar', 'constraint' => 120, 'null' => false, 'default' => '/assets/images/DevProgs/default.png'],
+            'image'         => ['type' => 'varchar', 'constraint' => 120, 'null' => false, 'default' => '/assets/images/DevProgs/contents/default.jpg'],
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->createTable('nsca_dev');

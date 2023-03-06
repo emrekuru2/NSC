@@ -43,6 +43,8 @@ $routes->get('about', 'Main\AboutController::index');
 
 // News functional routing
 $routes->get('news/(:num)', 'Main\NewsController::getNewsByID/$1');
+$routes->get('development/(:num)', 'Main\DevelopmentController::register/$1');
+
 
 
 // Routing for admin views and functions

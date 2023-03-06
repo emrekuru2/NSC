@@ -270,5 +270,38 @@ class Nsca extends Seeder
         ];
 
         $this->db->table('nsca_news_comments')->insertBatch($dataComments);
+        
+        $devPrograms = [
+            [
+                'name' => 'Youth Summer Camp',
+                'duration' => '16 Weeks',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eros odio, volutpat tempus ullamcorper ut, scelerisque quis neque. Nullam finibus orci id mi sagittis tincidunt. Vestibulum ornare ornare dui, et iaculis diam pulvinar vitae. Ut eu nunc ut velit elementum accumsan. Morbi nec pharetra dolor. Nunc porta suscipit lacus eget consequat. Phasellus a est vitae sapien dignissim egestas ut vulputate ipsum. Morbi sed ultricies dolor, sed mollis nibh. In semper, libero iaculis feugiat lobortis, enim metus',
+                'time' => '0915-1515',
+                'charges' => '$50 monthly',
+                'type' => 'youth',
+                'daysRun' => 'Saturdays and Sundays',
+            ],
+            [
+                'name' => 'Lunchtime Basketball',
+                'duration' => '10 Weeks',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eros odio, volutpat tempus ullamcorper ut, scelerisque quis neque. Nullam finibus orci id mi sagittis tincidunt. Vestibulum ornare ornare dui, et iaculis diam pulvinar vitae. Ut eu nunc ut velit elementum accumsan. Morbi nec pharetra dolor. Nunc porta suscipit lacus eget consequat. Phasellus a est vitae sapien dignissim egestas ut vulputate ipsum. Morbi sed ultricies dolor, sed mollis nibh. In semper, libero iaculis feugiat lobortis, enim metus',
+                'time' => '1215-1515',
+                'charges' => '$25 monthly',
+                'type' => 'youth',
+                'daysRun' => 'Saturdays and Sundays',
+            ],
+            [
+                'name' => 'Youth Summer Camp',
+                'duration' => '10 Weeks',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eros odio, volutpat tempus ullamcorper ut, scelerisque quis neque. Nullam finibus orci id mi sagittis tincidunt. Vestibulum ornare ornare dui, et iaculis diam pulvinar vitae. Ut eu nunc ut velit elementum accumsan. Morbi nec pharetra dolor. Nunc porta suscipit lacus eget consequat. Phasellus a est vitae sapien dignissim egestas ut vulputate ipsum. Morbi sed ultricies dolor, sed mollis nibh. In semper, libero iaculis feugiat lobortis, enim metus',
+                'time' => '1215-1515',
+                'charges' => '$25 monthly',
+                'type' => 'youth',
+                'daysRun' => 'Saturdays and Sundays',
+            ],
+
+        ];
+        $this->db->table('nsca_dev')->insertBatch($devPrograms);
+
     }
 }
