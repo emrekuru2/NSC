@@ -11,8 +11,22 @@ class NewsController extends BaseController
         $data = [
             'title' => 'News'
         ];
-        
-        
+
         return view('pages/admin/news', $data);
+    }
+
+    public function createNews()
+    {
+        $title = $this->request->getVar('title');
+        $content = $this->request->getVar('content');
+        $userID = auth()->id();
+
+        $news = new \App\Entities\News();
+        $news->userID = $userID;
+        $news->title = $title;
+        $news->content = $content;
+
+        $newsModel = model(NewsModel::class);
+        $newsModel->save($news);
     }
 }

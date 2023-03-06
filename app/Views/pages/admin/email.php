@@ -23,7 +23,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="message" class="form-label">Message</label>
-                        <textarea rows="6" type="text" name="message" class="form-control"></textarea>
+                        <?= view_cell('\App\Libraries\Contents::editor') ?>
                     </div>
                     <div class="form-group">
                         <button type="button" id="form-submit" class="btn btn-primary btn-block">Submit</button>

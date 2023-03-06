@@ -13,7 +13,7 @@ class NewsController extends BaseController
         $model = model(NewsModel::class);
 
         $data = [
-            'news'  => $model->paginate(5),
+            'news'  => $model->getNews()->paginate(5),
             'pager' => $model->pager,
             'title' => 'News',
         ];
@@ -21,7 +21,21 @@ class NewsController extends BaseController
         return view('pages/news', $data);
     }
 
-    
+    public function getNewsByID(int $id)
+    {
+        $newsModel = model(NewsModel::class);
+        $commentsModel = model(CommentsModel::class);
 
-    
+        $news = $newsModel->getNewsByID($id);
+        $comments = $commentsModel->getComments($id);
+
+        $data = [
+            'news'     => $news,
+            'comments' => $comments->paginate(8),
+            'title'    => $news->title,
+            'pager'    => $comments->pager,
+        ];
+
+        return view('pages/news_details', $data);
+    }
 }
