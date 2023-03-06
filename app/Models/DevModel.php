@@ -7,11 +7,11 @@ use CodeIgniter\Model;
 class DevModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'devs';
+    protected $table            = 'nsca_dev';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = 'array';
+    protected $returnType       = \App\Entities\Dev::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [];

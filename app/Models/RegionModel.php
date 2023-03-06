@@ -4,14 +4,14 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class TeamModel extends Model
+class RegionModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'nsca_team';
+    protected $table            = 'nsca_location';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = \App\Entities\Team::class;
+    protected $returnType       = \App\Entities\Region::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [];

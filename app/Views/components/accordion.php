@@ -32,7 +32,14 @@
     </h2>
     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion">
       <div class="accordion-body">
-        <!-- DYNAMIC CONTENT -->
+          <ul class="list-group">
+              <?php foreach ($teams as $team): ?>
+                  <li class="list-group-item">
+                      <input class="form-check-input me-1" type="checkbox" value="team-<?= $team->id ?>" id="team-<?= $team->id ?>">
+                      <label class="form-check-label" for="team-<?= $team->id ?>"><?= $team->name ?></label>
+                  </li>
+              <?php endforeach ?>
+          </ul>
       </div>
     </div>
   </div>
@@ -44,7 +51,12 @@
     </h2>
     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordion">
       <div class="accordion-body">
-        <!-- DYNAMIC CONTENT -->
+          <?php foreach ($clubs as $club): ?>
+              <li class="list-group-item">
+                  <input class="form-check-input me-1" type="checkbox" value="club-<?= $club->id ?>" id="club-<?= $club->id ?>">
+                  <label class="form-check-label" for="club-<?= $club->id ?>"><?= $club->name ?></label>
+              </li>
+          <?php endforeach ?>
 
       </div>
     </div>
@@ -57,7 +69,13 @@
     </h2>
     <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordion">
       <div class="accordion-body">
-        <!-- DYNAMIC CONTENT -->
+          <?php foreach ($committees as $committee): ?>
+              <li class="list-group-item">
+                  <input class="form-check-input me-1" type="checkbox" value="committee-<?= $committee->id ?>" id="committee-<?= $committee->id ?>">
+                  <label class="form-check-label" for="committee-<?= $committee->id ?>"><?= $committee->name ?></label>
+              </li>
+          <?php endforeach ?>
+
       </div>
     </div>
   </div>
@@ -69,7 +87,13 @@
     </h2>
     <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordion">
       <div class="accordion-body">
-        <!-- DYNAMIC CONTENT -->
+          <?php foreach ($regions as $region): ?>
+              <li class="list-group-item">
+                  <input class="form-check-input me-1" type="checkbox" value="region-<?= $region->id ?>" id="region-<?= $region->id ?>">
+                  <label class="form-check-label" for="region-<?= $region->id ?>"><?= $region->name ?></label>
+              </li>
+          <?php endforeach ?>
+
       </div>
     </div>
   </div>
@@ -81,7 +105,12 @@
     </h2>
     <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordion">
       <div class="accordion-body">
-        <!-- DYNAMIC CONTENT -->
+          <?php foreach ($devs as $dev): ?>
+              <li class="list-group-item">
+                  <input class="form-check-input me-1" type="checkbox" value="dev-<?= $dev->id ?>" id="dev-<?= $dev->id ?>">
+                  <label class="form-check-label" for="dev-<?= $dev->id ?>"><?= $dev->name ?></label>
+              </li>
+          <?php endforeach ?>
       </div>
     </div>
   </div>

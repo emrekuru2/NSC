@@ -2,9 +2,8 @@
 
 class Contents {
 
-    public function accordion() {
-        return view('components/accordion');
-
+    public function accordion($content) {
+        return view('components/accordion', $content);
     }
 
    

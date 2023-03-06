@@ -7,11 +7,11 @@ use CodeIgniter\Model;
 class CommitteeModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'committees';
+    protected $table            = 'nsca_committees';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = 'array';
+    protected $returnType       = \App\Entities\Committee::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [];
