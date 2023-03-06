@@ -41,6 +41,9 @@ $routes->get('contact', 'Main\ContactController::index');
 $routes->get('faqs', 'Main\FaqsController::index');
 $routes->get('about', 'Main\AboutController::index');
 
+// News functional routing
+$routes->get('news/(:num)', 'Main\NewsController::getNewsByID/$1');
+
 
 // Routing for admin views and functions
 $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
@@ -58,7 +61,8 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->get('settings', 'Admin\SettingsController::index');
 
     // Functions
-    $routes->match(['get', 'post'], 'sendEmail', 'Admin\EmailController::sendEmail');
+    $routes->match(['post'], 'sendEmail', 'Admin\EmailController::sendEmail');
+    $routes->match(['post'], 'createNews', 'Admin\NewsController::createNews');
 });
 
 // Codeigniter's default auth routing

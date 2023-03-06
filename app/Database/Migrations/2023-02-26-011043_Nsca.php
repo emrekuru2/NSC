@@ -245,13 +245,9 @@ class Nsca extends Migration
             'id'            => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
             'userID'        => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
             'title'         => ['type' => 'varchar', 'constraint' => 128, 'null' => true],
-            'first_name'    => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
-            'last_name'     => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
-            'email'         => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
-            'date'          => ['type' => 'datetime', 'null' => true],
             'content'       => ['type' => 'text'],
-            'pictures'      => ['type' => 'text'],
-            'videos'        => ['type' => 'text'],
+            'created_at'    => ['type' => 'datetime', 'null' => true],
+            'updated_at'    => ['type' => 'datetime', 'null' => true],
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->addKey('userID');
@@ -264,7 +260,7 @@ class Nsca extends Migration
             'newsID'        => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
             'userID'        => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
             'comment'       => ['type' => 'text', 'null' => false],
-            'date'          => ['type' => 'datetime', 'null' => false],
+            'created_at'    => ['type' => 'datetime', 'null' => false],
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->addKey(['newsID', 'userID']);
