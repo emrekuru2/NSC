@@ -4,14 +4,14 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CommitteeModel extends Model
+class RegionModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'nsca_committees';
+    protected $table            = 'nsca_location';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = \App\Entities\Committee::class;
+    protected $returnType       = \App\Entities\Region::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [];
