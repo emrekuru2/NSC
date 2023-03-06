@@ -22,11 +22,24 @@ class EmailController extends BaseController
         $to = $this->request->getVar('mailTo');
         $subject = $this->request->getVar('subject');
         $message = $this->request->getVar('message');
+        $stringJSON = $this->request->getVar('groups');
+        $JSON = json_decode($stringJSON);
 
         $email = \Config\Services::email();
-        $email->setTo($to);
-        $email->setFrom('testadmin@cricketnovascotia.ca', 'Confirm Registration');
+        $email->protocol = 'smtp';
+        $email->SMTPHost = 'mail.cricketnovascotia.ca';
+        $email->SMTPUser = 'testadmin@cricketnovascotia.ca';
+        $email->SMTPPass = 'CricketNSCA';
+        $email->SMTPPort = 25;
+        $email->SMTPCrypto = 'tls';
+        $email->BCCBatchMode = true;
 
+        $email->setBCC($JSON->recipients);
+//        foreach ($JSON->recipients as $recipient) {
+//            $email->setBCC($recipient);
+//        }
+
+        $email->setFrom('testadmin@cricketnovascotia.ca', 'Confirm Registration');
         $email->setSubject($subject);
         $email->setMessage($message);
 
@@ -45,7 +58,7 @@ class EmailController extends BaseController
             $data = [
                 'title'   => 'Email',
                 'type'    => 'danger',
-                'content' => 'Email could not be sent!'
+                'content' => '' . print_r($email->printDebugger(), true)
             ];
             return view('pages/admin/email', $data);
         }

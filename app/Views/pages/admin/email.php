@@ -12,10 +12,10 @@
         <div class="card shadow">
             <div class="card-header">Send email</div>
             <div class="card-body">
-                <form method="post" action="sendEmail">
+                <form id="send-email-form" method="post" action="sendEmail">
                     <div class="form-group mb-3">
-                        <label for="mailTo" class="form-label">Reciever(s) email</label>
-                        <input type="text" name="mailTo" class="form-control">
+                        <label for="mailTo" class="form-label">Receiver(s) email</label>
+                        <input type="text" name="mailTo" placeholder="example@email.com;" class="form-control">
                     </div>
                     <div class="form-group mb-3">
                         <label for="subject" class="form-label">Subject</label>
@@ -26,8 +26,9 @@
                         <textarea rows="6" type="text" name="message" class="form-control"></textarea>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                        <button type="button" id="form-submit" class="btn btn-primary btn-block">Submit</button>
                     </div>
+                    <input type="hidden" name="groups" value="">
                 </form>
             </div>
         </div>
