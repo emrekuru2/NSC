@@ -30,15 +30,11 @@ class EmailController extends BaseController
         $email->SMTPHost = 'mail.cricketnovascotia.ca';
         $email->SMTPUser = 'testadmin@cricketnovascotia.ca';
         $email->SMTPPass = 'CricketNSCA';
-        $email->SMTPPort = 25;
+        $email->SMTPPort = 26;
         $email->SMTPCrypto = 'tls';
         $email->BCCBatchMode = true;
 
-        $email->setBCC($JSON->recipients);
-//        foreach ($JSON->recipients as $recipient) {
-//            $email->setBCC($recipient);
-//        }
-
+        $email->setTo($JSON->recipients); // TODO: Change to BCC.
         $email->setFrom('testadmin@cricketnovascotia.ca', 'Confirm Registration');
         $email->setSubject($subject);
         $email->setMessage($message);
