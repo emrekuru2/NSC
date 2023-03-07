@@ -316,7 +316,7 @@ class Nsca extends Migration
 
         // Teams Table
         $this->forge->addField([
-            'id'            => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+            'teamID'        => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
             'clubID'        => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
             'compID'        => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
         ]);
