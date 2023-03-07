@@ -32,17 +32,17 @@
     </h2>
     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordion">
       <div class="accordion-body">
-         <?php
-           if (sizeof($clubs) == 0) {
-             echo '<p class="text-start margin-bottom-0">No clubs available.</p>';
-           }
+        <?php
+          if (sizeof($clubs) == 0) {
+            echo '<p class="text-start margin-bottom-0">No clubs available.</p>';
+          }
 
-           foreach ($clubs as $club): ?>
-             <li class="list-group-item">
-               <input class="form-check-input me-1" type="checkbox" value="club-<?= $club->id ?>" id="club-<?= $club->id ?>">
-               <label class="form-check-label" for="club-<?= $club->id ?>"><?= $club->name ?></label>
-             </li>
-           <?php endforeach ?>
+          foreach ($clubs as $club): ?>
+            <li class="list-group-item">
+              <input class="form-check-input me-1" type="checkbox" value="club-<?= $club->id ?>" id="club-<?= $club->id ?>">
+              <label class="form-check-label" for="club-<?= $club->id ?>"><?= $club->name ?></label>
+            </li>
+        <?php endforeach ?>
       </div>
     </div>
   </div>
@@ -54,19 +54,17 @@
     </h2>
     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion">
       <div class="accordion-body">
-          <ul class="list-group">
-            <?php
-              if (sizeof($teams) == 0) {
-                echo '<p class="text-start margin-bottom-0">No teams available.</p>';
-              }
+        <?php
+          if (sizeof($teams) == 0) {
+            echo '<p class="text-start margin-bottom-0">No teams available.</p>';
+          }
 
-              foreach ($teams as $team): ?>
-                <li class="list-group-item">
-                  <input class="form-check-input me-1" type="checkbox" value="team-<?= $team->id ?>" id="team-<?= $team->id ?>">
-                  <label class="form-check-label" for="team-<?= $team->id ?>"><?= $team->name ?></label>
-                </li>
-            <?php endforeach ?>
-          </ul>
+          foreach ($teams as $team): ?>
+            <li class="list-group-item">
+              <input class="form-check-input me-1" type="checkbox" value="team-<?= $team->id ?>" id="team-<?= $team->id ?>">
+              <label class="form-check-label" for="team-<?= $team->id ?>"><?= $team->name ?></label>
+            </li>
+        <?php endforeach ?>
       </div>
     </div>
   </div>
