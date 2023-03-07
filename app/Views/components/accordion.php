@@ -9,16 +9,16 @@
       <div class="accordion-body">
         <ul class="list-group">
           <li class="list-group-item">
-            <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckbox">
-            <label class="form-check-label" for="firstCheckbox">All registered users</label>
+            <input class="form-check-input me-1" type="checkbox" value="all-users" id="all-users">
+            <label class="form-check-label" for="all-users">All registered users</label>
           </li>
           <li class="list-group-item">
-            <input class="form-check-input me-1" type="checkbox" value="" id="secondCheckbox">
-            <label class="form-check-label" for="secondCheckbox">All programs users</label>
+            <input class="form-check-input me-1" type="checkbox" value="all-programs" id="all-programs">
+            <label class="form-check-label" for="all-programs">All programs users</label>
           </li>
           <li class="list-group-item">
-            <input class="form-check-input me-1" type="checkbox" value="" id="thirdCheckbox">
-            <label class="form-check-label" for="thirdCheckbox">All club players</label>
+            <input class="form-check-input me-1" type="checkbox" value="all-clubs" id="all-clubs">
+            <label class="form-check-label" for="all-clubs">All club players</label>
           </li>
         </ul>
       </div>

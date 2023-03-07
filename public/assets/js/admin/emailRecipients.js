@@ -1,23 +1,39 @@
-document.getElementById('form-submit').addEventListener('click', () => {
-    const recipientsInput = document.getElementsByName('mailTo')[0].value
-    let recipients = addMissingSemiColons(recipientsInput)
-    recipients = removeAllSpaces(recipients)
+// Listeners
+document.getElementById("form-submit").addEventListener("click", () => {
+  let recipientsJSON = {
+    recipients: [],
+    groups: [],
+  };
 
-    // Creating JSON of email recipients
-    const recipientsArray = recipients.split(';')
-    let recipientsJSON = { 'recipients': [] }
-    recipientsArray.forEach(recipient => recipientsJSON.recipients.push(recipient))
-    document.getElementsByName('groups')[0].value = JSON.stringify(recipientsJSON)
+  // Individuals
+  const recipientsElement = document.getElementsByName("mailTo")[0].value;
+  let recipientsString = removeAllSpaces(addMissingSemiColons(recipientsElement));
+  const recipientsArray = recipientsString.split(";");
 
-    document.getElementById('send-email-form').submit()
-})
+  recipientsArray.forEach((recipient) =>
+    recipientsJSON.recipients.push(recipient)
+  );
 
+  // Groups
+  const emailGroupChecks = document.querySelectorAll('input[type="checkbox"]');
+  emailGroupChecks.forEach((checkbox) => {
+      if (checkbox.checked) {
+        recipientsJSON.groups.push(checkbox.value)
+      }
+  });
+
+  document.getElementsByName("groups")[0].value = JSON.stringify(recipientsJSON);
+  document.getElementById("send-email-form").submit();
+});
+
+// Functions
 function addMissingSemiColons(string) {
-    string = string.replaceAll(/\s+/g,'\ ') // Removing all but one space between emails
-    if (string.match(/[^\s;]\s+[^\s;]/gi)) string = string.replaceAll(/\s+/g, ';') // Replacing spaces with semicolons
-    return string
+  string = string.replaceAll(/\s+/g, " "); // Removing all but one space between emails
+  if (string.match(/[^\s;]\s+[^\s;]/gi))
+    string = string.replaceAll(/\s+/g, ";"); // Replacing spaces with semicolons
+  return string;
 }
 
 function removeAllSpaces(string) {
-    return string.replaceAll(/\s/g,'')
+  return string.replaceAll(/\s/g, "");
 }
