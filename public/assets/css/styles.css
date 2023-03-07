@@ -203,3 +203,7 @@ tl-item.active .tl-dot:before {
 .b-danger {
     border-color: #f54394!important;
 }
+
+.margin-bottom-0 {
+    margin-bottom: 0;
+}
