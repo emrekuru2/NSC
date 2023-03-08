@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\UserTypes;
 
 use CodeIgniter\Model;
 
@@ -18,7 +18,6 @@ class DevUserModel extends Model
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
 
 
 }

@@ -1,42 +1,22 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\UserTypes;
 
 use CodeIgniter\Model;
 
 class TeamUserModel extends Model
 {
-    protected $DBGroup          = 'default';
-    protected $table            = 'teamusers';
+    // Construction
+    protected $table            = 'nsca_team_user';
     protected $primaryKey       = 'id';
-    protected $useAutoIncrement = true;
-    protected $insertID         = 0;
-    protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
+    protected $returnType       = \App\Entities\UserTypes\TeamUser::class;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['userID', 'teamID', 'isClubManager', 'isTeamCaptain', 'isViceCaptain', 'isWaitingToJoin'];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
 
-    // Validation
-    protected $validationRules      = [];
-    protected $validationMessages   = [];
-    protected $skipValidation       = false;
-    protected $cleanValidationRules = true;
-
-    // Callbacks
-    protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
-    protected $afterInsert    = [];
-    protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
-    protected $beforeFind     = [];
-    protected $afterFind      = [];
-    protected $beforeDelete   = [];
-    protected $afterDelete    = [];
 }
