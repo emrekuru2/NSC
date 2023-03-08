@@ -30,6 +30,34 @@ class Nsca extends Seeder
         ];
         $this->db->table('nsca_users')->insertBatch($dataAdminUser);
 
+        $dataAuthAdminIdentity = [
+            [
+                'user_id'      => 1,
+                'type'         => 'email_password',
+                'name'         => null,
+                'secret'       => 'admin@gmail.com',
+                'secret2'      => $password->hash('Password2023!'),
+                'expires'      => null,
+                'extra'        => null,
+                'force_reset'  => 0,
+                'last_used_at' => null,
+                'created_at'   => Time::now(),
+                'updated_at'   => Time::now()
+            ]
+        ];
+        $this->db->table('auth_identities')->insertBatch($dataAuthAdminIdentity);
+
+        $dataAuthAdminGroup = [
+            [
+                'user_id'    => 1,
+                'group'      => 'admin',
+                'created_at' => Time::now(),
+            ]
+        ];
+        $this->db->table('auth_groups_users')->insertBatch($dataAuthAdminGroup);
+
+
+
         $testDataUsers = [
             [
                 'email'      => 'manager@gmail.com',
@@ -164,20 +192,7 @@ class Nsca extends Seeder
         ];
         $this->db->table('nsca_users')->insertBatch($testDataUsers);
 
-        $dataAuthIdentities = [
-            [
-                'user_id'      => 1,
-                'type'         => 'email_password',
-                'name'         => null,
-                'secret'       => 'admin@gmail.com',
-                'secret2'      => $password->hash('Password2023!'),
-                'expires'      => null,
-                'extra'        => null,
-                'force_reset'  => 0,
-                'last_used_at' => null,
-                'created_at'   => Time::now(),
-                'updated_at'   => Time::now()
-            ],
+        $testDataAuthIdentities = [
             [
                 'user_id'      => 2,
                 'type'         => 'email_password',
@@ -229,16 +244,89 @@ class Nsca extends Seeder
                 'last_used_at' => null,
                 'created_at'   => Time::now(),
                 'updated_at'   => Time::now()
+            ],
+            [
+                'user_id'      => 6,
+                'type'         => 'email_password',
+                'name'         => null,
+                'secret'       => 'test1@email.com',
+                'secret2'      => $password->hash('Password2023!'),
+                'expires'      => null,
+                'extra'        => null,
+                'force_reset'  => 0,
+                'last_used_at' => null,
+                'created_at'   => Time::now(),
+                'updated_at'   => Time::now()
+            ],
+            [
+                'user_id'      => 7,
+                'type'         => 'email_password',
+                'name'         => null,
+                'secret'       => 'test2@email.com',
+                'secret2'      => $password->hash('Password2023!'),
+                'expires'      => null,
+                'extra'        => null,
+                'force_reset'  => 0,
+                'last_used_at' => null,
+                'created_at'   => Time::now(),
+                'updated_at'   => Time::now()
+            ],
+            [
+                'user_id'      => 8,
+                'type'         => 'email_password',
+                'name'         => null,
+                'secret'       => 'test3@email.com',
+                'secret2'      => $password->hash('Password2023!'),
+                'expires'      => null,
+                'extra'        => null,
+                'force_reset'  => 0,
+                'last_used_at' => null,
+                'created_at'   => Time::now(),
+                'updated_at'   => Time::now()
+            ],
+            [
+                'user_id'      => 9,
+                'type'         => 'email_password',
+                'name'         => null,
+                'secret'       => 'test4@email.com',
+                'secret2'      => $password->hash('Password2023!'),
+                'expires'      => null,
+                'extra'        => null,
+                'force_reset'  => 0,
+                'last_used_at' => null,
+                'created_at'   => Time::now(),
+                'updated_at'   => Time::now()
+            ],
+            [
+                'user_id'      => 10,
+                'type'         => 'email_password',
+                'name'         => null,
+                'secret'       => 'test5@email.com',
+                'secret2'      => $password->hash('Password2023!'),
+                'expires'      => null,
+                'extra'        => null,
+                'force_reset'  => 0,
+                'last_used_at' => null,
+                'created_at'   => Time::now(),
+                'updated_at'   => Time::now()
+            ],
+            [
+                'user_id'      => 11,
+                'type'         => 'email_password',
+                'name'         => null,
+                'secret'       => 'test6@email.com',
+                'secret2'      => $password->hash('Password2023!'),
+                'expires'      => null,
+                'extra'        => null,
+                'force_reset'  => 0,
+                'last_used_at' => null,
+                'created_at'   => Time::now(),
+                'updated_at'   => Time::now()
             ]
         ];
-        $this->db->table('auth_identities')->insertBatch($dataAuthIdentities);
+        $this->db->table('auth_identities')->insertBatch($testDataAuthIdentities);
 
-        $dataAuthGroups = [
-            [
-                'user_id'    => 1,
-                'group'      => 'admin',
-                'created_at' => Time::now(),
-            ],
+        $testDataAuthGroups = [
             [
                 'user_id'    => 2,
                 'group'      => 'manager',
@@ -258,11 +346,39 @@ class Nsca extends Seeder
                 'user_id'    => 5,
                 'group'      => 'guest',
                 'created_at' => Time::now(),
+            ],
+            [
+                'user_id'    => 6,
+                'group'      => 'player',
+                'created_at' => Time::now(),
+            ],
+            [
+                'user_id'    => 7,
+                'group'      => 'player',
+                'created_at' => Time::now(),
+            ],
+            [
+                'user_id'    => 8,
+                'group'      => 'player',
+                'created_at' => Time::now(),
+            ],
+            [
+                'user_id'    => 9,
+                'group'      => 'player',
+                'created_at' => Time::now(),
+            ],
+            [
+                'user_id'    => 10,
+                'group'      => 'player',
+                'created_at' => Time::now(),
+            ],
+            [
+                'user_id'    => 11,
+                'group'      => 'player',
+                'created_at' => Time::now(),
             ]
         ];
-        $this->db->table('auth_groups_users')->insertBatch($dataAuthGroups);
-
-
+        $this->db->table('auth_groups_users')->insertBatch($testDataAuthGroups);
 
         $testDataNews = [
             [
