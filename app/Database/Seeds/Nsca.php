@@ -563,7 +563,7 @@ class Nsca extends Seeder
                 'daysRun' => 'Saturdays and Sundays',
             ],
             [
-                'name' => 'Youth Summer Camp',
+                'name' => 'Youth Spring Camp',
                 'duration' => '10 Weeks',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eros odio, volutpat tempus ullamcorper ut, scelerisque quis neque. Nullam finibus orci id mi sagittis tincidunt. Vestibulum ornare ornare dui, et iaculis diam pulvinar vitae. Ut eu nunc ut velit elementum accumsan. Morbi nec pharetra dolor. Nunc porta suscipit lacus eget consequat. Phasellus a est vitae sapien dignissim egestas ut vulputate ipsum. Morbi sed ultricies dolor, sed mollis nibh. In semper, libero iaculis feugiat lobortis, enim metus',
                 'time' => '1215-1515',
@@ -579,13 +579,19 @@ class Nsca extends Seeder
                 'id' => 1,
                 'name' => 'Halifax',
                 'address' => '123 Test Street',
-                'description'   => 'Halifax region description'
+                'description'   => 'Halifax region description.'
             ],
             [
                 'id' => 2,
-                'name' => 'Moncton',
+                'name' => 'Sackville',
                 'address' => '123 Test Street',
-                'description'   => 'Moncton region description'
+                'description'   => 'Sackville region description.'
+            ],
+            [
+                'id' => 3,
+                'name' => 'Dartmouth',
+                'address' => '123 Test Street',
+                'description'   => 'Dartmouth region description.'
             ]
         ];
         $this->db->table('nsca_location')->insertBatch($testDataRegions);
@@ -843,5 +849,72 @@ class Nsca extends Seeder
         ];
         $this->db->table('nsca_committees_user')->insertBatch($testDataCommitteeUsers);
 
+        $testDataDevProgramUsers = [
+            [
+                'id' => 1,
+                'devID' => 1,
+                'userID' => 12
+            ],
+            [
+                'id' => 2,
+                'devID' => 2,
+                'userID' => 13
+            ],
+            [
+                'id' => 3,
+                'devID' => 3,
+                'userID' => 14
+            ]
+        ];
+        $this->db->table('nsca_dev_user')->insertBatch($testDataDevProgramUsers);
+
+        $testDataRegionUsers = [
+            [
+                'id' => 1,
+                'locationID' => 1,
+                'userID' => 6
+            ],
+            [
+                'id' => 2,
+                'locationID' => 1,
+                'userID' => 7
+            ],
+            [
+                'id' => 3,
+                'locationID' => 1,
+                'userID' => 8
+            ],
+            [
+                'id' => 4,
+                'locationID' => 2,
+                'userID' => 9
+            ],
+            [
+                'id' => 5,
+                'locationID' => 2,
+                'userID' => 10
+            ],
+            [
+                'id' => 6,
+                'locationID' => 2,
+                'userID' => 11
+            ],
+            [
+                'id' => 7,
+                'locationID' => 3,
+                'userID' => 12
+            ],
+            [
+                'id' => 8,
+                'locationID' => 3,
+                'userID' => 13
+            ],
+            [
+                'id' => 9,
+                'locationID' => 3,
+                'userID' => 14
+            ]
+        ];
+        $this->db->table('nsca_location_user')->insertBatch($testDataRegionUsers);
     }
 }
