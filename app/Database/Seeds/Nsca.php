@@ -13,7 +13,7 @@ class Nsca extends Seeder
     {
         $password = service('passwords');
 
-        $dataUsers = [
+        $dataAdminUser = [
             [
                 'email'      => 'admin@gmail.com',
                 'first_name' => 'Admin',
@@ -26,7 +26,11 @@ class Nsca extends Seeder
                 'active'     => 1,
                 'created_at' => Time::now(),
                 'updated_at' => Time::now()
-            ],
+            ]
+        ];
+        $this->db->table('nsca_users')->insertBatch($dataAdminUser);
+
+        $testDataUsers = [
             [
                 'email'      => 'manager@gmail.com',
                 'first_name' => 'Manager',
@@ -78,12 +82,11 @@ class Nsca extends Seeder
                 'active'     => 1,
                 'created_at' => Time::now(),
                 'updated_at' => Time::now()
-            ],
+            ]
         ];
+        $this->db->table('nsca_users')->insertBatch($testDataUsers);
 
-        $this->db->table('nsca_users')->insertBatch($dataUsers);
-
-        $dataAuthIdentitites = [
+        $dataAuthIdentities = [
             [
                 'user_id'      => 1,
                 'type'         => 'email_password',
@@ -148,10 +151,9 @@ class Nsca extends Seeder
                 'last_used_at' => null,
                 'created_at'   => Time::now(),
                 'updated_at'   => Time::now()
-            ],
+            ]
         ];
-
-        $this->db->table('auth_identities')->insertBatch($dataAuthIdentitites);
+        $this->db->table('auth_identities')->insertBatch($dataAuthIdentities);
 
         $dataAuthGroups = [
             [
@@ -178,13 +180,11 @@ class Nsca extends Seeder
                 'user_id'    => 5,
                 'group'      => 'guest',
                 'created_at' => Time::now(),
-            ],
-
+            ]
         ];
-
         $this->db->table('auth_groups_users')->insertBatch($dataAuthGroups);
 
-        $dataNews = [
+        $testDataNews = [
             [
                 'userID' => '1',
                 'title' => 'erat neque',
@@ -232,11 +232,9 @@ class Nsca extends Seeder
                 'created_at' => Time::now(),
             ]
         ];
+        $this->db->table('nsca_news')->insertBatch($testDataNews);
 
-
-        $this->db->table('nsca_news')->insertBatch($dataNews);
-
-        $dataComments = [
+        $testDataComments = [
             [
                 'newsID' => '3',
                 'userID' => '4',
@@ -268,10 +266,9 @@ class Nsca extends Seeder
                 'created_at' => Time::now(),
             ]
         ];
-
-        $this->db->table('nsca_news_comments')->insertBatch($dataComments);
+        $this->db->table('nsca_news_comments')->insertBatch($testDataComments);
         
-        $devPrograms = [
+        $testDataDevPrograms = [
             [
                 'name' => 'Youth Summer Camp',
                 'duration' => '16 Weeks',
@@ -298,10 +295,57 @@ class Nsca extends Seeder
                 'charges' => '$25 monthly',
                 'type' => 'youth',
                 'daysRun' => 'Saturdays and Sundays',
-            ],
-
+            ]
         ];
-        $this->db->table('nsca_dev')->insertBatch($devPrograms);
+        $this->db->table('nsca_dev')->insertBatch($testDataDevPrograms);
+
+        $testDataClubs = [
+            [
+                'id' => 1,
+                'name' => 'Halifax Cricket Club',
+                'abbreviation' => 'HCC',
+                'website' => NULL,
+                'description' => NULL,
+                'email' => 'halifaxcricketclub@gmail.com',
+                'phone' => '403-702-1916',
+                'facebook' => 'https://www.facebook.com/halifaxcricketclub/',
+                'image' => NULL,
+            ],
+            [
+                'id' => 2,
+                'name' => 'East Coast Cricket Club',
+                'abbreviation' => 'ECCC',
+                'website' => 'https://eastcoastcricketclub.ca/',
+                'description' => NULL,
+                'email' => 'eastcoastcricketclub@gmail.com',
+                'phone' => '902-789-6335',
+                'facebook' => 'https://www.facebook.com/cricketclubofeastcoast/',
+                'image' => NULL,
+            ],
+            [
+                'id' => 3,
+                'name' => 'Nova Scotia Avengers Cricket Club',
+                'abbreviation' => 'Avengers',
+                'website' => NULL,
+                'description' => NULL,
+                'email' => 'novascotiaavengers@gmail.com',
+                'phone' => '709-699-8717',
+                'facebook' => 'https://www.facebook.com/Nova-Scotia-Avengers-Cricket-Club-2214442235461792/',
+                'image' => NULL,
+            ],
+            [
+                'id' => 4,
+                'name' => 'Halifax Titans Cricket Club',
+                'abbreviation' => 'Titans',
+                'website' => 'https://halifaxtitanscricketclub.com/',
+                'description' => NULL,
+                'email' => 'halifaxtitanscricketclub@gmail.com',
+                'phone' => '902-414-5502',
+                'facebook' => NULL,
+                'image' => NULL,
+            ]
+        ];
+        $this->db->table('nsca_clubs')->insertBatch($testDataClubs);
 
     }
 }
