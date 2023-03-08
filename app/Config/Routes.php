@@ -65,6 +65,8 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     // Functions
     $routes->match(['post'], 'sendEmail', 'Admin\EmailController::sendEmail');
     $routes->match(['post'], 'createNews', 'Admin\NewsController::createNews');
+    $routes->match(['post'], 'createDev', 'Admin\DevelopmentController::createDev');
+
 });
 
 // Codeigniter's default auth routing
