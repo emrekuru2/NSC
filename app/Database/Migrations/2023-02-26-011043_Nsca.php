@@ -204,7 +204,30 @@ class Nsca extends Migration
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->createTable('nsca_dev');
+
+
+
+        // Development Programs Table
+        $this->forge->addField([
+            'id'            => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+            'name'          => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
+            'description'   => ['type' => 'varchar', 'constraint' => 512, 'null' => true],
+            'start_time'    => ['type' => 'time', 'null' => false],
+            'end_time'      => ['type' => 'time', 'null' => false],
+            'start_date'    => ['type' => 'datetime', 'null' => false],
+            'end_date'      => ['type' => 'datetime', 'null' => false],
+            'price'         => ['type' => 'int', 'constraint' => 11, 'null' => true],
+            'location'      => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
+            'image'         => ['type' => 'varchar', 'constraint' => 120, 'null' => false, 'default' => '/assets/images/DevProgs/contents/default.jpg'],
+            'daysRun'       => ['type' => 'varchar', 'constraint' => 128, 'null' => true],
+        ]);
+        $this->forge->addPrimaryKey('id');
+        $this->forge->createTable('nsca_dev_test');
         
+
+
+
+
         // Development User Table
         $this->forge->addField([
             'id'            => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],

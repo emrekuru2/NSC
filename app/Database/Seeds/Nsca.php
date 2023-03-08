@@ -298,6 +298,92 @@ class Nsca extends Seeder
                 'charges' => '$25 monthly',
                 'type' => 'youth',
                 'daysRun' => 'Saturdays and Sundays',
+            ]
+        ];
+        $this->db->table('nsca_dev')->insertBatch($devPrograms);
+
+        $DevPrograms = [
+            [
+                'name' => 'Youth Summer Camp',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eros odio, volutpat tempus ullamcorper ut, scelerisque quis neque. Nullam finibus orci id mi sagittis tincidunt. Vestibulum ornare ornare dui, et iaculis diam pulvinar vitae. Ut eu nunc ut velit elementum accumsan. Morbi nec pharetra dolor. Nunc porta suscipit lacus eget consequat. Phasellus a est vitae sapien dignissim egestas ut vulputate ipsum. Morbi sed ultricies dolor, sed mollis nibh. In semper, libero iaculis feugiat lobortis, enim metus',
+                'start_time' => Time::now(),
+                'end_time' => Time::now(),
+                'start_date' => Time::now(),
+                'end_date' => Time::now(),
+                'price' => 50,
+                'location' => 'NSCA',
+                'daysRun' => 'Saturdays and Sundays',
+
+            ],
+            [
+                'name' => 'Youth lunch Camp',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eros odio, volutpat tempus ullamcorper ut, scelerisque quis neque. Nullam finibus orci id mi sagittis tincidunt. Vestibulum ornare ornare dui, et iaculis diam pulvinar vitae. Ut eu nunc ut velit elementum accumsan. Morbi nec pharetra dolor. Nunc porta suscipit lacus eget consequat. Phasellus a est vitae sapien dignissim egestas ut vulputate ipsum. Morbi sed ultricies dolor, sed mollis nibh. In semper, libero iaculis feugiat lobortis, enim metus',
+                'start_time' => Time::now(),
+                'end_time' => Time::now(),
+                'start_date' => Time::now(),
+                'end_date' => Time::now(),
+                'price' => 50,
+                'location' => 'NSCA',
+                'daysRun' => 'Saturdays and Sundays',
+
+            ],
+            [
+                'name' => 'Youth night Camp',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eros odio, volutpat tempus ullamcorper ut, scelerisque quis neque. Nullam finibus orci id mi sagittis tincidunt. Vestibulum ornare ornare dui, et iaculis diam pulvinar vitae. Ut eu nunc ut velit elementum accumsan. Morbi nec pharetra dolor. Nunc porta suscipit lacus eget consequat. Phasellus a est vitae sapien dignissim egestas ut vulputate ipsum. Morbi sed ultricies dolor, sed mollis nibh. In semper, libero iaculis feugiat lobortis, enim metus',
+                'start_time' => Time::now(),
+                'end_time' => Time::now(),
+                'start_date' => Time::now(),
+                'end_date' => Time::now(),
+                'price' => 50,
+                'location' => 'NSCA',
+                'daysRun' => 'Saturdays and Sundays',
+
+            ],
+        ];
+        $this->db->table('nsca_dev_test')->insertBatch($DevPrograms);
+
+
+
+
+
+
+
+
+
+
+        $testDataClubs = [
+            [
+                'id' => 1,
+                'name' => 'Halifax Cricket Club',
+                'abbreviation' => 'HCC',
+                'website' => NULL,
+                'description' => NULL,
+                'email' => 'halifaxcricketclub@gmail.com',
+                'phone' => '403-702-1916',
+                'facebook' => 'https://www.facebook.com/halifaxcricketclub/',
+                'image' => NULL,
+            ],
+            [
+                'id' => 2,
+                'name' => 'East Coast Cricket Club',
+                'abbreviation' => 'ECCC',
+                'website' => 'https://eastcoastcricketclub.ca/',
+                'description' => NULL,
+                'email' => 'eastcoastcricketclub@gmail.com',
+                'phone' => '902-789-6335',
+                'facebook' => 'https://www.facebook.com/cricketclubofeastcoast/',
+                'image' => NULL,
+            ],
+            [
+                'id' => 3,
+                'name' => 'Nova Scotia Avengers Cricket Club',
+                'abbreviation' => 'Avengers',
+                'website' => NULL,
+                'description' => NULL,
+                'email' => 'novascotiaavengers@gmail.com',
+                'phone' => '709-699-8717',
+                'facebook' => 'https://www.facebook.com/Nova-Scotia-Avengers-Cricket-Club-2214442235461792/',
+                'image' => NULL,
             ],
 
         ];
