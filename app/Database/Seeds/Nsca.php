@@ -214,6 +214,19 @@ class Nsca extends Seeder
                 'active'     => 1,
                 'created_at' => Time::now(),
                 'updated_at' => Time::now()
+            ],
+            [
+                'email'      => 'test9@email.com',
+                'first_name' => 'Test',
+                'last_name'  => 'User9',
+                'phone'      => '0000000000',
+                'street'     => '6299 South st.',
+                'city'       => 'Halifax',
+                'country'    => 'Canada',
+                'postal'     => 'B3H4R2',
+                'active'     => 1,
+                'created_at' => Time::now(),
+                'updated_at' => Time::now()
             ]
         ];
         $this->db->table('nsca_users')->insertBatch($testDataUsers);
@@ -374,6 +387,19 @@ class Nsca extends Seeder
                 'last_used_at' => null,
                 'created_at'   => Time::now(),
                 'updated_at'   => Time::now()
+            ],
+            [
+                'user_id'      => 14,
+                'type'         => 'email_password',
+                'name'         => null,
+                'secret'       => 'test9@email.com',
+                'secret2'      => $password->hash('Password2023!'),
+                'expires'      => null,
+                'extra'        => null,
+                'force_reset'  => 0,
+                'last_used_at' => null,
+                'created_at'   => Time::now(),
+                'updated_at'   => Time::now()
             ]
         ];
         $this->db->table('auth_identities')->insertBatch($testDataAuthIdentities);
@@ -438,9 +464,178 @@ class Nsca extends Seeder
                 'user_id'    => 13,
                 'group'      => 'player',
                 'created_at' => Time::now(),
+            ],
+            [
+                'user_id'    => 14,
+                'group'      => 'player',
+                'created_at' => Time::now(),
             ]
         ];
         $this->db->table('auth_groups_users')->insertBatch($testDataAuthGroups);
+
+        $testDataClubs = [
+            [
+                'id' => 1,
+                'name' => 'Halifax Cricket Club',
+                'abbreviation' => 'HCC',
+                'website' => NULL,
+                'description' => NULL,
+                'email' => 'halifaxcricketclub@gmail.com',
+                'phone' => '403-702-1916',
+                'facebook' => 'https://www.facebook.com/halifaxcricketclub/',
+                'image' => NULL,
+            ],
+            [
+                'id' => 2,
+                'name' => 'East Coast Cricket Club',
+                'abbreviation' => 'ECCC',
+                'website' => 'https://eastcoastcricketclub.ca/',
+                'description' => NULL,
+                'email' => 'eastcoastcricketclub@gmail.com',
+                'phone' => '902-789-6335',
+                'facebook' => 'https://www.facebook.com/cricketclubofeastcoast/',
+                'image' => NULL,
+            ],
+            [
+                'id' => 3,
+                'name' => 'Nova Scotia Avengers Cricket Club',
+                'abbreviation' => 'Avengers',
+                'website' => NULL,
+                'description' => NULL,
+                'email' => 'novascotiaavengers@gmail.com',
+                'phone' => '709-699-8717',
+                'facebook' => 'https://www.facebook.com/Nova-Scotia-Avengers-Cricket-Club-2214442235461792/',
+                'image' => NULL,
+            ],
+            [
+                'id' => 4,
+                'name' => 'Halifax Titans Cricket Club',
+                'abbreviation' => 'Titans',
+                'website' => 'https://halifaxtitanscricketclub.com/',
+                'description' => NULL,
+                'email' => 'halifaxtitanscricketclub@gmail.com',
+                'phone' => '902-414-5502',
+                'facebook' => NULL,
+                'image' => NULL,
+            ]
+        ];
+        $this->db->table('nsca_clubs')->insertBatch($testDataClubs);
+
+        $testDataTeams = [
+            [
+                'id' => 1,
+                'name' => 'Lions',
+                'description' => 'Lions of Halifax',
+                'image' => 'NovaScotiaWarriors.jpg'
+            ],
+            [
+                'id' => 2,
+                'name' => 'Falcons',
+                'description' => 'Falcons of Dartmouth',
+                'image' => 'predators.jpg'
+            ],
+            [
+                'id' => 3,
+                'name' => 'Tigers',
+                'description' => 'Tigers of Bedford',
+                'image' => 'NSAvengers.jpg'
+            ]
+        ];
+        $this->db->table('nsca_team')->insertBatch($testDataTeams);
+
+        $testDataDevPrograms = [
+            [
+                'name' => 'Youth Summer Camp',
+                'duration' => '16 Weeks',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eros odio, volutpat tempus ullamcorper ut, scelerisque quis neque. Nullam finibus orci id mi sagittis tincidunt. Vestibulum ornare ornare dui, et iaculis diam pulvinar vitae. Ut eu nunc ut velit elementum accumsan. Morbi nec pharetra dolor. Nunc porta suscipit lacus eget consequat. Phasellus a est vitae sapien dignissim egestas ut vulputate ipsum. Morbi sed ultricies dolor, sed mollis nibh. In semper, libero iaculis feugiat lobortis, enim metus',
+                'time' => '0915-1515',
+                'charges' => '$50 monthly',
+                'type' => 'youth',
+                'daysRun' => 'Saturdays and Sundays',
+            ],
+            [
+                'name' => 'Lunchtime Basketball',
+                'duration' => '10 Weeks',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eros odio, volutpat tempus ullamcorper ut, scelerisque quis neque. Nullam finibus orci id mi sagittis tincidunt. Vestibulum ornare ornare dui, et iaculis diam pulvinar vitae. Ut eu nunc ut velit elementum accumsan. Morbi nec pharetra dolor. Nunc porta suscipit lacus eget consequat. Phasellus a est vitae sapien dignissim egestas ut vulputate ipsum. Morbi sed ultricies dolor, sed mollis nibh. In semper, libero iaculis feugiat lobortis, enim metus',
+                'time' => '1215-1515',
+                'charges' => '$25 monthly',
+                'type' => 'youth',
+                'daysRun' => 'Saturdays and Sundays',
+            ],
+            [
+                'name' => 'Youth Spring Camp',
+                'duration' => '10 Weeks',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eros odio, volutpat tempus ullamcorper ut, scelerisque quis neque. Nullam finibus orci id mi sagittis tincidunt. Vestibulum ornare ornare dui, et iaculis diam pulvinar vitae. Ut eu nunc ut velit elementum accumsan. Morbi nec pharetra dolor. Nunc porta suscipit lacus eget consequat. Phasellus a est vitae sapien dignissim egestas ut vulputate ipsum. Morbi sed ultricies dolor, sed mollis nibh. In semper, libero iaculis feugiat lobortis, enim metus',
+                'time' => '1215-1515',
+                'charges' => '$25 monthly',
+                'type' => 'youth',
+                'daysRun' => 'Saturdays and Sundays',
+            ]
+        ];
+        $this->db->table('nsca_dev')->insertBatch($testDataDevPrograms);
+
+        $testDataRegions = [
+            [
+                'id' => 1,
+                'name' => 'Halifax',
+                'address' => '123 Test Street',
+                'description'   => 'Halifax region description.'
+            ],
+            [
+                'id' => 2,
+                'name' => 'Sackville',
+                'address' => '123 Test Street',
+                'description'   => 'Sackville region description.'
+            ],
+            [
+                'id' => 3,
+                'name' => 'Dartmouth',
+                'address' => '123 Test Street',
+                'description'   => 'Dartmouth region description.'
+            ]
+        ];
+        $this->db->table('nsca_location')->insertBatch($testDataRegions);
+
+        $testDataCommittees = [
+            [
+                'id' => 1,
+                'name' => 'Test Committee 1',
+                'description' => 'Test description.',
+                'years' => '2023-2025'
+            ],
+            [
+                'id' => 2,
+                'name' => 'Test Committee 2',
+                'description' => 'Test description.',
+                'years' => '2022-2024'
+            ]
+        ];
+        $this->db->table('nsca_committees')->insertBatch($testDataCommittees);
+
+        $testDataCompetitionTypes = [
+            [
+                'id' => 1,
+                'name' => 'Test Competition Type A',
+                'description' => 'Test Competition Type A description.'
+            ],
+            [
+                'id' => 2,
+                'name' => 'Test Competition Type B',
+                'description' => 'Test Competition Type B description.'
+            ]
+        ];
+        $this->db->table('nsca_competition_type')->insertBatch($testDataCompetitionTypes);
+
+        $testDataCompetitions = [
+            [
+                'id' => 1,
+                'name' => 'Lions Against Snakes',
+                'description' => 'Lions and Snakes face head on.',
+                'compTypeID' => 1,
+                'yearRunning' => 2022
+            ]
+        ];
+        $this->db->table('nsca_competition')->insertBatch($testDataCompetitions);
 
         $testDataNews = [
             [
@@ -525,85 +720,6 @@ class Nsca extends Seeder
             ]
         ];
         $this->db->table('nsca_news_comments')->insertBatch($testDataComments);
-        
-        $testDataDevPrograms = [
-            [
-                'name' => 'Youth Summer Camp',
-                'duration' => '16 Weeks',
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eros odio, volutpat tempus ullamcorper ut, scelerisque quis neque. Nullam finibus orci id mi sagittis tincidunt. Vestibulum ornare ornare dui, et iaculis diam pulvinar vitae. Ut eu nunc ut velit elementum accumsan. Morbi nec pharetra dolor. Nunc porta suscipit lacus eget consequat. Phasellus a est vitae sapien dignissim egestas ut vulputate ipsum. Morbi sed ultricies dolor, sed mollis nibh. In semper, libero iaculis feugiat lobortis, enim metus',
-                'time' => '0915-1515',
-                'charges' => '$50 monthly',
-                'type' => 'youth',
-                'daysRun' => 'Saturdays and Sundays',
-            ],
-            [
-                'name' => 'Lunchtime Basketball',
-                'duration' => '10 Weeks',
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eros odio, volutpat tempus ullamcorper ut, scelerisque quis neque. Nullam finibus orci id mi sagittis tincidunt. Vestibulum ornare ornare dui, et iaculis diam pulvinar vitae. Ut eu nunc ut velit elementum accumsan. Morbi nec pharetra dolor. Nunc porta suscipit lacus eget consequat. Phasellus a est vitae sapien dignissim egestas ut vulputate ipsum. Morbi sed ultricies dolor, sed mollis nibh. In semper, libero iaculis feugiat lobortis, enim metus',
-                'time' => '1215-1515',
-                'charges' => '$25 monthly',
-                'type' => 'youth',
-                'daysRun' => 'Saturdays and Sundays',
-            ],
-            [
-                'name' => 'Youth Summer Camp',
-                'duration' => '10 Weeks',
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eros odio, volutpat tempus ullamcorper ut, scelerisque quis neque. Nullam finibus orci id mi sagittis tincidunt. Vestibulum ornare ornare dui, et iaculis diam pulvinar vitae. Ut eu nunc ut velit elementum accumsan. Morbi nec pharetra dolor. Nunc porta suscipit lacus eget consequat. Phasellus a est vitae sapien dignissim egestas ut vulputate ipsum. Morbi sed ultricies dolor, sed mollis nibh. In semper, libero iaculis feugiat lobortis, enim metus',
-                'time' => '1215-1515',
-                'charges' => '$25 monthly',
-                'type' => 'youth',
-                'daysRun' => 'Saturdays and Sundays',
-            ]
-        ];
-        $this->db->table('nsca_dev')->insertBatch($testDataDevPrograms);
-
-        $testDataClubs = [
-            [
-                'id' => 1,
-                'name' => 'Halifax Cricket Club',
-                'abbreviation' => 'HCC',
-                'website' => NULL,
-                'description' => NULL,
-                'email' => 'halifaxcricketclub@gmail.com',
-                'phone' => '403-702-1916',
-                'facebook' => 'https://www.facebook.com/halifaxcricketclub/',
-                'image' => NULL,
-            ],
-            [
-                'id' => 2,
-                'name' => 'East Coast Cricket Club',
-                'abbreviation' => 'ECCC',
-                'website' => 'https://eastcoastcricketclub.ca/',
-                'description' => NULL,
-                'email' => 'eastcoastcricketclub@gmail.com',
-                'phone' => '902-789-6335',
-                'facebook' => 'https://www.facebook.com/cricketclubofeastcoast/',
-                'image' => NULL,
-            ],
-            [
-                'id' => 3,
-                'name' => 'Nova Scotia Avengers Cricket Club',
-                'abbreviation' => 'Avengers',
-                'website' => NULL,
-                'description' => NULL,
-                'email' => 'novascotiaavengers@gmail.com',
-                'phone' => '709-699-8717',
-                'facebook' => 'https://www.facebook.com/Nova-Scotia-Avengers-Cricket-Club-2214442235461792/',
-                'image' => NULL,
-            ],
-            [
-                'id' => 4,
-                'name' => 'Halifax Titans Cricket Club',
-                'abbreviation' => 'Titans',
-                'website' => 'https://halifaxtitanscricketclub.com/',
-                'description' => NULL,
-                'email' => 'halifaxtitanscricketclub@gmail.com',
-                'phone' => '902-414-5502',
-                'facebook' => NULL,
-                'image' => NULL,
-            ]
-        ];
-        $this->db->table('nsca_clubs')->insertBatch($testDataClubs);
 
         $testDataAlerts = [
             [
@@ -615,83 +731,190 @@ class Nsca extends Seeder
         ];
         $this->db->table('nsca_alerts')->insertBatch($testDataAlerts);
 
-        $testDataCommittees = [
+        $testDataClubTeams = [
             [
                 'id' => 1,
-                'name' => 'Test Committee 1',
-                'description' => 'Test description.',
-                'years' => '2023-2025'
+                'teamID' => 1,
+                'clubID' => 1,
+                'compID' => 1
             ],
             [
                 'id' => 2,
-                'name' => 'Test Committee 2',
-                'description' => 'Test description.',
-                'years' => '2022-2024'
-            ]
-        ];
-        $this->db->table('nsca_committees')->insertBatch($testDataCommittees);
-
-        $testDataCompetitionTypes = [
-            [
-                'id' => 1,
-                'name' => 'Test Competition Type A',
-                'description' => 'Test Competition Type A description.'
-            ],
-            [
-                'id' => 2,
-                'name' => 'Test Competition Type B',
-                'description' => 'Test Competition Type B description.'
-            ]
-        ];
-        $this->db->table('nsca_competition_type')->insertBatch($testDataCompetitionTypes);
-
-        $testDataCompetitions = [
-            [
-                'id' => 1,
-                'name' => 'Lions Against Snakes',
-                'description' => 'Lions and Snakes face head on.',
-                'compTypeID' => 1,
-                'yearRunning' => 2022
-            ]
-        ];
-        $this->db->table('nsca_competition')->insertBatch($testDataCompetitions);
-
-        $testDataRegions = [
-            [
-                'id' => 1,
-                'name' => 'Halifax',
-                'address' => '123 Test Street',
-                'description'   => 'Halifax region description'
-            ],
-            [
-                'id' => 2,
-                'name' => 'Moncton',
-                'address' => '123 Test Street',
-                'description'   => 'Moncton region description'
-            ]
-        ];
-        $this->db->table('nsca_location')->insertBatch($testDataRegions);
-
-        $testDataTeams = [
-            [
-                'id' => 1,
-                'name' => 'Lions',
-                'description' => 'Lions of Halifax',
-                'image' => 'NovaScotiaWarriors.jpg'
-            ],
-            [
-                'id' => 2,
-                'name' => 'Falcons',
-                'description' => 'Falcons of Dartmouth',
-                'image' => 'predators.jpg'
+                'teamID' => 2,
+                'clubID' => 2,
+                'compID' => 1
             ],
             [
                 'id' => 3,
-                'name' => 'Tigers',
-                'description' => 'Tigers of Bedford',
-                'image' => 'NSAvengers.jpg'
+                'teamID' => 3,
+                'clubID' => 3,
+                'compID' => 1
             ]
         ];
-        $this->db->table('nsca_team')->insertBatch($testDataTeams);
+        $this->db->table('nsca_teams')->insertBatch($testDataClubTeams);
+
+        $testDataTeamUsers = [
+            [
+                'id' => 1,
+                'userID' => 6,
+                'teamID' => 1,
+                'isClubManager' => 0,
+                'isTeamCaptain' => 0,
+                'isViceCaptain' => 0,
+                'isWaitingToJoin' => 0
+            ],
+            [
+                'id' => 2,
+                'userID' => 7,
+                'teamID' => 1,
+                'isClubManager' => 0,
+                'isTeamCaptain' => 0,
+                'isViceCaptain' => 0,
+                'isWaitingToJoin' => 0
+            ],
+            [
+                'id' => 3,
+                'userID' => 8,
+                'teamID' => 2,
+                'isClubManager' => 0,
+                'isTeamCaptain' => 0,
+                'isViceCaptain' => 0,
+                'isWaitingToJoin' => 0
+            ],
+            [
+                'id' => 4,
+                'userID' => 9,
+                'teamID' => 2,
+                'isClubManager' => 0,
+                'isTeamCaptain' => 0,
+                'isViceCaptain' => 0,
+                'isWaitingToJoin' => 0
+            ],
+            [
+                'id' => 5,
+                'userID' => 10,
+                'teamID' => 3,
+                'isClubManager' => 0,
+                'isTeamCaptain' => 0,
+                'isViceCaptain' => 0,
+                'isWaitingToJoin' => 0
+            ],
+            [
+                'id' => 6,
+                'userID' => 11,
+                'teamID' => 3,
+                'isClubManager' => 0,
+                'isTeamCaptain' => 0,
+                'isViceCaptain' => 0,
+                'isWaitingToJoin' => 0
+            ]
+        ];
+        $this->db->table('nsca_team_user')->insertBatch($testDataTeamUsers);
+
+        $testDataTeamJoinList = [
+            [
+                'id' => 1,
+                'userID' => 12,
+                'teamID' => 1
+            ],
+            [
+                'id' => 2,
+                'userID' => 13,
+                'teamID' => 2
+            ],
+            [
+                'id' => 3,
+                'userID' => 14,
+                'teamID' => 3
+            ]
+        ];
+        $this->db->table('nsca_team_joinlist')->insertBatch($testDataTeamJoinList);
+
+        $testDataCommitteeUsers = [
+            [
+                'id'            => 1,
+                'committeeID'   => 1,
+                'userID'        => 12
+            ],
+            [
+                'id'            => 2,
+                'committeeID'   => 1,
+                'userID'        => 13
+            ],
+            [
+                'id'            => 3,
+                'committeeID'   => 2,
+                'userID'        => 14
+            ]
+        ];
+        $this->db->table('nsca_committees_user')->insertBatch($testDataCommitteeUsers);
+
+        $testDataDevProgramUsers = [
+            [
+                'id' => 1,
+                'devID' => 1,
+                'userID' => 12
+            ],
+            [
+                'id' => 2,
+                'devID' => 2,
+                'userID' => 13
+            ],
+            [
+                'id' => 3,
+                'devID' => 3,
+                'userID' => 14
+            ]
+        ];
+        $this->db->table('nsca_dev_user')->insertBatch($testDataDevProgramUsers);
+
+        $testDataRegionUsers = [
+            [
+                'id' => 1,
+                'locationID' => 1,
+                'userID' => 6
+            ],
+            [
+                'id' => 2,
+                'locationID' => 1,
+                'userID' => 7
+            ],
+            [
+                'id' => 3,
+                'locationID' => 1,
+                'userID' => 8
+            ],
+            [
+                'id' => 4,
+                'locationID' => 2,
+                'userID' => 9
+            ],
+            [
+                'id' => 5,
+                'locationID' => 2,
+                'userID' => 10
+            ],
+            [
+                'id' => 6,
+                'locationID' => 2,
+                'userID' => 11
+            ],
+            [
+                'id' => 7,
+                'locationID' => 3,
+                'userID' => 12
+            ],
+            [
+                'id' => 8,
+                'locationID' => 3,
+                'userID' => 13
+            ],
+            [
+                'id' => 9,
+                'locationID' => 3,
+                'userID' => 14
+            ]
+        ];
+        $this->db->table('nsca_location_user')->insertBatch($testDataRegionUsers);
     }
 }
