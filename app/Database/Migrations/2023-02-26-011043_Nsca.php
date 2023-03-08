@@ -316,11 +316,11 @@ class Nsca extends Migration
 
         // Teams Table
         $this->forge->addField([
-            'id'            => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+            'teamID'        => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
             'clubID'        => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
             'compID'        => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
         ]);
-        $this->forge->addPrimaryKey('id');
+        $this->forge->addPrimaryKey('teamID');
         $this->forge->addKey(['clubID', 'compID']);
         $this->forge->addForeignKey('clubID', 'nsca_clubs', 'id', '', 'CASCADE');
         $this->forge->addForeignKey('compID', 'nsca_competition', 'id', '', 'CASCADE');
@@ -339,7 +339,7 @@ class Nsca extends Migration
         $this->forge->addPrimaryKey('id');
         $this->forge->addKey(['userID', 'teamID']);
         $this->forge->addForeignKey('userID', 'nsca_users', 'id', '', 'CASCADE');
-        $this->forge->addForeignKey('teamID', 'nsca_teams', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('teamID', 'nsca_teams', 'teamID', '', 'CASCADE');
         $this->forge->createTable('nsca_team_user');
 
         // Settings Table

@@ -13,7 +13,7 @@ class Nsca extends Seeder
     {
         $password = service('passwords');
 
-        $dataUsers = [
+        $dataAdminUser = [
             [
                 'email'      => 'admin@gmail.com',
                 'first_name' => 'Admin',
@@ -26,7 +26,39 @@ class Nsca extends Seeder
                 'active'     => 1,
                 'created_at' => Time::now(),
                 'updated_at' => Time::now()
-            ],
+            ]
+        ];
+        $this->db->table('nsca_users')->insertBatch($dataAdminUser);
+
+        $dataAuthAdminIdentity = [
+            [
+                'user_id'      => 1,
+                'type'         => 'email_password',
+                'name'         => null,
+                'secret'       => 'admin@gmail.com',
+                'secret2'      => $password->hash('Password2023!'),
+                'expires'      => null,
+                'extra'        => null,
+                'force_reset'  => 0,
+                'last_used_at' => null,
+                'created_at'   => Time::now(),
+                'updated_at'   => Time::now()
+            ]
+        ];
+        $this->db->table('auth_identities')->insertBatch($dataAuthAdminIdentity);
+
+        $dataAuthAdminGroup = [
+            [
+                'user_id'    => 1,
+                'group'      => 'admin',
+                'created_at' => Time::now(),
+            ]
+        ];
+        $this->db->table('auth_groups_users')->insertBatch($dataAuthAdminGroup);
+
+
+
+        $testDataUsers = [
             [
                 'email'      => 'manager@gmail.com',
                 'first_name' => 'Manager',
@@ -79,24 +111,114 @@ class Nsca extends Seeder
                 'created_at' => Time::now(),
                 'updated_at' => Time::now()
             ],
-        ];
-
-        $this->db->table('nsca_users')->insertBatch($dataUsers);
-
-        $dataAuthIdentitites = [
             [
-                'user_id'      => 1,
-                'type'         => 'email_password',
-                'name'         => null,
-                'secret'       => 'admin@gmail.com',
-                'secret2'      => $password->hash('Password2023!'),
-                'expires'      => null,
-                'extra'        => null,
-                'force_reset'  => 0,
-                'last_used_at' => null,
-                'created_at'   => Time::now(),
-                'updated_at'   => Time::now()
+                'email'      => 'test1@email.com',
+                'first_name' => 'Test',
+                'last_name'  => 'User1',
+                'phone'      => '0000000000',
+                'street'     => '6299 South st.',
+                'city'       => 'Halifax',
+                'country'    => 'Canada',
+                'postal'     => 'B3H4R2',
+                'active'     => 1,
+                'created_at' => Time::now(),
+                'updated_at' => Time::now()
             ],
+            [
+                'email'      => 'test2@email.com',
+                'first_name' => 'Test',
+                'last_name'  => 'User2',
+                'phone'      => '0000000000',
+                'street'     => '6299 South st.',
+                'city'       => 'Halifax',
+                'country'    => 'Canada',
+                'postal'     => 'B3H4R2',
+                'active'     => 1,
+                'created_at' => Time::now(),
+                'updated_at' => Time::now()
+            ],
+            [
+                'email'      => 'test3@email.com',
+                'first_name' => 'Test',
+                'last_name'  => 'User3',
+                'phone'      => '0000000000',
+                'street'     => '6299 South st.',
+                'city'       => 'Halifax',
+                'country'    => 'Canada',
+                'postal'     => 'B3H4R2',
+                'active'     => 1,
+                'created_at' => Time::now(),
+                'updated_at' => Time::now()
+            ],
+            [
+                'email'      => 'test4@email.com',
+                'first_name' => 'Test',
+                'last_name'  => 'User4',
+                'phone'      => '0000000000',
+                'street'     => '6299 South st.',
+                'city'       => 'Halifax',
+                'country'    => 'Canada',
+                'postal'     => 'B3H4R2',
+                'active'     => 1,
+                'created_at' => Time::now(),
+                'updated_at' => Time::now()
+            ],
+            [
+                'email'      => 'test5@email.com',
+                'first_name' => 'Test',
+                'last_name'  => 'User5',
+                'phone'      => '0000000000',
+                'street'     => '6299 South st.',
+                'city'       => 'Halifax',
+                'country'    => 'Canada',
+                'postal'     => 'B3H4R2',
+                'active'     => 1,
+                'created_at' => Time::now(),
+                'updated_at' => Time::now()
+            ],
+            [
+                'email'      => 'test6@email.com',
+                'first_name' => 'Test',
+                'last_name'  => 'User6',
+                'phone'      => '0000000000',
+                'street'     => '6299 South st.',
+                'city'       => 'Halifax',
+                'country'    => 'Canada',
+                'postal'     => 'B3H4R2',
+                'active'     => 1,
+                'created_at' => Time::now(),
+                'updated_at' => Time::now()
+            ],
+            [
+                'email'      => 'test7@email.com',
+                'first_name' => 'Test',
+                'last_name'  => 'User7',
+                'phone'      => '0000000000',
+                'street'     => '6299 South st.',
+                'city'       => 'Halifax',
+                'country'    => 'Canada',
+                'postal'     => 'B3H4R2',
+                'active'     => 1,
+                'created_at' => Time::now(),
+                'updated_at' => Time::now()
+            ],
+            [
+                'email'      => 'test8@email.com',
+                'first_name' => 'Test',
+                'last_name'  => 'User8',
+                'phone'      => '0000000000',
+                'street'     => '6299 South st.',
+                'city'       => 'Halifax',
+                'country'    => 'Canada',
+                'postal'     => 'B3H4R2',
+                'active'     => 1,
+                'created_at' => Time::now(),
+                'updated_at' => Time::now()
+            ]
+        ];
+        $this->db->table('nsca_users')->insertBatch($testDataUsers);
+
+        $testDataAuthIdentities = [
             [
                 'user_id'      => 2,
                 'type'         => 'email_password',
@@ -149,16 +271,114 @@ class Nsca extends Seeder
                 'created_at'   => Time::now(),
                 'updated_at'   => Time::now()
             ],
-        ];
-
-        $this->db->table('auth_identities')->insertBatch($dataAuthIdentitites);
-
-        $dataAuthGroups = [
             [
-                'user_id'    => 1,
-                'group'      => 'admin',
-                'created_at' => Time::now(),
+                'user_id'      => 6,
+                'type'         => 'email_password',
+                'name'         => null,
+                'secret'       => 'test1@email.com',
+                'secret2'      => $password->hash('Password2023!'),
+                'expires'      => null,
+                'extra'        => null,
+                'force_reset'  => 0,
+                'last_used_at' => null,
+                'created_at'   => Time::now(),
+                'updated_at'   => Time::now()
             ],
+            [
+                'user_id'      => 7,
+                'type'         => 'email_password',
+                'name'         => null,
+                'secret'       => 'test2@email.com',
+                'secret2'      => $password->hash('Password2023!'),
+                'expires'      => null,
+                'extra'        => null,
+                'force_reset'  => 0,
+                'last_used_at' => null,
+                'created_at'   => Time::now(),
+                'updated_at'   => Time::now()
+            ],
+            [
+                'user_id'      => 8,
+                'type'         => 'email_password',
+                'name'         => null,
+                'secret'       => 'test3@email.com',
+                'secret2'      => $password->hash('Password2023!'),
+                'expires'      => null,
+                'extra'        => null,
+                'force_reset'  => 0,
+                'last_used_at' => null,
+                'created_at'   => Time::now(),
+                'updated_at'   => Time::now()
+            ],
+            [
+                'user_id'      => 9,
+                'type'         => 'email_password',
+                'name'         => null,
+                'secret'       => 'test4@email.com',
+                'secret2'      => $password->hash('Password2023!'),
+                'expires'      => null,
+                'extra'        => null,
+                'force_reset'  => 0,
+                'last_used_at' => null,
+                'created_at'   => Time::now(),
+                'updated_at'   => Time::now()
+            ],
+            [
+                'user_id'      => 10,
+                'type'         => 'email_password',
+                'name'         => null,
+                'secret'       => 'test5@email.com',
+                'secret2'      => $password->hash('Password2023!'),
+                'expires'      => null,
+                'extra'        => null,
+                'force_reset'  => 0,
+                'last_used_at' => null,
+                'created_at'   => Time::now(),
+                'updated_at'   => Time::now()
+            ],
+            [
+                'user_id'      => 11,
+                'type'         => 'email_password',
+                'name'         => null,
+                'secret'       => 'test6@email.com',
+                'secret2'      => $password->hash('Password2023!'),
+                'expires'      => null,
+                'extra'        => null,
+                'force_reset'  => 0,
+                'last_used_at' => null,
+                'created_at'   => Time::now(),
+                'updated_at'   => Time::now()
+            ],
+            [
+                'user_id'      => 12,
+                'type'         => 'email_password',
+                'name'         => null,
+                'secret'       => 'test7@email.com',
+                'secret2'      => $password->hash('Password2023!'),
+                'expires'      => null,
+                'extra'        => null,
+                'force_reset'  => 0,
+                'last_used_at' => null,
+                'created_at'   => Time::now(),
+                'updated_at'   => Time::now()
+            ],
+            [
+                'user_id'      => 13,
+                'type'         => 'email_password',
+                'name'         => null,
+                'secret'       => 'test8@email.com',
+                'secret2'      => $password->hash('Password2023!'),
+                'expires'      => null,
+                'extra'        => null,
+                'force_reset'  => 0,
+                'last_used_at' => null,
+                'created_at'   => Time::now(),
+                'updated_at'   => Time::now()
+            ]
+        ];
+        $this->db->table('auth_identities')->insertBatch($testDataAuthIdentities);
+
+        $testDataAuthGroups = [
             [
                 'user_id'    => 2,
                 'group'      => 'manager',
@@ -179,12 +399,50 @@ class Nsca extends Seeder
                 'group'      => 'guest',
                 'created_at' => Time::now(),
             ],
-
+            [
+                'user_id'    => 6,
+                'group'      => 'player',
+                'created_at' => Time::now(),
+            ],
+            [
+                'user_id'    => 7,
+                'group'      => 'player',
+                'created_at' => Time::now(),
+            ],
+            [
+                'user_id'    => 8,
+                'group'      => 'player',
+                'created_at' => Time::now(),
+            ],
+            [
+                'user_id'    => 9,
+                'group'      => 'player',
+                'created_at' => Time::now(),
+            ],
+            [
+                'user_id'    => 10,
+                'group'      => 'player',
+                'created_at' => Time::now(),
+            ],
+            [
+                'user_id'    => 11,
+                'group'      => 'player',
+                'created_at' => Time::now(),
+            ],
+            [
+                'user_id'    => 12,
+                'group'      => 'player',
+                'created_at' => Time::now(),
+            ],
+            [
+                'user_id'    => 13,
+                'group'      => 'player',
+                'created_at' => Time::now(),
+            ]
         ];
+        $this->db->table('auth_groups_users')->insertBatch($testDataAuthGroups);
 
-        $this->db->table('auth_groups_users')->insertBatch($dataAuthGroups);
-
-        $dataNews = [
+        $testDataNews = [
             [
                 'userID' => '1',
                 'title' => 'erat neque',
@@ -232,11 +490,9 @@ class Nsca extends Seeder
                 'created_at' => Time::now(),
             ]
         ];
+        $this->db->table('nsca_news')->insertBatch($testDataNews);
 
-
-        $this->db->table('nsca_news')->insertBatch($dataNews);
-
-        $dataComments = [
+        $testDataComments = [
             [
                 'newsID' => '3',
                 'userID' => '4',
@@ -268,10 +524,9 @@ class Nsca extends Seeder
                 'created_at' => Time::now(),
             ]
         ];
-
-        $this->db->table('nsca_news_comments')->insertBatch($dataComments);
+        $this->db->table('nsca_news_comments')->insertBatch($testDataComments);
         
-        $devPrograms = [
+        $testDataDevPrograms = [
             [
                 'name' => 'Youth Summer Camp',
                 'duration' => '16 Weeks',
@@ -298,10 +553,145 @@ class Nsca extends Seeder
                 'charges' => '$25 monthly',
                 'type' => 'youth',
                 'daysRun' => 'Saturdays and Sundays',
-            ],
-
+            ]
         ];
-        $this->db->table('nsca_dev')->insertBatch($devPrograms);
+        $this->db->table('nsca_dev')->insertBatch($testDataDevPrograms);
 
+        $testDataClubs = [
+            [
+                'id' => 1,
+                'name' => 'Halifax Cricket Club',
+                'abbreviation' => 'HCC',
+                'website' => NULL,
+                'description' => NULL,
+                'email' => 'halifaxcricketclub@gmail.com',
+                'phone' => '403-702-1916',
+                'facebook' => 'https://www.facebook.com/halifaxcricketclub/',
+                'image' => NULL,
+            ],
+            [
+                'id' => 2,
+                'name' => 'East Coast Cricket Club',
+                'abbreviation' => 'ECCC',
+                'website' => 'https://eastcoastcricketclub.ca/',
+                'description' => NULL,
+                'email' => 'eastcoastcricketclub@gmail.com',
+                'phone' => '902-789-6335',
+                'facebook' => 'https://www.facebook.com/cricketclubofeastcoast/',
+                'image' => NULL,
+            ],
+            [
+                'id' => 3,
+                'name' => 'Nova Scotia Avengers Cricket Club',
+                'abbreviation' => 'Avengers',
+                'website' => NULL,
+                'description' => NULL,
+                'email' => 'novascotiaavengers@gmail.com',
+                'phone' => '709-699-8717',
+                'facebook' => 'https://www.facebook.com/Nova-Scotia-Avengers-Cricket-Club-2214442235461792/',
+                'image' => NULL,
+            ],
+            [
+                'id' => 4,
+                'name' => 'Halifax Titans Cricket Club',
+                'abbreviation' => 'Titans',
+                'website' => 'https://halifaxtitanscricketclub.com/',
+                'description' => NULL,
+                'email' => 'halifaxtitanscricketclub@gmail.com',
+                'phone' => '902-414-5502',
+                'facebook' => NULL,
+                'image' => NULL,
+            ]
+        ];
+        $this->db->table('nsca_clubs')->insertBatch($testDataClubs);
+
+        $testDataAlerts = [
+            [
+                'id' => 1,
+                'title' => 'No Games today!',
+                'content' => 'No games will be played today due to the weather!',
+                'status' => 'inactive'
+            ]
+        ];
+        $this->db->table('nsca_alerts')->insertBatch($testDataAlerts);
+
+        $testDataCommittees = [
+            [
+                'id' => 1,
+                'name' => 'Test Committee 1',
+                'description' => 'Test description.',
+                'years' => '2023-2025'
+            ],
+            [
+                'id' => 2,
+                'name' => 'Test Committee 2',
+                'description' => 'Test description.',
+                'years' => '2022-2024'
+            ]
+        ];
+        $this->db->table('nsca_committees')->insertBatch($testDataCommittees);
+
+        $testDataCompetitionTypes = [
+            [
+                'id' => 1,
+                'name' => 'Test Competition Type A',
+                'description' => 'Test Competition Type A description.'
+            ],
+            [
+                'id' => 2,
+                'name' => 'Test Competition Type B',
+                'description' => 'Test Competition Type B description.'
+            ]
+        ];
+        $this->db->table('nsca_competition_type')->insertBatch($testDataCompetitionTypes);
+
+        $testDataCompetitions = [
+            [
+                'id' => 1,
+                'name' => 'Lions Against Snakes',
+                'description' => 'Lions and Snakes face head on.',
+                'compTypeID' => 1,
+                'yearRunning' => 2022
+            ]
+        ];
+        $this->db->table('nsca_competition')->insertBatch($testDataCompetitions);
+
+        $testDataRegions = [
+            [
+                'id' => 1,
+                'name' => 'Halifax',
+                'address' => '123 Test Street',
+                'description'   => 'Halifax region description'
+            ],
+            [
+                'id' => 2,
+                'name' => 'Moncton',
+                'address' => '123 Test Street',
+                'description'   => 'Moncton region description'
+            ]
+        ];
+        $this->db->table('nsca_location')->insertBatch($testDataRegions);
+
+        $testDataTeams = [
+            [
+                'id' => 1,
+                'name' => 'Lions',
+                'description' => 'Lions of Halifax',
+                'image' => 'NovaScotiaWarriors.jpg'
+            ],
+            [
+                'id' => 2,
+                'name' => 'Falcons',
+                'description' => 'Falcons of Dartmouth',
+                'image' => 'predators.jpg'
+            ],
+            [
+                'id' => 3,
+                'name' => 'Tigers',
+                'description' => 'Tigers of Bedford',
+                'image' => 'NSAvengers.jpg'
+            ]
+        ];
+        $this->db->table('nsca_team')->insertBatch($testDataTeams);
     }
 }
