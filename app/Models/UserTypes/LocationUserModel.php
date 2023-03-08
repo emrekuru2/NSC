@@ -4,17 +4,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class DevUserModel extends Model
+class LocationUserModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'nsca_dev_user';
+    protected $table            = 'locationusers';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = \App\Entities\DevUser::class;
+    protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['devID', 'userID', 'isLead'];
+    protected $allowedFields    = [];
 
     // Dates
     protected $useTimestamps = false;

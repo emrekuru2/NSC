@@ -4,14 +4,14 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class DevModel extends Model
+class CompetitionModel extends Model
 {
     // Construction
-    protected $table            = 'nsca_dev';
+    protected $table            = 'nsca_competition';
     protected $primaryKey       = 'id';
-    protected $returnType       = \App\Entities\Dev::class;
+    protected $returnType       = \App\Entities\Competition::class;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'duration', 'description', 'time', 'charges', 'type', 'daysRun', 'image'];
+    protected $allowedFields    = ['name', 'description', 'compTypeID', 'yearRunning'];
 
     // Dates
     protected $useTimestamps = true;
@@ -19,4 +19,5 @@ class DevModel extends Model
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
+
 }

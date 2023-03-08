@@ -6,12 +6,22 @@ use CodeIgniter\Model;
 
 class NewsModel extends Model
 {
+    // Construction
     protected $table            = 'nsca_news';
     protected $primaryKey       = 'id';
     protected $returnType       = \App\Entities\News::class;
+    protected $protectFields    = true;
     protected $allowedFields    = ['userID', 'title', 'content'];
-    protected $useTimestamps    =  true;
 
+     // Dates
+     protected $useTimestamps = true;
+     protected $dateFormat    = 'datetime';
+     protected $createdField  = 'created_at';
+     protected $updatedField  = 'updated_at';
+     protected $deletedField  = 'deleted_at';
+
+
+    // Functions
     public function getNews()
     {
         return $this->select('nsca_news.id, first_name, last_name, title, content, nsca_news.created_at')

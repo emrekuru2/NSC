@@ -4,10 +4,10 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CompetitionModel extends Model
+class TeamUserModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'competitions';
+    protected $table            = 'teamusers';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;

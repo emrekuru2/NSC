@@ -6,7 +6,6 @@ use CodeIgniter\Model;
 
 class TeamModel extends Model
 {
-    protected $DBGroup          = 'default';
     protected $table            = 'nsca_team';
     protected $primaryKey       = 'id';
     protected $returnType       = \App\Entities\Team::class;
