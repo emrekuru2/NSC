@@ -499,7 +499,7 @@ class TestData extends Seeder
                 'image' => 'NSAvengers.jpg'
             ]
         ];
-        $this->db->table('nsca_team')->insertBatch($testDataTeams);
+        $this->db->table('nsca_teams')->insertBatch($testDataTeams);
 
         $testDataDevPrograms = [
             [
