@@ -727,34 +727,22 @@ class Nsca extends Seeder
 
         $testDataClubTeams = [
             [
+                'id' => 1,
                 'teamID' => 1,
                 'clubID' => 1,
-                'compID' => NULL
+                'compID' => 1
             ],
             [
-                'teamID' => 1,
-                'clubID' => 2,
-                'compID' => NULL
-            ],
-            [
+                'id' => 2,
                 'teamID' => 2,
                 'clubID' => 2,
-                'compID' => NULL
+                'compID' => 1
             ],
             [
-                'teamID' => 2,
-                'clubID' => 3,
-                'compID' => NULL
-            ],
-            [
+                'id' => 3,
                 'teamID' => 3,
                 'clubID' => 3,
-                'compID' => NULL
-            ],
-            [
-                'teamID' => 3,
-                'clubID' => 4,
-                'compID' => NULL
+                'compID' => 1
             ]
         ];
         $this->db->table('nsca_teams')->insertBatch($testDataClubTeams);
@@ -817,7 +805,24 @@ class Nsca extends Seeder
         ];
         $this->db->table('nsca_team_user')->insertBatch($testDataTeamUsers);
 
-
+        $testDataTeamJoinList = [
+            [
+                'id' => 1,
+                'userID' => 12,
+                'teamID' => 1
+            ],
+            [
+                'id' => 2,
+                'userID' => 13,
+                'teamID' => 2
+            ],
+            [
+                'id' => 3,
+                'userID' => 14,
+                'teamID' => 3
+            ]
+        ];
+        $this->db->table('nsca_team_joinlist')->insertBatch($testDataTeamJoinList);
 
     }
 }
