@@ -824,5 +824,24 @@ class Nsca extends Seeder
         ];
         $this->db->table('nsca_team_joinlist')->insertBatch($testDataTeamJoinList);
 
+        $testDataCommitteeUsers = [
+            [
+                'id'            => 1,
+                'committeeID'   => 1,
+                'userID'        => 12
+            ],
+            [
+                'id'            => 2,
+                'committeeID'   => 1,
+                'userID'        => 13
+            ],
+            [
+                'id'            => 3,
+                'committeeID'   => 2,
+                'userID'        => 14
+            ]
+        ];
+        $this->db->table('nsca_committees_user')->insertBatch($testDataCommitteeUsers);
+
     }
 }
