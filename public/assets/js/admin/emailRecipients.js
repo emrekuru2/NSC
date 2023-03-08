@@ -2,7 +2,12 @@
 document.getElementById("form-submit").addEventListener("click", () => {
   let recipientsJSON = {
     recipients: [],
-    groups: [],
+    general: [],
+    club: [],
+    team: [],
+    committee: [],
+    location: [],
+    dev: []
   };
 
   // Individuals
@@ -20,7 +25,7 @@ document.getElementById("form-submit").addEventListener("click", () => {
       if (checkbox.checked) {
         recipientsJSON.groups.push(checkbox.value)
       }
-  });
+  }); // TODO: Add groups to corresponding JSON array.
 
   document.getElementsByName("groups")[0].value = JSON.stringify(recipientsJSON);
   document.getElementById("send-email-form").submit();

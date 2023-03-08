@@ -13,12 +13,16 @@
             <label class="form-check-label" for="all-users">All registered users</label>
           </li>
           <li class="list-group-item">
-            <input class="form-check-input me-1" type="checkbox" value="all-programs" id="all-programs">
-            <label class="form-check-label" for="all-programs">All programs users</label>
-          </li>
-          <li class="list-group-item">
             <input class="form-check-input me-1" type="checkbox" value="all-clubs" id="all-clubs">
             <label class="form-check-label" for="all-clubs">All club players</label>
+          </li>
+          <li class="list-group-item">
+              <input class="form-check-input me-1" type="checkbox" value="all-programs" id="all-programs">
+              <label class="form-check-label" for="all-programs">All programs users</label>
+          </li>
+          <li class="list-group-item">
+              <input class="form-check-input me-1" type="checkbox" value="all-players" id="all-players">
+              <label class="form-check-label" for="all-players">All players</label>
           </li>
         </ul>
       </div>
@@ -137,3 +141,7 @@
     </div>
   </div>
 </div>
+<!---->
+<?php //foreach ($tests as $test): ?>
+<!--<script> console.log('') </script>-->
+<?php //endforeach ?>
