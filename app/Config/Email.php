@@ -103,7 +103,7 @@ class Email extends BaseConfig
     /**
      * Enable BCC Batch Mode.
      */
-    public bool $BCCBatchMode = false;
+    public bool $BCCBatchMode = true;
 
     /**
      * Number of emails in each BCC batch
