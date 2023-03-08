@@ -82,6 +82,84 @@ class Nsca extends Seeder
                 'active'     => 1,
                 'created_at' => Time::now(),
                 'updated_at' => Time::now()
+            ],
+            [
+                'email'      => 'test1@email.com',
+                'first_name' => 'Test',
+                'last_name'  => 'User1',
+                'phone'      => '0000000000',
+                'street'     => '6299 South st.',
+                'city'       => 'Halifax',
+                'country'    => 'Canada',
+                'postal'     => 'B3H4R2',
+                'active'     => 1,
+                'created_at' => Time::now(),
+                'updated_at' => Time::now()
+            ],
+            [
+                'email'      => 'test2@email.com',
+                'first_name' => 'Test',
+                'last_name'  => 'User2',
+                'phone'      => '0000000000',
+                'street'     => '6299 South st.',
+                'city'       => 'Halifax',
+                'country'    => 'Canada',
+                'postal'     => 'B3H4R2',
+                'active'     => 1,
+                'created_at' => Time::now(),
+                'updated_at' => Time::now()
+            ],
+            [
+                'email'      => 'test3@email.com',
+                'first_name' => 'Test',
+                'last_name'  => 'User3',
+                'phone'      => '0000000000',
+                'street'     => '6299 South st.',
+                'city'       => 'Halifax',
+                'country'    => 'Canada',
+                'postal'     => 'B3H4R2',
+                'active'     => 1,
+                'created_at' => Time::now(),
+                'updated_at' => Time::now()
+            ],
+            [
+                'email'      => 'test4@email.com',
+                'first_name' => 'Test',
+                'last_name'  => 'User4',
+                'phone'      => '0000000000',
+                'street'     => '6299 South st.',
+                'city'       => 'Halifax',
+                'country'    => 'Canada',
+                'postal'     => 'B3H4R2',
+                'active'     => 1,
+                'created_at' => Time::now(),
+                'updated_at' => Time::now()
+            ],
+            [
+                'email'      => 'test5@email.com',
+                'first_name' => 'Test',
+                'last_name'  => 'User5',
+                'phone'      => '0000000000',
+                'street'     => '6299 South st.',
+                'city'       => 'Halifax',
+                'country'    => 'Canada',
+                'postal'     => 'B3H4R2',
+                'active'     => 1,
+                'created_at' => Time::now(),
+                'updated_at' => Time::now()
+            ],
+            [
+                'email'      => 'test6@email.com',
+                'first_name' => 'Test',
+                'last_name'  => 'User6',
+                'phone'      => '0000000000',
+                'street'     => '6299 South st.',
+                'city'       => 'Halifax',
+                'country'    => 'Canada',
+                'postal'     => 'B3H4R2',
+                'active'     => 1,
+                'created_at' => Time::now(),
+                'updated_at' => Time::now()
             ]
         ];
         $this->db->table('nsca_users')->insertBatch($testDataUsers);
@@ -183,6 +261,8 @@ class Nsca extends Seeder
             ]
         ];
         $this->db->table('auth_groups_users')->insertBatch($dataAuthGroups);
+
+
 
         $testDataNews = [
             [
@@ -347,5 +427,93 @@ class Nsca extends Seeder
         ];
         $this->db->table('nsca_clubs')->insertBatch($testDataClubs);
 
+        $testDataAlerts = [
+            [
+                'id' => 1,
+                'title' => 'No Games today!',
+                'content' => 'No games will be played today due to the weather!',
+                'status' => 'inactive'
+            ]
+        ];
+        $this->db->table('nsca_alerts')->insertBatch($testDataAlerts);
+
+        $testDataCommittees = [
+            [
+                'id' => 1,
+                'name' => 'Test Committee 1',
+                'description' => 'Test description.',
+                'years' => '2023-2025'
+            ],
+            [
+                'id' => 2,
+                'name' => 'Test Committee 2',
+                'description' => 'Test description.',
+                'years' => '2022-2024'
+            ]
+        ];
+        $this->db->table('nsca_committees')->insertBatch($testDataCommittees);
+
+        $testDataCompetitions = [
+            [
+                'id' => 1,
+                'name' => 'Lions Against Snakes',
+                'description' => 'Lions and Snakes face head on.',
+                'compTypeID' => 1,
+                'yearRunning' => 2022
+            ]
+        ];
+        $this->db->table('nsca_competition')->insertBatch($testDataCompetitions);
+
+        $testDataCompetitionTypes = [
+            [
+                'id' => 1,
+                'name' => 'Test Competition Type A',
+                'description' => 'Test Competition Type A description.'
+            ],
+            [
+                'id' => 2,
+                'name' => 'Test Competition Type B',
+                'description' => 'Test Competition Type B description.'
+            ]
+        ];
+        $this->db->table('nsca_competition_type')->insertBatch($testDataCompetitionTypes);
+
+        $testDataRegions = [
+            [
+                'id' => 1,
+                'name' => 'Halifax',
+                'address' => '123 Test Street',
+                'description'   => 'Halifax region description'
+            ],
+            [
+                'id' => 2,
+                'name' => 'Moncton',
+                'address' => '123 Test Street',
+                'description'   => 'Moncton region description'
+            ]
+        ];
+        $this->db->table('nsca_location')->insertBatch($testDataRegions);
+
+        $testDataTeams = [
+            [
+                'id' => 1,
+                'name' => 'Lions',
+                'description' => 'Lions of Halifax',
+                'image' => 'NovaScotiaWarriors.jpg'
+            ],
+            [
+                'id' => 2,
+                'name' => 'Falcons',
+                'description' => 'Falcons of Dartmouth',
+                'image' => 'predators.jpg'
+            ],
+            [
+                'id' => 3,
+                'name' => 'Tigers',
+                'description' => 'Tigers of Bedford',
+                'image' => 'NSAvengers.jpg'
+            ]
+        ];
+        $this->db->table('nsca_team')->insertBatch($testDataTeams);
     }
 }
