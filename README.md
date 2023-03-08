@@ -70,7 +70,6 @@ database.default.password =
 database.default.DBDriver = MySQLi
 database.default.DBPrefix =
 database.default.port = 3306
-
 ```
 
 > If you were working with another database before, drop that database and create a new one from your database manager or with this command down below.:exclamation: The name must be written without quotes.
@@ -87,7 +86,8 @@ php spark migrate
 > Then run
 
 ```sh
-php spark db:seed Nsca
+php spark db:seed Init
+php spark db:seed TestData
 ```
 
 > The user emails, passwords and their roles are shown below. 
@@ -103,7 +103,8 @@ php spark db:seed Nsca
 > For any changes on database tables or dummy rows, you can use these commands down below to keep the database features up to date
 ```sh
 php spark migrate:rollback
-php spark db:seed Nsca
+php spark db:seed Init
+php spark db:seed TestData
 ```
 
 
