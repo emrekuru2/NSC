@@ -188,6 +188,32 @@ class Nsca extends Seeder
                 'active'     => 1,
                 'created_at' => Time::now(),
                 'updated_at' => Time::now()
+            ],
+            [
+                'email'      => 'test7@email.com',
+                'first_name' => 'Test',
+                'last_name'  => 'User7',
+                'phone'      => '0000000000',
+                'street'     => '6299 South st.',
+                'city'       => 'Halifax',
+                'country'    => 'Canada',
+                'postal'     => 'B3H4R2',
+                'active'     => 1,
+                'created_at' => Time::now(),
+                'updated_at' => Time::now()
+            ],
+            [
+                'email'      => 'test8@email.com',
+                'first_name' => 'Test',
+                'last_name'  => 'User8',
+                'phone'      => '0000000000',
+                'street'     => '6299 South st.',
+                'city'       => 'Halifax',
+                'country'    => 'Canada',
+                'postal'     => 'B3H4R2',
+                'active'     => 1,
+                'created_at' => Time::now(),
+                'updated_at' => Time::now()
             ]
         ];
         $this->db->table('nsca_users')->insertBatch($testDataUsers);
@@ -322,6 +348,32 @@ class Nsca extends Seeder
                 'last_used_at' => null,
                 'created_at'   => Time::now(),
                 'updated_at'   => Time::now()
+            ],
+            [
+                'user_id'      => 12,
+                'type'         => 'email_password',
+                'name'         => null,
+                'secret'       => 'test7@email.com',
+                'secret2'      => $password->hash('Password2023!'),
+                'expires'      => null,
+                'extra'        => null,
+                'force_reset'  => 0,
+                'last_used_at' => null,
+                'created_at'   => Time::now(),
+                'updated_at'   => Time::now()
+            ],
+            [
+                'user_id'      => 13,
+                'type'         => 'email_password',
+                'name'         => null,
+                'secret'       => 'test8@email.com',
+                'secret2'      => $password->hash('Password2023!'),
+                'expires'      => null,
+                'extra'        => null,
+                'force_reset'  => 0,
+                'last_used_at' => null,
+                'created_at'   => Time::now(),
+                'updated_at'   => Time::now()
             ]
         ];
         $this->db->table('auth_identities')->insertBatch($testDataAuthIdentities);
@@ -374,6 +426,16 @@ class Nsca extends Seeder
             ],
             [
                 'user_id'    => 11,
+                'group'      => 'player',
+                'created_at' => Time::now(),
+            ],
+            [
+                'user_id'    => 12,
+                'group'      => 'player',
+                'created_at' => Time::now(),
+            ],
+            [
+                'user_id'    => 13,
                 'group'      => 'player',
                 'created_at' => Time::now(),
             ]
@@ -569,17 +631,6 @@ class Nsca extends Seeder
         ];
         $this->db->table('nsca_committees')->insertBatch($testDataCommittees);
 
-        $testDataCompetitions = [
-            [
-                'id' => 1,
-                'name' => 'Lions Against Snakes',
-                'description' => 'Lions and Snakes face head on.',
-                'compTypeID' => 1,
-                'yearRunning' => 2022
-            ]
-        ];
-        $this->db->table('nsca_competition')->insertBatch($testDataCompetitions);
-
         $testDataCompetitionTypes = [
             [
                 'id' => 1,
@@ -593,6 +644,17 @@ class Nsca extends Seeder
             ]
         ];
         $this->db->table('nsca_competition_type')->insertBatch($testDataCompetitionTypes);
+
+        $testDataCompetitions = [
+            [
+                'id' => 1,
+                'name' => 'Lions Against Snakes',
+                'description' => 'Lions and Snakes face head on.',
+                'compTypeID' => 1,
+                'yearRunning' => 2022
+            ]
+        ];
+        $this->db->table('nsca_competition')->insertBatch($testDataCompetitions);
 
         $testDataRegions = [
             [
