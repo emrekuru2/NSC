@@ -214,6 +214,19 @@ class Nsca extends Seeder
                 'active'     => 1,
                 'created_at' => Time::now(),
                 'updated_at' => Time::now()
+            ],
+            [
+                'email'      => 'test9@email.com',
+                'first_name' => 'Test',
+                'last_name'  => 'User9',
+                'phone'      => '0000000000',
+                'street'     => '6299 South st.',
+                'city'       => 'Halifax',
+                'country'    => 'Canada',
+                'postal'     => 'B3H4R2',
+                'active'     => 1,
+                'created_at' => Time::now(),
+                'updated_at' => Time::now()
             ]
         ];
         $this->db->table('nsca_users')->insertBatch($testDataUsers);
@@ -374,6 +387,19 @@ class Nsca extends Seeder
                 'last_used_at' => null,
                 'created_at'   => Time::now(),
                 'updated_at'   => Time::now()
+            ],
+            [
+                'user_id'      => 14,
+                'type'         => 'email_password',
+                'name'         => null,
+                'secret'       => 'test9@email.com',
+                'secret2'      => $password->hash('Password2023!'),
+                'expires'      => null,
+                'extra'        => null,
+                'force_reset'  => 0,
+                'last_used_at' => null,
+                'created_at'   => Time::now(),
+                'updated_at'   => Time::now()
             ]
         ];
         $this->db->table('auth_identities')->insertBatch($testDataAuthIdentities);
@@ -436,6 +462,11 @@ class Nsca extends Seeder
             ],
             [
                 'user_id'    => 13,
+                'group'      => 'player',
+                'created_at' => Time::now(),
+            ],
+            [
+                'user_id'    => 14,
                 'group'      => 'player',
                 'created_at' => Time::now(),
             ]
@@ -693,6 +724,100 @@ class Nsca extends Seeder
             ]
         ];
         $this->db->table('nsca_alerts')->insertBatch($testDataAlerts);
+
+        $testDataClubTeams = [
+            [
+                'teamID' => 1,
+                'clubID' => 1,
+                'compID' => NULL
+            ],
+            [
+                'teamID' => 1,
+                'clubID' => 2,
+                'compID' => NULL
+            ],
+            [
+                'teamID' => 2,
+                'clubID' => 2,
+                'compID' => NULL
+            ],
+            [
+                'teamID' => 2,
+                'clubID' => 3,
+                'compID' => NULL
+            ],
+            [
+                'teamID' => 3,
+                'clubID' => 3,
+                'compID' => NULL
+            ],
+            [
+                'teamID' => 3,
+                'clubID' => 4,
+                'compID' => NULL
+            ]
+        ];
+        $this->db->table('nsca_teams')->insertBatch($testDataClubTeams);
+
+        $testDataTeamUsers = [
+            [
+                'id' => 1,
+                'userID' => 6,
+                'teamID' => 1,
+                'isClubManager' => 0,
+                'isTeamCaptain' => 0,
+                'isViceCaptain' => 0,
+                'isWaitingToJoin' => 0
+            ],
+            [
+                'id' => 2,
+                'userID' => 7,
+                'teamID' => 1,
+                'isClubManager' => 0,
+                'isTeamCaptain' => 0,
+                'isViceCaptain' => 0,
+                'isWaitingToJoin' => 0
+            ],
+            [
+                'id' => 3,
+                'userID' => 8,
+                'teamID' => 2,
+                'isClubManager' => 0,
+                'isTeamCaptain' => 0,
+                'isViceCaptain' => 0,
+                'isWaitingToJoin' => 0
+            ],
+            [
+                'id' => 4,
+                'userID' => 9,
+                'teamID' => 2,
+                'isClubManager' => 0,
+                'isTeamCaptain' => 0,
+                'isViceCaptain' => 0,
+                'isWaitingToJoin' => 0
+            ],
+            [
+                'id' => 5,
+                'userID' => 10,
+                'teamID' => 3,
+                'isClubManager' => 0,
+                'isTeamCaptain' => 0,
+                'isViceCaptain' => 0,
+                'isWaitingToJoin' => 0
+            ],
+            [
+                'id' => 6,
+                'userID' => 11,
+                'teamID' => 3,
+                'isClubManager' => 0,
+                'isTeamCaptain' => 0,
+                'isViceCaptain' => 0,
+                'isWaitingToJoin' => 0
+            ]
+        ];
+        $this->db->table('nsca_team_user')->insertBatch($testDataTeamUsers);
+
+
 
     }
 }
