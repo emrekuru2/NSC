@@ -57,21 +57,19 @@ class EmailController extends BaseController
         if ($email->send()) {
 
             $data = [
-                'title'   => 'Email',
                 'type'    => 'success',
                 'content' => 'Email sent successfully'
             ];
 
-            return view('pages/admin/email', $data);
-            
+            return redirect()->back()->with('alert', $data);
         } else {
 
             $data = [
-                'title'   => 'Email',
                 'type'    => 'danger',
                 'content' => '' . print_r($email->printDebugger(), true)
             ];
-            return view('pages/admin/email', $data);
+
+            return redirect()->back()->with('alert', $data);
         }
     }
 }

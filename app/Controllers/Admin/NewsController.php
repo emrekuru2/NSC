@@ -27,6 +27,21 @@ class NewsController extends BaseController
         $news->content = $content;
 
         $newsModel = model(NewsModel::class);
-        $newsModel->save($news);
+
+        if ($newsModel->save($news)) {
+            $data = [
+                'type'    => 'success',
+                'content' => 'News created successfully'
+            ];
+
+            return redirect()->back()->with('alert', $data);
+        }
+
+        $data = [
+            'type'    => 'danger',
+            'content' => 'News could not be created'
+        ];
+
+        return redirect()->back()->with('alert', $data);
     }
 }
