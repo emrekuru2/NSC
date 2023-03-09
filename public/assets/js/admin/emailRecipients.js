@@ -9,7 +9,7 @@ const allProgramsCheck = document.getElementById("all-programs");
 // Form Submission Button
 submitButton.addEventListener("click", () => {
   let recipientsJSON = {
-    individual: [],
+    recipients: [],
     general: [],
     club: [],
     team: [],
@@ -25,7 +25,7 @@ submitButton.addEventListener("click", () => {
 
   recipientsArray.forEach((recipient) => {
     if (recipient !== '') {
-      recipientsJSON.individual.push(recipient)
+      recipientsJSON.recipients.push(recipient)
     }
   });
 
