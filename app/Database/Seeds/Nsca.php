@@ -350,5 +350,27 @@ class Nsca extends Seeder
         ];
         $this->db->table('nsca_clubs')->insertBatch($testDataClubs);
 
+        $devProgType = [
+            [
+                'id' => 1,
+                'name' => 'Kids',
+                'min_age' => 5,
+                'max_age' => 12,
+            ],
+            [
+                'id' => 2,
+                'name' => 'Youth',
+                'min_age' => 13,
+                'max_age' => 18,
+            ],
+            [
+                'id' => 3,
+                'name' => 'Adult',
+                'min_age' => 19,
+                'max_age' => 100,
+            ],
+        ];
+        $this->db->table('nsca_devprogram_type')->insertBatch($devProgType);
+
     }
 }
