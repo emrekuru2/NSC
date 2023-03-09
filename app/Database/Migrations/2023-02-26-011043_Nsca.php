@@ -206,18 +206,25 @@ class Nsca extends Migration
         // Development Programs Table
         $this->forge->addField([
             'id'            => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+            'devProgID'     => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
             'name'          => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
-            'duration'      => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
             'description'   => ['type' => 'varchar', 'constraint' => 512, 'null' => true],
-            'time'          => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
-            'charges'       => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
-            'type'          => ['type' => 'varchar', 'constraint' => 512, 'null' => true],
-            'daysRun'       => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
+            'start_time'    => ['type' => 'time', 'null' => false],
+            'end_time'      => ['type' => 'time', 'null' => false],
+            'start_date'    => ['type' => 'datetime', 'null' => false],
+            'end_date'      => ['type' => 'datetime', 'null' => false],
+            'price'         => ['type' => 'int', 'constraint' => 11, 'null' => true],
+            'location'      => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
             'image'         => ['type' => 'varchar', 'constraint' => 120, 'null' => false, 'default' => '/assets/images/DevProgs/contents/default.jpg'],
+            'daysRun'       => ['type' => 'varchar', 'constraint' => 128, 'null' => true],
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->createTable('nsca_dev');
         
+
+
+
+
         // Development User Table
         $this->forge->addField([
             'id'            => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
@@ -357,6 +364,16 @@ class Nsca extends Migration
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->createTable('settings');
+        
+
+        $this->forge->addField([
+            'id'            => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+            'type_name'          => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
+            'min_age'       => ['type' => 'int', 'constraint' => 11, 'null' => false],
+            'max_age'       => ['type' => 'int', 'constraint' => 11, 'null' => false],
+        ]);
+        $this->forge->addPrimaryKey('id');
+        $this->forge->createTable('nsca_devprogram_type');
 
 
     }

@@ -4,17 +4,18 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class DevModel extends Model
+class DevTypeModel extends Model
 {
-    protected $table            = 'nsca_dev';
+    protected $table            = 'nsca_devprogram_type';
     protected $primaryKey       = 'id';
-    protected $returnType       = \App\Entities\Dev::class;
+    protected $returnType       = \App\Entities\DevType::class;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'description', 'start_time', 'end_time', 'start_date', 'end_date', 'price', 'location', 'image', 'daysRun', 'devProgID'];
+    protected $allowedFields    = ['type_name', 'min_age', 'max_age'];
 
     // Dates
     protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
+    protected $deletedField  = 'deleted_at';
 }
