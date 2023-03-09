@@ -20,24 +20,45 @@ submitButton.addEventListener("click", () => {
 
   // Individuals
   const recipientsElement = document.getElementsByName("mailTo")[0].value;
-  let recipientsString = removeAllSpaces(
-    addMissingSemiColons(recipientsElement)
-  );
+  let recipientsString = removeAllSpaces(addMissingSemiColons(recipientsElement));
   const recipientsArray = recipientsString.split(";");
 
-  recipientsArray.forEach((recipient) =>
-    recipientsJSON.individual.push(recipient)
-  );
+  recipientsArray.forEach((recipient) => {
+    if (recipient !== '') {
+      recipientsJSON.individual.push(recipient)
+    }
+  });
 
   // Groups
-  // emailGroupChecks.forEach((checkbox) => {
-  //     if (checkbox.checked) {
-  //       recipientsJSON.groups.push(checkbox.value)
-  //     }
-  // }); // TODO: Add groups to corresponding JSON array.
+  for (let i = 0; i < allChecks.length; i++) {
+    if (allChecks[i].checked) {
+      let group = allChecks[i].dataset.groupName;
+      let id = allChecks[i].value;
 
-  document.getElementsByName("groups")[0].value =
-    JSON.stringify(recipientsJSON);
+      switch (group) {
+        case "general":
+          recipientsJSON.general.push(id);
+          break;
+        case "club":
+          recipientsJSON.club.push(id);
+          break;
+        case "team":
+          recipientsJSON.team.push(id);
+          break;
+        case "committee":
+          recipientsJSON.committee.push(id);
+          break;
+        case "location":
+          recipientsJSON.location.push(id);
+          break;
+        case "dev":
+          recipientsJSON.dev.push(id);
+          break;
+      }
+    }
+  }
+
+  document.getElementsByName("groups")[0].value = JSON.stringify(recipientsJSON);
   submitButton.submit();
 });
 
