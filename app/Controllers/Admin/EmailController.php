@@ -6,7 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\ClubModel;
 use App\Models\CommitteeModel;
 use App\Models\DevModel;
-use App\Models\RegionModel;
+use App\Models\LocationModel;
 use App\Models\TeamModel;
 
 class EmailController extends BaseController
@@ -16,7 +16,7 @@ class EmailController extends BaseController
         $clubModel = model(ClubModel::class);
         $teamModel = model(TeamModel::class);
         $committeeModel = model(CommitteeModel::class);
-        $regionModel = model(RegionModel::class);
+        $locationModel = model(LocationModel::class);
         $devModel = model(DevModel::class);
 
         $data = [
@@ -24,7 +24,7 @@ class EmailController extends BaseController
             'clubs' => $clubModel->findAll(),
             'teams' => $teamModel->findAll(),
             'committees' => $committeeModel->findAll(),
-            'regions' => $regionModel->findAll(),
+            'locations' => $locationModel->findAll(),
             'devs' => $devModel->findAll()
         ];
 

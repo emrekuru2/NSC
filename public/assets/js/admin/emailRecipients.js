@@ -1,8 +1,21 @@
-// Listeners
-document.getElementById("form-submit").addEventListener("click", () => {
+// Variables
+const submitButton = document.getElementById("form-submit");
+const allChecks = document.querySelectorAll('input[type="checkbox"]');
+const allUsersCheck = document.getElementById("all-users");
+const allClubsCheck = document.getElementById("all-clubs");
+const allProgramsCheck = document.getElementById("all-programs");
+
+// ~~ Listeners ~~
+// Form Submission Button
+submitButton.addEventListener("click", () => {
   let recipientsJSON = {
     recipients: [],
-    groups: [],
+    general: [],
+    club: [],
+    team: [],
+    committee: [],
+    location: [],
+    dev: [],
   };
 
   // Individuals
@@ -10,20 +23,112 @@ document.getElementById("form-submit").addEventListener("click", () => {
   let recipientsString = removeAllSpaces(addMissingSemiColons(recipientsElement));
   const recipientsArray = recipientsString.split(";");
 
-  recipientsArray.forEach((recipient) =>
-    recipientsJSON.recipients.push(recipient)
-  );
-
-  // Groups
-  const emailGroupChecks = document.querySelectorAll('input[type="checkbox"]');
-  emailGroupChecks.forEach((checkbox) => {
-      if (checkbox.checked) {
-        recipientsJSON.groups.push(checkbox.value)
-      }
+  recipientsArray.forEach((recipient) => {
+    if (recipient !== '') {
+      recipientsJSON.recipients.push(recipient)
+    }
   });
 
+  // Groups
+  for (let i = 0; i < allChecks.length; i++) {
+    if (allChecks[i].checked) {
+      let group = allChecks[i].dataset.groupName;
+      let id = allChecks[i].value;
+
+      switch (group) {
+        case "general":
+          recipientsJSON.general.push(id);
+          break;
+        case "club":
+          recipientsJSON.club.push(id);
+          break;
+        case "team":
+          recipientsJSON.team.push(id);
+          break;
+        case "committee":
+          recipientsJSON.committee.push(id);
+          break;
+        case "location":
+          recipientsJSON.location.push(id);
+          break;
+        case "dev":
+          recipientsJSON.dev.push(id);
+          break;
+      }
+    }
+  }
+
   document.getElementsByName("groups")[0].value = JSON.stringify(recipientsJSON);
-  document.getElementById("send-email-form").submit();
+  submitButton.submit();
+});
+
+allUsersCheck.addEventListener("click", () => {
+  // Checked
+  if (allUsersCheck.checked) {
+    for (let i = 0; i < allChecks.length; i++) {
+      if (allChecks[i] !== allUsersCheck) {
+        allChecks[i].checked = false;
+        allChecks[i].disabled = true;
+      }
+    }
+  }
+
+  //Unchecked
+  else {
+    for (let i = 0; i < allChecks.length; i++) {
+      if (allChecks[i] !== allUsersCheck) {
+        allChecks[i].disabled = false;
+      }
+    }
+  }
+});
+
+allClubsCheck.addEventListener("click", () => {
+  // Checked
+  if (allClubsCheck.checked) {
+    for (let i = 0; i < allChecks.length; i++) {
+      if (
+        allChecks[i].dataset.groupName === "club" ||
+        allChecks[i].dataset.groupName === "team"
+      ) {
+        allChecks[i].checked = false;
+        allChecks[i].disabled = true;
+      }
+    }
+  }
+
+  //Unchecked
+  else {
+    for (let i = 0; i < allChecks.length; i++) {
+      if (
+        allChecks[i].dataset.groupName === "club" ||
+        allChecks[i].dataset.groupName === "team"
+      ) {
+        allChecks[i].disabled = false;
+      }
+    }
+  }
+});
+
+allProgramsCheck.addEventListener("click", () => {
+  // Checked
+  if (allProgramsCheck.checked) {
+    for (let i = 0; i < allChecks.length; i++) {
+      if (allChecks[i].dataset.groupName === "dev") {
+        allChecks[i].checked = false;
+        allChecks[i].disabled = true;
+      }
+    }
+  }
+
+  //Unchecked
+  else {
+    for (let i = 0; i < allChecks.length; i++) {
+      if (allChecks[i].dataset.groupName === "dev") {
+        allChecks[i].disabled = false;
+      }
+    }
+  }
 });
 
 // Functions

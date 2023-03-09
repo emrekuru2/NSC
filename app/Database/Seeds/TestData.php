@@ -479,24 +479,27 @@ class TestData extends Seeder
         $testDataTeams = [
             [
                 'id' => 1,
+                'clubID' => 1,
                 'name' => 'Lions',
                 'description' => 'Lions of Halifax',
                 'image' => 'NovaScotiaWarriors.jpg'
             ],
             [
                 'id' => 2,
+                'clubID' => 2,
                 'name' => 'Falcons',
                 'description' => 'Falcons of Dartmouth',
                 'image' => 'predators.jpg'
             ],
             [
                 'id' => 3,
+                'clubID' => 3,
                 'name' => 'Tigers',
                 'description' => 'Tigers of Bedford',
                 'image' => 'NSAvengers.jpg'
             ]
         ];
-        $this->db->table('nsca_team')->insertBatch($testDataTeams);
+        $this->db->table('nsca_teams')->insertBatch($testDataTeams);
 
         $testDataDevPrograms = [
             [
@@ -686,82 +689,48 @@ class TestData extends Seeder
         ];
         $this->db->table('nsca_alerts')->insertBatch($testDataAlerts);
 
-        $testDataClubTeams = [
-            [
-                'id' => 1,
-                'teamID' => 1,
-                'clubID' => 1,
-                'compID' => 1
-            ],
-            [
-                'id' => 2,
-                'teamID' => 2,
-                'clubID' => 2,
-                'compID' => 1
-            ],
-            [
-                'id' => 3,
-                'teamID' => 3,
-                'clubID' => 3,
-                'compID' => 1
-            ]
-        ];
-        $this->db->table('nsca_teams')->insertBatch($testDataClubTeams);
-
         $testDataTeamUsers = [
             [
                 'id' => 1,
                 'userID' => 6,
                 'teamID' => 1,
-                'isClubManager' => 0,
                 'isTeamCaptain' => 0,
-                'isViceCaptain' => 0,
-                'isWaitingToJoin' => 0
+                'isViceCaptain' => 0
             ],
             [
                 'id' => 2,
                 'userID' => 7,
                 'teamID' => 1,
-                'isClubManager' => 0,
                 'isTeamCaptain' => 0,
-                'isViceCaptain' => 0,
-                'isWaitingToJoin' => 0
+                'isViceCaptain' => 0
             ],
             [
                 'id' => 3,
                 'userID' => 8,
                 'teamID' => 2,
-                'isClubManager' => 0,
                 'isTeamCaptain' => 0,
-                'isViceCaptain' => 0,
-                'isWaitingToJoin' => 0
+                'isViceCaptain' => 0
             ],
             [
                 'id' => 4,
                 'userID' => 9,
                 'teamID' => 2,
-                'isClubManager' => 0,
                 'isTeamCaptain' => 0,
-                'isViceCaptain' => 0,
-                'isWaitingToJoin' => 0
+                'isViceCaptain' => 0
             ],
             [
                 'id' => 5,
                 'userID' => 10,
                 'teamID' => 3,
-                'isClubManager' => 0,
                 'isTeamCaptain' => 0,
-                'isViceCaptain' => 0,
-                'isWaitingToJoin' => 0
+                'isViceCaptain' => 0
             ],
             [
                 'id' => 6,
                 'userID' => 11,
                 'teamID' => 3,
-                'isClubManager' => 0,
                 'isTeamCaptain' => 0,
-                'isViceCaptain' => 0,
-                'isWaitingToJoin' => 0
+                'isViceCaptain' => 0
             ]
         ];
         $this->db->table('nsca_team_user')->insertBatch($testDataTeamUsers);

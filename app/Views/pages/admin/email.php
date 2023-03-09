@@ -37,7 +37,7 @@
         <div class="card shadow">
             <div class="card-header">Email groups</div>
             <div class="card-body">
-                <?= view_cell('\App\Libraries\Contents::accordion', ['teams' => $teams, 'clubs' => $clubs, 'committees' => $committees, 'regions' => $regions, 'devs' => $devs]) ?>
+                <?= view_cell('\App\Libraries\Contents::accordion', ['teams' => $teams, 'clubs' => $clubs, 'committees' => $committees, 'locations' => $locations, 'devs' => $devs]) ?>
             </div>
         </div>
     </div>
