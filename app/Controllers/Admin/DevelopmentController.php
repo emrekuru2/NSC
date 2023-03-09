@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers\Admin;
+
 use CodeIgniter\I18n\Time;
 
 use App\Controllers\BaseController;
@@ -13,11 +14,12 @@ class DevelopmentController extends BaseController
     {
         $model = model(DevModel::class);
         $devType = model(DevTypeModel::class);
+
         $data = [
-            'programs'  => $model->orderBy('start_date', 'ASC')->paginate(10),
-            'devTypes' => $devType->findAll(),
-            'pager' => $model->pager,
-            'title' => 'Development',
+            'programs'  => $model->orderBy('id', 'DESC')->paginate(10),
+            'devTypes'  => $devType->findAll(),
+            'pager'     => $model->pager,
+            'title'     => 'Development',
         ];
 
         return view('pages/admin/development', $data);
@@ -26,69 +28,48 @@ class DevelopmentController extends BaseController
     public function createDev()
     {
 
-        $name = $this->request->getVar('name');
-        $start_time = $this->request->getVar('start_time');
-        $end_time = $this->request->getVar('end_time');
-        $start_date = $this->request->getVar('start_date');
-        $end_date = $this->request->getVar('end_date');
-        $days = $this->request->getVar('days');
-        // create a string of all days separated by a comma
-        $daysRun = implode(", ", $days);
-        $devType = $this->request->getVar('devType');
-        echo $devType;
-        $price = $this->request->getVar('price');
-        $location = $this->request->getVar('location');
-        $description = $this->request->getVar('description');
-        $image = $this->request->getVar('image');
-
+        $data = $this->request->getPost();
         $dev = new \App\Entities\Dev();
-        $devmodel = model(DevModel::class);
-        $dev->name = $name;
-        $dev->start_time = $start_time;
-        $dev->end_time = $end_time;
-        $dev->start_date = $start_date;
-        $dev->end_date = $end_date;
-        $dev->price = $price;
-        $dev->location = $location;
-        $dev->description = $description;
-        $dev->image = $image;
-        $dev->daysRun = $daysRun;
-        $dev->devProgID = $devType;
-        
+        $dev->fill($data);
 
-        $devmodel->save($dev);
+        if (model(DevModel::class)->save($dev)) {
+            $data = [
+                'type'    => 'success',
+                'content' => 'Development program created successfully'
+            ];
+
+            return redirect()->back()->with('alert', $data);
+        }
 
         $data = [
-            'title' => 'Development',
-            'type' => 'success',
-            'content' => 'Development program created successfully'
+            'type'    => 'danger',
+            'content' => 'Development program could not be created'
         ];
 
-        return view('pages/admin/development', $data);
+        return redirect()->back()->with('alert', $data);
     }
 
     public function createProgType()
     {
 
-        $name = $this->request->getVar('name');
-        $min_age = $this->request->getVar('min_age');
-        $max_age = $this->request->getVar('max_age');
+        $data = $this->request->getPost();
+        $devType = new \App\Entities\DevType();
+        $devType->fill($data);
 
-        $dev = new \App\Entities\DevType();
-        $devmodel = model(DevTypeModel::class);
-        $dev->type_name = $name;
-        $dev->min_age = $min_age;
-        $dev->max_age = $max_age;
+        if (model(DevTypeModel::class)->save($devType)) {
+            $data = [
+                'type'    => 'success',
+                'content' => 'Development program created successfully'
+            ];
 
-        $devmodel->save($dev);
+            return redirect()->back()->with('alert', $data);
+        }
 
         $data = [
-            'title' => 'Development',
-            'type' => 'success',
-            'content' => 'Development program created successfully'
+            'type'    => 'danger',
+            'content' => 'Development program could not be created'
         ];
 
-        return view('pages/admin/development', $data);
-
+        return redirect()->back()->with('alert', $data);
     }
 }

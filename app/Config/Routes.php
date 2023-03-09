@@ -66,7 +66,7 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->match(['post'], 'sendEmail', 'Admin\EmailController::sendEmail');
     $routes->match(['post'], 'createNews', 'Admin\NewsController::createNews');
     $routes->match(['post'], 'createDev', 'Admin\DevelopmentController::createDev');
-    $routes->match(['get'], 'createProgType', 'Admin\DevelopmentController::createProgType');
+    $routes->match(['post'], 'createProgType', 'Admin\DevelopmentController::createProgType');
 
 });
 
