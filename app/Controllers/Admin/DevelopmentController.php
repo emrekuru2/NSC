@@ -76,7 +76,7 @@ class DevelopmentController extends BaseController
 
         $dev = new \App\Entities\DevType();
         $devmodel = model(DevTypeModel::class);
-        $dev->name = $name;
+        $dev->type_name = $name;
         $dev->min_age = $min_age;
         $dev->max_age = $max_age;
 

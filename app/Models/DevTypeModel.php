@@ -10,7 +10,7 @@ class DevTypeModel extends Model
     protected $primaryKey       = 'id';
     protected $returnType       = \App\Entities\DevType::class;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'min_age', 'max_age'];
+    protected $allowedFields    = ['type_name', 'min_age', 'max_age'];
 
     // Dates
     protected $useTimestamps = false;
