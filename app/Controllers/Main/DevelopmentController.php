@@ -9,7 +9,10 @@ class DevelopmentController extends BaseController
     {
         $model = model(DevModel::class);
         $data = [
-            'programs'  => $model->orderBy('start_date', 'ASC')->paginate(5),
+            'programs'  => 
+            $model->orderBy('start_date', 'ASC')
+            ->join('nsca_devprogram_type', 'nsca_devprogram_type.id = nsca_dev.devProgID')
+            ->findAll(),
             'pager' => $model->pager,
             'title' => 'Development',
         ];

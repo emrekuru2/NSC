@@ -366,7 +366,7 @@ class Nsca extends Migration
 
         $this->forge->addField([
             'id'            => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
-            'name'          => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
+            'type_name'          => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
             'min_age'       => ['type' => 'int', 'constraint' => 11, 'null' => false],
             'max_age'       => ['type' => 'int', 'constraint' => 11, 'null' => false],
         ]);

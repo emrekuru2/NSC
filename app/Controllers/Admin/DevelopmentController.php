@@ -5,14 +5,17 @@ use CodeIgniter\I18n\Time;
 
 use App\Controllers\BaseController;
 use DevModel;
+use DevTypeModel;
 
 class DevelopmentController extends BaseController
 {
     public function index()
     {
         $model = model(DevModel::class);
+        $devType = model(DevTypeModel::class);
         $data = [
             'programs'  => $model->orderBy('start_date', 'ASC')->paginate(10),
+            'devTypes' => $devType->findAll(),
             'pager' => $model->pager,
             'title' => 'Development',
         ];
@@ -31,7 +34,8 @@ class DevelopmentController extends BaseController
         $days = $this->request->getVar('days');
         // create a string of all days separated by a comma
         $daysRun = implode(", ", $days);
-        echo $daysRun;
+        $devType = $this->request->getVar('devType');
+        echo $devType;
         $price = $this->request->getVar('price');
         $location = $this->request->getVar('location');
         $description = $this->request->getVar('description');
@@ -49,7 +53,32 @@ class DevelopmentController extends BaseController
         $dev->description = $description;
         $dev->image = $image;
         $dev->daysRun = $daysRun;
+        $dev->devProgID = $devType;
         
+
+        $devmodel->save($dev);
+
+        $data = [
+            'title' => 'Development',
+            'type' => 'success',
+            'content' => 'Development program created successfully'
+        ];
+
+        return view('pages/admin/development', $data);
+    }
+
+    public function createProgType()
+    {
+
+        $name = $this->request->getVar('name');
+        $min_age = $this->request->getVar('min_age');
+        $max_age = $this->request->getVar('max_age');
+
+        $dev = new \App\Entities\DevType();
+        $devmodel = model(DevTypeModel::class);
+        $dev->name = $name;
+        $dev->min_age = $min_age;
+        $dev->max_age = $max_age;
 
         $devmodel->save($dev);
 

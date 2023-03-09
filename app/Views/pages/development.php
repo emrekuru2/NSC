@@ -23,6 +23,7 @@ use CodeIgniter\I18n\Time;
                                 <p><b>Days</b>: <?= esc($program->daysRun) ?></p>
                                 <p><b>Dates:</b> <?= date('m/d/y',strtotime(esc($program->start_date))) ?>-<?= date('m/d/y',strtotime(esc($program->end_date)))?></p>
                                 <p><b>Time:</b> <?= date('H:m', strtotime(esc($program->start_time))) ?>-<?= date('H:m', strtotime(esc($program->end_time)))?></p>
+                                <p><b>Ages:</b> <?= esc($program->min_age) ?>-<?= esc($program->max_age) ?></p>
                                 <p><b>Location:</b> <?= esc($program->location) ?></p>
                                 <p><b>Cost:</b> $<?= esc($program->price) ?></p>
                                 

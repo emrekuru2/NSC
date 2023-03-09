@@ -276,6 +276,7 @@ class Nsca extends Seeder
             [
                 'name' => 'Youth Summer Camp',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eros odio, volutpat tempus ullamcorper ut, scelerisque quis neque. Nullam finibus orci id mi sagittis tincidunt. Vestibulum ornare ornare dui, et iaculis diam pulvinar vitae. Ut eu nunc ut velit elementum accumsan. Morbi nec pharetra dolor. Nunc porta suscipit lacus eget consequat. Phasellus a est vitae sapien dignissim egestas ut vulputate ipsum. Morbi sed ultricies dolor, sed mollis nibh. In semper, libero iaculis feugiat lobortis, enim metus',
+                'devProgID' => 1,
                 'start_time' => Time::now(),
                 'end_time' => Time::now(),
                 'start_date' => Time::now(),
@@ -288,6 +289,7 @@ class Nsca extends Seeder
             [
                 'name' => 'Youth lunch Camp',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eros odio, volutpat tempus ullamcorper ut, scelerisque quis neque. Nullam finibus orci id mi sagittis tincidunt. Vestibulum ornare ornare dui, et iaculis diam pulvinar vitae. Ut eu nunc ut velit elementum accumsan. Morbi nec pharetra dolor. Nunc porta suscipit lacus eget consequat. Phasellus a est vitae sapien dignissim egestas ut vulputate ipsum. Morbi sed ultricies dolor, sed mollis nibh. In semper, libero iaculis feugiat lobortis, enim metus',
+                'devProgID' => 2,
                 'start_time' => Time::now(),
                 'end_time' => Time::now(),
                 'start_date' => Time::now(),
@@ -300,6 +302,7 @@ class Nsca extends Seeder
             [
                 'name' => 'Youth night Camp',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eros odio, volutpat tempus ullamcorper ut, scelerisque quis neque. Nullam finibus orci id mi sagittis tincidunt. Vestibulum ornare ornare dui, et iaculis diam pulvinar vitae. Ut eu nunc ut velit elementum accumsan. Morbi nec pharetra dolor. Nunc porta suscipit lacus eget consequat. Phasellus a est vitae sapien dignissim egestas ut vulputate ipsum. Morbi sed ultricies dolor, sed mollis nibh. In semper, libero iaculis feugiat lobortis, enim metus',
+                'devProgID' => 3,
                 'start_time' => Time::now(),
                 'end_time' => Time::now(),
                 'start_date' => Time::now(),
@@ -353,19 +356,19 @@ class Nsca extends Seeder
         $devProgType = [
             [
                 'id' => 1,
-                'name' => 'Kids',
+                'type_name' => 'Kids',
                 'min_age' => 5,
                 'max_age' => 12,
             ],
             [
                 'id' => 2,
-                'name' => 'Youth',
+                'type_name' => 'Youth',
                 'min_age' => 13,
                 'max_age' => 18,
             ],
             [
                 'id' => 3,
-                'name' => 'Adult',
+                'type_name' => 'Adult',
                 'min_age' => 19,
                 'max_age' => 100,
             ],

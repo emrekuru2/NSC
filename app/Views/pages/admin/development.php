@@ -11,7 +11,21 @@
                 <div class="card shadow">
                     <div class="card-header">Create Program Type</div>
                     <div class="card-body">
-                        
+                    <form method="get" action="createProgType">
+                    <div class="w-100 mb-3">
+                        <label for="name" class="form-label">Name:</label>
+                        <input type="text" class="form-control" id="title" name="name">
+                    </div>                        
+                    <div class="w-50 mb-3">
+                            <label for="min_age" class="form-label">Minimum age:</label>
+                            <input type="number" class="form-control" id="min_age" name="min_age">
+                    </div>
+                    <div class="w-50 mb-3">
+                            <label for="max_age" class="form-label">Maximum age:</label>
+                            <input type="number" class="form-control" id="max_age" name="max_age">
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Publish</button>
+                </form>
                     </div>
                 </div>
             </div>
@@ -28,7 +42,6 @@
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider">
-                                <!-- THIS PART NEEDS TO BE DYNAMICALLY GENERATED -->
                                 <?php if (!empty($programs) && is_array($programs)) : ?>
                                     <?php foreach ($programs as $program) : ?>
                                         <tr>
@@ -88,6 +101,18 @@
                             <option value="Thursday">Thursday</option>
                             <option value="Friday">Friday</option>
                             <option value="Saturday">Saturday</option>
+                        </select>
+                        </div>
+                        <div class="w-100">
+                            <label for="devType" class="form-label">Program Type:</label>
+                            <select name="devType" id="devType" name="devType">
+                            <?php if (!empty($devTypes) && is_array($devTypes)) : ?>
+                                    <?php foreach ($devTypes as $devType) : ?>
+                                        <option value=<?=esc($devType->id)?>>
+                                            <?= esc($devType->name)?>
+                                        </option>
+                                    <?php endforeach ?>
+                                <?php endif ?>
                         </select>
                         </div>
                         
