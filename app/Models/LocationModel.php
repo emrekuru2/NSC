@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class RegionModel extends Model
+class LocationModel extends Model
 {
     protected $DBGroup          = 'default';
     protected $table            = 'nsca_location';
