@@ -18,11 +18,7 @@
           </li>
           <li class="list-group-item">
               <input class="form-check-input me-1" type="checkbox" value="all-programs" id="all-programs">
-              <label class="form-check-label" for="all-programs">All programs users</label>
-          </li>
-          <li class="list-group-item">
-              <input class="form-check-input me-1" type="checkbox" value="all-players" id="all-players">
-              <label class="form-check-label" for="all-players">All players</label>
+              <label class="form-check-label" for="all-programs">All development program users</label>
           </li>
         </ul>
       </div>
@@ -43,7 +39,7 @@
 
           foreach ($clubs as $club): ?>
             <li class="list-group-item">
-              <input class="form-check-input me-1" type="checkbox" value="club-<?= $club->id ?>" id="club-<?= $club->id ?>">
+              <input class="form-check-input me-1" type="checkbox" data-group-name="club" value="<?= $club->id ?>" id="club-<?= $club->id ?>">
               <label class="form-check-label" for="club-<?= $club->id ?>"><?= $club->name ?></label>
             </li>
         <?php endforeach ?>
@@ -65,7 +61,7 @@
 
           foreach ($teams as $team): ?>
             <li class="list-group-item">
-              <input class="form-check-input me-1" type="checkbox" value="team-<?= $team->id ?>" id="team-<?= $team->id ?>">
+              <input class="form-check-input me-1" type="checkbox" data-group-name="team" value="<?= $team->id ?>" id="team-<?= $team->id ?>">
               <label class="form-check-label" for="team-<?= $team->id ?>"><?= $team->name ?></label>
             </li>
         <?php endforeach ?>
@@ -87,7 +83,7 @@
 
             foreach ($committees as $committee): ?>
               <li class="list-group-item">
-                <input class="form-check-input me-1" type="checkbox" value="committee-<?= $committee->id ?>" id="committee-<?= $committee->id ?>">
+                <input class="form-check-input me-1" type="checkbox" data-group-name="committee" value="<?= $committee->id ?>" id="committee-<?= $committee->id ?>">
                 <label class="form-check-label" for="committee-<?= $committee->id ?>"><?= $committee->name ?></label>
               </li>
           <?php endforeach ?>
@@ -98,20 +94,20 @@
   <div class="accordion-item">
     <h2 class="accordion-header" id="headingFive">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-        Regions
+        Locations
       </button>
     </h2>
     <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordion">
       <div class="accordion-body">
           <?php
-            if (sizeof($regions) == 0) {
-              echo '<p class="text-start margin-bottom-0">No regions available.</p>';
+            if (sizeof($locations) == 0) {
+              echo '<p class="text-start margin-bottom-0">No locations available.</p>';
             }
 
-            foreach ($regions as $region): ?>
+            foreach ($locations as $location): ?>
               <li class="list-group-item">
-                <input class="form-check-input me-1" type="checkbox" value="region-<?= $region->id ?>" id="region-<?= $region->id ?>">
-                <label class="form-check-label" for="region-<?= $region->id ?>"><?= $region->name ?></label>
+                <input class="form-check-input me-1" type="checkbox" data-group-name="location" value="<?= $location->id ?>" id="region-<?= $location->id ?>">
+                <label class="form-check-label" for="region-<?= $location->id ?>"><?= $location->name ?></label>
               </li>
           <?php endforeach ?>
 
@@ -121,7 +117,7 @@
   <div class="accordion-item">
     <h2 class="accordion-header" id="headingSix">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-        Programs
+        Development Programs
       </button>
     </h2>
     <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordion">
@@ -133,7 +129,7 @@
 
             foreach ($devs as $dev): ?>
               <li class="list-group-item">
-                <input class="form-check-input me-1" type="checkbox" value="dev-<?= $dev->id ?>" id="dev-<?= $dev->id ?>">
+                <input class="form-check-input me-1" type="checkbox" data-group-name="dev" value="<?= $dev->id ?>" id="dev-<?= $dev->id ?>">
                 <label class="form-check-label" for="dev-<?= $dev->id ?>"><?= $dev->name ?></label>
               </li>
           <?php endforeach ?>
@@ -141,7 +137,3 @@
     </div>
   </div>
 </div>
-<!---->
-<?php //foreach ($tests as $test): ?>
-<!--<script> console.log('') </script>-->
-<?php //endforeach ?>

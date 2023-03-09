@@ -1,34 +1,113 @@
-// Listeners
-document.getElementById("form-submit").addEventListener("click", () => {
+// Variables
+const submitButton = document.getElementById("form-submit");
+const allChecks = document.querySelectorAll('input[type="checkbox"]');
+const allUsersCheck = document.getElementById("all-users");
+const allClubsCheck = document.getElementById("all-clubs");
+const allProgramsCheck = document.getElementById("all-programs");
+
+// ~~ Listeners ~~
+// Form Submission Button
+submitButton.addEventListener("click", () => {
   let recipientsJSON = {
-    recipients: [],
+    individual: [],
     general: [],
     club: [],
     team: [],
     committee: [],
     location: [],
-    dev: []
+    dev: [],
   };
 
   // Individuals
   const recipientsElement = document.getElementsByName("mailTo")[0].value;
-  let recipientsString = removeAllSpaces(addMissingSemiColons(recipientsElement));
+  let recipientsString = removeAllSpaces(
+    addMissingSemiColons(recipientsElement)
+  );
   const recipientsArray = recipientsString.split(";");
 
   recipientsArray.forEach((recipient) =>
-    recipientsJSON.recipients.push(recipient)
+    recipientsJSON.individual.push(recipient)
   );
 
   // Groups
-  const emailGroupChecks = document.querySelectorAll('input[type="checkbox"]');
-  emailGroupChecks.forEach((checkbox) => {
-      if (checkbox.checked) {
-        recipientsJSON.groups.push(checkbox.value)
-      }
-  }); // TODO: Add groups to corresponding JSON array.
+  // emailGroupChecks.forEach((checkbox) => {
+  //     if (checkbox.checked) {
+  //       recipientsJSON.groups.push(checkbox.value)
+  //     }
+  // }); // TODO: Add groups to corresponding JSON array.
 
-  document.getElementsByName("groups")[0].value = JSON.stringify(recipientsJSON);
-  document.getElementById("send-email-form").submit();
+  document.getElementsByName("groups")[0].value =
+    JSON.stringify(recipientsJSON);
+  submitButton.submit();
+});
+
+allUsersCheck.addEventListener("click", () => {
+  // Checked
+  if (allUsersCheck.checked) {
+    for (let i = 0; i < allChecks.length; i++) {
+      if (allChecks[i] !== allUsersCheck) {
+        allChecks[i].checked = false;
+        allChecks[i].disabled = true;
+      }
+    }
+  }
+
+  //Unchecked
+  else {
+    for (let i = 0; i < allChecks.length; i++) {
+      if (allChecks[i] !== allUsersCheck) {
+        allChecks[i].disabled = false;
+      }
+    }
+  }
+});
+
+allClubsCheck.addEventListener("click", () => {
+  // Checked
+  if (allClubsCheck.checked) {
+    for (let i = 0; i < allChecks.length; i++) {
+      if (
+        allChecks[i].dataset.groupName === "club" ||
+        allChecks[i].dataset.groupName === "team"
+      ) {
+        allChecks[i].checked = false;
+        allChecks[i].disabled = true;
+      }
+    }
+  }
+
+  //Unchecked
+  else {
+    for (let i = 0; i < allChecks.length; i++) {
+      if (
+        allChecks[i].dataset.groupName === "club" ||
+        allChecks[i].dataset.groupName === "team"
+      ) {
+        allChecks[i].disabled = false;
+      }
+    }
+  }
+});
+
+allProgramsCheck.addEventListener("click", () => {
+  // Checked
+  if (allProgramsCheck.checked) {
+    for (let i = 0; i < allChecks.length; i++) {
+      if (allChecks[i].dataset.groupName === "dev") {
+        allChecks[i].checked = false;
+        allChecks[i].disabled = true;
+      }
+    }
+  }
+
+  //Unchecked
+  else {
+    for (let i = 0; i < allChecks.length; i++) {
+      if (allChecks[i].dataset.groupName === "dev") {
+        allChecks[i].disabled = false;
+      }
+    }
+  }
 });
 
 // Functions
