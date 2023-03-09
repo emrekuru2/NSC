@@ -1,10 +1,10 @@
-<nav class="navbar navbar-expand-lg bg-dark h-100" data-bs-theme="dark">
+<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
   <button class="navbar-toggler m-2" type="button" data-bs-toggle="collapse" data-bs-target="#toggle" aria-controls="toggle" aria-expanded="false" aria-label="Toggle navigation"><i class="fa-solid fa-bars"></i></button>
   <h3 class="navbar-toggler m-2"><?= $title ?></h3>
   <div class="collapse navbar-collapse" id="toggle" style="width: 280px;">
     <div class="h-auto w-100 d-flex flex-column p-3 bg-dark text-light">
       <div class="d-flex flex-column align-items-center">
-        <img src="/assets/images/Users/defaultUser.png" alt="profile" width="100px" height="100px" >
+        <img src="/assets/images/Users/defaultUser.png" alt="profile" width="100px" height="100px">
         <span class="fs-4">Admin Name</span>
       </div>
       <hr>
@@ -46,9 +46,14 @@
         </li>
       </ul>
       <hr>
-      <a href="/" class="btn btn-outline-primary w-100" role="button"><i class="fa-solid fa-house fa-lg pe-3"></i>Home</a>
-      <hr>
-      <button type="button" class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#logout"><i class="fa-solid fa-right-from-bracket fa-lg pe-3"></i>Logout</button>
+      <div class="nav nav-pills d-flex gap-1">
+        <div class="nav-item flex-grow-1">
+          <a href="/" class="btn btn-outline-primary w-100" role="button"><i class="fa-solid fa-house fa-lg pe-3"></i>Home</a>
+        </div>
+        <div class="nav-item">
+          <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#logout"><i class="fa-solid fa-right-from-bracket fa-lg"></i> </button>
+        </div>
+      </div>
       <?= view_cell('\App\Libraries\Alerts::modal', ['content' => 'Are you sure you wan to log out?', 'id' => 'logout']) ?>
     </div>
   </div>

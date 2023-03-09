@@ -1,25 +1,24 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\UserTypes;
 
 use CodeIgniter\Model;
 
-class LocationModel extends Model
+class LocationUserModel extends Model
 {
-
     // Construction
-    protected $table            = 'nsca_location';
+    protected $table            = 'nsca_location_user';
     protected $primaryKey       = 'id';
-    protected $returnType       = \App\Entities\Location::class;
+    protected $returnType       = \App\Entities\UserTypes\LocationUser::class;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'address', 'description'];
+    protected $allowedFields    = ['locationID', 'userID'];
 
     // Dates
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
 
- 
+  
+
 }

@@ -13,7 +13,7 @@ class ClubsController extends BaseController
         $model = model(ClubModel::class);
 
         $data = [
-            'clubs'  => $model->getAllClubs(),
+            'clubs'  => $model->findAll(),
             'title' => 'Clubs',
         ];
 

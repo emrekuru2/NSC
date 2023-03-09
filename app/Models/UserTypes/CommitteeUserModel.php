@@ -1,25 +1,22 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\UserTypes;
 
 use CodeIgniter\Model;
 
-class LocationModel extends Model
+class CommitteeUserModel extends Model
 {
-
     // Construction
-    protected $table            = 'nsca_location';
+    protected $table            = 'nsca_committees_user';
     protected $primaryKey       = 'id';
-    protected $returnType       = \App\Entities\Location::class;
+    protected $returnType       = \App\Entities\UserTypes\CommitteeUser::class;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'address', 'description'];
+    protected $allowedFields    = ['committeeID', 'userID', 'isLead'];
 
     // Dates
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
 
- 
 }

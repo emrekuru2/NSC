@@ -8,8 +8,7 @@ use CodeIgniter\Database\RawSql;
 
 class TeamModel extends Model
 {
-    protected $DBGroup          = 'default';
-    protected $table            = 'nsca_teams';
+    protected $table            = 'nsca_team';
     protected $primaryKey       = 'id';
     protected $returnType       = \App\Entities\Team::class;
     protected $allowedFields    = ['name', 'description', 'image'];

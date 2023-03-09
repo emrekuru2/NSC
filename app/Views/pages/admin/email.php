@@ -2,11 +2,6 @@
 
 <?= $this->section('adminContent') ?>
 
-<?php if (isset($type)) : ?>
-    <?= view_cell('\App\Libraries\Alerts::toast', ['type' => $type, 'content' => $content]) ?>
-    <script type='text/javascript' src="/assets/js/toast.js"></script>
-<?php endif ?>
-
 <div class="row">
     <div class="col-12 col-lg-7">
         <div class="card shadow">

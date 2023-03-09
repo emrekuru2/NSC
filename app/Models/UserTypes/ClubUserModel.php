@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\UserTypes;
 
 use CodeIgniter\Model;
 
-class DevModel extends Model
+class ClubUserModel extends Model
 {
-    // Construction
-    protected $table            = 'nsca_dev';
+    protected $table            = 'nsca_club_user';
     protected $primaryKey       = 'id';
-    protected $returnType       = \App\Entities\Dev::class;
+    protected $returnType       = \App\Entities\UserTypes\ClubUser::class;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'duration', 'description', 'time', 'charges', 'type', 'daysRun', 'image'];
+    protected $allowedFields    = ['clubID', 'userID', 'isManager'];
 
     // Dates
     protected $useTimestamps = true;
@@ -19,4 +18,5 @@ class DevModel extends Model
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
+
 }
