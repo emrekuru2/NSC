@@ -46,8 +46,8 @@ use CodeIgniter\I18n\Time;
                 </div>
             <?php endforeach ?>
         <?php else : ?>
-            <h3>No News</h3>
-            <p>Unable to find any news for you.</p>
+            <h3>No Programs</h3>
+            <p>Unable to find any programs for you.</p>
         <?php endif ?>
     </div>
 

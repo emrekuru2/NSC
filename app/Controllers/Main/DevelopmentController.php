@@ -9,7 +9,7 @@ class DevelopmentController extends BaseController
     {
         $model = model(DevModel::class);
         $data = [
-            'programs'  => $model->paginate(5),
+            'programs'  => $model->orderBy('start_date', 'ASC')->paginate(5),
             'pager' => $model->pager,
             'title' => 'Development',
         ];

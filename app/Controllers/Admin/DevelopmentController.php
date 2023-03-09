@@ -10,11 +10,13 @@ class DevelopmentController extends BaseController
 {
     public function index()
     {
+        $model = model(DevModel::class);
         $data = [
-            'title' => 'Development'
+            'programs'  => $model->orderBy('start_date', 'ASC')->paginate(10),
+            'pager' => $model->pager,
+            'title' => 'Development',
         ];
-        
-        
+
         return view('pages/admin/development', $data);
     }
 
@@ -27,6 +29,9 @@ class DevelopmentController extends BaseController
         $start_date = $this->request->getVar('start_date');
         $end_date = $this->request->getVar('end_date');
         $days = $this->request->getVar('days');
+        // create a string of all days separated by a comma
+        $daysRun = implode(", ", $days);
+        echo $daysRun;
         $price = $this->request->getVar('price');
         $location = $this->request->getVar('location');
         $description = $this->request->getVar('description');
@@ -43,7 +48,7 @@ class DevelopmentController extends BaseController
         $dev->location = $location;
         $dev->description = $description;
         $dev->image = $image;
-        $dev->daysRun = $days;
+        $dev->daysRun = $daysRun;
         
 
         $devmodel->save($dev);
