@@ -207,3 +207,11 @@ tl-item.active .tl-dot:before {
 .margin-bottom-0 {
     margin-bottom: 0;
 }
+
+.margin-bottom-half-rem {
+    margin-bottom: 0.5rem;
+}
+
+.text-bold {
+    font-weight: bold;
+}

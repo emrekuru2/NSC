@@ -4,18 +4,22 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\TeamModel;
+use App\Models\UserModel;
+use App\Models\UserTypes\TeamUserModel;
 
 class TeamsController extends BaseController
 {
     public function index()
     {
-        $userModel = model(TeamModel::class);
         $teamModel = model(TeamModel::class);
+        $userModel = model(UserModel::class);
+        $teamUserModel = model(TeamUserModel::class);
 
         $data = [
             'title' => 'Teams',
             'teams' => $teamModel->findAll(),
-            'users' => $userModel->findAll()
+            'users' => $userModel->findAll(),
+            'teamUsers' => $teamUserModel->findAll()
         ];
         
         
