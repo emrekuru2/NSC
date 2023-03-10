@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers\Main;
 
 use App\Controllers\BaseController;
@@ -9,11 +10,9 @@ class DevelopmentController extends BaseController
     {
         $model = model(DevModel::class);
         $data = [
-            'programs'  => 
-            $model->orderBy('start_date', 'ASC')
-            ->join('nsca_devprogram_type', 'nsca_devprogram_type.id = nsca_dev.devProgID')
-            ->findAll(),
-            'pager' => $model->pager,
+            'programs'  => $model->orderBy('start_date', 'ASC')
+                                 ->join('nsca_devprogram_type', 'nsca_devprogram_type.id = nsca_dev.devProgID')
+                                 ->findAll(),
             'title' => 'Development',
         ];
 
