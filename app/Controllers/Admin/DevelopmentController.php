@@ -30,6 +30,8 @@ class DevelopmentController extends BaseController
 
         $data = $this->request->getPost();
         $dev = new \App\Entities\Dev();
+        // combine values of days array into a string
+        $data['daysRun'] = implode(',', $data['days']);
         $dev->fill($data);
 
         if (model(DevModel::class)->save($dev)) {
@@ -54,6 +56,7 @@ class DevelopmentController extends BaseController
 
         $data = $this->request->getPost();
         $devType = new \App\Entities\DevType();
+        // combine values of days array into a string
         $devType->fill($data);
 
         if (model(DevTypeModel::class)->save($devType)) {

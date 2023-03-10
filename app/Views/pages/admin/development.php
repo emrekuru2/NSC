@@ -62,7 +62,7 @@
         <div class="card shadow">
             <div class="card-header">Create Program</div>
             <div class="card-body">
-                <form method="post" action="createDev">
+                <form method="post" enctype="multipart/form-data" action="createDev">
                     <div class="row g-3 justify-content-center">
                         <div class="col-12">
                             <label for="name" class="form-label">Name:</label>
@@ -94,7 +94,7 @@
                         </div>
                         <div class="col-12 col-lg-6">
                             <label for="days[]" class="form-label">Days running:</label>
-                            <select name="days[]" id="days[]" name="days[]" multiple="multiple">
+                            <select name="days[]" id="days[]"  multiple="multiple">
                                 <option value="Sunday">Sunday</option>
                                 <option value="Monday">Monday</option>
                                 <option value="Tuesday">Tuesday</option>
