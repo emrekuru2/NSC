@@ -105,8 +105,8 @@
                             </select>
                         </div>
                         <div class="col-12 col-lg-6">
-                            <label for="devType" class="form-label">Program Type:</label>
-                            <select name="devType" id="devType" name="devType">
+                            <label for="devProgID" class="form-label">Program Type:</label>
+                            <select name="devProgID" id="devProgID">
                                 <?php if (!empty($devTypes) && is_array($devTypes)) : ?>
                                     <?php foreach ($devTypes as $devType) : ?>
                                         <option value=<?= esc($devType->id) ?>>
