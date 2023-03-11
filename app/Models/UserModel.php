@@ -64,4 +64,44 @@ class UserModel extends ShieldUserModel
 
         return $this->first();
     }
+
+    public function getClubMemberEmailsByID(int $clubID)
+    {
+        return $this->select('nsca_users.email')
+            ->join('nsca_club_user', 'nsca_users.id = nsca_club_user.userID', 'left')
+            ->join('nsca_clubs', 'nsca_club_user.clubID = nsca_clubs.id', 'left')
+            ->where('nsca_clubs.id', $clubID);
+    }
+
+    public function getTeamMemberEmailsByID(int $teamID)
+    {
+        return $this->select('nsca_users.email')
+            ->join('nsca_team_user', 'nsca_users.id = nsca_team_user.userID', 'left')
+            ->join('nsca_teams', 'nsca_team_user.teamID = nsca_teams.id', 'left')
+            ->where('nsca_teams.id', $teamID);
+    }
+
+    public function getLocationMemberEmailsByID(int $locationID)
+    {
+        return $this->select('nsca_users.email')
+            ->join('nsca_location_user', 'nsca_users.id = nsca_location_user.userID', 'left')
+            ->join('nsca_location', 'nsca_location_user.locationID = nsca_location.id', 'left')
+            ->where('nsca_location.id', $locationID);
+    }
+
+    public function getDevProgramMemberEmailsByID(int $devID)
+    {
+        return $this->select('nsca_users.email')
+            ->join('nsca_dev_user', 'nsca_users.id = nsca_dev_user.userID', 'left')
+            ->join('nsca_dev', 'nsca_dev_user.devID = nsca_dev.id', 'left')
+            ->where('nsca_dev.id', $devID);
+    }
+
+    public function getCommitteeMemberEmailsByID(int $committeeID)
+    {
+        return $this->select('nsca_users.email')
+            ->join('nsca_committees_user', 'nsca_users.id = nsca_committees_user.userID', 'left')
+            ->join('nsca_committees', 'nsca_committees_user.committeeID = nsca_committees.id', 'left')
+            ->where('nsca_committees.id', $committeeID);
+    }
 }
