@@ -1,0 +1,54 @@
+<?php
+
+namespace App\Controllers\Admin;
+
+use App\Controllers\BaseController;
+use App\Models\competitionTypeModel;
+
+class CompetitionTypeController extends BaseController
+{
+    public function index()
+    {
+        $competitionType = new competitionTypeModel();
+
+        $data = [  
+            'competitionType' =>$competitionType->findAll(),
+            'title' => 'CompetitionsType'
+        ];
+
+        return view('pages/admin/competitionType', $data);
+    }
+
+    public function store(){
+        $students = new competitionTypeModel();
+        $data = [
+            'name' => $this->request->getPost('name'),
+            'description' => $this->request->getPost('description')
+        ];
+        $students->save($data);
+        header("Refresh:0");
+
+        //return redirect('/admin/competitionType');
+    }
+    public function edit($id = null)
+    {
+        $competitionType = new competitionTypeModel();
+
+        $data = [
+            'competitionType' =>$competitionType->find($id),
+
+            'title' => 'CompetitionsType'
+        ];
+        return view('pages/admin/competitionTypeEdit', $data);
+    }
+
+    public function update($id =null){
+        $competitionType = new competitionTypeModel();
+        $data = [
+            'name' => $this->request->getPost('name'),
+            'description' => $this->request->getPost('description')
+        ];
+        $competitionType ->update($id, $data);
+        return redirect()->to(base_url("admin/CompetitionType"))->with('status','successes');
+    }
+}

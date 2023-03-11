@@ -53,6 +53,13 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->get('clubs', 'Admin\ClubsController::index');
     $routes->get('teams', 'Admin\TeamsController::index');
     $routes->get('competitions', 'Admin\CompetitionsController::index');
+    $routes->get('CompetitionType', 'Admin\CompetitionTypeController::index');
+
+    $routes->get('CompetitionType/edit/(:num)','Admin\CompetitionTypeController::edit/$1' );
+
+
+
+
     $routes->get('committees', 'Admin\CommitteesController::index');
     $routes->get('development', 'Admin\DevelopmentController::index');
     $routes->get('users', 'Admin\UsersController::index');
@@ -63,6 +70,8 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     // Functions
     $routes->match(['post'], 'sendEmail', 'Admin\EmailController::sendEmail');
     $routes->match(['post'], 'createNews', 'Admin\NewsController::createNews');
+    $routes->post('CompetitionType', 'Admin\CompetitionTypeController::store');
+    $routes->put('CompetitionType/update/(:num)','Admin\CompetitionTypeController::update/$1' );
 });
 
 // Codeigniter's default auth routing
