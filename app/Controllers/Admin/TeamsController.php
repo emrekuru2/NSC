@@ -29,9 +29,4 @@ class TeamsController extends BaseController
         return view('pages/admin/teams', $data);
     }
 
-    public function edit()
-    {
-
-    }
-
 }
