@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col-sm-4 mb-3 mb-sm-0">
         <?= view_cell('\App\Libraries\Contents::searchPanel', ['title' => $title, 'rows' => $teams]); ?>
-        <?= view_cell('\App\Libraries\Contents::list', ['title' => $title, 'rows' => $teams]); ?>
+        <?= view_cell('\App\Libraries\Contents::groupEditListPanel', ['title' => $title, 'rows' => $teams]); ?>
     </div>
 
     <div class="col-sm-8">
