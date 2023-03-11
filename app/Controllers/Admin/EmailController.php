@@ -8,6 +8,8 @@ use App\Models\CommitteeModel;
 use App\Models\DevModel;
 use App\Models\LocationModel;
 use App\Models\TeamModel;
+use App\Models\UserEmailModel;
+use Exception;
 
 class EmailController extends BaseController
 {
@@ -32,15 +34,91 @@ class EmailController extends BaseController
     }
 
     public function sendEmail()
-    { 
-
+    {
         $subject = $this->request->getVar('subject');
         $message = $this->request->getVar('message');
         $stringJSON = $this->request->getVar('groups');
         $JSON = json_decode($stringJSON);
 
+        $recipientArray = array();
+
+        // Individuals
+        array_push($recipientArray, $JSON->recipients);
+
+        // Groups
+        $userEmailModel = model(UserEmailModel::class);
+
+        foreach ($JSON->general as $group) {
+            switch ($group) {
+                case 'all-users':
+                    $allMembers = $userEmailModel->getAllUserEmails();
+                    foreach ($allMembers as $member) {
+                        array_push($recipientArray, $member->email);
+                    }
+                    break;
+                case 'all-clubs':
+                    $allClubMembers = $userEmailModel->getAllClubMemberEmails();
+                    foreach ($allClubMembers as $member) {
+                        array_push($recipientArray, $member->email);
+                    }
+                    break;
+                case 'all-programs':
+                    $allDevProgramMembers = $userEmailModel->getAllDevProgramMemberEmails();
+                    foreach ($allDevProgramMembers as $member) {
+                        array_push($recipientArray, $member->email);
+                    }
+                    break;
+            }
+        }
+
+        foreach ($JSON->club as $clubID) {
+            $clubMembers = $userEmailModel->getClubMemberEmailsByID($clubID);
+            foreach ($clubMembers as $member) {
+                array_push($recipientArray, $member->email);
+            }
+        }
+
+        foreach ($JSON->team as $teamID) {
+            $teamMembers = $userEmailModel->getTeamMemberEmailsByID($teamID);
+            foreach ($teamMembers as $member) {
+                array_push($recipientArray, $member->email);
+            }
+        }
+
+        foreach ($JSON->committee as $committeeID) {
+            $committeeMembers = $userEmailModel->getCommitteeMemberEmailsByID($committeeID);
+            foreach ($committeeMembers as $member) {
+                array_push($recipientArray, $member->email);
+            }
+
+        }
+
+        foreach ($JSON->location as $locationID) {
+            $locationMembers = $userEmailModel->getLocationMemberEmailsByID($locationID);
+            foreach ($locationMembers as $member) {
+                array_push($recipientArray, $member->email);
+            }
+        }
+
+        foreach ($JSON->dev as $devID) {
+            $devProgramMembers = $userEmailModel->getDevProgramMemberEmailsByID($devID);
+            foreach ($devProgramMembers as $member) {
+                array_push($recipientArray, $member->email);
+            }
+        }
+
         $email = \Config\Services::email();
-        $email->setTo($JSON->recipients);
+
+        $failedRecipients = array();
+        foreach ($recipientArray as $recipient) {
+            try {
+                $email->setTo($recipient);
+            }
+            catch (Exception $e) {
+                array_push($failedRecipients, $recipient);
+            }
+        }
+
         $email->setFrom('testadmin@cricketnovascotia.ca', 'Confirm Registration');
         $email->setSubject($subject);
         $email->setMessage($message);
@@ -49,7 +127,8 @@ class EmailController extends BaseController
 
             $data = [
                 'type'    => 'success',
-                'content' => 'Email sent successfully'
+                'content' => 'Email sent successfully',
+                'failed' => $failedRecipients
             ];
 
             return redirect()->back()->with('alert', $data);
@@ -57,7 +136,8 @@ class EmailController extends BaseController
 
             $data = [
                 'type'    => 'danger',
-                'content' => '' . print_r($email->printDebugger(), true)
+                'content' => 'Error occurred while sending email',
+                'failed' => $failedRecipients
             ];
 
             return redirect()->back()->with('alert', $data);
