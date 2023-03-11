@@ -7,16 +7,17 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "codeigniter4/framework": "^4.0",
-        "codeigniter4/shield": "^1.0@beta",
-      "ext-json": "*"
+        "codeigniter4/shield": "^1.0@beta"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9",
         "mikey179/vfsstream": "^1.6",
         "phpunit/phpunit": "^9.1"
     },
-    "suggest": {
-        "ext-fileinfo": "Improves mime type detection for files"
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
     },
     "autoload": {
         "exclude-from-classmap": [
