@@ -23,4 +23,9 @@ class Contents
     {
         return view('components/list', $content);
     }
+
+    public function searchPanel($content)
+    {
+        return view('components/searchPanel', $content);
+    }
 }
