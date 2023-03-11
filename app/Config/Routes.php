@@ -54,6 +54,7 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->get('alerts', 'Admin\AlertsController::index');
     $routes->get('clubs', 'Admin\ClubsController::index');
     $routes->get('teams', 'Admin\TeamsController::index');
+    $routes->get('teams/edit', 'Admin\TeamsController::edit');
     $routes->get('competitions', 'Admin\CompetitionsController::index');
     $routes->get('committees', 'Admin\CommitteesController::index');
     $routes->get('development', 'Admin\DevelopmentController::index');
