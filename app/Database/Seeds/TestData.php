@@ -501,8 +501,6 @@ class TestData extends Seeder
         ];
         $this->db->table('nsca_teams')->insertBatch($testDataTeams);
 
-
-
         $testDataRegions = [
             [
                 'id' => 1,
@@ -705,6 +703,46 @@ class TestData extends Seeder
             ]
         ];
         $this->db->table('nsca_team_user')->insertBatch($testDataTeamUsers);
+
+        $testDataClubUsers = [
+            [
+                'id' => 1,
+                'userID' => 6,
+                'clubID' => 1,
+                'isManager' => 1
+            ],
+            [
+                'id' => 2,
+                'userID' => 7,
+                'clubID' => 1,
+                'isManager' => 0
+            ],
+            [
+                'id' => 3,
+                'userID' => 8,
+                'clubID' => 2,
+                'isManager' => 1
+            ],
+            [
+                'id' => 4,
+                'userID' => 9,
+                'clubID' => 2,
+                'isManager' => 0
+            ],
+            [
+                'id' => 5,
+                'userID' => 10,
+                'clubID' => 3,
+                'isManager' => 1
+            ],
+            [
+                'id' => 6,
+                'userID' => 11,
+                'clubID' => 3,
+                'isManager' => 0
+            ]
+        ];
+        $this->db->table('nsca_club_user')->insertBatch($testDataClubUsers);
 
         $testDataTeamJoinList = [
             [
