@@ -11,7 +11,11 @@ class UserEmailModel extends Model
     protected $primaryKey       = 'id';
     protected $returnType       = \App\Entities\User::class;
     protected $protectFields    = true;
-    protected $allowedFields    = 'email';
+    protected $allowedFields    = [
+        'email',
+        'first_name',
+        'last_name'
+    ];
 
     // Dates
     protected $useTimestamps = true;
@@ -75,6 +79,14 @@ class UserEmailModel extends Model
     {
         return $this->select('nsca_users.email')
             ->join('nsca_dev_user', 'nsca_dev_user.userID = nsca_users.id', 'cross')->findAll();
+    }
+
+    public function getTeamUsersByTeamID(int $teamID): array
+    {
+        return $this->select('nsca_users.first_name, nsca_users.last_name, nsca_team_user.isTeamCaptain, nsca_team_user.isViceCaptain')
+            ->join('nsca_team_user', 'nsca_users.id = nsca_team_user.userID', 'left')
+            ->join('nsca_teams', 'nsca_team_user.teamID = nsca_teams.id', 'left')
+            ->where('nsca_teams.id', $teamID)->findAll();
     }
 
 }
