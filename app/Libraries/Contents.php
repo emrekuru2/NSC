@@ -18,4 +18,9 @@ class Contents
     {
         return view('components/comment', $content);
     }
+
+    public function list($content)
+    {
+        return view('components/list', $content);
+    }
 }
