@@ -13,9 +13,4 @@ class TeamModel extends Model
     protected $returnType       = \App\Entities\Team::class;
     protected $allowedFields    = ['name', 'description', 'image'];
 
-    function getEmails($teamID) {
-    }
-
-
-    
 }
