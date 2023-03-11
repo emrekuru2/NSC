@@ -29,7 +29,9 @@
                         <th class="col-1 line-height-2rem"><?= $row->id ?></th>
                         <td class="col-10 line-height-2rem"><?= $row->name ?></td>
                         <td class="col-1">
-                            <button type="button" class="btn btn-primary btn-sm">Edit</button>
+                            <form action="teams/edit?name=<?= $row->name ?>">
+                                <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+                            </form>
                         </td>
                     </tr>
                 <?php endforeach ?>

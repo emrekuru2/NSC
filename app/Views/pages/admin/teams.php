@@ -46,11 +46,15 @@
                 </div>
 
                 <!-- Edit Logo -->
-                <div class="form-group margin-bottom-0">
+                <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="teamLogo">Logo</label>
                     <input class="form-control" type="file" name="teamLogo" id="teamLogo">
                 </div>
 
+                <!-- Edit Members -->
+                <div class="form-group margin-bottom-0">
+                    <?= view_cell('\App\Libraries\Contents::groupMemberEditList', ['title' => $title, 'rows' => $teamUsers, 'users' => $users]); ?>
+                </div>
             </form>
         </div>
     </div>
