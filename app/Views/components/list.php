@@ -1,25 +1,14 @@
-<div class="card">
+<?php
+/**
+ * @param string $title <p>Name of section. E.g., 'Teams', 'Clubs', 'Committees', etc.</p>
+ * @param array $rows <p>Array of entities from section model. Recommended to use the findAll() model function.</p>
+ */
+?>
+
+<div class="card shadow">
+    <div class="card-header">All <?= $title ?></div>
     <div class="card-body">
-        <h5 class="card-title text-bold">Search <?= $title ?></h5>
-        <div class="container text-center">
-            <div class="row">
-                <div class="col-10">
-                    <input class="form-control form-control-sm" list="<?= strtolower($title); ?>List" id="<?= strtolower($title); ?>SearchBar" placeholder="Type to search <?= strtolower($title); ?>...">
-                    <datalist id="<?= strtolower($title); ?>List">
-                        <?php foreach ($rows as $row): ?>
-                            <option value="<?= $row->name ?>">
-                        <?php endforeach ?>
-                    </datalist>
-                </div>
-                <div class="col-2">
-                    <button type="button" class="btn btn-primary btn-sm">Edit</button>
-                </div>
-            </div>
-        </div>
 
-        <br>
-
-        <h5 class="card-title text-bold">All <?= $title ?></h5>
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -28,6 +17,7 @@
                     <th scope="col"></th>
                 </tr>
             </thead>
+
             <tbody>
                 <?php
                 if (sizeof($rows) == 0) {
@@ -36,9 +26,9 @@
 
                 foreach ($rows as $row): ?>
                     <tr>
-                        <th class="col-2"><?= $row->id ?></th>
-                        <td><?= $row->name ?></td>
-                        <td class="col-2">
+                        <th class="col-1 line-height-2rem"><?= $row->id ?></th>
+                        <td class="col-10 line-height-2rem"><?= $row->name ?></td>
+                        <td class="col-1">
                             <button type="button" class="btn btn-primary btn-sm">Edit</button>
                         </td>
                     </tr>
