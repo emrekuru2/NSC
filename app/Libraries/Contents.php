@@ -19,9 +19,9 @@ class Contents
         return view('components/comment', $content);
     }
 
-    public function list($content)
+    public function groupEditListPanel($content)
     {
-        return view('components/list', $content);
+        return view('components/groupEditListPanel', $content);
     }
 
     public function searchPanel($content)
