@@ -5,52 +5,50 @@
 
 <div class="row">
     <div class="col-sm-4 mb-3 mb-sm-0">
-        <?= view_cell('\App\Libraries\Contents::list', ['title' => $title, 'rows' => $teams, 'users' => $users, 'teamUsers' => $teamUsers]); ?>
+        <?= view_cell('\App\Libraries\Contents::searchPanel', ['title' => $title, 'rows' => $teams]); ?>
+        <?= view_cell('\App\Libraries\Contents::list', ['title' => $title, 'rows' => $teams]); ?>
     </div>
 
     <div class="col-sm-8">
-        <div class="card">
+        <div class="card shadow">
+            <div class="card-header">Edit Team: <b></b></div>
             <form class="card-body">
 
+                <!-- Logo and Name -->
+                <img src="<?php echo base_url('assets/images/Teams/logos/defaultTeam.png'); ?>" class="card-img-top mb-3 mx-auto d-block" style="width: 150px; height: 150px" alt="Team Logo">
+                <h4 class="card-title text-bold text-center">Team Name</h4>
 
-                <img src="<?php echo base_url('assets/images/Teams/logos/defaultTeam.png'); ?>" class="img-thumbnail rounded margin-bottom-half-rem" alt="Profile photo">
-                <h4 class="card-title text-bold">Team Name</h4>
-
-                <div class="mb-3 row">
-                    <label for="teamName" class="col-2 col-form-label">Name</label>
-                    <div class="col-10">
-                        <input type="text" class="form-control" name="clubName" id="teamName">
-                    </div>
+                <!-- Edit Name -->
+                <div class="form-group margin-bottom-1rem">
+                    <label class="margin-bottom-half-rem" for="teamName">Name</label>
+                    <input type="text" class="form-control" name="teamName" id="teamName" placeholder="Team Name">
                 </div>
 
-                <div class="mb-3 row">
-                    <label for="clubName" class="col-2 col-form-label">Club</label>
-                    <div class="col-10">
-                        <select class="form-select col-9" name="clubName" id="clubName" aria-label="Default select example">
-                            <?php
-                            if (sizeof($teams) == 0) {
-                                echo '<option value="0">No Club</option>';
-                            }
+                <!-- Edit Club -->
+                <div class="form-group margin-bottom-1rem">
+                    <label class="margin-bottom-half-rem" for="clubName">Club</label>
+                    <select class="form-control" name="clubName" id="clubName" aria-label="Club name">
+                        <?php
+                        if (sizeof($teams) == 0) {
+                            echo '<option value="0">No clubs available.</option>';
+                        }
 
-                            foreach ($teams as $team): ?>
-                                <option value="<?= $team->id ?>"><?= $team->name ?></option>
-                            <?php endforeach ?>
-                        </select>
-                    </div>
+                        foreach ($teams as $team): ?>
+                            <option value="<?= $team->id ?>"><?= $team->name ?></option>
+                        <?php endforeach ?>
+                    </select>
                 </div>
 
-                <div class="mb-3 row">
-                    <label for="teamDescription" class="col-2 col-form-label">Description</label>
-                    <div class="col-10">
-                        <textarea class="form-control" name="teamDescription" id="teamDescription"></textarea>
-                    </div>
+                <!-- Edit Description -->
+                <div class="form-group margin-bottom-1rem">
+                    <label class="margin-bottom-half-rem" for="teamDescription">Description</label>
+                    <textarea class="form-control" name="teamDescription" id="teamDescription" rows="3" placeholder="521 characters maximum."></textarea>
                 </div>
 
-                <div class="mb-3 row">
-                    <label for="teamLogo" class="col-2 col-form-label">Logo</label>
-                    <div class="col-10">
-                        <input class="form-control" type="file" name="teamLogo" id="teamLogo">
-                    </div>
+                <!-- Edit Logo -->
+                <div class="form-group margin-bottom-0">
+                    <label class="margin-bottom-half-rem" for="teamLogo">Logo</label>
+                    <input class="form-control" type="file" name="teamLogo" id="teamLogo">
                 </div>
 
             </form>
@@ -58,5 +56,6 @@
     </div>
 </div>
 
+<script type="text/javascript" src="<?= base_url('assets/js/admin/teams.js'); ?>"></script>
 
 <?= $this->endSection() ?>
