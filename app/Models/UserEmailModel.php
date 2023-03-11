@@ -60,11 +60,21 @@ class UserEmailModel extends Model
             ->where('nsca_committees.id', $committeeID)->findAll();
     }
 
-    public function getAllUserEmails()
+    public function getAllUserEmails(): array
+    {
+        return $this->select('nsca_users.email')->findAll();
+    }
+
+    public function getAllClubMemberEmails(): array
     {
         return $this->select('nsca_users.email')
-            ->join('nsca_committees_user', 'nsca_users.id = nsca_committees_user.userID', 'left')
-            ->join('nsca_committees', 'nsca_committees_user.committeeID = nsca_committees.id', 'left')
-            ->where('nsca_committees.id')->findAll();
+            ->join('nsca_club_user', 'nsca_users.id = nsca_club_user.userID', 'cross')->findAll();
     }
+
+    public function getAllDevProgramMemberEmails(): array
+    {
+        return $this->select('nsca_users.email')
+            ->join('nsca_dev_user', 'nsca_dev_user.userID = nsca_users.id', 'cross')->findAll();
+    }
+
 }
