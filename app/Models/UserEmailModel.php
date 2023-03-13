@@ -81,12 +81,12 @@ class UserEmailModel extends Model
             ->join('nsca_dev_user', 'nsca_dev_user.userID = nsca_users.id', 'cross')->findAll();
     }
 
-    public function getTeamUsersByTeamID(int $teamID): array
+    public function getTeamUsersByTeamName(string $teamName): array
     {
         return $this->select('nsca_users.first_name, nsca_users.last_name, nsca_team_user.isTeamCaptain, nsca_team_user.isViceCaptain')
             ->join('nsca_team_user', 'nsca_users.id = nsca_team_user.userID', 'left')
             ->join('nsca_teams', 'nsca_team_user.teamID = nsca_teams.id', 'left')
-            ->where('nsca_teams.id', $teamID)->findAll();
+            ->where('nsca_teams.name', $teamName)->findAll();
     }
 
 }
