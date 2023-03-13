@@ -20,12 +20,12 @@ class CompetitionTypeController extends BaseController
     }
 
     public function store(){
-        $students = new competitionTypeModel();
+        $competitionTypeModel = new competitionTypeModel();
         $data = [
             'name' => $this->request->getPost('name'),
             'description' => $this->request->getPost('description')
         ];
-        $students->save($data);
+        $competitionTypeModel->save($data);
         header("Refresh:0");
 
         //return redirect('/admin/competitionType');
@@ -50,5 +50,12 @@ class CompetitionTypeController extends BaseController
         ];
         $competitionType ->update($id, $data);
         return redirect()->to(base_url("admin/CompetitionType"))->with('status','successes');
+    }
+    public function delete($id = null){
+        $competitionType = new competitionTypeModel();
+        $competitionType->delete($id);
+        return redirect()->to(base_url("admin/CompetitionType"))->with('status','successes');
+
+
     }
 }

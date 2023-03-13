@@ -37,7 +37,7 @@
                                         <td><?php echo $row['name']?></td>
                                         <td>
                                             <a href="<?= base_url('admin/CompetitionType/edit/' .$row['id']) ?>" class="">Edit</a>
-                                            <a href="#" class="">Delete</a>
+                                            <a href="<?= base_url('admin/CompetitionType/delete/' .$row['id']) ?>" class="">Delete</a>
                                         </td>
                                     </tr>
                                    <?php endforeach; ?>
