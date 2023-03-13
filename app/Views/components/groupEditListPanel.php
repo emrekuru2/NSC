@@ -12,7 +12,6 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
                     <th scope="col">Name</th>
                     <th scope="col"></th>
                 </tr>
@@ -26,12 +25,11 @@
 
                 foreach ($rows as $row): ?>
                     <tr>
-                        <th class="col-1 line-height-2rem"><?= $row->id ?></th>
-                        <td class="col-10 line-height-2rem"><?= $row->name ?></td>
+                        <td class="col-11 line-height-2rem"><?= $row->name ?></td>
                         <td class="col-1">
-                            <form action="teams/edit?name=<?= $row->name ?>">
-                                <button type="submit" class="btn btn-primary btn-sm">Edit</button>
-                            </form>
+                            <a href="?name=<?= $row->name ?>">
+                                <button type="submit" name="edit-button" data-name="<?= $row->name ?>" class="btn btn-primary btn-sm">Edit</button>
+                            </a>
                         </td>
                     </tr>
                 <?php endforeach ?>
