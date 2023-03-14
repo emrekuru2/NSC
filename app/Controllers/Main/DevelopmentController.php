@@ -22,12 +22,13 @@ class DevelopmentController extends BaseController
     public function register(int $programID)
     {
 
-        $model = model(DevUserModel::class);
+        
 
         $currentUser = new \App\Entities\DevUser();
         $currentUser->devID = $programID;
         $currentUser->userID = auth()->id();
-        $model->save($currentUser);
+        $devModel = model(DevUserModel::class);
+        $devModel->save($currentUser);
 
 
         $data = [
@@ -36,4 +37,5 @@ class DevelopmentController extends BaseController
 
         return redirect()->to('development');
     }
+
 }
