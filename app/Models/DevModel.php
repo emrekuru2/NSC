@@ -13,7 +13,7 @@ class DevModel extends Model
     protected $allowedFields    = ['name', 'description', 'start_time', 'end_time', 'start_date', 'end_date', 'price', 'location', 'image', 'daysRun', 'devProgID'];
 
     // Dates
-    protected $useTimestamps = true;
+    protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
