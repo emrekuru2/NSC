@@ -1,5 +1,5 @@
 <?= $this->extend('layouts/admin') ?>
-
+<?php //$this->load->cricket();?>
 <?= $this->section('adminContent') ?>
 <div class="row">
     <div class="col-lg-4 mb-3 mb-lg-0">
@@ -9,24 +9,19 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">ID</th>
                             <th scope="col">Club name</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
                         <!-- THIS PART NEEDS TO BE DYNAMICALLY GENERATED -->
+                        <?php
+                        foreach ($clubs as $club): ?>
                         <tr>
-                            <td>1</td>
-                            <td>No games today!</td>
+                            <td><?= $club->name ?></td>
+                            <td><button type="button" name="edit-button" data-name="<?= $club->name ?>" class="btn btn-primary btn-sm">Edit</button></td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Otto</td>
-                        </tr>
+                        <?php endforeach ?>
                     </tbody>
                 </table>
             </div>
@@ -35,7 +30,8 @@
     <div class="col-lg-8">
         <div class="card h-100 shadow">
             <div class="card-header">Club details: <b>Halifax Cricket Club</b></div>
-            <div class="card-body text-center">
+            <!-- make into a form redirecting to ClubsController!-->
+            <form class="card-body text-center" action="edit" method="POST">
                 <img src="/assets/images/teamProfilePictures/HalifaxCC.jpg" class="card-img-top mb-3" style="width: 150px; height: 150px" alt="club_image">
                 <div class="input-group mb-3">
                     <input type="file" class="form-control">
@@ -61,8 +57,8 @@
                     <span class="input-group-text" style="width: 20%;" id="www">Website</span>
                     <input type="text" class="form-control" placeholder="Website" aria-label="www" aria-describedby="www">
                 </div>
-                <button type="submit" class="btn btn-primary w-25">Update</button>
-            </div>
+                <button type="submit" name ="formSubmit" class="btn btn-primary w-25">Update</button>
+            </form>
         </div>
     </div>
 </div>

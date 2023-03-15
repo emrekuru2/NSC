@@ -14,7 +14,8 @@ class ClubModel extends Model
     protected $allowedFields    = [
                                     'name', 
                                     'abbreviation', 
-                                    'website', 'description', 
+                                    'website', 
+                                    'description', 
                                     'email', 
                                     'phone', 
                                     'facebook', 
