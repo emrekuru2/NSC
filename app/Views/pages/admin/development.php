@@ -66,16 +66,16 @@
                     <div class="row g-3 justify-content-center">
                         <div class="col-12">
                             <label for="name" class="form-label">Name:</label>
-                            <input type="text" class="form-control" id="title" name="name">
+                            <input type="text" class="form-control" id="title" name="name" required>
                         </div>
                         <div class="col-12 col-lg-6">
                             <div class="w-100">
                                 <label for="start_time" class="form-label">Start time:</label>
-                                <input type="time" class="form-control" id="start_time" name="start_time">
+                                <input type="time" class="form-control" id="start_time" name="start_time" required>
                             </div>
                             <div class="w-100">
                                 <label for="end_time" class="form-label">End time:</label>
-                                <input type="time" class="form-control" id="end_time" name="end_time">
+                                <input type="time" class="form-control" id="end_time" name="end_time" required>
                             </div>
                         </div>
                         <div class="col-12 col-lg-6">
@@ -94,7 +94,7 @@
                         </div>
                         <div class="col-12 col-lg-6">
                             <label for="days[]" class="form-label">Days running:</label>
-                            <select name="days[]" id="days[]"  multiple="multiple">
+                            <select name="days[]" id="days[]" name="days[]" multiple="multiple">
                                 <option value="Sunday">Sunday</option>
                                 <option value="Monday">Monday</option>
                                 <option value="Tuesday">Tuesday</option>
@@ -105,8 +105,8 @@
                             </select>
                         </div>
                         <div class="col-12 col-lg-6">
-                            <label for="devProgID" class="form-label">Program Type:</label>
-                            <select name="devProgID" id="devProgID">
+                            <label for="devType" class="form-label">Program Type:</label>
+                            <select name="devType" id="devType" name="devType">
                                 <?php if (!empty($devTypes) && is_array($devTypes)) : ?>
                                     <?php foreach ($devTypes as $devType) : ?>
                                         <option value=<?= esc($devType->id) ?>>
