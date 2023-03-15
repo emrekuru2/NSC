@@ -27,7 +27,7 @@
                     <tr>
                         <td class="col-11 line-height-2rem"><?= $row->name ?></td>
                         <td class="col-1">
-                            <a href="?name=<?= $row->name ?>">
+                            <a href="teams/<?= $row->name ?>">
                                 <button type="submit" name="edit-button" data-name="<?= $row->name ?>" class="btn btn-primary btn-sm">Edit</button>
                             </a>
                         </td>
