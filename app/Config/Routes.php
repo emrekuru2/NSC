@@ -52,11 +52,20 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->get('alerts', 'Admin\AlertsController::index');
     $routes->get('clubs', 'Admin\ClubsController::index');
     $routes->get('teams', 'Admin\TeamsController::index');
+
+
     $routes->get('competitions', 'Admin\CompetitionsController::index');
     $routes->get('CompetitionType', 'Admin\CompetitionTypeController::index');
     $routes->get('CompetitionType/delete/(:num)','Admin\CompetitionTypeController::delete/$1' );
     $routes->get('CompetitionType/edit/(:num)','Admin\CompetitionTypeController::edit/$1' );
 
+    //edit page redirect
+    $routes->get('CompetitionType/edit/dashboard', 'Admin\DashController::index');
+    $routes->get('CompetitionType/edit/alerts', 'Admin\AlertsController::index');
+    $routes->get('CompetitionType/edit/clubs', 'Admin\ClubsController::index');
+    $routes->get('CompetitionType/edit/teams', 'Admin\TeamsController::index');
+    $routes->get('CompetitionType/edit/competitions', 'Admin\CompetitionsController::index');
+    $routes->get('CompetitionType/edit/CompetitionType', 'Admin\CompetitionTypeController::index');
 
 
 
