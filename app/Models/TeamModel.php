@@ -13,4 +13,10 @@ class TeamModel extends Model
     protected $returnType       = \App\Entities\Team::class;
     protected $allowedFields    = ['name', 'description', 'image'];
 
+    // Functions
+    public function findTeamByName(string $teamName): array
+    {
+        return $this->select()->where('nsca_teams.name', $teamName)->find();
+    }
+
 }
