@@ -7,35 +7,36 @@ use App\Models\ClubModel;
 use App\Models\TeamModel;
 use App\Models\UserEmailModel;
 use Exception;
+use function MongoDB\BSON\toJSON;
 
 class TeamsController extends BaseController
 {
     public function index()
     {
         $teamModel = model(TeamModel::class);
+
+        $data = [
+            'title' => 'Teams',
+            'allTeams' => $teamModel->orderBy('nsca_teams.name', 'ASC')->findAll()
+        ];
+
+        return view('pages/admin/teams', $data);
+    }
+
+    public function getTeam(int $teamID) {
+        $teamModel = model(TeamModel::class);
         $userModel = model(UserEmailModel::class);
         $clubModel = model(ClubModel::class);
 
-        $team = null;
-        $teamMembers = null;
-        $clubMembers = null;
-
-        try {
-            $teamName = $this->request->getGet('name')[0];
-
-            $team = $teamModel->findTeamByName($teamName);
-            $teamMembers = $userModel->getTeamUsersByTeamName($teamName);
-            $clubMembers = $userModel->getClubUsersByClubName($teamName);
-        } catch (Exception $e) {
-
-        }
+        $team = $teamModel->find($teamID);
+        $teamMembers = $userModel->getTeamUsersByTeamId($teamID);
 
         $data = [
             'title' => 'Teams',
             'team' => $team,
             'teamMembers' => $teamMembers,
             'allTeams' => $teamModel->orderBy('nsca_teams.name', 'ASC')->findAll(),
-            'clubMembers' => $clubMembers,
+            //'clubMembers' => $clubMembers,
             'allClubs' => $clubModel->orderBy('nsca_clubs.name', 'ASC')->findAll()
         ];
 
