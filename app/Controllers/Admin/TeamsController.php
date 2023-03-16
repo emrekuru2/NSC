@@ -6,8 +6,6 @@ use App\Controllers\BaseController;
 use App\Models\ClubModel;
 use App\Models\TeamModel;
 use App\Models\UserEmailModel;
-use Exception;
-use function MongoDB\BSON\toJSON;
 
 class TeamsController extends BaseController
 {
@@ -23,7 +21,8 @@ class TeamsController extends BaseController
         return view('pages/admin/teams', $data);
     }
 
-    public function getTeam(int $teamID) {
+    public function edit(int $teamID) {
+        // TODO: Change page to POST request.
         $teamModel = model(TeamModel::class);
         $userModel = model(UserEmailModel::class);
         $clubModel = model(ClubModel::class);
