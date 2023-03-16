@@ -49,6 +49,9 @@ $routes->get('development/(:num)', 'Main\DevelopmentController::register/$1');
 
 // Routing for admin views and functions
 $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
+    // Get with parameter
+    $routes->get('teams/(:num)', 'Admin\TeamsController::edit/$1');
+
     // Get requests
     $routes->get('dashboard', 'Admin\DashController::index');
     $routes->get('alerts', 'Admin\AlertsController::index');
@@ -61,9 +64,6 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->get('news', 'Admin\NewsController::index');
     $routes->get('email', 'Admin\EmailController::index');
     $routes->get('settings', 'Admin\SettingsController::index');
-
-    // Get with parameter
-    $routes->get('teams/(:num)', 'Admin\TeamsController::getTeam/$1');
 
     // Put request
 
