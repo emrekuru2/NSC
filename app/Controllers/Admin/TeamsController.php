@@ -17,7 +17,7 @@ class TeamsController extends BaseController
 
         $data = [
             'title' => 'Teams',
-            'allTeams' => $teamModel->orderBy('nsca_teams.name', 'ASC')->findAll()
+            'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll()
         ];
 
         return view('pages/admin/teams', $data);
@@ -35,9 +35,8 @@ class TeamsController extends BaseController
             'title' => 'Teams',
             'team' => $team,
             'teamMembers' => $teamMembers,
-            'allTeams' => $teamModel->orderBy('nsca_teams.name', 'ASC')->findAll(),
-            //'clubMembers' => $clubMembers,
-            'allClubs' => $clubModel->orderBy('nsca_clubs.name', 'ASC')->findAll()
+            'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
+            'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll()
         ];
 
         return view('pages/admin/teams', $data);
