@@ -63,7 +63,7 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->get('settings', 'Admin\SettingsController::index');
 
     // Get with parameter
-    $routes->get('teams/(:alpha)', 'Admin\TeamsController::getTeam/$1');
+    $routes->get('teams/(:num)', 'Admin\TeamsController::getTeam/$1');
 
     // Put request
 
