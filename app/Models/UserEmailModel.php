@@ -84,17 +84,20 @@ class UserEmailModel extends Model
 
     public function getTeamUsersByTeamName(string $teamName): array
     {
-        return $this->select('nsca_users.first_name, nsca_users.last_name, nsca_team_user.isTeamCaptain, nsca_team_user.isViceCaptain')
-            ->join('nsca_team_user', 'nsca_users.id = nsca_team_user.userID', 'left')
-            ->join('nsca_teams', 'nsca_team_user.teamID = nsca_teams.id', 'left')
-            ->where('nsca_teams.name', $teamName)
-            ->orderBy('nsca_users.last_name', 'ASC')->findAll();
+        $db = \Config\Database::connect();
+
+        $statement = "SELECT nsca_users.id, nsca_users.first_name, nsca_users.last_name FROM nsca_users
+                        LEFT JOIN nsca_team_user ON nsca_users.id = nsca_team_user.userID
+                        LEFT JOIN nsca_teams ON nsca_team_user.teamID = nsca_teams.id
+                        WHERE nsca_teams.name = {$teamName}";
+
+        $query = $db->query($statement);
+        return $query->getResult();
     }
 
     public function getTeamUsersByTeamId(int $teamID): array
     {
         $db = \Config\Database::connect();
-        //$builder = $db->table('nsca_users');
 
         $statement = "SELECT nsca_users.id FROM nsca_users
                         LEFT JOIN nsca_team_user ON nsca_users.id = nsca_team_user.userID
@@ -107,20 +110,28 @@ class UserEmailModel extends Model
 
     public function getClubUsersByClubName(string $clubName): array
     {
-        return $this->select('nsca_users.first_name, nsca_users.last_name, nsca_club_user.isManager')
-            ->join('nsca_club_user', 'nsca_users.id = nsca_club_user.userID', 'left')
-            ->join('nsca_clubs', 'nsca_club_user.clubID = nsca_clubs.id', 'left')
-            ->where('nsca_clubs.name', $clubName)
-            ->orderBy('nsca_users.last_name', 'ASC')->findAll();
+        $db = \Config\Database::connect();
+
+        $statement = "SELECT nsca_users.id, nsca_users.first_name, nsca_users.last_name FROM nsca_users
+                        LEFT JOIN nsca_club_user ON nsca_users.id = nsca_club_user.userID
+                        LEFT JOIN nsca_clubs ON nsca_club_user.teamID = nsca_clubs.id
+                        WHERE nsca_clubs.name = {$clubName}";
+
+        $query = $db->query($statement);
+        return $query->getResult();
     }
 
     public function getClubUsersByClubId(string $clubID): array
     {
-        return $this->select('nsca_users.first_name, nsca_users.last_name, nsca_club_user.isManager')
-            ->join('nsca_club_user', 'nsca_users.id = nsca_club_user.userID', 'left')
-            ->join('nsca_clubs', 'nsca_club_user.clubID = nsca_clubs.id', 'left')
-            ->where('nsca_clubs.id', $clubID)
-            ->orderBy('nsca_users.last_name', 'ASC')->findAll();
+        $db = \Config\Database::connect();
+
+        $statement = "SELECT nsca_users.id, nsca_users.first_name, nsca_users.last_name FROM nsca_users
+                        LEFT JOIN nsca_club_user ON nsca_users.id = nsca_club_user.userID
+                        LEFT JOIN nsca_clubs ON nsca_club_user.teamID = nsca_clubs.id
+                        WHERE nsca_clubs.id = {$clubID}";
+
+        $query = $db->query($statement);
+        return $query->getResult();
     }
 
 }
