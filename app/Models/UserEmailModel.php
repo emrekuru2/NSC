@@ -82,40 +82,16 @@ class UserEmailModel extends Model
             ->join('nsca_dev_user', 'nsca_dev_user.userID = nsca_users.id', 'cross')->findAll();
     }
 
-    public function getTeamUsersByTeamName(string $teamName): array
-    {
-        $db = \Config\Database::connect();
-
-        $statement = "SELECT nsca_users.id, nsca_users.first_name, nsca_users.last_name FROM nsca_users
-                        LEFT JOIN nsca_team_user ON nsca_users.id = nsca_team_user.userID
-                        LEFT JOIN nsca_teams ON nsca_team_user.teamID = nsca_teams.id
-                        WHERE nsca_teams.name = {$teamName}";
-
-        $query = $db->query($statement);
-        return $query->getResult();
-    }
-
     public function getTeamUsersByTeamId(int $teamID): array
     {
         $db = \Config\Database::connect();
+        $teamID = stripslashes($teamID);
 
-        $statement = "SELECT nsca_users.id FROM nsca_users
+        $statement = "SELECT nsca_users.id
+                        FROM nsca_users
                         LEFT JOIN nsca_team_user ON nsca_users.id = nsca_team_user.userID
                         LEFT JOIN nsca_teams ON nsca_team_user.teamID = nsca_teams.id
                         WHERE nsca_teams.id = {$teamID}";
-
-        $query = $db->query($statement);
-        return $query->getResult();
-    }
-
-    public function getClubUsersByClubName(string $clubName): array
-    {
-        $db = \Config\Database::connect();
-
-        $statement = "SELECT nsca_users.id, nsca_users.first_name, nsca_users.last_name FROM nsca_users
-                        LEFT JOIN nsca_club_user ON nsca_users.id = nsca_club_user.userID
-                        LEFT JOIN nsca_clubs ON nsca_club_user.teamID = nsca_clubs.id
-                        WHERE nsca_clubs.name = {$clubName}";
 
         $query = $db->query($statement);
         return $query->getResult();
@@ -125,7 +101,8 @@ class UserEmailModel extends Model
     {
         $db = \Config\Database::connect();
 
-        $statement = "SELECT nsca_users.id, nsca_users.first_name, nsca_users.last_name FROM nsca_users
+        $statement = "SELECT nsca_users.id, nsca_users.first_name, nsca_users.last_name
+                        FROM nsca_users
                         LEFT JOIN nsca_club_user ON nsca_users.id = nsca_club_user.userID
                         LEFT JOIN nsca_clubs ON nsca_club_user.teamID = nsca_clubs.id
                         WHERE nsca_clubs.id = {$clubID}";
