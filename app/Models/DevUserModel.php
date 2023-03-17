@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class DevUserModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'nsca_dev_user';
+    protected $table            = 'nsca_dev_users';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
