@@ -24,20 +24,6 @@ class Teams extends Migration
         $this->forge->addForeignKey('clubID', 'nsca_clubs', 'id', '', 'CASCADE');
         $this->forge->createTable('nsca_teams');
 
-        // Team Joinlist Table
-        $this->forge->addField([
-            'id'            => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
-            'userID'        => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
-            'teamID'        => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
-            'created_at'    => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
-            'updated_at'    => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
-        ]);
-        $this->forge->addPrimaryKey('id');
-        $this->forge->addKey(['teamID', 'userID']);
-        $this->forge->addForeignKey('teamID', 'nsca_teams', 'id', '', 'CASCADE');
-        $this->forge->addForeignKey('userID', 'nsca_users', 'id', '', 'CASCADE');
-        $this->forge->createTable('nsca_team_joinlists');
-
         // Team User Table
         $this->forge->addField([
             'id'              => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
@@ -61,7 +47,6 @@ class Teams extends Migration
 
         $this->forge->dropTable('nsca_team_users', true);
         $this->forge->dropTable('nsca_teams', true);
-        $this->forge->dropTable('nsca_team_joinlists', true);
 
         $this->db->enableForeignKeyChecks();
     }

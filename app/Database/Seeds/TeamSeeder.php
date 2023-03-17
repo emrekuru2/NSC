@@ -70,20 +70,6 @@ class TeamSeeder extends Seeder
         ];
         $this->db->table('nsca_team_users')->insertBatch($users);
 
-        $joinList = [
-            [
-                'userID' => 2,
-                'teamID' => 1
-            ],
-            [
-                'userID' => 3,
-                'teamID' => 2
-            ],
-            [
-                'userID' => 4,
-                'teamID' => 3
-            ]
-        ];
-        $this->db->table('nsca_team_joinlists')->insertBatch($joinList);
+        
     }
 }

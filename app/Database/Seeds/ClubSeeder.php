@@ -85,5 +85,21 @@ class ClubSeeder extends Seeder
             ]
         ];
         $this->db->table('nsca_club_users')->insertBatch($users);
+
+        $joinList = [
+            [
+                'userID' => 2,
+                'clubID' => 1
+            ],
+            [
+                'userID' => 3,
+                'clubID' => 2
+            ],
+            [
+                'userID' => 4,
+                'clubID' => 3
+            ]
+        ];
+        $this->db->table('nsca_club_joinlists')->insertBatch($joinList);
     }
 }
