@@ -31,6 +31,19 @@ class DevelopmentController extends BaseController
         $data = $this->request->getPost();
         $data['image'] = storeImage('Dev', $this->request->getFile('image'));
         $dev = new \App\Entities\Dev();
+        // combine values of days array into a string
+        $data['daysRun'] = implode(',', $data['days']);
+
+        // get file
+        $file = $this->request->getFile('image');
+        if ($file->isValid()){
+            // get random name
+            $newName = $file->getRandomName();
+            $file->store("../../public/assets/images/DevProgs/contents/", $newName);
+            // get path and file name
+            $data["image"] = "/assets/images/DevProgs/contents/".$newName;
+
+        }
         $dev->fill($data);
 
         if (model(DevModel::class)->save($dev)) {
@@ -55,6 +68,7 @@ class DevelopmentController extends BaseController
 
         $data = $this->request->getPost();
         $devType = new \App\Entities\DevType();
+        // combine values of days array into a string
         $devType->fill($data);
 
         if (model(DevTypeModel::class)->save($devType)) {
