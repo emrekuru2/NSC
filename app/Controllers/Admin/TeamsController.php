@@ -21,13 +21,13 @@ class TeamsController extends BaseController
         return view('pages/admin/teams', $data);
     }
 
-    public function edit()
+    public function editTeam()
     {
         $teamModel = model(TeamModel::class);
         $userModel = model(UserEmailModel::class);
         $clubModel = model(ClubModel::class);
 
-        if ($this->request->getPost('teamName') !== null) {
+        if ($this->request->getPost('teamName') != null) {
             $teamRow = $teamModel->select('id')->findAll()[0];
             $teamID = $teamRow->id;
         } else {
@@ -35,18 +35,11 @@ class TeamsController extends BaseController
         }
 
         $team = $teamModel->where('nsca_teams.id', $teamID)->findAll();
-        if (sizeof($team) == 0) {
-            $team = null;
-            $teamMembers = null;
-        } else {
-            $team = $team[0];
-            $teamMembers = $userModel->getTeamUsersByTeamId($teamID);
-        }
 
         $data = [
             'title' => 'Teams',
-            'team' => $team,
-            'teamMembers' => $teamMembers,
+            'team' => sizeof($team) > 0 ? $team[0] : null,
+            'teamMembers' => sizeof($team) > 0 ? $userModel->getTeamUsersByTeamId($teamID) : null,
             'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
             'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll()
         ];
@@ -54,7 +47,7 @@ class TeamsController extends BaseController
         return view('pages/admin/teams', $data);
     }
 
-    public function update()
+    public function updateTeam()
     {
         $teamModel = model(TeamModel::class);
 
@@ -66,7 +59,20 @@ class TeamsController extends BaseController
         return view('pages/admin/teams', $data);
     }
 
-    public function delete()
+    public function deleteTeam()
+    {
+        $teamModel = model(TeamModel::class);
+
+        $data = [
+            'title' => 'Teams',
+            //'alert' =>
+            'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll()
+        ];
+
+        return view('pages/admin/teams', $data);
+    }
+
+    public function removeMember()
     {
         $teamModel = model(TeamModel::class);
 
