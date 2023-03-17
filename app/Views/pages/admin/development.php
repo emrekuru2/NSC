@@ -13,8 +13,8 @@
                     <div class="card-body">
                         <form method="post" action="createProgType">
                             <div class="w-100 mb-3">
-                                <label for="type_name" class="form-label">Name:</label>
-                                <input type="text" class="form-control" id="type_name" name="type_name">
+                                <label for="name" class="form-label">Name:</label>
+                                <input type="text" class="form-control" id="name" name="name">
                             </div>
                             <div class="w-100 mb-3">
                                 <label for="min_age" class="form-label">Minimum age:</label>
@@ -115,7 +115,7 @@
                                 <?php if (!empty($devTypes) && is_array($devTypes)) : ?>
                                     <?php foreach ($devTypes as $devType) : ?>
                                         <option value=<?= esc($devType->id) ?>>
-                                            <?= esc($devType->type_name) ?>
+                                            <?= esc($devType->name) ?>
                                         </option>
                                     <?php endforeach ?>
                                 <?php endif ?>
