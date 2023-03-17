@@ -47,4 +47,18 @@ class TeamsController extends BaseController
         return view('pages/admin/teams', $data);
     }
 
+    public function update()
+    {
+        $data = [];
+
+        return view('pages/admin/teams', $data);
+    }
+
+    public function remove()
+    {
+        $data = [];
+
+        return view('pages/admin/teams', $data);
+    }
+
 }
