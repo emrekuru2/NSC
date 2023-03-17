@@ -501,37 +501,6 @@ class TestData extends Seeder
         ];
         $this->db->table('nsca_teams')->insertBatch($testDataTeams);
 
-        $testDataDevPrograms = [
-            [
-                'name' => 'Youth Summer Camp',
-                'duration' => '16 Weeks',
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eros odio, volutpat tempus ullamcorper ut, scelerisque quis neque. Nullam finibus orci id mi sagittis tincidunt. Vestibulum ornare ornare dui, et iaculis diam pulvinar vitae. Ut eu nunc ut velit elementum accumsan. Morbi nec pharetra dolor. Nunc porta suscipit lacus eget consequat. Phasellus a est vitae sapien dignissim egestas ut vulputate ipsum. Morbi sed ultricies dolor, sed mollis nibh. In semper, libero iaculis feugiat lobortis, enim metus',
-                'time' => '0915-1515',
-                'charges' => '$50 monthly',
-                'type' => 'youth',
-                'daysRun' => 'Saturdays and Sundays',
-            ],
-            [
-                'name' => 'Lunchtime Basketball',
-                'duration' => '10 Weeks',
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eros odio, volutpat tempus ullamcorper ut, scelerisque quis neque. Nullam finibus orci id mi sagittis tincidunt. Vestibulum ornare ornare dui, et iaculis diam pulvinar vitae. Ut eu nunc ut velit elementum accumsan. Morbi nec pharetra dolor. Nunc porta suscipit lacus eget consequat. Phasellus a est vitae sapien dignissim egestas ut vulputate ipsum. Morbi sed ultricies dolor, sed mollis nibh. In semper, libero iaculis feugiat lobortis, enim metus',
-                'time' => '1215-1515',
-                'charges' => '$25 monthly',
-                'type' => 'youth',
-                'daysRun' => 'Saturdays and Sundays',
-            ],
-            [
-                'name' => 'Youth Spring Camp',
-                'duration' => '10 Weeks',
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eros odio, volutpat tempus ullamcorper ut, scelerisque quis neque. Nullam finibus orci id mi sagittis tincidunt. Vestibulum ornare ornare dui, et iaculis diam pulvinar vitae. Ut eu nunc ut velit elementum accumsan. Morbi nec pharetra dolor. Nunc porta suscipit lacus eget consequat. Phasellus a est vitae sapien dignissim egestas ut vulputate ipsum. Morbi sed ultricies dolor, sed mollis nibh. In semper, libero iaculis feugiat lobortis, enim metus',
-                'time' => '1215-1515',
-                'charges' => '$25 monthly',
-                'type' => 'youth',
-                'daysRun' => 'Saturdays and Sundays',
-            ]
-        ];
-        $this->db->table('nsca_dev')->insertBatch($testDataDevPrograms);
-
         $testDataRegions = [
             [
                 'id' => 1,
@@ -735,6 +704,46 @@ class TestData extends Seeder
         ];
         $this->db->table('nsca_team_user')->insertBatch($testDataTeamUsers);
 
+        $testDataClubUsers = [
+            [
+                'id' => 1,
+                'userID' => 6,
+                'clubID' => 1,
+                'isManager' => 1
+            ],
+            [
+                'id' => 2,
+                'userID' => 7,
+                'clubID' => 1,
+                'isManager' => 0
+            ],
+            [
+                'id' => 3,
+                'userID' => 8,
+                'clubID' => 2,
+                'isManager' => 1
+            ],
+            [
+                'id' => 4,
+                'userID' => 9,
+                'clubID' => 2,
+                'isManager' => 0
+            ],
+            [
+                'id' => 5,
+                'userID' => 10,
+                'clubID' => 3,
+                'isManager' => 1
+            ],
+            [
+                'id' => 6,
+                'userID' => 11,
+                'clubID' => 3,
+                'isManager' => 0
+            ]
+        ];
+        $this->db->table('nsca_club_user')->insertBatch($testDataClubUsers);
+
         $testDataTeamJoinList = [
             [
                 'id' => 1,
@@ -772,25 +781,6 @@ class TestData extends Seeder
             ]
         ];
         $this->db->table('nsca_committees_user')->insertBatch($testDataCommitteeUsers);
-
-        $testDataDevProgramUsers = [
-            [
-                'id' => 1,
-                'devID' => 1,
-                'userID' => 12
-            ],
-            [
-                'id' => 2,
-                'devID' => 2,
-                'userID' => 13
-            ],
-            [
-                'id' => 3,
-                'devID' => 3,
-                'userID' => 14
-            ]
-        ];
-        $this->db->table('nsca_dev_user')->insertBatch($testDataDevProgramUsers);
 
         $testDataRegionUsers = [
             [
@@ -840,5 +830,89 @@ class TestData extends Seeder
             ]
         ];
         $this->db->table('nsca_location_user')->insertBatch($testDataRegionUsers);
+
+        $devProgType = [
+            [
+                'id' => 1,
+                'type_name' => 'Kids',
+                'min_age' => 5,
+                'max_age' => 12,
+            ],
+            [
+                'id' => 2,
+                'type_name' => 'Youth',
+                'min_age' => 13,
+                'max_age' => 18,
+            ],
+            [
+                'id' => 3,
+                'type_name' => 'Adult',
+                'min_age' => 19,
+                'max_age' => 100,
+            ],
+        ];
+        $this->db->table('nsca_devprogram_type')->insertBatch($devProgType);
+
+        $testDataDevPrograms = [
+            [
+                'name' => 'Youth Summer Camp',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eros odio, volutpat tempus ullamcorper ut, scelerisque quis neque. Nullam finibus orci id mi sagittis tincidunt. Vestibulum ornare ornare dui, et iaculis diam pulvinar vitae. Ut eu nunc ut velit elementum accumsan. Morbi nec pharetra dolor. Nunc porta suscipit lacus eget consequat. Phasellus a est vitae sapien dignissim egestas ut vulputate ipsum. Morbi sed ultricies dolor, sed mollis nibh. In semper, libero iaculis feugiat lobortis, enim metus',
+                'devProgID' => 1,
+                'start_time' => Time::now(),
+                'end_time' => Time::now(),
+                'start_date' => Time::now(),
+                'end_date' => Time::now(),
+                'price' => 50,
+                'location' => 'NSCA',
+                'daysRun' => 'Saturdays and Sundays',
+
+            ],
+            [
+                'name' => 'Youth lunch Camp',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eros odio, volutpat tempus ullamcorper ut, scelerisque quis neque. Nullam finibus orci id mi sagittis tincidunt. Vestibulum ornare ornare dui, et iaculis diam pulvinar vitae. Ut eu nunc ut velit elementum accumsan. Morbi nec pharetra dolor. Nunc porta suscipit lacus eget consequat. Phasellus a est vitae sapien dignissim egestas ut vulputate ipsum. Morbi sed ultricies dolor, sed mollis nibh. In semper, libero iaculis feugiat lobortis, enim metus',
+                'devProgID' => 2,
+                'start_time' => Time::now(),
+                'end_time' => Time::now(),
+                'start_date' => Time::now(),
+                'end_date' => Time::now(),
+                'price' => 50,
+                'location' => 'NSCA',
+                'daysRun' => 'Saturdays and Sundays',
+
+            ],
+            [
+                'name' => 'Youth night Camp',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eros odio, volutpat tempus ullamcorper ut, scelerisque quis neque. Nullam finibus orci id mi sagittis tincidunt. Vestibulum ornare ornare dui, et iaculis diam pulvinar vitae. Ut eu nunc ut velit elementum accumsan. Morbi nec pharetra dolor. Nunc porta suscipit lacus eget consequat. Phasellus a est vitae sapien dignissim egestas ut vulputate ipsum. Morbi sed ultricies dolor, sed mollis nibh. In semper, libero iaculis feugiat lobortis, enim metus',
+                'devProgID' => 3,
+                'start_time' => Time::now(),
+                'end_time' => Time::now(),
+                'start_date' => Time::now(),
+                'end_date' => Time::now(),
+                'price' => 50,
+                'location' => 'NSCA',
+                'daysRun' => 'Saturdays and Sundays',
+
+            ],
+        ];
+        $this->db->table('nsca_dev')->insertBatch($testDataDevPrograms);
+
+        $testDataDevProgramUsers = [
+            [
+                'id' => 1,
+                'devID' => 1,
+                'userID' => 12
+            ],
+            [
+                'id' => 2,
+                'devID' => 2,
+                'userID' => 13
+            ],
+            [
+                'id' => 3,
+                'devID' => 3,
+                'userID' => 14
+            ]
+        ];
+        $this->db->table('nsca_dev_user')->insertBatch($testDataDevProgramUsers);
     }
 }

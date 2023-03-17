@@ -207,3 +207,42 @@ tl-item.active .tl-dot:before {
 .margin-bottom-0 {
     margin-bottom: 0;
 }
+
+.margin-bottom-half-rem {
+    margin-bottom: 0.5rem;
+}
+
+.margin-bottom-1rem {
+    margin-bottom: 1rem;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.border-style-none {
+    border-style: none;
+}
+.border-style-none > td {
+    border-style: none;
+}
+
+.line-height-2rem {
+    line-height: 2rem;
+}
+
+#delete-form {
+    display: flex;
+    flex-direction: column;
+    padding: 0 1rem 1rem 1rem;
+}
+#delete-form > button {
+    width: fit-content;
+}
+
+.divider {
+    border-top: 3px solid lightgray;
+    border-radius: 2px;
+    margin: 0 auto 1rem auto !important;
+    width: calc(100% - 2rem);
+}

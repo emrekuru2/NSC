@@ -38,6 +38,6 @@
     </div>
 </div>
 
-<script type="text/javascript" src="<?php echo base_url('assets/js/admin/emailRecipients.js'); ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/admin/email.js'); ?>"></script>
 
 <?= $this->endSection() ?>

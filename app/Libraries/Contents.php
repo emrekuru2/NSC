@@ -18,4 +18,19 @@ class Contents
     {
         return view('components/comment', $content);
     }
+
+    public function groupEditListPanel($content)
+    {
+        return view('components/groupEditListPanel', $content);
+    }
+
+    public function searchPanel($content)
+    {
+        return view('components/searchPanel', $content);
+    }
+
+    public function groupMemberEditList($content)
+    {
+        return view('components/groupMemberEditList', $content);
+    }
 }
