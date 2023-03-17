@@ -73,6 +73,8 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->match(['post'], 'createProgType', 'Admin\DevelopmentController::createProgType');
     $routes->match(['post'], 'setAlert', 'Admin\AlertsController::setAlert');
     $routes->match(['post'], 'editTeam', 'Admin\TeamsController::edit');
+    $routes->match(['post'], 'updateTeam', 'Admin\TeamsController::update');
+    $routes->match(['post'], 'deleteTeam', 'Admin\TeamsController::delete');
 
 });
 
