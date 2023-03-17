@@ -8,7 +8,6 @@ use App\Models\CommitteeModel;
 use App\Models\DevModel;
 use App\Models\LocationModel;
 use App\Models\TeamModel;
-use App\Models\UserEmailModel;
 use Exception;
 
 class EmailController extends BaseController
@@ -46,7 +45,7 @@ class EmailController extends BaseController
         array_push($recipientArray, $JSON->recipients);
 
         // Groups
-        $userEmailModel = model(UserEmailModel::class);
+        $userEmailModel = model(UserModel::class);
 
         foreach ($JSON->general as $group) {
             switch ($group) {

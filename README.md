@@ -41,53 +41,9 @@ composer -v
 composer install
 ```
 
-> Create or copy the **env** file to **.env** and comment out the lines shown down below. Then adjust your database, webserver url and environment type to your local environment needs.
-```php
-#--------------------------------------------------------------------
-# ENVIRONMENT
-#--------------------------------------------------------------------
-
-CI_ENVIRONMENT = development
-
-#--------------------------------------------------------------------
-# APP
-#--------------------------------------------------------------------
-
-app.baseURL = 'http://localhost/'
-# If you have trouble with `.`, you could also use `_`.
-# app_baseURL = ''
-# app.forceGlobalSecureRequests = false
-# app.CSPEnabled = false
-
-#--------------------------------------------------------------------
-# DATABASE
-#--------------------------------------------------------------------
-
-database.default.database = cricket
-database.default.hostname = localhost
-database.default.username = root
-database.default.password = 
-database.default.DBDriver = MySQLi
-database.default.DBPrefix =
-database.default.port = 3306
-```
-
-> If you were working with another database before, drop that database and create a new one from your database manager or with this command down below.:exclamation: The name must be written without quotes.
+> To setup the project for development type the script below and add the environment type into the args segment (development or production).
 ```sh
-php spark db:create 'your database name that matches the name inside .env file'
-```
-
-
-> Finally, go back to your project, make sure your terminal is still in project folder and run these two commands to populate the database. First run
-
-```sh
-php spark migrate 
-```
-> Then run
-
-```sh
-php spark db:seed Init
-php spark db:seed TestData
+php spark setup <args>
 ```
 
 > The user emails, passwords and their roles are shown below. 
@@ -99,13 +55,6 @@ php spark db:seed TestData
 | player@gmail.com  | Password2023! | player  |
 | umpire@gmail.com  | Password2023! | umpire  |
 | guest@gmail.com   | Password2023! | guest   |
-
-> For any changes on database tables or dummy rows, you can use these commands down below to keep the database features up to date
-```sh
-php spark migrate:rollback
-php spark db:seed Init
-php spark db:seed TestData
-```
 
 
 ## CodeIgniter 4 Application Starter

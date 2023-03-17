@@ -49,7 +49,9 @@ $routes->get('development/(:num)', 'Main\DevelopmentController::register/$1');
 
 // Routing for admin views and functions
 $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
-    // Index pages
+    // Get with parameter
+
+    // Get requests
     $routes->get('dashboard', 'Admin\DashController::index');
     $routes->get('alerts', 'Admin\AlertsController::index');
     $routes->get('clubs', 'Admin\ClubsController::index');
@@ -62,13 +64,18 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->get('email', 'Admin\EmailController::index');
     $routes->get('settings', 'Admin\SettingsController::index');
 
-    // Functions
+    // Put request
+
+    // Post requests
     $routes->match(['post'], 'sendEmail', 'Admin\EmailController::sendEmail');
     $routes->match(['post'], 'createNews', 'Admin\NewsController::createNews');
     $routes->match(['post'], 'createDev', 'Admin\DevelopmentController::createDev');
     $routes->match(['post'], 'createProgType', 'Admin\DevelopmentController::createProgType');
-
     $routes->match(['post'], 'setAlert', 'Admin\AlertsController::setAlert');
+    $routes->match(['post'], 'editTeam', 'Admin\TeamsController::editTeam');
+    $routes->match(['post'], 'updateTeam', 'Admin\TeamsController::updateTeam');
+    $routes->match(['post'], 'deleteTeam', 'Admin\TeamsController::deleteTeam');
+    $routes->match(['post'], 'removeTeamMember', 'Admin\TeamsController::removeMember');
 
 });
 

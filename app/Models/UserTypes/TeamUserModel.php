@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class TeamUserModel extends Model
 {
     // Construction
-    protected $table            = 'nsca_team_user';
+    protected $table            = 'nsca_team_users';
     protected $primaryKey       = 'id';
     protected $returnType       = \App\Entities\UserTypes\TeamUser::class;
     protected $protectFields    = true;
