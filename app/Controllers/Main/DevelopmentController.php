@@ -11,16 +11,16 @@ class DevelopmentController extends BaseController
         $builder = $db->table('nsca_dev');
         // create string
         if (auth()->loggedIn()){
-            $statement = 'SELECT nsca_dev.*, nsca_devprogram_type.*,
-            CASE WHEN nsca_dev_user.userID IS NULL THEN 0 ELSE 1 END AS is_registered
-            FROM nsca_dev';
-            $statement .= ' LEFT JOIN nsca_dev_user ON nsca_dev_user.devID = nsca_dev.id AND nsca_dev_user.userID = '.auth()->id();
-            $statement .= ' JOIN nsca_devprogram_type ON nsca_Devprogram_type.id = nsca_dev.devProgID;';
+            $statement = 'SELECT nsca_devs.*, nsca_dev_types.*,
+            CASE WHEN nsca_dev_users.userID IS NULL THEN 0 ELSE 1 END AS is_registered
+            FROM nsca_devs';
+            $statement .= ' LEFT JOIN nsca_dev_users ON nsca_dev_users.devID = nsca_devs.id AND nsca_dev_users.userID = '.auth()->id();
+            $statement .= ' JOIN nsca_dev_types ON nsca_dev_types.id = nsca_devs.typeID;';
         }
         else{
-            $statement = 'SELECT nsca_dev.*, nsca_devprogram_type.*
-            FROM nsca_dev
-            JOIN nsca_devprogram_type ON nsca_Devprogram_type.id = nsca_dev.devProgID;';
+            $statement = 'SELECT nsca_devs.*, nsca_devprogram_type.*
+            FROM nsca_devs
+            JOIN nsca_dev_types ON nsca_dev_types.id = nsca_devs.typeID;';
         }
 
         $query = $db->query($statement);
