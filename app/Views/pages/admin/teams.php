@@ -57,6 +57,7 @@
                 <!-- Edit Members -->
                 <div class="form-group margin-bottom-0">
                     <label class="margin-bottom-half-rem" for="teamImage">Members</label>
+                    <?= view_cell('\App\Libraries\Contents::groupMemberEditList', ['groupName' => 'Team', 'members' => $teamMembers]); ?>
                 </div>
 
                 <br>
@@ -71,6 +72,7 @@
 
             <form method="post" action="deleteTeam" id="delete-form">
                 <!-- Delete Team Button -->
+                <input value="<?= $teamIsSet ? $team->id : '' ?>" name="teamID" id="delete-team-id" hidden>
                 <button type="button" name="delete-button" id="delete-button" class="btn btn-danger"<?= $teamIsSet ?: " disabled" ?>>Delete Team</button>
             </form>
 

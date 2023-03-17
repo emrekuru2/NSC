@@ -244,5 +244,5 @@ tl-item.active .tl-dot:before {
     border-top: 3px solid lightgray;
     border-radius: 2px;
     margin: 0 auto 1rem auto !important;
-    width: 97.5%;
+    width: calc(100% - 2rem);
 }
