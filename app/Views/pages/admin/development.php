@@ -53,7 +53,6 @@
                                                 <input type="hidden" name="id" value="<?=esc($program->id)?>">
                                                 <button class="btn btn-primary" type="submit">Modify</button>
                                             </form></td>
-                                            <!-- <td><a href="modify_development/<?=esc($program->id)?>" class="btn btn-primary">Modify</a></td> -->
                                         </tr>
                                     <?php endforeach ?>
                                 <?php endif ?>
@@ -111,8 +110,8 @@
                             </select>
                         </div>
                         <div class="col-12 col-lg-6">
-                            <label for="devType" class="form-label">Program Type:</label>
-                            <select name="devType" id="devType" name="devType" required>
+                            <label for="typeID" class="form-label">Program Type:</label>
+                            <select name="typeID" id="typeID"  required>
                                 <?php if (!empty($devTypes) && is_array($devTypes)) : ?>
                                     <?php foreach ($devTypes as $devType) : ?>
                                         <option value=<?= esc($devType->id) ?>>
