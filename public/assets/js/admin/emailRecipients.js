@@ -1,4 +1,5 @@
 // Variables
+const emailForm = document.getElementById("send-email-form");
 const submitButton = document.getElementById("form-submit");
 const allChecks = document.querySelectorAll('input[type="checkbox"]');
 const allUsersCheck = document.getElementById("all-users");
@@ -6,7 +7,6 @@ const allClubsCheck = document.getElementById("all-clubs");
 const allProgramsCheck = document.getElementById("all-programs");
 
 // ~~ Listeners ~~
-// Form Submission Button
 submitButton.addEventListener("click", () => {
   let recipientsJSON = {
     recipients: [],
@@ -59,7 +59,7 @@ submitButton.addEventListener("click", () => {
   }
 
   document.getElementsByName("groups")[0].value = JSON.stringify(recipientsJSON);
-  submitButton.submit();
+  emailForm.submit();
 });
 
 allUsersCheck.addEventListener("click", () => {

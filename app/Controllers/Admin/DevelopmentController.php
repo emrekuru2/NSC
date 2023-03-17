@@ -27,8 +27,9 @@ class DevelopmentController extends BaseController
 
     public function createDev()
     {
-
+        helper('image');
         $data = $this->request->getPost();
+        $data['image'] = storeImage('Dev', $this->request->getFile('image'));
         $dev = new \App\Entities\Dev();
         // combine values of days array into a string
         $data['daysRun'] = implode(',', $data['days']);
@@ -86,4 +87,5 @@ class DevelopmentController extends BaseController
 
         return redirect()->back()->with('alert', $data);
     }
+
 }
