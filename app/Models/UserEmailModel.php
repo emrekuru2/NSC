@@ -85,7 +85,7 @@ class UserEmailModel extends Model
     public function getTeamUsersByTeamId(int $teamID): array
     {
         return $this->select('nsca_users.first_name, nsca_users.last_name, nsca_team_user.isTeamCaptain, nsca_team_user.isViceCaptain')
-            ->join('nsca_teams_user', 'nsca_team_user.userID = nsca_users.id', 'left')
+            ->join('nsca_team_user', 'nsca_team_user.userID = nsca_users.id', 'left')
             ->join('nsca_teams', 'nsca_team_user.teamID = nsca_teams.id', 'left')
             ->where('nsca_teams.id', $teamID)
             ->findAll();
@@ -94,9 +94,9 @@ class UserEmailModel extends Model
     public function getClubUsersByClubId(string $clubID): array
     {
         return $this->select('nsca_users.first_name, nsca_users.last_name, nsca_club_user.isManager')
-            ->join('nsca_teams_user', 'nsca_team_user.userID = nsca_users.id', 'left')
-            ->join('nsca_teams', 'nsca_team_user.teamID = nsca_teams.id', 'left')
-            ->where('nsca_teams.id', $clubID)
+            ->join('nsca_club_user', 'nsca_club_user.userID = nsca_users.id', 'left')
+            ->join('nsca_clubs', 'nsca_club_user.teamID = nsca_clubs.id', 'left')
+            ->where('nsca_clubs.id', $clubID)
             ->findAll();
     }
 
