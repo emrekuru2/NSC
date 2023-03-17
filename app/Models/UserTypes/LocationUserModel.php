@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class LocationUserModel extends Model
 {
     // Construction
-    protected $table            = 'nsca_location_user';
+    protected $table            = 'nsca_location_users';
     protected $primaryKey       = 'id';
     protected $returnType       = \App\Entities\UserTypes\LocationUser::class;
     protected $protectFields    = true;

@@ -14,9 +14,12 @@
 </head>
 
 <body>
+    <?php if (session()->getFlashdata('alert') !== NULL) : ?>
+        <?= view_cell('\App\Libraries\Alerts::toast', ['type' => session()->getFlashdata('alert')['type'], 'content' => session()->getFlashdata('alert')['content']]) ?>
+    <?php endif; ?>
     <header>
         <div class="d-none width-100 d-lg-flex justify-content-center align-items-center p-2">
-            <img src="/assets/images/logo1.png" alt="logo" width="60px">
+            <img src="assets/images/General/logo1.png" alt="logo" width="60px">
             <h2>Nova Scotia Cricket Association</h2>
         </div>
         <?= view_cell('\App\Libraries\Navigations::navbar') ?>
@@ -28,7 +31,7 @@
         <hr />
         <div class="row align-items-center">
             <div class="col-lg-4 col-sm-12">
-                <img src="/assets/images/logo1.png" alt="logo" width="60px">
+                <img src="assets/images/General/logo1.png" alt="logo" width="60px">
             </div>
             <div class="col-lg-4 col-sm-12 order-lg-last">
                 <ul class="nav justify-content-lg-evenly justify-content-center">

@@ -69,8 +69,9 @@ class Setup extends BaseCommand
             return EXIT_ERROR;
         }
 
-        
-        $this->call('env', [$env]);
+        CLI::print('Setting up for environment type ' . $env, 'blue', 'yellow');
+        CLI::newLine();
+
 
         $base_url    = CLI::prompt('Your base url', 'http://localhost/');
         $db_hostname = CLI::prompt('Your database hostname', 'localhost');
@@ -83,10 +84,9 @@ class Setup extends BaseCommand
         CLI::newLine();
 
 
-        if (!$this->editENV(array($base_url, $db_hostname, $db_name, $db_user, $db_pswd, $db_driver, $db_prefix, $db_port))) {
+        if (!$this->editENV(array($env, $base_url, $db_hostname, $db_name, $db_user, $db_pswd, $db_driver, $db_prefix, $db_port))) {
             CLI::print('Settings could not be applied', 'red');
             CLI::newLine();
-
         } else {
             CLI::print('Settings applied successfully!', 'green');
             CLI::newLine();
@@ -95,25 +95,36 @@ class Setup extends BaseCommand
         $this->call('db:create', [$db_name]);
         $this->call('migrate');
 
-        if ($env === 'production') {
-            $this->call('db:seed', ['Prod']);
-
-        } else if ($env === 'development') {
-            $this->call('db:seed', ['Prod']);
-            $this->call('db:seed', ['Dev']);
+        if ($env === 'development') {
+            $this->call('db:seed', ['Main']);
         }
 
-        CLI::clearScreen();
+
         CLI::newLine();
-        CLI::write('Setup Completed', 'green', 'light_gray');
-        
+        CLI::write('Setup Completed', 'blue', 'yellow');
     }
 
 
-    public function editENV(array $props): bool {
+    public function editENV(array $props): bool
+    {
+        $baseEnv = ROOTPATH . 'env';
         $envFile = ROOTPATH . '.env';
 
+        if (!is_file($envFile)) {
+            if (!is_file($baseEnv)) {
+                CLI::write('Both default shipped `env` file and custom `.env` are missing.', 'yellow');
+                CLI::write('It is impossible to write the new environment type.', 'yellow');
+                CLI::newLine();
+
+                return false;
+            }
+
+            copy($baseEnv, $envFile);
+        }
+
+
         $settings = [
+            'CI_ENVIRONMENT',
             'app.baseURL',
             'database.default.hostname',
             'database.default.database',
@@ -124,7 +135,7 @@ class Setup extends BaseCommand
             'database.default.port'
         ];
 
- 
+
         for ($i = 0; $i < sizeof($settings); $i++) {
             $pattern = sprintf('/^[#\s]*%s[=\s](.*)$/m', $settings[$i]);
             $result = file_put_contents($envFile, preg_replace($pattern, "$settings[$i] = $props[$i]", file_get_contents($envFile), 1));
@@ -133,15 +144,11 @@ class Setup extends BaseCommand
                 return false;
             }
 
-            putenv($settings[$i]);    
+            putenv($settings[$i]);
             unset($_ENV[$settings[$i]], $_SERVER[$settings[$i]]);
             (new DotEnv(ROOTPATH))->load();
-
-
         }
 
         return true;
-
     }
-    
 }

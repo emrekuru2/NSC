@@ -32,7 +32,7 @@ $routes->set404Override();
 
 // Routing for general views
 $routes->get('/', 'Main\HomeController::index');
-$routes->get('clubs', 'Main\ClubsController::index');
+$routes->get('clubs', 'Main\ClubsController::viewClubs');
 $routes->get('teams', 'Main\TeamsController::index');
 $routes->get('committees', 'Main\CommitteesController::index');
 $routes->get('development', 'Main\DevelopmentController::index');
@@ -41,9 +41,12 @@ $routes->get('contact', 'Main\ContactController::index');
 $routes->get('faqs', 'Main\FaqsController::index');
 $routes->get('about', 'Main\AboutController::index');
 
+
 // News functional routing
 $routes->get('news/(:num)', 'Main\NewsController::getNewsByID/$1');
 $routes->get('development/(:num)', 'Main\DevelopmentController::register/$1');
+$routes->get('club_join', 'Main\ClubsController::viewClubs');
+$routes->match(['post'], 'join_club', 'Main\ClubsController::joinClub');
 
 
 
@@ -67,7 +70,6 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->match(['post'], 'createNews', 'Admin\NewsController::createNews');
     $routes->match(['post'], 'createDev', 'Admin\DevelopmentController::createDev');
     $routes->match(['post'], 'createProgType', 'Admin\DevelopmentController::createProgType');
-
     $routes->match(['post'], 'setAlert', 'Admin\AlertsController::setAlert');
 
 });

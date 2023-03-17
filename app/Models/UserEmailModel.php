@@ -12,6 +12,7 @@ class UserEmailModel extends Model
     protected $returnType       = \App\Entities\User::class;
     protected $protectFields    = true;
     protected $allowedFields    = [
+        'id',
         'email',
         'first_name',
         'last_name'
@@ -81,22 +82,22 @@ class UserEmailModel extends Model
             ->join('nsca_dev_user', 'nsca_dev_user.userID = nsca_users.id', 'cross')->findAll();
     }
 
-    public function getTeamUsersByTeamName(string $teamName): array
+    public function getTeamUsersByTeamId(int $teamID): array
     {
         return $this->select('nsca_users.first_name, nsca_users.last_name, nsca_team_user.isTeamCaptain, nsca_team_user.isViceCaptain')
-            ->join('nsca_team_user', 'nsca_users.id = nsca_team_user.userID', 'left')
+            ->join('nsca_team_user', 'nsca_team_user.userID = nsca_users.id', 'left')
             ->join('nsca_teams', 'nsca_team_user.teamID = nsca_teams.id', 'left')
-            ->where('nsca_teams.name', $teamName)
-            ->orderBy('nsca_users.last_name', 'ASC')->findAll();
+            ->where('nsca_teams.id', $teamID)
+            ->findAll();
     }
 
-    public function getClubUsersByClubName(string $clubName): array
+    public function getClubUsersByClubId(string $clubID): array
     {
         return $this->select('nsca_users.first_name, nsca_users.last_name, nsca_club_user.isManager')
-            ->join('nsca_club_user', 'nsca_users.id = nsca_club_user.userID', 'left')
-            ->join('nsca_clubs', 'nsca_club_user.clubID = nsca_clubs.id', 'left')
-            ->where('nsca_clubs.name', $clubName)
-            ->orderBy('nsca_users.last_name', 'ASC')->findAll();
+            ->join('nsca_club_user', 'nsca_club_user.userID = nsca_users.id', 'left')
+            ->join('nsca_clubs', 'nsca_club_user.teamID = nsca_clubs.id', 'left')
+            ->where('nsca_clubs.id', $clubID)
+            ->findAll();
     }
 
 }
