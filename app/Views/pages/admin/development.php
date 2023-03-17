@@ -62,7 +62,7 @@
         <div class="card shadow">
             <div class="card-header">Create Program</div>
             <div class="card-body">
-                <form method="post" action="createDev">
+                <form method="post" action="createDev" enctype="multipart/form-data">
                     <div class="row g-3 justify-content-center">
                         <div class="col-12">
                             <label for="name" class="form-label">Name:</label>
