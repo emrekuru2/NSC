@@ -6,8 +6,8 @@
 
 <div class="row">
     <div class="col-sm-4 mb-3 mb-sm-0">
-        <?= view_cell('\App\Libraries\Contents::searchPanel', ['title' => $title, 'rows' => $allTeams]); ?>
-        <?= view_cell('\App\Libraries\Contents::groupEditListPanel', ['title' => $title, 'rows' => $allTeams, 'groupIsSet' => $teamIsSet]); ?>
+        <?= view_cell('\App\Libraries\Contents::searchPanel', ['title' => 'Team', 'rows' => $allTeams]); ?>
+        <?= view_cell('\App\Libraries\Contents::groupEditListPanel', ['title' => 'Team', 'rows' => $allTeams, 'groupIsSet' => $teamIsSet]); ?>
     </div>
 
     <div class="col-sm-8">
@@ -29,19 +29,16 @@
                 <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="clubName">Club</label>
                     <select class="form-control" name="clubName" id="clubName" aria-label="Club Name"<?= $teamIsSet ?: " disabled" ?>>
-                        <?php if($teamIsSet) {
+                        <?php if($teamIsSet && !empty($allClubs)) {
                             foreach ($allClubs as $club) {
                                 if ($club->id == $team->clubID) {
-                                    echo "<option value=" . $club->name . " selected>" . $club->name . "</option>";
+                                    echo "<option value=" . $club->id . " selected>" . $club->name . "</option>";
                                 }
                                 else {
-                                    echo "<option value=" . $club->name . ">" . $club->name . "</option>";
+                                    echo "<option value=" . $club->id . ">" . $club->name . "</option>";
                                 }
                             }
-                        } else {
-                            echo "<option value='No clubs available'>";
-                        }
-                        ?>
+                        } ?>
                     </select>
                 </div>
 
@@ -68,7 +65,6 @@
                     <button type="button" name="edit-button" class="btn btn-primary"<?= $teamIsSet ?: " disabled" ?>>Save</button>
                     <button type="button" name="edit-button" class="btn btn-danger"<?= $teamIsSet ?: " disabled" ?>>Delete Team</button>
                 </div>
-
             </form>
 
         </div>

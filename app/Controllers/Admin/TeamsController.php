@@ -21,12 +21,18 @@ class TeamsController extends BaseController
         return view('pages/admin/teams', $data);
     }
 
-    public function edit(int $teamID) {
-        // TODO: Change page to POST request.
+    public function edit()
+    {
         $teamModel = model(TeamModel::class);
         $userModel = model(UserEmailModel::class);
         $clubModel = model(ClubModel::class);
 
+        if ($this->request->getPost('teamName') !== null) {
+            $teamRow = $teamModel->select('id')->findAll(1);
+            $teamID = $teamRow[0]->id;
+        } else {
+            $teamID = $this->request->getPost('teamID');
+        }
         $team = $teamModel->find($teamID);
         $teamMembers = $userModel->getTeamUsersByTeamId($teamID);
 

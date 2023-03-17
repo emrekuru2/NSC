@@ -50,7 +50,6 @@ $routes->get('development/(:num)', 'Main\DevelopmentController::register/$1');
 // Routing for admin views and functions
 $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     // Get with parameter
-    $routes->get('teams/(:num)', 'Admin\TeamsController::edit/$1');
 
     // Get requests
     $routes->get('dashboard', 'Admin\DashController::index');
@@ -73,6 +72,7 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->match(['post'], 'createDev', 'Admin\DevelopmentController::createDev');
     $routes->match(['post'], 'createProgType', 'Admin\DevelopmentController::createProgType');
     $routes->match(['post'], 'setAlert', 'Admin\AlertsController::setAlert');
+    $routes->match(['post'], 'editTeam', 'Admin\TeamsController::edit');
 
 });
 
