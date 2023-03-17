@@ -28,13 +28,20 @@ class TeamsController extends BaseController
         $clubModel = model(ClubModel::class);
 
         if ($this->request->getPost('teamName') !== null) {
-            $teamRow = $teamModel->select('id')->findAll(1);
-            $teamID = $teamRow[0]->id;
+            $teamRow = $teamModel->select('id')->findAll()[0];
+            $teamID = $teamRow->id;
         } else {
             $teamID = $this->request->getPost('teamID');
         }
-        $team = $teamModel->find($teamID);
-        $teamMembers = $userModel->getTeamUsersByTeamId($teamID);
+
+        $team = $teamModel->where('nsca_teams.id', $teamID)->findAll();
+        if (sizeof($team) == 0) {
+            $team = null;
+            $teamMembers = null;
+        } else {
+            $team = $team[0];
+            $teamMembers = $userModel->getTeamUsersByTeamId($teamID);
+        }
 
         $data = [
             'title' => 'Teams',
@@ -49,14 +56,25 @@ class TeamsController extends BaseController
 
     public function update()
     {
-        $data = [];
+        $teamModel = model(TeamModel::class);
+
+        $data = [
+            'title' => 'Teams',
+            'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll()
+        ];
 
         return view('pages/admin/teams', $data);
     }
 
-    public function remove()
+    public function delete()
     {
-        $data = [];
+        $teamModel = model(TeamModel::class);
+
+        $data = [
+            'title' => 'Teams',
+            //'alert' =>
+            'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll()
+        ];
 
         return view('pages/admin/teams', $data);
     }
