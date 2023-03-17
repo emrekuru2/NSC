@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class CompetitionModel extends Model
 {
     // Construction
-    protected $table            = 'nsca_competition';
+    protected $table            = 'nsca_competitions';
     protected $primaryKey       = 'id';
     protected $returnType       = \App\Entities\Competition::class;
     protected $protectFields    = true;
@@ -18,6 +18,5 @@ class CompetitionModel extends Model
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
 
 }

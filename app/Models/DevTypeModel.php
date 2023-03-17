@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class DevTypeModel extends Model
 {
-    protected $table            = 'nsca_devprogram_type';
+    protected $table            = 'nsca_dev_types';
     protected $primaryKey       = 'id';
     protected $returnType       = \App\Entities\DevType::class;
     protected $protectFields    = true;
@@ -17,5 +17,4 @@ class DevTypeModel extends Model
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
 }

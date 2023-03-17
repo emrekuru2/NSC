@@ -8,7 +8,7 @@ class LocationModel extends Model
 {
 
     // Construction
-    protected $table            = 'nsca_location';
+    protected $table            = 'nsca_locations';
     protected $primaryKey       = 'id';
     protected $returnType       = \App\Entities\Location::class;
     protected $protectFields    = true;
@@ -19,7 +19,6 @@ class LocationModel extends Model
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
 
  
 }

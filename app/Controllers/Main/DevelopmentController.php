@@ -3,29 +3,30 @@
 namespace App\Controllers\Main;
 
 use App\Controllers\BaseController;
+use App\Models\UserTypes\DevUserModel;
 
 class DevelopmentController extends BaseController
 {
     public function index()
     {
-        $model = model(DevModel::class);
+        $devModel = model(DevModel::class);
+
         $data = [
-            'programs'  => $model->orderBy('start_date', 'ASC')
-                                 ->join('nsca_devprogram_type', 'nsca_devprogram_type.id = nsca_dev.devProgID')
-                                 ->findAll(),
+            'programs'  => $devModel->programs(),
             'title' => 'Development',
         ];
 
         return view('pages/development', $data);
     }
+    
     public function register(int $programID)
     {
 
         $model = model(DevUserModel::class);
 
-        $currentUser = new \App\Entities\DevUser();
+        $currentUser = new \App\Entities\UserTypes\DevUser();
         $currentUser->devID = $programID;
-        $currentUser->userID = auth()->id();
+        $currentUser->userID = user_id();
         $model->save($currentUser);
 
 
