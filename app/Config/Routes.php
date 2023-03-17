@@ -61,6 +61,8 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->get('news', 'Admin\NewsController::index');
     $routes->get('email', 'Admin\EmailController::index');
     $routes->get('settings', 'Admin\SettingsController::index');
+    $routes->get('users/edit/(:num)', 'Admin\UsersController::editUser/$1');
+
 
     // Functions
     $routes->match(['post'], 'sendEmail', 'Admin\EmailController::sendEmail');

@@ -67,6 +67,9 @@ class Setup extends BaseCommand
         if (empty($env)) {
             CLI::print('You need to specify your environment type', 'red');
             return EXIT_ERROR;
+        } else if ($env != 'production' || $env != 'development'){
+            CLI::error('Environment type can either be development or production');
+            return EXIT_ERROR;
         }
 
         CLI::print('Setting up for environment type ' . $env, 'blue', 'yellow');
