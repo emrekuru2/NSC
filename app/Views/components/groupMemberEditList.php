@@ -1,6 +1,6 @@
 <?php
 /**
- * @param string $title <p>Name of section. E.g., 'Teams', 'Clubs', 'Committees', etc.</p>
+ * @param string $groupName <p>Name of section (Singular). E.g., 'Team', 'Club', 'Committee', etc.</p>
  * @param array $members <p>Array of user entities that are in the same group. E.g., club members, team members, etc.</p>
  */
 ?>
@@ -19,7 +19,7 @@
     <tbody>
     <?php
     if (sizeof($members) == 0) {
-        echo '<p class="text-start margin-bottom-half-rem">No ' . strtolower($title) . ' members available.</p>';
+        echo '<p class="text-start margin-bottom-half-rem">No ' . strtolower($groupName) . 's members available.</p>';
     }
 
     foreach ($members as $member): ?>
