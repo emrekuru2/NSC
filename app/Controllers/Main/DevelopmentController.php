@@ -24,10 +24,11 @@ class DevelopmentController extends BaseController
 
         $model = model(DevUserModel::class);
 
-        $currentUser = new \App\Entities\UserTypes\DevUser();
+        $currentUser = new \App\Entities\DevUser();
         $currentUser->devID = $programID;
         $currentUser->userID = user_id();
-        $model->save($currentUser);
+        $devModel = model(DevUserModel::class);
+        $devModel->save($currentUser);
 
 
         $data = [
@@ -36,4 +37,5 @@ class DevelopmentController extends BaseController
 
         return redirect()->to('development');
     }
+
 }
