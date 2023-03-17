@@ -11,45 +11,47 @@ class ClubsController extends BaseController
     public function index()
     {
         $clubModel = model(ClubModel::class);
-
-        try {
-            //$teamName = $this->request->getGet('name')[0];
-
-            //$team = $teamModel->findTeamByName($teamName);
-            //$teamMembers = $userModel->getTeamUsersByTeamName($teamName);
-            //$clubMembers = $userModel->getClubUsersByClubName($teamName);
-        } catch (Exception $e) {
-
-        }
+        $userModel = model(UserEmailModel::class);
 
         $data = [
             'title' => 'Clubs',
-            'clubs' => $clubModel->findAll()
+            'clubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll()
         ];
 
         return view('pages/admin/clubs', $data);
     }
 
-    public function edit()
+    public function updateClub()
     {
-        if (isset($_POST['formSubmit'])) {
-            if($_POST['formSubmit'] == 'Submit'){
+        $clubModel = model(ClubModel::class);
 
-                $data = [
-                    'type'    => 'success',
-                    'content' => 'Clubs updated successfully'
-                ];
+        $data = [
+            'title' => 'Clubs',
+            'clubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll()
+        ];
 
-                return redirect()->back()->with('alert', $data);
-            }   
+        return view('pages/admin/clubs', $data);
+    }
+
+    public function editClub()
+    {
+        $clubModel = model(ClubModel::class);
+        $userModel = model(UserEmailModel::class);
+
+        if (this->request->getPost('clubName') != null) {
+            $clubRow = $clubModel->select('id')->findAll()[0];
+            $clubID = $clubRow->id;
         } else {
-
-            $data = [
-                'type'    => 'danger',
-                'content' => '' . print_r($clubModel->printDebugger(), true)
-            ];
-
-            return redirect()->back()->with('alert', $data);
+            $clubID = $this->request->getPost('clubID');
         }
+
+        $club = $clubModel->where('nsca_clubs.id', $clubID)->findAll();
+
+        $data = [
+            'title' => 'Clubs',
+            'club' => sizeof($club) > 0 ? $club[0] : null,
+            'clubMembers' => sizeof($club) > 0 ? $userModel->getClubUsersByClubId($clubID) : null,
+            'clubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll()
+        ];
     }
 }
