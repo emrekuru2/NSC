@@ -7,15 +7,6 @@ use CodeIgniter\I18n\Time;
 
 <?= $this->section('mainContent') ?>
 <div class="container my-3">
-<<<<<<< HEAD
-    <h2 class="text-center">Development Programs</h2>
-    <hr>
-    <?php if (!empty($programs) && is_array($programs)) : ?>
-        <?php foreach ($programs as $program) : ?>
-            <div class="card my-3">
-                <div class="card-header d-flex">
-                    <?= esc($program->name) ?>
-=======
         <h2 class="text-center">Development Programs</h2>
         <hr>
         <?php if (!empty($programs) && is_array($programs)) : ?>
@@ -54,7 +45,6 @@ use CodeIgniter\I18n\Time;
                     <?php endif ?>
 
                     </div>
->>>>>>> c9db877 (disabled the option for double registeration for dev programs)
 
                 </div>
                 <div class="card-body">

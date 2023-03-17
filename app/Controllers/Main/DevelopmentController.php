@@ -9,12 +9,6 @@ class DevelopmentController extends BaseController
 {
     public function index()
     {
-<<<<<<< HEAD
-        $devModel = model(DevModel::class);
-
-        $data = [
-            'programs'  => $devModel->programs(),
-=======
         $db = \Config\Database::connect();
         $builder = $db->table('nsca_dev');
         $query = $db->query('SELECT nsca_dev.*, nsca_devprogram_type.*,
@@ -29,7 +23,6 @@ class DevelopmentController extends BaseController
             'programs'  => 
             $query->getResult(),
             'pager' => $model->pager,
->>>>>>> c9db877 (disabled the option for double registeration for dev programs)
             'title' => 'Development',
         ];
 
