@@ -51,7 +51,7 @@
                                             <td><?= date('m/d/y', strtotime(esc($program->start_date))) ?>-<?= date('m/d/y', strtotime(esc($program->end_date))) ?></td>
                                             <td><form method="post" action="modify_development">
                                                 <input type="hidden" name="id" value="<?=esc($program->id)?>">
-                                                <button type="submit">Modify</button>
+                                                <button class="btn btn-primary" type="submit">Modify</button>
                                             </form></td>
                                             <!-- <td><a href="modify_development/<?=esc($program->id)?>" class="btn btn-primary">Modify</a></td> -->
                                         </tr>
