@@ -69,6 +69,7 @@ class DevelopmentController extends BaseController
         $data = $this->request->getPost();
         $devType = new \App\Entities\DevType();
         // combine values of days array into a string
+
         $devType->fill($data);
 
         if (model(DevTypeModel::class)->save($devType)) {
@@ -87,5 +88,5 @@ class DevelopmentController extends BaseController
 
         return redirect()->back()->with('alert', $data);
     }
-
+    
 }
