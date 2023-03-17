@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class ClubUserModel extends Model
 {
-    protected $table            = 'nsca_club_user';
+    protected $table            = 'nsca_club_users';
     protected $primaryKey       = 'id';
     protected $returnType       = \App\Entities\UserTypes\ClubUser::class;
     protected $protectFields    = true;
@@ -17,6 +17,5 @@ class ClubUserModel extends Model
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
 
 }

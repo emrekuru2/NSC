@@ -7,9 +7,9 @@ use CodeIgniter\Model;
 class DevUserModel extends Model
 {
     // Construction
-    protected $table            = 'nsca_dev_user';
+    protected $table            = 'nsca_dev_users';
     protected $primaryKey       = 'id';
-    protected $returnType       = \App\Entities\DevUser::class;
+    protected $returnType       = \App\Entities\UserTypes\DevUser::class;
     protected $protectFields    = true;
     protected $allowedFields    = ['devID', 'userID', 'isLead'];
 

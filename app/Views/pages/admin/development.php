@@ -62,7 +62,7 @@
         <div class="card shadow">
             <div class="card-header">Create Program</div>
             <div class="card-body">
-                <form method="post" action="createDev">
+                <form method="post" action="createDev" enctype="multipart/form-data">
                     <div class="row g-3 justify-content-center">
                         <div class="col-12">
                             <label for="name" class="form-label">Name:</label>
@@ -94,7 +94,7 @@
                         </div>
                         <div class="col-12 col-lg-6">
                             <label for="days[]" class="form-label">Days running:</label>
-                            <select name="days[]" id="days[]" name="days[]" multiple="multiple">
+                            <select name="days[]" id="days[]"  multiple="multiple">
                                 <option value="Sunday">Sunday</option>
                                 <option value="Monday">Monday</option>
                                 <option value="Tuesday">Tuesday</option>
@@ -105,8 +105,8 @@
                             </select>
                         </div>
                         <div class="col-12 col-lg-6">
-                            <label for="devType" class="form-label">Program Type:</label>
-                            <select name="devType" id="devType" name="devType">
+                            <label for="devProgID" class="form-label">Program Type:</label>
+                            <select name="devProgID" id="devProgID">
                                 <?php if (!empty($devTypes) && is_array($devTypes)) : ?>
                                     <?php foreach ($devTypes as $devType) : ?>
                                         <option value=<?= esc($devType->id) ?>>

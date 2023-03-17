@@ -64,8 +64,6 @@ writable/debugbar/*
 
 php_errors.log
 
-mysql-8/
-
 #-------------------------
 # User Guide Temp Files
 #-------------------------
@@ -127,3 +125,4 @@ nb-configuration.xml
 /phpunit*.xml
 /.phpunit.*.cache
 
+mysql-8/

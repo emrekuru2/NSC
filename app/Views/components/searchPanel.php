@@ -14,7 +14,7 @@
                 <form method="post" action="edit<?= $groupName ?>" id="search-form">
                     <tr class="border-style-none">
                         <td class="col-11">
-                            <input class="form-control form-control-sm" list="<?= strtolower($groupName); ?>s-list" name="teamName" id="search-bar" placeholder="Type to search <?= strtolower($groupName); ?>...">
+                            <input class="form-control form-control-sm" list="<?= strtolower($groupName); ?>s-list" name="groupName" id="search-bar" placeholder="Type to search <?= strtolower($groupName); ?>...">
                             <datalist id="<?= strtolower($groupName); ?>s-list">
                                 <?php foreach ($rows as $row): ?>
                                 <option value="<?= $row->name ?>">

@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class CommitteeUserModel extends Model
 {
     // Construction
-    protected $table            = 'nsca_committees_user';
+    protected $table            = 'nsca_committee_users';
     protected $primaryKey       = 'id';
     protected $returnType       = \App\Entities\UserTypes\CommitteeUser::class;
     protected $protectFields    = true;
