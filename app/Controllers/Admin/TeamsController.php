@@ -15,7 +15,8 @@ class TeamsController extends BaseController
 
         $data = [
             'title' => 'Teams',
-            'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll()
+            'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
+            'teamMembers' => null
         ];
 
         return view('pages/admin/teams', $data);
