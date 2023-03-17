@@ -30,7 +30,11 @@ class DevelopmentController extends BaseController
 
         $data = $this->request->getPost();
         $dev = new \App\Entities\Dev();
+        // explode the date string into an array
+        $days = $this->request->getVar('days');
+        $daysRun = implode(",", $days);
         $dev->fill($data);
+        $dev->daysRun = $daysRun;
 
         if (model(DevModel::class)->save($dev)) {
             $data = [
@@ -71,5 +75,72 @@ class DevelopmentController extends BaseController
         ];
 
         return redirect()->back()->with('alert', $data);
+    }
+    // TODO - Add edit and delete functions
+    public function modify()
+    {
+        $DevModel = model(DevModel::class);
+        $devType = model(DevTypeModel::class);
+        $id = $this->request->getPost('id');
+        // get the dev program
+        $dev = $DevModel->find($id);
+        $devID = $devType->find($id);
+
+        // get all users registered to the program
+        $users = $DevModel->getUsers($id);
+
+
+        $data = [
+            'program'     => $dev,
+            'users'       => $users,
+            'devTypes'  => $devType->findAll(),
+            'title'    => $dev->name . " - Modify",
+        ];
+
+        return view('pages/admin/development_modify', $data);
+    }
+    public function modifyProgram(){
+        $devModel = model(DevModel::class);
+        $devType = model(DevTypeModel::class);
+        $data = $this->request->getPost();
+        $id = $this->request->getVar('id');
+        $days = $this->request->getVar('days');
+        $daysRun = implode(",", $days);
+
+        $dev = new \App\Entities\Dev();
+        $dev->fill($data);
+        $dev->daysRun = $daysRun;
+
+        if ($id == NULL){
+            $data = [
+                "title" => "Error"
+            ];
+            return view('pages/admin/dashboard', $data);
+        }
+        $devModel->update(array('id' => $id), $dev);
+
+        $data = [
+            'programs'  => $devModel->orderBy('id', 'DESC')->paginate(10),
+            'devTypes'  => $devType->findAll(),
+            'type'    => 'success',
+            'title' => 'Development',
+            'content' => 'Development program modified successfully'
+        ];
+        return view('pages/admin/development', $data);
+    }
+    public function deleteProgram(){
+        $devModel = model(DevModel::class);
+        $devType = model(DevTypeModel::class);
+        $id = $this->request->getVar('id');
+        $devModel->delete($id);
+
+        $data = [
+            'programs'  => $devModel->orderBy('id', 'DESC')->paginate(10),
+            'devTypes'  => $devType->findAll(),
+            'type'    => 'success',
+            'title' => 'Development',
+            'content' => 'Development program deleted successfully'
+        ];
+        return view('pages/admin/development', $data);
     }
 }
