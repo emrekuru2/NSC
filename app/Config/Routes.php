@@ -46,7 +46,6 @@ $routes->get('news/(:num)', 'Main\NewsController::getNewsByID/$1');
 $routes->get('development/(:num)', 'Main\DevelopmentController::register/$1');
 
 
-
 // Routing for admin views and functions
 $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     // Get with parameter
@@ -71,6 +70,8 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->match(['post'], 'createNews', 'Admin\NewsController::createNews');
     $routes->match(['post'], 'createDev', 'Admin\DevelopmentController::createDev');
     $routes->match(['post'], 'createProgType', 'Admin\DevelopmentController::createProgType');
+    $routes->match(['post'], 'modifyProgram', 'Admin\DevelopmentController::modifyProgram');
+    $routes->match(['post'], 'deleteProgram', 'Admin\DevelopmentController::deleteProgram');
     $routes->match(['post'], 'setAlert', 'Admin\AlertsController::setAlert');
     $routes->match(['post'], 'editTeam', 'Admin\TeamsController::editTeam');
     $routes->match(['post'], 'updateTeam', 'Admin\TeamsController::updateTeam');

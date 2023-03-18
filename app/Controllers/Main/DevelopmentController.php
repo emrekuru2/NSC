@@ -1,33 +1,50 @@
 <?php
-
 namespace App\Controllers\Main;
 
 use App\Controllers\BaseController;
-use App\Models\UserTypes\DevUserModel;
 
 class DevelopmentController extends BaseController
 {
     public function index()
     {
-        $devModel = model(DevModel::class);
+        $db = \Config\Database::connect();
+        $builder = $db->table('nsca_dev');
+        // create string
+        if (auth()->loggedIn()){
+            $statement = 'SELECT nsca_devs.*, nsca_dev_types.min_age, nsca_dev_types.max_age,
+            CASE WHEN nsca_dev_users.userID IS NULL THEN 0 ELSE 1 END AS is_registered
+            FROM nsca_devs';
+            $statement .= ' LEFT JOIN nsca_dev_users ON nsca_dev_users.devID = nsca_devs.id AND nsca_dev_users.userID = '.auth()->id();
+            $statement .= ' JOIN nsca_dev_types ON nsca_dev_types.id = nsca_devs.typeID;';
+        }
+        else{
+            $statement = 'SELECT nsca_devs.*, nsca_devprogram_type.*
+            FROM nsca_devs
+            JOIN nsca_dev_types ON nsca_dev_types.id = nsca_devs.typeID;';
+        }
 
+        $query = $db->query($statement);
+
+        $model = model(DevModel::class);
         $data = [
-            'programs'  => $devModel->programs(),
+            'programs'  => 
+            $query->getResult(),
+            'pager' => $model->pager,
             'title' => 'Development',
         ];
 
         return view('pages/development', $data);
     }
-    
     public function register(int $programID)
     {
 
-        $model = model(DevUserModel::class);
 
-        $currentUser = new \App\Entities\UserTypes\DevUser();
+
+        $currentUser = new \App\Entities\DevUser();
         $currentUser->devID = $programID;
-        $currentUser->userID = user_id();
-        $model->save($currentUser);
+        $currentUser->userID = auth()->id();
+        $devModel = model(DevUserModel::class);
+        $devModel->save($currentUser);
 
 
         $data = [
@@ -36,4 +53,5 @@ class DevelopmentController extends BaseController
 
         return redirect()->to('development');
     }
+
 }
