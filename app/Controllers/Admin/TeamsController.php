@@ -12,17 +12,19 @@ class TeamsController extends BaseController
     public function index()
     {
         $teamModel = model(TeamModel::class);
+        $clubModel = model(ClubModel::class);
 
         $data = [
             'title' => 'Teams',
+            'teamMembers' => null,
             'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
-            'teamMembers' => null
+            'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll()
         ];
 
         return view('pages/admin/teams', $data);
     }
 
-    public function editTeam()
+    public function edit()
     {
         $teamModel = model(TeamModel::class);
         $userModel = model(UserEmailModel::class);
@@ -49,26 +51,64 @@ class TeamsController extends BaseController
         return view('pages/admin/teams', $data);
     }
 
-    public function updateTeam()
+    public function update()
     {
         $teamModel = model(TeamModel::class);
+        $clubModel = model(ClubModel::class);
 
         $data = [
             'title' => 'Teams',
-            'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll()
+            'teamMembers' => null,
+            'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
+            'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll()
         ];
 
         return view('pages/admin/teams', $data);
     }
 
-    public function deleteTeam()
+    public function create()
     {
         $teamModel = model(TeamModel::class);
+        $clubModel = model(ClubModel::class);
 
         $data = [
             'title' => 'Teams',
             //'alert' =>
-            'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll()
+            'teamMembers' => null,
+            'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
+            'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll()
+        ];
+
+        return view('pages/admin/teams', $data);
+    }
+
+    public function delete()
+    {
+        $teamModel = model(TeamModel::class);
+        $clubModel = model(ClubModel::class);
+
+        $data = [
+            'title' => 'Teams',
+            //'alert' =>
+            'teamMembers' => null,
+            'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
+            'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll()
+        ];
+
+        return view('pages/admin/teams', $data);
+    }
+
+    public function updateMember()
+    {
+        $teamModel = model(TeamModel::class);
+        $clubModel = model(ClubModel::class);
+
+        $data = [
+            'title' => 'Teams',
+            //'alert' =>
+            'teamMembers' => null,
+            'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
+            'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll()
         ];
 
         return view('pages/admin/teams', $data);
@@ -77,11 +117,14 @@ class TeamsController extends BaseController
     public function removeMember()
     {
         $teamModel = model(TeamModel::class);
+        $clubModel = model(ClubModel::class);
 
         $data = [
             'title' => 'Teams',
             //'alert' =>
-            'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll()
+            'teamMembers' => null,
+            'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
+            'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll()
         ];
 
         return view('pages/admin/teams', $data);
