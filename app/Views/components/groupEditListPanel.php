@@ -9,7 +9,7 @@
     <div class="card-header">
         <div class="d-md-flex justify-content-md-end group-list-header">
             <div class="line-height-2rem">All <?= $groupName . 's' ?></div>
-            <button type="button" id="new-group-button" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> New <?= $groupName  ?></button>
+            <button type="button" id="new-group-button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#groupModal"><i class="fa-solid fa-plus"></i> New <?= $groupName  ?></button>
         </div>
     </div>
 
