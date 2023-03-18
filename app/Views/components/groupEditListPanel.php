@@ -28,7 +28,7 @@
                         <td class="col-11 line-height-2rem"><label for="teamID"><?= $row->name ?></label></td>
                         <td class="col-1">
                             <form method="post" action="edit<?= $groupName ?>">
-                                <input value="<?= $row->id ?>" name="teamID" id="teamID" hidden>
+                                <input value="<?= $row->id ?>" name="groupID" id="groupID" hidden>
                                 <button type="submit" name="edit-button" class="btn btn-primary btn-sm">Edit</button>
                             </form>
                         </td>

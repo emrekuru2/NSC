@@ -14,16 +14,16 @@
                 <form method="post" action="edit<?= $groupName ?>" id="search-form">
                     <tr class="border-style-none">
                         <td class="col-11">
-                            <input class="form-control form-control-sm" list="<?= strtolower($groupName); ?>s-list" name="groupName" id="search-bar" placeholder="Type to search <?= strtolower($groupName); ?>...">
+                            <input class="form-control form-control-sm" list="<?= strtolower($groupName); ?>s-list" name="search" id="search-bar" placeholder="Type to search <?= strtolower($groupName); ?>...">
                             <datalist id="<?= strtolower($groupName); ?>s-list">
                                 <?php foreach ($rows as $row): ?>
-                                <option value="<?= $row->name ?>">
-                                    <?php endforeach ?>
+                                    <option value="<?= $row->name ?>">
+                                <?php endforeach ?>
                             </datalist>
                         </td>
 
                         <td class="col-1">
-                            <button type="button" id="search-bar-button" class="btn btn-primary btn-sm" disabled>Edit</button>
+                            <button type="button" id="search-bar-button" class="btn btn-primary btn-sm">Edit</button>
                         </td>
                     </tr>
                 </form>

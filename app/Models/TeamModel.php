@@ -12,6 +12,6 @@ class TeamModel extends Model
     protected $table            = 'nsca_teams';
     protected $primaryKey       = 'id';
     protected $returnType       = \App\Entities\Team::class;
-    protected $allowedFields    = ['clubID', 'name', 'description', 'image'];
+    protected $allowedFields    = ['id', 'name', 'description', 'image'];
 
 }

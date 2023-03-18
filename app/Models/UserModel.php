@@ -36,16 +36,16 @@ class UserModel extends ShieldUserModel
     public function getClubMemberEmailsByID(int $clubID): array
     {
         return $this->select('nsca_users.email')
-            ->join('nsca_club_user', 'nsca_users.id = nsca_club_user.userID', 'left')
-            ->join('nsca_clubs', 'nsca_club_user.clubID = nsca_clubs.id', 'left')
+            ->join('nsca_club_users', 'nsca_users.id = nsca_club_users.userID', 'left')
+            ->join('nsca_clubs', 'nsca_club_users.clubID = nsca_clubs.id', 'left')
             ->where('nsca_clubs.id', $clubID)->findAll();
     }
 
     public function getTeamMemberEmailsByID(int $teamID): array
     {
         return $this->select('nsca_users.email')
-            ->join('nsca_team_user', 'nsca_users.id = nsca_team_user.userID', 'left')
-            ->join('nsca_teams', 'nsca_team_user.teamID = nsca_teams.id', 'left')
+            ->join('nsca_team_users', 'nsca_users.id = nsca_team_users.userID', 'left')
+            ->join('nsca_teams', 'nsca_team_users.teamID = nsca_teams.id', 'left')
             ->where('nsca_teams.id', $teamID)->findAll();
     }
 
@@ -81,7 +81,7 @@ class UserModel extends ShieldUserModel
     public function getAllClubMemberEmails(): array
     {
         return $this->select('nsca_users.email')
-            ->join('nsca_club_user', 'nsca_users.id = nsca_club_user.userID', 'cross')->findAll();
+            ->join('nsca_club_users', 'nsca_users.id = nsca_club_users.userID', 'cross')->findAll();
     }
 
     public function getAllDevProgramMemberEmails(): array
