@@ -61,7 +61,7 @@
 
             <form method="post" action="updateTeam" class="card-body">
                 <!-- Logo and Name -->
-                <img src="<?= $teamIsSet ? base_url('assets/images/teamProfilePictures/' . $team->image) : base_url('assets/images/Teams/logos/defaultTeam.png') ?>" class="card-img-top mb-3 mx-auto d-block" style="width: 150px; height: 150px" alt="Team Logo">
+                <img src="<?= $teamIsSet ? base_url($team->image) : base_url('assets/images/Teams/default.png') ?>" class="card-img-top mb-3 mx-auto d-block" style="width: 150px; height: 150px" alt="Team Logo">
                 <h4 class="card-title text-bold text-center"><?= $team->name ?? "Select Team" ?></h4>
 
                 <!-- Edit Logo -->
