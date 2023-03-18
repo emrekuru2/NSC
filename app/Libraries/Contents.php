@@ -29,8 +29,4 @@ class Contents
         return view('components/searchPanel', $content);
     }
 
-    public function groupMemberEditList($content)
-    {
-        return view('components/groupMemberEditList', $content);
-    }
 }
