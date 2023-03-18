@@ -68,18 +68,42 @@ class TeamsController extends BaseController
 
     public function create()
     {
-        $teamModel = model(TeamModel::class);
-        $clubModel = model(ClubModel::class);
+        $data['clubID'] = esc($this->request->getPost('newClubID'));
+        $data['name'] = esc($this->request->getPost('newName'));
+        $data['description'] = esc($this->request->getPost('newDescription'));
+
+        // Logo
+        //helper('image');
+        $file = $this->request->getFile('newImage');
+        if ($file != null) {
+            $filepath = storeImage('Teams', $file);
+            if ($filepath != null) {
+                $data['image'] = $filepath;
+            } else {
+                $data['image'] = 'assets/images/Teams/default.png';
+            }
+        } else {
+            $data['image'] = 'assets/images/Teams/default.png';
+        }
+
+        $team = new \App\Entities\Team();
+        $team->fill($data);
+
+        if (model(TeamModel::class)->save($team)) {
+            $data = [
+                'type'    => 'success',
+                'content' => 'Team created successfully'
+            ];
+
+            return redirect()->to('admin/teams')->with('alert', $data);
+        }
 
         $data = [
-            'title' => 'Teams',
-            //'alert' =>
-            'teamMembers' => null,
-            'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
-            'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll()
+            'type'    => 'danger',
+            'content' => 'Error occurred while creating team'
         ];
 
-        return view('pages/admin/teams', $data);
+        return redirect()->to('admin/teams')->with('alert', $data);
     }
 
     public function delete()

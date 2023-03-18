@@ -15,28 +15,28 @@
             <div class="modal-body">
                 <!-- Name -->
                 <div class="form-group margin-bottom-1rem">
-                    <label class="margin-bottom-half-rem" for="name">Name</label>
-                    <input type="text" class="form-control" name="name" required>
+                    <label class="margin-bottom-half-rem" for="newName">Name</label>
+                    <input type="text" class="form-control" name="newName" id="newName" required>
                 </div>
 
                 <!-- Club -->
                 <div class="form-group margin-bottom-1rem">
-                    <label class="margin-bottom-half-rem" for="clubName">Club</label>
-                    <select class="form-control" name="clubName" id="clubName" required>
+                    <label class="margin-bottom-half-rem" for="newClubID">Club</label>
+                    <select class="form-control" name="newClubID" id="newClubID" required>
                         <?php foreach ($allClubs as $club) echo "<option value=" . $club->id . ">" . $club->name . "</option>"; ?>
                     </select>
                 </div>
 
                 <!-- Description -->
                 <div class="form-group margin-bottom-1rem">
-                    <label class="margin-bottom-half-rem" for="description">Description</label>
-                    <textarea class="form-control" name="description" rows="2" required></textarea>
+                    <label class="margin-bottom-half-rem" for="newDescription">Description</label>
+                    <textarea class="form-control" name="newDescription" id="newDescription" rows="2" required></textarea>
                 </div>
 
                 <!-- Logo -->
                 <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="image">Logo</label>
-                    <input class="form-control" type="file" name="image">
+                    <input class="form-control" type="file" name="newImage" id="newImage">
                 </div>
 
             </div>
@@ -51,7 +51,7 @@
 
 <div class="row">
     <div class="col-sm-4 mb-3 mb-sm-0">
-        <?= view_cell('\App\Libraries\Contents::searchPanel', ['groupName' => 'Team', 'rows' => $allTeams]); ?>
+        <?= view_cell('\App\Libraries\Contents::searchPanel', ['groupName' => 'Team', 'rows' => $allTeams, 'typeOfSearch' => 'Edit']); ?>
         <?= view_cell('\App\Libraries\Contents::groupEditListPanel', ['title' => 'Team', 'rows' => $allTeams, 'groupIsSet' => $teamIsSet]); ?>
     </div>
 
@@ -103,7 +103,7 @@
 
                 <!-- Edit Members -->
                 <div class="form-group margin-bottom-0">
-                    <label class="margin-bottom-half-rem" for="teamImage">Members</label>
+                    <label class="margin-bottom-half-rem">Members</label>
                     <table class="table table-hover">
                         <thead>
                         <tr>
