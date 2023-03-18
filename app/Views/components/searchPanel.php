@@ -2,6 +2,7 @@
 /**
  * @param string $groupName <p>Name of section (Singular). E.g., 'Team', 'Club', 'Committee', etc.</p>
  * @param array $rows <p>Array of entities from section model. E.g., clubs table, teams table, etc. Recommended to use the findAll() model function.</p>
+ * @param string $typeOfSearch <p>Type of search. E.g., 'Edit', 'Search', 'Find', etc.</p>
  */
 ?>
 
@@ -23,7 +24,7 @@
                         </td>
 
                         <td class="col-1">
-                            <button type="button" id="search-bar-button" class="btn btn-primary btn-sm">Edit</button>
+                            <button type="button" id="search-bar-button" class="btn btn-primary btn-sm"><?= $typeOfSearch ?? 'Search' ?></button>
                         </td>
                     </tr>
                 </form>
