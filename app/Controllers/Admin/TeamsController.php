@@ -25,7 +25,7 @@ class TeamsController extends BaseController
         return view('pages/admin/teams', $data);
     }
 
-    public function edit()
+    public function editTeam()
     {
         $teamModel = model(TeamModel::class);
         $userModel = model(UserEmailModel::class);
@@ -46,13 +46,13 @@ class TeamsController extends BaseController
             'team' => count($team) > 0 ? $team[0] : null,
             'teamMembers' => count($team) > 0 ? $userModel->getTeamUsersByTeamId($teamID) : null,
             'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
-            'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll()
+            'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll(),
         ];
 
         return view('pages/admin/teams', $data);
     }
 
-    public function update()
+    public function updateTeam()
     {
         $teamModel = model(TeamModel::class);
         $clubModel = model(ClubModel::class);
@@ -67,14 +67,13 @@ class TeamsController extends BaseController
         return view('pages/admin/teams', $data);
     }
 
-    public function create()
+    public function createTeam()
     {
         $data['clubID'] = esc($this->request->getPost('newClubID'));
         $data['name'] = esc($this->request->getPost('newName'));
         $data['description'] = esc($this->request->getPost('newDescription'));
 
         // Logo
-        //helper('image');
         $file = $this->request->getFile('newImage');
         if ($file != null) {
             $filepath = storeImage('Teams', $file);
@@ -107,36 +106,28 @@ class TeamsController extends BaseController
         return redirect()->to('admin/teams')->with('alert', $data);
     }
 
-    public function delete()
+    public function deleteTeam()
     {
         $teamModel = model(TeamModel::class);
-        $clubModel = model(ClubModel::class);
+
+        $teamID = $this->request->getPost('deleteTeamID');
+        $teamModel->delete($teamID);
+
+        if (isEmpty($teamModel->find($teamID))) {
+            $data = [
+                'type'    => 'success',
+                'content' => 'Team deleted successfully'
+            ];
+
+            return redirect()->to('admin/teams')->with('alert', $data);
+        }
 
         $data = [
-            'title' => 'Teams',
-            //'alert' =>
-            'teamMembers' => null,
-            'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
-            'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll()
+            'type'    => 'danger',
+            'content' => 'Error occurred while deleting team'
         ];
 
-        return view('pages/admin/teams', $data);
-    }
-
-    public function updateMember()
-    {
-        $teamModel = model(TeamModel::class);
-        $clubModel = model(ClubModel::class);
-
-        $data = [
-            'title' => 'Teams',
-            //'alert' =>
-            'teamMembers' => null,
-            'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
-            'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll()
-        ];
-
-        return view('pages/admin/teams', $data);
+        return redirect()->to('admin/teams')->with('alert', $data);
     }
 
     public function removeMember()

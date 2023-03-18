@@ -40,13 +40,13 @@
 
             <div class="modal-body">
                 <?php if ($teamIsSet) {?>
-                    <label class="margin-bottom-half-rem" for="newName">Are you sure you want to delete the <?= $team->name ?> team?</label>
+                    <label class="margin-bottom-half-rem" for="deleteTeamID">Are you sure you want to delete the <?= $team->name ?> team?</label>
                 <?php } else { ?>
-                    <label class="margin-bottom-half-rem" for="newName">Select a team to delete.</label>
+                    <label class="margin-bottom-half-rem" for="deleteTeamID">Select a team to delete.</label>
                 <?php } ?>
             </div>
             <div class="modal-footer group-modal-footer">
-                <input type="text" value="<?= $team->id ?? '' ?>" name="deleteTeamID" hidden>
+                <input type="text" value="<?= $teamIsSet ? $team->id : '' ?>" name="deleteTeamID" hidden>
                 <button type="submit" class="btn btn-danger"<?= $teamIsSet ?: " disabled" ?>>Delete</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             </div>
