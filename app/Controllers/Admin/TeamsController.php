@@ -28,11 +28,12 @@ class TeamsController extends BaseController
         $userModel = model(UserEmailModel::class);
         $clubModel = model(ClubModel::class);
 
-        if ($this->request->getPost('teamName') != null) {
-            $teamRow = $teamModel->select('id')->findAll()[0];
-            $teamID = $teamRow->id;
+        if ($this->request->getPost('search') != null) {
+            $teamName = $this->request->getPost('search');
+            $teamRow = $teamModel->select('nsca_teams.id')->where('nsca_teams.name', $teamName)->findAll();
+            sizeof($teamRow) > 0 ? $teamID = $teamRow[0]->id : $teamID = -1;
         } else {
-            $teamID = $this->request->getPost('teamID');
+            $teamID = $this->request->getPost('groupID');
         }
 
         $team = $teamModel->where('nsca_teams.id', $teamID)->findAll();
