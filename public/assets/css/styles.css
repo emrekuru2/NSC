@@ -241,8 +241,14 @@ tl-item.active .tl-dot:before {
 }
 
 .divider {
-    border-top: 3px solid lightgray;
-    border-radius: 2px;
+    border-top: 2px solid lightgray !important;
     margin: 0 auto 1rem auto !important;
-    width: calc(100% - 2rem);
+}
+
+.group-list-header {
+    justify-content: space-between !important;
+}
+
+.modal-footer.group-modal-footer {
+    justify-content: flex-start !important;
 }
