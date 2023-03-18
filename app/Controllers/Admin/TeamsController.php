@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\ClubModel;
 use App\Models\TeamModel;
 use App\Models\UserEmailModel;
+use function PHPUnit\Framework\isEmpty;
 
 class TeamsController extends BaseController
 {
@@ -42,8 +43,8 @@ class TeamsController extends BaseController
 
         $data = [
             'title' => 'Teams',
-            'team' => sizeof($team) > 0 ? $team[0] : null,
-            'teamMembers' => sizeof($team) > 0 ? $userModel->getTeamUsersByTeamId($teamID) : null,
+            'team' => count($team) > 0 ? $team[0] : null,
+            'teamMembers' => count($team) > 0 ? $userModel->getTeamUsersByTeamId($teamID) : null,
             'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
             'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll()
         ];
