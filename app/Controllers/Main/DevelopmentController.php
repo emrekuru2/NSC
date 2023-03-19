@@ -18,7 +18,7 @@ class DevelopmentController extends BaseController
             $statement .= ' JOIN nsca_dev_types ON nsca_dev_types.id = nsca_devs.typeID;';
         }
         else{
-            $statement = 'SELECT nsca_devs.*, nsca_devprogram_type.*
+            $statement = 'SELECT nsca_devs.*, nsca_dev_types.*
             FROM nsca_devs
             JOIN nsca_dev_types ON nsca_dev_types.id = nsca_devs.typeID;';
         }
