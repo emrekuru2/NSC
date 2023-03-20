@@ -18,7 +18,3 @@ searchBarButton.addEventListener('click', () => {
 updateButton.addEventListener('click', () => {
     updateForm.submit()
 })
-
-deleteButton.addEventListener('click', () => {
-    //deleteForm.submit()
-})

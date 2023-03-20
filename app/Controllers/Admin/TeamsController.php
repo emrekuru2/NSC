@@ -7,7 +7,6 @@ use App\Models\ClubModel;
 use App\Models\TeamModel;
 use App\Models\UserEmailModel;
 use App\Models\UserTypes\TeamUserModel;
-use http\Env\Request;
 use function PHPUnit\Framework\isEmpty;
 
 class TeamsController extends BaseController
