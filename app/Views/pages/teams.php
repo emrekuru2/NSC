@@ -25,7 +25,7 @@
 
                             <div class="px-3 pt-3 mx-1 mt-1 pb-0">
                                 <!-- image -->
-                                <img src="<?= base_url($team->image) ?>" class="img-thumbnail  rounded w-25 h-25" alt="Sample image">
+                                <img src="<?= base_url($team->image) ?>" class="img-thumbnail  rounded w-25 h-25" alt="Team logo">
                                 <h4 class="font-weight-bold mb-3"><?= esc($team->name) ?></h4>
                                 <p><?= esc($team->description) ?></p>
                             </div>
