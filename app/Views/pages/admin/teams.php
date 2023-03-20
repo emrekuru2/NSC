@@ -5,7 +5,7 @@
 <?php $teamIsSet = isset($team) ?>
 
 <!-- Remove Member Modal -->
-<form method="post" action="removeTeamMember" class="modal fade" id="removeMemberModal" tabindex="-2" aria-hidden="true">
+<form method="post" action="removeTeamMember" id="removeMemberModal" class="modal fade" tabindex="-2" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -15,13 +15,15 @@
 
             <div class="modal-body">
                 <?php if ($teamIsSet) {?>
-                    <label class="margin-bottom-half-rem" for="newName">Are you sure you want to remove TEST NAME from the <?= $team->name ?> team?</label>
+                    <label class="margin-bottom-half-rem" id="remove-member-message">Are you sure you want to remove TEST NAME from the <?= $team->name ?> team?</label>
                 <?php } else { ?>
-                    <label class="margin-bottom-half-rem" for="newName">Select a member to remove.</label>
+                    <label class="margin-bottom-half-rem" id="remove-member-message">Select a member to remove.</label>
                 <?php } ?>
             </div>
+
             <div class="modal-footer group-modal-footer">
-                <input type="text" value="" name="userID" hidden>
+                <input type="text" value="<?= $teamIsSet ? $team->id : '' ?>" name="remove-member-team-id" hidden>
+                <input type="text" value="0" name="remove-member-id" id="remove-member-id" hidden>
                 <button type="submit" class="btn btn-danger"<?= $teamIsSet ?: " disabled" ?>>Remove</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             </div>
@@ -45,6 +47,7 @@
                     <label class="margin-bottom-half-rem" for="deleteTeamID">Select a team to delete.</label>
                 <?php } ?>
             </div>
+
             <div class="modal-footer group-modal-footer">
                 <input type="text" value="<?= $teamIsSet ? $team->id : '' ?>" name="deleteTeamID" hidden>
                 <button type="submit" class="btn btn-danger"<?= $teamIsSet ?: " disabled" ?>>Delete</button>
@@ -55,7 +58,7 @@
 </form>
 
 <!-- Create Team Modal -->
-<form method="post" action="createTeam" class="modal fade" id="groupModal" tabindex="-1" aria-hidden="true">
+<form method="post" action="createTeam" enctype="multipart/form-data" class="modal fade" id="groupModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -86,7 +89,7 @@
 
                 <!-- Logo -->
                 <div class="form-group margin-bottom-1rem">
-                    <label class="margin-bottom-half-rem" for="image">Logo</label>
+                    <label class="margin-bottom-half-rem" for="newImage">Logo</label>
                     <input class="form-control" type="file" name="newImage" id="newImage">
                 </div>
 
@@ -192,7 +195,7 @@
                                     </form>
                                 </td>
                                 <td class="col-1">
-                                    <button type="button" name="remove-member-button" data-bs-toggle="modal" data-bs-target="#removeMemberModal" class="btn btn-danger btn-sm">Remove</button>
+                                    <button type="button" name="remove-member-button" data-user="<?= $member->id ?>" data-name="<?= $member->first_name ?> <?= $member->last_name ?>" data-bs-toggle="modal" data-bs-target="#removeMemberModal" class="btn btn-danger btn-sm">Remove</button>
                                 </td>
                             </tr>
                         <?php endforeach; } ?>
@@ -218,5 +221,6 @@
 </div>
 
 <script type="text/javascript" src="<?= base_url('assets/js/admin/editGroup.js'); ?>"></script>
+    <script type="text/javascript" src="<?= base_url('assets/js/admin/teams.js'); ?>"></script>
 
 <?= $this->endSection() ?>

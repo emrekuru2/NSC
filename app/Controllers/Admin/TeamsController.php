@@ -6,6 +6,8 @@ use App\Controllers\BaseController;
 use App\Models\ClubModel;
 use App\Models\TeamModel;
 use App\Models\UserEmailModel;
+use App\Models\UserTypes\TeamUserModel;
+use http\Env\Request;
 use function PHPUnit\Framework\isEmpty;
 
 class TeamsController extends BaseController
@@ -52,6 +54,25 @@ class TeamsController extends BaseController
         return view('pages/admin/teams', $data);
     }
 
+    public function getTeamToEdit(int $teamID)
+    {
+        $teamModel = model(TeamModel::class);
+        $userModel = model(UserEmailModel::class);
+        $clubModel = model(ClubModel::class);
+
+        $team = $teamModel->where('nsca_teams.id', $teamID)->findAll();
+
+        $data = [
+            'title' => 'Teams',
+            'team' => count($team) > 0 ? $team[0] : null,
+            'teamMembers' => count($team) > 0 ? $userModel->getTeamUsersByTeamId($team[0]->id) : null,
+            'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
+            'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll(),
+        ];
+
+        return view('pages/admin/teams', $data);
+    }
+
     public function updateTeam()
     {
         $teamModel = model(TeamModel::class);
@@ -74,16 +95,14 @@ class TeamsController extends BaseController
         $data['description'] = esc($this->request->getPost('newDescription'));
 
         // Logo
+        helper('image');
+
         $file = $this->request->getFile('newImage');
-        if ($file != null) {
-            $filepath = storeImage('Teams', $file);
-            if ($filepath != null) {
-                $data['image'] = $filepath;
-            } else {
-                $data['image'] = 'assets/images/Teams/default.png';
-            }
-        } else {
+        $filepath = storeImage('Teams', $file);
+        if (!$filepath) {
             $data['image'] = 'assets/images/Teams/default.png';
+        } else {
+            $data['image'] = $filepath;
         }
 
         $team = new \App\Entities\Team();
@@ -132,18 +151,13 @@ class TeamsController extends BaseController
 
     public function removeMember()
     {
-        $teamModel = model(TeamModel::class);
-        $clubModel = model(ClubModel::class);
+        $teamUserModel = model(TeamUserModel::class);
 
-        $data = [
-            'title' => 'Teams',
-            //'alert' =>
-            'teamMembers' => null,
-            'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
-            'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll()
-        ];
+        $teamID = esc($this->request->getPost('remove-member-team-id'));
+        $userID = esc($this->request->getPost('remove-member-id'));
+        $teamUserModel->where('userID', $userID)->where('teamID', $teamID)->delete();
 
-        return view('pages/admin/teams', $data);
+        return $this->getTeamToEdit($teamID);
     }
 
 }

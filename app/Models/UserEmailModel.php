@@ -83,7 +83,7 @@ class UserEmailModel extends Model
 
     public function getTeamUsersByTeamId(int $teamID): array
     {
-        return $this->select('nsca_users.first_name, nsca_users.last_name, nsca_team_users.isTeamCaptain, nsca_team_users.isViceCaptain')
+        return $this->select('nsca_users.id, nsca_users.first_name, nsca_users.last_name, nsca_team_users.isTeamCaptain, nsca_team_users.isViceCaptain')
             ->join('nsca_team_users', 'nsca_team_users.userID = nsca_users.id', 'left')
             ->join('nsca_teams', 'nsca_team_users.teamID = nsca_teams.id', 'left')
             ->where('nsca_teams.id', $teamID)

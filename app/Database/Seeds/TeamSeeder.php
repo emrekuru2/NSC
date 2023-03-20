@@ -13,19 +13,19 @@ class TeamSeeder extends Seeder
                 'clubID' => 1,
                 'name' => 'Lions',
                 'description' => 'Lions of Halifax',
-                'image' => 'NovaScotiaWarriors.jpg'
+                'image' => 'assets/images/Teams/1679279078_96d548d55d41e3a40fd2.png'
             ],
             [
                 'clubID' => 2,
                 'name' => 'Falcons',
                 'description' => 'Falcons of Dartmouth',
-                'image' => 'predators.jpg'
+                'image' => 'assets/images/Teams/1679280630_ec7e6a5e7c77c3c6d728.png'
             ],
             [
                 'clubID' => 3,
                 'name' => 'Tigers',
                 'description' => 'Tigers of Bedford',
-                'image' => 'NSAvengers.jpg'
+                'image' => 'assets/images/Teams/1679280642_764ecea8c4444d1f0a0e.png'
             ]
         ];
         $this->db->table('nsca_teams')->insertBatch($teams);

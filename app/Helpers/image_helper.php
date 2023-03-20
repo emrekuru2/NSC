@@ -2,12 +2,12 @@
 
 function storeImage($folder, $file)
 {
-    if ($file->isValid() && !$file->hasMoved()) {
+    if ($file->isValid()) {
         $newName = $file->getRandomName();
         $path = 'assets/images/' . $folder . '/';
-        $file->move($path, $newName);
+        $file->store("../../public/" . $path, $newName);
         return $path . $newName;
     }
 
-    return null;
+    return false;
 }
