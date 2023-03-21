@@ -4,15 +4,37 @@
     <!-- The about us section:
         It has an image background with text and link over it
     -->
-    <div class="container my-4" style="padding-top:2vw;">
-        <img src="/assets/images/General/logo1.png" alt="about-us" style="width:100%;height:40vw">
-        <div class="text-white" style="position:absolute; bottom:2vw; right:4vw;">
+    <div class="container my-4" style="padding-top:2vw; position: relative;">
+        <img src="/assets/images/General/logo1.png" alt="about-us" style="width:40%; height:auto;">
+        <div class="text-bold" style="position:absolute; top:50%; transform: translateY(-50%); right:2vw; width: 40%;">
             <h3>About us</h3>
             <p style="opacity:1;">
-                Some content Some content Some content  Some content
+                Pellentesque ullamcorper lorem lorem, elementum malesuada urna commodo vitae. Integer pulvinar tortor eget sapien aliquam cursus ac rutrum risus. Fusce et iaculis neque, ut ornare ligula. Vestibulum orci lacus, vestibulum vel orci varius, placerat dapibus nulla. Etiam vehicula diam a mi lobortis efficitur. Morbi interdum ipsum sit amet neque elementum, accumsan placerat lectus suscipit. Maecenas vel urna vitae dui gravida ornare in eget elit. Morbi congue mauris eget egestas iaculis. Ut sagittis mauris id diam sodales, in auctor felis fermentum. Nam sodales nunc odio, sed tincidunt tellus vulputate ac. Nulla at leo augue. Quisque in tellus viverra, viverra ante eget, tincidunt nunc.
             </p>
         </div>
     </div>
+
+    <style>
+        @media (max-width: 767px) {
+            .container {
+                display: flex;
+                flex-direction: column-reverse;
+                align-items: center;
+            }
+            img {
+                width: 100%;
+                height: auto;
+            }
+            .text-bold {
+                position: static;
+                margin-top: 2vw;
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+
+
 
     <div class="container d-flex" style="padding-top:2vw;">
 
@@ -49,14 +71,30 @@
         </div>
 
         <!-- DevPrograms Card -->
-        <div class="card bg-info " style="height:15rem; width: 70vh;">
-            <div class="card-body text-center pt-5" style="color: white;" >
+        <div class="card bg-info" style="height:15rem; width: 70vh; position: relative;">
+            <div class="card-body text-center pt-5" style="color: white;">
                 <h2 class="card-title">Development Programs</h2>
-                <p class="card-text " style="color: white;">Sign up for our new and upcoming programs
+                <p class="card-text" style="color: white;">Sign up for our new and upcoming programs
                     <br>and become a member at NSCA</p>
-                <p><a class="btn btn-primary" href="/development">Get involved</a></p>
+                <p style="position: absolute; bottom: 1px;"><a class="btn btn-primary" href="/development">Get involved</a></p>
             </div>
         </div>
+        <style>
+            /* Media query for screens smaller than 768px */
+            @media screen and (max-width: 767px) {
+                .d-flex {
+                    flex-wrap: wrap;
+                }
+
+                .carousel {
+                    margin-bottom: 2vw;
+                }
+
+                .card {
+                    width: 100%;
+                }
+            }
+        </style>
 
     </div>
 
