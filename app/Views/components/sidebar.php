@@ -4,7 +4,7 @@
   <div class="collapse navbar-collapse" id="toggle" style="width: 280px;">
     <div class="h-auto w-100 d-flex flex-column p-3 bg-dark text-light">
       <div class="d-flex flex-column align-items-center">
-        <img src="/assets/images/Users/defaultUser.png" alt="profile" width="100px" height="100px">
+        <img src="<?= base_url('/assets/images/Users/default.png') ?>" alt="profile" width="100px" height="100px">
         <span class="fs-4">Admin Name</span>
       </div>
       <hr>

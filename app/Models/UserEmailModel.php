@@ -2,28 +2,19 @@
 
 namespace App\Models;
 
-use CodeIgniter\Shield\Entities\User;
-use CodeIgniter\Shield\Authentication\Authenticators\Session;
-use CodeIgniter\Shield\Models\UserModel as ShieldUserModel;
+use CodeIgniter\Model;
 
-class UserModel extends ShieldUserModel
+class UserEmailModel extends Model
 {
+    // Construction
     protected $table            = 'nsca_users';
     protected $primaryKey       = 'id';
-    protected $useSoftDeletes   = false;
+    protected $returnType       = \App\Entities\User::class;
+    protected $protectFields    = true;
     protected $allowedFields    = [
         'email',
         'first_name',
-        'last_name',
-        'phone',
-        'street',
-        'city',
-        'country',
-        'postal_code',
-        'status',
-        'status_message',
-        'active',
-        'last_active',
+        'last_name'
     ];
 
     // Dates
@@ -32,7 +23,7 @@ class UserModel extends ShieldUserModel
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
 
-
+    // Functions
     public function getClubMemberEmailsByID(int $clubID): array
     {
         return $this->select('nsca_users.email')
@@ -90,42 +81,22 @@ class UserModel extends ShieldUserModel
             ->join('nsca_dev_user', 'nsca_dev_user.userID = nsca_users.id', 'cross')->findAll();
     }
 
-    public function findByCredentials(array $credentials): ?User
+    public function getTeamUsersByTeamId(int $teamID): array
     {
-        // Email is stored in an identity so remove that here
-        $email = $credentials['email'] ?? null;
-        unset($credentials['email']);
-
-        // any of the credentials used should be case-insensitive
-        foreach ($credentials as $key => $value) {
-            $this->where('LOWER(' . $this->db->protectIdentifiers("users.{$key}") . ')', strtolower($value));
-        }
-
-        if (!empty($email)) {
-            $data = $this->select('nsca_users.*, auth_identities.secret as email, auth_identities.secret2 as password_hash')
-                ->join('auth_identities', 'auth_identities.user_id = nsca_users.id')
-                ->where('auth_identities.type', Session::ID_TYPE_EMAIL_PASSWORD)
-                ->where('LOWER(' . $this->db->protectIdentifiers('auth_identities.secret') . ')', strtolower($email))
-                ->asArray()
-                ->first();
-
-            if ($data === null) {
-                return null;
-            }
-
-            $email = $data['email'];
-            unset($data['email']);
-            $password_hash = $data['password_hash'];
-            unset($data['password_hash']);
-
-            $user                = new User($data);
-            $user->email         = $email;
-            $user->password_hash = $password_hash;
-            $user->syncOriginal();
-
-            return $user;
-        }
-
-        return $this->first();
+        return $this->select('nsca_users.id, nsca_users.first_name, nsca_users.last_name, nsca_team_users.isTeamCaptain, nsca_team_users.isViceCaptain')
+            ->join('nsca_team_users', 'nsca_team_users.userID = nsca_users.id', 'left')
+            ->join('nsca_teams', 'nsca_team_users.teamID = nsca_teams.id', 'left')
+            ->where('nsca_teams.id', $teamID)
+            ->findAll();
     }
+
+    public function getClubUsersByClubId(int $clubID): array
+    {
+        return $this->select('nsca_users.first_name, nsca_users.last_name, nsca_club_users.isManager')
+            ->join('nsca_club_users', 'nsca_club_users.userID = nsca_users.id', 'left')
+            ->join('nsca_clubs', 'nsca_club_users.clubID = nsca_clubs.id', 'left')
+            ->where('nsca_clubs.id', $clubID)
+            ->findAll();
+    }
+
 }
