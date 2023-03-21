@@ -7,6 +7,8 @@ use App\Models\ClubModel;
 use App\Models\TeamModel;
 use App\Models\UserEmailModel;
 use App\Models\UserTypes\TeamUserModel;
+use Config\Pager;
+use Exception;
 use function PHPUnit\Framework\isEmpty;
 
 class TeamsController extends BaseController
@@ -76,68 +78,102 @@ class TeamsController extends BaseController
     {
         helper('image');
         $teamModel = model(TeamModel::class);
-        $clubModel = model(ClubModel::class);
-        $userModel = model(UserEmailModel::class);
         $teamUserModel = model(TeamUserModel::class);
 
-        $data['id'] = esc($this->request->getPost('update-team-id'));
-        $data['clubID'] = esc($this->request->getPost('updateClubID'));
-        $data['name'] = esc($this->request->getPost('updateTeamName'));
-        $data['description'] = esc($this->request->getPost('updateTeamDescription'));
+        $clubID = esc($this->request->getPost('updateClubID'));
+        $name = esc($this->request->getPost('updateTeamName'));
+        $description = esc($this->request->getPost('updateTeamDescription'));
+        $image = $this->request->getFile('updateTeamImage');
 
         $teamID = esc($this->request->getPost('update-team-id'));
         $team = $teamModel->find($teamID);
 
-        // Deleting old image
-        if (!str_contains($team->image, 'default.png')) {
-            unlink('public/' . $team->image);
+        // New Team Image
+        if ($image->isValid()) {
+            // Deleting old image
+            if (!str_contains($team->image, 'default.png')) {
+                unlink($team->image);
+            }
+
+            $filepath = storeImage('Teams', $image);
+            if (!$filepath) {
+                $filepath = 'assets/images/Teams/default.png';
+            }
+
+            try {
+                $teamModel->set('clubID', $clubID)
+                    ->set('name', $name)
+                    ->set('description', $description)
+                    ->set('image', $filepath)
+                    ->where('id', $teamID)
+                    ->update();
+            } catch (Exception $e) {
+                echo "<script> console.log('Update failed for team: " . $teamID . " ') </script>";
+            }
         }
 
-        $image = $this->request->getFile('updateTeamImage');
-        $filepath = storeImage('Teams', $image);
-        if (!$filepath) {
-            $data['image'] = 'assets/images/Teams/default.png';
-        } else {
-            $data['image'] = $filepath;
-        }
+        // No New Team Image
+        else {
+            try {
+                $teamModel->set('clubID', $clubID)
+                    ->set('name', $name)
+                    ->set('description', $description)
+                    ->where('id', $teamID)
+                    ->update();
+            } catch (Exception $e) {
+                echo "<script> console.log('Update failed for team: " . $teamID . " ') </script>";
+            }
 
-        $team = new \App\Entities\Team();
-        $team->fill($data);
+        }
 
         // Updating Team Members
         $json = $this->request->getPost('update-members-JSON');
-        foreach ($json->players as $player) {
-            $userID = $player[0];
+        if ($json != '') {
+            $teamJSON = json_decode($json);
 
-            switch ($player[1]) {
-                case 'player':
-                    $teamUserModel->set('isViceCaptain', 0)
-                        ->set('isTeamCaptain', 0)
-                        ->where($userID);
-                    break;
-                case 'viceCaptain':
-                    $teamUserModel->set('isViceCaptain', 1)
-                        ->set('isTeamCaptain', 0)
-                        ->where($userID);
-                    break;
-                case 'captain':
-                    $teamUserModel->set('isViceCaptain', 0)
-                        ->set('isTeamCaptain', 1)
-                        ->where($userID);
-                    break;
+            foreach ($teamJSON->players as $player) {
+                $userID = $player[0];
+
+                switch ($player[1]) {
+                    case 'vice':
+                        try {
+                            $teamUserModel->set('isViceCaptain', 1)
+                                ->set('isTeamCaptain', 0)
+                                ->where('userID', $userID)
+                                ->where('teamID', $teamID)
+                                ->update();
+                        } catch (Exception $e) {
+                            echo "<script> console.log('Update failed when changing role to \'Player\' for user: ' + '" . $userID . ", on team: " . $teamID . " ') </script>";
+                        }
+                        break;
+
+                    case 'captain':
+                        try {
+                            $teamUserModel->set('isViceCaptain', 0)
+                                ->set('isTeamCaptain', 1)
+                                ->where('userID', $userID)
+                                ->where('teamID', $teamID)
+                                ->update();
+                        } catch (Exception $e) {
+                            echo "<script> console.log('Update failed when changing role to \'Captain\' for user: ' + '" . $userID . ", on team: " . $teamID . " ') </script>";
+                        }
+                        break;
+                    default:
+                        try {
+                            $teamUserModel->set('isViceCaptain', 0)
+                                ->set('isTeamCaptain', 0)
+                                ->where('userID', $userID)
+                                ->where('teamID', $teamID)
+                                ->update();
+                        } catch (Exception $e) {
+                            echo "<script> console.log('Update failed when changing role to \'Vice-Captain\' for user: ' + '" . $userID . ", on team: " . $teamID . " ') </script>";
+                        }
+                        break;
+                }
             }
-
-            model(TeamModel::class)->save($team);
         }
 
-        $data = [
-            'title' => 'Teams',
-            'teamMembers' => null,
-            'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
-            'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll()
-        ];
-
-        return view('pages/admin/teams', $data);
+        return $this->getTeamToEdit($teamID);
     }
 
     public function createTeam()

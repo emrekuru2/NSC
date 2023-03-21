@@ -1,7 +1,11 @@
 // Variables
-let removeMemberButtons = document.getElementsByName('remove-member-button')
-let removeMemberHiddenInput = document.getElementById('remove-member-id')
-let removeMemberMessage = document.getElementById('remove-member-message')
+const removeMemberButtons = document.getElementsByName('remove-member-button')
+const removeMemberHiddenInput = document.getElementById('remove-member-id')
+const removeMemberMessage = document.getElementById('remove-member-message')
+const updateForm = document.getElementById('update-form')
+const updateButton = document.getElementById('update-button')
+const teamMemberTableBody = document.getElementById('team-member-list')
+
 
 // Listeners
 for (let i = 0; i < removeMemberButtons.length; i++) {
@@ -16,6 +20,11 @@ for (let i = 0; i < removeMemberButtons.length; i++) {
     })
 }
 
+updateButton.addEventListener('click', () => {
+    document.getElementById('update-members-JSON').value = getMemberRolesJSON();
+    updateForm.submit()
+})
+
 
 // Functions
 function getMemberRolesJSON() {
@@ -24,13 +33,20 @@ function getMemberRolesJSON() {
         'players': []
     }
 
-    const tableRows = document.querySelectorAll('tr')
-    for (let i = 1; i < tableRows.length; i++) {
-        let player = []
-        player.push(tableRows[i].children[4].children[0].dataset.user) // ID
-        player.push(tableRows[i].children[1].value) // Role
+    if (teamMemberTableBody.dataset.membersIsSet === 'false') {
+        return ""
+    }
 
-        teamJSON.players.push(player)
+    const tableRows = teamMemberTableBody.children
+    for (let i = 0; i < tableRows.length; i++) {
+        let player = []
+
+        let id = tableRows[i].dataset.user
+        if (id !== 'none') {
+            player.push(id) // ID
+            player.push(tableRows[i].children[1].children[0].value) // Role
+            teamJSON.players.push(player)
+        }
     }
 
     return JSON.stringify(teamJSON)
