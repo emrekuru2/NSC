@@ -3,6 +3,9 @@ let removeMemberButtons = document.getElementsByName('remove-member-button')
 let removeMemberHiddenInput = document.getElementById('remove-member-id')
 let removeMemberMessage = document.getElementById('remove-member-message')
 
+const updateForm = document.getElementById('update-form')
+const updateButton = document.getElementById('update-button')
+
 // Listeners
 for (let i = 0; i < removeMemberButtons.length; i++) {
     removeMemberButtons[i].addEventListener('click', () => {
@@ -15,6 +18,11 @@ for (let i = 0; i < removeMemberButtons.length; i++) {
         removeMemberMessage.innerText = firstHalf + removeMemberButtons[i].dataset.name + secondHalf
     })
 }
+
+updateButton.addEventListener('click', () => {
+    document.getElementById('update-members-JSON').value = getMemberRolesJSON();
+    //updateForm.submit()
+})
 
 
 // Functions
