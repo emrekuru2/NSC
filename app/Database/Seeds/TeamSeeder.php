@@ -32,14 +32,20 @@ class TeamSeeder extends Seeder
 
         $users = [
             [
-                'userID' => 2,
-                'teamID' => 1,
+                'userID' => 1,
+                'teamID' => 2,
                 'isTeamCaptain' => 0,
                 'isViceCaptain' => 0
             ],
             [
                 'userID' => 2,
                 'teamID' => 1,
+                'isTeamCaptain' => 0,
+                'isViceCaptain' => 0
+            ],
+            [
+                'userID' => 3,
+                'teamID' => 2,
                 'isTeamCaptain' => 0,
                 'isViceCaptain' => 0
             ],
@@ -51,18 +57,12 @@ class TeamSeeder extends Seeder
             ],
             [
                 'userID' => 5,
-                'teamID' => 2,
-                'isTeamCaptain' => 0,
-                'isViceCaptain' => 0
-            ],
-            [
-                'userID' => 1,
                 'teamID' => 3,
                 'isTeamCaptain' => 0,
                 'isViceCaptain' => 0
             ],
             [
-                'userID' => 5,
+                'userID' => 6,
                 'teamID' => 3,
                 'isTeamCaptain' => 0,
                 'isViceCaptain' => 0
