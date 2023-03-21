@@ -2,10 +2,10 @@
 
 function storeImage($folder, $file)
 {
-    if ($file->isValid() && str_contains($file->getMimeType(), 'image')) {
+    if ($file->isValid() && !$file->hasMoved()) {
         $newName = $file->getRandomName();
         $path = 'assets/images/' . $folder . '/';
-        $file->store("../../public/" . $path, $newName);
+        $file->move($path, $newName);
         return $path . $newName;
     }
 
