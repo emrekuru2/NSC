@@ -45,7 +45,7 @@
                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
             </ol>
             <div class="carousel-inner" >
-                <div class="carousel-item active" style="height: 15rem;width: 100vh; margin-right:5vh;">
+                <div class="carousel-item active" style="height: 20rem;width: 100vh; margin-right:5vh;">
                     <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"  preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
                     <div class="carousel-caption text-end">
                         <h1>Clubs</h1>
@@ -71,7 +71,7 @@
         </div>
 
         <!-- DevPrograms Card -->
-        <div class="card bg-info" style="height:15rem; width: 70vh; position: relative;">
+        <div class="card bg-info" style="height:20rem; width: 70vh; position: relative;">
             <div class="card-body text-center pt-5" style="color: white;">
                 <h2 class="card-title">Development Programs</h2>
                 <p class="card-text" style="color: white;">Sign up for our new and upcoming programs
