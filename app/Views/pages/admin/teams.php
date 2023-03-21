@@ -120,22 +120,22 @@
 
                 <!-- Edit Logo -->
                 <div class="form-group margin-bottom-1rem">
-                    <label class="margin-bottom-half-rem" for="teamImage">Logo</label>
-                    <input class="form-control" type="file" name="teamImage" id="teamImage"<?= $teamIsSet ?: " disabled" ?>>
+                    <label class="margin-bottom-half-rem" for="updateTeamImage">Logo</label>
+                    <input class="form-control" type="file" name="updateTeamImage" id="updateTeamImage"<?= $teamIsSet ?: " disabled" ?>>
                 </div>
 
                 <hr class="divider">
 
                 <!-- Edit Name -->
                 <div class="form-group margin-bottom-1rem">
-                    <label class="margin-bottom-half-rem" for="teamName">Name</label>
-                    <input type="text" class="form-control" name="teamName" id="teamName" <?= $teamIsSet ? "value='" . $team->name . "'" : "disabled" ?>>
+                    <label class="margin-bottom-half-rem" for="updateTeamName">Name</label>
+                    <input type="text" class="form-control" name="updateTeamName" id="updateTeamName" <?= $teamIsSet ? "value='" . $team->name . "'" : "disabled" ?>>
                 </div>
 
                 <!-- Edit Club -->
                 <div class="form-group margin-bottom-1rem">
-                    <label class="margin-bottom-half-rem" for="clubName">Club</label>
-                    <select class="form-control" name="clubName" id="clubName" aria-label="Club Name"<?= $teamIsSet ?: " disabled" ?>>
+                    <label class="margin-bottom-half-rem" for="updateClubID">Club</label>
+                    <select class="form-control" name="updateClubID" id="updateClubID" aria-label="Club"<?= $teamIsSet ?: " disabled" ?>>
                         <?php if($teamIsSet && !empty($allClubs)) {
                             foreach ($allClubs as $club) {
                                 if ($club->id == $team->clubID) {
@@ -151,8 +151,8 @@
 
                 <!-- Edit Description -->
                 <div class="form-group margin-bottom-1rem">
-                    <label class="margin-bottom-half-rem" for="teamDescription">Description</label>
-                    <textarea class="form-control" name="teamDescription" id="teamDescription" rows="3" <?= $teamIsSet ? ">" . $team->description : "disabled>" ?></textarea>
+                    <label class="margin-bottom-half-rem" for="updateTeamDescription">Description</label>
+                    <textarea class="form-control" name="updateTeamDescription" id="updateTeamDescription" rows="3" <?= $teamIsSet ? ">" . $team->description : "disabled>" ?></textarea>
                 </div>
 
                 <!-- Edit Members -->
@@ -164,8 +164,8 @@
                             <th scope="col">Name</th>
                             <th scope="col">Role</th>
                             <th scope="col"></th>
-                            <th scope="col">Options</th>
                             <th scope="col"></th>
+                            <th scope="col">Options</th>
                         </tr>
                         </thead>
 
@@ -189,11 +189,7 @@
                                     </select>
                                 </td>
                                 <td class="col-1"></td>
-                                <td class="col-1">
-                                    <form>
-                                        <button type="button" name="update-member-button" class="btn btn-primary btn-sm">Update</button>
-                                    </form>
-                                </td>
+                                <td class="col-1"></td>
                                 <td class="col-1">
                                     <button type="button" name="remove-member-button" data-user="<?= $member->id ?>" data-name="<?= $member->first_name ?> <?= $member->last_name ?>" data-bs-toggle="modal" data-bs-target="#removeMemberModal" class="btn btn-danger btn-sm">Remove</button>
                                 </td>
@@ -207,7 +203,9 @@
 
                 <!-- Update Team Button -->
                 <div class="form-group margin-bottom-0">
-                    <button type="button" name="update-button" id="update-button" class="btn btn-primary margin-bottom-1rem"<?= $teamIsSet ?: " disabled" ?>>Update</button>
+                    <input type="text" value="<?= $teamIsSet ? $team->id : '' ?>" name="update-team-id" hidden>
+                    <input type="text" value="" name="update-members-JSON" id="update-members-JSON" hidden>
+                    <button type="button" name="update-button" id="update-button" class="btn btn-primary margin-bottom-1rem"<?= $teamIsSet ?: " disabled" ?>>Update Team</button>
                 </div>
 
                 <hr class="divider">

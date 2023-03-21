@@ -18,6 +18,20 @@ for (let i = 0; i < removeMemberButtons.length; i++) {
 
 
 // Functions
-function getMemberRoles() {
+function getMemberRolesJSON() {
+    let JSON =
+    {
+        'players': []
+    }
 
+    const tableRows = document.querySelectorAll('tr')
+    for (let i = 1; i < tableRows.length; i++) {
+        let player = []
+        player.push(tableRows[i].children[0].innerText) // Name
+        player.push(tableRows[i].children[1].value) // Role
+
+        JSON.players.push(player)
+    }
+
+    return JSON
 }

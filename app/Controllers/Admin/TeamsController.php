@@ -77,6 +77,33 @@ class TeamsController extends BaseController
         $teamModel = model(TeamModel::class);
         $clubModel = model(ClubModel::class);
 
+        $data['id'] = esc($this->request->getPost('update-team-id'));
+        $data['clubID'] = esc($this->request->getPost('updateClubID'));
+        $data['name'] = esc($this->request->getPost('updateTeamName'));
+        $data['description'] = esc($this->request->getPost('updateTeamDescription'));
+
+        $teamID = esc($this->request->getPost('update-team-id'));
+        $json = $this->request->getPost('update-members-JSON');
+
+        $team = $teamModel->find($teamID);
+
+        // Updating Team
+        if (!str_contains($team->image, 'default.png')) {
+            unlink('public/' . $team->image);
+        }
+
+        helper('image');
+        $image = $this->request->getFile('newImage');
+        $filepath = storeImage('Teams', $image);
+        if (!$filepath) {
+            $data['image'] = 'assets/images/Teams/default.png';
+        } else {
+            $data['image'] = $filepath;
+        }
+
+        // Updating Team Members
+        foreach ($json->players as $player) {} // TODO
+
         $data = [
             'title' => 'Teams',
             'teamMembers' => null,
