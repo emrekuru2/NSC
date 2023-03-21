@@ -115,7 +115,7 @@
         <div class="card shadow">
             <div class="card-header">Edit Team<b></b></div>
 
-            <form method="post" action="updateTeam" class="card-body">
+            <form method="post" action="updateTeam" enctype="multipart/form-data" class="card-body" id="update-form">
                 <!-- Logo and Name -->
                 <img src="<?= $teamIsSet ? base_url($team->image) : base_url('assets/images/Teams/default.png') ?>" class="card-img-top mb-3 mx-auto d-block" style="width: 150px; height: 150px" alt="Team Logo">
                 <h4 class="card-title text-bold text-center"><?= $team->name ?? "Select Team" ?></h4>
@@ -167,34 +167,31 @@
                             <th scope="col">Name</th>
                             <th scope="col">Role</th>
                             <th scope="col"></th>
-                            <th scope="col"></th>
                             <th scope="col">Options</th>
                         </tr>
                         </thead>
 
-                        <tbody>
+                        <tbody id="team-member-list" data-members-is-set="<?= $teamIsSet && $teamMembers != null ? 'true' : 'false' ?>">
                         <?php if (empty($teamMembers)) { ?>
-                            <tr>
+                            <tr data-user="none" data-name="none">
                                 <td class="col-5 line-height-2rem">No team members</td>
                                 <td class="col-4 line-height-2rem"></td>
-                                <td class="col-1 line-height-2rem"></td>
-                                <td class="col-1 line-height-2rem"></td>
+                                <td class="col-2 line-height-2rem"></td>
                                 <td class="col-1 line-height-2rem"></td>
                             </tr>
                         <?php } else { foreach ($teamMembers as $member): ?>
-                            <tr>
-                                <td class="col-5 line-height-2rem"><?= $member->first_name ?> <?= $member->last_name ?></td>
+                            <tr data-user="<?= $member->id ?>" data-name="<?= $member->first_name . ' ' . $member->last_name ?>">
+                                <td class="col-5 line-height-2rem"><?= $member->first_name . ' ' . $member->last_name ?></td>
                                 <td class="col-4 line-height-2rem">
                                     <select name="role" id="role" class="form-select form-select-sm">
                                         <option value="player"<?= $member->isTeamCaptain == 0 && $member->isViceCaptain == 0 ? ' selected' : ''; ?>>Player</option>
-                                        <option value="viceCaptain"<?= $member->isViceCaptain == 1 ? ' selected' : ''; ?>>Vice Captain</option>
+                                        <option value="vice"<?= $member->isViceCaptain == 1 ? ' selected' : ''; ?>>Vice Captain</option>
                                         <option value="captain"<?= $member->isTeamCaptain == 1 ? ' selected' : ''; ?>>Captain</option>
                                     </select>
                                 </td>
-                                <td class="col-1"></td>
-                                <td class="col-1"></td>
+                                <td class="col-2"></td>
                                 <td class="col-1">
-                                    <button type="button" name="remove-member-button" data-user="<?= $member->id ?>" data-name="<?= $member->first_name ?> <?= $member->last_name ?>" data-bs-toggle="modal" data-bs-target="#removeMemberModal" class="btn btn-danger btn-sm">Remove</button>
+                                    <button type="button" name="remove-member-button" data-bs-toggle="modal" data-bs-target="#removeMemberModal" class="btn btn-danger btn-sm">Remove</button>
                                 </td>
                             </tr>
                         <?php endforeach; } ?>
@@ -206,7 +203,7 @@
 
                 <!-- Update Team Button -->
                 <div class="form-group margin-bottom-0">
-                    <input type="text" value="<?= $teamIsSet ? $team->id : '' ?>" name="update-team-id" hidden>
+                    <input type="text" value="<?= $teamIsSet ? $team->id : '' ?>" name="update-team-id" id="update-team-id" hidden>
                     <input type="text" value="" name="update-members-JSON" id="update-members-JSON" hidden>
                     <button type="button" name="update-button" id="update-button" class="btn btn-primary margin-bottom-1rem"<?= $teamIsSet ?: " disabled" ?>>Update Team</button>
                 </div>
