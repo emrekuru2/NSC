@@ -6,6 +6,9 @@ use App\Controllers\BaseController;
 use App\Models\UserModel;
 use App\Models\TeamModel;
 use App\Models\ClubModel;
+use App\Models\UserTypes\ClubUserModel;
+use App\Models\UserTypes\TeamUserModel;
+use CodeIgniter\Shield\Models\PermissionModel;
 
 class UsersController extends BaseController
 {
@@ -23,17 +26,40 @@ class UsersController extends BaseController
         return view('pages/admin/users', $data);
     }
 
-    public function editUser(int $id)
+    public function userDetails(int $id)
     {
 
         $data = [
             'title' => 'User Editing',
-            'user'  => model(UserModel::class)->find($id), 
+            'user'  => model(UserModel::class)->find($id),
             'teams' => model(TeamModel::class)->findAll(),
             'clubs' => model(ClubModel::class)->findAll()
         ];
 
 
         return view('pages/admin/edit_user', $data);
+    }
+
+    public function editUser(int $id)
+    {
+
+        $data = $this->request->getPost();
+
+        if (isset($data['role'])) {
+            $row = model(PermissionModel::class)->where('user_id', $id)->first();
+            model(PermissionModel::class)->update($row['id'], ['permission' => $data['role']]);
+        }
+
+        if (isset($data['team'])) {
+            $row = model(TeamUserModel::class)->where('userID', $id);
+            model(TeamUserModel::class)->update($row->id, ['teamID' => $data['team']]);
+        }
+
+        if (isset($data['club'])) {
+            $row = model(ClubUserModel::class)->where('userID', $id);
+            model(ClubUserModel::class)->update($row->id, ['clubID' => $data['club']]);
+        }
+
+        return redirect()->back();
     }
 }

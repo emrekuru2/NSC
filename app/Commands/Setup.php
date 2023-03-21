@@ -90,18 +90,21 @@ class Setup extends BaseCommand
         if (!$this->editENV(array($env, $base_url, $db_hostname, $db_name, $db_user, $db_pswd, $db_driver, $db_prefix, $db_port))) {
             CLI::print('Settings could not be applied', 'red');
             CLI::newLine();
+            return EXIT_ERROR;
+            
         } else {
             CLI::print('Settings applied successfully!', 'green');
             CLI::newLine();
         }
 
-        $this->call('db:create', [$db_name]);
         $this->call('migrate');
 
         if ($env === 'development') {
-            $this->call('db:seed', ['Main']);
-        }
+            $this->call('db:seed', ['MainSeeder']);
 
+        } else {
+            $this->call('db:seed', ['ProdSeeder']);
+        }
 
         CLI::newLine();
         CLI::write('Setup Completed', 'blue', 'yellow');
