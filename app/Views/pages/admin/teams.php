@@ -91,6 +91,7 @@
                 <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="newImage">Logo</label>
                     <input class="form-control" type="file" name="newImage" id="newImage">
+                    <div class="form-text">SVG filetype recommended.</div>
                 </div>
 
             </div>
@@ -103,6 +104,7 @@
     </div>
 </form>
 
+<!-- Update Team -->
 <div class="row">
     <div class="col-sm-4 mb-3 mb-sm-0">
         <?= view_cell('\App\Libraries\Contents::searchPanel', ['groupName' => 'Team', 'rows' => $allTeams, 'typeOfSearch' => 'Edit']); ?>
@@ -122,6 +124,7 @@
                 <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="updateTeamImage">Logo</label>
                     <input class="form-control" type="file" name="updateTeamImage" id="updateTeamImage"<?= $teamIsSet ?: " disabled" ?>>
+                    <div class="form-text">SVG filetype recommended.</div>
                 </div>
 
                 <hr class="divider">
@@ -219,6 +222,6 @@
 </div>
 
 <script type="text/javascript" src="<?= base_url('assets/js/admin/editGroup.js'); ?>"></script>
-    <script type="text/javascript" src="<?= base_url('assets/js/admin/teams.js'); ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/admin/teams.js'); ?>"></script>
 
 <?= $this->endSection() ?>

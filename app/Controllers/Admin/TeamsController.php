@@ -74,6 +74,7 @@ class TeamsController extends BaseController
 
     public function updateTeam()
     {
+        helper('image');
         $teamModel = model(TeamModel::class);
         $clubModel = model(ClubModel::class);
 
@@ -83,17 +84,14 @@ class TeamsController extends BaseController
         $data['description'] = esc($this->request->getPost('updateTeamDescription'));
 
         $teamID = esc($this->request->getPost('update-team-id'));
-        $json = $this->request->getPost('update-members-JSON');
-
         $team = $teamModel->find($teamID);
 
-        // Updating Team
+        // Deleting old image
         if (!str_contains($team->image, 'default.png')) {
             unlink('public/' . $team->image);
         }
 
-        helper('image');
-        $image = $this->request->getFile('newImage');
+        $image = $this->request->getFile('updateTeamImage');
         $filepath = storeImage('Teams', $image);
         if (!$filepath) {
             $data['image'] = 'assets/images/Teams/default.png';
@@ -102,6 +100,7 @@ class TeamsController extends BaseController
         }
 
         // Updating Team Members
+        $json = $this->request->getPost('update-members-JSON');
         foreach ($json->players as $player) {} // TODO
 
         $data = [
@@ -156,6 +155,12 @@ class TeamsController extends BaseController
         $teamModel = model(TeamModel::class);
 
         $teamID = $this->request->getPost('deleteTeamID');
+
+        $team = $teamModel->find($teamID);
+        if (file_exists($team->image) && !str_contains($team->image, 'default.png')) {
+            unlink($team->image);
+        }
+
         $teamModel->delete($teamID);
 
         if (isEmpty($teamModel->find($teamID))) {
