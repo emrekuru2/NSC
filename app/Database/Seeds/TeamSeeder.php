@@ -33,7 +33,7 @@ class TeamSeeder extends Seeder
         $users = [
             [
                 'userID' => 1,
-                'teamID' => 2,
+                'teamID' => 1,
                 'isTeamCaptain' => 0,
                 'isViceCaptain' => 0
             ],
