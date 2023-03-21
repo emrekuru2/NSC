@@ -27,7 +27,7 @@
                     <?php if (session('message') !== null) : ?>
                         <div class="alert alert-success" role="alert"><?= session('message') ?></div>
                     <?php endif ?>
-                    <img src="/assets/images/logo2.png" class="img-fluid" alt="Responsive image">
+                    <img src="<?= base_url('/assets/images/General/logo2.png') ?>" class="img-fluid" alt="Responsive image">
                     <hr>
                     <form action="<?= url_to('login') ?>" method="post" class="row g-3 justify-content-center my-4">
                         <?= csrf_field() ?>

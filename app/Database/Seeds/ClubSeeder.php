@@ -17,7 +17,7 @@ class ClubSeeder extends Seeder
                 'email' => 'halifaxcricketclub@gmail.com',
                 'phone' => '403-702-1916',
                 'facebook' => 'https://www.facebook.com/halifaxcricketclub/',
-                'image' => NULL,
+                'image' => 'assets/images/Clubs/default.png',
             ],
             [
                 'name' => 'East Coast Cricket Club',
@@ -27,7 +27,7 @@ class ClubSeeder extends Seeder
                 'email' => 'eastcoastcricketclub@gmail.com',
                 'phone' => '902-789-6335',
                 'facebook' => 'https://www.facebook.com/cricketclubofeastcoast/',
-                'image' => NULL,
+                'image' => 'assets/images/Clubs/default.png',
             ],
             [
                 'name' => 'Nova Scotia Avengers Cricket Club',
@@ -37,7 +37,7 @@ class ClubSeeder extends Seeder
                 'email' => 'novascotiaavengers@gmail.com',
                 'phone' => '709-699-8717',
                 'facebook' => 'https://www.facebook.com/Nova-Scotia-Avengers-Cricket-Club-2214442235461792/',
-                'image' => NULL,
+                'image' => 'assets/images/Clubs/default.png',
             ],
             [
                 'name' => 'Halifax Titans Cricket Club',
@@ -47,7 +47,7 @@ class ClubSeeder extends Seeder
                 'email' => 'halifaxtitanscricketclub@gmail.com',
                 'phone' => '902-414-5502',
                 'facebook' => NULL,
-                'image' => NULL,
+                'image' => 'assets/images/Clubs/default.png',
             ]
         ];
         $this->db->table('nsca_clubs')->insertBatch($clubs);

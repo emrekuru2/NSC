@@ -7,7 +7,6 @@ use App\Models\ClubModel;
 use App\Models\TeamModel;
 use App\Models\UserEmailModel;
 use App\Models\UserTypes\TeamUserModel;
-use http\Env\Request;
 use function PHPUnit\Framework\isEmpty;
 
 class TeamsController extends BaseController
@@ -75,8 +74,61 @@ class TeamsController extends BaseController
 
     public function updateTeam()
     {
+        helper('image');
         $teamModel = model(TeamModel::class);
         $clubModel = model(ClubModel::class);
+        $userModel = model(UserEmailModel::class);
+        $teamUserModel = model(TeamUserModel::class);
+
+        $data['id'] = esc($this->request->getPost('update-team-id'));
+        $data['clubID'] = esc($this->request->getPost('updateClubID'));
+        $data['name'] = esc($this->request->getPost('updateTeamName'));
+        $data['description'] = esc($this->request->getPost('updateTeamDescription'));
+
+        $teamID = esc($this->request->getPost('update-team-id'));
+        $team = $teamModel->find($teamID);
+
+        // Deleting old image
+        if (!str_contains($team->image, 'default.png')) {
+            unlink('public/' . $team->image);
+        }
+
+        $image = $this->request->getFile('updateTeamImage');
+        $filepath = storeImage('Teams', $image);
+        if (!$filepath) {
+            $data['image'] = 'assets/images/Teams/default.png';
+        } else {
+            $data['image'] = $filepath;
+        }
+
+        $team = new \App\Entities\Team();
+        $team->fill($data);
+
+        // Updating Team Members
+        $json = $this->request->getPost('update-members-JSON');
+        foreach ($json->players as $player) {
+            $userID = $player[0];
+
+            switch ($player[1]) {
+                case 'player':
+                    $teamUserModel->set('isViceCaptain', 0)
+                        ->set('isTeamCaptain', 0)
+                        ->where($userID);
+                    break;
+                case 'viceCaptain':
+                    $teamUserModel->set('isViceCaptain', 1)
+                        ->set('isTeamCaptain', 0)
+                        ->where($userID);
+                    break;
+                case 'captain':
+                    $teamUserModel->set('isViceCaptain', 0)
+                        ->set('isTeamCaptain', 1)
+                        ->where($userID);
+                    break;
+            }
+
+            model(TeamModel::class)->save($team);
+        }
 
         $data = [
             'title' => 'Teams',
@@ -130,6 +182,12 @@ class TeamsController extends BaseController
         $teamModel = model(TeamModel::class);
 
         $teamID = $this->request->getPost('deleteTeamID');
+
+        $team = $teamModel->find($teamID);
+        if (file_exists($team->image) && !str_contains($team->image, 'default.png')) {
+            unlink($team->image);
+        }
+
         $teamModel->delete($teamID);
 
         if (isEmpty($teamModel->find($teamID))) {
