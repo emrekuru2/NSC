@@ -33,6 +33,7 @@ class TeamsController extends BaseController
         $teamModel = model(TeamModel::class);
         $userModel = model(UserEmailModel::class);
         $clubModel = model(ClubModel::class);
+        $userEmailModel = model(UserEmailModel::class);
 
         if ($this->request->getPost('search') != null) {
             $teamName = $this->request->getPost('search');
@@ -50,6 +51,7 @@ class TeamsController extends BaseController
             'teamMembers' => count($team) > 0 ? $userModel->getTeamUsersByTeamId($teamID) : null,
             'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
             'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll(),
+            'allUsers' => $userEmailModel->select()->orderBy('nsca_users.last_name', 'ASC')->findAll(),
         ];
 
         return view('pages/admin/teams', $data);
@@ -60,6 +62,7 @@ class TeamsController extends BaseController
         $teamModel = model(TeamModel::class);
         $userModel = model(UserEmailModel::class);
         $clubModel = model(ClubModel::class);
+        $userEmailModel = model(UserEmailModel::class);
 
         $team = $teamModel->where('nsca_teams.id', $teamID)->findAll();
 
@@ -69,6 +72,7 @@ class TeamsController extends BaseController
             'teamMembers' => count($team) > 0 ? $userModel->getTeamUsersByTeamId($team[0]->id) : null,
             'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
             'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll(),
+            'allUsers' => $userEmailModel->select('nsca_users.firstname, nsca_users.last_name')->orderBy('nsca_users.last_name', 'ASC')->findAll(),
         ];
 
         return view('pages/admin/teams', $data);
@@ -252,6 +256,10 @@ class TeamsController extends BaseController
         $teamUserModel->where('userID', $userID)->where('teamID', $teamID)->delete();
 
         return $this->getTeamToEdit($teamID);
+    }
+
+    public function addMembers() {
+        return redirect()->to('admin/teams');
     }
 
 }
