@@ -77,6 +77,8 @@ class TeamsController extends BaseController
         helper('image');
         $teamModel = model(TeamModel::class);
         $clubModel = model(ClubModel::class);
+        $userModel = model(UserEmailModel::class);
+        $teamUserModel = model(TeamUserModel::class);
 
         $data['id'] = esc($this->request->getPost('update-team-id'));
         $data['clubID'] = esc($this->request->getPost('updateClubID'));
@@ -99,9 +101,34 @@ class TeamsController extends BaseController
             $data['image'] = $filepath;
         }
 
+        $team = new \App\Entities\Team();
+        $team->fill($data);
+
         // Updating Team Members
         $json = $this->request->getPost('update-members-JSON');
-        foreach ($json->players as $player) {} // TODO
+        foreach ($json->players as $player) {
+            $userID = $player[0];
+
+            switch ($player[1]) {
+                case 'player':
+                    $teamUserModel->set('isViceCaptain', 0)
+                        ->set('isTeamCaptain', 0)
+                        ->where($userID);
+                    break;
+                case 'viceCaptain':
+                    $teamUserModel->set('isViceCaptain', 1)
+                        ->set('isTeamCaptain', 0)
+                        ->where($userID);
+                    break;
+                case 'captain':
+                    $teamUserModel->set('isViceCaptain', 0)
+                        ->set('isTeamCaptain', 1)
+                        ->where($userID);
+                    break;
+            }
+
+            model(TeamModel::class)->save($team);
+        }
 
         $data = [
             'title' => 'Teams',

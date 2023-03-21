@@ -12,5 +12,5 @@ searchBarButton.addEventListener('click', () => {
 
 updateButton.addEventListener('click', () => {
     document.getElementById('update-members-JSON').value = getMemberRolesJSON();
-    updateForm.submit()
+    //updateForm.submit()
 })
