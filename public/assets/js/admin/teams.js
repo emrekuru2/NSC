@@ -2,6 +2,13 @@
 const removeMemberButtons = document.getElementsByName('remove-member-button')
 const removeMemberHiddenInput = document.getElementById('remove-member-id')
 const removeMemberMessage = document.getElementById('remove-member-message')
+
+const addMembersForm = document.getElementById('addMemberModal')
+const addMembersButton = document.getElementById('add-member-button')
+const addMemberTable = document.getElementById('add-member-list')
+const addMemberChecks = document.getElementsByName('add-member-check')
+const addMemberRoles = document.getElementsByName('add-member-role')
+
 const updateForm = document.getElementById('update-form')
 const updateButton = document.getElementById('update-button')
 const teamMemberTableBody = document.getElementById('team-member-list')
@@ -23,6 +30,11 @@ for (let i = 0; i < removeMemberButtons.length; i++) {
 updateButton.addEventListener('click', () => {
     document.getElementById('update-members-JSON').value = getMemberRolesJSON();
     updateForm.submit()
+})
+
+addMembersButton.addEventListener('click', () => {
+    document.getElementById('add-members-JSON').value = getAddedMembersJSON();
+    //addMembersForm.submit()
 })
 
 
@@ -50,4 +62,27 @@ function getMemberRolesJSON() {
     }
 
     return JSON.stringify(teamJSON)
+}
+
+function getAddedMembersJSON() {
+    let membersJSON =
+        {
+            'members': []
+        }
+
+    for (let i = 0; i < addMemberChecks.length; i++) {
+        if (addMemberChecks[i].checked) {
+            let member = []
+
+            let id = addMemberChecks[i].value
+            if (id !== 'none') {
+                member.push(id) // ID
+                member.push(addMemberRoles[i].value) // Role
+                membersJSON.members.push(member)
+            }
+        }
+    }
+
+    console.log(membersJSON)
+    return JSON.stringify(membersJSON)
 }
