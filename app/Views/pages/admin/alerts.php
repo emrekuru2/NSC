@@ -8,7 +8,7 @@
                 <div class="card shadow">
                     <div class="card-header">Current Alert</div>
                     <div class="card-body d-flex">
-                        <h2 class="card-title flex-grow-1">2</h2>
+                        <h2 class="card-title flex-grow-1"><?= ($active != null) ? esc($active->title) : 'No alerts is active'  ?></h2>
                         <a class="btn btn-outline-danger">Disable</a>
                     </div>
                 </div>
@@ -17,29 +17,23 @@
                 <div class="card shadow">
                     <div class="card-header">Alert List</div>
                     <div class="card-body">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Alert title</th>
-                                </tr>
-                            </thead>
-                            <tbody class="table-group-divider">
-                                <!-- THIS PART NEEDS TO BE DYNAMICALLY GENERATED -->
-                                <tr>
-                                    <td>1</td>
-                                    <td>No games today!</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Otto</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <form method="post" action="setAlert" class="d-flex flex-column align-items-center gap-3 ">
+                            <ul class="list-group w-100">
+                                <?php if (isset($alerts)) : ?>
+                                    <?php foreach ($alerts as $alert) : ?>
+                                        <li class="list-group-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="flexRadioDefault" value="<?= $alert->id ?>" id="<?= $alert->id ?>">
+                                                <label class="form-check-label" for="<?= $alert->id ?>"><?= $alert->title ?></label>
+                                            </div>
+                                        </li>
+                                    <?php endforeach ?>
+                                <?php else : ?>
+                                    <span>There are no alerts</span>
+                                <?php endif ?>
+                            </ul>
+                            <button type="submit" class="btn btn-primary w-50">Set the current alert</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -58,7 +52,7 @@
                         <label for="content" class="form-label">Alert content</label>
                         <textarea class="form-control" id="content" rows="10"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary w-25">Publish</button>
+                    <button type="submit" class="btn btn-primary w-50">Create new alert</button>
                 </form>
             </div>
         </div>

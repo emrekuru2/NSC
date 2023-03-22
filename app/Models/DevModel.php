@@ -6,37 +6,31 @@ use CodeIgniter\Model;
 
 class DevModel extends Model
 {
-    protected $DBGroup          = 'default';
-    protected $table            = 'devs';
+    protected $table            = 'nsca_devs';
     protected $primaryKey       = 'id';
-    protected $useAutoIncrement = true;
-    protected $insertID         = 0;
-    protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
+    protected $returnType       = \App\Entities\Dev::class;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['name', 'description', 'start_time', 'end_time', 'start_date', 'end_date', 'price', 'location', 'image', 'daysRun', 'typeID'];
 
     // Dates
     protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
 
-    // Validation
-    protected $validationRules      = [];
-    protected $validationMessages   = [];
-    protected $skipValidation       = false;
-    protected $cleanValidationRules = true;
+    public function programs() {
+        return $this->orderBy('start_date', 'ASC')
+        ->join('nsca_dev_types', 'nsca_dev_types.id = nsca_devs.typeID', 'left')
+        ->findAll();
+    }
 
-    // Callbacks
-    protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
-    protected $afterInsert    = [];
-    protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
-    protected $beforeFind     = [];
-    protected $afterFind      = [];
-    protected $beforeDelete   = [];
-    protected $afterDelete    = [];
+    public function getUsers(int $id){
+        $db = \Config\Database::connect();
+        $builder = $db->table('nsca_dev_users');
+        $builder->select('nsca_dev_users.*, nsca_users.*');
+        $builder->join('nsca_users', 'nsca_users.id = nsca_dev_users.userID');
+        $builder->where('nsca_dev_users.devID', $id);
+        $query = $builder->get();
+        return $query->getResult();
+    }
 }

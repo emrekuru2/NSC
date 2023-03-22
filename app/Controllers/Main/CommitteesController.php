@@ -8,7 +8,10 @@ class CommitteesController extends BaseController
 {
     public function index()
     {
+        $model = model(CommitteeModel::class);
+
         $data = [
+            'committees'  => $model->findAll(),
             'title' => 'Committees',
         ];
 

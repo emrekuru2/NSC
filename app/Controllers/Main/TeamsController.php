@@ -8,7 +8,10 @@ class TeamsController extends BaseController
 {
     public function index()
     {
+        $model = model(TeamModel::class);
+
         $data = [
+            'teams'  => $model->findAll(),
             'title' => 'Teams',
         ];
 

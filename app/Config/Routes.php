@@ -43,6 +43,7 @@ $routes->get('about', 'Main\AboutController::index');
 
 // News functional routing
 $routes->get('news/(:num)', 'Main\NewsController::getNewsByID/$1');
+$routes->get('development/(:num)', 'Main\DevelopmentController::register/$1');
 
 
 // Routing for admin views and functions
@@ -90,7 +91,12 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->get('email', 'Admin\EmailController::index');
     $routes->get('settings', 'Admin\SettingsController::index');
 
-    // Functions
+    // GET with parameters
+
+    // PUT
+
+    // POST
+    $routes->match(['post'], 'setAlert', 'Admin\AlertsController::setAlert');
     $routes->match(['post'], 'sendEmail', 'Admin\EmailController::sendEmail');
     $routes->match(['post'], 'createNews', 'Admin\NewsController::createNews');
     $routes->post('CompetitionType', 'Admin\CompetitionTypeController::store');
@@ -98,6 +104,25 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->put('CompetitionType/update/(:num)','Admin\CompetitionTypeController::update/$1' );
     $routes->put('competitions/update/(:num)','Admin\CompetitionsController::update/$1' );
 
+
+    $routes->match(['post'], 'createDev', 'Admin\DevelopmentController::createDev');
+    $routes->match(['post'], 'createProgType', 'Admin\DevelopmentController::createProgType');
+    $routes->match(['post'], 'modifyProgram', 'Admin\DevelopmentController::modifyProgram');
+    $routes->match(['post'], 'deleteProgram', 'Admin\DevelopmentController::deleteProgram');
+    $routes->match(['post'], 'modify_development', 'Admin\DevelopmentController::modify');
+
+    $routes->match(['post'], 'editTeam', 'Admin\TeamsController::editTeam');
+    $routes->match(['post'], 'updateTeam', 'Admin\TeamsController::updateTeam');
+    $routes->match(['post'], 'createTeam', 'Admin\TeamsController::createTeam');
+    $routes->match(['post'], 'deleteTeam', 'Admin\TeamsController::deleteTeam');
+    $routes->match(['post'], 'removeTeamMember', 'Admin\TeamsController::removeMember');
+    $routes->match(['post'], 'addTeamMembers', 'Admin\TeamsController::addMembers');
+
+    $routes->match(['post'], 'editClub', 'Admin\ClubsController::editClub');
+    $routes->match(['post'], 'updateClub', 'Admin\ClubsController::updateClub');
+    $routes->match(['post'], 'createClub', 'Admin\ClubsController::createClub');
+    $routes->match(['post'], 'deleteClub', 'Admin\ClubsController::deleteClub');
+    $routes->match(['post'], 'removeClubMember', 'Admin\ClubsController::removeMember');
 });
 
 // Codeigniter's default auth routing

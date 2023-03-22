@@ -17,14 +17,13 @@ class NewsController extends BaseController
             'pager' => $model->pager,
             'title' => 'News',
         ];
-
         return view('pages/news', $data);
     }
 
     public function getNewsByID(int $id)
     {
         $newsModel = model(NewsModel::class);
-        $commentsModel = model(CommentsModel::class);
+        $commentsModel = model(CommentModel::class);
 
         $news = $newsModel->getNewsByID($id);
         $comments = $commentsModel->getComments($id);
