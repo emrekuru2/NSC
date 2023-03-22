@@ -4,7 +4,7 @@
   <div class="collapse navbar-collapse" id="toggle" style="width: 280px;">
     <div class="h-auto w-100 d-flex flex-column p-3 bg-dark text-light">
       <div class="d-flex flex-column align-items-center">
-        <img src="/assets/images/Users/defaultUser.png" alt="profile" width="100px" height="100px" >
+        <img src="/assets/images/Users/defaultUser.png" alt="profile" width="100px" height="100px">
         <span class="fs-4">Admin Name</span>
       </div>
       <hr>
@@ -26,7 +26,7 @@
           <a href="competitions" class="nav-link link-primary text-light <?= ($title == 'Competitions') ? "active" : "" ?>"><i class="fa-solid fa-chess-king fa-lg me-3 fa-fw"></i>Competitions</a>
         </li>
         <li class="nav-item">
-          <a href="CompetitionType" class="nav-link link-primary text-light <?= ($title == 'CompetitionType') ? "active" : "" ?>"><i class="fa-solid fa-chess-king fa-lg me-3 fa-fw"></i>Competitions Type</a>
+          <a href="CompetitionType" class="nav-link link-primary text-light <?= ($title == 'Competitions Type') ? "active" : "" ?>"><i class="fa-solid fa-chess-king fa-lg me-3 fa-fw"></i>Competitions Type</a>
         </li>
         <li class="nav-item">
           <a href="committees" class="nav-link link-primary text-light <?= ($title == 'Committees') ? "active" : "" ?>"><i class="fa-solid fa-users-between-lines fa-lg me-3 fa-fw"></i>Committees</a>

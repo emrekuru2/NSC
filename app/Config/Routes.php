@@ -54,7 +54,7 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->get('teams', 'Admin\TeamsController::index');
     $routes->get('competitions', 'Admin\CompetitionsController::index');
     $routes->get('CompetitionType', 'Admin\CompetitionTypeController::index');
-    $routes->get('CompetitionType/delete/(:num)','Admin\CompetitionTypeController::delete/$1' );
+    $routes->get('CompetitionType/delete/(:num)', 'Admin\CompetitionTypeController::delete/$1');
     $routes->get('CompetitionType/edit/(:num)','Admin\CompetitionTypeController::edit/$1' );
 
 
