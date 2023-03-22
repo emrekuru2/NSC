@@ -43,47 +43,17 @@ $routes->get('about', 'Main\AboutController::index');
 
 // News functional routing
 $routes->get('news/(:num)', 'Main\NewsController::getNewsByID/$1');
-$routes->get('development/(:num)', 'Main\DevelopmentController::register/$1');
 
 
 // Routing for admin views and functions
 $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
-    // Index pages
+    // GET
     $routes->get('dashboard', 'Admin\DashController::index');
     $routes->get('alerts', 'Admin\AlertsController::index');
     $routes->get('clubs', 'Admin\ClubsController::index');
     $routes->get('teams', 'Admin\TeamsController::index');
-
-
     $routes->get('competitions', 'Admin\CompetitionsController::index');
-    $routes->get('competitions/edit/(:num)','Admin\CompetitionsController::edit/$1' );
-    $routes->get('competitions/delete/(:num)','Admin\CompetitionsController::delete/$1' );
-
-
-
     $routes->get('CompetitionType', 'Admin\CompetitionTypeController::index');
-    $routes->get('CompetitionType/delete/(:num)','Admin\CompetitionTypeController::delete/$1' );
-    $routes->get('CompetitionType/edit/(:num)','Admin\CompetitionTypeController::edit/$1' );
-
-    //edit page redirect
-    $routes->get('CompetitionType/edit/dashboard', 'Admin\DashController::index');
-    $routes->get('CompetitionType/edit/alerts', 'Admin\AlertsController::index');
-    $routes->get('CompetitionType/edit/clubs', 'Admin\ClubsController::index');
-    $routes->get('CompetitionType/edit/teams', 'Admin\TeamsController::index');
-    $routes->get('CompetitionType/edit/competitions', 'Admin\CompetitionsController::index');
-    $routes->get('CompetitionType/edit/CompetitionType', 'Admin\CompetitionTypeController::index');
-    $routes->get('CompetitionType/edit/news', 'Main\NewsController::index');
-    //edit page redirect
-    $routes->get('competitions/edit/dashboard', 'Admin\DashController::index');
-    $routes->get('competitions/edit/alerts', 'Admin\AlertsController::index');
-    $routes->get('competitions/edit/clubs', 'Admin\ClubsController::index');
-    $routes->get('competitions/edit/teams', 'Admin\TeamsController::index');
-    $routes->get('competitions/edit/competitions', 'Admin\CompetitionsController::index');
-    $routes->get('competitions/edit/CompetitionType', 'Admin\CompetitionTypeController::index');
-    $routes->get('competitions/edit/news', 'Main\NewsController::index');
-
-
-
     $routes->get('committees', 'Admin\CommitteesController::index');
     $routes->get('development', 'Admin\DevelopmentController::index');
     $routes->get('users', 'Admin\UsersController::index');
@@ -92,15 +62,19 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->get('settings', 'Admin\SettingsController::index');
     $routes->get('users/edit/(:num)', 'Admin\UsersController::userDetails/$1');
 
+    // GET with parameters
+    $routes->get('CompetitionType/edit/(:num)','Admin\CompetitionTypeController::edit/$1' );
+    $routes->get('CompetitionType/edit/dashboard', 'Admin\DashController::index');
+    $routes->get('CompetitionType/edit/alerts', 'Admin\AlertsController::index');
+    $routes->get('CompetitionType/edit/clubs', 'Admin\ClubsController::index');
+    $routes->get('CompetitionType/edit/teams', 'Admin\TeamsController::index');
+    $routes->get('CompetitionType/edit/competitions', 'Admin\CompetitionsController::index');
+    $routes->get('CompetitionType/edit/CompetitionType', 'Admin\CompetitionTypeController::index');
+    $routes->get('CompetitionType/delete/(:num)','Admin\CompetitionTypeController::delete/$1' );
 
     // Functions
     $routes->match(['post'], 'sendEmail', 'Admin\EmailController::sendEmail');
     $routes->match(['post'], 'createNews', 'Admin\NewsController::createNews');
-    $routes->post('CompetitionType', 'Admin\CompetitionTypeController::store');
-    $routes->post('competitions', 'Admin\CompetitionsController::store');
-    $routes->put('CompetitionType/update/(:num)','Admin\CompetitionTypeController::update/$1' );
-    $routes->put('competitions/update/(:num)','Admin\CompetitionsController::update/$1' );
-
 
     $routes->match(['post'], 'createDev', 'Admin\DevelopmentController::createDev');
     $routes->match(['post'], 'createProgType', 'Admin\DevelopmentController::createProgType');
