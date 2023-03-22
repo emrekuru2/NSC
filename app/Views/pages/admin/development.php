@@ -24,7 +24,7 @@
                                 <label for="max_age" class="form-label">Maximum age:</label>
                                 <input type="number" class="form-control" id="max_age" name="max_age">
                             </div>
-                            <button type="submit" class="btn btn-primary w-100">Publish</button>
+                            <button type="submit" class="btn btn-primary w-100">Create</button>
                         </form>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                                     <th scope="col">ID</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Dates</th>
-                                    <th scope="col">Modify</th>
+                                    <th scope="col">Edit</th>
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider">
@@ -51,7 +51,7 @@
                                             <td><?= date('m/d/y', strtotime(esc($program->start_date))) ?>-<?= date('m/d/y', strtotime(esc($program->end_date))) ?></td>
                                             <td><form method="post" action="modify_development">
                                                 <input type="hidden" name="id" value="<?=esc($program->id)?>">
-                                                <button class="btn btn-primary" type="submit">Modify</button>
+                                                <button class="btn btn-primary" type="submit">Edit</button>
                                             </form></td>
                                         </tr>
                                     <?php endforeach ?>
@@ -134,7 +134,7 @@
                             <label for="image" class="form-label">Image:</label>
                             <input type="file" accept=".png, .jpeg, .jpg" class="form-control" id="image" name="image">
                         </div>
-                        <button type="submit" class="col-12 col-lg-6 btn btn-primary">Publish</button>
+                        <button type="submit" class="col-12 col-lg-6 btn btn-primary">Create</button>
                     </div>
                 </form>
             </div>

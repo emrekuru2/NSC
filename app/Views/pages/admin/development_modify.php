@@ -87,7 +87,7 @@
                                 <?php if (!empty($devTypes) && is_array($devTypes)) : ?>
                                     <?php foreach ($devTypes as $devType) : ?>
                                         <option value=<?= esc($devType->id) ?>>
-                                            <?= esc($devType->type_name) ?>
+                                            <?= esc($devType->name) ?>
                                         </option>
                                     <?php endforeach ?>
                                 <?php endif ?>
