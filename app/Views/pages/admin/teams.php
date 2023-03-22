@@ -70,7 +70,7 @@
 
             <div class="modal-body">
                 <?php if ($teamIsSet) {?>
-                    <label class="margin-bottom-half-rem" id="remove-member-message">Are you sure you want to remove TEST NAME from the <?= $team->name ?> team?</label>
+                    <label class="margin-bottom-half-rem" id="remove-member-message">Are you sure you want to remove NAME from the <?= $team->name ?> team?</label>
                 <?php } else { ?>
                     <label class="margin-bottom-half-rem" id="remove-member-message">Select a member to remove.</label>
                 <?php } ?>
@@ -239,7 +239,7 @@
                                     <td class="col-1 line-height-2rem"></td>
                                 </tr>
                             <?php } else { foreach ($teamMembers as $member): ?>
-                                <tr data-user="<?= $member->id ?>" data-name="<?= $member->first_name . ' ' . $member->last_name ?>">
+                                <tr>
                                     <td class="col-5 line-height-2rem"><?= $member->first_name . ' ' . $member->last_name ?></td>
                                     <td class="col-4 line-height-2rem">
                                         <select name="role" id="role" class="form-select form-select-sm">
@@ -250,7 +250,7 @@
                                     </td>
                                     <td class="col-2"></td>
                                     <td class="col-1">
-                                        <button type="button" name="remove-member-button" data-bs-toggle="modal" data-bs-target="#removeMemberModal" class="btn btn-danger btn-sm">Remove</button>
+                                        <button type="button" name="remove-member-button" data-user="<?= $member->id ?>" data-name="<?= $member->first_name . ' ' . $member->last_name ?>" data-bs-toggle="modal" data-bs-target="#removeMemberModal" class="btn btn-danger btn-sm">Remove</button>
                                     </td>
                                 </tr>
                             <?php endforeach; } ?>

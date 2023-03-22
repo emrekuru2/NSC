@@ -51,7 +51,7 @@ class TeamsController extends BaseController
             'teamMembers' => count($team) > 0 ? $userModel->getTeamUsersByTeamId($teamID) : null,
             'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
             'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll(),
-            'allUsers' => $userEmailModel->select()->orderBy('nsca_users.last_name', 'ASC')->findAll(),
+            'allUsers' => $userEmailModel->select()->orderBy('nsca_users.last_name', 'ASC')->findAll()
         ];
 
         return view('pages/admin/teams', $data);
@@ -72,7 +72,7 @@ class TeamsController extends BaseController
             'teamMembers' => count($team) > 0 ? $userModel->getTeamUsersByTeamId($team[0]->id) : null,
             'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
             'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll(),
-            'allUsers' => $userEmailModel->select('nsca_users.firstname, nsca_users.last_name')->orderBy('nsca_users.last_name', 'ASC')->findAll(),
+            'allUsers' => $userEmailModel->select()->orderBy('nsca_users.last_name', 'ASC')->findAll()
         ];
 
         return view('pages/admin/teams', $data);
@@ -220,6 +220,7 @@ class TeamsController extends BaseController
     public function deleteTeam()
     {
         $teamModel = model(TeamModel::class);
+        $teamUserModel = model(TeamUserModel::class);
 
         $teamID = $this->request->getPost('deleteTeamID');
 
@@ -229,13 +230,13 @@ class TeamsController extends BaseController
         }
 
         $teamModel->delete($teamID);
+        $teamUserModel->deleteTeamUsers($teamID);
 
         if (isEmpty($teamModel->find($teamID))) {
             $data = [
                 'type'    => 'success',
                 'content' => 'Team deleted successfully'
             ];
-
             return redirect()->to('admin/teams')->with('alert', $data);
         }
 
@@ -243,7 +244,6 @@ class TeamsController extends BaseController
             'type'    => 'danger',
             'content' => 'Error occurred while deleting team'
         ];
-
         return redirect()->to('admin/teams')->with('alert', $data);
     }
 
@@ -258,8 +258,49 @@ class TeamsController extends BaseController
         return $this->getTeamToEdit($teamID);
     }
 
-    public function addMembers() {
-        return redirect()->to('admin/teams');
+    public function addMembers()
+    {
+        $teamUserModel = model(TeamUserModel::class);
+
+        $teamID = $this->request->getPost('add-member-team-id');
+
+        $json = $this->request->getPost('add-members-JSON');
+        if ($json != '') {
+            $usersJSON = json_decode($json);
+
+            foreach ($usersJSON->members as $member) {
+
+                $data['userID'] = $member[0];
+                $data['teamID'] = $teamID;
+
+                switch ($member[1]) {
+                    case 'vice':
+                        $data['isTeamCaptain'] = 0;
+                        $data['isViceCaptain'] = 1;
+                        break;
+
+                    case 'captain':
+                        $data['isTeamCaptain'] = 1;
+                        $data['isViceCaptain'] = 0;
+                        break;
+                    default:
+                        $data['isTeamCaptain'] = 0;
+                        $data['isViceCaptain'] = 0;
+                        break;
+                }
+
+                $teamUser = new \App\Entities\UserTypes\TeamUser();
+                $teamUser->fill($data);
+
+                try {
+                    $teamUserModel->save($teamUser);
+                } catch (Exception $e) {
+                    echo "<script> console.log('Failed to assign user to team.') </script>";
+                }
+            }
+        }
+
+        return $this->getTeamToEdit($teamID);
     }
 
 }

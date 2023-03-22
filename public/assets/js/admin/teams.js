@@ -34,7 +34,7 @@ updateButton.addEventListener('click', () => {
 
 addMembersButton.addEventListener('click', () => {
     document.getElementById('add-members-JSON').value = getAddedMembersJSON();
-    //addMembersForm.submit()
+    addMembersForm.submit()
 })
 
 

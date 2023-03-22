@@ -19,4 +19,8 @@ class TeamUserModel extends Model
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
 
+    // Functions
+    public function deleteTeamUsers(int $teamID) {
+        $this->where('teamID', $teamID)->delete();
+    }
 }
