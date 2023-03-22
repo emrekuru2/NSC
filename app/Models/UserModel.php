@@ -11,6 +11,7 @@ class UserModel extends ShieldUserModel
     protected $table            = 'nsca_users';
     protected $primaryKey       = 'id';
     protected $useSoftDeletes   = false;
+    protected $returnType       = \App\Entities\User::class;
     protected $allowedFields    = [
         'email',
         'first_name',
