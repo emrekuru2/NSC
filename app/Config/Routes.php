@@ -61,6 +61,9 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->get('email', 'Admin\EmailController::index');
     $routes->get('settings', 'Admin\SettingsController::index');
     $routes->get('users/edit/(:num)', 'Admin\UsersController::userDetails/$1');
+    $routes->get('competitions/edit/(:num)','Admin\CompetitionsController::edit/$1' );
+    $routes->get('competitions/delete/(:num)','Admin\CompetitionsController::delete/$1' );
+
 
     // GET with parameters
     $routes->get('CompetitionType/edit/(:num)','Admin\CompetitionTypeController::edit/$1' );
@@ -95,6 +98,11 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->match(['post'], 'createClub', 'Admin\ClubsController::createClub');
     $routes->match(['post'], 'deleteClub', 'Admin\ClubsController::deleteClub');
     $routes->match(['post'], 'removeClubMember', 'Admin\ClubsController::removeMember');
+    $routes->match(['post'], 'CompetitionType', 'Admin\CompetitionTypeController::store');
+    $routes->match(['post'], 'competitions', 'Admin\CompetitionsController::store');
+    $routes->match(['put'], 'CompetitionType/update/(:num)','Admin\CompetitionTypeController::update/$1' );
+    $routes->match(['put'], 'competitions/update/(:num)','Admin\CompetitionsController::update/$1' );
+
 });
 
 // Codeigniter's default auth routing

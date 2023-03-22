@@ -28,6 +28,7 @@ class CompetitionsController extends BaseController
             'competitionType' => $this->request->getPost('competitionType'),
 
         ];
+
         $competitionModel->save($data);
         header("Refresh:0");
 
