@@ -35,7 +35,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link dropdown-toggle d-flex flex-row align-items-center gap-1" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-                                <img src="assets/images/Users/defaultUser.png" width="20px" height="20px" class="bg-dark rounded-circle" alt="profile_img">
+                                <img src="<?= auth()->user()->image ?>" width="20px" height="20px" class="bg-dark rounded-circle" alt="profile_img">
                                 <span><?= auth()->user()->first_name ?></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-lg-end">
@@ -59,7 +59,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link dropdown-toggle d-flex flex-row align-items-center gap-1" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-                                <img src="assets/images/Users/defaultUser.png" width="20px" height="20px" class="bg-dark rounded-circle" alt="profile_img">
+                                <img src="<?= auth()->user()->image ?>" width="20px" height="20px" class="bg-dark rounded-circle" alt="profile_img">
                                 <span><?= auth()->user()->first_name ?></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-lg-end">
@@ -82,7 +82,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link dropdown-toggle d-flex flex-row align-items-center gap-1" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-                                <img src="assets/images/Users/defaultUser.png" width="20px" height="20px" class="bg-dark rounded-circle" alt="profile_img">
+                                <img src="<?= auth()->user()->image ?>" width="20px" height="20px" class="bg-dark rounded-circle" alt="profile_img">
                                 <span><?= auth()->user()->first_name ?></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-lg-end">
@@ -99,7 +99,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link dropdown-toggle d-flex flex-row align-items-center gap-1" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-                                <img src="assets/images/Users/defaultUser.png" width="20px" height="20px" class="bg-dark rounded-circle" alt="profile_img">
+                                <img src="<?= auth()->user()->image ?>" width="20px" height="20px" class="bg-dark rounded-circle" alt="profile_img">
                                 <span><?= auth()->user()->first_name ?></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-lg-end">
@@ -113,7 +113,7 @@
                     <?php elseif (auth()->user()->inGroup('guest')) : ?>
                         <li class="nav-item">
                             <a class="nav-link dropdown-toggle d-flex flex-row align-items-center gap-1" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-                                <img src="assets/images/Users/defaultUser.png" width="20px" height="20px" class="bg-dark rounded-circle" alt="profile_img">
+                                <img src="<?= auth()->user()->image ?>" width="20px" height="20px" class="bg-dark rounded-circle" alt="profile_img">
                                 <span><?= auth()->user()->first_name ?></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-lg-end">

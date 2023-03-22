@@ -15,8 +15,21 @@
 </head>
 
 <body>
-    <main>
-        <?= view_cell('\App\Libraries\Navigations::panel') ?>
+    <?php if (session()->getFlashdata('alert') !== NULL) : ?>
+        <?= view_cell('\App\Libraries\Alerts::toast', ['type' => session()->getFlashdata('alert')['type'], 'content' => session()->getFlashdata('alert')['content']]) ?>
+    <?php endif; ?>
+    <main class="row">
+        <!-- TODO Fix navbar to fixed position -->
+        <aside class="col-12 col-lg-2">
+            <?= view_cell('\App\Libraries\Navigations::sidebar') ?>
+        </aside>
+        <section class="col-12 col-lg-10 p-4">
+            <div class="d-none d-lg-block">
+                <h1><?= $title ?></h1>
+                <hr>
+            </div>
+            <?= $this->renderSection('adminContent') ?>
+        </section>
     </main>
     <!-- Bootstrap v5.3 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
