@@ -241,7 +241,7 @@ tl-item.active .tl-dot:before {
 }
 
 .divider {
-    border-top: 2px solid rgba(0, 0, 0, 0.175) !important;
+    border-top: 2px solid lightgray !important;
     margin: 0 auto 1rem auto !important;
 }
 
