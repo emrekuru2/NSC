@@ -60,12 +60,6 @@ class TeamSeeder extends Seeder
                 'teamID' => 3,
                 'isTeamCaptain' => 0,
                 'isViceCaptain' => 0
-            ],
-            [
-                'userID' => 6,
-                'teamID' => 3,
-                'isTeamCaptain' => 0,
-                'isViceCaptain' => 0
             ]
         ];
         $this->db->table('nsca_team_users')->insertBatch($users);

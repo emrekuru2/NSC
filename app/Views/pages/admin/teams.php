@@ -4,6 +4,61 @@
 
 <?php $teamIsSet = isset($team) ?>
 
+<!-- Add Member Modal -->
+<form method="post" action="addTeamMembers" id="addMemberModal" class="modal fade" tabindex="-2" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Add Team Member</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col"></th>
+                        <th scope="col">Add</th>
+                    </tr>
+                    </thead>
+
+                    <tbody id="add-member-list">
+                    <?php if (empty($allUsers)) { ?>
+                        <tr data-user="none" data-name="none">
+                            <td class="col-7">No users available.</td>
+                            <td class="col-4"></td>
+                            <td class="col-1"></td>
+                        </tr>
+                    <?php } else { foreach ($allUsers as $user): ?>
+                        <tr>
+                            <td class="col-7 line-height-2rem"><?= $user->first_name . ' ' . $user->last_name ?></td>
+                            <td class="col-4">
+                                <select name="add-member-role" id="role" class="form-select form-select-sm">
+                                    <option value="player" selected>Player</option>
+                                    <option value="vice">Vice Captain</option>
+                                    <option value="captain">Captain</option>
+                                </select>
+                            </td>
+                            <td class="col-1">
+                                <input type="checkbox" class="form-check-input shadow" value="<?= $user->id ?? 'none' ?>" data-role="player" name="add-member-check">
+                            </td>
+                        </tr>
+                    <?php endforeach; } ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="modal-footer group-modal-footer">
+                <input type="text" value="<?= $teamIsSet ? $team->id : '' ?>" name="add-member-team-id" hidden>
+                <input type="text" value="" name="add-members-JSON" id="add-members-JSON" hidden>
+                <button type="button" id="add-member-button" class="btn btn-primary"<?= $teamIsSet ?: " disabled" ?>>Add</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</form>
+
 <!-- Remove Member Modal -->
 <form method="post" action="removeTeamMember" id="removeMemberModal" class="modal fade" tabindex="-2" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -15,7 +70,7 @@
 
             <div class="modal-body">
                 <?php if ($teamIsSet) {?>
-                    <label class="margin-bottom-half-rem" id="remove-member-message">Are you sure you want to remove TEST NAME from the <?= $team->name ?> team?</label>
+                    <label class="margin-bottom-half-rem" id="remove-member-message">Are you sure you want to remove NAME from the <?= $team->name ?> team?</label>
                 <?php } else { ?>
                     <label class="margin-bottom-half-rem" id="remove-member-message">Select a member to remove.</label>
                 <?php } ?>
@@ -115,7 +170,7 @@
         <div class="card shadow">
             <div class="card-header">Edit Team<b></b></div>
 
-            <form method="post" action="updateTeam" class="card-body">
+            <form method="post" action="updateTeam" enctype="multipart/form-data" class="card-body" id="update-form">
                 <!-- Logo and Name -->
                 <img src="<?= $teamIsSet ? base_url($team->image) : base_url('assets/images/Teams/default.png') ?>" class="card-img-top mb-3 mx-auto d-block" style="width: 150px; height: 150px" alt="Team Logo">
                 <h4 class="card-title text-bold text-center"><?= $team->name ?? "Select Team" ?></h4>
@@ -160,53 +215,57 @@
 
                 <!-- Edit Members -->
                 <div class="form-group margin-bottom-0">
-                    <label class="margin-bottom-half-rem">Members</label>
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Role</th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                            <th scope="col">Options</th>
-                        </tr>
-                        </thead>
+                    <div class="margin-bottom-half-rem">
+                        <label>Members</label>
+                    </div>
 
-                        <tbody>
-                        <?php if (empty($teamMembers)) { ?>
+                    <div class="border-round">
+                        <table class="table table-hover margin-bottom-half-rem">
+                            <thead>
                             <tr>
-                                <td class="col-5 line-height-2rem">No team members</td>
-                                <td class="col-4 line-height-2rem"></td>
-                                <td class="col-1 line-height-2rem"></td>
-                                <td class="col-1 line-height-2rem"></td>
-                                <td class="col-1 line-height-2rem"></td>
+                                <th scope="col">Name</th>
+                                <th scope="col">Role</th>
+                                <th scope="col"></th>
+                                <th scope="col">Options</th>
                             </tr>
-                        <?php } else { foreach ($teamMembers as $member): ?>
-                            <tr>
-                                <td class="col-5 line-height-2rem"><?= $member->first_name ?> <?= $member->last_name ?></td>
-                                <td class="col-4 line-height-2rem">
-                                    <select name="role" id="role" class="form-select form-select-sm">
-                                        <option value="player"<?= $member->isTeamCaptain == 0 && $member->isViceCaptain == 0 ? ' selected' : ''; ?>>Player</option>
-                                        <option value="viceCaptain"<?= $member->isViceCaptain == 1 ? ' selected' : ''; ?>>Vice Captain</option>
-                                        <option value="captain"<?= $member->isTeamCaptain == 1 ? ' selected' : ''; ?>>Captain</option>
-                                    </select>
-                                </td>
-                                <td class="col-1"></td>
-                                <td class="col-1"></td>
-                                <td class="col-1">
-                                    <button type="button" name="remove-member-button" data-user="<?= $member->id ?>" data-name="<?= $member->first_name ?> <?= $member->last_name ?>" data-bs-toggle="modal" data-bs-target="#removeMemberModal" class="btn btn-danger btn-sm">Remove</button>
-                                </td>
-                            </tr>
-                        <?php endforeach; } ?>
-                        </tbody>
-                    </table>
+                            </thead>
+
+                            <tbody id="team-member-list" data-members-is-set="<?= $teamIsSet && $teamMembers != null ? 'true' : 'false' ?>">
+                            <?php if (empty($teamMembers)) { ?>
+                                <tr data-user="none" data-name="none">
+                                    <td class="col-5 line-height-2rem">No team members</td>
+                                    <td class="col-4 line-height-2rem"></td>
+                                    <td class="col-2 line-height-2rem"></td>
+                                    <td class="col-1 line-height-2rem"></td>
+                                </tr>
+                            <?php } else { foreach ($teamMembers as $member): ?>
+                                <tr>
+                                    <td class="col-5 line-height-2rem"><?= $member->first_name . ' ' . $member->last_name ?></td>
+                                    <td class="col-4 line-height-2rem">
+                                        <select name="role" id="role" class="form-select form-select-sm">
+                                            <option value="player"<?= $member->isTeamCaptain == 0 && $member->isViceCaptain == 0 ? ' selected' : ''; ?>>Player</option>
+                                            <option value="vice"<?= $member->isViceCaptain == 1 ? ' selected' : ''; ?>>Vice Captain</option>
+                                            <option value="captain"<?= $member->isTeamCaptain == 1 ? ' selected' : ''; ?>>Captain</option>
+                                        </select>
+                                    </td>
+                                    <td class="col-2"></td>
+                                    <td class="col-1">
+                                        <button type="button" name="remove-member-button" data-user="<?= $member->id ?>" data-name="<?= $member->first_name . ' ' . $member->last_name ?>" data-bs-toggle="modal" data-bs-target="#removeMemberModal" class="btn btn-danger btn-sm">Remove</button>
+                                    </td>
+                                </tr>
+                            <?php endforeach; } ?>
+                            </tbody>
+                        </table>
+
+                        <button type="button" id="new-group-button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addMemberModal"<?= $teamIsSet ?: " disabled" ?>><i class="fa-solid fa-plus"></i> Add Member</button>
+                    </div>
                 </div>
 
                 <br>
 
                 <!-- Update Team Button -->
                 <div class="form-group margin-bottom-0">
-                    <input type="text" value="<?= $teamIsSet ? $team->id : '' ?>" name="update-team-id" hidden>
+                    <input type="text" value="<?= $teamIsSet ? $team->id : '' ?>" name="update-team-id" id="update-team-id" hidden>
                     <input type="text" value="" name="update-members-JSON" id="update-members-JSON" hidden>
                     <button type="button" name="update-button" id="update-button" class="btn btn-primary margin-bottom-1rem"<?= $teamIsSet ?: " disabled" ?>>Update Team</button>
                 </div>
@@ -221,7 +280,6 @@
     </div>
 </div>
 
-<script type="text/javascript" src="<?= base_url('assets/js/admin/editGroup.js'); ?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/admin/teams.js'); ?>"></script>
 
 <?= $this->endSection() ?>

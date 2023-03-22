@@ -12,6 +12,7 @@ class UserEmailModel extends Model
     protected $returnType       = \App\Entities\User::class;
     protected $protectFields    = true;
     protected $allowedFields    = [
+        'id',
         'email',
         'first_name',
         'last_name'

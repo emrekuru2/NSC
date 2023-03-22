@@ -257,3 +257,8 @@ tl-item.active .tl-dot:before {
     padding-top: 0;
 }
 
+.border-round {
+    border: 1px solid rgba(0, 0, 0, 0.175);
+    padding: 0 0.5rem 0.5rem 0.5rem;
+    border-radius: 0.375rem;
+}

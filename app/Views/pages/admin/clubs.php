@@ -13,16 +13,18 @@
             <div class="card-header">Edit Club</b></div>
 
             <form class="card-body" action="updateClub" method="post" id="update-form">
-                <img src="/assets/images/teamProfilePictures/HalifaxCC.jpg" class="card-img-top mb-3 mx-auto d-block" style="width: 150px; height: 150px" alt="club_image">
-                <h4 class="card-title text-bold text-center"><?= $club->name ?? "Select Club to Edit" ?></h4>
+                <img src="<?= $clubIsSet ? base_url($club->image) : base_url('assets/images/Clubs/default.png') ?>" class="card-img-top mb-3 mx-auto d-block" style="width: 150px; height: 150px" alt="club_image">
+                <h4 class="card-title text-bold text-center"><?= $club->name ?? "Select Club" ?></h4>
 
                 <br>
 
-                <div class="input-group mb-3">
-                    <input type="file" class="form-control">
+                <div class="form-group margin-bottom-1rem">
+                    <label class="margin-bottom-half-rem" for="updateClubImage">Logo</label>
+                    <input type="file" class="form-control"  name="updateClubImage" id="updateClubImage"<?= $clubIsSet ?: " disabled" ?>>
+                    <div class="form-text">SVG filetype recommended.</div>
                 </div>
 
-                <hr>
+                <hr class="divider">
 
                 <!-- Edit Name -->
                 <div class="form-group margin-bottom-1rem">
@@ -38,8 +40,8 @@
 
                 <!-- Edit Description -->
                 <div class="form-group margin-bottom-1rem">
-                    <label class="margin-bottom-half-rem" for="abbreviation">Abbreviation</label>
-                    <input type="text" class="form-control" name="abbreviation" id="abbreviation"<?= $clubIsSet ?: " disabled" ?>>
+                    <label class="margin-bottom-half-rem" for="abbreviation">Description</label>
+                    <textarea class="form-control" name="updateClubDescription" id="updateClubDescription" rows="3" <?= $clubIsSet ? ">" . $club->description : "disabled>" ?></textarea>
                 </div>
 
                 <!-- Edit Email -->
@@ -70,22 +72,17 @@
 
                 <!-- Update Club Button-->
                 <div class="form-group margin-bottom-0">
-                    <button type="button" name="update-button" id="update-button" class="btn btn-primary"<?= $clubIsSet ?: " disabled" ?>>Update</button>
+                    <button type="button" name="update-button" id="update-button" class="btn btn-primary margin-bottom-1rem"<?= $clubIsSet ?: " disabled" ?>>Update</button>
                 </div>
-            </form>
 
-            <hr class="divider">
+                <hr class="divider">
 
-            <form method="post" action="deleteClub" id="delete-form">
-                <!-- Delete Club Button -->
-                <input value="<?= $clubIsSet ? $club->id : 0 ?>" name="teamID" id="delete-team-id" hidden>
-                <button type="button" name="delete-button" id="delete-button" class="btn btn-danger"<?= $clubIsSet ?: " disabled" ?>>Delete Club</button>
+                <!-- Delete Team Button -->
+                <button type="button" name="delete-button" id="delete-button" data-bs-toggle="modal" data-bs-target="#deleteClubModal" class="btn btn-danger margin-bottom-0"<?= $clubIsSet ?: " disabled" ?>>Delete Club</button>
             </form>
 
         </div>
     </div>
 </div>
-
-<script type="text/javascript" src="<?= base_url('assets/js/admin/editGroup.js'); ?>"></script>
 
 <?= $this->endSection() ?>

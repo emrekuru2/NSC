@@ -129,15 +129,6 @@ nb-configuration.xml
 mysql-8/
 /mysql-8/
 
-#-------------------------
 # Images
-#-------------------------
+# Note: Manually add images using 'git add public assets/images/...' if you plan on pushing them. 'git add -A' will not work.
 public/assets/images/*
-
-# Excluded General
-!public/assets/images/*/default.png
-
-# Excluded Teams
-!public/assets/images/Teams/1679279078_96d548d55d41e3a40fd2.png
-!public/assets/images/Teams/1679280630_ec7e6a5e7c77c3c6d728.png
-!public/assets/images/Teams/1679280642_764ecea8c4444d1f0a0e.png

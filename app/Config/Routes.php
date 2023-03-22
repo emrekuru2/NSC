@@ -81,6 +81,7 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->match(['post'], 'createTeam', 'Admin\TeamsController::createTeam');
     $routes->match(['post'], 'deleteTeam', 'Admin\TeamsController::deleteTeam');
     $routes->match(['post'], 'removeTeamMember', 'Admin\TeamsController::removeMember');
+    $routes->match(['post'], 'addTeamMembers', 'Admin\TeamsController::addMembers');
 
     $routes->match(['post'], 'editClub', 'Admin\ClubsController::editClub');
     $routes->match(['post'], 'updateClub', 'Admin\ClubsController::updateClub');
