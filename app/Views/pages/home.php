@@ -5,7 +5,7 @@
         It has an image background with text and link over it
     -->
     <div class="justify-content-center container my-4" style="padding-top:2vw; position: relative;">
-        <img src="/assets/images/Home/cricket.jpg" alt="about-us" style="width:45%; height:auto;">
+        <img src="<?= base_url('assets/images/General/logo1.png') ?>" alt="about-us" style="width:45%; height:auto;">
         <div class="text-bold" style="position: absolute; top: 50%; transform: translateY(-50%); right: 2vw; width: 40%; max-height: 80%; overflow-y: auto;">
             <h3>About us</h3>
             <p style="opacity: 1;">
