@@ -5,7 +5,7 @@ use CodeIgniter\Model;
 
 class CompetitionModel extends Model
 {
-    protected $table            = 'nsca_competition';
+    protected $table            = 'nsca_competitions';
     protected $primaryKey       = 'id';
     protected $allowedFields    = ['name','description','compTypeID','YearRunning','competitionType'];
 

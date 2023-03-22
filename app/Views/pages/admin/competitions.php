@@ -40,7 +40,7 @@
                     <form class="d-flex flex-column align-items-center"<?= base_url('add')?> method="POST">
                     <div class="input-group mb-3">
                         <span class="input-group-text" style="width: 20%;" id="name">Name</span>
-                        <input type="text" class="form-control" name="name" placeholder="Club name" aria-label="name" aria-describedby="name">
+                        <input type="text" class="form-control" name="name" placeholder="Name" aria-label="name" aria-describedby="name">
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" style="width: 20%;" id="Description">Description</span>
