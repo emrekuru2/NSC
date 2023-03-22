@@ -6,7 +6,8 @@ function storeImage($folder, $file)
         $newName = $file->getRandomName();
         $path = 'assets/images/' . $folder . '/';
         $file->move($path, $newName);
+        return $path . $newName;
     }
 
-    return $path . $newName;
+    return false;
 }

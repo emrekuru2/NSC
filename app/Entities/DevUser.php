@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entities\UserTypes;
+namespace App\Entities;
 
 use CodeIgniter\Entity\Entity;
 

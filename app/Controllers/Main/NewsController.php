@@ -17,7 +17,6 @@ class NewsController extends BaseController
             'pager' => $model->pager,
             'title' => 'News',
         ];
-
         return view('pages/news', $data);
     }
 

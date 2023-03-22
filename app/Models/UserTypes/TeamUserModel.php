@@ -11,7 +11,7 @@ class TeamUserModel extends Model
     protected $primaryKey       = 'id';
     protected $returnType       = \App\Entities\UserTypes\TeamUser::class;
     protected $protectFields    = true;
-    protected $allowedFields    = ['userID', 'teamID', 'isClubManager', 'isTeamCaptain', 'isViceCaptain', 'isWaitingToJoin'];
+    protected $allowedFields    = ['userID', 'teamID', 'isClubManager', 'isTeamCaptain', 'isViceCaptain'];
 
     // Dates
     protected $useTimestamps = true;
@@ -19,4 +19,8 @@ class TeamUserModel extends Model
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
 
+    // Functions
+    public function deleteTeamUsers(int $teamID) {
+        $this->where('teamID', $teamID)->delete();
+    }
 }

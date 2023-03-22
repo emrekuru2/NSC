@@ -1,4 +1,4 @@
-<?= $this->extend('layouts\auth') ?>
+<?= $this->extend('layouts/auth') ?>
 
 <?= $this->section('title') ?><?= lang('Auth.register') ?> <?= $this->endSection() ?>
 

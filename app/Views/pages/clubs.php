@@ -2,26 +2,56 @@
 
 <?= $this->section('mainContent') ?>
 
-    <?php if (!empty($clubs) && is_array($clubs)) : ?>
+<div class="container my-5">
 
-        <?php foreach ($clubs as $clubs_item) : ?>
 
-            <h3><?= esc($clubs_item['Name']) ?></h3>
+        <!-- Section: Block Content -->
+        <section class="dark-grey-text text-center">
 
-            <div class="main">
-                <a><?= esc($clubs_item['Website']) ?></a>
-                <img src="<?= esc($clubs_item['TeamImage']) ?>">
+            <h1 class="display-3 text-center font-weight-bold">Clubs</h3>
+
+            <!-- Grid row -->
+            <div class="row">
+                <?php if (!empty($clubs) && is_array($clubs)) : ?>
+                    <?php foreach ($clubs as $club) : ?>
+
+                        <h2 class="display-7 mb-2 text-center font-weight-normal"><?=$club->name?></h4>
+            <br>
+            
+            <div class="club-container">
+                <img class="feature-img rounded-circle" src="<?=base_url("/assets/images/Clubs/default.png")?>"
+                            alt="Sample image">   
+                
+                <div class="club-info">
+                    <div class="info-container">
+                        <i class="fa-solid fa-envelope"></i>
+                        <a href="Mailto:<?=$club->email?>">: <?=$club->email?></a>
+                    </div>
+
+                    <div class="info-container">
+                        <i class="fa-solid fa-phone"></i>
+                        <a href="tel:<?=$club->phone?>">: <?=$club->phone?></a>
+                    </div>
+                    <?php if($club->facebook != null)?>
+                    <div class="info-container">
+                        <i class="fa-brands fa-facebook"></i>
+                        <a href="<?=$club->facebook?>">: <?=$club->name?></a>
+                    </div>
+                </div>
             </div>
-            <p>View article</p>
 
-        <?php endforeach ?>
+                        <!-- Grid column -->
+                    <?php endforeach; ?>
+                <?php endif; ?>
+        
 
-    <?php else : ?>
+            </div>
 
-        <h3>No News</h3>
+        </section>
+        <!-- Section: Block Content -->
 
-        <p>Unable to find any clubs for you.</p>
 
-    <?php endif ?>
+    </div>
+
 
 <?= $this->endSection() ?>
