@@ -220,6 +220,7 @@ class TeamsController extends BaseController
     public function deleteTeam()
     {
         $teamModel = model(TeamModel::class);
+        $teamUserModel = model(TeamUserModel::class);
 
         $teamID = $this->request->getPost('deleteTeamID');
 
@@ -229,13 +230,13 @@ class TeamsController extends BaseController
         }
 
         $teamModel->delete($teamID);
+        $teamUserModel->deleteTeamUsers($teamID);
 
         if (isEmpty($teamModel->find($teamID))) {
             $data = [
                 'type'    => 'success',
                 'content' => 'Team deleted successfully'
             ];
-
             return redirect()->to('admin/teams')->with('alert', $data);
         }
 
@@ -243,7 +244,6 @@ class TeamsController extends BaseController
             'type'    => 'danger',
             'content' => 'Error occurred while deleting team'
         ];
-
         return redirect()->to('admin/teams')->with('alert', $data);
     }
 
