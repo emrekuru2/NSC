@@ -162,8 +162,52 @@
 <!-- Update Team -->
 <div class="row">
     <div class="col-sm-4 mb-3 mb-sm-0">
-        <?= view_cell('\App\Libraries\Contents::searchPanel', ['groupName' => 'Team', 'rows' => $allTeams, 'typeOfSearch' => 'Edit']); ?>
-        <?= view_cell('\App\Libraries\Contents::groupEditListPanel', ['title' => 'Team', 'rows' => $allTeams, 'groupIsSet' => $teamIsSet]); ?>
+<!--        --><?php //= view_cell('\App\Libraries\Contents::searchPanel', ['groupName' => 'Team', 'rows' => $allTeams, 'typeOfSearch' => 'Edit']); ?>
+<!--        --><?php //= view_cell('\App\Libraries\Contents::groupEditListPanel', ['groupName' => 'Team', 'rows' => $allTeams, 'groupIsSet' => $teamIsSet]); ?>
+
+        <div class="card shadow">
+            <div class="card-header">
+                <div class="d-md-flex justify-content-md-end group-list-header">
+                    <div class="line-height-2rem">All Teams</div>
+                    <button type="button" id="new-group-button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#groupModal"><i class="fa-solid fa-plus"></i> New Team</button>
+                </div>
+            </div>
+
+            <div class="card-body padding-top-half-rem">
+                <?= view_cell('\App\Libraries\Contents::search', ['groupName' => 'Team', 'rows' => $allTeams, 'typeOfSearch' => 'Edit']); ?>
+
+                <hr class="divider">
+
+                <table class="table table-hover margin-bottom-half-rem">
+                    <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <?php
+                    if (sizeof($allTeams) == 0) {
+                        echo '<p class="text-start margin-bottom-0">No teams available.</p>';
+                    }
+
+                    foreach ($allTeams as $team): ?>
+                        <tr>
+                            <td class="col-11 line-height-2rem"><label for="groupID"><?= $team->name ?></label></td>
+                            <td class="col-1">
+                                <form method="post" action="editTeam">
+                                    <input value="<?= $team->id ?>" name="groupID" id="groupID" hidden>
+                                    <button type="submit" name="edit-button" class="btn btn-primary btn-sm">Edit</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php endforeach ?>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
     </div>
 
     <div class="col-sm-8">
