@@ -33,7 +33,7 @@ class Developments extends Migration
             'end_date'      => ['type' => 'date', 'null' => false],
             'price'         => ['type' => 'int', 'constraint' => 11, 'null' => true],
             'location'      => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
-            'image'         => ['type' => 'varchar', 'constraint' => 120, 'null' => false, 'default' => 'assets/images/Devs/default.png'],
+            'image'         => ['type' => 'varchar', 'constraint' => 120, 'null' => false, 'default' => 'assets/images/Dev/default.png'],
             'daysRun'       => ['type' => 'varchar', 'constraint' => 128, 'null' => true],
             'created_at'    => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
             'updated_at'    => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
