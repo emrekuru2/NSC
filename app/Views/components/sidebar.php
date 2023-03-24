@@ -29,7 +29,6 @@
           <a href="CompetitionType" class="nav-link link-primary text-light <?= ($title == 'CompetitionType') ? "active" : "" ?>"><i class="fa-solid fa-chess-king fa-lg me-3 fa-fw"></i>Competitions Type</a>
         </li>
         <li class="nav-item">
-          <a href="committees" class="nav-link link-primary text-light <?= ($title == 'Committees') ? "active" : "" ?>"><i class="fa-solid fa-users-between-lines fa-lg me-3 fa-fw"></i>Committees</a>
           <a href="<?= base_url('admin/committees')?>" class="nav-link link-primary text-light <?= ($title == 'Committees') ? "active" : "" ?>"><i class="fa-solid fa-users-between-lines fa-lg me-3 fa-fw"></i>Committees</a>
         </li>
         <li class="nav-item">
