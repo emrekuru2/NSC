@@ -11,7 +11,7 @@ class CommitteeModel extends Model
     protected $primaryKey       = 'id';
     protected $returnType       = \App\Entities\Committee::class;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'description', 'years'];
+    protected $allowedFields    = ['name', 'description', 'years', 'image'];
 
     // Dates
     protected $useTimestamps = true;

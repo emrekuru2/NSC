@@ -40,7 +40,7 @@
         <div class="card shadow">
             <div class="card-header">Create committiee</div>
             <div class="card-body">
-                <form method="post" action="createCommittee">
+                <form method="post" action="createCommittee" enctype="multipart/form-data">
                     <div class="row g-3 justify-content-center">
                         <div class="col-12">
                             <label for="name" class="form-label">Name:</label>
@@ -65,6 +65,10 @@
                         <div class="col-12">
                             <label for="description" class="form-label">committiee description</label>
                             <textarea class="form-control" id="description" rows="10" name="description" required></textarea>
+                        </div>
+                        <div class="col-12 col-lg-12">
+                            <label for="image" class="form-label">Image:</label>
+                            <input type="file" accept=".png, .jpeg, .jpg" class="form-control" id="image" name="image">
                         </div>
                         <button type="submit" class="col-12 col-lg-6 btn btn-primary">Create</button>
                     </div>

@@ -20,19 +20,31 @@ class CommitteesController extends BaseController
     }
 
     public function createCommittee(){
+        helper('image');
+        
         $committieesModel = new \App\Models\CommitteeModel();
         $name = $this->request->getVar('name');
         $startyear = $this->request->getVar('startyear');
+
         if ($this->request->getVar('endyear') == null){
             $startyear = $startyear . ' - Present';
         }
         else{
             $startyear = $startyear . ' - ' . $this->request->getVar('endyear');
         }
+        $image = $this->request->getFile('image');
+        if ($image->isValid()){
+            
+            $filePath = storeImage('Committee', $image);
+        }
+        else{
+            $filePath = 'assets/images/Committee/default.png';
+        }
         $data = [
             'name' => $name,
             'years' => $startyear,
             'description' => $this->request->getVar('description'),
+            'image' => $filePath,
         ];
 
         $committieesModel->insert($data);
