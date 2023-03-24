@@ -17,6 +17,7 @@
                                     <th scope="col">ID</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Dates</th>
+                                    <th scope="col">Edit</th>
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider">
@@ -26,6 +27,10 @@
                                             <td><?= esc($committiee->id) ?></td>
                                             <td><?= esc($committiee->name) ?></td>
                                             <td><?= esc($committiee->years) ?></td>
+                                            <td><form method="post" action="modify_committee">
+                                                <input type="hidden" name="id" value="<?=esc($committiee->id)?>">
+                                                <button class="btn btn-primary" type="submit">Edit</button>
+                                            </form></td>
                                         </tr>
                                     <?php endforeach ?>
                                 <?php endif ?>
