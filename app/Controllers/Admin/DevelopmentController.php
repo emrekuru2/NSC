@@ -102,6 +102,7 @@ class DevelopmentController extends BaseController
         $data = [
             'program'     => $dev,
             'users'       => $users,
+            'days'      => ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
             'devTypes'  => $devType->findAll(),
             'title'    => $dev->name . " - Modify",
         ];
