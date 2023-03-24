@@ -13,7 +13,7 @@ class CompetitionTypeController extends BaseController
 
         $data = [  
             'competitionType' =>$competitionType->findAll(),
-            'title' => 'CompetitionsType'
+            'title' => 'Competitions Type'
         ];
 
         return view('pages/admin/competitionType', $data);
@@ -37,7 +37,7 @@ class CompetitionTypeController extends BaseController
         $data = [
             'competitionType' =>$competitionType->find($id),
 
-            'title' => 'CompetitionsType'
+            'title' => 'Competitions Type'
         ];
         return view('pages/admin/competitionTypeEdit', $data);
     }
