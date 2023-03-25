@@ -8,34 +8,23 @@
         <!-- Section: Block Content -->
         <section class="dark-grey-text text-center">
 
-            <h1 class="display-3 text-center font-weight-bold">Clubs</h3>
+            <h1 class="display-3 text-center font-weight-bold">Clubs</h1>
+            <br>
 
             <!-- Grid row -->
             <div class="row">
                 <?php if (!empty($clubs) && is_array($clubs)) : ?>
                     <?php foreach ($clubs as $club) : ?>
-
-                        <h2 class="display-7 mb-2 text-center font-weight-normal"><?=$club->name?></h4>
-            <br>
-            
-            <div class="club-container">
-                <img class="feature-img rounded-circle" src="<?=base_url("/assets/images/Clubs/default.png")?>"
-                            alt="Sample image">   
-                
-                <div class="club-info">
-                    <div class="info-container">
-                        <i class="fa-solid fa-envelope"></i>
-                        <a href="Mailto:<?=$club->email?>">: <?=$club->email?></a>
+            <div class="col-lg-4 mb-5">
+                <div class="card h-100 shadow border-0">
+                    <img class="card-img-top" src="<?=base_url("/assets/images/Clubs/default.png")?>" alt="..." />
+                    <div class="card-body p-4">
+                        <h2 class="lead fw-normal text-muted mb-0"><?=$club->name?></h2>
                     </div>
-
-                    <div class="info-container">
-                        <i class="fa-solid fa-phone"></i>
-                        <a href="tel:<?=$club->phone?>">: <?=$club->phone?></a>
-                    </div>
-                    <?php if($club->facebook != null)?>
-                    <div class="info-container">
-                        <i class="fa-brands fa-facebook"></i>
-                        <a href="<?=$club->facebook?>">: <?=$club->name?></a>
+                    <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+                        <div class="d-flex align-items-end justify-content-between">
+                        
+                        </div>
                     </div>
                 </div>
             </div>
