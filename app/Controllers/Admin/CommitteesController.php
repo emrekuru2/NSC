@@ -133,6 +133,9 @@ class CommitteesController extends BaseController
 
         $id = $this->request->getVar('id');
         $committieesModel->delete($id);
+        // remove all users from committee
+        $committeeUserModel = model(CommitteeUserModel::class);
+        $committeeUserModel->where('committeeID', $id)->delete();
 
 
         $data = [
