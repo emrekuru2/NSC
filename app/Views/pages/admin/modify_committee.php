@@ -1,6 +1,10 @@
 <?= $this->extend('layouts/admin') ?>
 
 <?= $this->section('adminContent') ?>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
+<script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
+
+
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -58,8 +62,23 @@
                                 <?php else: ?>
                                     <input type="number" class="form-control" id="endyear" name="endyear" value=<?=esc($years[1])?>>
                                 <?php endif; ?>
-
                             </div>
+                            <label for="users[]" class="form-label">Committee members:</label>
+                            <select id="users[]" name="users[]" multiple="multiple" required>
+                                <?php foreach ($users as $user) : ?>
+
+                                    <?php if(in_array($user->id, $members)) : ?>
+                                        <option value="<?=esc($user->id)?>" selected>
+                                        <?=esc($user->first_name)?> <?=esc($user->last_name)?>
+                                    </option>
+                                    <?php else : ?>
+                                        <option value="<?=esc($user->id)?>">
+                                        <?=esc($user->first_name)?> <?=esc($user->last_name)?>
+                                    </option>
+                                    <?php endif ?>
+
+                                <?php endforeach; ?>
+                            </select>
                         <div class="col-12">
                             <label for="description" class="form-label">committiee description</label>
                             <textarea class="form-control" id="description" rows="10" name="description" required ><?=esc($committee->description)?></textarea>
@@ -74,5 +93,7 @@
         </div>
     </div>
 <script type="text/javascript" src="<?= base_url('assets/js/admin/committiees.js');?>"></script>
-
+<script>
+    new MultiSelectTag('users[]') // id
+</script>
 <?= $this->endSection() ?>
