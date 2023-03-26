@@ -9,28 +9,23 @@
         <section class="dark-grey-text text-center">
 
             <h1 class="display-3 text-center font-weight-bold">Teams</h3>
+            <br>
 
             <!-- Grid row -->
             <div class="row">
                 <?php if (!empty($teams) && is_array($teams)) : ?>
                     <?php foreach ($teams as $team) : ?>
                         <!-- Grid column -->
-                        <div class="col-md-6 mb-4">
-
-                            <div class="view overlay rounded">
-                                <a>
-                                    <div class="mask rgba-white-slight"></div>
-                                </a>
+                        <div class="col-lg-4 mb-5">
+                            <div class="card h-100 shadow border-0">
+                                <img class="card-img-top" src="<?=base_url($team->image)?>" alt="..." />
+                                <div class="card-body p-4">
+                                    <a class="text-decoration-none link-dark stretched-link"><h5 class="fw-bolder"><?=$team->name?></h5></a>
+                                    <h2 class="lead fw-normal text-muted mb-0"><?=$team->description?></h2>
+                                </div>
                             </div>
-
-                            <div class="px-3 pt-3 mx-1 mt-1 pb-0">
-                                <!-- image -->
-                                <img src="<?= base_url($team->image) ?>" class="img-thumbnail  rounded w-25 h-25" alt="Team logo">
-                                <h4 class="font-weight-bold mb-3"><?= esc($team->name) ?></h4>
-                                <p><?= esc($team->description) ?></p>
-                            </div>
-
                         </div>
+                        
                         <!-- Grid column -->
                     <?php endforeach; ?>
                 <?php endif; ?>
