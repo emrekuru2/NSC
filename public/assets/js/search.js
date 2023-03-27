@@ -11,14 +11,15 @@ searchBarButton.addEventListener('click', () => {
 
 
 // Functions
+// Debug the autocomplete function
 function autoComplete(input, array) {
     let currentFocus;
 
     input.addEventListener("input", function() {
         let list, item, val = this.value
         closeAllLists()
+        if (!val) return false
 
-        if (!val) { return false;}
         currentFocus = -1
 
         list = document.createElement("div")
@@ -29,17 +30,27 @@ function autoComplete(input, array) {
         for (let i = 0; i < array.length; i++) {
             // Checking if input matches values in array
             if (array[i].substring(0, val.length).toUpperCase() === val.toUpperCase()) {
-                // Create a DIV element for each matching element
+                // Create a div element for each matching element
                 item = document.createElement("div")
                 item.innerHTML = "<strong>" + array[i].substring(0, val.length) + "</strong>" // Bold matching letters
-                item.innerHTML += array[i].substring(val.length);
+                item.innerHTML += array[i].substring(val.length)
                 item.innerHTML += "<input type='hidden' value='" + array[i] + "'>" // Input field to hold array value
 
                 // When user clicks on autofill option
                 item.addEventListener("click", function() {
-                    input.value = this.getElementsByTagName("input")[0].value; // Inserting array value into search bar
-                    closeAllLists()
+                    if (item.innerText !== "No results found") {
+                        input.value = this.getElementsByTagName("input")[0].value; // Inserting array value into search bar
+                        closeAllLists()
+                        //searchForm.submit()
+                    }
                 })
+                list.appendChild(item)
+            }
+
+            if (i === array.length - 1 && list.childNodes.length === 0) {
+                // Create a div element for each matching element
+                item = document.createElement("div")
+                item.innerText = "No results found" // Input field to hold array value
                 list.appendChild(item)
             }
         }
@@ -47,22 +58,22 @@ function autoComplete(input, array) {
 
     input.addEventListener("keydown", function(event) {
         // Traversing the autocomplete list
-        let x = document.getElementById(this.id + "autocomplete-list")
-        if (x) x = x.getElementsByTagName("div")
+        let selectedItem = document.getElementById(this.id + "autocomplete-list")
+        if (selectedItem) selectedItem = selectedItem.getElementsByTagName("div")
         if (event.keyCode === 40) {
             // Presses 'Down' arrow key
             currentFocus++
-            addActive(x)
+            addActive(selectedItem)
         } else if (event.keyCode === 38) {
             // Presses 'Up' arrow key
             currentFocus--
-            addActive(x)
+            addActive(selectedItem)
         } else if (event.keyCode === 13) {
             // Presses 'Enter' key
             event.preventDefault()
             if (currentFocus > -1) {
                 /*and simulate a click on the "active" item:*/
-                if (x) x[currentFocus].click()
+                if (selectedItem) selectedItem[currentFocus].click()
             }
         }
     })
