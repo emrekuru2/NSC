@@ -5,6 +5,7 @@ namespace App\Controllers\Admin;
 use App\Models\DevModel;
 use App\Models\DevTypeModel;
 use App\Controllers\BaseController;
+use App\Models\DevUserModel;
 
 class DevelopmentController extends BaseController
 {
@@ -143,6 +144,9 @@ class DevelopmentController extends BaseController
         $devType = model(DevTypeModel::class);
         $id = $this->request->getVar('id');
         $devModel->delete($id);
+        // remove all users from development program
+        $committeeUserModel = model(DevUserModel::class);
+        $committeeUserModel->where('devID', $id)->delete();
 
         $data = [
             'programs'  => $devModel->orderBy('id', 'DESC')->paginate(10),
