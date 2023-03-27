@@ -11,7 +11,6 @@ searchBarButton.addEventListener('click', () => {
 
 
 // Functions
-// Debug the autocomplete function
 function autoComplete(input, array) {
     let currentFocus;
 
