@@ -7,8 +7,7 @@
 
         <!-- Section: Block Content -->
         <section class="dark-grey-text text-center">
-
-            <h1 class="display-3 text-center font-weight-bold">Committees</h3>
+            <h1 class="display-3 text-center font-weight-bold">Committees</h1>
 
             <!-- Grid row -->
             <div class="row">
