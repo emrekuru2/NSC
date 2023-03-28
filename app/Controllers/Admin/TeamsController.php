@@ -82,7 +82,11 @@ class TeamsController extends BaseController
         $teamName = esc($this->request->getVar('search'));
         $team = $teamModel->select()->where('name', $teamName)->first();
 
-        return $this->getTeamToEdit($team->id);
+        if ($team != null) {
+            return $this->getTeamToEdit($team->id);
+        } else {
+            return redirect()->back();
+        }
     }
 
     public function updateTeam()

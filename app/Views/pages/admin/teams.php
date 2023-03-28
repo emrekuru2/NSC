@@ -163,8 +163,6 @@
 
     <!-- All Teams and Search -->
     <div class="col-sm-4 mb-3 mb-sm-0">
-<!--        --><?php //= view_cell('\App\Libraries\Contents::searchPanel', ['groupName' => 'Team', 'rows' => $allTeams, 'typeOfSearch' => 'Edit']); ?>
-<!--        --><?php //= view_cell('\App\Libraries\Contents::groupEditListPanel', ['groupName' => 'Team', 'rows' => $allTeams, 'groupIsSet' => $teamIsSet]); ?>
         <div class="card shadow">
             <div class="card-header">
                 <div class="d-md-flex justify-content-md-end group-list-header">
@@ -174,7 +172,7 @@
             </div>
 
             <div class="card-body padding-top-half-rem">
-                <?= view_cell('\App\Libraries\Contents::search', ['route' => 'searchTeam', 'name' => 'Team', 'rows' => $allTeams]); ?>
+                <?= view_cell('\App\Libraries\Contents::search', ['route' => 'searchTeam', 'name' => 'Team', 'array' => $allTeams, 'useName' => true]); ?>
 
                 <hr class="divider">
 
