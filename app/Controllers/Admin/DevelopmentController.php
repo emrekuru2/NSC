@@ -101,6 +101,7 @@ class DevelopmentController extends BaseController
             $dev = $devModel->select()->find($devID);
         }
 
+        if ($dev == null) return $this->index();
         $users = $devModel->getUsers($dev->id);
 
         $data = [
