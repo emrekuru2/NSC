@@ -61,9 +61,12 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->get('email', 'Admin\EmailController::index');
     $routes->get('settings', 'Admin\SettingsController::index');
     $routes->get('users/edit/(:num)', 'Admin\UsersController::userDetails/$1');
+    $routes->get('searchTeam', 'Admin\TeamsController::searchTeam');
 
 
     // Functions
+    $routes->match(['post'], 'editUser/(:num)', 'Admin\UsersController::editUser/$1');
+
     $routes->match(['post'], 'sendEmail', 'Admin\EmailController::sendEmail');
     $routes->match(['post'], 'createNews', 'Admin\NewsController::createNews');
 
@@ -84,7 +87,6 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->match(['post'], 'deleteTeam', 'Admin\TeamsController::deleteTeam');
     $routes->match(['post'], 'removeTeamMember', 'Admin\TeamsController::removeMember');
     $routes->match(['post'], 'addTeamMembers', 'Admin\TeamsController::addMembers');
-    $routes->match(['post'], 'editUser/(:num)', 'Admin\UsersController::editUser/$1');
 
     $routes->match(['post'], 'editClub', 'Admin\ClubsController::editClub');
     $routes->match(['post'], 'updateClub', 'Admin\ClubsController::updateClub');

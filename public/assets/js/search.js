@@ -1,12 +1,11 @@
 // Variables
 const searchForm = document.getElementById('search-form')
 const searchBar = document.getElementById('search')
-const searchBarButton = document.getElementById('search-bar-button')
 
 
 // Listeners
-searchBarButton.addEventListener('click', () => {
-    if (searchBar.value !== '') searchForm.submit()
+document.addEventListener('keydown', (event) => {
+    if (searchBar.value !== '' && event.keyCode === 13) searchForm.submit() // Enter key pressed when searching
 })
 
 

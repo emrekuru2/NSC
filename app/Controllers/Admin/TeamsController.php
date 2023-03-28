@@ -75,6 +75,16 @@ class TeamsController extends BaseController
         return view('pages/admin/teams', $data);
     }
 
+    public function searchTeam()
+    {
+        $teamModel = model(TeamModel::class);
+
+        $teamName = esc($this->request->getVar('search'));
+        $team = $teamModel->select()->where('name', $teamName)->first();
+
+        return $this->getTeamToEdit($team->id);
+    }
+
     public function updateTeam()
     {
         helper('image');

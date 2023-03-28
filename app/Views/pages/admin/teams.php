@@ -159,12 +159,12 @@
     </div>
 </form>
 
-<!-- Update Team -->
 <div class="row">
+
+    <!-- All Teams and Search -->
     <div class="col-sm-4 mb-3 mb-sm-0">
 <!--        --><?php //= view_cell('\App\Libraries\Contents::searchPanel', ['groupName' => 'Team', 'rows' => $allTeams, 'typeOfSearch' => 'Edit']); ?>
 <!--        --><?php //= view_cell('\App\Libraries\Contents::groupEditListPanel', ['groupName' => 'Team', 'rows' => $allTeams, 'groupIsSet' => $teamIsSet]); ?>
-
         <div class="card shadow">
             <div class="card-header">
                 <div class="d-md-flex justify-content-md-end group-list-header">
@@ -174,16 +174,16 @@
             </div>
 
             <div class="card-body padding-top-half-rem">
-                <?= view_cell('\App\Libraries\Contents::search', ['groupName' => 'Team', 'rows' => $allTeams, 'typeOfSearch' => 'Edit']); ?>
+                <?= view_cell('\App\Libraries\Contents::search', ['route' => 'searchTeam', 'name' => 'Team', 'rows' => $allTeams]); ?>
 
                 <hr class="divider">
 
                 <table class="table table-hover margin-bottom-half-rem">
                     <thead>
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col"></th>
-                    </tr>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col"></th>
+                        </tr>
                     </thead>
 
                     <tbody>
@@ -210,6 +210,7 @@
         </div>
     </div>
 
+    <!-- Update Team -->
     <div class="col-sm-8">
         <div class="card shadow">
             <div class="card-header">Edit Team<b></b></div>
