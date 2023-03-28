@@ -70,6 +70,8 @@ class CommitteesController extends BaseController
             $committee = $committeeModel->select()->find($committeeID);
         }
 
+        if ($committee == null) return $this->index();
+
         $years = explode(' - ', $committee->years);
 
         $members = $committeeModel->getMembers($committee->id);
