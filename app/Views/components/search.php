@@ -4,6 +4,7 @@
  * @brief Search bar component.
  * @details Search bar component for searching entities in database. Use '$this->request->getVar('search')' inside a controller to get search term.
  *
+ * Required:
  * @param string $route <p>Route name of the desired function.</p>
  * @param string $name <p>Name of section (Singular). E.g., 'Team', 'Club', 'Committee', etc.</p>
  * @param array $array <p>Array of entities from model. E.g., teams table, clubs table, etc.</p>
@@ -20,7 +21,7 @@
 
         <thead class="border-style-none">
             <tr>
-                <th scope="col" class="border-bottom-width-0 padding-bottom-0 border-style-none">Search<?= isset($useName) ? ' ' . $name . 's' : '' ?></th>
+                <th scope="col" class="border-bottom-width-0 padding-top-0 padding-bottom-0 border-style-none">Search<?= isset($useName) ? ' ' . $name . 's' : '' ?></th>
             </tr>
         </thead>
 

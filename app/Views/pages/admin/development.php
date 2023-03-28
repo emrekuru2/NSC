@@ -3,10 +3,12 @@
 <?= $this->section('adminContent') ?>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
-<script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
+
 <div class="row">
     <div class="col-lg-4">
         <div class="row-lg">
+
+            <!-- Create Development -->
             <div class="col-lg-12">
                 <div class="card shadow">
                     <div class="card-header">Create Program Type</div>
@@ -29,11 +31,16 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-12">
                 <div class="card shadow">
                     <div class="card-header">Programs</div>
                     <div class="card-body">
+                        <?= view_cell('\App\Libraries\Contents::search', ['route' => 'modify_development', 'name' => 'Develop Program', 'array' => $programs, 'method' =>  'post', 'useName' => true, 'useDivider' => true]) ?>
+
+
                         <table class="table table-striped">
+
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
@@ -42,9 +49,10 @@
                                     <th scope="col">Edit</th>
                                 </tr>
                             </thead>
+
                             <tbody class="table-group-divider">
-                                <?php if (!empty($programs) && is_array($programs)) : ?>
-                                    <?php foreach ($programs as $program) : ?>
+                                <?php if (!empty($programs) && is_array($programs)) :
+                                    foreach ($programs as $program) : ?>
                                         <tr>
                                             <td><?= esc($program->id) ?></td>
                                             <td><?= esc($program->name) ?></td>
@@ -57,12 +65,14 @@
                                     <?php endforeach ?>
                                 <?php endif ?>
                             </tbody>
+
                         </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="col-lg-8">
         <div class="card shadow">
             <div class="card-header">Create Program</div>
@@ -141,9 +151,10 @@
         </div>
     </div>
 </div>
+
 <script>
     new MultiSelectTag('days[]') // id
 </script>
-
+<script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
 
 <?= $this->endSection() ?>
