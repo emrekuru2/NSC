@@ -3,14 +3,57 @@
 <?php $clubIsSet = isset($club) || isset($club) && $club == null ?>
 
 <div class="row">
+    <!-- Club List -->
     <div class="col-lg-4 mb-3 mb-lg-0">
-        <?= view_cell('\App\Libraries\Contents::searchPanel',['groupName' => 'Club', 'rows' => $allClubs]); ?>
-        <?= view_cell('\App\Libraries\Contents::groupEditListPanel', ['title' => 'Club', 'rows' => $allClubs, 'groupIsSet' => $clubIsSet]); ?>
+        <div class="card shadow">
+
+            <div class="card-header">
+                <div class="d-md-flex justify-content-md-end group-list-header">
+                    <div class="line-height-2rem">All Clubs</div>
+<!--                    <button type="button" id="new-group-button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#groupModal"><i class="fa-solid fa-plus"></i> New --><?php //= $groupName  ?><!--</button>-->
+                </div>
+            </div>
+
+            <div class="card-body padding-top-half-rem">
+                <?= view_cell('\App\Libraries\Contents::search', ['route' => 'clubs', 'name' => 'Club', 'array' => $allClubs, 'useName' => true, 'useDivider' => true]); ?>
+
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="padding-top-0">Name</th>
+                        <th scope="col" class="padding-top-0"></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <?php
+                    if (sizeof($allClubs) == 0) {
+                        echo '<p class="text-start margin-bottom-0">No ' . strtolower($groupName) . 's available.</p>';
+                    }
+
+                    foreach ($allClubs as $clubIndex): ?>
+                        <tr>
+                            <td class="col-11 line-height-2rem"><label for="name"><?= $clubIndex->name ?></label></td>
+                            <td class="col-1">
+                                <form method="get" action="">
+                                    <input value="<?= $clubIndex->name ?>" name="name" id="name" hidden>
+                                    <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php endforeach ?>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
     </div>
 
+    <!-- Edit Club -->
     <div class="col-lg-8">
         <div class="card h-100 shadow">
-            <div class="card-header">Edit Club</b></div>
+            <div class="card-header">Edit Club</div>
 
             <form class="card-body" action="updateClub" method="post" id="update-form">
                 <img src="<?= $clubIsSet ? base_url($club->image) : base_url('assets/images/Clubs/default.png') ?>" class="card-img-top mb-3 mx-auto d-block" style="width: 150px; height: 150px" alt="club_image">
