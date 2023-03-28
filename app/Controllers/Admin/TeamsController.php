@@ -7,7 +7,6 @@ use App\Models\ClubModel;
 use App\Models\TeamModel;
 use App\Models\UserEmailModel;
 use App\Models\UserTypes\TeamUserModel;
-use Config\Pager;
 use Exception;
 use function PHPUnit\Framework\isEmpty;
 
@@ -20,6 +19,7 @@ class TeamsController extends BaseController
 
         $data = [
             'title' => 'Teams',
+            'team' => null,
             'teamMembers' => null,
             'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
             'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll()
@@ -33,25 +33,22 @@ class TeamsController extends BaseController
         $teamModel = model(TeamModel::class);
         $userModel = model(UserEmailModel::class);
         $clubModel = model(ClubModel::class);
-        $userEmailModel = model(UserEmailModel::class);
 
         if ($this->request->getPost('search') != null) {
-            $teamName = $this->request->getPost('search');
-            $teamRow = $teamModel->select('nsca_teams.id')->where('nsca_teams.name', $teamName)->findAll();
-            sizeof($teamRow) > 0 ? $teamID = $teamRow[0]->id : $teamID = -1;
+            $teamName = esc($this->request->getPost('search'));
+            $team = $teamModel->select()->where('name', $teamName)->first();
         } else {
             $teamID = $this->request->getPost('groupID');
+            $team = $teamModel->select()->find($teamID);
         }
-
-        $team = $teamModel->where('nsca_teams.id', $teamID)->findAll();
 
         $data = [
             'title' => 'Teams',
-            'team' => count($team) > 0 ? $team[0] : null,
-            'teamMembers' => count($team) > 0 ? $userModel->getTeamUsersByTeamId($teamID) : null,
-            'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
-            'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll(),
-            'allUsers' => $userEmailModel->select()->orderBy('nsca_users.last_name', 'ASC')->findAll()
+            'team' => $team,
+            'teamMembers' => $team != null ? $userModel->getTeamUsersByTeamId($team->id) : null,
+            'allTeams' => $teamModel->select()->orderBy('name', 'ASC')->findAll(),
+            'allClubs' => $clubModel->select()->orderBy('name', 'ASC')->findAll(),
+            'allUsers' => $userModel->select()->orderBy('last_name', 'ASC')->findAll()
         ];
 
         return view('pages/admin/teams', $data);
@@ -76,6 +73,16 @@ class TeamsController extends BaseController
         ];
 
         return view('pages/admin/teams', $data);
+    }
+
+    public function searchTeam()
+    {
+        $teamModel = model(TeamModel::class);
+
+        $teamName = esc($this->request->getVar('search'));
+        $team = $teamModel->select()->where('name', $teamName)->first();
+
+        return $this->getTeamToEdit($team->id);
     }
 
     public function updateTeam()
