@@ -192,12 +192,12 @@
                         echo '<p class="text-start margin-bottom-0">No teams available.</p>';
                     }
 
-                    foreach ($allTeams as $team): ?>
+                    foreach ($allTeams as $teamIndex): ?>
                         <tr>
-                            <td class="col-11 line-height-2rem"><label for="groupID"><?= $team->name ?></label></td>
+                            <td class="col-11 line-height-2rem"><label for="groupID"><?= $teamIndex->name ?></label></td>
                             <td class="col-1">
                                 <form method="post" action="editTeam">
-                                    <input value="<?= $team->id ?>" name="groupID" id="groupID" hidden>
+                                    <input value="<?= $teamIndex->id ?>" name="groupID" id="groupID" hidden>
                                     <button type="submit" name="edit-button" class="btn btn-primary btn-sm">Edit</button>
                                 </form>
                             </td>
