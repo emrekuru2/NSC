@@ -223,7 +223,8 @@ tl-item.active .tl-dot:before {
 .border-style-none {
     border-style: none;
 }
-.border-style-none > td {
+
+.border-style-none>td {
     border-style: none;
 }
 
@@ -236,7 +237,8 @@ tl-item.active .tl-dot:before {
     flex-direction: column;
     padding: 0 1rem 1rem 1rem;
 }
-#delete-form > button {
+
+#delete-form>button {
     width: fit-content;
 }
 
@@ -261,7 +263,7 @@ tl-item.active .tl-dot:before {
     border: 1px solid rgba(0, 0, 0, 0.175);
     padding: 0 0.5rem 0.5rem 0.5rem;
     border-radius: 0.375rem;
-
+}
 .alert {
     padding: 10px;
     color: white;
@@ -269,7 +271,7 @@ tl-item.active .tl-dot:before {
     transition: opacity 0.6s;
     margin-bottom: 15px;
     width: 400px;
-    
+
 }
 
 .alert.success {
@@ -289,4 +291,10 @@ tl-item.active .tl-dot:before {
 
 .closebtn:hover {
     color: black;
+}
+
+.startyear {
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
 }
