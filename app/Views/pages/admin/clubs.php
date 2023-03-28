@@ -15,7 +15,7 @@
             </div>
 
             <div class="card-body padding-top-half-rem">
-                <?= view_cell('\App\Libraries\Contents::search', ['route' => 'clubs', 'name' => 'Club', 'array' => $allClubs, 'useName' => true, 'useDivider' => true]); ?>
+                <?= view_cell('\App\Libraries\Contents::search', ['route' => 'clubs', 'name' => 'Club', 'array' => $allClubs, 'fields' => ['name'], 'useName' => true, 'useDivider' => true]); ?>
 
                 <table class="table table-hover">
                     <thead>
