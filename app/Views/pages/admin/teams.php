@@ -174,7 +174,7 @@
             </div>
 
             <div class="card-body padding-top-half-rem">
-                <?= view_cell('\App\Libraries\Contents::search', ['route' => 'searchTeam', 'name' => 'Team', 'rows' => $allTeams]); ?>
+                <?= view_cell('\App\Libraries\Contents::search', ['route' => 'searchTeam', 'name' => 'Team', 'rows' => $allTeams, 'useName' => true]); ?>
 
                 <hr class="divider">
 

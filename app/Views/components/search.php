@@ -3,6 +3,7 @@
  * @param string $route <p>Function name of the desired route.</p>
  * @param string $name <p>Name of section (Singular). E.g., 'Team', 'Club', 'Committee', etc.</p>
  * @param array $rows <p>Array of entities from model. E.g., teams table, clubs table, etc.</p>
+ * @param boolean $useName <p>Optional: Use name in search bar title. E.g., true = 'Search Teams', false = 'Search'.</p>
  */
 ?>
 
@@ -11,7 +12,7 @@
 
         <thead class="border-style-none">
             <tr>
-                <th scope="col" class="border-bottom-width-0 padding-bottom-0 border-style-none">Search</th>
+                <th scope="col" class="border-bottom-width-0 padding-bottom-0 border-style-none">Search<?= isset($useName) ? ' ' . $name . 's': '' ?></th>
             </tr>
         </thead>
 
