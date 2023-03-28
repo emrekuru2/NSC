@@ -8,6 +8,7 @@
  * @param string $route <p>Route name of the desired function.</p>
  * @param string $name <p>Name of section (Singular). E.g., 'Team', 'Club', 'Committee', etc.</p>
  * @param array $array <p>Array of entities from model. E.g., teams table, clubs table, etc.</p>
+ * @param array $fields <p>Array of field names from model to display. E.g., ['name'], ['first_name', 'last_name'], etc.</p>
  *
  * Optional:
  * @param string $method <p>HTTP form method. 'get' or 'post' (Default = 'get').</p>
@@ -43,8 +44,21 @@
 <script>
     let array = [
         <?php foreach ($array as $item) :
-            if ($item != $array[count($array)-1]) echo '"' . $item->name . '",';
-            else echo '"' . $item->name . '"';
+            $value = '';
+            for ($i = 0; $i < count($fields); $i++) {
+                $value .= $item->{$fields[$i]};
+                if ($i != count($fields)-1) {
+                    $value .= ' ';
+                }
+            }
+
+
+            if ($item == $array[count($array)-1]) {
+                echo '"' . $value . '"';
+            }
+            else {
+                echo '"' . $value . '",';
+            }
         endforeach; ?>
     ]
 </script>
