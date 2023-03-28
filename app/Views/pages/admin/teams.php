@@ -172,7 +172,7 @@
             </div>
 
             <div class="card-body padding-top-half-rem">
-                <?= view_cell('\App\Libraries\Contents::search', ['route' => 'searchTeam', 'name' => 'Team', 'array' => $allTeams, 'useName' => true, 'useDivider' => true]); ?>
+                <?= view_cell('\App\Libraries\Contents::search', ['route' => 'searchTeam', 'name' => 'Team', 'array' => $allTeams, 'fields' => ['name'], 'useName' => true, 'useDivider' => true]); ?>
 
                 <!-- Team List -->
                 <table class="table table-hover margin-bottom-half-rem">

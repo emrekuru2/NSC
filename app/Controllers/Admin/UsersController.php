@@ -40,6 +40,24 @@ class UsersController extends BaseController
         return view('pages/admin/edit_user', $data);
     }
 
+    public function searchUserDetails()
+    {
+        $name = esc($this->request->getVar('search'));
+
+        $firstname = explode(' ', $name)[0];
+        $user = model(UserModel::class)->where('first_name', $firstname)->first();
+
+
+        $data = [
+            'title' => 'User Editing',
+            'user'  => $user,
+            'teams' => model(TeamModel::class)->findAll(),
+            'clubs' => model(ClubModel::class)->findAll()
+        ];
+
+        return view('pages/admin/edit_user', $data);
+    }
+
     public function editUser(int $id)
     {
 

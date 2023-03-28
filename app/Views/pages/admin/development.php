@@ -36,7 +36,7 @@
                 <div class="card shadow">
                     <div class="card-header">Programs</div>
                     <div class="card-body">
-                        <?= view_cell('\App\Libraries\Contents::search', ['route' => 'modify_development', 'name' => 'Develop Program', 'array' => $programs, 'method' =>  'post', 'useName' => true, 'useDivider' => true]) ?>
+                        <?= view_cell('\App\Libraries\Contents::search', ['route' => 'modify_development', 'name' => 'Program', 'array' => $programs, 'fields' => ['name'], 'method' =>  'post', 'useName' => true, 'useDivider' => true]) ?>
 
 
                         <table class="table table-striped">
