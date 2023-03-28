@@ -1,7 +1,6 @@
 // Variables
 const searchForm = document.getElementById('search-form')
 const searchBar = document.getElementById('search')
-const autoCompleteList = document.getElementById('searchautocomplete-list')
 
 
 // Listeners
