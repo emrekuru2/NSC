@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Models\CommitteeModel;
 use App\Models\UserModel;
 use App\Models\UserTypes\CommitteeUserModel;
 
@@ -59,13 +60,19 @@ class CommitteesController extends BaseController
         $committeeModel = model(CommitteeModel::class);
         $userModel = model(UserModel::class);
         $users = $userModel->findAll();
-        // get ID
-        $id = $this->request->getPost('id');
-        $committee = $committeeModel->find($id);
+
+        // Get Committee
+        if ($this->request->getVar('search') != null) {
+            $committeeName = esc($this->request->getPost('search'));
+            $committee = $committeeModel->select()->where('name', $committeeName)->first();
+        } else {
+            $committeeID = $this->request->getPost('id');
+            $committee = $committeeModel->select()->find($committeeID);
+        }
+
         $years = explode(' - ', $committee->years);
 
-        $members = $committeeModel->getMembers($id);
-        // create array of user IDs
+        $members = $committeeModel->getMembers($committee->id);
         $memberIDs = [];
         foreach ($members as $member){
             $memberIDs[] = $member->userID;

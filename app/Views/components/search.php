@@ -10,7 +10,7 @@
  *
  * Optional:
  * @param string $method <p>HTTP form method. 'get' or 'post' (Default = 'get').</p>
- * @param boolean $useName <p>Use name in search bar title (Default = false). E.g., true = 'Type to search teams...', false = 'Type to search...'.</p>
+ * @param boolean $useName <p>Use name in search bar placeholder (Default = false). E.g., true = 'Type to search teams...', false = 'Type to search...'.</p>
  * @param boolean $useDivider <p>Use divider underneath search bar (Default = false).</p>
  */
 ?>
