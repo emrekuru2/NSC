@@ -172,7 +172,7 @@
             </div>
 
             <div class="card-body padding-top-half-rem">
-                <?= view_cell('\App\Libraries\Contents::search', ['route' => 'searchTeam', 'name' => 'Team', 'array' => $allTeams, 'fields' => ['name'], 'useName' => true, 'useDivider' => true]); ?>
+                <?= view_cell('\App\Libraries\Contents::search', ['name' => 'Team', 'array' => $allTeams, 'fields' => ['name'], 'useName' => true, 'useDivider' => true]); ?>
 
                 <!-- Team List -->
                 <table class="table table-hover margin-bottom-half-rem">
@@ -191,11 +191,11 @@
 
                     foreach ($allTeams as $teamIndex): ?>
                         <tr>
-                            <td class="col-11 line-height-2rem"><label for="groupID"><?= $teamIndex->name ?></label></td>
+                            <td class="col-11 line-height-2rem"><label for="name"><?= $teamIndex->name ?></label></td>
                             <td class="col-1">
-                                <form method="post" action="editTeam">
-                                    <input value="<?= $teamIndex->id ?>" name="groupID" id="groupID" hidden>
-                                    <button type="submit" name="edit-button" class="btn btn-primary btn-sm">Edit</button>
+                                <form method="get" action="">
+                                    <input value="<?= $teamIndex->name ?>" name="name" id="name" hidden>
+                                    <button type="submit" class="btn btn-primary btn-sm">Edit</button>
                                 </form>
                             </td>
                         </tr>

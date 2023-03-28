@@ -62,7 +62,6 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->get('settings', 'Admin\SettingsController::index');
     $routes->get('users/edit/(:num)', 'Admin\UsersController::userDetails/$1');
     $routes->get('users/edit', 'Admin\UsersController::searchUserDetails');
-    $routes->get('searchTeam', 'Admin\TeamsController::searchTeam');
 
 
     // Functions
@@ -81,15 +80,13 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->match(['post'], 'modify_committee', 'Admin\CommitteesController::modify');
     $routes->match(['post'], 'modifyCommittee', 'Admin\CommitteesController::modifyCommittee');
     $routes->match(['post'], 'deleteCommittee', 'Admin\CommitteesController::deleteCommittee');
-    
-    $routes->match(['post'], 'editTeam', 'Admin\TeamsController::editTeam');
+
     $routes->match(['post'], 'updateTeam', 'Admin\TeamsController::updateTeam');
     $routes->match(['post'], 'createTeam', 'Admin\TeamsController::createTeam');
     $routes->match(['post'], 'deleteTeam', 'Admin\TeamsController::deleteTeam');
     $routes->match(['post'], 'removeTeamMember', 'Admin\TeamsController::removeMember');
     $routes->match(['post'], 'addTeamMembers', 'Admin\TeamsController::addMembers');
 
-    $routes->match(['post'], 'editClub', 'Admin\ClubsController::editClub');
     $routes->match(['post'], 'updateClub', 'Admin\ClubsController::updateClub');
     $routes->match(['post'], 'createClub', 'Admin\ClubsController::createClub');
     $routes->match(['post'], 'deleteClub', 'Admin\ClubsController::deleteClub');
