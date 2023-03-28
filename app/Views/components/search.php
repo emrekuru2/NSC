@@ -2,15 +2,16 @@
 /**
  * @file search.php
  * @brief Search bar component.
- * @details Search bar component for searching entities in database.
+ * @details Search bar component for searching entities in database. Use '$this->request->getVar('search')' inside a controller to get search term.
  *
  * @param string $route <p>Route name of the desired function.</p>
  * @param string $name <p>Name of section (Singular). E.g., 'Team', 'Club', 'Committee', etc.</p>
  * @param array $array <p>Array of entities from model. E.g., teams table, clubs table, etc.</p>
  *
  * Optional:
- * @param string $method <p>HTTP method of search (Default = 'get'). E.g., 'get', 'post', etc.</p>
- * @param boolean $useName <p>Use name in search bar title. E.g., true = 'Type to search teams...', false = 'Type to search...'.</p>
+ * @param string $method <p>HTTP form method. 'get' or 'post' (Default = 'get').</p>
+ * @param boolean $useName <p>Use name in search bar placeholder (Default = false). E.g., true = 'Type to search teams...', false = 'Type to search...'.</p>
+ * @param boolean $useDivider <p>Use divider underneath search bar (Default = false).</p>
  */
 ?>
 
@@ -35,6 +36,8 @@
 
     </table>
 </form>
+
+<?= isset($useDivider) ? '<hr class="divider">' : '' ?>
 
 <script>
     let array = [
