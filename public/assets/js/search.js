@@ -7,9 +7,6 @@ const autoCompleteList = document.getElementById('searchautocomplete-list')
 // Listeners
 document.addEventListener('keydown', (event) => {
     if (searchBar.value !== '' && event.key === 'Enter'){
-        if (autoCompleteList.children.length === 1) {
-            autoCompleteList.children[0].click()
-        }
         searchForm.submit()
     }
 })
