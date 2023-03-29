@@ -8,14 +8,14 @@
         <!-- Section: Block Content -->
         <section class="dark-grey-text text-center">
 
-            <h1 class="display-3 text-center font-weight-bold">Clubs</h3>
+            <h1 class="display-3 text-center font-weight-bold">Clubs</h1>
 
             <!-- Grid row -->
             <div class="row">
                 <?php if (!empty($clubs) && is_array($clubs)) : ?>
                     <?php foreach ($clubs as $club) : ?>
 
-                        <h2 class="display-7 mb-2 text-center font-weight-normal"><?=$club->name?></h4>
+                        <h2 class="display-7 mb-2 text-center font-weight-normal"><?=$club->name?></h2>
             <br>
             
             <div class="club-container">

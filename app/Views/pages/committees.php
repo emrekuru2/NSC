@@ -7,8 +7,7 @@
 
         <!-- Section: Block Content -->
         <section class="dark-grey-text text-center">
-
-            <h1 class="display-3 text-center font-weight-bold">Committees</h3>
+            <h1 class="display-3 text-center font-weight-bold">Committees</h1>
 
             <!-- Grid row -->
             <div class="row">
@@ -22,7 +21,7 @@
                                     <div class="mask rgba-white-slight"></div>
                                 </a>
                             </div>
-
+                            <img src=<?= esc($committee->image)?> class="img-thumbnail  rounded w-15% h-15%">
                             <div class="px-3 pt-3 mx-1 mt-1 pb-0">
                                 <h4 class="font-weight-bold mb-3"><?= esc($committee->name) ?>(<?= esc($committee->years) ?>)</h4>
                                 <p><?= esc($committee->description) ?></p>

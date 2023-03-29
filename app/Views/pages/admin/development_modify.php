@@ -1,7 +1,26 @@
 <?= $this->extend('layouts/admin') ?>
 
 <?= $this->section('adminContent') ?>
-
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete development program</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      Are you sure you want to delete <?=$program->name?>?
+      <form method="post" action="deleteProgram" id="delete">
+                    <input type="hidden" value=<?=$program->id?> name="id">        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" name="delete-button" id="delete-button" class="btn btn-danger">Delete Program</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
 <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
 <div class="row">
@@ -72,13 +91,18 @@
                         <div class="col-12 col-lg-6">
                             <label for="days[]" class="form-label">Days running:</label>
                             <select id="days[]" name="days[]" multiple="multiple" required>
-                                <option value="Sunday">Sunday</option>
-                                <option value="Monday">Monday</option>
-                                <option value="Tuesday">Tuesday</option>
-                                <option value="Wednesday">Wednesday</option>
-                                <option value="Thursday">Thursday</option>
-                                <option value="Friday">Friday</option>
-                                <option value="Saturday">Saturday</option>
+                                <?php foreach($days as $day) : ?>
+                                    <!-- check if day is a substring of daysRun -->
+                                    <?php if(strpos($program->daysRun, $day) !== false) : ?>
+                                        <option value=<?= esc($day) ?> selected>
+                                            <?= esc($day) ?>
+                                        </option>
+                                    <?php else : ?>
+                                        <option value=<?= esc($day) ?>>
+                                            <?= esc($day) ?>
+                                        </option>
+                                    <?php endif ?>
+                                <?php endforeach ?>
                             </select>
                         </div>
                         <div class="col-12 col-lg-6">
@@ -87,7 +111,7 @@
                                 <?php if (!empty($devTypes) && is_array($devTypes)) : ?>
                                     <?php foreach ($devTypes as $devType) : ?>
                                         <option value=<?= esc($devType->id) ?>>
-                                            <?= esc($devType->type_name) ?>
+                                            <?= esc($devType->name) ?>
                                         </option>
                                     <?php endforeach ?>
                                 <?php endif ?>
@@ -113,10 +137,7 @@
                         
                     </div>
                 </form>
-                <form method="post" action="deleteProgram" id="delete-form">
-                    <input type="hidden" value=<?=$program->id?> name="id">
-                    <button type="submit" name="delete-button" id="delete-button" class="btn btn-danger">Delete Program</button>
-                </form>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete Program</button>
                 <hr class="divider">
                 <a href="development" name="delete-button" id="delete-button" class="btn btn-warning">Back</a>
             </div>

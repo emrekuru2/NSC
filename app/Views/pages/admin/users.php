@@ -5,6 +5,8 @@
 <div class="card shadow">
     <div class="card-header">Users</div>
     <div class="card-body">
+        <?= view_cell('\App\Libraries\Contents::search', ['route' => 'users/edit', 'name' => 'User', 'array' => $users, 'fields' => ['first_name', 'last_name'], 'useName' => true, 'useDivider' => true]); ?>
+
         <table class="table table-striped">
             <thead>
                 <tr>
