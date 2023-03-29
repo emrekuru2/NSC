@@ -10,7 +10,7 @@
       <hr>
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-          <a href="<?php base_url("admin/dashboard")?>" class="nav-link link-primary text-light <?= ($title == 'Dashboard') ? "active" : "" ?>"><i class="fa-solid fa-gauge fa-lg me-3 fa-fw"></i>Dashboard</a>
+          <a href="<?= base_url("admin/dashboard")?>" class="nav-link link-primary text-light <?= ($title == 'Dashboard') ? "active" : "" ?>"><i class="fa-solid fa-gauge fa-lg me-3 fa-fw"></i>Dashboard</a>
         </li>
         <hr>
         <li class="nav-item">
