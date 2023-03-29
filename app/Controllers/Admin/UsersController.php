@@ -47,6 +47,7 @@ class UsersController extends BaseController
         $firstname = explode(' ', $name)[0];
         $user = model(UserModel::class)->where('first_name', $firstname)->first();
 
+        if ($user == null) return redirect()->back();
 
         $data = [
             'title' => 'User Editing',
