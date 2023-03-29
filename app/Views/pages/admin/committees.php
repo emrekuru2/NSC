@@ -3,6 +3,7 @@
 <?= $this->section('adminContent') ?>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
+<script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
 
 <div class="row">
 
@@ -101,6 +102,5 @@
     new MultiSelectTag('days[]') // id
 </script>
 <script type="text/javascript" src="<?= base_url('assets/js/admin/committiees.js');?>"></script>
-<script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
 
 <?= $this->endSection() ?>
