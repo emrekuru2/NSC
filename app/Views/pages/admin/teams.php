@@ -24,7 +24,7 @@
                     </thead>
 
                     <tbody id="add-member-list">
-                    <?php if (empty($allUsers)) { ?>
+                    <?php if (!$teamIsSet && empty($allUsers)) { ?>
                         <tr data-user="none" data-name="none">
                             <td class="col-7">No users available.</td>
                             <td class="col-4"></td>
@@ -32,7 +32,7 @@
                         </tr>
                     <?php } else { foreach ($allUsers as $user): ?>
                         <tr>
-                            <td class="col-7 line-height-2rem"><?= $user->first_name . ' ' . $user->last_name ?></td>
+                            <td class="col-7 line-height-2rem"><?= $user->first_name . ' ' . $user->last_name ?? '' ?></td>
                             <td class="col-4">
                                 <select name="add-member-role" id="role" class="form-select form-select-sm">
                                     <option value="player" selected>Player</option>
@@ -79,7 +79,7 @@
             <div class="modal-footer group-modal-footer">
                 <input type="text" value="<?= $teamIsSet ? $team->id : '' ?>" name="remove-member-team-id" hidden>
                 <input type="text" value="0" name="remove-member-id" id="remove-member-id" hidden>
-                <button type="submit" class="btn btn-danger"<?= $teamIsSet ?: " disabled" ?>>Remove</button>
+                <button type="button" class="btn btn-danger"<?= $teamIsSet ?: " disabled" ?>>Remove</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             </div>
         </div>
@@ -159,12 +159,10 @@
     </div>
 </form>
 
-<!-- Update Team -->
 <div class="row">
-    <div class="col-sm-4 mb-3 mb-sm-0">
-<!--        --><?php //= view_cell('\App\Libraries\Contents::searchPanel', ['groupName' => 'Team', 'rows' => $allTeams, 'typeOfSearch' => 'Edit']); ?>
-<!--        --><?php //= view_cell('\App\Libraries\Contents::groupEditListPanel', ['groupName' => 'Team', 'rows' => $allTeams, 'groupIsSet' => $teamIsSet]); ?>
 
+    <!-- All Teams and Search -->
+    <div class="col-sm-4 mb-3 mb-sm-0">
         <div class="card shadow">
             <div class="card-header">
                 <div class="d-md-flex justify-content-md-end group-list-header">
@@ -174,35 +172,32 @@
             </div>
 
             <div class="card-body padding-top-half-rem">
-                <?= view_cell('\App\Libraries\Contents::search', ['groupName' => 'Team', 'rows' => $allTeams, 'typeOfSearch' => 'Edit']); ?>
+                <?= view_cell('\App\Libraries\Contents::search', ['name' => 'Team', 'array' => $allTeams, 'fields' => ['name'], 'useName' => true, 'useDivider' => true]); ?>
 
-                <hr class="divider">
-
+                <!-- Team List -->
                 <table class="table table-hover margin-bottom-half-rem">
                     <thead>
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col"></th>
-                    </tr>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col"></th>
+                        </tr>
                     </thead>
 
                     <tbody>
-                    <?php
-                    if (sizeof($allTeams) == 0) {
-                        echo '<p class="text-start margin-bottom-0">No teams available.</p>';
-                    }
-
-                    foreach ($allTeams as $team): ?>
-                        <tr>
-                            <td class="col-11 line-height-2rem"><label for="groupID"><?= $team->name ?></label></td>
-                            <td class="col-1">
-                                <form method="post" action="editTeam">
-                                    <input value="<?= $team->id ?>" name="groupID" id="groupID" hidden>
-                                    <button type="submit" name="edit-button" class="btn btn-primary btn-sm">Edit</button>
-                                </form>
-                            </td>
-                        </tr>
-                    <?php endforeach ?>
+                        <?php
+                        if (sizeof($allTeams) == 0) {
+                            echo '<p class="text-start margin-bottom-0">No teams available.</p>';
+                        } else { foreach ($allTeams as $teamIndex): ?>
+                            <tr>
+                                <td class="col-11 line-height-2rem"><label for="name"><?= $teamIndex->name ?></label></td>
+                                <td class="col-1">
+                                    <form method="get" action="">
+                                        <input value="<?= $teamIndex->name ?>" name="name" id="name" hidden>
+                                        <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endforeach ?><?php } ?>
                     </tbody>
                 </table>
 
@@ -210,6 +205,7 @@
         </div>
     </div>
 
+    <!-- Update Team -->
     <div class="col-sm-8">
         <div class="card shadow">
             <div class="card-header">Edit Team<b></b></div>
@@ -264,7 +260,7 @@
                     </div>
 
                     <div class="border-round">
-                        <table class="table table-hover margin-bottom-half-rem">
+                        <table class="table <?= $teamIsSet ? 'table-hover' : '' ?> margin-bottom-half-rem">
                             <thead>
                             <tr>
                                 <th scope="col">Name</th>
@@ -274,8 +270,8 @@
                             </tr>
                             </thead>
 
-                            <tbody id="team-member-list" data-members-is-set="<?= $teamIsSet && $teamMembers != null ? 'true' : 'false' ?>">
-                            <?php if (empty($teamMembers)) { ?>
+                            <tbody id="team-member-list" data-members-is-set="<?= $teamIsSet && !empty($teamMembers) ? 'true' : 'false' ?>">
+                            <?php if (!$teamIsSet && empty($teamMembers)) { ?>
                                 <tr data-user="none" data-name="none">
                                     <td class="col-5 line-height-2rem">No team members</td>
                                     <td class="col-4 line-height-2rem"></td>

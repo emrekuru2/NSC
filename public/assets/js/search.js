@@ -1,16 +1,18 @@
 // Variables
 const searchForm = document.getElementById('search-form')
 const searchBar = document.getElementById('search')
-const searchBarButton = document.getElementById('search-bar-button')
 
 
 // Listeners
-searchBarButton.addEventListener('click', () => {
-    if (searchBar.value !== '') searchForm.submit()
+document.addEventListener('keydown', (event) => {
+    if (searchBar.value !== '' && event.key === 'Enter'){
+        searchForm.submit()
+    }
 })
 
 
 // Functions
+
 function autoComplete(input, array) {
     let currentFocus;
 
@@ -27,21 +29,20 @@ function autoComplete(input, array) {
         this.parentNode.appendChild(list)
 
         for (let i = 0; i < array.length; i++) {
-            // Checking if input matches values in array
+            // Match in array
             if (array[i].substring(0, val.length).toUpperCase() === val.toUpperCase()) {
                 // Create a div element for each matching element
                 item = document.createElement("div")
-                item.innerHTML = "<strong>" + array[i].substring(0, val.length) + "</strong>" // Bold matching letters
+                item.innerHTML = "<strong>" + array[i].substring(0, val.length) + "</strong>"
                 item.innerHTML += array[i].substring(val.length)
-                item.innerHTML += "<input type='hidden' value='" + array[i] + "'>" // Input field to hold array value
+                item.innerHTML += "<input type='hidden' value='" + array[i] + "'>" // Input holding value
 
-                // When user clicks on autofill option
-                item.addEventListener("click", function() {
-                    if (item.innerText !== "No results found") {
-                        input.value = this.getElementsByTagName("input")[0].value; // Inserting array value into search bar
-                        closeAllLists()
-                        //searchForm.submit()
-                    }
+                // When user clicks an autofill option
+                item.addEventListener("click", function(event) {
+                    event.preventDefault()
+                    input.value = this.getElementsByTagName("input")[0].value; // Inserting array value into search bar
+                    closeAllLists()
+                    searchForm.submit()
                 })
                 list.appendChild(item)
             }
@@ -52,6 +53,18 @@ function autoComplete(input, array) {
                 item.innerText = "No results found" // Input field to hold array value
                 list.appendChild(item)
             }
+
+            // When user presses 'Enter' key with one autofill option
+            if (i === array.length - 1 && list.childNodes.length === 1) {
+                input.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter') {
+                        event.preventDefault()
+                        input.value = item.getElementsByTagName("input")[0].value; // Inserting array value into search bar
+                        list.childNodes[0].click()
+                    }
+                })
+            }
+
         }
     });
 
