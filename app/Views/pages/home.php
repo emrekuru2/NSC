@@ -143,7 +143,6 @@
             </div>
         </div>
     </header>
-
     <!-- News preview section-->
     <section class="py-5">
         <div class="container px-5 my-5">
@@ -156,27 +155,27 @@
                 </div>
             </div>
             <div class="row gx-5">
+            <?php if (!empty($news) && is_array($news)) : ?>
+                <?php foreach ($news as $news_item) : ?>
                 <div class="col-lg-4 mb-5">
-                    <div class="card h-100 shadow border-0">
-                        <img class="card-img-top" src="https://dummyimage.com/600x350/ced4da/6c757d" alt="..." />
+                    <div class="card h-100 shadow border-0 d-flex align-items-center">
                         <div class="card-body p-4">
                             <div class="badge bg-primary bg-gradient rounded-pill mb-2">News</div>
-                            <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">Blog post title</h5></a>
-                            <p class="card-text mb-0">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a class="text-decoration-none link-dark stretched-link" href="#!"><?= $news_item->content ?>
                         </div>
                         <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
                             <div class="d-flex align-items-end justify-content-between">
                                 <div class="d-flex align-items-center">
-                                    <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
-                                    <div class="small">
-                                        <div class="fw-bold">Kelly Rowan</div>
-                                        <div class="text-muted">March 12, 2023 &middot; 6 min read</div>
-                                    </div>
+                                        <a href="news/<?= esc($news_item->id)?>" class="btn btn-primary btn-block">Find out more</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <?php endforeach ?>
+            <?php endif ?>
+
+
                 <div class="col-lg-4 mb-5">
                     <div class="card h-100 shadow border-0">
                         <img class="card-img-top" src="https://dummyimage.com/600x350/adb5bd/495057" alt="..." />
@@ -230,7 +229,7 @@
                     </div>
                     <div class="ms-xl-4">
                         <div class="input-group mb-2">
-                            <button class="btn btn-outline-light" id="button-newsletter" type="button">Find out More</button>
+                            <button class="btn btn-outline-light" id="button-newsletter" type="button">Find out more</button>
                         </div>
                     </div>
                 </div>
