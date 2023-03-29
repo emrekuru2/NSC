@@ -2,7 +2,37 @@
 
 <?= $this->section('adminContent') ?>
 
+<!-- Style for the deletion success alert -->
+<style>
+    .alert {
+        padding: 10px;
+        color: white;
+        opacity: 1;
+        transition: opacity 0.6s;
+        margin-bottom: 15px;
+        width: 400px;
 
+    }
+
+    .alert.success {
+        background-color: #4CAF50;
+    }
+
+    .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .closebtn:hover {
+        color: black;
+    }
+</style>
 
 
 <div class="row">
@@ -25,7 +55,7 @@
                             <?php
                             if (session()->getFlashdata('status')) {
                             ?>
-                            <div style="width:90%" id="alertMessage" class=" alert success">
+                                <div style="width:90%" id="alertMessage" class=" alert success">
                                     <span class="closebtn" onclick="closeAlert()">×</span>
                                     <strong>Success!</strong> Your Request Processed successfully.
                                 </div>
@@ -42,7 +72,7 @@
                                             <td><?php echo $row['name'] ?></td>
                                             <td style=" display:flex;">
                                                 <a style="margin-right:10px;" href="<?= base_url('admin/CompetitionType/edit/' . $row['id']) ?>" class="btn btn-primary btn-sm">Edit</a>
-                                                <a href="<?= base_url('admin/CompetitionType/delete/' . $row['id']) ?>" class="btn btn-primary btn-sm">Delete</a>
+                                                <a href="<?= base_url('admin/CompetitionType/delete/' . $row['id']) ?>" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure you want to delete this Competition Type?')">Delete</a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -76,9 +106,9 @@
 
 <!-- Script to close the deletion successful message -->
 <script>
-function closeAlert(){
-document.getElementById("alertMessage").style.display = 'none';
-}
+    function closeAlert() {
+        document.getElementById("alertMessage").style.display = 'none';
+    }
 </script>
 
 <?= $this->endSection() ?>

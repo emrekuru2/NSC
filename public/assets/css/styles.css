@@ -261,32 +261,4 @@ tl-item.active .tl-dot:before {
     border: 1px solid rgba(0, 0, 0, 0.175);
     padding: 0 0.5rem 0.5rem 0.5rem;
     border-radius: 0.375rem;
-
-.alert {
-    padding: 10px;
-    color: white;
-    opacity: 1;
-    transition: opacity 0.6s;
-    margin-bottom: 15px;
-    width: 400px;
-    
-}
-
-.alert.success {
-    background-color: #4CAF50;
-}
-
-.closebtn {
-    margin-left: 15px;
-    color: white;
-    font-weight: bold;
-    float: right;
-    font-size: 22px;
-    line-height: 10px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.closebtn:hover {
-    color: black;
 }
