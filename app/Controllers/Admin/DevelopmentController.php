@@ -89,16 +89,20 @@ class DevelopmentController extends BaseController
     }
     public function modify()
     {
-        $DevModel = model(DevModel::class);
+        $devModel = model(DevModel::class);
         $devType = model(DevTypeModel::class);
-        $id = $this->request->getPost('id');
-        // get the dev program
-        $dev = $DevModel->find($id);
-        $devID = $devType->find($id);
 
-        // get all users registered to the program
-        $users = $DevModel->getUsers($id);
+        // Get Dev Program
+        if ($this->request->getVar('search') != null) {
+            $devName = esc($this->request->getPost('search'));
+            $dev = $devModel->select()->where('name', $devName)->first();
+        } else {
+            $devID = $this->request->getPost('id');
+            $dev = $devModel->select()->find($devID);
+        }
 
+        if ($dev == null) return $this->index();
+        $users = $devModel->getUsers($dev->id);
 
         $data = [
             'program'     => $dev,
