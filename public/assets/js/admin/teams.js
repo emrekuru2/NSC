@@ -86,3 +86,56 @@ function getAddedMembersJSON() {
     console.log(membersJSON)
     return JSON.stringify(membersJSON)
 }
+
+
+// Executions
+let teamMembers = []
+for (let i = 0; i < removeMemberButtons.length; i++) {
+    let name = removeMemberButtons[i].dataset.name
+
+    if (name !== 'none') {
+        teamMembers.push(name)
+        console.log('Team member: ' + name)
+    }
+}
+
+for (let i = 0; i < addMemberTable.children.length; i++) {
+    let name = addMemberTable.children[i].children[0].innerText
+
+    console.log('Removing member from list: ' + name)
+    addMemberTable.children[i].remove()
+}
+
+
+
+// let teamMembers = []
+// const teamMemberElements = teamMemberTableBody.children
+// for (let i = 0; i < teamMemberTableBody.children.length; i++) {
+//     let name = teamMemberTableBody.children[i].children[0].children[0].innerText
+//
+// }
+//
+//
+// for (let i = 0; i < addMemberTable.children.length; i++) {
+//     allTeamMembers.push(tableRows2[i].dataset.name)
+// }
+//
+// for (let i = 0; i < allTeamMembers.length; i++) {
+//     for (let j = 0; j < teamMembers.length; j++) {
+//         if (teamMembers[j] === allTeamMembers[i]) {
+//             addMemberTable.deleteRow(i)
+//             i--
+//             break
+//         }
+//     }
+// }
+//
+// // If there are no members in the addMemberTable, disable the addMembersButton
+// if (addMemberTable.children.length === 0) {
+//     addMembersButton.disabled = true
+// }
+//
+// // If there are no members in the teamMemberTable, set the dataset to false
+// if (teamMemberTableBody.children.length === 0) {
+//     teamMemberTableBody.dataset.membersIsSet = false
+// }

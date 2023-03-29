@@ -8,7 +8,6 @@ use App\Models\TeamModel;
 use App\Models\UserEmailModel;
 use App\Models\UserTypes\TeamUserModel;
 use Exception;
-use function PHPUnit\Framework\isEmpty;
 
 class TeamsController extends BaseController
 {
@@ -16,7 +15,6 @@ class TeamsController extends BaseController
     {
         $teamModel = model(TeamModel::class);
         $userModel = model(UserEmailModel::class);
-        $clubModel = model(ClubModel::class);
 
         if ($this->request->getVar('search') != null) {
             $teamName = esc($this->request->getVar('search'));
@@ -30,12 +28,23 @@ class TeamsController extends BaseController
             $team = null;
         }
 
+        if ($team != null) {
+            $teamMembers = $userModel->select()
+                ->join('nsca_team_users', 'nsca_team_users.userID = nsca_users.id', 'left')
+                ->where('nsca_team_users.teamID', $team->id)
+                ->orderBy('nsca_users.last_name', 'ASC')
+                ->findAll();
+        }
+        else {
+            $teamMembers = null;
+        }
+
         $data = [
             'title' => 'Teams',
             'team' => $team,
-            'teamMembers' => $team != null ? $userModel->getClubUsersByClubId($team->id) : null,
+            'teamMembers' => $teamMembers,
             'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
-            'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll(),
+            'allClubs' => model(ClubModel::class)->select()->orderBy('nsca_clubs.name', 'ASC')->findAll(),
             'allUsers' => $userModel->select()->orderBy('nsca_users.last_name', 'ASC')->findAll()
         ];
 
