@@ -175,7 +175,7 @@
                 <?= view_cell('\App\Libraries\Contents::search', ['name' => 'Team', 'array' => $allTeams, 'fields' => ['name'], 'useName' => true, 'useDivider' => true]); ?>
 
                 <!-- Team List -->
-                <table class="table table-hover margin-bottom-half-rem">
+                <table class="table<?= !empty($allTeams) ? ' table-hover' : '' ?> margin-bottom-half-rem">
                     <thead>
                         <tr>
                             <th scope="col">Name</th>
@@ -260,7 +260,7 @@
                     </div>
 
                     <div class="border-round">
-                        <table class="table <?= $teamIsSet ? 'table-hover' : '' ?> margin-bottom-half-rem">
+                        <table class="table<?= $teamIsSet && !empty($teamMembers) ? ' table-hover' : '' ?> margin-bottom-half-rem">
                             <thead>
                             <tr>
                                 <th scope="col">Name</th>
@@ -271,7 +271,7 @@
                             </thead>
 
                             <tbody id="team-member-list" data-team-isset="<?= $teamIsSet ?>">
-                                <?php if (!$teamIsSet && empty($teamMembers)) { ?>
+                                <?php if (!$teamIsSet || empty($teamMembers)) { ?>
                                     <tr>
                                         <td class="col-5 line-height-2rem">No team members</td>
                                         <td class="col-4 line-height-2rem"></td>

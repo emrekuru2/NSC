@@ -51,14 +51,14 @@ teamMemberRoles.forEach( (roleSelect) => {
 
 // Functions
 function getMemberRolesJSON() {
-    if (teamMemberTableBody.dataset.teamIsset === '0' || !teamMembersChanged) return ''
+    if (teamMemberTableBody.dataset.teamIsset === '0' && !teamMembersChanged) return ''
 
     let teamJSON = { 'players': [] }
     for (let i = 0; i < teamMemberTableBody.children.length; i++) {
         let player = []
 
-        player.push(teamMemberTableBody.children[i].dataset.user) // ID
-        player.push(teamMemberTableBody.children[i].children[1].children[0].value) // Role
+        player.push(teamMemberTableBody.children[i].children[1].children[0].dataset.user) // ID
+        player.push(teamMemberTableBody.children[i].children[3].children[0].value) // Role
         teamJSON.players.push(player)
     }
 
@@ -102,20 +102,10 @@ for (let i = 0; i < removeMemberButtons.length; i++) {
 //     addMemberTable.children[i].remove()
 // }
 
-
-
-// let teamMembers = []
-// const teamMemberElements = teamMemberTableBody.children
-// for (let i = 0; i < teamMemberTableBody.children.length; i++) {
-//     let name = teamMemberTableBody.children[i].children[0].children[0].innerText
-//
-// }
-//
-//
 // for (let i = 0; i < addMemberTable.children.length; i++) {
 //     allTeamMembers.push(tableRows2[i].dataset.name)
 // }
-//
+
 // for (let i = 0; i < allTeamMembers.length; i++) {
 //     for (let j = 0; j < teamMembers.length; j++) {
 //         if (teamMembers[j] === allTeamMembers[i]) {
@@ -125,13 +115,8 @@ for (let i = 0; i < removeMemberButtons.length; i++) {
 //         }
 //     }
 // }
-//
+
 // // If there are no members in the addMemberTable, disable the addMembersButton
 // if (addMemberTable.children.length === 0) {
 //     addMembersButton.disabled = true
-// }
-//
-// // If there are no members in the teamMemberTable, set the dataset to false
-// if (teamMemberTableBody.children.length === 0) {
-//     teamMemberTableBody.dataset.membersIsSet = false
 // }
