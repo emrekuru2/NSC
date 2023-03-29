@@ -12,20 +12,23 @@ const addMemberRoles = document.getElementsByName('add-member-role')
 const updateForm = document.getElementById('update-form')
 const updateButton = document.getElementById('update-button')
 const teamMemberTableBody = document.getElementById('team-member-list')
+const teamMemberRoles = document.getElementsByName('role')
+
+let teamMembersChanged = false
 
 
 // Listeners
-for (let i = 0; i < removeMemberButtons.length; i++) {
-    removeMemberButtons[i].addEventListener('click', () => {
+removeMemberButtons.forEach( (button) => {
+    button.addEventListener('click', () => {
         let message = removeMemberMessage.innerText
 
-        removeMemberHiddenInput.value = removeMemberButtons[i].dataset.user
+        removeMemberHiddenInput.value = button.dataset.user
         let firstHalf = message.substring(0, 32)
         let secondHalf = message.substring(message.indexOf("from") - 1)
 
-        removeMemberMessage.innerText = firstHalf + removeMemberButtons[i].dataset.name + secondHalf
+        removeMemberMessage.innerText = firstHalf + button.dataset.name + secondHalf
     })
-}
+})
 
 updateButton.addEventListener('click', () => {
     document.getElementById('update-members-JSON').value = getMemberRolesJSON();
@@ -37,38 +40,31 @@ addMembersButton.addEventListener('click', () => {
     addMembersForm.submit()
 })
 
+teamMemberRoles.forEach( (roleSelect) => {
+    roleSelect.addEventListener('change', () => {
+        teamMembersChanged = true
+    })
+})
+
 
 // Functions
 function getMemberRolesJSON() {
-    let teamJSON =
-    {
-        'players': []
-    }
+    if (teamMemberTableBody.children[0].dataset.user === 'none' || !teamMembersChanged) return ''
 
-    if (teamMemberTableBody.dataset.membersIsSet === 'false') {
-        return ""
-    }
-
-    const tableRows = teamMemberTableBody.children
-    for (let i = 0; i < tableRows.length; i++) {
+    let teamJSON = { 'players': [] }
+    for (let i = 0; i < teamMemberTableBody.children.length; i++) {
         let player = []
 
-        let id = tableRows[i].dataset.user
-        if (id !== 'none') {
-            player.push(id) // ID
-            player.push(tableRows[i].children[1].children[0].value) // Role
-            teamJSON.players.push(player)
-        }
+        player.push(teamMemberTableBody.children[i].dataset.user) // ID
+        player.push(teamMemberTableBody.children[i].children[1].children[0].value) // Role
+        teamJSON.players.push(player)
     }
 
     return JSON.stringify(teamJSON)
 }
 
 function getAddedMembersJSON() {
-    let membersJSON =
-        {
-            'members': []
-        }
+    let membersJSON = { 'members': [] }
 
     for (let i = 0; i < addMemberChecks.length; i++) {
         if (addMemberChecks[i].checked) {
@@ -82,8 +78,6 @@ function getAddedMembersJSON() {
             }
         }
     }
-
-    console.log(membersJSON)
     return JSON.stringify(membersJSON)
 }
 
