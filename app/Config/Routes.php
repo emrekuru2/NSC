@@ -77,6 +77,8 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->match(['post'], 'deleteProgram', 'Admin\DevelopmentController::deleteProgram');
     $routes->match(['post'], 'modify_development', 'Admin\DevelopmentController::modify');
 
+    $routes->match(['post'], 'accept_user', 'Admin\DashController::accept_user');
+
     $routes->match(['post'], 'createCommittee', 'Admin\CommitteesController::createCommittee');
     $routes->match(['post'], 'modify_committee', 'Admin\CommitteesController::modify');
     $routes->match(['post'], 'modifyCommittee', 'Admin\CommitteesController::modifyCommittee');
