@@ -29,7 +29,7 @@ class TeamsController extends BaseController
         }
 
         if ($team != null) {
-            $teamMembers = $userModel->select()
+            $teamMembers = $userModel->select('nsca_users.id, nsca_users.first_name, nsca_users.last_name, nsca_team_users.isTeamCaptain, nsca_team_users.isViceCaptain')
                 ->join('nsca_team_users', 'nsca_team_users.userID = nsca_users.id', 'left')
                 ->where('nsca_team_users.teamID', $team->id)
                 ->orderBy('nsca_users.last_name', 'ASC')

@@ -18,8 +18,10 @@ let teamMembersChanged = false
 
 
 // Listeners
-removeMemberButtons.forEach( (button) => {
-    button.addEventListener('click', () => {
+removeMemberButtons.forEach( (buttonElement) => {
+    buttonElement.addEventListener('click', (event) => {
+        let button = event.target
+
         let message = removeMemberMessage.innerText
 
         removeMemberHiddenInput.value = button.dataset.user
@@ -49,7 +51,7 @@ teamMemberRoles.forEach( (roleSelect) => {
 
 // Functions
 function getMemberRolesJSON() {
-    if (teamMemberTableBody.children[0].dataset.user === 'none' || !teamMembersChanged) return ''
+    if (teamMemberTableBody.dataset.teamIsset === '0' || !teamMembersChanged) return ''
 
     let teamJSON = { 'players': [] }
     for (let i = 0; i < teamMemberTableBody.children.length; i++) {
@@ -93,12 +95,12 @@ for (let i = 0; i < removeMemberButtons.length; i++) {
     }
 }
 
-for (let i = 0; i < addMemberTable.children.length; i++) {
-    let name = addMemberTable.children[i].children[0].innerText
-
-    console.log('Removing member from list: ' + name)
-    addMemberTable.children[i].remove()
-}
+// for (let i = 0; i < addMemberTable.children.length; i++) {
+//     let name = addMemberTable.children[i].children[0].innerText
+//
+//     console.log('Removing member from list: ' + name)
+//     addMemberTable.children[i].remove()
+// }
 
 
 
