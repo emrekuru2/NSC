@@ -20,7 +20,10 @@
                             <?php foreach($competition as $row) :?>
                                 <tr>
                                     <td><?php echo $row['id']?></td>
-                                    <td><?php echo $row['name']?></td>
+                                    <td>
+                                        <a href="<?= base_url('admin/competitions/check/' .$row['id']) ?>" class=""><?php echo $row['name']?></a>
+
+                                    </td>
                                     <td>
                                         <a href="<?= base_url('admin/competitions/edit/' .$row['id']) ?>" class="">Edit</a>
                                         <a href="<?= base_url('admin/competitions/delete/' .$row['id']) ?>" class="">Delete</a>

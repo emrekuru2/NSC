@@ -63,6 +63,8 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->get('users/edit/(:num)', 'Admin\UsersController::userDetails/$1');
     $routes->get('competitions/edit/(:num)','Admin\CompetitionsController::edit/$1' );
     $routes->get('competitions/delete/(:num)','Admin\CompetitionsController::delete/$1' );
+    $routes->get('competitions/check/(:num)','Admin\CompetitionsController::check/$1' );
+
 
 
     // GET with parameters

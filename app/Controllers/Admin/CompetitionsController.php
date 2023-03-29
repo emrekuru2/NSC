@@ -46,6 +46,16 @@ class CompetitionsController extends BaseController
         ];
         return view('pages/admin/competitionsEdit', $data);
     }
+    public function check($id =null){
+        $competitionModel = new CompetitionModel();
+
+        $data = [
+            'competition' =>$competitionModel->find($id),
+
+            'title' => 'Competitions'
+        ];
+        return view('pages/admin/competitionCheck', $data);
+    }
     public function update($id =null){
         $competitionModel = new CompetitionModel();
         $data = [
@@ -57,6 +67,7 @@ class CompetitionsController extends BaseController
         $competitionModel ->update($id, $data);
         return redirect()->to(base_url("admin/competitions"))->with('status','successes');
     }
+
     public function delete($id = null){
         $competitionModel = new CompetitionModel();
         $competitionModel->delete($id);
