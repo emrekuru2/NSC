@@ -34,7 +34,7 @@
                         <tr>
                             <td class="col-7 line-height-2rem"><?= $user->first_name . ' ' . $user->last_name ?? '' ?></td>
                             <td class="col-4">
-                                <select name="add-member-role" id="role" class="form-select form-select-sm">
+                                <select name="add-member-role" class="form-select form-select-sm">
                                     <option value="player" selected>Player</option>
                                     <option value="vice">Vice Captain</option>
                                     <option value="captain">Captain</option>
@@ -77,9 +77,9 @@
             </div>
 
             <div class="modal-footer group-modal-footer">
-                <input type="text" value="<?= $teamIsSet ? $team->id : '' ?>" name="remove-member-team-id" hidden>
-                <input type="text" value="0" name="remove-member-id" id="remove-member-id" hidden>
-                <button type="button" class="btn btn-danger"<?= $teamIsSet ?: " disabled" ?>>Remove</button>
+                <input type="hidden" value="<?= $teamIsSet ? $team->id : '' ?>" name="remove-member-team-id">
+                <input type="hidden" value="0" name="remove-member-id" id="remove-member-id">
+                <button type="submit" class="btn btn-danger"<?= $teamIsSet ? '' : " disabled" ?>>Remove</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             </div>
         </div>
@@ -175,7 +175,7 @@
                 <?= view_cell('\App\Libraries\Contents::search', ['name' => 'Team', 'array' => $allTeams, 'fields' => ['name'], 'useName' => true, 'useDivider' => true]); ?>
 
                 <!-- Team List -->
-                <table class="table table-hover margin-bottom-half-rem">
+                <table class="table<?= !empty($allTeams) ? ' table-hover' : '' ?> margin-bottom-half-rem">
                     <thead>
                         <tr>
                             <th scope="col">Name</th>
@@ -260,7 +260,7 @@
                     </div>
 
                     <div class="border-round">
-                        <table class="table <?= $teamIsSet ? 'table-hover' : '' ?> margin-bottom-half-rem">
+                        <table class="table<?= $teamIsSet && !empty($teamMembers) ? ' table-hover' : '' ?> margin-bottom-half-rem">
                             <thead>
                             <tr>
                                 <th scope="col">Name</th>
@@ -270,30 +270,30 @@
                             </tr>
                             </thead>
 
-                            <tbody id="team-member-list" data-members-is-set="<?= $teamIsSet && !empty($teamMembers) ? 'true' : 'false' ?>">
-                            <?php if (!$teamIsSet && empty($teamMembers)) { ?>
-                                <tr data-user="none" data-name="none">
-                                    <td class="col-5 line-height-2rem">No team members</td>
-                                    <td class="col-4 line-height-2rem"></td>
-                                    <td class="col-2 line-height-2rem"></td>
-                                    <td class="col-1 line-height-2rem"></td>
-                                </tr>
-                            <?php } else { foreach ($teamMembers as $member): ?>
-                                <tr>
-                                    <td class="col-5 line-height-2rem"><?= $member->first_name . ' ' . $member->last_name ?></td>
-                                    <td class="col-4 line-height-2rem">
-                                        <select name="role" id="role" class="form-select form-select-sm">
-                                            <option value="player"<?= $member->isTeamCaptain == 0 && $member->isViceCaptain == 0 ? ' selected' : ''; ?>>Player</option>
-                                            <option value="vice"<?= $member->isViceCaptain == 1 ? ' selected' : ''; ?>>Vice Captain</option>
-                                            <option value="captain"<?= $member->isTeamCaptain == 1 ? ' selected' : ''; ?>>Captain</option>
-                                        </select>
-                                    </td>
-                                    <td class="col-2"></td>
-                                    <td class="col-1">
-                                        <button type="button" name="remove-member-button" data-user="<?= $member->id ?>" data-name="<?= $member->first_name . ' ' . $member->last_name ?>" data-bs-toggle="modal" data-bs-target="#removeMemberModal" class="btn btn-danger btn-sm">Remove</button>
-                                    </td>
-                                </tr>
-                            <?php endforeach; } ?>
+                            <tbody id="team-member-list" data-team-isset="<?= $teamIsSet ?>">
+                                <?php if (!$teamIsSet || empty($teamMembers)) { ?>
+                                    <tr>
+                                        <td class="col-5 line-height-2rem">No team members</td>
+                                        <td class="col-4 line-height-2rem"></td>
+                                        <td class="col-2 line-height-2rem"></td>
+                                        <td class="col-1 line-height-2rem"></td>
+                                    </tr>
+                                <?php } else { foreach ($teamMembers as $member): ?>
+                                    <tr>
+                                        <td class="col-5 line-height-2rem"><?= $member->first_name . ' ' . $member->last_name ?></td>
+                                        <td class="col-4 line-height-2rem">
+                                            <select name="role" class="form-select form-select-sm">
+                                                <option value="player"<?= $member->isTeamCaptain == 0 && $member->isViceCaptain == 0 ? ' selected' : ''; ?>>Player</option>
+                                                <option value="vice"<?= $member->isViceCaptain == 1 ? ' selected' : ''; ?>>Vice Captain</option>
+                                                <option value="captain"<?= $member->isTeamCaptain == 1 ? ' selected' : ''; ?>>Captain</option>
+                                            </select>
+                                        </td>
+                                        <td class="col-2"></td>
+                                        <td class="col-1">
+                                            <button type="button" name="remove-member-button" data-user="<?= $member->id ?>" data-name="<?= $member->first_name . ' ' . $member->last_name ?>" data-bs-toggle="modal" data-bs-target="#removeMemberModal" class="btn btn-danger btn-sm">Remove</button>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; } ?>
                             </tbody>
                         </table>
 
