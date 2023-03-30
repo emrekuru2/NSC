@@ -14,7 +14,9 @@
             </div>
 
             <div class="modal-body">
-                <p class="text-start">Select teams to add to the <?= str_contains(strtolower($club->name), 'club') ? $club->name : $club->name . 'Club' ?></p>
+                <p class="text-start">
+                    Select teams to add to the <?php if ($clubIsSet) { echo str_contains(strtolower($club->name), 'club') ? $club->name : $club->name . 'Club';}?>
+                </p>
 
                 <table class="table table-hover" id="add-team-table">
                     <thead>
@@ -189,14 +191,14 @@
 
                 <!-- Email -->
                 <div class="form-group margin-bottom-1rem">
-                    <label class="margin-bottom-half-rem" for="newEmail">Website</label>
+                    <label class="margin-bottom-half-rem" for="newEmail">Email</label>
                     <input type="email" class="form-control" name="email" id="newEmail" maxlength="128">
                 </div>
 
                 <!-- Phone -->
                 <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="newPhone">Phone</label>
-                    <input type="tel" class="form-control" name="phone" id="newPhone" maxlength="12">
+                    <input type="tel" class="form-control" name="phone" id="newPhone" maxlength="12" placeholder="123-456-7890">
                 </div>
 
                 <!-- Website -->

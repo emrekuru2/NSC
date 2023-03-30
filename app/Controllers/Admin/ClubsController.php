@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\ClubModel;
 use App\Models\TeamModel;
 use App\Models\UserEmailModel;
+use Exception;
 
 class ClubsController extends BaseController
 {
@@ -51,7 +52,39 @@ class ClubsController extends BaseController
     }
 
     public function createClub()
-    {}
+    {
+        helper('image');
+
+        $data['name'] = esc($this->request->getPost('name'));
+        $data['abbreviation'] = esc($this->request->getPost('abbreviation'));
+        $data['description'] = esc($this->request->getPost('description'));
+        $data['email'] = esc($this->request->getPost('email'));
+        $data['phone'] = esc($this->request->getPost('phone'));
+        $data['website'] = esc($this->request->getPost('website'));
+        $data['facebook'] = esc($this->request->getPost('facebook'));
+
+        // Logo
+        $file = $this->request->getFile('image');
+        $filepath = storeImage('Clubs', $file);
+        if (! $filepath) {
+            $data['image'] = 'assets/images/Clubs/default.png';
+        } else {
+            $data['image'] = $filepath;
+        }
+
+        $club = new \App\Entities\Club();
+        $club->fill($data);
+
+        try {
+            if (model(ClubModel::class)->save($club)) {
+                return redirect()->to('admin/clubs?name=' . str_replace(' ', '+', $data['name']))->with('alert', ['type' => 'success', 'content' => 'Team created successfully']);
+            }
+        } catch (Exception $e) {
+            echo "<script> console.log('Error occurred while creating club. " . $e->getMessage() . ".') </script>";
+        }
+
+        return redirect()->to('admin/clubs')->with('alert', ['type' => 'danger', 'content' => 'Error occurred while creating team']);
+    }
 
     public function deleteClub()
     {}
