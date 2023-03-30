@@ -57,8 +57,8 @@ function getMemberRolesJSON() {
     for (let i = 0; i < teamMemberTableBody.children.length; i++) {
         let player = []
 
-        player.push(teamMemberTableBody.children[i].children[1].children[0].dataset.user) // ID
-        player.push(teamMemberTableBody.children[i].children[3].children[0].value) // Role
+        player.push(teamMemberTableBody.children[i].children[3].children[0].dataset.user) // ID
+        player.push(teamMemberTableBody.children[i].children[1].children[0].value) // Role
         teamJSON.players.push(player)
     }
 

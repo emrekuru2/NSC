@@ -19,16 +19,6 @@ class Contents
         return view('components/comment', $content);
     }
 
-    public function groupEditListPanel($content)
-    {
-        return view('components/groupEditListPanel', $content);
-    }
-
-    public function searchPanel($content)
-    {
-        return view('components/searchPanel', $content);
-    }
-
     public function search($content)
     {
         return view('components/search', $content);
