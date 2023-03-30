@@ -15,7 +15,7 @@
 
             <div class="modal-body">
                 <p class="text-start">
-                    Select teams to add to the <?php if ($clubIsSet) { echo str_contains(strtolower($club->name), 'club') ? $club->name : $club->name . 'Club';}?>
+                    Select teams to add to the <?php if ($clubIsSet) { echo str_contains(strtolower($club->name), 'club') ? $club->name : $club->name . ' Club'; } ?>
                 </p>
 
                 <table class="table table-hover" id="add-team-table">
@@ -119,7 +119,7 @@
 
             <div class="modal-body">
                 <?php if ($clubIsSet) {?>
-                    <label class="margin-bottom-half-rem" id="remove-member-message">Are you sure you want to remove NAME from the <?= $club->name ?> club?</label>
+                    <label class="margin-bottom-half-rem" id="remove-member-message">Are you sure you want to remove the NAME team from the <b><?= str_contains(strtolower($club->name), 'club') ? $club->name : $club->name . ' Club' ?></b>?</label>
                 <?php } else { ?>
                     <label class="margin-bottom-half-rem" id="remove-member-message">Select a member to remove.</label>
                 <?php } ?>
@@ -146,7 +146,7 @@
 
             <div class="modal-body">
                 <?php if ($clubIsSet) {?>
-                    <label class="margin-bottom-half-rem">Are you sure you want to delete the <?= $club->name ?>?</label>
+                    <label class="margin-bottom-half-rem">Are you sure you want to delete the <?= str_contains(strtolower($club->name), 'club') ? $club->name : $club->name . ' Club' ?>?</label>
                 <?php } else { ?>
                     <label class="margin-bottom-half-rem">Select a club to delete.</label>
                 <?php } ?>
@@ -350,8 +350,6 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Name</th>
-                                    <th scope="col"></th>
-                                    <th scope="col"></th>
                                     <th scope="col">Options</th>
                                 </tr>
                             </thead>
@@ -359,18 +357,14 @@
                             <tbody id="club-team-list" data-club-isset="<?= $clubIsSet ?>">
                                 <?php if (!$clubIsSet || empty($clubTeams)) { ?>
                                     <tr>
-                                        <td class="col-5 line-height-2rem">No teams</td>
-                                        <td class="col-4"></td>
-                                        <td class="col-2"></td>
+                                        <td class="col-11 line-height-2rem">No teams</td>
                                         <td class="col-1"></td>
                                     </tr>
                                 <?php } else { foreach ($clubTeams as $team): ?>
                                     <tr>
-                                        <td class="col-5 line-height-2rem"><a href="teams?name=<?= str_replace(' ', '-', $team->name) ?>"><?= $team->name ?></a></td>
-                                        <td class="col-4"></td>
-                                        <td class="col-2"></td>
+                                        <td class="col-11 line-height-2rem"><a href="teams?name=<?= str_replace(' ', '-', $team->name) ?>"><?= $team->name ?></a></td>
                                         <td class="col-1">
-                                            <button type="button" name="remove-member-button" data-name="<?= $team->name ?>" data-bs-toggle="modal" data-bs-target="#removeMemberModal" class="btn btn-danger btn-sm">Remove</button>
+                                            <button type="button" name="remove-team-button" data-name="<?= $team->name ?>" data-bs-toggle="modal" data-bs-target="#removeMemberModal" class="btn btn-danger btn-sm">Remove</button>
                                         </td>
                                     </tr>
                                 <?php endforeach; } ?>
@@ -417,7 +411,7 @@
                                         </td>
                                         <td class="col-2"></td>
                                         <td class="col-1">
-                                            <button type="button" name="remove-member-button" data-user="<?= $member->id ?>" data-name="<?= $member->first_name . ' ' . $member->last_name ?>" data-bs-toggle="modal" data-bs-target="#removeMemberModal" class="btn btn-danger btn-sm">Remove</button>
+                                            <button type="button" name="remove-member-button" data-name="<?= $member->first_name . ' ' . $member->last_name ?>" data-bs-toggle="modal" data-bs-target="#removeMemberModal" class="btn btn-danger btn-sm">Remove</button>
                                         </td>
                                     </tr>
                                 <?php endforeach; } ?>
@@ -432,6 +426,8 @@
 
                 <!-- Update Club Button-->
                 <div class="form-group margin-bottom-0">
+                    <input type="hidden" value="<?= $clubIsSet ? $club->id : '' ?>" name="update-club-id" id="update-club-id">
+                    <input type="hidden" value="" name="update-members-JSON" id="update-members-JSON">
                     <button type="button" name="update-button" id="update-button" class="btn btn-primary margin-bottom-1rem"<?= $clubIsSet ?: " disabled" ?>>Update Club</button>
                 </div>
 
