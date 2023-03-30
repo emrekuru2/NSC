@@ -28,13 +28,14 @@ class ClubsController extends BaseController
         }
 
         $data = [
-            'title' => 'Clubs',
-            'club' => $club,
-            'clubMembers' => $club != null ? $userModel->getClubUsersByClubId($club->id) : null,
-            'clubTeams' => $club != null ? $teamModel->getTeamsInClub($club->id) : null,
-            'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll(),
+            'title'           => 'Clubs',
+            'club'            => $club,
+            'clubMembers'     => $club != null ? $userModel->getClubUsersByClubId($club->id) : null,
+            'clubTeams'       => $club != null ? $teamModel->getTeamsInClub($club->id) : null,
+            'allClubs'        => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll(),
             'unassignedTeams' => $club != null ? $teamModel->getUnassignedTeams() : null,
-            'allUsers' => $userModel->select()->orderBy('nsca_users.last_name', 'ASC')->findAll()
+            'unassignedUsers' => $userModel->getUsersNotInTeam(),
+            'allUsers'        => $userModel->select()->orderBy('nsca_users.last_name', 'ASC')->findAll()
         ];
 
         return view('pages/admin/clubs', $data);
@@ -101,9 +102,31 @@ class ClubsController extends BaseController
     }
 
     public function removeMember()
-    {}
+    {
+        $clubUserModel = model(ClubUserModel::class);
+        $clubModel     = model(ClubModel::class);
+        $userModel     = model(UserEmailModel::class);
+
+        $clubID   = esc($this->request->getPost('remove-member-club-id'));
+        $fullName = esc($this->request->getPost('remove-member-name'));
+
+        $fullName = explode(',', $fullName);
+        $userID  = $userModel->select()->where('first_name', $fullName[0])->where('last_name', $fullName[1])->first()->id;
+
+        $clubUserModel->where('userID', $userID)->where('clubID', $clubID)->delete();
+        $clubName = $clubModel->select()->find($clubID)->name;
+
+        if ($clubUserModel->where('userID', $userID)->where('clubID', $clubID)->first() === null) {
+            return redirect()->to('admin/clubs?name=' . str_replace(' ', '+', $clubName))->with('alert', ['type' => 'success', 'content' => 'Removed member successfully']);
+        }
+
+        return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error occurred while removing member']);
+    }
 
     public function addMembers()
+    {}
+
+    public function removeTeam()
     {}
 
     public function addTeams()

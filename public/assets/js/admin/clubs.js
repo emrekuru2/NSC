@@ -1,6 +1,6 @@
 // Variables
 const removeMemberButtons = document.getElementsByName('remove-member-button')
-const removeMemberHiddenInput = document.getElementById('remove-member-id')
+const removeMemberHiddenInput = document.getElementById('remove-member-name')
 const removeMemberMessage = document.getElementById('remove-member-message')
 
 const addMembersForm = document.getElementById('addMemberModal')
@@ -23,7 +23,7 @@ removeMemberButtons.forEach( (buttonElement) => {
         let button = event.target
         let message = removeMemberMessage.innerText
 
-        removeMemberHiddenInput.value = button.dataset.user
+        removeMemberHiddenInput.value = button.dataset.name
         let clubName = message.substring(message.indexOf("from the") + 9 , message.indexOf("?"))
 
         removeMemberMessage.innerHTML = 'Are you sure you want to remove the ' + '<b>' + button.dataset.name + '</b>' + ' team from the ' + '<b>' + clubName + '</b>' + '?'

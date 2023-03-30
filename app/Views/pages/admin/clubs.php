@@ -15,7 +15,7 @@
 
             <div class="modal-body">
                 <p class="text-start">
-                    Select teams to add to the <?php if ($clubIsSet) { echo str_contains(strtolower($club->name), 'club') ? $club->name : $club->name . ' Club'; } ?>
+                    Select teams to add to the <b><?php if ($clubIsSet) { echo str_contains(strtolower($club->name), 'club') ? $club->name : $club->name . ' Club'; } ?></b>
                 </p>
 
                 <table class="table table-hover" id="add-team-table">
@@ -36,7 +36,7 @@
                         <tr>
                             <td class="col-11 line-height-2rem"><?= $unassignedTeam->name ?? 'No team' ?></td>
                             <td class="col-1">
-                                <input type="checkbox" class="form-check-input shadow" value="<?= $unassignedTeam->name ?? 'none' ?>" name="add-teams-check">
+                                <input type="checkbox" class="form-check-input shadow check-margin" value="<?= $unassignedTeam->name ?? 'none' ?>" name="add-teams-check">
                             </td>
                         </tr>
                     <?php endforeach; } ?>
@@ -64,6 +64,10 @@
             </div>
 
             <div class="modal-body">
+                <p class="text-start">
+                    Select members to add to the <b><?php if ($clubIsSet) { echo str_contains(strtolower($club->name), 'club') ? $club->name : $club->name . ' Club'; } ?></b>
+                </p>
+
                 <table class="table table-hover" id="add-member-table">
                     <thead>
                     <tr>
@@ -74,13 +78,13 @@
                     </thead>
 
                     <tbody id="add-member-list">
-                    <?php if (!$clubIsSet && empty($allUsers)) { ?>
+                    <?php if (!$clubIsSet && empty($unassignedUsers)) { ?>
                         <tr>
                             <td class="col-7 line-height-2rem">No users available</td>
                             <td class="col-4"></td>
                             <td class="col-1"></td>
                         </tr>
-                    <?php } else { foreach ($allUsers as $user): ?>
+                    <?php } else { foreach ($unassignedUsers as $user): ?>
                         <tr>
                             <td class="col-7 line-height-2rem"><?= $user->first_name . ' ' . $user->last_name ?? '' ?></td>
                             <td class="col-4">
@@ -90,7 +94,7 @@
                                 </select>
                             </td>
                             <td class="col-1">
-                                <input type="checkbox" class="form-check-input shadow" value="<?= $user->id ?? 'none' ?>" data-role="player" name="add-member-check">
+                                <input type="checkbox" class="form-check-input shadow check-margin" value="<?= $user->id ?? 'none' ?>" data-role="player" name="add-member-check">
                             </td>
                         </tr>
                     <?php endforeach; } ?>
@@ -127,7 +131,7 @@
 
             <div class="modal-footer group-modal-footer">
                 <input type="hidden" value="<?= $clubIsSet ? $club->id : '' ?>" name="remove-member-club-id">
-                <input type="hidden" value="0" name="remove-member-id" id="remove-member-id">
+                <input type="hidden" value="" name="remove-member-name" id="remove-member-name">
                 <button type="submit" class="btn btn-danger"<?= $clubIsSet ? '' : " disabled" ?>>Remove</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             </div>
@@ -411,7 +415,7 @@
                                         </td>
                                         <td class="col-2"></td>
                                         <td class="col-1">
-                                            <button type="button" name="remove-member-button" data-name="<?= $member->first_name . ' ' . $member->last_name ?>" data-bs-toggle="modal" data-bs-target="#removeMemberModal" class="btn btn-danger btn-sm">Remove</button>
+                                            <button type="button" name="remove-member-button" data-name="<?= $member->first_name . ',' . $member->last_name ?>" data-bs-toggle="modal" data-bs-target="#removeMemberModal" class="btn btn-danger btn-sm">Remove</button>
                                         </td>
                                     </tr>
                                 <?php endforeach; } ?>
