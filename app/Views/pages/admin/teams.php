@@ -205,10 +205,10 @@
         </div>
     </div>
 
-    <!-- Update Team -->
+    <!-- Edit Team -->
     <div class="col-sm-8">
         <div class="card shadow">
-            <div class="card-header">Edit Team<b></b></div>
+            <div class="card-header">Edit Team</div>
 
             <form method="post" action="updateTeam" enctype="multipart/form-data" class="card-body" id="update-form">
                 <!-- Logo and Name -->
