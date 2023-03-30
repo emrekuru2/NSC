@@ -12,7 +12,7 @@ class Teams extends Migration
         // Teams Table
         $this->forge->addField([
             'id'          => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
-            'clubID'      => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
+            'clubID'      => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'null' => true],
             'name'        => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
             'description' => ['type' => 'varchar', 'constraint' => 512, 'null' => true],
             'image'       => ['type' => 'varchar', 'constraint' => 128, 'null' => false, 'default' => 'assets/images/Teams/default.png'],

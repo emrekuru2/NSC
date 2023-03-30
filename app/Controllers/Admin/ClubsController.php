@@ -30,12 +30,9 @@ class ClubsController extends BaseController
             'title' => 'Clubs',
             'club' => $club,
             'clubMembers' => $club != null ? $userModel->getClubUsersByClubId($club->id) : null,
-            'clubTeams' => $club != null ? $teamModel->select()
-                ->where('nsca_teams.clubID', $club->id)
-                ->orderBy('nsca_teams.name', 'ASC')
-                ->findAll() : null,
+            'clubTeams' => $club != null ? $teamModel->getTeamsInClub($club->id) : null,
             'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll(),
-            'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
+            'unassignedTeams' => $club != null ? $teamModel->getUnassignedTeams() : null,
             'allUsers' => $userModel->select()->orderBy('nsca_users.last_name', 'ASC')->findAll()
         ];
 
@@ -64,5 +61,8 @@ class ClubsController extends BaseController
     {}
 
     public function addMembers()
+    {}
+
+    public function addTeams()
     {}
 }
