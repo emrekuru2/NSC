@@ -83,40 +83,48 @@ function getAddedMembersJSON() {
     return JSON.stringify(membersJSON)
 }
 
+function updateAddMembersList() {
+    let teamMembersArray = []
+    for (let i = 0; i < removeMemberButtons.length; i++) {
+        let name = removeMemberButtons[i].dataset.name
+        if (name === 'none') break
 
-// Executions
-let teamMembers = []
-for (let i = 0; i < removeMemberButtons.length; i++) {
-    let name = removeMemberButtons[i].dataset.name
+        teamMembersArray.push(name)
+    }
 
-    if (name !== 'none') {
-        teamMembers.push(name)
-        console.log('Team member: ' + name)
+    for (let i = 0; i < addMemberTable.children.length; i++) {
+        let name = addMemberTable.children[i].children[0].innerText
+        if (name === 'No users available') break
+
+        if (teamMembersArray.includes(name)) {
+            addMemberTable.children[i].remove()
+            i--
+        }
+    }
+
+    if (addMemberTable.children.length === 0) {
+        document.getElementById('add-member-table').classList.remove('table-hover')
+
+        let tr = document.createElement('tr')
+
+        let td = document.createElement('td')
+        td.classList.add('col-7')
+        td.classList.add('line-height-2rem')
+        td.innerText = 'No users available'
+        tr.appendChild(td)
+
+        td = document.createElement('td')
+        td.classList.add('col-4')
+        tr.appendChild(td)
+
+        td = document.createElement('td')
+        td.classList.add('col-1')
+        tr.appendChild(td)
+
+        addMemberTable.appendChild(tr)
     }
 }
 
-// for (let i = 0; i < addMemberTable.children.length; i++) {
-//     let name = addMemberTable.children[i].children[0].innerText
-//
-//     console.log('Removing member from list: ' + name)
-//     addMemberTable.children[i].remove()
-// }
 
-// for (let i = 0; i < addMemberTable.children.length; i++) {
-//     allTeamMembers.push(tableRows2[i].dataset.name)
-// }
-
-// for (let i = 0; i < allTeamMembers.length; i++) {
-//     for (let j = 0; j < teamMembers.length; j++) {
-//         if (teamMembers[j] === allTeamMembers[i]) {
-//             addMemberTable.deleteRow(i)
-//             i--
-//             break
-//         }
-//     }
-// }
-
-// // If there are no members in the addMemberTable, disable the addMembersButton
-// if (addMemberTable.children.length === 0) {
-//     addMembersButton.disabled = true
-// }
+// Executions
+updateAddMembersList()
