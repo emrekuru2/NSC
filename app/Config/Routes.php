@@ -89,6 +89,7 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->match(['post'], 'createClub', 'Admin\ClubsController::createClub');
     $routes->match(['post'], 'deleteClub', 'Admin\ClubsController::deleteClub');
     $routes->match(['post'], 'removeClubMember', 'Admin\ClubsController::removeMember');
+    $routes->match(['post'], 'addClubMembers', 'Admin\ClubsController::addMembers');
 });
 
 // Codeigniter's default auth routing

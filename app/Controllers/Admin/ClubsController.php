@@ -4,13 +4,16 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\ClubModel;
+use App\Models\TeamModel;
 use App\Models\UserEmailModel;
+use App\Controllers\BaseController;
 
 class ClubsController extends BaseController
 {
     public function index()
     {
         $clubModel = model(ClubModel::class);
+        $teamModel = model(TeamModel::class);
         $userModel = model(UserEmailModel::class);
 
         if ($this->request->getVar('search') !== null) {
@@ -24,10 +27,16 @@ class ClubsController extends BaseController
         }
 
         $data = [
-            'title'       => 'Clubs',
-            'club'        => $club,
-            'clubMembers' => $club !== null ? $userModel->getClubUsersByClubId($club->id) : null,
-            'allClubs'    => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll(),
+            'title' => 'Clubs',
+            'club' => $club,
+            'clubMembers' => $club != null ? $userModel->getClubUsersByClubId($club->id) : null,
+            'clubTeams' => $club != null ? $teamModel->select()
+                ->where('nsca_teams.clubID', $club->id)
+                ->orderBy('nsca_teams.name', 'ASC')
+                ->findAll() : null,
+            'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll(),
+            'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
+            'allUsers' => $userModel->select()->orderBy('nsca_users.last_name', 'ASC')->findAll()
         ];
 
         return view('pages/admin/clubs', $data);
@@ -44,4 +53,16 @@ class ClubsController extends BaseController
 
         return view('pages/admin/clubs', $data);
     }
+
+    public function createClub()
+    {}
+
+    public function deleteClub()
+    {}
+
+    public function removeMember()
+    {}
+
+    public function addMembers()
+    {}
 }
