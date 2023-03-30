@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\ClubModel;
 use App\Models\TeamModel;
 use App\Models\UserEmailModel;
+use App\Models\UserTypes\ClubUserModel;
 use Exception;
 
 class ClubsController extends BaseController
@@ -40,31 +41,22 @@ class ClubsController extends BaseController
     }
 
     public function updateClub()
-    {
-        $clubModel = model(ClubModel::class);
-
-        $data = [
-            'title'    => 'Clubs',
-            'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll(),
-        ];
-
-        return view('pages/admin/clubs', $data);
-    }
+    {}
 
     public function createClub()
     {
         helper('image');
 
-        $data['name'] = esc($this->request->getPost('name'));
+        $data['name']         = esc($this->request->getPost('name'));
         $data['abbreviation'] = esc($this->request->getPost('abbreviation'));
-        $data['description'] = esc($this->request->getPost('description'));
-        $data['email'] = esc($this->request->getPost('email'));
-        $data['phone'] = esc($this->request->getPost('phone'));
-        $data['website'] = esc($this->request->getPost('website'));
-        $data['facebook'] = esc($this->request->getPost('facebook'));
+        $data['description']  = esc($this->request->getPost('description'));
+        $data['email']        = esc($this->request->getPost('email'));
+        $data['phone']        = esc($this->request->getPost('phone'));
+        $data['website']      = esc($this->request->getPost('website'));
+        $data['facebook']     = esc($this->request->getPost('facebook'));
 
         // Logo
-        $file = $this->request->getFile('image');
+        $file     = $this->request->getFile('image');
         $filepath = storeImage('Clubs', $file);
         if (! $filepath) {
             $data['image'] = 'assets/images/Clubs/default.png';
@@ -87,7 +79,26 @@ class ClubsController extends BaseController
     }
 
     public function deleteClub()
-    {}
+    {
+        $clubModel     = model(ClubModel::class);
+        $clubUserModel = model(ClubUserModel::class);
+
+        $clubID = $this->request->getPost('deleteClubID');
+
+        $club = $clubModel->find($clubID);
+        if (file_exists($club->image) && ! str_contains($club->image, 'default.png')) {
+            unlink($club->image);
+        }
+
+        $clubModel->delete($clubID);
+        $clubUserModel->deleteClubUsers($clubID);
+
+        if ($clubModel->find($clubID) == null) {
+            return redirect()->to('admin/teams')->with('alert', ['type' => 'success', 'content' => 'Team deleted successfully']);
+        }
+
+        return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error occurred while deleting team']);
+    }
 
     public function removeMember()
     {}
