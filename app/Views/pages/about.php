@@ -10,7 +10,7 @@
                         <h1 class="fw-bolder mb-3">Nova Scotia Cricket Association</h1>
                         <p class="lead fw-normal text-muted mb-4">In 1965 the Nova Scotia Cricket Association (NSCA) was officially formed at the first meeting called for that purpose, held at the YMCA, South Park Street, Halifax. Nova Scotia Cricket Association (NSCA) became a member of the national cricket body, Cricket Canada, (formerly Canadian Cricket Association) in 1966. In 1975 the City of Halifax granted permission for the sport to be played on the north commons.
                             (Excerpts taken from "A History of Cricket in Nova Scotia" by Bhan Deonarine)</p>
-                        <a class="btn btn-primary btn-lg" href="https://cricketnovascotia.ca/documents/history.pdf">Read our story (Bhan Deonarine)</a>
+                        <a class="btn btn-primary btn-lg" href="https://cricketnovascotia.ca/documents/history.pdf" target="_blank">Read our story (Bhan Deonarine)</a>
                     </div>
                 </div>
             </div>
@@ -24,6 +24,7 @@
                 <div class="col-lg-6">
                     <h2 class="fw-bolder">Constitution of the Nova Scotia Cricket Association</h2>
                     <p class="lead fw-normal text-muted mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto est, ut esse a labore aliquam beatae expedita. Blanditiis impedit numquam libero molestiae et fugit cupiditate, quibusdam expedita, maiores eaque quisquam.</p>
+                    <a class="btn btn-primary btn-lg" href="https://cricketnovascotia.ca/documents/nsca_constitution.pdf" target="_blank">Read more →</a>
                 </div>
             </div>
         </div>
@@ -36,6 +37,7 @@
                 <div class="col-lg-6">
                     <h2 class="fw-bolder">Special Resolution - AGM 2019</h2>
                     <p class="lead fw-normal text-muted mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto est, ut esse a labore aliquam beatae expedita. Blanditiis impedit numquam libero molestiae et fugit cupiditate, quibusdam expedita, maiores eaque quisquam.</p>
+                    <a class="btn btn-primary btn-lg" href="https://cricketnovascotia.ca/documents/SpecRes2019AGM.pdf" target="_blank">Read more →</a>
                 </div>
             </div>
         </div>
