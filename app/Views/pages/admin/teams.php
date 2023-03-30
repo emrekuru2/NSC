@@ -320,8 +320,6 @@
     </div>
 </div>
 
-
-<script> </script>
 <script type="text/javascript" src="<?= base_url('assets/js/admin/teams.js'); ?>"></script>
 
 <?= $this->endSection() ?>

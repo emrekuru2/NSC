@@ -128,4 +128,6 @@
     </div>
 </div>
 
+    <script type="text/javascript" src="<?= base_url('assets/js/admin/clubs.js'); ?>"></script>
+
 <?= $this->endSection() ?>

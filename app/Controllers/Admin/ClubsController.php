@@ -48,4 +48,16 @@ class ClubsController extends BaseController
 
         return view('pages/admin/clubs', $data);
     }
+
+    public function createClub()
+    {}
+
+    public function deleteClub()
+    {}
+
+    public function removeMember()
+    {}
+
+    public function addMembers()
+    {}
 }
