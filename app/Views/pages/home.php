@@ -1,35 +1,6 @@
 <?= $this->extend('layouts/default') ?>
 
 <?= $this->section('mainContent') ?>
-<!--         Contact Us -->
-<!--        <div class="col-lg-5 col-md-12 mb-5">-->
-<!--            <div class="card h-100" style="background-color: deepskyblue;">-->
-<!--                <div class="card-body">-->
-<!--                    <h3 class="card-title text-white">Contact Us</h3>-->
-<!--                    <div class="container text-white">-->
-<!--                        <div class="row align-items-center">-->
-<!--                            <div class="col-2">-->
-<!--                                <a href="https://www.facebook.com/novascotiacricket/" target="_blank" class="mr-2 mb-3 text-white fs-2" role="button"><i class="fab fa-facebook"></i></a>-->
-<!--                            </div>-->
-<!--                            <div class="col padding-left: 2px;"><h5>Facebook</h5></div>-->
-<!--                        </div>-->
-<!--                        <div class="row align-items-center">-->
-<!--                            <div class="col-2">-->
-<!--                                <a href="https://twitter.com/nscricket" target="_blank" class="mr-2 mb-3 text-white fs-2" role="button"><i class="fab fa-twitter"></i></a>-->
-<!--                            </div>-->
-<!--                            <div class="col"><h5>Twitter</h5></div>-->
-<!--                        </div>-->
-<!--                        <div class="row align-items-center">-->
-<!--                            <div class="col-2">-->
-<!--                                <a href="mailto:testadmin@cricketnovascotia.ca" class="mr-2 mb-3 text-white fs-2" role="button"><i class="fas fa-envelope"></i></a>-->
-<!--                            </div>-->
-<!--                            <div class="col"><h5>Email</h5></div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
     <header class="bg-dark py-5">
         <div class="container px-5">
             <div class="row gx-5 align-items-center justify-content-center">
@@ -49,6 +20,50 @@
     </header>
     <!-- News preview section-->
     <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <!-- Blog entries-->
+                <div class="col-lg-8">
+                    <!-- Featured blog post-->
+                    <div class="card mb-4">
+                        <a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                        <div class="card-body">
+                            <div class="small text-muted">January 1, 2023</div>
+                            <h2 class="card-title">Check Out Our Clubs</h2>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
+                            <a class="btn btn-primary" href="clubs">Find clubs →</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Side widgets-->
+                <div class="col-lg-4">
+                    <!-- Dev program widget-->
+                    <div class="card mb-4">
+                        <h5 class="card-header">Development Programs</h5>
+                        <div class="card-body">
+                            <p>Sign up for our new and upcoming development programs, and become a member at NSCA</p>
+                        <a href="development" class="btn btn-primary btn-block">Get Involved</a>
+                        </div>
+                    </div>
+                    <!-- Contact widget-->
+                    <div class="card mb-4">
+                        <h5 class="card-header">Contact Us</h5>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <ul class="list-unstyled mb-0">
+                                        <li><a href="https://twitter.com/nscricket" target="_blank" class="mr-2 mb-3 fs-2" role="button" style="text-decoration: none; display: inline-flex; align-items: center;"><i class="fab fa-twitter" style="margin-right: 5px;"></i><span style="white-space: nowrap;">Twitter</span></a></li>
+                                        <li><a href="https://www.facebook.com/novascotiacricket/" target="_blank" class="mr-2 mb-3 fs-2" role="button" style="text-decoration: none; display: inline-flex; align-items: center;"><i class="fab fa-facebook" style="margin-right: 5px;"></i><span style="white-space: nowrap;">Facebook</span></a></li>
+                                        <li><a href="mailto:testadmin@cricketnovascotia.ca" class="mr-2 mb-3 fs-2" role="button" style="text-decoration: none; display: inline-flex; align-items: center;"><i class="fas fa-envelope" style="margin-right: 5px;"></i><span style="white-space: nowrap;">E-mail</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="container px-5 my-5">
             <div class="row gx-5 justify-content-center">
                 <div class="col-lg-8 col-xl-6">
