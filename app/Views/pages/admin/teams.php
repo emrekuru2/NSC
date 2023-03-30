@@ -14,7 +14,7 @@
             </div>
 
             <div class="modal-body">
-                <table class="table table-hover">
+                <table class="table table-hover" id="add-member-table">
                     <thead>
                     <tr>
                         <th scope="col">Name</th>
@@ -25,8 +25,8 @@
 
                     <tbody id="add-member-list">
                     <?php if (!$teamIsSet && empty($allUsers)) { ?>
-                        <tr data-user="none" data-name="none">
-                            <td class="col-7">No users available.</td>
+                        <tr>
+                            <td class="col-7 line-height-2rem">No users available</td>
                             <td class="col-4"></td>
                             <td class="col-1"></td>
                         </tr>
@@ -143,7 +143,7 @@
                 </div>
 
                 <!-- Logo -->
-                <div class="form-group margin-bottom-1rem">
+                <div class="form-group margin-bottom-half-rem">
                     <label class="margin-bottom-half-rem" for="newImage">Logo</label>
                     <input class="form-control" type="file" name="newImage" id="newImage">
                     <div class="form-text">SVG filetype recommended.</div>
@@ -167,7 +167,7 @@
             <div class="card-header">
                 <div class="d-md-flex justify-content-md-end group-list-header">
                     <div class="line-height-2rem">All Teams</div>
-                    <button type="button" id="new-group-button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#groupModal"><i class="fa-solid fa-plus"></i> New Team</button>
+                    <button type="button" id="new-group-button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#groupModal"><i class="fa-solid fa-plus"></i> Create Team</button>
                 </div>
             </div>
 
@@ -320,6 +320,8 @@
     </div>
 </div>
 
+
+<script> </script>
 <script type="text/javascript" src="<?= base_url('assets/js/admin/teams.js'); ?>"></script>
 
 <?= $this->endSection() ?>
