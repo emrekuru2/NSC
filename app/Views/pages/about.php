@@ -10,7 +10,7 @@
                         <h1 class="fw-bolder mb-3">Nova Scotia Cricket Association</h1>
                         <p class="lead fw-normal text-muted mb-4">In 1965 the Nova Scotia Cricket Association (NSCA) was officially formed at the first meeting called for that purpose, held at the YMCA, South Park Street, Halifax. Nova Scotia Cricket Association (NSCA) became a member of the national cricket body, Cricket Canada, (formerly Canadian Cricket Association) in 1966. In 1975 the City of Halifax granted permission for the sport to be played on the north commons.
                             (Excerpts taken from "A History of Cricket in Nova Scotia" by Bhan Deonarine)</p>
-                        <a class="btn btn-primary btn-lg" href="http://cricketnovascotia.ca/documents/history.pdf">Read our story (Bhan Deonarine)</a>
+                        <a class="btn btn-primary btn-lg" href="https://cricketnovascotia.ca/documents/history.pdf">Read our story (Bhan Deonarine)</a>
                     </div>
                 </div>
             </div>
