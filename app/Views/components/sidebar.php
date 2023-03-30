@@ -2,13 +2,13 @@
   <button class="navbar-toggler m-2" type="button" data-bs-toggle="collapse" data-bs-target="#toggle" aria-controls="toggle" aria-expanded="false" aria-label="Toggle navigation"><i class="fa-solid fa-bars"></i></button>
   <h3 class="navbar-toggler m-2"><?= $title ?></h3>
   <div class="collapse navbar-collapse" id="toggle" style="width: 280px;">
-    <div class="h-auto w-100 d-flex flex-column p-3 bg-dark text-light">
+    <div class="w-100 d-flex flex-column p-3 bg-dark text-light vh-100 overflow-auto">
       <div class="d-flex flex-column align-items-center">
         <img src="<?= base_url('/assets/images/Users/default.png') ?>" alt="profile" width="100px" height="100px">
         <span class="fs-4">Admin Name</span>
       </div>
       <hr>
-      <ul class="nav nav-pills flex-column mb-auto">
+      <ul class="nav nav-pills flex-column  ">
         <li class="nav-item">
           <a href="<?= base_url("admin/dashboard")?>" class="nav-link link-primary text-light <?= ($title == 'Dashboard') ? "active" : "" ?>"><i class="fa-solid fa-gauge fa-lg me-3 fa-fw"></i>Dashboard</a>
         </li>

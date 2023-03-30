@@ -2,7 +2,7 @@
 
 <?= $this->section('adminContent') ?>
 
-<div class="row">
+<div class="row g-4">
     <div class="col-12 col-lg-7">
         <div class="card shadow">
             <div class="card-header">Send email</div>
@@ -32,7 +32,7 @@
         <div class="card shadow">
             <div class="card-header">Email groups</div>
             <div class="card-body">
-                <?= view_cell('\App\Libraries\Contents::accordion', ['teams' => $teams, 'clubs' => $clubs, 'committees' => $committees, 'locations' => $locations, 'devs' => $devs]) ?>
+                <?= view_cell('\App\Libraries\Contents::accordion', ['items' => ['teams' => $teams, 'clubs' => $clubs, 'committees' => $committees, 'locations' => $locations, 'devs' => $devs]]) ?>
             </div>
         </div>
     </div>
