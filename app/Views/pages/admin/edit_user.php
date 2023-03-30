@@ -8,7 +8,7 @@
             <div class="card-header">User Details</div>
             <div class="card-body d-flex flex-column align-items-center">
                 <img class="border user-image" src="<?= base_url(esc($user->image)) ?>">
-                <h4 class="mt-3"> <?= esc($user->first_name) . " " . esc($user->last_name) ?></h4>
+                <h4 class="mt-3"> <?= esc($user->first_name) . ' ' . esc($user->last_name) ?></h4>
                 <hr class="w-100">
                 <ul class="list-group w-100">
                     <li class="list-group-item"><b>Email:</b> <?= esc($user->email) ?></li>

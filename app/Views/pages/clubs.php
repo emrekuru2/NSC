@@ -12,16 +12,16 @@
 
             <!-- Grid row -->
             <div class="row">
-                <?php if (!empty($clubs) && is_array($clubs)) : ?>
+                <?php if (! empty($clubs) && is_array($clubs)) : ?>
                     <?php foreach ($clubs as $club) : ?>
 
                         <h2 class="display-7 mb-2 text-center font-weight-normal"><?=$club->name?></h2>
             <br>
-            
+
             <div class="club-container">
-                <img class="feature-img rounded-circle" src="<?=base_url("/assets/images/Clubs/default.png")?>"
-                            alt="Sample image">   
-                
+                <img class="feature-img rounded-circle" src="<?=base_url('/assets/images/Clubs/default.png')?>"
+                            alt="Sample image">
+
                 <div class="club-info">
                     <div class="info-container">
                         <i class="fa-solid fa-envelope"></i>
@@ -32,7 +32,8 @@
                         <i class="fa-solid fa-phone"></i>
                         <a href="tel:<?=$club->phone?>">: <?=$club->phone?></a>
                     </div>
-                    <?php if($club->facebook != null)?>
+                    <?php if($club->facebook !== null) {;
+                    }?>
                     <div class="info-container">
                         <i class="fa-brands fa-facebook"></i>
                         <a href="<?=$club->facebook?>">: <?=$club->name?></a>
@@ -43,7 +44,7 @@
                         <!-- Grid column -->
                     <?php endforeach; ?>
                 <?php endif; ?>
-        
+
 
             </div>
 

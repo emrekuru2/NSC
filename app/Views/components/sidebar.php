@@ -2,47 +2,47 @@
   <button class="navbar-toggler m-2" type="button" data-bs-toggle="collapse" data-bs-target="#toggle" aria-controls="toggle" aria-expanded="false" aria-label="Toggle navigation"><i class="fa-solid fa-bars"></i></button>
   <h3 class="navbar-toggler m-2"><?= $title ?></h3>
   <div class="collapse navbar-collapse" id="toggle" style="width: 280px;">
-    <div class="h-auto w-100 d-flex flex-column p-3 bg-dark text-light">
+    <div class="w-100 d-flex flex-column p-3 bg-dark text-light vh-100 overflow-auto">
       <div class="d-flex flex-column align-items-center">
         <img src="<?= base_url('/assets/images/Users/default.png') ?>" alt="profile" width="100px" height="100px">
         <span class="fs-4">Admin Name</span>
       </div>
       <hr>
-      <ul class="nav nav-pills flex-column mb-auto">
+      <ul class="nav nav-pills flex-column  ">
         <li class="nav-item">
-          <a href="<?= base_url("admin/dashboard")?>" class="nav-link link-primary text-light <?= ($title == 'Dashboard') ? "active" : "" ?>"><i class="fa-solid fa-gauge fa-lg me-3 fa-fw"></i>Dashboard</a>
+          <a href="<?= base_url('admin/dashboard')?>" class="nav-link link-primary text-light <?= ($title === 'Dashboard') ? 'active' : '' ?>"><i class="fa-solid fa-gauge fa-lg me-3 fa-fw"></i>Dashboard</a>
         </li>
         <hr>
         <li class="nav-item">
-          <a href="<?= base_url('admin/alerts')?>" class="nav-link link-primary text-light <?= ($title == 'Alerts') ? "active" : "" ?>"><i class="fa-solid fa-bell fa-lg me-3 fa-fw"></i>Alerts</a>
+          <a href="<?= base_url('admin/alerts')?>" class="nav-link link-primary text-light <?= ($title === 'Alerts') ? 'active' : '' ?>"><i class="fa-solid fa-bell fa-lg me-3 fa-fw"></i>Alerts</a>
         </li>
         <li class="nav-item">
-          <a href="<?= base_url('admin/clubs')?>" class="nav-link link-primary text-light <?= ($title == 'Clubs') ? "active" : "" ?>"><i class="fa-solid fa-list fa-lg me-3 fa-fw"></i>Clubs</a>
+          <a href="<?= base_url('admin/clubs')?>" class="nav-link link-primary text-light <?= ($title === 'Clubs') ? 'active' : '' ?>"><i class="fa-solid fa-list fa-lg me-3 fa-fw"></i>Clubs</a>
         </li>
         <li class="nav-item">
-          <a href="<?= base_url('admin/teams')?>" class="nav-link link-primary text-light <?= ($title == 'Teams') ? "active" : "" ?>"><i class="fa-solid fa-people-group fa-lg me-3 fa-fw"></i>Teams</a>
+          <a href="<?= base_url('admin/teams')?>" class="nav-link link-primary text-light <?= ($title === 'Teams') ? 'active' : '' ?>"><i class="fa-solid fa-people-group fa-lg me-3 fa-fw"></i>Teams</a>
         </li>
         <li class="nav-item">
-          <a href="<?= base_url('admin/competitions')?>" class="nav-link link-primary text-light <?= ($title == 'Competitions') ? "active" : "" ?>"><i class="fa-solid fa-chess-king fa-lg me-3 fa-fw"></i>Competitions</a>
+          <a href="<?= base_url('admin/competitions')?>" class="nav-link link-primary text-light <?= ($title === 'Competitions') ? 'active' : '' ?>"><i class="fa-solid fa-chess-king fa-lg me-3 fa-fw"></i>Competitions</a>
         </li>
         <li class="nav-item">
-          <a href="<?= base_url('admin/committees')?>" class="nav-link link-primary text-light <?= ($title == 'Committees') ? "active" : "" ?>"><i class="fa-solid fa-users-between-lines fa-lg me-3 fa-fw"></i>Committees</a>
+          <a href="<?= base_url('admin/committees')?>" class="nav-link link-primary text-light <?= ($title === 'Committees') ? 'active' : '' ?>"><i class="fa-solid fa-users-between-lines fa-lg me-3 fa-fw"></i>Committees</a>
         </li>
         <li class="nav-item">
-          <a href="<?= base_url('admin/development')?>" class="nav-link link-primary text-light <?= ($title == 'Development') ? "active" : "" ?>"><i class="fa-solid fa-book fa-lg me-3 fa-fw"></i>Development</a>
+          <a href="<?= base_url('admin/development')?>" class="nav-link link-primary text-light <?= ($title === 'Development') ? 'active' : '' ?>"><i class="fa-solid fa-book fa-lg me-3 fa-fw"></i>Development</a>
         </li>
         <li class="nav-item">
-          <a href="<?= base_url('admin/users')?>" class="nav-link link-primary text-light <?= ($title == 'Users') ? "active" : "" ?>"><i class="fa-solid fa-user fa-lg me-3 fa-fw"></i>Users</a>
+          <a href="<?= base_url('admin/users')?>" class="nav-link link-primary text-light <?= ($title === 'Users') ? 'active' : '' ?>"><i class="fa-solid fa-user fa-lg me-3 fa-fw"></i>Users</a>
         </li>
         <hr>
         <li class="nav-item">
-          <a href="<?= base_url('admin/news')?>" class="nav-link link-primary text-light <?= ($title == 'News') ? "active" : "" ?>"><i class="fa-solid fa-bullhorn fa-lg me-3 fa-fw"></i>News</a>
+          <a href="<?= base_url('admin/news')?>" class="nav-link link-primary text-light <?= ($title === 'News') ? 'active' : '' ?>"><i class="fa-solid fa-bullhorn fa-lg me-3 fa-fw"></i>News</a>
         </li>
         <li class="nav-item">
-          <a href="<?= base_url('admin/email')?>" class="nav-link link-primary text-light <?= ($title == 'Email') ? "active" : "" ?>"><i class="fa-solid fa-envelope fa-lg me-3 fa-fw"></i>Send email</a>
+          <a href="<?= base_url('admin/email')?>" class="nav-link link-primary text-light <?= ($title === 'Email') ? 'active' : '' ?>"><i class="fa-solid fa-envelope fa-lg me-3 fa-fw"></i>Send email</a>
         </li>
         <li class="nav-item">
-          <a href="<?= base_url('admin/settings')?>" class="nav-link link-primary text-light <?= ($title == 'Settings') ? "active" : "" ?>"><i class="fa-solid fa-gear fa-lg me-3 fa-fw"></i>Settings</a>
+          <a href="<?= base_url('admin/settings')?>" class="nav-link link-primary text-light <?= ($title === 'Settings') ? 'active' : '' ?>"><i class="fa-solid fa-gear fa-lg me-3 fa-fw"></i>Settings</a>
         </li>
       </ul>
       <hr>

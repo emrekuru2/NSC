@@ -9,10 +9,9 @@ class CompetitionsController extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'Competitions'
+            'title' => 'Competitions',
         ];
-        
-        
+
         return view('pages/admin/competitions', $data);
     }
 }

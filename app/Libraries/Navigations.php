@@ -1,16 +1,21 @@
-<?php namespace App\Libraries;
+<?php
 
-class Navigations {
+namespace App\Libraries;
 
-    public function navbar() {
+class Navigations
+{
+    public function navbar()
+    {
         return view('components/navbar.php');
     }
 
-    public function panel() {
+    public function panel()
+    {
         return view('components/panel.php');
     }
 
-    public function sidebar() {
+    public function sidebar()
+    {
         return view('components/sidebar.php');
     }
 }

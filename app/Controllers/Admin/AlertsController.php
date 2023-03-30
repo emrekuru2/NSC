@@ -12,11 +12,10 @@ class AlertsController extends BaseController
         $alerts = model(AlertModel::class);
 
         $data = [
-            'title' => 'Alerts',
+            'title'  => 'Alerts',
             'alerts' => $alerts->findAll(),
-            'active' => $alerts->where('status', 1)->first()
+            'active' => $alerts->where('status', 1)->first(),
         ];
-
 
         return view('pages/admin/alerts', $data);
     }
@@ -28,17 +27,14 @@ class AlertsController extends BaseController
     public function setAlert()
     {
         $current = $this->request->getVar('flexRadioDefault');
-        $alert = model(AlertModel::class);
-        $active = $alert->where('status', 1)->first();
+        $alert   = model(AlertModel::class);
+        $active  = $alert->where('status', 1)->first();
 
         if ($active) {
             $alert->deactivate($active->id);
         }
 
-
-
         if ($alert->update($current, ['status' => 1])) {
-
             return redirect()->back();
         }
 

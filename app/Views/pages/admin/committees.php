@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
 <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
 
-<div class="row">
+<div class="row g-4">
 
     <!-- Committees -->
     <div class="col-lg-4">
@@ -14,7 +14,7 @@
                 <div class="card shadow">
                     <div class="card-header">Committees</div>
                     <div class="card-body">
-                        <?= view_cell('\App\Libraries\Contents::search', ['route' => 'modify_committee', 'name' => 'Committee', 'array' => $committiees, 'fields' => ['name'], 'method' =>  'post', 'useName' => true, 'useDivider' => true]) ?>
+                        <?= view_cell('\App\Libraries\Contents::search', ['route' => 'modify_committee', 'name' => 'Committee', 'array' => $committiees, 'fields' => ['name'], 'method' => 'post', 'useName' => true, 'useDivider' => true]) ?>
 
                         <table class="table table-striped">
                             <thead>
@@ -27,7 +27,7 @@
                             </thead>
 
                             <tbody class="table-group-divider">
-                                <?php if (!empty($committiees) && is_array($committiees)) : ?>
+                                <?php if (! empty($committiees) && is_array($committiees)) : ?>
                                     <?php foreach ($committiees as $committiee) : ?>
                                         <tr>
                                             <td><?= esc($committiee->id) ?></td>
@@ -101,6 +101,6 @@
 <script>
     new MultiSelectTag('days[]') // id
 </script>
-<script type="text/javascript" src="<?= base_url('assets/js/admin/committiees.js');?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/admin/committiees.js'); ?>"></script>
 
 <?= $this->endSection() ?>

@@ -11,29 +11,29 @@ class Clubs extends Migration
     {
         // Clubs Table
         $this->forge->addField([
-            'id'            => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
-            'email'         => ['type' => 'varchar', 'constraint' => 128, 'null' => true],
-            'name'          => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
-            'abbreviation'  => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
-            'description'   => ['type' => 'varchar', 'constraint' => 512, 'null' => true],
-            'website'       => ['type' => 'varchar', 'constraint' => 128, 'null' => true],
-            'phone'         => ['type' => 'varchar', 'constraint' => 12, 'null' => true],
-            'facebook'      => ['type' => 'varchar', 'constraint' => 256, 'null' => true],
-            'image'         => ['type' => 'varchar', 'constraint' => 64, 'null' => false, 'default' => 'assets/images/Clubs/default.png'],
-            'created_at'    => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
-            'updated_at'    => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
+            'id'           => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+            'email'        => ['type' => 'varchar', 'constraint' => 128, 'null' => true],
+            'name'         => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
+            'abbreviation' => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
+            'description'  => ['type' => 'varchar', 'constraint' => 512, 'null' => true],
+            'website'      => ['type' => 'varchar', 'constraint' => 128, 'null' => true],
+            'phone'        => ['type' => 'varchar', 'constraint' => 12, 'null' => true],
+            'facebook'     => ['type' => 'varchar', 'constraint' => 256, 'null' => true],
+            'image'        => ['type' => 'varchar', 'constraint' => 64, 'null' => false, 'default' => 'assets/images/Clubs/default.png'],
+            'created_at'   => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
+            'updated_at'   => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->createTable('nsca_clubs');
 
         // Club_Users Table
         $this->forge->addField([
-            'id'              => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
-            'userID'          => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
-            'clubID'          => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
-            'isManager'       => ['type' => 'tinyint', 'constraint' => 1, 'null' => true, 'default' => 0],
-            'created_at'      => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
-            'updated_at'      => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
+            'id'         => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+            'userID'     => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
+            'clubID'     => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
+            'isManager'  => ['type' => 'tinyint', 'constraint' => 1, 'null' => true, 'default' => 0],
+            'created_at' => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
+            'updated_at' => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->addKey(['clubID', 'userID']);
@@ -43,11 +43,11 @@ class Clubs extends Migration
 
         // Club Joinlist Table
         $this->forge->addField([
-            'id'            => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
-            'userID'        => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
-            'clubID'        => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
-            'created_at'    => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
-            'updated_at'    => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
+            'id'         => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+            'userID'     => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
+            'clubID'     => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
+            'created_at' => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
+            'updated_at' => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->addKey(['clubID', 'userID']);
@@ -63,7 +63,7 @@ class Clubs extends Migration
         $this->forge->dropTable('nsca_clubs', true);
         $this->forge->dropTable('nsca_club_users', true);
         $this->forge->dropTable('nsca_club_joinlists', true);
-  
+
         $this->db->enableForeignKeyChecks();
     }
 }

@@ -1,6 +1,6 @@
-<?= $this->extend("layouts/admin") ?>
+<?= $this->extend('layouts/admin') ?>
 
-<?= $this->section("adminContent") ?>
+<?= $this->section('adminContent') ?>
 
 <div class="row text-center">
     <div class="col">
@@ -53,7 +53,7 @@
                     <tbody class="table-group-divider">
                         <?php foreach ($joinlist as $row) : ?>
                             <tr>
-                                <td><?= esc($row['first_name']) . " " . esc($row['last_name']) ?></td>
+                                <td><?= esc($row['first_name']) . ' ' . esc($row['last_name']) ?></td>
                                 <td><?= esc($row['club_name']) ?></td>
                                 <td>
                                     <button type="submit" name="accept" class="btn btn-primary mx-2">Accept</button>

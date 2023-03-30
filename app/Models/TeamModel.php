@@ -6,12 +6,11 @@ use CodeIgniter\Model;
 
 class TeamModel extends Model
 {
-    protected $table            = 'nsca_teams';
-    protected $primaryKey       = 'id';
-    protected $returnType       = \App\Entities\Team::class;
-    protected $allowedFields    = ['id', 'clubID', 'name', 'description', 'image'];
+    protected $table         = 'nsca_teams';
+    protected $primaryKey    = 'id';
+    protected $returnType    = \App\Entities\Team::class;
+    protected $allowedFields = ['id', 'clubID', 'name', 'description', 'image'];
 
-    // Functions
     public function getTeamsInClub(int $clubID): array
     {
         return $this->select('nsca_teams.id, nsca_teams.name')
