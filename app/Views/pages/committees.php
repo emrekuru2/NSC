@@ -11,7 +11,7 @@
 
             <!-- Grid row -->
             <div class="row">
-                <?php if (!empty($committees) && is_array($committees)) : ?>
+                <?php if (! empty($committees) && is_array($committees)) : ?>
                     <?php foreach ($committees as $committee) : ?>
                         <!-- Grid column -->
                         <div class="col-md-6 mb-4">
@@ -31,7 +31,7 @@
                         <!-- Grid column -->
                     <?php endforeach; ?>
                 <?php endif; ?>
-        
+
 
             </div>
 

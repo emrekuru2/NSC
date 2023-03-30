@@ -6,11 +6,11 @@ use CodeIgniter\Model;
 
 class DevTypeModel extends Model
 {
-    protected $table            = 'nsca_dev_types';
-    protected $primaryKey       = 'id';
-    protected $returnType       = \App\Entities\DevType::class;
-    protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'min_age', 'max_age'];
+    protected $table         = 'nsca_dev_types';
+    protected $primaryKey    = 'id';
+    protected $returnType    = \App\Entities\DevType::class;
+    protected $protectFields = true;
+    protected $allowedFields = ['name', 'min_age', 'max_age'];
 
     // Dates
     protected $useTimestamps = false;

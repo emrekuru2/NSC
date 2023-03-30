@@ -9,15 +9,15 @@ class Teams extends Migration
 {
     public function up()
     {
-         // Teams Table
-         $this->forge->addField([
-            'id'            => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
-            'clubID'        => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
-            'name'          => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
-            'description'   => ['type' => 'varchar', 'constraint' => 512, 'null' => true],
-            'image'         => ['type' => 'varchar', 'constraint' => 128, 'null' => false, 'default' => 'assets/images/Teams/default.png'],
-            'created_at'    => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
-            'updated_at'    => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
+        // Teams Table
+        $this->forge->addField([
+            'id'          => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+            'clubID'      => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
+            'name'        => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
+            'description' => ['type' => 'varchar', 'constraint' => 512, 'null' => true],
+            'image'       => ['type' => 'varchar', 'constraint' => 128, 'null' => false, 'default' => 'assets/images/Teams/default.png'],
+            'created_at'  => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
+            'updated_at'  => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->addKey('clubID');
@@ -26,13 +26,13 @@ class Teams extends Migration
 
         // Team User Table
         $this->forge->addField([
-            'id'              => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
-            'userID'          => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
-            'teamID'          => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
-            'isTeamCaptain'   => ['type' => 'tinyint', 'constraint' => 1, 'null' => 0, 'default' => 0],
-            'isViceCaptain'   => ['type' => 'tinyint', 'constraint' => 1, 'null' => 0, 'default' => 0],
-            'created_at'      => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
-            'updated_at'      => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
+            'id'            => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+            'userID'        => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
+            'teamID'        => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
+            'isTeamCaptain' => ['type' => 'tinyint', 'constraint' => 1, 'null' => 0, 'default' => 0],
+            'isViceCaptain' => ['type' => 'tinyint', 'constraint' => 1, 'null' => 0, 'default' => 0],
+            'created_at'    => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
+            'updated_at'    => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->addKey(['userID', 'teamID']);

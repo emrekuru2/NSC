@@ -23,5 +23,4 @@ class Contents
     {
         return view('components/search', $content);
     }
-
 }

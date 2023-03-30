@@ -2,11 +2,9 @@
 
 namespace App\Controllers\Admin;
 
+use App\Controllers\BaseController;
 use App\Models\ClubModel;
 use App\Models\UserEmailModel;
-use CodeIgniter\HTTP\IncomingRequest;
-use CodeIgniter\Files\File;
-use App\Controllers\BaseController;
 
 class ClubsController extends BaseController
 {
@@ -15,23 +13,21 @@ class ClubsController extends BaseController
         $clubModel = model(ClubModel::class);
         $userModel = model(UserEmailModel::class);
 
-        if ($this->request->getVar('search') != null) {
+        if ($this->request->getVar('search') !== null) {
             $clubName = $this->request->getVar('search');
-            $club = $clubModel->select()->where('name', $clubName)->first();
-        }
-        else if ($this->request->getVar('name') != null) {
+            $club     = $clubModel->select()->where('name', $clubName)->first();
+        } elseif ($this->request->getVar('name') !== null) {
             $clubName = $this->request->getVar('name');
-            $club = $clubModel->select()->where('name', $clubName)->first();
-        }
-        else {
+            $club     = $clubModel->select()->where('name', $clubName)->first();
+        } else {
             $club = null;
         }
 
         $data = [
-            'title' => 'Clubs',
-            'club' => $club,
-            'clubMembers' => $club != null ? $userModel->getClubUsersByClubId($club->id) : null,
-            'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll()
+            'title'       => 'Clubs',
+            'club'        => $club,
+            'clubMembers' => $club !== null ? $userModel->getClubUsersByClubId($club->id) : null,
+            'allClubs'    => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll(),
         ];
 
         return view('pages/admin/clubs', $data);
@@ -42,8 +38,8 @@ class ClubsController extends BaseController
         $clubModel = model(ClubModel::class);
 
         $data = [
-            'title' => 'Clubs',
-            'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll()
+            'title'    => 'Clubs',
+            'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll(),
         ];
 
         return view('pages/admin/clubs', $data);

@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <?php if (session()->getFlashdata('alert') !== NULL) : ?>
+    <?php if (session()->getFlashdata('alert') !== null) : ?>
         <?= view_cell('\App\Libraries\Alerts::toast', ['type' => session()->getFlashdata('alert')['type'], 'content' => session()->getFlashdata('alert')['content']]) ?>
     <?php endif; ?>
     <main class="d-flex">

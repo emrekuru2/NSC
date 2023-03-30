@@ -16,36 +16,33 @@ class TeamsController extends BaseController
         $teamModel = model(TeamModel::class);
         $userModel = model(UserEmailModel::class);
 
-        if ($this->request->getVar('search') != null) {
+        if ($this->request->getVar('search') !== null) {
             $teamName = esc($this->request->getVar('search'));
-            $team = $teamModel->select()->where('name', $teamName)->first();
-        }
-        else if ($this->request->getVar('name') != null) {
+            $team     = $teamModel->select()->where('name', $teamName)->first();
+        } elseif ($this->request->getVar('name') !== null) {
             $teamName = $this->request->getVar('name');
-            $team = $teamModel->select()->where('name', $teamName)->first();
-        }
-        else {
+            $team     = $teamModel->select()->where('name', $teamName)->first();
+        } else {
             $team = null;
         }
 
-        if ($team != null) {
+        if ($team !== null) {
             $teamMembers = $userModel->select('nsca_users.id, nsca_users.first_name, nsca_users.last_name, nsca_team_users.isTeamCaptain, nsca_team_users.isViceCaptain')
                 ->join('nsca_team_users', 'nsca_team_users.userID = nsca_users.id', 'left')
                 ->where('nsca_team_users.teamID', $team->id)
                 ->orderBy('nsca_users.last_name', 'ASC')
                 ->findAll();
-        }
-        else {
+        } else {
             $teamMembers = null;
         }
 
         $data = [
-            'title' => 'Teams',
-            'team' => $team,
+            'title'       => 'Teams',
+            'team'        => $team,
             'teamMembers' => $teamMembers,
-            'allTeams' => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
-            'allClubs' => model(ClubModel::class)->select()->orderBy('nsca_clubs.name', 'ASC')->findAll(),
-            'allUsers' => $userModel->select()->orderBy('nsca_users.last_name', 'ASC')->findAll()
+            'allTeams'    => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
+            'allClubs'    => model(ClubModel::class)->select()->orderBy('nsca_clubs.name', 'ASC')->findAll(),
+            'allUsers'    => $userModel->select()->orderBy('nsca_users.last_name', 'ASC')->findAll(),
         ];
 
         return view('pages/admin/teams', $data);
@@ -54,26 +51,26 @@ class TeamsController extends BaseController
     public function updateTeam()
     {
         helper('image');
-        $teamModel = model(TeamModel::class);
+        $teamModel     = model(TeamModel::class);
         $teamUserModel = model(TeamUserModel::class);
 
-        $clubID = esc($this->request->getPost('updateClubID'));
-        $name = esc($this->request->getPost('updateTeamName'));
+        $clubID      = esc($this->request->getPost('updateClubID'));
+        $name        = esc($this->request->getPost('updateTeamName'));
         $description = esc($this->request->getPost('updateTeamDescription'));
-        $image = $this->request->getFile('updateTeamImage');
+        $image       = $this->request->getFile('updateTeamImage');
 
         $teamID = esc($this->request->getPost('update-team-id'));
-        $team = $teamModel->find($teamID);
+        $team   = $teamModel->find($teamID);
 
         // New Team Image
         if ($image->isValid()) {
             // Deleting old image
-            if (!str_contains($team->image, 'default.png')) {
+            if (! str_contains($team->image, 'default.png')) {
                 unlink($team->image);
             }
 
             $filepath = storeImage('Teams', $image);
-            if (!$filepath) {
+            if (! $filepath) {
                 $filepath = 'assets/images/Teams/default.png';
             }
 
@@ -100,12 +97,11 @@ class TeamsController extends BaseController
             } catch (Exception $e) {
                 echo "<script> console.log('Update failed for team: " . $teamID . " ') </script>";
             }
-
         }
 
         // Updating Team Members
         $json = $this->request->getPost('update-members-JSON');
-        if ($json != '') {
+        if ($json !== '') {
             $teamJSON = json_decode($json);
 
             foreach ($teamJSON->players as $player) {
@@ -120,7 +116,7 @@ class TeamsController extends BaseController
                                 ->where('teamID', $teamID)
                                 ->update();
                         } catch (Exception $e) {
-                            echo "<script> console.log('Update failed when changing role to \'Player\' for user: ' + '" . $userID . ", on team: " . $teamID . " ') </script>";
+                            echo "<script> console.log('Update failed when changing role to \\'Player\\' for user: ' + '" . $userID . ', on team: ' . $teamID . " ') </script>";
                         }
                         break;
 
@@ -132,9 +128,10 @@ class TeamsController extends BaseController
                                 ->where('teamID', $teamID)
                                 ->update();
                         } catch (Exception $e) {
-                            echo "<script> console.log('Update failed when changing role to \'Captain\' for user: ' + '" . $userID . ", on team: " . $teamID . " ') </script>";
+                            echo "<script> console.log('Update failed when changing role to \\'Captain\\' for user: ' + '" . $userID . ', on team: ' . $teamID . " ') </script>";
                         }
                         break;
+
                     default:
                         try {
                             $teamUserModel->set('isViceCaptain', 0)
@@ -143,7 +140,7 @@ class TeamsController extends BaseController
                                 ->where('teamID', $teamID)
                                 ->update();
                         } catch (Exception $e) {
-                            echo "<script> console.log('Update failed when changing role to \'Vice-Captain\' for user: ' + '" . $userID . ", on team: " . $teamID . " ') </script>";
+                            echo "<script> console.log('Update failed when changing role to \\'Vice-Captain\\' for user: ' + '" . $userID . ', on team: ' . $teamID . " ') </script>";
                         }
                         break;
                 }
@@ -155,16 +152,16 @@ class TeamsController extends BaseController
 
     public function createTeam()
     {
-        $data['clubID'] = esc($this->request->getPost('newClubID'));
-        $data['name'] = esc($this->request->getPost('newName'));
+        $data['clubID']      = esc($this->request->getPost('newClubID'));
+        $data['name']        = esc($this->request->getPost('newName'));
         $data['description'] = esc($this->request->getPost('newDescription'));
 
         // Logo
         helper('image');
 
-        $file = $this->request->getFile('newImage');
+        $file     = $this->request->getFile('newImage');
         $filepath = storeImage('Teams', $file);
-        if (!$filepath) {
+        if (! $filepath) {
             $data['image'] = 'assets/images/Teams/default.png';
         } else {
             $data['image'] = $filepath;
@@ -180,25 +177,26 @@ class TeamsController extends BaseController
         } catch (Exception $e) {
             echo "<script> console.log('Error occurred while creating team. " . $e->getMessage() . " ') </script>";
         }
+
         return redirect()->to('admin/teams')->with('alert', ['type' => 'danger', 'content' => 'Error occurred while creating team']);
     }
 
     public function deleteTeam()
     {
-        $teamModel = model(TeamModel::class);
+        $teamModel     = model(TeamModel::class);
         $teamUserModel = model(TeamUserModel::class);
 
         $teamID = $this->request->getPost('deleteTeamID');
 
         $team = $teamModel->find($teamID);
-        if (file_exists($team->image) && !str_contains($team->image, 'default.png')) {
+        if (file_exists($team->image) && ! str_contains($team->image, 'default.png')) {
             unlink($team->image);
         }
 
         $teamModel->delete($teamID);
         $teamUserModel->deleteTeamUsers($teamID);
 
-        if ($teamModel->find($teamID) == null) {
+        if ($teamModel->find($teamID) === null) {
             return redirect()->to('admin/teams')->with('alert', ['type' => 'success', 'content' => 'Team deleted successfully']);
         }
 
@@ -208,7 +206,7 @@ class TeamsController extends BaseController
     public function removeMember()
     {
         $teamUserModel = model(TeamUserModel::class);
-        $teamModel = model(TeamModel::class);
+        $teamModel     = model(TeamModel::class);
 
         $teamID = esc($this->request->getPost('remove-member-team-id'));
         $userID = esc($this->request->getPost('remove-member-id'));
@@ -217,7 +215,7 @@ class TeamsController extends BaseController
         $teamName = $teamModel->select('name')->find($teamID)->name;
 
         try {
-            if ($teamUserModel->where('userID', $userID)->where('teamID', $teamID)->findAll() == null) {
+            if ($teamUserModel->where('userID', $userID)->where('teamID', $teamID)->findAll() === null) {
                 return redirect()->to('admin/teams?name=' . str_replace(' ', '+', $teamName))->with('alert', ['type' => 'success', 'content' => 'Team created successfully']);
             }
         } catch (Exception $e) {
@@ -230,16 +228,15 @@ class TeamsController extends BaseController
     public function addMembers()
     {
         $teamUserModel = model(TeamUserModel::class);
-        $teamModel = model(TeamModel::class);
+        $teamModel     = model(TeamModel::class);
 
         $teamID = $this->request->getPost('add-member-team-id');
 
         $json = $this->request->getPost('add-members-JSON');
-        if ($json != '') {
+        if ($json !== '') {
             $usersJSON = json_decode($json);
 
             foreach ($usersJSON->members as $member) {
-
                 $data['userID'] = $member[0];
                 $data['teamID'] = $teamID;
 
@@ -253,6 +250,7 @@ class TeamsController extends BaseController
                         $data['isTeamCaptain'] = 1;
                         $data['isViceCaptain'] = 0;
                         break;
+
                     default:
                         $data['isTeamCaptain'] = 0;
                         $data['isViceCaptain'] = 0;
@@ -272,5 +270,4 @@ class TeamsController extends BaseController
 
         return redirect()->back();
     }
-
 }

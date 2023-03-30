@@ -5,9 +5,7 @@ namespace App\Commands;
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
 use CodeIgniter\CLI\GeneratorTrait;
-use Config\Database;
 use CodeIgniter\Config\DotEnv;
-use Throwable;
 
 class Setup extends BaseCommand
 {
@@ -57,8 +55,6 @@ class Setup extends BaseCommand
 
     /**
      * Actually execute a command.
-     *
-     * @param array $params
      */
     public function run(array $params)
     {
@@ -66,15 +62,17 @@ class Setup extends BaseCommand
 
         if (empty($env)) {
             CLI::print('You need to specify your environment type', 'red');
+
             return EXIT_ERROR;
-        } else if ($env != 'production' || $env != 'development'){
+        }
+        if ($env !== 'production' || $env !== 'development') {
             CLI::error('Environment type can either be development or production');
+
             return EXIT_ERROR;
         }
 
         CLI::print('Setting up for environment type ' . $env, 'blue', 'yellow');
         CLI::newLine();
-
 
         $base_url    = CLI::prompt('Your base url', 'http://localhost/');
         $db_hostname = CLI::prompt('Your database hostname', 'localhost');
@@ -86,22 +84,19 @@ class Setup extends BaseCommand
         $db_port     = CLI::prompt('Your database port', '3306', 'required');
         CLI::newLine();
 
-
-        if (!$this->editENV(array($env, $base_url, $db_hostname, $db_name, $db_user, $db_pswd, $db_driver, $db_prefix, $db_port))) {
+        if (! $this->editENV([$env, $base_url, $db_hostname, $db_name, $db_user, $db_pswd, $db_driver, $db_prefix, $db_port])) {
             CLI::print('Settings could not be applied', 'red');
             CLI::newLine();
+
             return EXIT_ERROR;
-            
-        } else {
-            CLI::print('Settings applied successfully!', 'green');
-            CLI::newLine();
         }
+        CLI::print('Settings applied successfully!', 'green');
+        CLI::newLine();
 
         $this->call('migrate');
 
         if ($env === 'development') {
             $this->call('db:seed', ['MainSeeder']);
-
         } else {
             $this->call('db:seed', ['ProdSeeder']);
         }
@@ -110,14 +105,13 @@ class Setup extends BaseCommand
         CLI::write('Setup Completed', 'blue', 'yellow');
     }
 
-
     public function editENV(array $props): bool
     {
         $baseEnv = ROOTPATH . 'env';
         $envFile = ROOTPATH . '.env';
 
-        if (!is_file($envFile)) {
-            if (!is_file($baseEnv)) {
+        if (! is_file($envFile)) {
+            if (! is_file($baseEnv)) {
                 CLI::write('Both default shipped `env` file and custom `.env` are missing.', 'yellow');
                 CLI::write('It is impossible to write the new environment type.', 'yellow');
                 CLI::newLine();
@@ -128,7 +122,6 @@ class Setup extends BaseCommand
             copy($baseEnv, $envFile);
         }
 
-
         $settings = [
             'CI_ENVIRONMENT',
             'app.baseURL',
@@ -138,13 +131,12 @@ class Setup extends BaseCommand
             'database.default.password',
             'database.default.DBDriver',
             'database.default.DBPrefix',
-            'database.default.port'
+            'database.default.port',
         ];
 
-
-        for ($i = 0; $i < sizeof($settings); $i++) {
+        for ($i = 0; $i < count($settings); $i++) {
             $pattern = sprintf('/^[#\s]*%s[=\s](.*)$/m', $settings[$i]);
-            $result = file_put_contents($envFile, preg_replace($pattern, "$settings[$i] = $props[$i]", file_get_contents($envFile), 1));
+            $result  = file_put_contents($envFile, preg_replace($pattern, "{$settings[$i]} = {$props[$i]}", file_get_contents($envFile), 1));
 
             if ($result === false) {
                 return false;

@@ -45,7 +45,6 @@ $routes->get('about', 'Main\AboutController::index');
 $routes->get('news/(:num)', 'Main\NewsController::getNewsByID/$1');
 $routes->get('development/(:num)', 'Main\DevelopmentController::register/$1');
 
-
 // Routing for admin views and functions
 $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     // GET
@@ -62,7 +61,6 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->get('settings', 'Admin\SettingsController::index');
     $routes->get('users/edit/(:num)', 'Admin\UsersController::userDetails/$1');
     $routes->get('users/edit', 'Admin\UsersController::searchUserDetails');
-
 
     // Functions
     $routes->match(['post'], 'editUser/(:num)', 'Admin\UsersController::editUser/$1');
@@ -95,7 +93,6 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
 
 // Codeigniter's default auth routing
 service('auth')->routes($routes);
-
 
 /*
  * --------------------------------------------------------------------

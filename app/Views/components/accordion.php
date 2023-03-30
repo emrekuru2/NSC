@@ -37,7 +37,7 @@
       <div id="collapse-<?= esc($key) ?>" class="accordion-collapse collapse" aria-labelledby="heading-<?= esc($key) ?>" data-bs-parent="#accordion">
         <div class="accordion-body">
           <ul class="list-group">
-            <?= sizeof($values) == 0 ? '<p class="text-start margin-bottom-0">No clubs available.</p>' : null ?>
+            <?= count($values) === 0 ? '<p class="text-start margin-bottom-0">No clubs available.</p>' : null ?>
             <?php foreach ($values as $value) : ?>
               <li class="list-group-item">
                 <input class="form-check-input me-1" type="checkbox" data-group-name="<?= esc(substr($key, 0, -1)) ?>" value="<?= esc($value->id) ?>" id="<?= esc(substr($key, 0, -1) . '-' . $value->id) ?>">

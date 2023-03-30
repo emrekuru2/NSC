@@ -8,7 +8,7 @@
                 <div class="card shadow">
                     <div class="card-header">Current Alert</div>
                     <div class="card-body d-flex">
-                        <h2 class="card-title flex-grow-1"><?= ($active != null) ? esc($active->title) : 'No alert is active' ?></h2>
+                        <h2 class="card-title flex-grow-1"><?= ($active !== null) ? esc($active->title) : 'No alert is active' ?></h2>
                         <a class="btn btn-outline-danger">Disable</a>
                     </div>
                 </div>

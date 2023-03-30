@@ -11,21 +11,21 @@ class Auth extends Migration
     {
         // Users Table
         $this->forge->addField([
-            'id'             => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
-            'first_name'     => ['type' => 'varchar', 'constraint' => 30, 'null' => true],
-            'last_name'      => ['type' => 'varchar', 'constraint' => 30, 'null' => true],
-            'email'          => ['type' => 'varchar', 'constraint' => 30, 'null' => true],
-            'phone'          => ['type' => 'int', 'constraint' => 30, 'null' => true],
-            'street'         => ['type' => 'varchar', 'constraint' => 30, 'null' => true],
-            'city'           => ['type' => 'varchar', 'constraint' => 30, 'null' => true],
-            'region'         => ['type' => 'varchar', 'constraint' => 30, 'null' => true],
-            'country'        => ['type' => 'varchar', 'constraint' => 30, 'null' => true],
-            'postal'         => ['type' => 'varchar', 'constraint' => 30, 'null' => true],
-            'image'         => ['type' => 'varchar', 'constraint' => 120, 'null' => false, 'default' => 'assets/images/Users/default.png'],
-            'active'         => ['type' => 'tinyint', 'constraint' => 1, 'null' => 0, 'default' => 0],
-            'last_active'    => ['type' => 'datetime', 'null' => true],
-            'created_at'     => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
-            'updated_at'     => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
+            'id'          => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+            'first_name'  => ['type' => 'varchar', 'constraint' => 30, 'null' => true],
+            'last_name'   => ['type' => 'varchar', 'constraint' => 30, 'null' => true],
+            'email'       => ['type' => 'varchar', 'constraint' => 30, 'null' => true],
+            'phone'       => ['type' => 'int', 'constraint' => 30, 'null' => true],
+            'street'      => ['type' => 'varchar', 'constraint' => 30, 'null' => true],
+            'city'        => ['type' => 'varchar', 'constraint' => 30, 'null' => true],
+            'region'      => ['type' => 'varchar', 'constraint' => 30, 'null' => true],
+            'country'     => ['type' => 'varchar', 'constraint' => 30, 'null' => true],
+            'postal'      => ['type' => 'varchar', 'constraint' => 30, 'null' => true],
+            'image'       => ['type' => 'varchar', 'constraint' => 120, 'null' => false, 'default' => 'assets/images/Users/default.png'],
+            'active'      => ['type' => 'tinyint', 'constraint' => 1, 'null' => 0, 'default' => 0],
+            'last_active' => ['type' => 'datetime', 'null' => true],
+            'created_at'  => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
+            'updated_at'  => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->addUniqueKey('email');

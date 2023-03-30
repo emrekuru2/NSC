@@ -37,7 +37,7 @@
                 <div class="card shadow">
                     <div class="card-header">Programs</div>
                     <div class="card-body">
-                        <?= view_cell('\App\Libraries\Contents::search', ['route' => 'modify_development', 'name' => 'Program', 'array' => $programs, 'fields' => ['name'], 'method' =>  'post', 'useName' => true, 'useDivider' => true]) ?>
+                        <?= view_cell('\App\Libraries\Contents::search', ['route' => 'modify_development', 'name' => 'Program', 'array' => $programs, 'fields' => ['name'], 'method' => 'post', 'useName' => true, 'useDivider' => true]) ?>
 
 
                         <table class="table table-striped">
@@ -52,7 +52,7 @@
                             </thead>
 
                             <tbody class="table-group-divider">
-                                <?php if (!empty($programs) && is_array($programs)) :
+                                <?php if (! empty($programs) && is_array($programs)) :
                                     foreach ($programs as $program) : ?>
                                         <tr>
                                             <td><?= esc($program->id) ?></td>
@@ -123,7 +123,7 @@
                         <div class="col-12 col-lg-6">
                             <label for="typeID" class="form-label">Program Type:</label>
                             <select name="typeID" id="typeID"  required>
-                                <?php if (!empty($devTypes) && is_array($devTypes)) : ?>
+                                <?php if (! empty($devTypes) && is_array($devTypes)) : ?>
                                     <?php foreach ($devTypes as $devType) : ?>
                                         <option value=<?= esc($devType->id) ?>>
                                             <?= esc($devType->name) ?>

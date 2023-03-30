@@ -59,26 +59,26 @@ class AuthGroups extends ShieldAuthGroups
      */
     public array $permissions = [
         // Actions
-        'clubs.create'         => 'Can create clubs',
-        'clubs.edit'           => 'Can edit clubs',
-        'clubs.delete'         => 'Can delete clubs',
-        'committees.create'    => 'Can create committees',
-        'committees.edit'      => 'Can edit committees',
-        'committees.create'    => 'Can delete committees',
-        'devs.create'          => 'Can create development programs',
-        'devs.create'          => 'Can edit development programs',
-        'devs.delete'          => 'Can delete development programs',
-        'teams.create'         => 'Can create teams',
-        'teams.edit'           => 'Can edit teams',
-        'teams.delete'         => 'Can delete teams',
-        'teams.join'           => 'Can join teams',
-        'teams.accept'         => 'Can accept a player join requests',
-        'teams.reject'         => 'Can reject a player join requests',
-        'teams.add'            => 'Can add a player to team',
-        'teams.remove'         => 'Can remove a player from team',
-        'users.create'         => 'Can create non-admin users',
-        'users.edit'           => 'Can edit non-admin users',
-        'users.delete'         => 'Can delete non-admin users',
+        'clubs.create'      => 'Can create clubs',
+        'clubs.edit'        => 'Can edit clubs',
+        'clubs.delete'      => 'Can delete clubs',
+        'committees.create' => 'Can create committees',
+        'committees.edit'   => 'Can edit committees',
+        'committees.create' => 'Can delete committees',
+        'devs.create'       => 'Can create development programs',
+        'devs.create'       => 'Can edit development programs',
+        'devs.delete'       => 'Can delete development programs',
+        'teams.create'      => 'Can create teams',
+        'teams.edit'        => 'Can edit teams',
+        'teams.delete'      => 'Can delete teams',
+        'teams.join'        => 'Can join teams',
+        'teams.accept'      => 'Can accept a player join requests',
+        'teams.reject'      => 'Can reject a player join requests',
+        'teams.add'         => 'Can add a player to team',
+        'teams.remove'      => 'Can remove a player from team',
+        'users.create'      => 'Can create non-admin users',
+        'users.edit'        => 'Can edit non-admin users',
+        'users.delete'      => 'Can delete non-admin users',
         // Locations
         'admin.access'         => 'Can access the `Admin Panel` page',
         'myClub.access'        => 'Can access `My Club` page',
@@ -86,7 +86,7 @@ class AuthGroups extends ShieldAuthGroups
         'manageTeam.access'    => 'Can access `Manage Team` page',
         'playerProfile.access' => 'Can access `Player Profile` page',
         'profile.access'       => 'Can access `Profile` page',
-        
+
     ];
 
     /**
@@ -105,7 +105,7 @@ class AuthGroups extends ShieldAuthGroups
             'users.*',
             'profile.*',
             'playerProfile.*',
-            
+
         ],
         'manager' => [
             'myClub.access',
@@ -120,14 +120,14 @@ class AuthGroups extends ShieldAuthGroups
             'teams.join',
             'myTeam.access',
             'playerProfile.access',
-            'profile.access'
+            'profile.access',
         ],
         'umpire' => [
             'teams.join',
-            'profile.access'
+            'profile.access',
         ],
         'guest' => [
-            'profile.access'
+            'profile.access',
         ],
     ];
 }

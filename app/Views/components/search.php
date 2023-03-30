@@ -5,15 +5,16 @@
  * @details Search bar component for searching entities in database. Use '$this->request->getVar('search')' inside a controller to get search term.
  *
  * Required:
- * @param string $name <p>Name of section (Singular). E.g., 'Team', 'Club', 'Committee', etc.</p>
- * @param array $array <p>Array of entities from model. E.g., teams table, clubs table, etc.</p>
- * @param array $fields <p>Array of field names from model to display. E.g., ['name'], ['first_name', 'last_name'], etc.</p>
+ *
+ * @param string $name   <p>Name of section (Singular). E.g., 'Team', 'Club', 'Committee', etc.</p>
+ * @param array  $array  <p>Array of entities from model. E.g., teams table, clubs table, etc.</p>
+ * @param array  $fields <p>Array of field names from model to display. E.g., ['name'], ['first_name', 'last_name'], etc.</p>
  *
  * Optional:
- * @param string $route <p>Route name of the desired function.</p>
- * @param string $method <p>HTTP form method. 'get' or 'post' (Default = 'get').</p>
- * @param boolean $useName <p>Use name in search bar placeholder (Default = false). E.g., true = 'Type to search teams...', false = 'Type to search...'.</p>
- * @param boolean $useDivider <p>Use divider underneath search bar (Default = false).</p>
+ * @param string $route      <p>Route name of the desired function.</p>
+ * @param string $method     <p>HTTP form method. 'get' or 'post' (Default = 'get').</p>
+ * @param bool   $useName    <p>Use name in search bar placeholder (Default = false). E.g., true = 'Type to search teams...', false = 'Type to search...'.</p>
+ * @param bool   $useDivider <p>Use divider underneath search bar (Default = false).</p>
  */
 ?>
 
@@ -45,17 +46,17 @@
     let array = [
         <?php foreach ($array as $item) :
             $value = '';
+
             for ($i = 0; $i < count($fields); $i++) {
                 $value .= $item->{$fields[$i]};
-                if ($i != count($fields)-1) {
+                if ($i !== count($fields) - 1) {
                     $value .= ' ';
                 }
             }
 
-            if ($item == $array[count($array)-1]) {
+            if ($item === $array[count($array) - 1]) {
                 echo '"' . $value . '"';
-            }
-            else {
+            } else {
                 echo '"' . $value . '",';
             }
         endforeach; ?>

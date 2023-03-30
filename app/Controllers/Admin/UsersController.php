@@ -3,9 +3,9 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use App\Models\UserModel;
-use App\Models\TeamModel;
 use App\Models\ClubModel;
+use App\Models\TeamModel;
+use App\Models\UserModel;
 use App\Models\UserTypes\ClubUserModel;
 use App\Models\UserTypes\TeamUserModel;
 use CodeIgniter\Shield\Models\PermissionModel;
@@ -14,28 +14,24 @@ class UsersController extends BaseController
 {
     public function index()
     {
-
         $model = model(UserModel::class);
 
         $data = [
             'title' => 'Users',
-            'users' => $model->findAll(10, 1)
+            'users' => $model->findAll(10, 1),
         ];
-
 
         return view('pages/admin/users', $data);
     }
 
     public function userDetails(int $id)
     {
-
         $data = [
             'title' => 'User Editing',
             'user'  => model(UserModel::class)->find($id),
             'teams' => model(TeamModel::class)->findAll(),
-            'clubs' => model(ClubModel::class)->findAll()
+            'clubs' => model(ClubModel::class)->findAll(),
         ];
-
 
         return view('pages/admin/edit_user', $data);
     }
@@ -45,15 +41,17 @@ class UsersController extends BaseController
         $name = esc($this->request->getVar('search'));
 
         $firstname = explode(' ', $name)[0];
-        $user = model(UserModel::class)->where('first_name', $firstname)->first();
+        $user      = model(UserModel::class)->where('first_name', $firstname)->first();
 
-        if ($user == null) return redirect()->back();
+        if ($user === null) {
+            return redirect()->back();
+        }
 
         $data = [
             'title' => 'User Editing',
             'user'  => $user,
             'teams' => model(TeamModel::class)->findAll(),
-            'clubs' => model(ClubModel::class)->findAll()
+            'clubs' => model(ClubModel::class)->findAll(),
         ];
 
         return view('pages/admin/edit_user', $data);
@@ -61,7 +59,6 @@ class UsersController extends BaseController
 
     public function editUser(int $id)
     {
-
         $data = $this->request->getPost();
 
         if (isset($data['role'])) {

@@ -11,7 +11,7 @@
       <div class="modal-body">
       Are you sure you want to delete <?=$program->name?>?
       <form method="post" action="deleteProgram" id="delete">
-                    <input type="hidden" value=<?=$program->id?> name="id">        
+                    <input type="hidden" value=<?=$program->id?> name="id">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -37,7 +37,7 @@
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider">
-                                <?php if (!empty($users) && is_array($users)) : ?>
+                                <?php if (! empty($users) && is_array($users)) : ?>
                                     <?php foreach ($users as $user) : ?>
                                         <tr>
                                             <td><?= esc($user->first_name) ?> <?= esc($user->last_name) ?></td>
@@ -108,7 +108,7 @@
                         <div class="col-12 col-lg-6">
                             <label for="typeID" class="form-label">Program Type:</label>
                             <select name="typeID" id="typeID" name="typeID" required>
-                                <?php if (!empty($devTypes) && is_array($devTypes)) : ?>
+                                <?php if (! empty($devTypes) && is_array($devTypes)) : ?>
                                     <?php foreach ($devTypes as $devType) : ?>
                                         <option value=<?= esc($devType->id) ?>>
                                             <?= esc($devType->name) ?>
@@ -132,9 +132,9 @@
                             <button type="submit" id="update-button" class="btn btn-primary">Update</button>
                         </div>
                         <hr class="divider">
-                        
+
                         </div>
-                        
+
                     </div>
                 </form>
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete Program</button>
