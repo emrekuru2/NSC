@@ -6,7 +6,6 @@ use App\Controllers\BaseController;
 use App\Models\ClubModel;
 use App\Models\TeamModel;
 use App\Models\UserEmailModel;
-use App\Controllers\BaseController;
 
 class ClubsController extends BaseController
 {
