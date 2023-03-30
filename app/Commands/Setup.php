@@ -37,14 +37,14 @@ class Setup extends BaseCommand
      *
      * @var string
      */
-    protected $usage = 'setup <environment> [options]';
+    protected $usage = 'setup [options]';
 
     /**
      * The Command's Arguments
      *
      * @var array
      */
-    protected $arguments = ['environment' => 'The environment type to setup the project'];
+    protected $arguments = [];
 
     /**
      * The Command's Options
@@ -58,19 +58,12 @@ class Setup extends BaseCommand
      */
     public function run(array $params)
     {
-        $env = array_shift($params);
+        $env = CLI::promptByKey(['These are the environment choices:', 'Select one'], [
+            'production'  => 'This environment is used for deployment.',
+            'development' => 'This environment is used for developing and debugging the application',
+        ]);
 
-        if (empty($env)) {
-            CLI::print('You need to specify your environment type', 'red');
-
-            return EXIT_ERROR;
-        }
-        if ($env !== 'production' || $env !== 'development') {
-            CLI::error('Environment type can either be development or production');
-
-            return EXIT_ERROR;
-        }
-
+        CLI::newLine();
         CLI::print('Setting up for environment type ' . $env, 'blue', 'yellow');
         CLI::newLine();
 
