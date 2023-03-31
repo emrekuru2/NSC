@@ -95,10 +95,10 @@ class ClubsController extends BaseController
         $clubUserModel->deleteClubUsers($clubID);
 
         if ($clubModel->find($clubID) == null) {
-            return redirect()->to('admin/teams')->with('alert', ['type' => 'success', 'content' => 'Team deleted successfully']);
+            return redirect()->to('admin/clubs')->with('alert', ['type' => 'success', 'content' => 'Club deleted successfully']);
         }
 
-        return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error occurred while deleting team']);
+        return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error occurred while deleting club']);
     }
 
     public function removeMember()
@@ -111,13 +111,13 @@ class ClubsController extends BaseController
         $fullName = esc($this->request->getPost('remove-member-name'));
 
         $fullName = explode(',', $fullName);
-        $userID  = $userModel->select()->where('first_name', $fullName[0])->where('last_name', $fullName[1])->first()->id;
+        $userID   = $userModel->select()->where('first_name', $fullName[0])->where('last_name', $fullName[1])->first()->id;
 
         $clubUserModel->where('userID', $userID)->where('clubID', $clubID)->delete();
         $clubName = $clubModel->select()->find($clubID)->name;
 
         if ($clubUserModel->where('userID', $userID)->where('clubID', $clubID)->first() === null) {
-            return redirect()->to('admin/clubs?name=' . str_replace(' ', '+', $clubName))->with('alert', ['type' => 'success', 'content' => 'Removed member successfully']);
+            return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Removed member successfully']);
         }
 
         return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error occurred while removing member']);
@@ -127,7 +127,21 @@ class ClubsController extends BaseController
     {}
 
     public function removeTeam()
-    {}
+    {
+        $clubModel = model(ClubModel::class);
+        $teamModel = model(TeamModel::class);
+
+        $teamName = esc($this->request->getPost('remove-team-name'));
+        $teamID   = $teamModel->select()->where('name', $teamName)->first()->id;
+
+        $teamModel->set('clubID', null)->where('id', $teamID)->update();
+
+        if ($teamModel->where('id', $teamID)->first()->clubID === null) {
+            return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Removed member successfully']);
+        }
+
+        return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error occurred while removing member']);
+    }
 
     public function addTeams()
     {}

@@ -4,6 +4,32 @@
 
 <?php $clubIsSet = isset($club) ?>
 
+<!-- Remove Team Modal -->
+<form method="post" action="removeTeamFromClub" id="removeTeamModal" class="modal fade" tabindex="-2" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Remove Club</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <?php if ($clubIsSet) {?>
+                    <label class="margin-bottom-half-rem" id="remove-team-message"><?= str_contains(strtolower($club->name), 'club') ? $club->name : $club->name . ' Club' ?></label>
+                <?php } else { ?>
+                    <label class="margin-bottom-half-rem" id="remove-team-message">Select a team to remove.</label>
+                <?php } ?>
+            </div>
+
+            <div class="modal-footer group-modal-footer">
+                <input type="hidden" value="" name="remove-team-name" id="remove-team-name">
+                <button type="submit" class="btn btn-danger"<?= $clubIsSet ? '' : " disabled" ?>>Remove</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</form>
+
 <!-- Add Team Modal -->
 <form method="post" action="addTeamsToClub" id="addTeamToClubModal" class="modal fade" tabindex="-2" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -368,7 +394,7 @@
                                     <tr>
                                         <td class="col-11 line-height-2rem"><a href="teams?name=<?= str_replace(' ', '-', $team->name) ?>"><?= $team->name ?></a></td>
                                         <td class="col-1">
-                                            <button type="button" name="remove-team-button" data-name="<?= $team->name ?>" data-bs-toggle="modal" data-bs-target="#removeMemberModal" class="btn btn-danger btn-sm">Remove</button>
+                                            <button type="button" name="remove-team-button" data-name="<?= $team->name ?>" data-bs-toggle="modal" data-bs-target="#removeTeamModal" class="btn btn-danger btn-sm">Remove</button>
                                         </td>
                                     </tr>
                                 <?php endforeach; } ?>

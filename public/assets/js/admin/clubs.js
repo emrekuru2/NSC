@@ -3,6 +3,11 @@ const removeMemberButtons = document.getElementsByName('remove-member-button')
 const removeMemberHiddenInput = document.getElementById('remove-member-name')
 const removeMemberMessage = document.getElementById('remove-member-message')
 
+const removeTeamForm = document.getElementById('removeTeamModal')
+const removeTeamButtons = document.getElementsByName('remove-team-button')
+const removeTeamHiddenInput = document.getElementById('remove-team-name')
+const removeTeamMessage = document.getElementById('remove-team-message')
+
 const addMembersForm = document.getElementById('addMemberModal')
 const addMembersButton = document.getElementById('add-member-button')
 const addMemberTable = document.getElementById('add-member-list')
@@ -26,7 +31,7 @@ removeMemberButtons.forEach( (buttonElement) => {
         removeMemberHiddenInput.value = button.dataset.name
         let clubName = message.substring(message.indexOf("from the") + 9 , message.indexOf("?"))
 
-        removeMemberMessage.innerHTML = 'Are you sure you want to remove the ' + '<b>' + button.dataset.name + '</b>' + ' team from the ' + '<b>' + clubName + '</b>' + '?'
+        removeMemberMessage.innerHTML = 'Are you sure you want to remove  ' + '<b>' + button.dataset.name.replace(',', ' ') + '</b>' + ' from the ' + '<b>' + clubName + '</b>' + '?'
     })
 })
 
@@ -46,6 +51,15 @@ clubMemberRoles.forEach( (roleSelect) => {
     })
 })
 
+removeTeamButtons.forEach( (buttonElement) => {
+    buttonElement.addEventListener('click', (event) => {
+        let button = event.target
+        removeTeamHiddenInput.value = button.dataset.name
+
+        let clubName = removeTeamMessage.innerText
+        removeTeamMessage.innerHTML = 'Are you sure you want to remove the ' + '<b>' + button.dataset.name + '</b>' + ' team from the ' + '<b>' + clubName + '</b>' + '?'
+    })
+})
 
 // Functions
 function getClubMemberRolesJSON() {
