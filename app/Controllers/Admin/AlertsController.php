@@ -35,10 +35,10 @@ class AlertsController extends BaseController
         }
 
         if ($alert->update($current, ['status' => 1])) {
-            return redirect()->back();
+            return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Alert set successfully']);
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Alert could not be set']);
     }
 
     public function removeAlert(int $id)

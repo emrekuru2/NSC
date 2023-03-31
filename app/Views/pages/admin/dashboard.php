@@ -57,10 +57,10 @@
                                 <td><?= esc($row['club_name']) ?></td>
                                 <td>
                                     <form method="post" action="accept_user">
-                                        <input type="hidden" value="<?=esc($row["userID"])?>" id="userID" name="userID">
-                                        <input type="hidden" value="<?=esc($row["clubID"])?>" id="clubID" name="clubID">
-                                        <input type="hidden" value="<?=esc($row["recordID"])?>" id="recordID" name="recordID">
-                                        <input type="hidden" value="<?=esc($row["club_name"])?>" id="club_name" name="club_name">
+                                        <input type="hidden" value="<?=esc($row['userID'])?>" id="userID" name="userID">
+                                        <input type="hidden" value="<?=esc($row['clubID'])?>" id="clubID" name="clubID">
+                                        <input type="hidden" value="<?=esc($row['recordID'])?>" id="recordID" name="recordID">
+                                        <input type="hidden" value="<?=esc($row['club_name'])?>" id="club_name" name="club_name">
                                         <button type="submit" name="action" value="accept" class="btn btn-primary mx-2">Accept</button>
                                         <button type="submit" name="action" value="deny" class="btn btn-danger mx-2">Decline</button>
                                     </form>

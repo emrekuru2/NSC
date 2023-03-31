@@ -65,12 +65,12 @@ class TeamsController extends BaseController
         // New Team Image
         if ($image->isValid()) {
             // Deleting old image
-            if (! str_contains($team->image, 'default.png')) {
+            if (!str_contains($team->image, 'default.png')) {
                 unlink($team->image);
             }
 
             $filepath = storeImage('Teams', $image);
-            if (! $filepath) {
+            if (!$filepath) {
                 $filepath = 'assets/images/Teams/default.png';
             }
 
@@ -161,7 +161,7 @@ class TeamsController extends BaseController
 
         $file     = $this->request->getFile('newImage');
         $filepath = storeImage('Teams', $file);
-        if (! $filepath) {
+        if (!$filepath) {
             $data['image'] = 'assets/images/Teams/default.png';
         } else {
             $data['image'] = $filepath;
@@ -189,7 +189,7 @@ class TeamsController extends BaseController
         $teamID = $this->request->getPost('deleteTeamID');
 
         $team = $teamModel->find($teamID);
-        if (file_exists($team->image) && ! str_contains($team->image, 'default.png')) {
+        if (file_exists($team->image) && !str_contains($team->image, 'default.png')) {
             unlink($team->image);
         }
 
@@ -262,12 +262,11 @@ class TeamsController extends BaseController
 
                 try {
                     $teamUserModel->save($teamUser);
+                    return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Member added successfully']);
                 } catch (Exception $e) {
-                    echo "<script> console.log('Failed to assign user to team.') </script>";
+                    return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Member could not be added']);
                 }
             }
         }
-
-        return redirect()->back();
     }
 }
