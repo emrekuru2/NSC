@@ -40,7 +40,7 @@ $routes->get('news', 'Main\NewsController::index');
 $routes->get('contact', 'Main\ContactController::index');
 $routes->get('faqs', 'Main\FaqsController::index');
 $routes->get('about', 'Main\AboutController::index');
-
+$routes->match(['post'], 'contact_admins', 'Main\ContactController::contact_admins');
 // News functional routing
 $routes->get('news/(:num)', 'Main\NewsController::getNewsByID/$1');
 $routes->get('development/(:num)', 'Main\DevelopmentController::register/$1');
@@ -64,8 +64,6 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
 
     // Functions
     $routes->match(['post'], 'editUser/(:num)', 'Admin\UsersController::editUser/$1');
-
-    $routes->match(['post'], 'sendEmail', 'Admin\EmailController::sendEmail');
     $routes->match(['post'], 'createNews', 'Admin\NewsController::createNews');
 
     $routes->match(['post'], 'createDev', 'Admin\DevelopmentController::createDev');
