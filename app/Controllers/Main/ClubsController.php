@@ -32,31 +32,32 @@ class ClubsController extends BaseController
         return view('pages/club_join', $data);
     }
 
+    
     public function joinClub(){
         $clubJoinistModel = model(ClubJoinlistModel::class);
-
+        $clubModel = model(ClubModel::class);
         $currentUser = new \App\Entities\UserTypes\ClubUser();
         $currentUser->userID = auth()->id();
-        $currentUser->clubID = $_POST['clubs-select'];
+        $clubID = $clubModel->select()->where('name', $_POST['clubs-select'])->first()->id;
+        $currentUser->clubID = $clubID;
 
+        
         if ($clubJoinistModel->save($currentUser)) {
             $data = [
                 'type'    => 'success',
                 'content' => 'Your request was submitted successfully'
             ];
-
-            return redirect()->back()->with('alert', $data);
-
+        } else {
+            $data = [
+                'type'    => 'danger',
+                'content' => 'Failed to submit your request'
+            ];
         }
-        $data = [
-            'danger'    => 'success',
-            'content' => 'Failed to submit your request'
-        ];
-
-        return redirect()->back()->with('alert', $data);
-
         
+    
+        return redirect()->back()->with('alert', $data);
     }
+    
 
 
 
