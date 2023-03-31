@@ -2,10 +2,11 @@
 
 function storeImage($folder, $file)
 {
-    if ($file->isValid() && !$file->hasMoved()) {
+    if ($file->isValid() && ! $file->hasMoved()) {
         $newName = $file->getRandomName();
-        $path = 'assets/images/' . $folder . '/';
+        $path    = 'assets/images/' . $folder . '/';
         $file->move($path, $newName);
+
         return $path . $newName;
     }
 

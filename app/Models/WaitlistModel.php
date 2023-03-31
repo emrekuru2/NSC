@@ -7,11 +7,11 @@ use CodeIgniter\Model;
 class WaitlistModel extends Model
 {
     // Construction
-    protected $table            = 'nsca_club_joinlists';
-    protected $primaryKey       = 'id';
-    protected $returnType       = 'array';
-    protected $protectFields    = true;
-    protected $allowedFields    = ['userID', 'clubID'];
+    protected $table         = 'nsca_club_joinlists';
+    protected $primaryKey    = 'id';
+    protected $returnType    = 'array';
+    protected $protectFields = true;
+    protected $allowedFields = ['userID', 'clubID'];
 
     // Dates
     protected $useTimestamps = true;

@@ -6,16 +6,15 @@ use CodeIgniter\Model;
 
 class ClubUserModel extends Model
 {
-    protected $table            = 'nsca_club_users';
-    protected $primaryKey       = 'id';
-    protected $returnType       = \App\Entities\UserTypes\ClubUser::class;
-    protected $protectFields    = true;
-    protected $allowedFields    = ['clubID', 'userID', 'isManager'];
+    protected $table         = 'nsca_club_users';
+    protected $primaryKey    = 'id';
+    protected $returnType    = \App\Entities\UserTypes\ClubUser::class;
+    protected $protectFields = true;
+    protected $allowedFields = ['clubID', 'userID', 'isManager'];
 
     // Dates
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
-
 }
