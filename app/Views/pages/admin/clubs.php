@@ -30,7 +30,7 @@
     </div>
 </form>
 
-<!-- Add Team Modal -->
+<!-- Add Teams Modal -->
 <form method="post" action="addTeamsToClub" id="addTeamToClubModal" class="modal fade" tabindex="-2" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
@@ -44,7 +44,7 @@
                     Select teams to add to the <b><?php if ($clubIsSet) { echo str_contains(strtolower($club->name), 'club') ? $club->name : $club->name . ' Club'; } ?></b>
                 </p>
 
-                <table class="table table-hover" id="add-team-table">
+                <table class="table<?= $clubIsSet && ! empty($unassignedTeams) ? ' table-hover' : '' ?>" id="add-team-table">
                     <thead>
                     <tr>
                         <th scope="col">Name</th>
@@ -53,7 +53,7 @@
                     </thead>
 
                     <tbody id="add-team-list">
-                    <?php if (!$clubIsSet && empty($unassignedTeams)) { ?>
+                    <?php if (!$clubIsSet || empty($unassignedTeams)) { ?>
                         <tr>
                             <td class="col-11 line-height-2rem">No teams available</td>
                             <td class="col-1"></td>
@@ -73,7 +73,7 @@
             <div class="modal-footer group-modal-footer">
                 <input type="hidden" value="<?= $clubIsSet ? $club->id : '' ?>" name="add-team-club-id">
                 <input type="hidden" value="" name="add-teams-JSON" id="add-teams-JSON">
-                <button type="submit" id="add-teams-button" class="btn btn-primary"<?= $clubIsSet ? '' : " disabled" ?>>Add</button>
+                <button type="button" id="add-teams-button" class="btn btn-primary"<?= $clubIsSet ? '' : " disabled" ?>>Add</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             </div>
         </div>
@@ -104,13 +104,13 @@
                     </thead>
 
                     <tbody id="add-member-list">
-                    <?php if (!$clubIsSet && empty($unassignedUsers)) { ?>
+                    <?php if (!$clubIsSet && empty($allUsers)) { ?>
                         <tr>
                             <td class="col-7 line-height-2rem">No users available</td>
                             <td class="col-4"></td>
                             <td class="col-1"></td>
                         </tr>
-                    <?php } else { foreach ($unassignedUsers as $user): ?>
+                    <?php } else { foreach ($allUsers as $user): ?>
                         <tr>
                             <td class="col-7 line-height-2rem"><?= $user->first_name . ' ' . $user->last_name ?? '' ?></td>
                             <td class="col-4">
@@ -392,7 +392,7 @@
                                     </tr>
                                 <?php } else { foreach ($clubTeams as $team): ?>
                                     <tr>
-                                        <td class="col-11 line-height-2rem"><a href="teams?name=<?= str_replace(' ', '-', $team->name) ?>"><?= $team->name ?></a></td>
+                                        <td class="col-11 line-height-2rem"><a href="teams?name=<?= str_replace(' ', '+', $team->name) ?>"><?= $team->name ?></a></td>
                                         <td class="col-1">
                                             <button type="button" name="remove-team-button" data-name="<?= $team->name ?>" data-bs-toggle="modal" data-bs-target="#removeTeamModal" class="btn btn-danger btn-sm">Remove</button>
                                         </td>

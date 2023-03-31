@@ -144,5 +144,35 @@ class ClubsController extends BaseController
     }
 
     public function addTeams()
-    {}
+    {
+        $teamModel = model(TeamModel::class);
+
+        $clubID = $this->request->getPost('add-team-club-id');
+
+        $json       = $this->request->getPost('add-teams-JSON');
+        $addSuccess = 0;
+        $numTeams   = -1;
+
+        if ($json != '') {
+            $teamsJSON = json_decode($json);
+            $numTeams = count($teamsJSON->teams);
+
+            foreach ($teamsJSON->teams as $teamName) {
+                $teamID = $teamModel->select()->where('name', $teamName)->first()->id;
+
+                try {
+                    $teamModel->set('clubID', $clubID)->where('id', $teamID)->update();
+                    $addSuccess++;
+                } catch (Exception $e) {
+                    echo "<script> console.log('Error occurred while adding team to club. " . $e->getMessage() . ".') </script>";
+                }
+            }
+        }
+
+        if ($addSuccess == $numTeams) {
+            return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Added teams successfully']);
+        }
+
+        return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error occurred while adding teams']);
+    }
 }

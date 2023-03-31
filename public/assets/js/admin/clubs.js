@@ -14,6 +14,10 @@ const addMemberTable = document.getElementById('add-member-list')
 const addMemberChecks = document.getElementsByName('add-member-check')
 const addMemberRoles = document.getElementsByName('add-member-role')
 
+const addTeamsForm = document.getElementById('addTeamToClubModal')
+const addTeamChecks = document.getElementsByName('add-teams-check')
+const addTeamsButton = document.getElementById('add-teams-button')
+
 const updateForm = document.getElementById('update-form')
 const updateButton = document.getElementById('update-button')
 const clubMemberTableBody = document.getElementById('club-member-list')
@@ -61,10 +65,20 @@ removeTeamButtons.forEach( (buttonElement) => {
     })
 })
 
+addTeamsButton.addEventListener('click', () => {
+    let teamsJSON = { 'teams': [] }
+    for (let i = 0; i < addTeamChecks.length; i++) {
+        if (addTeamChecks[i].checked) {
+            teamsJSON.teams.push(addTeamChecks[i].value)
+        }
+    }
+    document.getElementById('add-teams-JSON').value = JSON.stringify(teamsJSON)
+    addTeamsForm.submit()
+})
+
 // Functions
 function getClubMemberRolesJSON() {
-    if (clubMemberTableBody.dataset.clubIsset === '0' && !clubMembersChanged ||
-        clubMemberTableBody.children[0].children[0].innerText === 'No club members') return ''
+    if (clubMemberTableBody.dataset.clubIsset === '0' && clubMemberTableBody.children[0].children[0].innerText === 'No club members') return ''
 
     let clubJSON = { 'members': [] }
     for (let i = 0; i < clubMemberTableBody.children.length; i++) {
