@@ -12,8 +12,8 @@
                                     <p class="text-muted">If several languages coalesce, the grammar of the resulting language
                                         is more simple and regular than that of the individual</p>
                                     <div>
-                                        <button type="button" class="btn btn-primary me-2">Email Us</button>
-                                        <button type="button" class="btn btn-success">Send us a tweet</button>
+                                        <a href="https://twitter.com/nscricket" target="_blank"><button type="button" class="btn btn-primary me-2">Send us a tweet</button></a>
+                                        <a href="mailto:testadmin@cricketnovascotia.ca"><button type="button" class="btn btn-success">Email Us</button></a>
                                     </div>
                                 </div>
                             </div>
