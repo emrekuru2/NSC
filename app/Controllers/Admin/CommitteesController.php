@@ -15,99 +15,105 @@ class CommitteesController extends BaseController
 
         $data = [
             'committiees' => $committieesModel->findAll(),
-            'title' => 'Committees'
+            'title'       => 'Committees',
         ];
-        
-        
+
         return view('pages/admin/committees', $data);
     }
 
-    public function createCommittee(){
+    public function createCommittee()
+    {
         helper('image');
-        
+
         $committieesModel = new \App\Models\CommitteeModel();
 
-        $name = $this->request->getVar('name');
+        $name      = $this->request->getVar('name');
         $startyear = $this->request->getVar('startyear');
 
-        if ($this->request->getVar('endyear') == null){
+        if ($this->request->getVar('endyear') === null) {
             $startyear = $startyear . ' - Present';
-        }
-        else{
+        } else {
             $startyear = $startyear . ' - ' . $this->request->getVar('endyear');
         }
         $image = $this->request->getFile('image');
-        if ($image->isValid()){
-            
+        if ($image->isValid()) {
             $filePath = storeImage('Committee', $image);
-        }
-        else{
+        } else {
             $filePath = 'assets/images/Committee/default.png';
         }
         $data = [
-            'name' => $name,
-            'years' => $startyear,
+            'name'        => $name,
+            'years'       => $startyear,
             'description' => $this->request->getVar('description'),
-            'image' => $filePath,
+            'image'       => $filePath,
         ];
 
         $committieesModel->insert($data);
 
         return redirect()->to('/admin/committees');
     }
-    public function modify(){
+
+    public function modify()
+    {
         // get a list of all users
         $committeeModel = model(CommitteeModel::class);
-        $userModel = model(UserModel::class);
-        $users = $userModel->findAll();
+        $userModel      = model(UserModel::class);
+        $users          = $userModel->findAll();
 
         // Get Committee
-        if ($this->request->getVar('search') != null) {
+        if ($this->request->getVar('search') !== null) {
             $committeeName = esc($this->request->getPost('search'));
-            $committee = $committeeModel->select()->where('name', $committeeName)->first();
+            $committee     = $committeeModel->select()->where('name', $committeeName)->first();
         } else {
             $committeeID = $this->request->getPost('id');
-            $committee = $committeeModel->select()->find($committeeID);
+            $committee   = $committeeModel->select()->find($committeeID);
+        }
+
+        if ($committee === null) {
+            return $this->index();
         }
 
         $years = explode(' - ', $committee->years);
 
-        $members = $committeeModel->getMembers($committee->id);
+        $members   = $committeeModel->getMembers($committee->id);
         $memberIDs = [];
-        foreach ($members as $member){
+
+        foreach ($members as $member) {
             $memberIDs[] = $member->userID;
         }
 
         $data = [
-            'users' => $users,
-            'members' => $memberIDs,
+            'users'     => $users,
+            'members'   => $memberIDs,
             'committee' => $committee,
-            'years' => $years,
-            'isActive' => $years[1] == 'Present',
-            'title' => 'Modify Committee'
+            'years'     => $years,
+            'isActive'  => $years[1] === 'Present',
+            'title'     => 'Modify Committee',
         ];
+
         return view('pages/admin/modify_committee', $data);
     }
-    public function modifyCommittee(){
+
+    public function modifyCommittee()
+    {
         $committeeModel = model(CommitteeModel::class);
-        $committee = new \App\Entities\Committee();
+        $committee      = new \App\Entities\Committee();
 
         $committieesModel = new \App\Models\CommitteeModel();
 
-        $data = $this->request->getPost();
-        $id = $this->request->getVar('id');
+        $data      = $this->request->getPost();
+        $id        = $this->request->getVar('id');
         $startyear = $this->request->getVar('startyear');
 
-        if ($this->request->getVar('endyear') == null){
+        if ($this->request->getVar('endyear') === null) {
             $startyear = $startyear . ' - Present';
-        }
-        else{
+        } else {
             $startyear = $startyear . ' - ' . $this->request->getVar('endyear');
         }
-        $data["years"] = $startyear;
+        $data['years'] = $startyear;
         $committee->fill($data);
 
-        $committeeModel->update(array('id' => $id), $committee);
+        $committeeModel->update(['id' => $id], $committee);
 
         // remove all users from committee
         $committeeUserModel = model(CommitteeUserModel::class);
@@ -115,28 +121,28 @@ class CommitteesController extends BaseController
 
         // loop through all selected users
         $users = $this->request->getPost('users');
-        if ($users != null){
-            foreach ($users as $user){
+        if ($users !== null) {
+            foreach ($users as $user) {
                 $userModel = model(CommitteeUserModel::class);
                 // create new record in committee_user table
                 $userModel->insert([
-                    'userID' => $user,
-                    'committeeID' => $id
+                    'userID'      => $user,
+                    'committeeID' => $id,
                 ]);
             }
         }
 
         $data = [
             'committiees' => $committieesModel->findAll(),
-            'title' => 'Committees'
+            'title'       => 'Committees',
         ];
-        
-        
+
         return view('pages/admin/committees', $data);
     }
-    public function deleteCommittee(){
-        $committieesModel = new \App\Models\CommitteeModel();
 
+    public function deleteCommittee()
+    {
+        $committieesModel = new \App\Models\CommitteeModel();
 
         $id = $this->request->getVar('id');
         $committieesModel->delete($id);
@@ -144,13 +150,11 @@ class CommitteesController extends BaseController
         $committeeUserModel = model(CommitteeUserModel::class);
         $committeeUserModel->where('committeeID', $id)->delete();
 
-
         $data = [
             'committiees' => $committieesModel->findAll(),
-            'title' => 'Committees'
+            'title'       => 'Committees',
         ];
-        
-        return view('pages/admin/committees', $data);
 
+        return view('pages/admin/committees', $data);
     }
 }

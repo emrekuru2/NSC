@@ -7,11 +7,11 @@ use CodeIgniter\Model;
 class AlertModel extends Model
 {
     // Construction
-    protected $table            = 'nsca_alerts';
-    protected $primaryKey       = 'id';
-    protected $returnType       = \App\Entities\Alert::class;
-    protected $protectFields    = true;
-    protected $allowedFields    = ['title', 'content', 'status'];
+    protected $table         = 'nsca_alerts';
+    protected $primaryKey    = 'id';
+    protected $returnType    = \App\Entities\Alert::class;
+    protected $protectFields = true;
+    protected $allowedFields = ['title', 'content', 'status'];
 
     // Dates
     protected $useTimestamps = true;
@@ -27,7 +27,8 @@ class AlertModel extends Model
 
     // Functions
 
-    public function deactivate(int $id) {
+    public function deactivate(int $id)
+    {
         $this->update($id, ['status' => 0]);
     }
 }

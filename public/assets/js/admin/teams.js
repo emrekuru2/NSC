@@ -12,20 +12,25 @@ const addMemberRoles = document.getElementsByName('add-member-role')
 const updateForm = document.getElementById('update-form')
 const updateButton = document.getElementById('update-button')
 const teamMemberTableBody = document.getElementById('team-member-list')
+const teamMemberRoles = document.getElementsByName('role')
+
+let teamMembersChanged = false
 
 
 // Listeners
-for (let i = 0; i < removeMemberButtons.length; i++) {
-    removeMemberButtons[i].addEventListener('click', () => {
+removeMemberButtons.forEach( (buttonElement) => {
+    buttonElement.addEventListener('click', (event) => {
+        let button = event.target
+
         let message = removeMemberMessage.innerText
 
-        removeMemberHiddenInput.value = removeMemberButtons[i].dataset.user
+        removeMemberHiddenInput.value = button.dataset.user
         let firstHalf = message.substring(0, 32)
         let secondHalf = message.substring(message.indexOf("from") - 1)
 
-        removeMemberMessage.innerText = firstHalf + removeMemberButtons[i].dataset.name + secondHalf
+        removeMemberMessage.innerText = firstHalf + button.dataset.name + secondHalf
     })
-}
+})
 
 updateButton.addEventListener('click', () => {
     document.getElementById('update-members-JSON').value = getMemberRolesJSON();
@@ -37,38 +42,31 @@ addMembersButton.addEventListener('click', () => {
     addMembersForm.submit()
 })
 
+teamMemberRoles.forEach( (roleSelect) => {
+    roleSelect.addEventListener('change', () => {
+        teamMembersChanged = true
+    })
+})
+
 
 // Functions
 function getMemberRolesJSON() {
-    let teamJSON =
-    {
-        'players': []
-    }
+    if (teamMemberTableBody.dataset.teamIsset === '0' && !teamMembersChanged) return ''
 
-    if (teamMemberTableBody.dataset.membersIsSet === 'false') {
-        return ""
-    }
-
-    const tableRows = teamMemberTableBody.children
-    for (let i = 0; i < tableRows.length; i++) {
+    let teamJSON = { 'players': [] }
+    for (let i = 0; i < teamMemberTableBody.children.length; i++) {
         let player = []
 
-        let id = tableRows[i].dataset.user
-        if (id !== 'none') {
-            player.push(id) // ID
-            player.push(tableRows[i].children[1].children[0].value) // Role
-            teamJSON.players.push(player)
-        }
+        player.push(teamMemberTableBody.children[i].children[3].children[0].dataset.user) // ID
+        player.push(teamMemberTableBody.children[i].children[1].children[0].value) // Role
+        teamJSON.players.push(player)
     }
 
     return JSON.stringify(teamJSON)
 }
 
 function getAddedMembersJSON() {
-    let membersJSON =
-        {
-            'members': []
-        }
+    let membersJSON = { 'members': [] }
 
     for (let i = 0; i < addMemberChecks.length; i++) {
         if (addMemberChecks[i].checked) {
@@ -82,7 +80,51 @@ function getAddedMembersJSON() {
             }
         }
     }
-
-    console.log(membersJSON)
     return JSON.stringify(membersJSON)
 }
+
+function updateAddMembersList() {
+    let teamMembersArray = []
+    for (let i = 0; i < removeMemberButtons.length; i++) {
+        let name = removeMemberButtons[i].dataset.name
+        if (name === 'none') break
+
+        teamMembersArray.push(name)
+    }
+
+    for (let i = 0; i < addMemberTable.children.length; i++) {
+        let name = addMemberTable.children[i].children[0].innerText
+        if (name === 'No users available') break
+
+        if (teamMembersArray.includes(name)) {
+            addMemberTable.children[i].remove()
+            i--
+        }
+    }
+
+    if (addMemberTable.children.length === 0) {
+        document.getElementById('add-member-table').classList.remove('table-hover')
+
+        let tr = document.createElement('tr')
+
+        let td = document.createElement('td')
+        td.classList.add('col-7')
+        td.classList.add('line-height-2rem')
+        td.innerText = 'No users available'
+        tr.appendChild(td)
+
+        td = document.createElement('td')
+        td.classList.add('col-4')
+        tr.appendChild(td)
+
+        td = document.createElement('td')
+        td.classList.add('col-1')
+        tr.appendChild(td)
+
+        addMemberTable.appendChild(tr)
+    }
+}
+
+
+// Executions
+updateAddMembersList()

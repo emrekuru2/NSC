@@ -11,12 +11,12 @@ class News extends Migration
     {
         // News Table
         $this->forge->addField([
-            'id'            => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
-            'userID'        => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
-            'title'         => ['type' => 'varchar', 'constraint' => 128, 'null' => true],
-            'content'       => ['type' => 'text'],
-            'created_at'    => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
-            'updated_at'    => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
+            'id'         => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+            'userID'     => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
+            'title'      => ['type' => 'varchar', 'constraint' => 128, 'null' => true],
+            'content'    => ['type' => 'text'],
+            'created_at' => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
+            'updated_at' => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->addKey('userID');
@@ -25,12 +25,12 @@ class News extends Migration
 
         // News Comments Table
         $this->forge->addField([
-            'id'            => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
-            'newsID'        => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
-            'userID'        => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
-            'comment'       => ['type' => 'text', 'null' => false],
-            'created_at'    => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
-            'updated_at'    => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
+            'id'         => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+            'newsID'     => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
+            'userID'     => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
+            'comment'    => ['type' => 'text', 'null' => false],
+            'created_at' => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
+            'updated_at' => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->addKey(['newsID', 'userID']);
@@ -44,7 +44,7 @@ class News extends Migration
         $this->db->disableForeignKeyChecks();
 
         $this->forge->dropTable('nsca_news', true);
-        $this->forge->dropTable('nsca_news_comments', true);      
+        $this->forge->dropTable('nsca_news_comments', true);
 
         $this->db->enableForeignKeyChecks();
     }

@@ -1,13 +1,16 @@
-<?php namespace App\Libraries;
+<?php
 
-class Alerts {
+namespace App\Libraries;
 
-    public function modal($content) {
+class Alerts
+{
+    public function modal($content)
+    {
         return view('components/modal', $content);
-
     }
 
-    public function toast($content) {
+    public function toast($content)
+    {
         return view('components/toast', $content);
     }
 }
