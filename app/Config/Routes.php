@@ -43,6 +43,7 @@ $routes->get('about', 'Main\AboutController::index');
 
 // News functional routing
 $routes->get('news/(:num)', 'Main\NewsController::getNewsByID/$1');
+$routes->get('development/(:num)', 'Main\DevelopmentController::register/$1');
 
 
 // Routing for admin views and functions
@@ -61,8 +62,12 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->get('email', 'Admin\EmailController::index');
     $routes->get('settings', 'Admin\SettingsController::index');
     $routes->get('users/edit/(:num)', 'Admin\UsersController::userDetails/$1');
+    $routes->get('users/edit', 'Admin\UsersController::searchUserDetails');
+    $routes->get('searchTeam', 'Admin\TeamsController::searchTeam');
     $routes->get('competitions/edit/(:num)','Admin\CompetitionsController::edit/$1' );
     $routes->get('competitions/delete/(:num)','Admin\CompetitionsController::delete/$1' );
+    $routes->get('competitions/check/(:num)','Admin\CompetitionsController::check/$1' );
+
 
 
     // GET with parameters
@@ -76,6 +81,8 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->get('CompetitionType/delete/(:num)','Admin\CompetitionTypeController::delete/$1' );
 
     // Functions
+    $routes->match(['post'], 'editUser/(:num)', 'Admin\UsersController::editUser/$1');
+
     $routes->match(['post'], 'sendEmail', 'Admin\EmailController::sendEmail');
     $routes->match(['post'], 'createNews', 'Admin\NewsController::createNews');
 
@@ -85,7 +92,11 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->match(['post'], 'deleteProgram', 'Admin\DevelopmentController::deleteProgram');
     $routes->match(['post'], 'modify_development', 'Admin\DevelopmentController::modify');
 
-    $routes->match(['post'], 'editTeam', 'Admin\TeamsController::editTeam');
+    $routes->match(['post'], 'createCommittee', 'Admin\CommitteesController::createCommittee');
+    $routes->match(['post'], 'modify_committee', 'Admin\CommitteesController::modify');
+    $routes->match(['post'], 'modifyCommittee', 'Admin\CommitteesController::modifyCommittee');
+    $routes->match(['post'], 'deleteCommittee', 'Admin\CommitteesController::deleteCommittee');
+
     $routes->match(['post'], 'updateTeam', 'Admin\TeamsController::updateTeam');
     $routes->match(['post'], 'createTeam', 'Admin\TeamsController::createTeam');
     $routes->match(['post'], 'deleteTeam', 'Admin\TeamsController::deleteTeam');

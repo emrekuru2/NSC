@@ -5,6 +5,7 @@ namespace App\Controllers\Admin;
 use App\Models\DevModel;
 use App\Models\DevTypeModel;
 use App\Controllers\BaseController;
+use App\Models\DevUserModel;
 
 class DevelopmentController extends BaseController
 {
@@ -88,16 +89,20 @@ class DevelopmentController extends BaseController
     }
     public function modify()
     {
-        $DevModel = model(DevModel::class);
+        $devModel = model(DevModel::class);
         $devType = model(DevTypeModel::class);
-        $id = $this->request->getPost('id');
-        // get the dev program
-        $dev = $DevModel->find($id);
-        $devID = $devType->find($id);
 
-        // get all users registered to the program
-        $users = $DevModel->getUsers($id);
+        // Get Dev Program
+        if ($this->request->getVar('search') != null) {
+            $devName = esc($this->request->getPost('search'));
+            $dev = $devModel->select()->where('name', $devName)->first();
+        } else {
+            $devID = $this->request->getPost('id');
+            $dev = $devModel->select()->find($devID);
+        }
 
+        if ($dev == null) return $this->index();
+        $users = $devModel->getUsers($dev->id);
 
         $data = [
             'program'     => $dev,
@@ -143,6 +148,9 @@ class DevelopmentController extends BaseController
         $devType = model(DevTypeModel::class);
         $id = $this->request->getVar('id');
         $devModel->delete($id);
+        // remove all users from development program
+        $committeeUserModel = model(DevUserModel::class);
+        $committeeUserModel->where('devID', $id)->delete();
 
         $data = [
             'programs'  => $devModel->orderBy('id', 'DESC')->paginate(10),

@@ -132,3 +132,6 @@ mysql-8/
 # Images
 # Note: Manually add images using 'git add public assets/images/...' if you plan on pushing them. 'git add -A' will not work.
 public/assets/images/*
+
+# Docker
+docker/db_data

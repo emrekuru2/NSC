@@ -29,4 +29,9 @@ class Contents
         return view('components/searchPanel', $content);
     }
 
+    public function search($content)
+    {
+        return view('components/search', $content);
+    }
+
 }

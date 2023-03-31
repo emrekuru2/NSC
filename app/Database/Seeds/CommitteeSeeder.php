@@ -12,12 +12,14 @@ class CommitteeSeeder extends Seeder
             [
                 'name' => 'Test Committee 1',
                 'description' => 'Test description.',
-                'years' => '2023-2025'
+                'years' => '2023 - 2025',
+                'image' => 'assets/images/Committee/default.png'
             ],
             [
                 'name' => 'Test Committee 2',
                 'description' => 'Test description.',
-                'years' => '2022-2024'
+                'years' => '2022 - 2024',
+                'image' => 'assets/images/Committee/default.png'
             ]
         ];
         $this->db->table('nsca_committees')->insertBatch($committies);
