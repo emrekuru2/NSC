@@ -52,9 +52,9 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <ul class="list-unstyled mb-0">
-                                    <li><a href="https://twitter.com/nscricket" target="_blank" class="mr-2 mb-3 fs-2" role="button" style="text-decoration: none; display: inline-flex; align-items: center;"><i class="fab fa-twitter" style="margin-right: 5px;"></i><span style="white-space: nowrap;">Twitter</span></a></li>
-                                    <li><a href="https://www.facebook.com/novascotiacricket/" target="_blank" class="mr-2 mb-3 fs-2" role="button" style="text-decoration: none; display: inline-flex; align-items: center;"><i class="fab fa-facebook" style="margin-right: 5px;"></i><span style="white-space: nowrap;">Facebook</span></a></li>
-                                    <li><a href="mailto:testadmin@cricketnovascotia.ca" class="mr-2 mb-3 fs-2" role="button" style="text-decoration: none; display: inline-flex; align-items: center;"><i class="fas fa-envelope" style="margin-right: 5px;"></i><span style="white-space: nowrap;">E-mail</span></a></li>
+                                    <li><a href="https://twitter.com/nscricket" target="_blank" class="mr-2 mb-2 fs-4" role="button" style="text-decoration: none; display: inline-flex; align-items: center;"><i class="fab fa-twitter" style="margin-right: 5px;"></i><span style="white-space: nowrap;">Twitter</span></a></li>
+                                    <li><a href="https://www.facebook.com/novascotiacricket/" target="_blank" class="mr-2 mb-2 fs-4" role="button" style="text-decoration: none; display: inline-flex; align-items: center;"><i class="fab fa-facebook" style="margin-right: 5px;"></i><span style="white-space: nowrap;">Facebook</span></a></li>
+                                    <li><a href="mailto:testadmin@cricketnovascotia.ca" class="mr-2 mb-2 fs-4" role="button" style="text-decoration: none; display: inline-flex; align-items: center;"><i class="fas fa-envelope" style="margin-right: 5px;"></i><span style="white-space: nowrap;">E-mail</span></a></li>
                                 </ul>
                             </div>
                         </div>
