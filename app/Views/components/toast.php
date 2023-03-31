@@ -1,4 +1,4 @@
-<div id="emailToast" class="toast bottom-0 start-50 position-absolute text-bg-<?= $type ?> " role="alert" aria-live="assertive" aria-atomic="true">
+<div id="emailToast" class="toast bottom-0 end-0 m-2 position-fixed text-bg-<?= $type ?> " role="alert" aria-live="assertive" aria-atomic="true">
     <div class="d-flex">
         <div class="toast-body">
             <?= $content ?>
