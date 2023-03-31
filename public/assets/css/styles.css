@@ -128,3 +128,7 @@ input {
 .modal-backdrop {
     z-index: 1;
 }
+
+.toast {
+    z-index: 99;
+}

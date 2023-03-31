@@ -6,7 +6,6 @@ use App\Controllers\BaseController;
 use App\Models\ClubModel;
 use App\Models\TeamModel;
 use App\Models\UserEmailModel;
-use App\Controllers\BaseController;
 
 class ClubsController extends BaseController
 {
@@ -27,13 +26,13 @@ class ClubsController extends BaseController
         }
 
         $data = [
-            'title' => 'Clubs',
-            'club' => $club,
-            'clubMembers' => $club != null ? $userModel->getClubUsersByClubId($club->id) : null,
-            'clubTeams' => $club != null ? $teamModel->getTeamsInClub($club->id) : null,
-            'allClubs' => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll(),
-            'unassignedTeams' => $club != null ? $teamModel->getUnassignedTeams() : null,
-            'allUsers' => $userModel->select()->orderBy('nsca_users.last_name', 'ASC')->findAll()
+            'title'           => 'Clubs',
+            'club'            => $club,
+            'clubMembers'     => $club !== null ? $userModel->getClubUsersByClubId($club->id) : null,
+            'clubTeams'       => $club !== null ? $teamModel->getTeamsInClub($club->id) : null,
+            'allClubs'        => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll(),
+            'unassignedTeams' => $club !== null ? $teamModel->getUnassignedTeams() : null,
+            'allUsers'        => $userModel->select()->orderBy('nsca_users.last_name', 'ASC')->findAll(),
         ];
 
         return view('pages/admin/clubs', $data);
@@ -52,17 +51,22 @@ class ClubsController extends BaseController
     }
 
     public function createClub()
-    {}
+    {
+    }
 
     public function deleteClub()
-    {}
+    {
+    }
 
     public function removeMember()
-    {}
+    {
+    }
 
     public function addMembers()
-    {}
+    {
+    }
 
     public function addTeams()
-    {}
+    {
+    }
 }
