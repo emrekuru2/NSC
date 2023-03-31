@@ -12,6 +12,7 @@
         "codeigniter4/shield": "v1.0.0-beta.3"
     },
     "require-dev": {
+        "codeigniter/coding-standard": "^1.7",
         "fakerphp/faker": "^1.9",
         "mikey179/vfsstream": "^1.6",
         "phpunit/phpunit": "^9.1"

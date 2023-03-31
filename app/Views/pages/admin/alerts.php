@@ -1,14 +1,14 @@
 <?= $this->extend('layouts/admin') ?>
 
 <?= $this->section('adminContent') ?>
-<div class="row">
+<div class="row g-4">
     <div class="col-lg-4">
         <div class="row-lg">
-            <div class="col-lg-12">
+            <div class="col-lg-12 mb-4">
                 <div class="card shadow">
                     <div class="card-header">Current Alert</div>
                     <div class="card-body d-flex">
-                        <h2 class="card-title flex-grow-1"><?= ($active != null) ? esc($active->title) : 'No alerts is active'  ?></h2>
+                        <h2 class="card-title flex-grow-1"><?= ($active !== null) ? esc($active->title) : 'No alert is active' ?></h2>
                         <a class="btn btn-outline-danger">Disable</a>
                     </div>
                 </div>

@@ -6,5 +6,5 @@ use CodeIgniter\Entity\Entity;
 
 class Comment extends Entity
 {
-    protected $dates   = ['created_at'];
+    protected $dates = ['created_at'];
 }

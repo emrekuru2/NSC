@@ -126,33 +126,33 @@ class AuthSeeder extends Seeder
                 'extra'        => null,
                 'force_reset'  => 0,
                 'last_used_at' => null,
-            ]
+            ],
         ];
 
         $this->db->table('auth_identities')->insertBatch($auth_identities);
 
         $auth_groups = [
             [
-                'user_id'    => 1,
-                'group'      => 'admin',
+                'user_id' => 1,
+                'group'   => 'admin',
             ],
             [
-                'user_id'    => 2,
-                'group'      => 'manager',
+                'user_id' => 2,
+                'group'   => 'manager',
             ],
             [
-                'user_id'    => 3,
-                'group'      => 'player',
+                'user_id' => 3,
+                'group'   => 'player',
             ],
             [
-                'user_id'    => 4,
-                'group'      => 'umpire',
+                'user_id' => 4,
+                'group'   => 'umpire',
             ],
             [
-                'user_id'    => 5,
-                'group'      => 'guest',
+                'user_id' => 5,
+                'group'   => 'guest',
 
-            ]
+            ],
         ];
 
         $this->db->table('auth_groups_users')->insertBatch($auth_groups);
@@ -180,7 +180,7 @@ class AuthSeeder extends Seeder
             [
                 'user_id'    => 5,
                 'permission' => 'guest',
-            ]
+            ],
         ];
 
         $this->db->table('auth_permissions_users')->insertBatch($auth_premissions);

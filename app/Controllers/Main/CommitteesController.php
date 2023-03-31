@@ -11,8 +11,8 @@ class CommitteesController extends BaseController
         $model = model(CommitteeModel::class);
 
         $data = [
-            'committees'  => $model->findAll(),
-            'title' => 'Committees',
+            'committees' => $model->findAll(),
+            'title'      => 'Committees',
         ];
 
         return view('pages/committees', $data);

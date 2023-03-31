@@ -15,15 +15,14 @@
 </head>
 
 <body>
-    <?php if (session()->getFlashdata('alert') !== NULL) : ?>
+    <?php if (session()->getFlashdata('alert') !== null) : ?>
         <?= view_cell('\App\Libraries\Alerts::toast', ['type' => session()->getFlashdata('alert')['type'], 'content' => session()->getFlashdata('alert')['content']]) ?>
     <?php endif; ?>
-    <main class="row">
-        <!-- TODO Fix navbar to fixed position -->
-        <aside class="col-12 col-lg-2">
+    <main class="d-flex">
+        <aside class="col-12 col-lg-2 position-fixed nav-z">
             <?= view_cell('\App\Libraries\Navigations::sidebar') ?>
         </aside>
-        <section class="col-12 col-lg-10 p-4">
+        <section class="col-12 col-lg-10 offset-lg-2 p-4 custom-margin">
             <div class="d-none d-lg-block">
                 <h1><?= $title ?></h1>
                 <hr>

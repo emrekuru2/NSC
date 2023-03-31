@@ -67,7 +67,7 @@
     <hr>
     </div>
     <div class="container d-flex flex-row flex-wrap justify-content-center" style="padding-top:2vw;">
-        <?php if (!empty($news) && is_array($news)) : ?>
+        <?php if (! empty($news) && is_array($news)) : ?>
             <?php foreach ($news as $news_item) : ?>
                 <div class="card mb-3 mx-5" style="width: 20rem;">
                     <div class="card-body d-flex flex-column">
