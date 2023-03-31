@@ -9,8 +9,7 @@
                             <div class="col-xl-5 col-lg-8">
                                 <div class="text-center">
                                     <h3>Frequently Asked Questions?</h3>
-                                    <p class="text-muted">If several languages coalesce, the grammar of the resulting language
-                                        is more simple and regular than that of the individual</p>
+                                    <p class="text-muted">ILorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at elementum mi. Donec hendrerit massa sed placerat vulputate. Fusce ipsum arcu, egestas nec purus et, accumsan lobortis odio.</p>
                                     <div>
                                         <a href="https://twitter.com/nscricket" target="_blank"><button type="button" class="btn btn-primary me-2">Send us a tweet</button></a>
                                         <a href="mailto:testadmin@cricketnovascotia.ca"><button type="button" class="btn btn-success">Email Us</button></a>
@@ -40,10 +39,10 @@
                                     <div class="tab-pane fade active show" id="pills-genarel" role="tabpanel" aria-labelledby="pills-genarel-tab">
                                         <div class="row g-4 mt-2">
                                             <div class="col-lg-6">
-                                                <h5>What is Lorem Ipsum ?</h5>
-                                                <p class="text-muted">If several languages coalesce, the grammar of the resulting language is more simple
-                                                    and regular than that of the individual languages. The new common language will be more simple and
-                                                    regular than the existing</p>
+                                                <h5>What is Cricket Nova Scotia ?</h5>
+                                                <p class="text-muted">Ut tincidunt finibus risus, et volutpat metus blandit sed. Mauris quis tortor tristique, vulputate nisl et, malesuada nisi.
+                                                    Ut tincidunt finibus risus, et volutpat metus blandit sed. Mauris quis tortor tristique, vulputate nisl et, malesuada nisi.
+                                                </p>
                                             </div>
                                             <div class="col-lg-6">
                                                 <h5>Why do we use it ?</h5>
