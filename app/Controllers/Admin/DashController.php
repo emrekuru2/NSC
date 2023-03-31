@@ -28,8 +28,16 @@ class DashController extends BaseController
 
         return view('pages/admin/dashboard', $data);
     }
-    public function accept_user(){
+    public function accept_user(){        
+        // get email service
+        $email = \Config\Services::email();
+
         $data = $this->request->getPost();
+        // create user entity
+        $user = model(UserModel::class)->find($data["userID"]);
+        // set user email
+        $email->setTo($user->email);
+        $email->setFrom('testadmin@cricketnovascotia.ca', 'Club Decision');
         // get userID
         $userID = $this->request->getVar("userID");
         if ($data["action"]=="accept"){
@@ -38,12 +46,20 @@ class DashController extends BaseController
             $entity->fill($data);
             model(ClubUserModel::class)->save($entity);
             model(WaitlistModel::class)->delete($data["recordID"]);
-            // send email to user telling them they were accepted
+
+            $email->setSubject('You are accepted');
+            // generate a message with the user name and club name and send it to the user
+            $message = "Hello ".$user->first_name." ".$user->last_name.",\n\n You have been accepted to the club ".$data["club_name"].".\n\n Regards,\n\n Cricket Nova Scotia";
+            $email->setMessage($message);
         }
         else{
             model(WaitlistModel::class)->delete($data["recordID"]);
             // send email to user telling them they were denied
+            $email->setSubject('You are rejected');
+            $message = "Hello ".$user->first_name." ".$user->last_name.",\n\n You have been rejected from the club ".$data["club_name"].".\n\n Regards,\n\n Cricket Nova Scotia";
+            $email->setMessage($message);
         }
+        $email->send();
 
 
         return redirect()->back();
