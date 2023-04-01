@@ -116,7 +116,7 @@
                             <td class="col-4">
                                 <select name="add-member-role" class="form-select form-select-sm">
                                     <option value="player" selected>Player</option>
-                                    <option value="vice">Manager</option>
+                                    <option value="manager">Manager</option>
                                 </select>
                             </td>
                             <td class="col-1">
@@ -129,9 +129,9 @@
             </div>
 
             <div class="modal-footer group-modal-footer">
-                <input type="text" value="<?= $clubIsSet ? $club->id : '' ?>" name="add-member-club-id" hidden>
-                <input type="text" value="" name="add-members-JSON" id="add-members-JSON" hidden>
-                <button type="submit" id="add-member-button" class="btn btn-primary"<?= $clubIsSet ?: " disabled" ?>>Add</button>
+                <input type="hidden" value="<?= $clubIsSet ? $club->id : '' ?>" name="add-member-club-id">
+                <input type="hidden" value="" name="add-members-JSON" id="add-members-JSON">
+                <button type="button" id="add-member-button" class="btn btn-primary"<?= $clubIsSet ?: " disabled" ?>>Add</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             </div>
         </div>

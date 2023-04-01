@@ -50,9 +50,7 @@ addMembersButton.addEventListener('click', () => {
 })
 
 clubMemberRoles.forEach( (roleSelect) => {
-    roleSelect.addEventListener('change', () => {
-        clubMembersChanged = true
-    })
+    roleSelect.addEventListener('change', () => clubMembersChanged = true)
 })
 
 removeTeamButtons.forEach( (buttonElement) => {

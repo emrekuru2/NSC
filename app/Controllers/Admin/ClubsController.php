@@ -124,7 +124,52 @@ class ClubsController extends BaseController
     }
 
     public function addMembers()
-    {}
+    {
+        $clubID = $this->request->getPost('add-member-club-id');
+        $json = $this->request->getPost('add-members-JSON');
+
+        if ($json != '') {
+            $usersJSON = json_decode($json);
+            $addSuccess = 0;
+            $numMembers = count($usersJSON->members);
+
+            foreach ($usersJSON->members as $member) {
+                $data['userID'] = $member[0];
+                $data['clubID'] = $clubID;
+
+                switch ($member[1]) {
+                    case 'manager':
+                        $data['isManager'] = 1;
+                        break;
+                    default:
+                        $data['isManager'] = 0;
+                        break;
+                }
+
+                $clubUser = new \App\Entities\UserTypes\ClubUser();
+                $clubUser->fill($data);
+
+                try {
+                    model(ClubUserModel::class)->save($clubUser);
+                    $addSuccess++;
+                } catch (Exception $e) {
+                    echo "<script> console.log('Error occurred while adding member to club. " . $e->getMessage() . ".') </script>";
+                }
+            }
+
+            if ($numMembers > 0 && $addSuccess == $numMembers) {
+                return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Members added successfully']);
+            }
+            else if ($addSuccess > 0) {
+                return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Error while adding some members to club']);
+            }
+            else {
+                return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error while adding members to team']);
+            }
+        }
+
+        return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'No members were selected']);
+    }
 
     public function removeTeam()
     {
