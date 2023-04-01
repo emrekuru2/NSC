@@ -15,7 +15,7 @@
       <div class="modal-body">
       Are you sure you want to delete <?=$committee->name?>?
       <form method="post" action="deleteCommittee" id="delete">
-                    <input type="hidden" value=<?=$committee->id?> name="id">        
+                    <input type="hidden" value=<?=$committee->id?> name="id">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -45,7 +45,7 @@
                         </div>
                             <div class="col-12 col-lg-6" id="endyeardiv">
                                 <div class="startyear">
-                                <label for="endyear" class="form-label">End year:</label>                                
+                                <label for="endyear" class="form-label">End year:</label>
                                 <div>
                                     <?php if ($isActive) : ?>
                                         <input class="form-check-input" type="checkbox"  data-status="open" id="flexCheckDefault" name="flexCheckDefault" checked>
@@ -54,7 +54,7 @@
                                         <input class="form-check-input" type="checkbox"  data-status="open" id="flexCheckDefault" name="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">Undetermined end year</label>
                                     <?php endif; ?>
-                                
+
                                 </div>
                                 </div>
                                 <?php if ($isActive) : ?>
@@ -67,7 +67,7 @@
                             <select id="users[]" name="users[]" multiple="multiple" required>
                                 <?php foreach ($users as $user) : ?>
 
-                                    <?php if(in_array($user->id, $members)) : ?>
+                                    <?php if(in_array($user->id, $members, true)) : ?>
                                         <option value="<?=esc($user->id)?>" selected>
                                         <?=esc($user->first_name)?> <?=esc($user->last_name)?>
                                     </option>
@@ -92,7 +92,7 @@
             </div>
         </div>
     </div>
-<script type="text/javascript" src="<?= base_url('assets/js/admin/committiees.js');?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/admin/committiees.js'); ?>"></script>
 <script>
     new MultiSelectTag('users[]') // id
 </script>

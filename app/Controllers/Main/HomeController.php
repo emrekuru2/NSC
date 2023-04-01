@@ -7,7 +7,6 @@ use App\Models\NewsModel;
 
 class HomeController extends BaseController
 {
-
     public function index()
     {
         $model = model(NewsModel::class);
@@ -19,10 +18,5 @@ class HomeController extends BaseController
         ];
 
         return view('pages/home', $data);
-      
     }
-
-
-
-    
 }

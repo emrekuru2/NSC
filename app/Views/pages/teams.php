@@ -12,7 +12,7 @@
 
             <!-- Grid row -->
             <div class="row">
-                <?php if (!empty($teams) && is_array($teams)) : ?>
+                <?php if (! empty($teams) && is_array($teams)) : ?>
                     <?php foreach ($teams as $team) : ?>
                         <!-- Grid column -->
                         <div class="col-md-6 mb-4">
@@ -34,7 +34,7 @@
                         <!-- Grid column -->
                     <?php endforeach; ?>
                 <?php endif; ?>
-        
+
 
             </div>
 

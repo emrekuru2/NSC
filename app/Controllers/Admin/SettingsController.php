@@ -9,10 +9,9 @@ class SettingsController extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'Settings'
+            'title' => 'Settings',
         ];
-        
-        
+
         return view('pages/admin/settings', $data);
     }
 }
