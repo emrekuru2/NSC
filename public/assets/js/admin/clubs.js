@@ -114,9 +114,7 @@ function getAddedClubMembersJSON() {
 function updateAddMembersList() {
     let clubMembersArray = []
     for (let i = 0; i < removeMemberButtons.length; i++) {
-        let name = removeMemberButtons[i].dataset.name
-        if (name === 'none') break
-
+        name = removeMemberButtons[i].dataset.name.replace(',', ' ')
         clubMembersArray.push(name)
     }
 
