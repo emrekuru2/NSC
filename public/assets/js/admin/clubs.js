@@ -41,7 +41,7 @@ removeMemberButtons.forEach( (buttonElement) => {
 
 updateButton.addEventListener('click', () => {
     document.getElementById('update-members-JSON').value = getClubMemberRolesJSON();
-    //updateForm.submit()
+    updateForm.submit()
 })
 
 addMembersButton.addEventListener('click', () => {
@@ -74,26 +74,17 @@ addTeamsButton.addEventListener('click', () => {
     addTeamsForm.submit()
 })
 
-document.querySelectorAll('input[type=tel]').forEach((input) => {
-    input.addEventListener('change', () => {
-        let phone = input.value
-        if (phone.length === 10 && (phone.match(new RegExp("/-/", "g")) || []).length === 0 ||
-            phone.length === 12 && (phone.match(new RegExp("/-/", "g")) || []).length === 1)
-        {
-            input.value = phone.substring(0, 3) + '-' + phone.substring(3, 6) + '-' + phone.substring(6, 10)
-        }
-    })
-})
 
 // Functions
 function getClubMemberRolesJSON() {
-    if (clubMemberTableBody.dataset.clubIsset === '0' && clubMemberTableBody.children[0].children[0].innerText === 'No club members') return ''
+    if (clubMemberTableBody.dataset.clubIsset === '0' ||
+        clubMemberTableBody.children[0].children[0].innerText === 'No club members') return ''
 
     let clubJSON = { 'members': [] }
     for (let i = 0; i < clubMemberTableBody.children.length; i++) {
         let member = []
 
-        member.push(clubMemberTableBody.children[i].children[0].innerText) // Name
+        member.push(clubMemberTableBody.children[i].children[3].children[0].dataset.name) // Name
         member.push(clubMemberTableBody.children[i].children[1].children[0].value) // Role
         clubJSON.members.push(member)
     }
@@ -123,7 +114,7 @@ function getAddedClubMembersJSON() {
 function updateAddMembersList() {
     let clubMembersArray = []
     for (let i = 0; i < removeMemberButtons.length; i++) {
-        name = removeMemberButtons[i].dataset.name.replace(',', ' ')
+        name = removeMemberButtons[i].dataset.name.replace('|', ' ')
         clubMembersArray.push(name)
     }
 
