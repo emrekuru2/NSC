@@ -380,6 +380,8 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Name</th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
                                     <th scope="col">Options</th>
                                 </tr>
                             </thead>
