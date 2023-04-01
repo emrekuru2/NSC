@@ -134,6 +134,7 @@
                 <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="newClubID">Club</label>
                     <select class="form-control" name="newClubID" id="newClubID" required>
+                        <option value="none" selected>No Club</option>
                         <?php foreach ($allClubs as $club) {
                             echo '<option value=' . $club->id . '>' . $club->name . '</option>';
                         } ?>
@@ -240,6 +241,12 @@
                     <label class="margin-bottom-half-rem" for="updateClubID">Club</label>
                     <select class="form-control" name="updateClubID" id="updateClubID" aria-label="Club"<?= $teamIsSet ?: ' disabled' ?>>
                         <?php if($teamIsSet && ! empty($allClubs)) {
+                            if ($team->clubID === null) {
+                                echo '<option value="none" selected>No Club</option>';
+                            } else {
+                                echo '<option value="none">No Club</option>';
+                            }
+
                             foreach ($allClubs as $club) {
                                 if ($club->id === $team->clubID) {
                                     echo '<option value=' . $club->id . ' selected>' . $club->name . '</option>';
@@ -288,9 +295,9 @@
                                         <td class="col-5 line-height-2rem"><?= $member->first_name . ' ' . $member->last_name ?></td>
                                         <td class="col-4 line-height-2rem">
                                             <select name="role" class="form-select form-select-sm">
-                                                <option value="player"<?= $member->isTeamCaptain == 0 && $member->isViceCaptain === 0 ? ' selected' : ''; ?>>Player</option>
-                                                <option value="vice"<?= $member->isViceCaptain == 1 ? ' selected' : ''; ?>>Vice Captain</option>
-                                                <option value="captain"<?= $member->isTeamCaptain == 1 ? ' selected' : ''; ?>>Captain</option>
+                                                <option value="player"<?= $member->isTeamCaptain == 0 && $member->isViceCaptain === 0 ? ' selected' : '' ?>>Player</option>
+                                                <option value="vice"<?= $member->isViceCaptain == 1 ? ' selected' : '' ?>>Vice Captain</option>
+                                                <option value="captain"<?= $member->isTeamCaptain == 1 ? ' selected' : '' ?>>Captain</option>
                                             </select>
                                         </td>
                                         <td class="col-2"></td>
@@ -303,7 +310,7 @@
                             </tbody>
                         </table>
 
-                        <button type="button" id="new-group-button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addMemberModal"<?= $teamIsSet ?: ' disabled' ?>><i class="fa-solid fa-plus"></i> Add Member</button>
+                        <button type="button" id="new-group-button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addMemberModal"<?= $teamIsSet ? '' : ' disabled' ?>><i class="fa-solid fa-plus"></i> Add Member</button>
                     </div>
                 </div>
 
