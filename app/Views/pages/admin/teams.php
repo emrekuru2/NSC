@@ -36,13 +36,13 @@
                             <td class="col-7 line-height-2rem"><?= $user->first_name . ' ' . $user->last_name ?? '' ?></td>
                             <td class="col-4">
                                 <select name="add-member-role" class="form-select form-select-sm">
-                                    <option value="player" selected>Player</option>
+                                    <option value="player">Player</option>
                                     <option value="vice">Vice Captain</option>
                                     <option value="captain">Captain</option>
                                 </select>
                             </td>
                             <td class="col-1">
-                                <input type="checkbox" class="form-check-input shadow" value="<?= $user->id ?? 'none' ?>" data-role="player" name="add-member-check">
+                                <input type="checkbox" class="form-check-input shadow" value="<?= $user->id ?? 'none' ?>" name="add-member-check">
                             </td>
                         </tr>
                     <?php endforeach;
@@ -52,8 +52,8 @@
             </div>
 
             <div class="modal-footer group-modal-footer">
-                <input type="text" value="<?= $teamIsSet ? $team->id : '' ?>" name="add-member-team-id" hidden>
-                <input type="text" value="" name="add-members-JSON" id="add-members-JSON" hidden>
+                <input type="hidden" value="<?= $teamIsSet ? $team->id : '' ?>" name="add-member-team-id">
+                <input type="hidden" value="" name="add-members-JSON" id="add-members-JSON">
                 <button type="button" id="add-member-button" class="btn btn-primary"<?= $teamIsSet ?: ' disabled' ?>>Add</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             </div>
@@ -288,9 +288,9 @@
                                         <td class="col-5 line-height-2rem"><?= $member->first_name . ' ' . $member->last_name ?></td>
                                         <td class="col-4 line-height-2rem">
                                             <select name="role" class="form-select form-select-sm">
-                                                <option value="player"<?= $member->isTeamCaptain === 0 && $member->isViceCaptain === 0 ? ' selected' : ''; ?>>Player</option>
-                                                <option value="vice"<?= $member->isViceCaptain === 1 ? ' selected' : ''; ?>>Vice Captain</option>
-                                                <option value="captain"<?= $member->isTeamCaptain === 1 ? ' selected' : ''; ?>>Captain</option>
+                                                <option value="player"<?= $member->isTeamCaptain == 0 && $member->isViceCaptain === 0 ? ' selected' : ''; ?>>Player</option>
+                                                <option value="vice"<?= $member->isViceCaptain == 1 ? ' selected' : ''; ?>>Vice Captain</option>
+                                                <option value="captain"<?= $member->isTeamCaptain == 1 ? ' selected' : ''; ?>>Captain</option>
                                             </select>
                                         </td>
                                         <td class="col-2"></td>
