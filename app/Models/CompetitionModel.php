@@ -11,7 +11,7 @@ class CompetitionModel extends Model
     protected $primaryKey    = 'id';
     protected $returnType    = \App\Entities\Competition::class;
     protected $protectFields = true;
-    protected $allowedFields = ['name', 'description', 'compTypeID', 'yearRunning'];
+    protected $allowedFields = ['name', 'description', 'typeID', 'yearRunning'];
 
     // Dates
     protected $useTimestamps = true;
