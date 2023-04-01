@@ -59,6 +59,8 @@ class TeamsController extends BaseController
         $description = esc($this->request->getPost('updateTeamDescription'));
         $image       = $this->request->getFile('updateTeamImage');
 
+        if ($clubID == 'none') $clubID = null;
+
         $teamID = esc($this->request->getPost('update-team-id'));
         $team   = $teamModel->find($teamID);
 
@@ -152,9 +154,14 @@ class TeamsController extends BaseController
 
     public function createTeam()
     {
-        $data['clubID']      = esc($this->request->getPost('newClubID'));
         $data['name']        = esc($this->request->getPost('newName'));
         $data['description'] = esc($this->request->getPost('newDescription'));
+
+        if (esc($this->request->getPost('newClubID')) == 'none') {
+            $data['clubID'] = null;
+        } else {
+            $data['clubID'] = esc($this->request->getPost('newClubID'));
+        }
 
         // Logo
         helper('image');
