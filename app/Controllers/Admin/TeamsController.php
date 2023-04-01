@@ -215,8 +215,8 @@ class TeamsController extends BaseController
         $teamName = $teamModel->select('name')->find($teamID)->name;
 
         try {
-            if ($teamUserModel->where('userID', $userID)->where('teamID', $teamID)->findAll() === null) {
-                return redirect()->to('admin/teams?name=' . str_replace(' ', '+', $teamName))->with('alert', ['type' => 'success', 'content' => 'Team created successfully']);
+            if ($teamUserModel->where('userID', $userID)->where('teamID', $teamID)->first() === null) {
+                return redirect()->to('admin/teams?name=' . str_replace(' ', '+', $teamName))->with('alert', ['type' => 'success', 'content' => 'Member removed successfully']);
             }
         } catch (Exception $e) {
             echo "<script> console.log('Error occurred while removing team member. " . $e->getMessage() . " ') </script>";
@@ -228,13 +228,15 @@ class TeamsController extends BaseController
     public function addMembers()
     {
         $teamUserModel = model(TeamUserModel::class);
-        $teamModel     = model(TeamModel::class);
 
         $teamID = $this->request->getPost('add-member-team-id');
 
         $json = $this->request->getPost('add-members-JSON');
+
         if ($json !== '') {
             $usersJSON = json_decode($json);
+            $addSuccess = 0;
+            $numMembers = count($usersJSON->members);
 
             foreach ($usersJSON->members as $member) {
                 $data['userID'] = $member[0];
@@ -262,11 +264,24 @@ class TeamsController extends BaseController
 
                 try {
                     $teamUserModel->save($teamUser);
-                    return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Member added successfully']);
+                    $addSuccess++;
                 } catch (Exception $e) {
-                    return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Member could not be added']);
+                    echo "<script> console.log('Error occurred while adding member to team. " . $e->getMessage() . ".') </script>";
                 }
             }
+
+            if ($numMembers > 0 && $addSuccess == $numMembers) {
+                return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Members added successfully']);
+            }
+            else if ($addSuccess > 0) {
+                return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Error while adding some members to team']);
+            }
+            else {
+                return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error while adding members to team']);
+            }
+
         }
+
+        return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'No members were selected']);
     }
 }
