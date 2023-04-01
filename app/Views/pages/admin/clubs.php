@@ -60,9 +60,9 @@
                         </tr>
                     <?php } else { foreach ($unassignedTeams as $unassignedTeam): ?>
                         <tr>
-                            <td class="col-11 line-height-2rem"><?= $unassignedTeam->name ?? 'No team' ?></td>
+                            <td class="col-11 line-height-2rem"><label for="team-check-<?= $unassignedTeam->name ?>"><?= $unassignedTeam->name ?></label></td>
                             <td class="col-1">
-                                <input type="checkbox" class="form-check-input shadow check-margin" value="<?= $unassignedTeam->name ?? 'none' ?>" name="add-teams-check">
+                                <input type="checkbox" id="team-check-<?= $unassignedTeam->name ?>" class="form-check-input shadow check-margin" value="<?= $unassignedTeam->name ?>" name="add-teams-check">
                             </td>
                         </tr>
                     <?php endforeach; } ?>
@@ -112,7 +112,7 @@
                         </tr>
                     <?php } else { foreach ($allUsers as $user): ?>
                         <tr>
-                            <td class="col-7 line-height-2rem"><?= $user->first_name . ' ' . $user->last_name ?? '' ?></td>
+                            <td class="col-7 line-height-2rem"><label for="member-check-<?= $user->first_name . '-' . $user->last_name ?>"><?= $user->first_name . ' ' . $user->last_name ?></label></td>
                             <td class="col-4">
                                 <select name="add-member-role" class="form-select form-select-sm">
                                     <option value="player" selected>Player</option>
@@ -120,7 +120,7 @@
                                 </select>
                             </td>
                             <td class="col-1">
-                                <input type="checkbox" class="form-check-input shadow check-margin" value="<?= $user->id ?? 'none' ?>" data-role="player" name="add-member-check">
+                                <input type="checkbox" id="member-check-<?= $user->first_name . '-' . $user->last_name ?>" class="form-check-input shadow check-margin" value="<?= $user->id ?>" data-role="player" name="add-member-check">
                             </td>
                         </tr>
                     <?php endforeach; } ?>
@@ -260,7 +260,7 @@
 </form>
 
 <div class="row">
-    <!-- Club List -->
+    <!-- All Clubs List -->
     <div class="col-lg-4 mb-3 mb-lg-0">
         <div class="card shadow">
 
@@ -392,7 +392,7 @@
                                     </tr>
                                 <?php } else { foreach ($clubTeams as $team): ?>
                                     <tr>
-                                        <td class="col-11 line-height-2rem"><a href="teams?name=<?= str_replace(' ', '+', $team->name) ?>"><?= $team->name ?></a></td>
+                                        <td class="col-11 line-height-2rem"><a class="club-link" href="teams?name=<?= str_replace(' ', '+', $team->name) ?>"><?= $team->name ?></a></td>
                                         <td class="col-1">
                                             <button type="button" name="remove-team-button" data-name="<?= $team->name ?>" data-bs-toggle="modal" data-bs-target="#removeTeamModal" class="btn btn-danger btn-sm">Remove</button>
                                         </td>
