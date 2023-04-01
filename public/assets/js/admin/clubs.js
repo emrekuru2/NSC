@@ -30,12 +30,13 @@ let clubMembersChanged = false
 removeMemberButtons.forEach( (buttonElement) => {
     buttonElement.addEventListener('click', (event) => {
         let button = event.target
-        let message = removeMemberMessage.innerText
+        let memberName = button.dataset.name
+        removeMemberHiddenInput.value = memberName
 
-        removeMemberHiddenInput.value = button.dataset.name
-        let clubName = message.substring(message.indexOf("from the") + 9 , message.indexOf("?"))
+        memberName = memberName.replace('|', '\ ')
+        let clubName = removeMemberMessage.innerText
+        removeMemberMessage.innerHTML = 'Are you sure you want to remove ' + '<b>' + memberName + '</b>' + ' from the ' + '<b>' + clubName + '</b>' + '?'
 
-        removeMemberMessage.innerHTML = 'Are you sure you want to remove  ' + '<b>' + button.dataset.name.replace(',', ' ') + '</b>' + ' from the ' + '<b>' + clubName + '</b>' + '?'
     })
 })
 

@@ -149,7 +149,7 @@
 
             <div class="modal-body">
                 <?php if ($clubIsSet) {?>
-                    <label class="margin-bottom-half-rem" id="remove-member-message">Are you sure you want to remove the NAME team from the <b><?= str_contains(strtolower($club->name), 'club') ? $club->name : $club->name . ' Club' ?></b>?</label>
+                    <label class="margin-bottom-half-rem" id="remove-member-message"><?= str_contains(strtolower($club->name), 'club') ? $club->name : $club->name . ' Club' ?></label>
                 <?php } else { ?>
                     <label class="margin-bottom-half-rem" id="remove-member-message">Select a member to remove.</label>
                 <?php } ?>
@@ -176,7 +176,7 @@
 
             <div class="modal-body">
                 <?php if ($clubIsSet) {?>
-                    <label class="margin-bottom-half-rem">Are you sure you want to delete the <?= str_contains(strtolower($club->name), 'club') ? $club->name : $club->name . ' Club' ?>?</label>
+                    <label class="margin-bottom-half-rem">Are you sure you want to delete the <b><?= str_contains(strtolower($club->name), 'club') ? $club->name : $club->name . ' Club' ?></b>?<br>This action <u>cannot</u> be undone.</label>
                 <?php } else { ?>
                     <label class="margin-bottom-half-rem">Select a club to delete.</label>
                 <?php } ?>

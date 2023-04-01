@@ -193,17 +193,14 @@ class ClubsController extends BaseController
     public function removeMember()
     {
         $clubUserModel = model(ClubUserModel::class);
-        $clubModel     = model(ClubModel::class);
         $userModel     = model(UserEmailModel::class);
 
         $clubID   = esc($this->request->getPost('remove-member-club-id'));
         $fullName = esc($this->request->getPost('remove-member-name'));
+        $fullName = explode('|', $fullName);
 
-        $fullName = explode(',', $fullName);
-        $userID   = $userModel->select()->where('first_name', $fullName[0])->where('last_name', $fullName[1])->first()->id;
-
+        $userID = $userModel->select()->where('first_name', $fullName[0])->where('last_name', $fullName[1])->first()->id;
         $clubUserModel->where('userID', $userID)->where('clubID', $clubID)->delete();
-        $clubName = $clubModel->select()->find($clubID)->name;
 
         if ($clubUserModel->where('userID', $userID)->where('clubID', $clubID)->first() === null) {
             return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Removed member successfully!']);
@@ -254,7 +251,6 @@ class ClubsController extends BaseController
 
     public function removeTeam()
     {
-        $clubModel = model(ClubModel::class);
         $teamModel = model(TeamModel::class);
 
         $teamName = esc($this->request->getPost('remove-team-name'));
