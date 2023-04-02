@@ -115,7 +115,7 @@
                             <td class="col-7 line-height-2rem"><label for="member-check-<?= $user->first_name . '-' . $user->last_name ?>"><?= $user->first_name . ' ' . $user->last_name ?></label></td>
                             <td class="col-4">
                                 <select name="add-member-role" class="form-select form-select-sm">
-                                    <option value="player" selected>Player</option>
+                                    <option value="player">Player</option>
                                     <option value="manager">Manager</option>
                                 </select>
                             </td>
