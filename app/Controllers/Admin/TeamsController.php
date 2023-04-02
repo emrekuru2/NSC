@@ -234,10 +234,7 @@ class TeamsController extends BaseController
 
     public function addMembers()
     {
-        $teamUserModel = model(TeamUserModel::class);
-
         $teamID = $this->request->getPost('add-member-team-id');
-
         $json = $this->request->getPost('add-members-JSON');
 
         if ($json !== '') {
@@ -270,7 +267,7 @@ class TeamsController extends BaseController
                 $teamUser->fill($data);
 
                 try {
-                    $teamUserModel->save($teamUser);
+                    model(TeamUserModel::class)->save($teamUser);
                     $addSuccess++;
                 } catch (Exception $e) {
                     echo "<script> console.log('Error occurred while adding member to team. " . $e->getMessage() . ".') </script>";
@@ -286,7 +283,6 @@ class TeamsController extends BaseController
             else {
                 return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error while adding members to team']);
             }
-
         }
 
         return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'No members were selected']);
