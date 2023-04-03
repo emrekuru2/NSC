@@ -40,7 +40,7 @@ $routes->get('news', 'Main\NewsController::index');
 $routes->get('contact', 'Main\ContactController::index');
 $routes->get('faqs', 'Main\FaqsController::index');
 $routes->get('about', 'Main\AboutController::index');
-$routes->match(['post'], 'contact_admins', 'Main\ContactController::contact_admins');
+$routes->match(['post'], 'contact_admins', 'Main\ContactController::index');
 // News functional routing
 $routes->get('news/(:num)', 'Main\NewsController::getNewsByID/$1');
 $routes->get('development/(:num)', 'Main\DevelopmentController::register/$1');
