@@ -45,10 +45,9 @@
                 <div class="card shadow">
                     <div class="card-header">Competition Type List</div>
                     <div class="card-body">
-                        <table class="table table-hover">
+                        <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th scope="col">ID</th>
                                     <th scope="col">Competiton Type Name</th>
                                 </tr>
                             </thead>
@@ -68,11 +67,10 @@
                                 <?php if ($competitionType) : ?>
                                     <?php foreach ($competitionType as $row) : ?>
                                         <tr>
-                                            <td><?php echo $row['id'] ?></td>
                                             <td><?php echo $row['name'] ?></td>
                                             <td style=" display:flex;">
                                                 <a style="margin-right:10px;" href="<?= base_url('admin/CompetitionType/edit/' . $row['id']) ?>" class="btn btn-primary btn-sm">Edit</a>
-                                                <a href="<?= base_url('admin/CompetitionType/delete/' . $row['id']) ?>" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure you want to delete this Competition Type?')">Delete</a>
+                                                <a href="<?= base_url('admin/CompetitionType/delete/' . $row['id']) ?>" class="btn btn-primary btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Competition Type?')">Delete</a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

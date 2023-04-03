@@ -7,8 +7,6 @@
             <button style="float:right;" type="button" class="btn btn-secondary btn-sm w-25" onclick="history.back();">Back</button>
         </div>
         <div class="card-body">
-            <!-- <a type="button" href="<?php redirect()->back() ?>" class="btn btn-primary w-25">Back</a> -->
-
             <form class="d-flex flex-column align-items-center" action="<?= base_url('admin/CompetitionType/update' . "/" . $competitionType['id']) ?>" method="POST">
                 <input type="hidden" name="_method" value="PUT">
                 <div class="w-100 mb-3">

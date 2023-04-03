@@ -20,15 +20,19 @@ class CompetitionsController extends BaseController
         return view('pages/admin/competitions', $data);
     }
     public function store(){
-        $competitionModel = new CompetitionModel();
+        $competitionModel = model(CompetitionModel::class);
+        
         $data = [
+            'typeID' => $this->request->getPost('competitionType'),
             'name' => $this->request->getPost('name'),
             'description' => $this->request->getPost('description'),
-            'YearRunning' => $this->request->getPost('yearRunning'),
-
+            'yearRunning' => $this->request->getPost('yearRunning'),
         ];
 
-        $competitionModel->save($data);
+        $competition = new \App\Entities\Competition();
+        $competition->fill($data);
+
+        $competitionModel->save($competition);
         header("Refresh:0");
 
 
@@ -58,9 +62,10 @@ class CompetitionsController extends BaseController
     public function update($id =null){
         $competitionModel = new CompetitionModel();
         $data = [
+            'typeID' => $this->request->getPost('competitionType'),
             'name' => $this->request->getPost('name'),
             'description' => $this->request->getPost('description'),
-            'YearRunning' => $this->request->getPost('yearRunning'),
+            'yearRunning' => $this->request->getPost('yearRunning'),
         ];
         $competitionModel ->update($id, $data);
         return redirect()->to(base_url("admin/competitions"))->with('status','successes');
