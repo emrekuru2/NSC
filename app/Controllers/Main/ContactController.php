@@ -24,17 +24,15 @@ class ContactController extends BaseController
         $phone = $data["phone"];
         $message = $data["message"];
         // set email
-        $sendTo = 'connormacintyre14@gmail.com';
+        $email->setTo('connormacintyre14@gmail.com');
 
-        $email->setTo($sendTo);
-
-        $email-setFrom('testadmin@cricketnovascotia.ca', 'feedback');
+        $email-setFrom('testadmin@cricketnovascotia.ca', 'Feedback');
         $email->setSubject('subject');
         $FullMessage = "recieved from: ".$email."\n\n Message: \n\n".$message;
         $email->setMessage($FullMessage);
 
         $email->send();
-        return redirect()->back();
+        return redirect()->back($data);
     }
 
 }
