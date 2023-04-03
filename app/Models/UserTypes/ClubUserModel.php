@@ -17,4 +17,10 @@ class ClubUserModel extends Model
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
+
+    // Functions
+    public function deleteClubUsers(int $clubID)
+    {
+        $this->where('clubID', $clubID)->delete();
+    }
 }

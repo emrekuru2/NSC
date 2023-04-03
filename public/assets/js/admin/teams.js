@@ -51,7 +51,8 @@ teamMemberRoles.forEach( (roleSelect) => {
 
 // Functions
 function getMemberRolesJSON() {
-    if (teamMemberTableBody.dataset.teamIsset === '0' && !teamMembersChanged) return ''
+    if (teamMemberTableBody.dataset.teamIsset === '0' && !teamMembersChanged ||
+        teamMemberTableBody.children[0].children[0].innerText === 'No team members') return ''
 
     let teamJSON = { 'players': [] }
     for (let i = 0; i < teamMemberTableBody.children.length; i++) {

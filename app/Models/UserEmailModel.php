@@ -99,4 +99,12 @@ class UserEmailModel extends Model
             ->where('nsca_clubs.id', $clubID)
             ->findAll();
     }
+
+    public function getUsersNotInTeam(): array
+    {
+        return $this->select()
+            ->join('nsca_team_users', 'nsca_team_users.userID = nsca_users.id', 'cross')
+            ->where('nsca_team_users.teamID')
+            ->findAll();
+    }
 }
