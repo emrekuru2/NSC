@@ -27,9 +27,9 @@ class ContactController extends BaseController
         $email->setTo('connormacintyre14@gmail.com');
 
         $email-setFrom($from, 'Feedback');
-        $email->setSubject($subject);
-        $FullMessage = "recieved from: ".$name."\n\n Message: \n\n".$message;
-        $email->setMessage($FullMessage);
+        $email->setSubject("$subject");
+        $FullMessage = "Received from: ".$name."\n\n Message: \n\n".$message;
+        $email->setMessage("$FullMessage");
 
         $email->send();
         return redirect()->back();
