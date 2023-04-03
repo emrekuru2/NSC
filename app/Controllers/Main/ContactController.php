@@ -19,20 +19,20 @@ class ContactController extends BaseController
 
         $data = $this->request->getPost();
 
-        $name = $data["name"];
-        $email = $data["email"];
-        $phone = $data["phone"];
-        $message = $data["message"];
+        $name = $data['name'];
+        $from = $data['email'];
+        $subject = $data['subject'];
+        $message = $data['message'];
         // set email
         $email->setTo('connormacintyre14@gmail.com');
 
-        $email-setFrom('testadmin@cricketnovascotia.ca', 'Feedback');
-        $email->setSubject('subject');
-        $FullMessage = "recieved from: ".$email."\n\n Message: \n\n".$message;
+        $email-setFrom($from, 'Feedback');
+        $email->setSubject($subject);
+        $FullMessage = "recieved from: ".$name."\n\n Message: \n\n".$message;
         $email->setMessage($FullMessage);
 
         $email->send();
-        return redirect()->back($data);
+        return redirect()->back();
     }
 
 }

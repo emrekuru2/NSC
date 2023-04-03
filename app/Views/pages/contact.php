@@ -26,11 +26,11 @@
                                 <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
                                 <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
                             </div>
-                            <!-- Phone number input-->
+                            <!-- Subject input-->
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="phone" name="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
-                                <label for="phone">Phone number</label>
-                                <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                                <input class="form-control" id="subject" name="subject" type="text" placeholder="Enter your subject here..." data-sb-validations="required" />
+                                <label for="subject">Subject</label>
+                                <div class="invalid-feedback" data-sb-feedback="subject:required">A subject is required.</div>
                             </div>
                             <!-- Message input-->
                             <div class="form-floating mb-3">
