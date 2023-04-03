@@ -22,8 +22,18 @@
                     <tr>
                         <td><?= esc($user->first_name) ?></td>
                         <td><?= esc($user->last_name) ?></td>
-                        <td><?= esc($user->team) ?></td>
-                        <td><?= esc($user->club) ?></td>
+                        <!-- if no team show not in team in red
+                        if in team show team name in green -->
+                        <?php if($user->team != 'none'):?>
+                            <td><?= esc($user->team) ?></td>
+                        <?php else: ?>
+                            <td class="text-danger font-weight-bold">Not in a team</td>
+                        <?php endif ?>
+                        <?php if($user->club != 'none'):?>
+                            <td><?= esc($user->club) ?></td>
+                        <?php else: ?>
+                            <td class="text-danger font-weight-bold">Not in a club</td>
+                        <?php endif ?>
                         <td><?= esc($user->role) ?></td>
                         <td><a href="users/edit/<?= esc($user->id) ?>">Edit</a></td>
                     </tr>
