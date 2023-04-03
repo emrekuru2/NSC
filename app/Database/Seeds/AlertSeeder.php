@@ -10,11 +10,11 @@ class AlertSeeder extends Seeder
     {
         $alerts = [
             [
-                'id' => 1,
-                'title' => 'No Games today!',
+                'id'      => 1,
+                'title'   => 'No Games today!',
                 'content' => 'No games will be played today due to the weather!',
-                'status' => 0
-            ]
+                'status'  => 0,
+            ],
         ];
         $this->db->table('nsca_alerts')->insertBatch($alerts);
     }

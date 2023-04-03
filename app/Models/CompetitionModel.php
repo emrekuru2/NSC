@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use CodeIgniter\Model;
@@ -11,8 +12,9 @@ class CompetitionModel extends Model
     protected $returnType       = \App\Entities\Competition::class;
     protected $allowedFields    = ['typeID', 'name','description','yearRunning'];
 
-    public function getAllClubs()
-    {
-        return $this->findAll();
-    }
+    // Dates
+    protected $useTimestamps = true;
+    protected $dateFormat    = 'datetime';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
 }

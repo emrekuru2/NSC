@@ -2,17 +2,17 @@
 
 namespace App\Models;
 
-use CodeIgniter\Shield\Entities\User;
 use CodeIgniter\Shield\Authentication\Authenticators\Session;
+use CodeIgniter\Shield\Entities\User;
 use CodeIgniter\Shield\Models\UserModel as ShieldUserModel;
 
 class UserModel extends ShieldUserModel
 {
-    protected $table            = 'nsca_users';
-    protected $primaryKey       = 'id';
-    protected $useSoftDeletes   = false;
-    protected $returnType       = \App\Entities\User::class;
-    protected $allowedFields    = [
+    protected $table          = 'nsca_users';
+    protected $primaryKey     = 'id';
+    protected $useSoftDeletes = false;
+    protected $returnType     = \App\Entities\User::class;
+    protected $allowedFields  = [
         'email',
         'first_name',
         'last_name',
@@ -32,7 +32,6 @@ class UserModel extends ShieldUserModel
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
-
 
     public function getClubMemberEmailsByID(int $clubID): array
     {
@@ -102,7 +101,7 @@ class UserModel extends ShieldUserModel
             $this->where('LOWER(' . $this->db->protectIdentifiers("users.{$key}") . ')', strtolower($value));
         }
 
-        if (!empty($email)) {
+        if (! empty($email)) {
             $data = $this->select('nsca_users.*, auth_identities.secret as email, auth_identities.secret2 as password_hash')
                 ->join('auth_identities', 'auth_identities.user_id = nsca_users.id')
                 ->where('auth_identities.type', Session::ID_TYPE_EMAIL_PASSWORD)

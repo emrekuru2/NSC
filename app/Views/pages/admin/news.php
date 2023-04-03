@@ -19,7 +19,6 @@
                         <button type="submit" class="btn btn-primary btn-block">Submit</button>
                     </div>
                 </form>
-                <?=  auth()->user()->first_name ?>
             </div>
         </div>
     </div>
