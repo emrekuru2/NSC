@@ -14,5 +14,4 @@ class ContactController extends BaseController
 
         return view('pages/contact', $data);
     }
-
 }

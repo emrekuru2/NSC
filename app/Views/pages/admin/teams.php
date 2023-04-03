@@ -295,9 +295,9 @@
                                         <td class="col-5 line-height-2rem"><?= $member->first_name . ' ' . $member->last_name ?></td>
                                         <td class="col-4 line-height-2rem">
                                             <select name="role" class="form-select form-select-sm">
-                                                <option value="player"<?= $member->isTeamCaptain == 0 && $member->isViceCaptain === 0 ? ' selected' : '' ?>>Player</option>
-                                                <option value="vice"<?= $member->isViceCaptain == 1 ? ' selected' : '' ?>>Vice Captain</option>
-                                                <option value="captain"<?= $member->isTeamCaptain == 1 ? ' selected' : '' ?>>Captain</option>
+                                                <option value="player"<?= $member->isTeamCaptain === 0 && $member->isViceCaptain === 0 ? ' selected' : '' ?>>Player</option>
+                                                <option value="vice"<?= $member->isViceCaptain === 1 ? ' selected' : '' ?>>Vice Captain</option>
+                                                <option value="captain"<?= $member->isTeamCaptain === 1 ? ' selected' : '' ?>>Captain</option>
                                             </select>
                                         </td>
                                         <td class="col-2"></td>

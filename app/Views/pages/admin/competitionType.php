@@ -24,7 +24,7 @@
                             </thead>
                             <?php
                             if (session()->getFlashdata('status')) {
-                            ?>
+                                ?>
                             <div style="width:90%" id="alertMessage" class=" alert success">
                                     <span class="closebtn" onclick="closeAlert()">×</span>
                                     <strong>Success!</strong> Your Request Processed successfully.
@@ -32,14 +32,14 @@
                             <?php
                             }
 
-                            ?>
+?>
                             <tbody class="table-group-divider">
                                 <!-- THIS PART NEEDS TO BE DYNAMICALLY GENERATED -->
                                 <?php if ($competitionType) : ?>
                                     <?php foreach ($competitionType as $row) : ?>
                                         <tr>
-                                            <td><?php echo $row['id'] ?></td>
-                                            <td><?php echo $row['name'] ?></td>
+                                            <td><?= $row['id'] ?></td>
+                                            <td><?= $row['name'] ?></td>
                                             <td style=" display:flex;">
                                                 <a style="margin-right:10px;" href="<?= base_url('admin/CompetitionType/edit/' . $row['id']) ?>" class="btn btn-primary btn-sm">Edit</a>
                                                 <a href="<?= base_url('admin/CompetitionType/delete/' . $row['id']) ?>" class="btn btn-primary btn-sm">Delete</a>

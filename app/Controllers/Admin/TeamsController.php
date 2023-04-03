@@ -59,7 +59,9 @@ class TeamsController extends BaseController
         $description = esc($this->request->getPost('updateTeamDescription'));
         $image       = $this->request->getFile('updateTeamImage');
 
-        if ($clubID == 'none') $clubID = null;
+        if ($clubID === 'none') {
+            $clubID = null;
+        }
 
         $teamID = esc($this->request->getPost('update-team-id'));
         $team   = $teamModel->find($teamID);
@@ -67,12 +69,12 @@ class TeamsController extends BaseController
         // New Team Image
         if ($image->isValid()) {
             // Deleting old image
-            if (!str_contains($team->image, 'default.png')) {
+            if (! str_contains($team->image, 'default.png')) {
                 unlink($team->image);
             }
 
             $filepath = storeImage('Teams', $image);
-            if (!$filepath) {
+            if (! $filepath) {
                 $filepath = 'assets/images/Teams/default.png';
             }
 
@@ -157,7 +159,7 @@ class TeamsController extends BaseController
         $data['name']        = esc($this->request->getPost('newName'));
         $data['description'] = esc($this->request->getPost('newDescription'));
 
-        if (esc($this->request->getPost('newClubID')) == 'none') {
+        if (esc($this->request->getPost('newClubID')) === 'none') {
             $data['clubID'] = null;
         } else {
             $data['clubID'] = esc($this->request->getPost('newClubID'));
@@ -168,7 +170,7 @@ class TeamsController extends BaseController
 
         $file     = $this->request->getFile('newImage');
         $filepath = storeImage('Teams', $file);
-        if (!$filepath) {
+        if (! $filepath) {
             $data['image'] = 'assets/images/Teams/default.png';
         } else {
             $data['image'] = $filepath;
@@ -196,7 +198,7 @@ class TeamsController extends BaseController
         $teamID = $this->request->getPost('deleteTeamID');
 
         $team = $teamModel->find($teamID);
-        if (file_exists($team->image) && !str_contains($team->image, 'default.png')) {
+        if (file_exists($team->image) && ! str_contains($team->image, 'default.png')) {
             unlink($team->image);
         }
 
@@ -235,10 +237,10 @@ class TeamsController extends BaseController
     public function addMembers()
     {
         $teamID = $this->request->getPost('add-member-team-id');
-        $json = $this->request->getPost('add-members-JSON');
+        $json   = $this->request->getPost('add-members-JSON');
 
         if ($json !== '') {
-            $usersJSON = json_decode($json);
+            $usersJSON  = json_decode($json);
             $addSuccess = 0;
             $numMembers = count($usersJSON->members);
 
@@ -274,15 +276,14 @@ class TeamsController extends BaseController
                 }
             }
 
-            if ($numMembers > 0 && $addSuccess == $numMembers) {
+            if ($numMembers > 0 && $addSuccess === $numMembers) {
                 return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Members added successfully']);
             }
-            else if ($addSuccess > 0) {
+            if ($addSuccess > 0) {
                 return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Error while adding some members to team']);
             }
-            else {
-                return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error while adding members to team']);
-            }
+
+            return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error while adding members to team']);
         }
 
         return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'No members were selected']);
