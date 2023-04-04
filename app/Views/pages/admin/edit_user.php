@@ -3,7 +3,7 @@
 <?= $this->section('adminContent') ?>
 
 <div class="row">
-    <div class="col-12 col-lg-4">
+    <div class="col-12 col-lg-5">
         <div class="card shadow">
             <div class="card-header">User Details</div>
             <div class="card-body d-flex flex-column align-items-center">
@@ -22,7 +22,7 @@
             </div>
         </div>
     </div>
-    <div class="col-12 col-lg-8">
+    <div class="col-12 col-lg-7">
         <div class="row gx-3 mb-3">
             <div class="col-12">
                 <h3>Current status</h3>
@@ -43,7 +43,7 @@
             <div class="col-12">
                 <h3>Edit status</h3>
                 <hr>
-                <form method="post" action="<?= base_url("admin/editUser/{$user->id}")?>">
+                <form method="post" action="<?= base_url("admin/editUser/{$user->id}") ?>">
                     <div class="input-group mb-3">
                         <span class="input-group-text w-25" id="roles">User Role</span>
                         <select class="form-select" aria-label="roles" name="role">
