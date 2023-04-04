@@ -405,8 +405,8 @@
                                             <td class="col-5 line-height-2rem"><?= $member->first_name . ' ' . $member->last_name ?></td>
                                             <td class="col-4 line-height-2rem">
                                                 <select name="role" class="form-select form-select-sm">
-                                                    <option value="player"<?= $member->isManager === 0 ? ' selected' : ''; ?>>Player</option>
-                                                    <option value="manager"<?= $member->isManager === 1 ? ' selected' : ''; ?>>Manager</option>
+                                                    <option value="player"<?= $member->isManager == 0 ? ' selected' : ''; ?>>Player</option>
+                                                    <option value="manager"<?= $member->isManager == 1 ? ' selected' : ''; ?>>Manager</option>
                                                 </select>
                                             </td>
                                             <td class="col-2"></td>
