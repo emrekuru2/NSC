@@ -175,14 +175,15 @@
                 <img src="<?= $teamIsSet ? base_url($team->image) : base_url('assets/images/Teams/default.png') ?>" class="card-img-top mb-3 mx-auto d-block" style="width: 150px; height: 150px" alt="Team Logo">
                 <h4 class="card-title text-bold text-center"><?= $team->name ?? 'Select Team' ?></h4>
 
+                <br>
+                <hr class="divider">
+
                 <!-- Edit Logo -->
                 <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="updateTeamImage">Logo</label>
                     <input class="form-control" type="file" name="updateTeamImage" id="updateTeamImage" <?= $teamIsSet ?: ' disabled' ?>>
                     <div class="form-text">SVG filetype recommended.</div>
                 </div>
-
-                <hr class="divider">
 
                 <!-- Edit Name -->
                 <div class="form-group margin-bottom-1rem">
@@ -249,9 +250,9 @@
                                         <td class="col-5 line-height-2rem"><?= $member->first_name . ' ' . $member->last_name ?></td>
                                         <td class="col-4 line-height-2rem">
                                             <select name="role" class="form-select form-select-sm">
-                                                <option value="player"<?= $member->isTeamCaptain === 0 && $member->isViceCaptain === 0 ? ' selected' : '' ?>>Player</option>
-                                                <option value="vice"<?= $member->isViceCaptain === 1 ? ' selected' : '' ?>>Vice Captain</option>
-                                                <option value="captain"<?= $member->isTeamCaptain === 1 ? ' selected' : '' ?>>Captain</option>
+                                                <option value="player"<?= $member->isTeamCaptain == 0 && $member->isViceCaptain == 0 ? ' selected' : '' ?>>Player</option>
+                                                <option value="vice"<?= $member->isViceCaptain == 1 ? ' selected' : '' ?>>Vice Captain</option>
+                                                <option value="captain"<?= $member->isTeamCaptain == 1 ? ' selected' : '' ?>>Captain</option>
                                             </select>
                                         </td>
                                         <td class="col-2"></td>
@@ -274,13 +275,13 @@
                 <div class="form-group margin-bottom-0">
                     <input type="text" value="<?= $teamIsSet ? $team->id : '' ?>" name="update-team-id" id="update-team-id" hidden>
                     <input type="text" value="" name="update-members-JSON" id="update-members-JSON" hidden>
-                    <button type="button" name="update-button" id="update-button" class="btn btn-primary margin-bottom-1rem"<?= $teamIsSet ?: ' disabled' ?>>Update Team</button>
+                    <button type="button" name="update-button" id="update-button" class="btn btn-primary margin-bottom-1rem"<?= $teamIsSet ? '' : ' disabled' ?>>Update Team</button>
                 </div>
 
                 <hr class="divider">
 
                 <!-- Delete Team Button -->
-                <button type="button" name="delete-button" id="delete-button" data-bs-toggle="modal" data-bs-target="#deleteTeamModal" class="btn btn-danger margin-bottom-0"<?= $teamIsSet ?: ' disabled' ?>>Delete Team</button>
+                <button type="button" name="delete-button" id="delete-button" data-bs-toggle="modal" data-bs-target="#deleteTeamModal" class="btn btn-danger margin-bottom-0"<?= $teamIsSet ? '' : 'disabled' ?>>Delete Team</button>
             </form>
 
         </div>
@@ -288,6 +289,7 @@
     <!-- All Teams and Search -->
     <div class="col-sm-5 mb-3 mb-sm-0">
         <div class="card shadow">
+
             <div class="card-header">
                 <div class="d-md-flex justify-content-md-end group-list-header">
                     <div class="line-height-2rem">All Teams</div>
@@ -302,8 +304,8 @@
                 <table class="table<?= ! empty($allTeams) ? ' table-hover' : '' ?> margin-bottom-half-rem">
                     <thead>
                         <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col"></th>
+                            <th scope="col" class="padding-top-0">Name</th>
+                            <th scope="col" class="padding-top-0"></th>
                         </tr>
                     </thead>
 
