@@ -19,39 +19,36 @@
                         <div class="card h-100 shadow border-0">
                             <img class="card-img-top" src="<?=base_url("/assets/images/Clubs/default.png")?>" alt="..." />
                             <div class="card-body p-4">
-                                <button class="text-decoration-none link-dark stretched-link" data-toggle="modal" data-target="#exampleModalCenter"></button>
-                                <h2 class="lead fw-normal text-muted mb-0"><?=$club->name?></h2>
+                                <input type="hidden" name="club-json" value="{ 'name':'<?=$club->name?>', 'email':'<?=$club->email?>', 'description':'<?=$club->description?>', 'website':'<?=$club->website?>', 'phone':'<?=$club->phone?>', 'facebook':'<?=$club->facebook?>' }" name="clubJSON">
+                                <button type="button" name="club-button" id="<?=$club->id?>" class="btn btn-primary" ><?=$club->name?></button>                                
                             </div>
-                            <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-                                <div class="d-flex align-items-end justify-content-between">
-                                
-                                </div>
-                            </div>
-                        </div>
+                        </div> 
                     </div>
 
                         <!-- Grid column -->
-                    <?php endforeach; ?>
-                    <!-- Modal pop up-->
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-                </div>
-            </div>
-            </div>
+                    <?php 
+                    endforeach; 
+                    ?>
+
+                    <!-- Modal -->
+                    
+                    <div class="modal fade" id="clubsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="modal-header"><?= esc($clubs[1]->name) ?></h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p><?= esc($clubs[1]->email) ?></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
                 <?php endif; ?>
         
 
@@ -59,6 +56,23 @@
 
         </section>
         <!-- Section: Block Content -->
+
+        <script>
+
+            let clubInfoButtons = document.getElementsByName('club-button');
+            let clubJsons = document.getElementsByName('club-json');
+
+            console.log(clubInfoButtons)
+
+            for (let i = 0; i < clubInfoButtons.length; i++) {
+                clubInfoButtons[i].addEventListener('click', (event) => {
+                    let json = JSON.parse(clubJsons[i]);
+                    console.log(json.name)
+                    document.getElementById('model-header').innerText = json.name
+                    
+                })
+            }
+        </script>
 
 
     </div>
