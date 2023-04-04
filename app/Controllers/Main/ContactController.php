@@ -14,7 +14,7 @@ class ContactController extends BaseController
 
         return view('pages/contact', $data);
     }
-    public function contact_admins(){
+    public function contactAdmins(){
         $email = \Config\Services::email();
 
         $data = $this->request->getPost();
@@ -24,9 +24,9 @@ class ContactController extends BaseController
         $subject = $data['subject'];
         $message = $data['message'];
         // set email
-        $email->setTo('connormacintyre14@gmail.com');
+        $email->setTo("connormacintyre14@gmail.com");
 
-        $email-setFrom($from, 'Feedback');
+        $email->setFrom($from);
         $email->setSubject("$subject");
         $FullMessage = "Received from: ".$name."\n\n Message: \n\n".$message;
         $email->setMessage("$FullMessage");
