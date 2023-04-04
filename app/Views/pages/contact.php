@@ -39,7 +39,8 @@
                                 <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
                             </div>
                             <!-- Submit Button-->
-                            <div class="d-grid"><button class="btn btn-primary btn-lg" id="submitButton" type="submit" name="formSubmit" value="Submit">Submit</button></div>
+                            <div class="d-grid"><button class="btn btn-primary btn-lg" id="form-submit" type="submit" name="formSubmit">Submit</button></div>
+                            <input type="hidden" name="groups" value="">
                         </form>
                     </div>
                 </div>
