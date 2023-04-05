@@ -1,50 +1,3 @@
-<?php
-$to = "connormacintyre14@gmail.com";
-if(isset($_POST['formSubmit']) && $_POST['formSubmit'] == "Submit") {
-    $name = trim($_POST["name"]);
-    $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
-    $phone = trim($_POST["phone"]);
-    $message = trim($_POST["message"]);
-
-    // Check that data was sent to the mailer.
-    if (empty($name) || empty($message) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        // Set a 400 (bad request) response code and exit.
-        http_response_code(400);
-        echo "Please complete the form and try again.";
-        exit;
-    }
-
-    // Set the recipient email address.
-    $recipient = $to;
-
-    // Set the email subject.
-    $subject = "New message from $name";
-
-    // Build the email content.
-    $email_content = "Name: $name\n";
-    $email_content .= "Email: $email\n\n";
-    $email_content .= "Phone: $phone\n\n";
-    $email_content .= "Message:\n$message\n";
-
-    // Build the email headers.
-    $email_headers = "From: $name <$email>";
-
-    // Send the email.
-    if (mail($recipient, $subject, $email_content, $email_headers)) {
-        // Set a 200 (okay) response code.
-        http_response_code(200);
-        echo "Thank You! Your message has been sent.";
-    } else {
-        // Set a 500 (internal server error) response code.
-        http_response_code(500);
-        echo "Oops! Something went wrong and we couldn't send your message.";
-    }
-} else {
-    // Not a POST request, set a 403 (forbidden) response code.
-    http_response_code(403);
-    echo "There was a problem with your submission, please try again.";
-}
-?>
 <?= $this->extend('layouts/default') ?>
 <?= $this->section('mainContent') ?>
 
@@ -59,7 +12,7 @@ if(isset($_POST['formSubmit']) && $_POST['formSubmit'] == "Submit") {
                 </div>
                 <div class="row gx-5 justify-content-center">
                     <div class="col-lg-8 col-xl-6">
-                        <form id="contactForm" data-sb-form-api-token="API_TOKEN" method="post" action="contact">
+                        <form id="send-email-form" method="post" action="contactAdmins">
                             <!-- Name input-->
                             <div class="form-floating mb-3">
                                 <input class="form-control" id="name" name="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
@@ -73,11 +26,11 @@ if(isset($_POST['formSubmit']) && $_POST['formSubmit'] == "Submit") {
                                 <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
                                 <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
                             </div>
-                            <!-- Phone number input-->
+                            <!-- Subject input-->
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="phone" name="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
-                                <label for="phone">Phone number</label>
-                                <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                                <input class="form-control" id="subject" name="subject" type="text" placeholder="Enter your subject here..." data-sb-validations="required" />
+                                <label for="subject">Subject</label>
+                                <div class="invalid-feedback" data-sb-feedback="subject:required">A subject is required.</div>
                             </div>
                             <!-- Message input-->
                             <div class="form-floating mb-3">
@@ -86,7 +39,8 @@ if(isset($_POST['formSubmit']) && $_POST['formSubmit'] == "Submit") {
                                 <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
                             </div>
                             <!-- Submit Button-->
-                            <div class="d-grid"><button class="btn btn-primary btn-lg" id="submitButton" type="submit" name="formSubmit" value="Submit">Submit</button></div>
+                            <div class="d-grid"><button class="btn btn-primary btn-lg" id="form-submit" type="submit" name="formSubmit">Submit</button></div>
+                            <input type="hidden" name="groups" value="">
                         </form>
                     </div>
                 </div>

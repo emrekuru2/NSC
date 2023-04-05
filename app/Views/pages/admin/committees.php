@@ -6,50 +6,8 @@
 <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
 
 <div class="row g-4">
-
-    <!-- Committees -->
-    <div class="col-lg-4">
-        <div class="row-lg">
-            <div class="col-lg-12">
-                <div class="card shadow">
-                    <div class="card-header">Committees</div>
-                    <div class="card-body">
-                        <?= view_cell('\App\Libraries\Contents::search', ['route' => 'modify_committee', 'name' => 'Committee', 'array' => $committiees, 'fields' => ['name'], 'method' => 'post', 'useName' => true, 'useDivider' => true]) ?>
-
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Dates</th>
-                                    <th scope="col">Edit</th>
-                                </tr>
-                            </thead>
-
-                            <tbody class="table-group-divider">
-                                <?php if (! empty($committiees) && is_array($committiees)) : ?>
-                                    <?php foreach ($committiees as $committiee) : ?>
-                                        <tr>
-                                            <td><?= esc($committiee->id) ?></td>
-                                            <td><?= esc($committiee->name) ?></td>
-                                            <td><?= esc($committiee->years) ?></td>
-                                            <td><form method="post" action="modify_committee">
-                                                <input type="hidden" name="id" value="<?=esc($committiee->id)?>">
-                                                <button class="btn btn-primary" type="submit">Edit</button>
-                                            </form></td>
-                                        </tr>
-                                    <?php endforeach ?>
-                                <?php endif ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Create committee -->
-    <div class="col-lg-8">
+    <div class="col-lg-7">
         <div class="card shadow">
             <div class="card-header">Create committiee</div>
             <div class="card-body">
@@ -95,7 +53,48 @@
             </div>
         </div>
     </div>
+    <!-- Committees -->
+    <div class="col-lg-5">
+        <div class="row-lg">
+            <div class="col-lg-12">
+                <div class="card shadow">
+                    <div class="card-header">Committees</div>
+                    <div class="card-body">
+                        <?= view_cell('\App\Libraries\Contents::search', ['route' => 'modify_committee', 'name' => 'Committee', 'array' => $committiees, 'fields' => ['name'], 'method' => 'post', 'useName' => true, 'useDivider' => true]) ?>
 
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Dates</th>
+                                    <th scope="col">Edit</th>
+                                </tr>
+                            </thead>
+
+                            <tbody class="table-group-divider">
+                                <?php if (! empty($committiees) && is_array($committiees)) : ?>
+                                    <?php foreach ($committiees as $committiee) : ?>
+                                        <tr>
+                                            <td><?= esc($committiee->id) ?></td>
+                                            <td><?= esc($committiee->name) ?></td>
+                                            <td><?= esc($committiee->years) ?></td>
+                                            <td>
+                                                <form method="post" action="modify_committee">
+                                                    <input type="hidden" name="id" value="<?= esc($committiee->id) ?>">
+                                                    <button class="btn btn-primary" type="submit">Edit</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach ?>
+                                <?php endif ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>

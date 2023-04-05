@@ -21,14 +21,12 @@ let teamMembersChanged = false
 removeMemberButtons.forEach( (buttonElement) => {
     buttonElement.addEventListener('click', (event) => {
         let button = event.target
-
-        let message = removeMemberMessage.innerText
-
+        let memberName = button.dataset.name
         removeMemberHiddenInput.value = button.dataset.user
-        let firstHalf = message.substring(0, 32)
-        let secondHalf = message.substring(message.indexOf("from") - 1)
 
-        removeMemberMessage.innerText = firstHalf + button.dataset.name + secondHalf
+        memberName = memberName.replace('|', ' ')
+        let teamName = removeMemberMessage.innerText
+        removeMemberMessage.innerHTML = 'Are you sure you want to remove ' + '<b>' + memberName + '</b>' + ' from the ' + '<b>' + teamName + '</b>' + ' team?'
     })
 })
 
@@ -69,8 +67,10 @@ function getMemberRolesJSON() {
 function getAddedMembersJSON() {
     let membersJSON = { 'members': [] }
 
+    let isChecked = false
     for (let i = 0; i < addMemberChecks.length; i++) {
         if (addMemberChecks[i].checked) {
+            isChecked = true
             let member = []
 
             let id = addMemberChecks[i].value
@@ -80,6 +80,10 @@ function getAddedMembersJSON() {
                 membersJSON.members.push(member)
             }
         }
+
+        if (i === addMemberChecks.length-1 && ! isChecked) {
+            return ''
+        }
     }
     return JSON.stringify(membersJSON)
 }
@@ -87,7 +91,7 @@ function getAddedMembersJSON() {
 function updateAddMembersList() {
     let teamMembersArray = []
     for (let i = 0; i < removeMemberButtons.length; i++) {
-        let name = removeMemberButtons[i].dataset.name
+        let name = removeMemberButtons[i].dataset.name.replace('|', ' ')
         if (name === 'none') break
 
         teamMembersArray.push(name)

@@ -11,7 +11,7 @@ class TeamUserModel extends Model
     protected $primaryKey    = 'id';
     protected $returnType    = \App\Entities\UserTypes\TeamUser::class;
     protected $protectFields = true;
-    protected $allowedFields = ['userID', 'teamID', 'isTeamCaptain', 'isViceCaptain', 'isViceCaptain'];
+    protected $allowedFields = ['userID', 'teamID', 'isTeamCaptain', 'isViceCaptain'];
 
     // Dates
     protected $useTimestamps = true;

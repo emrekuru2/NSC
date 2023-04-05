@@ -26,7 +26,7 @@
             <div class="col-lg-8">
                 <!-- Featured blog post-->
                 <div class="card mb-4">
-                    <a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." style="width: 100%; height: 100%;"/></a>
+                    <a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." style="width: 100%; height: 350px;"/></a>
                     <div class="card-body">
                         <div class="small text-muted">January 1, 2023</div>
                         <h2 class="card-title">Check Out Our Clubs</h2>
@@ -74,17 +74,17 @@
             </div>
         </div>
         <div class="row gx-5">
-            <?php if (!empty($news) && is_array($news)) : ?>
+            <?php if (! empty($news) && is_array($news)) : ?>
                 <?php foreach ($news as $news_item) : ?>
                     <?php
                     $html_string = $news_item->content;
-                    $dom = new DOMDocument();
+                    $dom         = new DOMDocument();
                     $dom->loadHTML($html_string);
 
                     // Extract the contents of each element
-                    $h4_content = $dom->getElementsByTagName('h4')->item(0)->nodeValue;
+                    $h4_content   = $dom->getElementsByTagName('h4')->item(0)->nodeValue;
                     $code_content = $dom->getElementsByTagName('code')->item(0)->nodeValue;
-                    $img_src = $dom->getElementsByTagName('img')->item(0)->getAttribute('src');
+                    $img_src      = $dom->getElementsByTagName('img')->item(0)->getAttribute('src');
                     ?>
                     <div class="col-lg-4 mb-5">
                         <div class="card h-100 shadow border-0 d-flex align-items-center">
