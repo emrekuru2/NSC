@@ -23,11 +23,10 @@ class ContactController extends BaseController
         $message = $data['message'];
         // set email
         $email = \Config\Services::email();
-        $email->setFrom("$from1");
-        $email->setTo("connormacintyre14@gmail.com");
-        $email->setSubject("$subject");
-        $FullMessage = "Received from: ".$name."\n\n Message: \n\n".$message;
-        $email->setMessage("$FullMessage");
+        $email->setFrom($from1);
+        $email->setTo('connormacintyre14@gmail.com');
+        $email->setSubject($subject);
+        $email->setMessage($message);
 
         $email->send();
         return redirect()->back();
