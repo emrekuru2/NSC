@@ -18,12 +18,12 @@ class ContactController extends BaseController
         $data = $this->request->getPost();
 
         $name = $data['name'];
-        $from1 = $data['email'];
+        $sentFrom = $data['email'];
         $subject = $data['subject'];
         $message = $data['message'];
         // set email
         $email = \Config\Services::email();
-        $email->setFrom($from1, $name);
+        $email->setFrom($sentFrom, $name);
         $email->setTo('connormacintyre14@gmail.com');
         $email->setSubject($subject);
         $email->setMessage($message);
