@@ -119,6 +119,11 @@
     }
 }
 
+.view-table-data {
+    line-height: 2rem;
+    padding: 0.25rem !important;
+}
+
 /* BOOTSTRAP SPECIFIC CUSTOMIZATION */
 
 .nav-z {

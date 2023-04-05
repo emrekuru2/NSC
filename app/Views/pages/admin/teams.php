@@ -169,8 +169,102 @@
 </form>
 
 <div class="row">
+
+    <!-- View Team -->
+    <div class="col-sm-7" id="view-team-card">
+        <div class="card shadow">
+            <div class="card-header">
+                <div class="d-md-flex justify-content-md-end group-list-header">
+                    <div class="line-height-2rem">Team Info</div>
+                    <button type="button" id="edit-team-button" class="btn btn-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i> Edit Team</button>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <!-- Logo and Name -->
+                <img src="<?= $teamIsSet ? base_url($team->image) : base_url('assets/images/Teams/default.png') ?>" class="card-img-top mb-3 mx-auto d-block" style="width: 150px; height: 150px" alt="Team Logo">
+                <h4 class="card-title text-bold text-center"><?= $team->name ?? 'Select Team' ?></h4>
+
+                <br>
+                <hr class="divider">
+
+                <!-- View Club -->
+                <div class="form-group margin-bottom-1rem">
+                    <div class="mb-3 row">
+                        <label class="col-2 col-form-label" for="viewTeamClub">Club</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" id="viewTeamClub" value="<?= $teamIsSet ? $teamClub->name : '' ?>" aria-label="readonly input" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- View Description -->
+                <div class="form-group margin-bottom-1rem">
+                    <div class="mb-3 row">
+                        <label class="col-2 col-form-label" for="viewTeamDescription">Description</label>
+                        <div class="col-10">
+                            <textarea class="form-control" id="updateTeamDescription" rows="3" aria-label="readonly input" readonly><?= $teamIsSet ? $team->description : '' ?></textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- View Members -->
+                <div class="form-group margin-bottom-1rem">
+                    <div class="mb-3 row">
+                        <label class="col-2 col-form-label" for="viewTeamMembers">Members</label>
+                        <div class="col-10">
+
+                            <div class="border-round">
+                                <table class="table<?= $teamIsSet && ! empty($teamMembers) ? ' table-hover' : '' ?> margin-bottom-half-rem">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Role</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody id="team-member-list" data-team-isset="<?= $teamIsSet ?>">
+                                    <?php if (! $teamIsSet) { ?>
+                                        <tr>
+                                            <td class="col-10 view-table-data"><br></td>
+                                            <td class="col-2 view-table-data"></td>
+                                        </tr>view-table-data
+                                    <?php } elseif (empty($teamMembers)) { ?>
+                                        <tr>
+                                            <td class="col-10 view-table-data">No team members</td>
+                                            <td class="col-2 view-table-data"></td>
+                                        </tr>
+                                    <?php } else {
+                                        foreach ($teamMembers as $member) : ?>
+                                            <tr>
+                                                <td class="col-10 view-table-data"><?= $member->first_name . ' ' . $member->last_name ?></td>
+                                                <td class="col-2 view-table-data">
+                                                    <?php if ($member->isTeamCaptain == 1) {
+                                                        echo 'Captain';
+                                                    } elseif ($member->isViceCaptain == 1) {
+                                                        echo 'Vice Captain';
+                                                    } else {
+                                                        echo 'Player';
+                                                    }  ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach;
+                                    } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <!-- Edit Team -->
-    <div class="col-sm-7">
+    <div class="col-sm-7" id="edit-team-card" hidden>
         <div class="card shadow">
             <div class="card-header">Edit Team</div>
 
@@ -290,6 +384,7 @@
 
         </div>
     </div>
+
     <!-- All Teams and Search -->
     <div class="col-sm-5 mb-3 mb-sm-0">
         <div class="card shadow">

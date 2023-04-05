@@ -13,6 +13,7 @@ class TeamsController extends BaseController
 {
     public function index()
     {
+        $clubModel = model(ClubModel::class);
         $teamModel = model(TeamModel::class);
         $userModel = model(UserEmailModel::class);
 
@@ -30,8 +31,9 @@ class TeamsController extends BaseController
             'title'       => 'Teams',
             'team'        => $team,
             'teamMembers' => $team !== null ? $userModel->getTeamUsersByTeamId($team->id) : null,
+            'teamClub'    => $team !== null ? $clubModel->select()->where('id', $team->clubID)->first() : null,
             'allTeams'    => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
-            'allClubs'    => model(ClubModel::class)->select()->orderBy('nsca_clubs.name', 'ASC')->findAll(),
+            'allClubs'    => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll(),
             'allUsers'    => $userModel->select()->orderBy('nsca_users.last_name', 'ASC')->findAll(),
         ];
 
