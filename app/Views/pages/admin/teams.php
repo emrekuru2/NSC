@@ -420,9 +420,9 @@
                         } else {
                             foreach ($allTeams as $teamIndex) : ?>
                             <tr>
-                                <td class="col-12 line-height-2rem">
+                                <td class="col-12 view-table-padding">
                                     <a href="<?= '?name=' . str_replace(' ', '+', $teamIndex->name) ?>">
-                                        <label class="text-bold width-100" for="name"><?= $teamIndex->name ?></label>
+                                        <label class="text-bold width-100 line-height-3rem" for="name"><?= $teamIndex->name ?></label>
                                     </a>
                                 </td>
                             </tr>
