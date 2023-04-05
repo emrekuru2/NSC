@@ -56,8 +56,11 @@ class TeamsController extends BaseController
         $teamID = esc($this->request->getPost('update-team-id'));
         $team   = $teamModel->find($teamID);
 
+        echo "<script> console.log('Image Size: ' + '" . $image->getSize() . "') </script>";
+
         // New Team Image
-        if ($image->isValid()) {
+//        if ($image != null) {
+        if ($image->getSize() > 0) {
             // Deleting old image
             if (! str_contains($team->image, 'default.png')) {
                 unlink($team->image);
@@ -67,11 +70,8 @@ class TeamsController extends BaseController
             if (! $filepath) {
                 $filepath = 'assets/images/Teams/default.png';
             }
-        }
-
-        // No Image
-        else {
-            $filepath = 'assets/images/Teams/default.png';
+        } else {
+            $filepath = $team->image;
         }
 
         try {

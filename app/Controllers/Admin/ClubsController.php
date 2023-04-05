@@ -70,11 +70,8 @@ class ClubsController extends BaseController
             if (! $filepath) {
                 $filepath = 'assets/images/Clubs/default.png';
             }
-        }
-
-        // No New Club Image
-        else {
-            $filepath = 'assets/images/Clubs/default.png';
+        }else {
+            $filepath = $club->image;
         }
 
         try {
