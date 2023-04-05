@@ -56,10 +56,6 @@ class TeamsController extends BaseController
         $teamID = esc($this->request->getPost('update-team-id'));
         $team   = $teamModel->find($teamID);
 
-        echo "<script> console.log('Image Size: ' + '" . $image->getSize() . "') </script>";
-
-        // New Team Image
-//        if ($image != null) {
         if ($image->getSize() > 0) {
             // Deleting old image
             if (! str_contains($team->image, 'default.png')) {

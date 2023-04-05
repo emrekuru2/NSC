@@ -59,8 +59,7 @@ class ClubsController extends BaseController
 
         $club = $clubModel->find($clubID);
 
-        // New Club Image
-        if ($image->isValid()) {
+        if ($image->getSize() > 0) {
             // Deleting old image
             if (! str_contains($club->image, 'default.png')) {
                 unlink($club->image);
@@ -70,7 +69,7 @@ class ClubsController extends BaseController
             if (! $filepath) {
                 $filepath = 'assets/images/Clubs/default.png';
             }
-        }else {
+        } else {
             $filepath = $club->image;
         }
 
