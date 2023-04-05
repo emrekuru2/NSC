@@ -176,7 +176,7 @@
             <div class="card-header">
                 <div class="d-md-flex justify-content-md-end group-list-header">
                     <div class="line-height-2rem">Team Info</div>
-                    <button type="button" id="edit-team-button" class="btn btn-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i> Edit Team</button>
+                    <button type="button" id="edit-team-button" class="btn btn-primary btn-sm" <?= $teamIsSet ? '' : ' disabled' ?>><i class="fa-solid fa-pen-to-square"></i> Edit Team</button>
                 </div>
             </div>
 
@@ -227,19 +227,19 @@
                                     <tbody id="team-member-list" data-team-isset="<?= $teamIsSet ?>">
                                     <?php if (! $teamIsSet) { ?>
                                         <tr>
-                                            <td class="col-10 view-table-data"><br></td>
-                                            <td class="col-2 view-table-data"></td>
-                                        </tr>view-table-data
+                                            <td class="col-9 view-table-data"><br></td>
+                                            <td class="col-3 view-table-data"></td>
+                                        </tr>
                                     <?php } elseif (empty($teamMembers)) { ?>
                                         <tr>
-                                            <td class="col-10 view-table-data">No team members</td>
-                                            <td class="col-2 view-table-data"></td>
+                                            <td class="col-9 view-table-data">No team members</td>
+                                            <td class="col-3 view-table-data"></td>
                                         </tr>
                                     <?php } else {
                                         foreach ($teamMembers as $member) : ?>
                                             <tr>
-                                                <td class="col-10 view-table-data"><?= $member->first_name . ' ' . $member->last_name ?></td>
-                                                <td class="col-2 view-table-data">
+                                                <td class="col-9 view-table-data"><?= $member->first_name . ' ' . $member->last_name ?></td>
+                                                <td class="col-3 view-table-data">
                                                     <?php if ($member->isTeamCaptain == 1) {
                                                         echo 'Captain';
                                                     } elseif ($member->isViceCaptain == 1) {
@@ -264,9 +264,14 @@
     </div>
 
     <!-- Edit Team -->
-    <div class="col-sm-7" id="edit-team-card" hidden>
+    <div class="col-sm-7" id="edit-team-card">
         <div class="card shadow">
-            <div class="card-header">Edit Team</div>
+            <div class="card-header">
+                <div class="d-md-flex justify-content-md-end group-list-header">
+                    <div class="line-height-2rem">Edit Team</div>
+                    <button type="button" id="cancel-edit-team-button" class="btn btn-primary btn-sm"><i class="fa-solid fa-xmark"></i> Cancel Edit</button>
+                </div>
+            </div>
 
             <form method="post" action="updateTeam" enctype="multipart/form-data" class="card-body" id="update-form">
                 <!-- Logo and Name -->
@@ -415,12 +420,10 @@
                         } else {
                             foreach ($allTeams as $teamIndex) : ?>
                             <tr>
-                                <td class="col-11 line-height-2rem"><label for="name"><?= $teamIndex->name ?></label></td>
-                                <td class="col-1">
-                                    <form method="get" action="">
-                                        <input value="<?= $teamIndex->name ?>" name="name" id="name" hidden>
-                                        <button type="submit" class="btn btn-primary btn-sm">Edit</button>
-                                    </form>
+                                <td class="col-12 line-height-2rem">
+                                    <a href="<?= '?name=' . str_replace(' ', '+', $teamIndex->name) ?>">
+                                        <label class="text-bold width-100" for="name"><?= $teamIndex->name ?></label>
+                                    </a>
                                 </td>
                             </tr>
                         <?php endforeach ?><?php } ?>

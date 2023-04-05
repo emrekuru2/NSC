@@ -124,6 +124,10 @@
     padding: 0.25rem !important;
 }
 
+.width-100 {
+    width: 100%;
+}
+
 /* BOOTSTRAP SPECIFIC CUSTOMIZATION */
 
 .nav-z {
