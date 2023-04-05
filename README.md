@@ -31,6 +31,8 @@
 
 ## Setup for development environment
 
+> The main (default) branch of the project has been renamed to CI4. For development purposes, please clone this branch as it has the latest code.
+
 > Make sure you have **composer** installed. It should come pre-installed with xampp, mamp. Run below command to check if it's installed.
 ```sh
 composer -v
