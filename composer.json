@@ -9,8 +9,8 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "codeigniter4/framework": "^4.0",
-        "codeigniter4/shield": "^1.0@beta",
-    "ext-json": "*"
+        "codeigniter4/shield": "v1.0.0-beta.3",
+        "ext-json": "*"
     },
     "require-dev": {
         "codeigniter/coding-standard": "^1.7",
@@ -34,7 +34,8 @@
         }
     },
     "scripts": {
-        "test": "phpunit"
+        "test": "phpunit",
+        "format": "vendor/bin/php-cs-fixer fix --verbose"
     },
     "support": {
         "forum": "https://forum.codeigniter.com/",

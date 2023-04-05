@@ -5,9 +5,9 @@
         <div class="card shadow">
             <div class="card-header">Create Competition Type: </div>
             <div class="card-body">
-                <a type="button" href="<?php  redirect()->back() ?>" class="btn btn-primary w-25">Back</a>
+                <a type="button" href="<?php redirect()->back() ?>" class="btn btn-primary w-25">Back</a>
 
-                <form class="d-flex flex-column align-items-center" action="<?= base_url('admin/competitions/update'."/".$competition['id'])?>" method="POST">
+                <form class="d-flex flex-column align-items-center" action="<?= base_url('admin/competitions/update/' . $competition['id'])?>" method="POST">
                     <input type="hidden" name="_method" value = "PUT">
                     <div class="w-100 mb-3">
                         <label for="content" class="form-label">Competition Name</label>

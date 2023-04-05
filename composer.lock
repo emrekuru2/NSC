@@ -144,20 +144,20 @@
         },
         {
             "name": "codeigniter4/shield",
-            "version": "v1.0.0-beta.5",
+            "version": "v1.0.0-beta.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/codeigniter4/shield.git",
-                "reference": "062d66b1570fea14b22dc3dae6414d64879eb519"
+                "reference": "5e6d5175da45b06dbe7d1deda03458d79d45a951"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codeigniter4/shield/zipball/062d66b1570fea14b22dc3dae6414d64879eb519",
-                "reference": "062d66b1570fea14b22dc3dae6414d64879eb519",
+                "url": "https://api.github.com/repos/codeigniter4/shield/zipball/5e6d5175da45b06dbe7d1deda03458d79d45a951",
+                "reference": "5e6d5175da45b06dbe7d1deda03458d79d45a951",
                 "shasum": ""
             },
             "require": {
-                "codeigniter4/settings": "^2.1",
+                "codeigniter4/settings": "^2.0",
                 "php": "^7.4.3 || ^8.0"
             },
             "provide": {
@@ -165,12 +165,8 @@
             },
             "require-dev": {
                 "codeigniter4/devkit": "^1.0",
-                "codeigniter4/framework": "^4.2.7",
-                "mikey179/vfsstream": "^1.6.7",
+                "codeigniter4/framework": "^4.2.3",
                 "mockery/mockery": "^1.0"
-            },
-            "suggest": {
-                "ext-curl": "Required to use the password validation rule via PwnedValidator class."
             },
             "type": "library",
             "autoload": {
@@ -211,7 +207,7 @@
                 "slack": "https://codeigniterchat.slack.com",
                 "source": "https://github.com/codeigniter4/shield"
             },
-            "time": "2023-03-18T08:49:30+00:00"
+            "time": "2022-10-30T23:14:47+00:00"
         },
         {
             "name": "laminas/laminas-escaper",
@@ -4224,9 +4220,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "codeigniter4/shield": 10
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

@@ -30,12 +30,12 @@ class ClubsController extends BaseController
         $data = [
             'title'           => 'Clubs',
             'club'            => $club,
-            'clubMembers'     => $club != null ? $userModel->getClubUsersByClubId($club->id) : null,
-            'clubTeams'       => $club != null ? $teamModel->getTeamsInClub($club->id) : null,
+            'clubMembers'     => $club !== null ? $userModel->getClubUsersByClubId($club->id) : null,
+            'clubTeams'       => $club !== null ? $teamModel->getTeamsInClub($club->id) : null,
             'allClubs'        => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll(),
-            'unassignedTeams' => $club != null ? $teamModel->getUnassignedTeams() : null,
+            'unassignedTeams' => $club !== null ? $teamModel->getUnassignedTeams() : null,
             'unassignedUsers' => $userModel->getUsersNotInTeam(),
-            'allUsers'        => $userModel->select()->orderBy('nsca_users.last_name', 'ASC')->findAll()
+            'allUsers'        => $userModel->select()->orderBy('nsca_users.last_name', 'ASC')->findAll(),
         ];
 
         return view('pages/admin/clubs', $data);
@@ -44,8 +44,8 @@ class ClubsController extends BaseController
     public function updateClub()
     {
         helper('image');
-        $clubModel     = model(ClubModel::class);
-        $userModel     = model(UserEmailModel::class);
+        $clubModel = model(ClubModel::class);
+        $userModel = model(UserEmailModel::class);
 
         $clubID       = esc($this->request->getPost('update-club-id'));
         $email        = esc($this->request->getPost('email'));
@@ -57,17 +57,19 @@ class ClubsController extends BaseController
         $facebook     = esc($this->request->getPost('facebook'));
         $image        = $this->request->getFile('image');
 
-        $club  = $clubModel->find($clubID);
+        $club = $clubModel->find($clubID);
 
         // New Club Image
         if ($image->isValid()) {
             // Deleting old image
-            if (!str_contains($club->image, 'default.png')) {
+            if (! str_contains($club->image, 'default.png')) {
                 unlink($club->image);
             }
 
             $filepath = storeImage('Clubs', $image);
-            if (!$filepath) $filepath = 'assets/images/Clubs/default.png';
+            if (! $filepath) {
+                $filepath = 'assets/images/Clubs/default.png';
+            }
         }
 
         // No New Club Image
@@ -94,17 +96,20 @@ class ClubsController extends BaseController
         $json = $this->request->getPost('update-members-JSON');
 
         if ($json !== '') {
-            $clubJSON = json_decode($json);
+            $clubJSON   = json_decode($json);
             $addSuccess = 0;
             $numMembers = count($clubJSON->members);
 
             foreach ($clubJSON->members as $member) {
                 $memberName = $member[0];
-                $firstName = explode('|', $memberName)[0];
-                $lastName = explode('|', $memberName)[1];
+                $firstName  = explode('|', $memberName)[0];
+                $lastName   = explode('|', $memberName)[1];
 
-                if ($member[1] == 'manager') $isManager = $member[1] = 1;
-                else $isManager = $member[1] = 0;
+                if ($member[1] === 'manager') {
+                    $isManager = $member[1] = 1;
+                } else {
+                    $isManager = $member[1] = 0;
+                }
 
                 $memberID = $userModel->select('id')->where('first_name', $firstName)->where('last_name', $lastName)->first()->id;
 
@@ -119,15 +124,14 @@ class ClubsController extends BaseController
                 }
             }
 
-            if ($numMembers > 0 && $addSuccess == $numMembers) {
+            if ($numMembers > 0 && $addSuccess === $numMembers) {
                 return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Club updated successfully!']);
             }
-            else if ($addSuccess > 0) {
+            if ($addSuccess > 0) {
                 return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Club updated successfully! Error occurred while updating ' . ($numMembers - $addSuccess) . ' club members.']);
             }
-            else {
-                return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Club updated successfully! Error while updating club members.']);
-            }
+
+            return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Club updated successfully! Error while updating club members.']);
         }
 
         return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Club updated successfully!']);
@@ -183,7 +187,7 @@ class ClubsController extends BaseController
         $clubModel->delete($clubID);
         $clubUserModel->deleteClubUsers($clubID);
 
-        if ($clubModel->find($clubID) == null) {
+        if ($clubModel->find($clubID) === null) {
             return redirect()->to('admin/clubs')->with('alert', ['type' => 'success', 'content' => 'Club deleted successfully!']);
         }
 
@@ -212,10 +216,10 @@ class ClubsController extends BaseController
     public function addMembers()
     {
         $clubID = $this->request->getPost('add-member-club-id');
-        $json = $this->request->getPost('add-members-JSON');
+        $json   = $this->request->getPost('add-members-JSON');
 
-        if ($json != '') {
-            $usersJSON = json_decode($json);
+        if ($json !== '') {
+            $usersJSON  = json_decode($json);
             $addSuccess = 0;
             $numMembers = count($usersJSON->members);
 
@@ -223,8 +227,11 @@ class ClubsController extends BaseController
                 $data['userID'] = $member[0];
                 $data['clubID'] = $clubID;
 
-                if ($member[1] == 'manager') $data['isManager'] = 1;
-                else $data['isManager'] = 0;
+                if ($member[1] === 'manager') {
+                    $data['isManager'] = 1;
+                } else {
+                    $data['isManager'] = 0;
+                }
 
                 $clubUser = new \App\Entities\UserTypes\ClubUser();
                 $clubUser->fill($data);
@@ -237,13 +244,14 @@ class ClubsController extends BaseController
                 }
             }
 
-            if ($numMembers > 0 && $addSuccess == $numMembers) {
+            if ($numMembers > 0 && $addSuccess === $numMembers) {
                 return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Members added successfully!']);
-            } else if ($addSuccess > 0) {
-                return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Members added successfully! Error occurred while adding some members to club.']);
-            } else {
-                return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error occurred while adding members to club.']);
             }
+            if ($addSuccess > 0) {
+                return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Members added successfully! Error occurred while adding some members to club.']);
+            }
+
+            return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error occurred while adding members to club.']);
         }
 
         return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error: No members selected.']);
@@ -275,9 +283,9 @@ class ClubsController extends BaseController
         $addSuccess = 0;
         $numTeams   = -1;
 
-        if ($json != '') {
+        if ($json !== '') {
             $teamsJSON = json_decode($json);
-            $numTeams = count($teamsJSON->teams);
+            $numTeams  = count($teamsJSON->teams);
 
             foreach ($teamsJSON->teams as $teamName) {
                 $teamID = $teamModel->select()->where('name', $teamName)->first()->id;
@@ -291,9 +299,10 @@ class ClubsController extends BaseController
             }
         }
 
-        if ($addSuccess == $numTeams && $numTeams > 1) {
+        if ($addSuccess === $numTeams && $numTeams > 1) {
             return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Added teams successfully!']);
-        } else if ($addSuccess == $numTeams && $numTeams == 1) {
+        }
+        if ($addSuccess === $numTeams && $numTeams === 1) {
             return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Added team successfully!']);
         }
 
