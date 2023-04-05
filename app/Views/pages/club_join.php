@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/default') ?>
 
 <?= $this->section('mainContent') ?>
-<div class="container">
+<div class="container" style="height: 100%;">
     <?php $session = \Config\Services::session(); ?>
     <?php if(session()->has('message')): ?>
         <script>
@@ -19,13 +19,8 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p id="hiddenPara" hidden></p>
-                    <script>
-                        const selectedClubID = document.getElementById('clubs-select').value;
-                        document.getElementById('hiddenPara').innerHTML = selectedClubID;
-                    </script>
                     <p>You have requested to join:</p>
-                    <p id="modal-message"></p>
+                    <p id="modal-message" style="font-weight: bold;"></p>
                     <p>Do you want to confirm?</p>
                 </div>
                 <div class="modal-footer">
@@ -36,25 +31,45 @@
         </div>
     </form>
     
-    <div class="row">
+    <div class="row card h-100 shadow border-0 mt-5">
         <div class="col-sm-9 col-md-7 col-lg-6 mx-auto">
-            <h1>Request to join a club</h1>
-        <div class="mb-3">
+            <h1 style="margin-top: 5vh;" >Request to join a club</h1>
+        <div style="margin-top: 5vh;" class="mb-3">
             <form method="post" id="club-select-form" action="join_club">
-                <label for="clubs-select" class="form-label">Select club you want to join:</label>
+                <label for="clubs-select" class="form-label" hidden>Select club you want to join:</label>
                 <select class="form-select form-select-lg" name="clubs-select" id="clubs-select">
-                    <option selected value="0">Select one</option>
+                    <option selected value="0">Select club</option>
                     <?php foreach ($clubs as $club): ?>
                         <option value="<?= $club->name ?>"><?php echo $club->name ?></option>
                     <?php endforeach; ?>
                 </select>
                 <!-- Modal trigger button -->
-                <button type="button"  id="submit" class="btn btn-primary btn-lg mt-1" data-bs-toggle="modal" data-bs-target="#confirmSubmission">
-                    Submit request
-                </button>
+                <button type="button"  id="submit" class="btn btn-primary btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#confirmSubmission">Submit request</button>
             </form>
 
         </div>
+        </div>
+    </div>
+
+    <div class="row card h-100 shadow border-0 mt-5">
+        <div class="col-sm-9 col-md-7 col-lg-6 mx-auto">
+            <div class="table-responsive">
+                <table class="table table-primary mt-3">
+                    <thead>
+                        <tr>
+                            <th scope="col">You requested to join:</th>
+                            <th scope="col">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="">
+                            <td scope="row"><?= $previousRequest != null ? $previousRequestClub : 'none' ?></td>
+                            <td><?= $previousRequest != null ? $previousRequestDate : '' ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
         </div>
     </div>
 </div>

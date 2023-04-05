@@ -10,7 +10,7 @@ class ClubJoinlistModel extends Model
     protected $primaryKey       = 'id';
     protected $returnType       = \App\Entities\UserTypes\ClubUser::class;
     protected $protectFields    = true;
-    protected $allowedFields    = ['clubID', 'userID'];
+    protected $allowedFields    = ['clubID', 'userID', 'updated_at'];
 
     // Dates
     protected $useTimestamps = true;
