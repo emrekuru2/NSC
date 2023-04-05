@@ -1,0 +1,93 @@
+ERROR - 2023-04-05 15:38:26 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it in C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:174
+Stack trace:
+#0 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(174): mysqli->real_connect('localhost', 'root', '', 'cns', 3306, '', 0)
+#1 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Database\BaseConnection.php(1408): CodeIgniter\Database\BaseConnection->query('SHOW TABLES FRO...')
+#4 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Database\BaseConnection.php(1427): CodeIgniter\Database\BaseConnection->listTables()
+#5 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Database\MigrationRunner.php(768): CodeIgniter\Database\BaseConnection->tableExists('migrations')
+#6 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Database\MigrationRunner.php(168): CodeIgniter\Database\MigrationRunner->ensureTable()
+#7 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Commands\Database\Migrate.php(84): CodeIgniter\Database\MigrationRunner->latest(NULL)
+#8 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\CLI\Commands.php(65): CodeIgniter\Commands\Database\Migrate->run(Array)
+#9 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\CLI\BaseCommand.php(114): CodeIgniter\CLI\Commands->run('migrate', Array)
+#10 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\app\Commands\Setup.php(89): CodeIgniter\CLI\BaseCommand->call('migrate')
+#11 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\CLI\Commands.php(65): App\Commands\Setup->run(Array)
+#12 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\CLI\Console.php(37): CodeIgniter\CLI\Commands->run('setup', Array)
+#13 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\spark(97): CodeIgniter\CLI\Console->run()
+#14 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it in C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:218
+Stack trace:
+#0 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Database\BaseConnection.php(1408): CodeIgniter\Database\BaseConnection->query('SHOW TABLES FRO...')
+#3 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Database\BaseConnection.php(1427): CodeIgniter\Database\BaseConnection->listTables()
+#4 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Database\MigrationRunner.php(768): CodeIgniter\Database\BaseConnection->tableExists('migrations')
+#5 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Database\MigrationRunner.php(168): CodeIgniter\Database\MigrationRunner->ensureTable()
+#6 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Commands\Database\Migrate.php(84): CodeIgniter\Database\MigrationRunner->latest(NULL)
+#7 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\CLI\Commands.php(65): CodeIgniter\Commands\Database\Migrate->run(Array)
+#8 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\CLI\BaseCommand.php(114): CodeIgniter\CLI\Commands->run('migrate', Array)
+#9 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\app\Commands\Setup.php(89): CodeIgniter\CLI\BaseCommand->call('migrate')
+#10 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\CLI\Commands.php(65): App\Commands\Setup->run(Array)
+#11 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\CLI\Console.php(37): CodeIgniter\CLI\Commands->run('setup', Array)
+#12 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\spark(97): CodeIgniter\CLI\Console->run()
+#13 {main}
+ERROR - 2023-04-05 15:38:30 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it in C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:174
+Stack trace:
+#0 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(174): mysqli->real_connect('localhost', 'root', '', 'cns', 3306, '', 0)
+#1 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Database\Database.php(67): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Database\Config.php(109): CodeIgniter\Database\Database->loadForge(Object(CodeIgniter\Database\MySQLi\Connection))
+#4 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Database\Seeder.php(97): CodeIgniter\Database\Config::forge(NULL)
+#5 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Commands\Database\Seed.php(69): CodeIgniter\Database\Seeder->__construct(Object(Config\Database))
+#6 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\CLI\Commands.php(65): CodeIgniter\Commands\Database\Seed->run(Array)
+#7 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\CLI\BaseCommand.php(114): CodeIgniter\CLI\Commands->run('db:seed', Array)
+#8 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\app\Commands\Setup.php(92): CodeIgniter\CLI\BaseCommand->call('db:seed', Array)
+#9 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\CLI\Commands.php(65): App\Commands\Setup->run(Array)
+#10 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\CLI\Console.php(37): CodeIgniter\CLI\Commands->run('setup', Array)
+#11 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\spark(97): CodeIgniter\CLI\Console->run()
+#12 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it in C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:218
+Stack trace:
+#0 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Database\Database.php(67): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Database\Config.php(109): CodeIgniter\Database\Database->loadForge(Object(CodeIgniter\Database\MySQLi\Connection))
+#3 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Database\Seeder.php(97): CodeIgniter\Database\Config::forge(NULL)
+#4 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\Commands\Database\Seed.php(69): CodeIgniter\Database\Seeder->__construct(Object(Config\Database))
+#5 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\CLI\Commands.php(65): CodeIgniter\Commands\Database\Seed->run(Array)
+#6 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\CLI\BaseCommand.php(114): CodeIgniter\CLI\Commands->run('db:seed', Array)
+#7 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\app\Commands\Setup.php(92): CodeIgniter\CLI\BaseCommand->call('db:seed', Array)
+#8 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\CLI\Commands.php(65): App\Commands\Setup->run(Array)
+#9 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\vendor\codeigniter4\framework\system\CLI\Console.php(37): CodeIgniter\CLI\Commands->run('setup', Array)
+#10 C:\xampp\htdocs\cricket-nova-scotia-ci4\cricket-nova-scotia\spark(97): CodeIgniter\CLI\Console->run()
+#11 {main}
+CRITICAL - 2023-04-05 15:38:30 --> Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it
+in SYSTEMPATH\Database\BaseConnection.php on line 427.
+ 1 SYSTEMPATH\Database\Database.php(67): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\Config.php(109): CodeIgniter\Database\Database->loadForge(Object(CodeIgniter\Database\MySQLi\Connection))
+ 3 SYSTEMPATH\Database\Seeder.php(97): CodeIgniter\Database\Config::forge(null)
+ 4 SYSTEMPATH\Commands\Database\Seed.php(69): CodeIgniter\Database\Seeder->__construct(Object(Config\Database))
+ 5 SYSTEMPATH\CLI\Commands.php(65): CodeIgniter\Commands\Database\Seed->run([...])
+ 6 SYSTEMPATH\CLI\BaseCommand.php(114): CodeIgniter\CLI\Commands->run('db:seed', [...])
+ 7 APPPATH\Commands\Setup.php(92): CodeIgniter\CLI\BaseCommand->call('db:seed', [...])
+ 8 SYSTEMPATH\CLI\Commands.php(65): App\Commands\Setup->run([])
+ 9 SYSTEMPATH\CLI\Console.php(37): CodeIgniter\CLI\Commands->run('setup', [])
+10 ROOTPATH\spark(97): CodeIgniter\CLI\Console->run()
+INFO - 2023-04-05 15:43:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-05 15:43:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-05 15:59:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-05 15:59:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-05 15:59:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-05 15:59:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-05 15:59:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-05 15:59:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-05 16:00:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-05 16:00:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-05 16:00:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-05 16:00:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-05 16:01:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-05 16:01:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-05 16:01:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-04-05 16:01:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
