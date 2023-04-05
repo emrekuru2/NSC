@@ -18,19 +18,23 @@ class ContactController extends BaseController
         $data = $this->request->getPost();
 
         $name = $data['name'];
-        $from1 = $data['email'];
+        $sentFrom = $data['email'];
         $subject = $data['subject'];
         $message = $data['message'];
         // set email
         $email = \Config\Services::email();
-        $email->setFrom("$from1");
-        $email->setTo("connormacintyre14@gmail.com");
-        $email->setSubject("$subject");
-        $FullMessage = "Received from: ".$name."\n\n Message: \n\n".$message;
-        $email->setMessage("$FullMessage");
+        $email->setFrom($sentFrom, $name);
+        $email->setTo('testadmin@cricketnovascotia.ca');
+        $email->setSubject($subject);
+        $email->setMessage($message);
+
 
         $email->send();
-        return redirect()->back();
+            $data = [
+                'type'    => 'success',
+                'content' => 'Email sent successfully'
+            ];
+        return redirect()->back()->with('alert', $data);
     }
 
 }
