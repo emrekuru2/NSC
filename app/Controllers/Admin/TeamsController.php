@@ -258,7 +258,7 @@ class TeamsController extends BaseController
                 }
             }
 
-            if ($numMembers > 0 && $addSuccess === $numMembers) {
+            if ($numMembers > 0 && $addSuccess == $numMembers) {
                 return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Members added successfully!']);
             }
             if ($addSuccess > 0) {
