@@ -31,7 +31,7 @@
 
 ## Setup for development environment
 
-> The main (default) branch of the project has been renamed to CI4. For development purposes, please clone this branch as it has the latest code.
+> The main (default) branch of the project is called **CI4**. For development purposes, please clone this branch as it has the latest code.
 
 > Make sure you have **composer** installed. It should come pre-installed with xampp, mamp. Run below command to check if it's installed.
 ```sh
@@ -41,13 +41,12 @@ composer -v
 > `CD` to you project folder and run below command to install required dependencies. :exclamation: Make sure your local web server **(apache or nginx)** is pointing to the **public** folder inside the project folder. If you are using XAMPP, you may do so by editing the php.ini file and changing the DocumentRoot and the subsequent Directory properties as such:
     DocumentRoot "C:/xampp/htdocs/cricket-nova-scotia-ci4/cricket-nova-scotia/public"
     <Directory "C:/xampp/htdocs/cricket-nova-scotia-ci4/cricket-nova-scotia/public">
-Please note that the above lines are just an example. The actual directories may be different for your machine.
+Please note these are just examples. The actual directory paths may be different for your machine.
 
 > Next, enable the php intl extension in your php.ini file. Then install the composer dependencies using the following command.
 ```sh
 composer install
 ```
-Note: It might give a "composer.json file not found" error. If that happens, make sure that you copy the composer.json file provided in the project to the directory of your composer install.
 
 > To setup the project for development type the script below and follow the prompt according to your local machine environment. If you are using for development purposes, type development into the first prompt. For the database name prompt, create an empty schema of the same name that you are going to type in the prompt.
 ```sh
