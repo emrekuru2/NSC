@@ -5,6 +5,7 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use App\Entities\UserTypes\ClubUser;
 use App\Models\ClubModel;
+use App\Models\RoleModel;
 use App\Models\TeamModel;
 use App\Models\UserModel;
 use App\Models\UserTypes\ClubUserModel;
@@ -41,11 +42,13 @@ class UsersController extends BaseController
                 $user->club = 'none';
             }
 
-            // get the role of the user
-            $roleModel = model(GroupModel::class)->where('');
-            $roleModel = model(PermissionModel::class);
-            $user->setRole($roleModel->getForUser($user)[0]);
-
+            // get users role
+            $role = model(RoleModel::class)->where('user_id', $user->id)->first();
+            if ($role != null){
+                $user->role = $role->permission;
+            } else {
+                $user->role = 'none';
+            }
         }
 
         $data = [

@@ -34,7 +34,11 @@
                         <?php else: ?>
                             <td class="text-danger font-weight-bold">Not in a club</td>
                         <?php endif ?>
-                        <td><?= esc($user->role) ?></td>
+                        <?php if($user->role != 'none'):?>
+                            <td><?= esc($user->role) ?></td>
+                        <?php else: ?>
+                            <td class="text-danger font-weight-bold">No assigned role</td>
+                        <?php endif ?>
                         <td><a href="users/edit/<?= esc($user->id) ?>">Edit</a></td>
                     </tr>
                 <?php endforeach ?>
