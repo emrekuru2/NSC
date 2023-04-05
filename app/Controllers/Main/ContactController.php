@@ -23,7 +23,7 @@ class ContactController extends BaseController
         $message = $data['message'];
         // set email
         $email = \Config\Services::email();
-        $email->setFrom($from1);
+        $email->setFrom($from1, $name);
         $email->setTo('connormacintyre14@gmail.com');
         $email->setSubject($subject);
         $email->setMessage($message);
