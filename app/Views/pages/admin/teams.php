@@ -14,6 +14,10 @@
             </div>
 
             <div class="modal-body">
+                <p class="text-start">
+                    Select members to add to the <b><?= $team->name ?? '' ?></b> team.
+                </p>
+
                 <table class="table table-hover" id="add-member-table">
                     <thead>
                         <tr>
@@ -42,7 +46,7 @@
                                         </select>
                                     </td>
                                     <td class="col-1">
-                                        <input type="checkbox" class="form-check-input shadow" value="<?= $user->id ?? 'none' ?>" name="add-member-check">
+                                        <input type="checkbox" class="form-check-input shadow check-margin" value="<?= $user->id ?? 'none' ?>" name="add-member-check">
                                     </td>
                                 </tr>
                         <?php endforeach;
@@ -72,7 +76,7 @@
 
             <div class="modal-body">
                 <?php if ($teamIsSet) { ?>
-                    <label class="margin-bottom-half-rem" id="remove-member-message">Are you sure you want to remove NAME from the <?= $team->name ?> team?</label>
+                    <label class="margin-bottom-half-rem" id="remove-member-message"><?= $team->name ?></label>
                 <?php } else { ?>
                     <label class="margin-bottom-half-rem" id="remove-member-message">Select a member to remove.</label>
                 <?php } ?>
@@ -99,7 +103,7 @@
 
             <div class="modal-body">
                 <?php if ($teamIsSet) : ?>
-                    <label class="margin-bottom-half-rem" for="deleteTeamID">Are you sure you want to delete the <?= $team->name ?> team?</label>
+                    <label class="margin-bottom-half-rem" for="deleteTeamID">Are you sure you want to delete the <b><?= $team->name ?></b> team?</label>
                 <?php else : ?>
                     <label class="margin-bottom-half-rem" for="deleteTeamID">Select a team to delete.</label>
                 <?php endif ?>
@@ -257,7 +261,7 @@
                                         </td>
                                         <td class="col-2"></td>
                                         <td class="col-1">
-                                            <button type="button" name="remove-member-button" data-user="<?= $member->id ?>" data-name="<?= $member->first_name . ' ' . $member->last_name ?>" data-bs-toggle="modal" data-bs-target="#removeMemberModal" class="btn btn-danger btn-sm">Remove</button>
+                                            <button type="button" name="remove-member-button" data-user="<?= $member->id ?>" data-name="<?= $member->first_name . '|' . $member->last_name ?>" data-bs-toggle="modal" data-bs-target="#removeMemberModal" class="btn btn-danger btn-sm">Remove</button>
                                         </td>
                                     </tr>
                                 <?php endforeach;
