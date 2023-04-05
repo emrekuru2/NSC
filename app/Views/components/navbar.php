@@ -19,6 +19,7 @@
                 <li class="nav-item">
                     <a class="nav-link <?= ($title === 'Development') ? 'active' : '' ?>" href="/development"><i class="fa-solid fa-book me-2"></i>Development Programs</a>
                 </li>
+
             </ul>
             <hr class="text-light">
             <ul class="navbar-nav">

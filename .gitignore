@@ -135,3 +135,7 @@ public/assets/images/*
 
 # Docker
 docker/db_data
+
+# Php Fixer
+
+.php-cs-fixer.cache

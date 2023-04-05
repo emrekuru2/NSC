@@ -32,7 +32,7 @@
                         <i class="fa-solid fa-phone"></i>
                         <a href="tel:<?=$club->phone?>">: <?=$club->phone?></a>
                     </div>
-                    <?php if($club->facebook !== null) {;
+                    <?php if($club->facebook !== null) {
                     }?>
                     <div class="info-container">
                         <i class="fa-brands fa-facebook"></i>
