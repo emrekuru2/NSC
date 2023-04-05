@@ -1,21 +1,29 @@
 // Variables
+// Removing Members
 const removeMemberButtons = document.getElementsByName('remove-member-button')
 const removeMemberHiddenInput = document.getElementById('remove-member-id')
 const removeMemberMessage = document.getElementById('remove-member-message')
 
+// Adding Members
 const addMembersForm = document.getElementById('addMemberModal')
 const addMembersButton = document.getElementById('add-member-button')
 const addMemberTable = document.getElementById('add-member-list')
 const addMemberChecks = document.getElementsByName('add-member-check')
 const addMemberRoles = document.getElementsByName('add-member-role')
 
+// Updating Team
 const updateForm = document.getElementById('update-form')
 const updateButton = document.getElementById('update-button')
 const teamMemberTableBody = document.getElementById('team-member-list')
 const teamMemberRoles = document.getElementsByName('role')
-
 let teamMembersChanged = false
 
+// Edit/View Mode
+const editButton = document.getElementById('edit-team-button')
+const cancelEditButton = document.getElementById('cancel-edit-team-button')
+const editTeamCard = document.getElementById('edit-team-card')
+const viewTeamCard = document.getElementById('view-team-card')
+let editMode = false
 
 // Listeners
 removeMemberButtons.forEach( (buttonElement) => {
@@ -46,6 +54,9 @@ teamMemberRoles.forEach( (roleSelect) => {
     })
 })
 
+editButton.addEventListener('click', toggleEditMode)
+
+cancelEditButton.addEventListener('click', toggleEditMode)
 
 // Functions
 function getMemberRolesJSON() {
@@ -130,6 +141,18 @@ function updateAddMembersList() {
     }
 }
 
+function toggleEditMode() {
+    if (editMode) {
+        editTeamCard.hidden = true
+        viewTeamCard.hidden = false
+        editMode = false
+    } else {
+        editTeamCard.hidden = false
+        viewTeamCard.hidden = true
+        editMode = true
+    }
+}
 
 // Executions
 updateAddMembersList()
+editTeamCard.hidden = true
