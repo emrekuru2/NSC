@@ -40,7 +40,11 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <p id="modal-email"></p>
+                            <p id="modal-description"></p>
+                            <a id="modal-email" href=""></a>
+                            <a id="modal-site" href=""></a>
+                            <p id="modal-phone"></p>
+                            <a id="modal-fb" href=""></a>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -61,22 +65,23 @@
             let clubInfoButtons = document.getElementsByName('club-button');
             let clubJsons = document.getElementsByName('club-json');
 
-            console.log(clubInfoButtons)
-            //issue with parsing
-            //console.log(clubJsons[0].value)
-            //let json = JSON.parse(clubJsons[0].value);
-            //console.log(json.cName)
-
             for (let i = 0; i < clubInfoButtons.length; i++) {
+                //adds click event listener to club bottons
                 clubInfoButtons[i].addEventListener('click', runModal.bind(this, i));
             }
 
             function runModal(j) {
                 let json = JSON.parse(clubJsons[j].value);
-                console.log(json.cName)
-                //innertext getting overwritten with each loop?
+                //inserts data into tags in the modal
                 document.getElementById('modal-header').innerText = json.cName
+                document.getElementById('modal-description').innerText = json.description
                 document.getElementById('modal-email').innerText = json.email
+                document.getElementById('modal-email').href = "mailto: " + json.email
+                document.getElementById('modal-site').innerText = json.website
+                document.getElementById('modal-site').href = json.website
+                document.getElementById('modal-phone').innerText = json.phone
+                document.getElementById('modal-fb').innerText = json.facebook
+                document.getElementById('modal-fb').href = json.facebook
             }
         </script>
 
