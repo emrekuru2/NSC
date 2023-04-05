@@ -24,12 +24,17 @@ class ContactController extends BaseController
         // set email
         $email = \Config\Services::email();
         $email->setFrom($sentFrom, $name);
-        $email->setTo('connormacintyre14@gmail.com');
+        $email->setTo('testadmin@cricketnovascotia.ca');
         $email->setSubject($subject);
         $email->setMessage($message);
 
+
         $email->send();
-        return redirect()->back();
+            $data = [
+                'type'    => 'success',
+                'content' => 'Email sent successfully'
+            ];
+        return redirect()->back()->with('alert', $data);
     }
 
 }
