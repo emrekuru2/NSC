@@ -30,8 +30,8 @@ class TeamsController extends BaseController
         $data = [
             'title'       => 'Teams',
             'team'        => $team,
-            'teamMembers' => $team !== null ? $userModel->getTeamUsersByTeamId($team->id) : null,
-            'teamClub'    => $team !== null ? $clubModel->select()->where('id', $team->clubID)->first() : null,
+            'teamMembers' => $team != null ? $userModel->getTeamUsersByTeamId($team->id) : null,
+            'teamClub'    => $team != null && $team->clubID != null ? $clubModel->select()->where('id', $team->clubID)->first() : null,
             'allTeams'    => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
             'allClubs'    => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll(),
             'allUsers'    => $userModel->select()->orderBy('nsca_users.last_name', 'ASC')->findAll(),

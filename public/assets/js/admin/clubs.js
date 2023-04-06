@@ -1,29 +1,39 @@
 // Variables
+// Removing Members
 const removeMemberButtons = document.getElementsByName('remove-member-button')
 const removeMemberHiddenInput = document.getElementById('remove-member-name')
 const removeMemberMessage = document.getElementById('remove-member-message')
 
+// Removing Teams
 const removeTeamButtons = document.getElementsByName('remove-team-button')
 const removeTeamHiddenInput = document.getElementById('remove-team-name')
 const removeTeamMessage = document.getElementById('remove-team-message')
 
+// Adding Members
 const addMembersForm = document.getElementById('addMemberModal')
 const addMembersButton = document.getElementById('add-member-button')
 const addMembersTable = document.getElementById('add-member-list')
 const addMembersChecks = document.getElementsByName('add-member-check')
 const addMemberRoles = document.getElementsByName('add-member-role')
 
+// Adding Teams
 const addTeamsForm = document.getElementById('addTeamToClubModal')
 const addTeamsChecks = document.getElementsByName('add-teams-check')
 const addTeamsButton = document.getElementById('add-teams-button')
 
+// Updating Team
 const updateForm = document.getElementById('update-form')
 const updateButton = document.getElementById('update-button')
 const clubMemberTableBody = document.getElementById('club-member-list')
 const clubMemberRoles = document.getElementsByName('role')
-
 let clubMembersChanged = false
 
+// Edit/View Mode
+const editButton = document.getElementById('edit-club-button')
+const cancelEditButton = document.getElementById('cancel-edit-club-button')
+const editTeamCard = document.getElementById('edit-club-card')
+const viewTeamCard = document.getElementById('view-club-card')
+let editMode = false
 
 // Listeners
 removeMemberButtons.forEach( (buttonElement) => {
@@ -74,6 +84,9 @@ addTeamsButton.addEventListener('click', () => {
     addTeamsForm.submit()
 })
 
+editButton.addEventListener('click', toggleEditMode)
+
+cancelEditButton.addEventListener('click', toggleEditMode)
 
 // Functions
 function getClubMemberRolesJSON() {
@@ -151,6 +164,18 @@ function updateAddMembersList() {
     }
 }
 
+function toggleEditMode() {
+    if (editMode) {
+        editTeamCard.hidden = true
+        viewTeamCard.hidden = false
+        editMode = false
+    } else {
+        editTeamCard.hidden = false
+        viewTeamCard.hidden = true
+        editMode = true
+    }
+}
 
 // Executions
 updateAddMembersList()
+editTeamCard.hidden = true
