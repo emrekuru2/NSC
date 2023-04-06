@@ -21,7 +21,7 @@ class ProdSeeder extends Seeder
                 'country'    => 'Canada',
                 'postal'     => 'B3H4R2',
                 'active'     => 1,
-            ]
+            ],
 
         ];
 
@@ -38,16 +38,16 @@ class ProdSeeder extends Seeder
                 'extra'        => null,
                 'force_reset'  => 0,
                 'last_used_at' => null,
-            ]
+            ],
         ];
 
         $this->db->table('auth_identities')->insertBatch($auth_identities);
 
         $auth_groups = [
             [
-                'user_id'    => 1,
-                'group'      => 'admin',
-            ]
+                'user_id' => 1,
+                'group'   => 'admin',
+            ],
 
         ];
 
@@ -57,10 +57,9 @@ class ProdSeeder extends Seeder
             [
                 'user_id'    => 1,
                 'permission' => 'admin',
-            ]
+            ],
         ];
 
         $this->db->table('auth_permissions_users')->insertBatch($auth_premissions);
-    
     }
 }

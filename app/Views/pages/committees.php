@@ -7,12 +7,11 @@
 
         <!-- Section: Block Content -->
         <section class="dark-grey-text text-center">
-
-            <h1 class="display-3 text-center font-weight-bold">Committees</h3>
+            <h1 class="display-3 text-center font-weight-bold">Committees</h1>
 
             <!-- Grid row -->
             <div class="row">
-                <?php if (!empty($committees) && is_array($committees)) : ?>
+                <?php if (! empty($committees) && is_array($committees)) : ?>
                     <?php foreach ($committees as $committee) : ?>
                         <!-- Grid column -->
                         <div class="col-md-6 mb-4">
@@ -32,7 +31,7 @@
                         <!-- Grid column -->
                     <?php endforeach; ?>
                 <?php endif; ?>
-        
+
 
             </div>
 

@@ -11,23 +11,23 @@ class Locations extends Migration
     {
         // Location Table
         $this->forge->addField([
-            'id'            => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
-            'name'          => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
-            'address'       => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
-            'description'   => ['type' => 'varchar', 'constraint' => 512, 'null' => 0, 'default' => 0],
-            'created_at'    => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
-            'updated_at'    => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
+            'id'          => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+            'name'        => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
+            'address'     => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
+            'description' => ['type' => 'varchar', 'constraint' => 512, 'null' => 0, 'default' => 0],
+            'created_at'  => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
+            'updated_at'  => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->createTable('nsca_locations');
 
         // Location User Table
         $this->forge->addField([
-            'id'            => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
-            'locationID'    => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
-            'userID'        => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
-            'created_at'    => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
-            'updated_at'    => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
+            'id'         => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+            'locationID' => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
+            'userID'     => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
+            'created_at' => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
+            'updated_at' => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->addKey(['locationID', 'userID']);
@@ -42,7 +42,7 @@ class Locations extends Migration
 
         $this->forge->dropTable('nsca_locations', true);
         $this->forge->dropTable('nsca_location_users', true);
-      
+
         $this->db->enableForeignKeyChecks();
     }
 }

@@ -11,7 +11,7 @@
                 <div class="card-header">News details</div>
                 <div class="card-body">
                     <div class="text-center">
-                        <img src="/assets/images/Users/defaultUser.png" alt="profile" width="100px" height="100px" class="bg-dark rounded-circle mb-2">
+                        <img src="<?= esc($news->image) ?>" alt="profile" width="100px" height="100px" class="bg-dark rounded-circle mb-2">
                         <h5><?= esc($news->first_name) . ' ' . esc($news->last_name) ?></h5>
                     </div>
                     <hr>
@@ -29,10 +29,10 @@
                         <?= view_cell(
                             '\App\Libraries\Contents::comment',
                             [
-                                'id'     => esc($comment->id),
-                                'img'    => 'none',
-                                'user'   => esc($comment->first_name) . ' ' . esc($comment->last_name),
-                                'content' => esc($comment->comment)
+                                'id'      => esc($comment->id),
+                                'img'     => esc($comment->image),
+                                'user'    => esc($comment->first_name) . ' ' . esc($comment->last_name),
+                                'content' => esc($comment->comment),
                             ]
                         )
                         ?>

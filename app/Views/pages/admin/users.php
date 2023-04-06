@@ -5,6 +5,8 @@
 <div class="card shadow">
     <div class="card-header">Users</div>
     <div class="card-body">
+        <?= view_cell('\App\Libraries\Contents::search', ['route' => 'users/edit', 'name' => 'User', 'array' => $users, 'fields' => ['first_name', 'last_name'], 'useName' => true, 'useDivider' => true]); ?>
+
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -20,9 +22,23 @@
                     <tr>
                         <td><?= esc($user->first_name) ?></td>
                         <td><?= esc($user->last_name) ?></td>
-                        <td><?= esc($user->team) ?></td>
-                        <td><?= esc($user->club) ?></td>
-                        <td><?= esc($user->role) ?></td>
+                        <!-- if no team show not in team in red
+                        if in team show team name in green -->
+                        <?php if($user->team != 'none'):?>
+                            <td><?= esc($user->team) ?></td>
+                        <?php else: ?>
+                            <td class="text-danger font-weight-bold">Not in a team</td>
+                        <?php endif ?>
+                        <?php if($user->club != 'none'):?>
+                            <td><?= esc($user->club) ?></td>
+                        <?php else: ?>
+                            <td class="text-danger font-weight-bold">Not in a club</td>
+                        <?php endif ?>
+                        <?php if($user->role != 'none'):?>
+                            <td><?= esc($user->role) ?></td>
+                        <?php else: ?>
+                            <td class="text-danger font-weight-bold">No assigned role</td>
+                        <?php endif ?>
                         <td><a href="users/edit/<?= esc($user->id) ?>">Edit</a></td>
                     </tr>
                 <?php endforeach ?>

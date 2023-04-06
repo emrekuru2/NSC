@@ -7,15 +7,15 @@ use CodeIgniter\Model;
 class UserEmailModel extends Model
 {
     // Construction
-    protected $table            = 'nsca_users';
-    protected $primaryKey       = 'id';
-    protected $returnType       = \App\Entities\User::class;
-    protected $protectFields    = true;
-    protected $allowedFields    = [
+    protected $table         = 'nsca_users';
+    protected $primaryKey    = 'id';
+    protected $returnType    = \App\Entities\User::class;
+    protected $protectFields = true;
+    protected $allowedFields = [
         'id',
         'email',
         'first_name',
-        'last_name'
+        'last_name',
     ];
 
     // Dates
@@ -100,4 +100,11 @@ class UserEmailModel extends Model
             ->findAll();
     }
 
+    public function getUsersNotInTeam(): array
+    {
+        return $this->select()
+            ->join('nsca_team_users', 'nsca_team_users.userID = nsca_users.id', 'cross')
+            ->where('nsca_team_users.teamID')
+            ->findAll();
+    }
 }

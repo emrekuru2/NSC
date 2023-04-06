@@ -8,12 +8,11 @@
         <!-- Section: Block Content -->
         <section class="dark-grey-text text-center">
 
-            <h1 class="display-3 text-center font-weight-bold">Teams</h3>
-            <br>
+            <h1 class="display-3 text-center font-weight-bold">Teams</h1>
 
             <!-- Grid row -->
             <div class="row">
-                <?php if (!empty($teams) && is_array($teams)) : ?>
+                <?php if (! empty($teams) && is_array($teams)) : ?>
                     <?php foreach ($teams as $team) : ?>
                         <!-- Grid column -->
                         <div class="col-lg-4 mb-5">
@@ -24,12 +23,12 @@
                                     <h2 class="lead fw-normal text-muted mb-0"><?=$team->description?></h2>
                                 </div>
                             </div>
+
                         </div>
-                        
                         <!-- Grid column -->
                     <?php endforeach; ?>
                 <?php endif; ?>
-        
+
 
             </div>
 

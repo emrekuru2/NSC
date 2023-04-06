@@ -7,11 +7,11 @@ use CodeIgniter\Model;
 class TeamUserModel extends Model
 {
     // Construction
-    protected $table            = 'nsca_team_users';
-    protected $primaryKey       = 'id';
-    protected $returnType       = \App\Entities\UserTypes\TeamUser::class;
-    protected $protectFields    = true;
-    protected $allowedFields    = ['userID', 'teamID', 'isClubManager', 'isTeamCaptain', 'isViceCaptain'];
+    protected $table         = 'nsca_team_users';
+    protected $primaryKey    = 'id';
+    protected $returnType    = \App\Entities\UserTypes\TeamUser::class;
+    protected $protectFields = true;
+    protected $allowedFields = ['userID', 'teamID', 'isTeamCaptain', 'isViceCaptain'];
 
     // Dates
     protected $useTimestamps = true;
@@ -20,7 +20,8 @@ class TeamUserModel extends Model
     protected $updatedField  = 'updated_at';
 
     // Functions
-    public function deleteTeamUsers(int $teamID) {
+    public function deleteTeamUsers(int $teamID)
+    {
         $this->where('teamID', $teamID)->delete();
     }
 }

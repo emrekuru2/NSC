@@ -2,12 +2,10 @@
 
 namespace App\Database\Seeds;
 
-use CodeIgniter\I18n\Time;
 use CodeIgniter\Database\Seeder;
 
 class MainSeeder extends Seeder
 {
-
     public function run()
     {
         $this->call('AuthSeeder');          // Authentication Seeder

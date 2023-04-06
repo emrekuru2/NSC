@@ -3,12 +3,12 @@
 <?= $this->section('adminContent') ?>
 
 <div class="row">
-    <div class="col-12 col-lg-4">
+    <div class="col-12 col-lg-5">
         <div class="card shadow">
             <div class="card-header">User Details</div>
             <div class="card-body d-flex flex-column align-items-center">
-                <img class="border" src="<?= esc($user->image) ?>" style="height: 150px; width: 150px;">
-                <h4 class="mt-3"> <?= esc($user->first_name) . " " . esc($user->last_name) ?></h4>
+                <img class="border user-image" src="<?= base_url(esc($user->image)) ?>">
+                <h4 class="mt-3"> <?= esc($user->first_name) . ' ' . esc($user->last_name) ?></h4>
                 <hr class="w-100">
                 <ul class="list-group w-100">
                     <li class="list-group-item"><b>Email:</b> <?= esc($user->email) ?></li>
@@ -22,7 +22,7 @@
             </div>
         </div>
     </div>
-    <div class="col-12 col-lg-8">
+    <div class="col-12 col-lg-7">
         <div class="row gx-3 mb-3">
             <div class="col-12">
                 <h3>Current status</h3>
@@ -43,7 +43,7 @@
             <div class="col-12">
                 <h3>Edit status</h3>
                 <hr>
-                <form method="post" action="<?= base_url("admin/editUser/{$user->id}")?>">
+                <form method="post" action="<?= base_url("admin/editUser/{$user->id}") ?>">
                     <div class="input-group mb-3">
                         <span class="input-group-text w-25" id="roles">User Role</span>
                         <select class="form-select" aria-label="roles" name="role">
