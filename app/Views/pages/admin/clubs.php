@@ -274,10 +274,171 @@
 </form>
 
 <div class="row">
-    <!-- Edit Club -->
-    <div class="col-lg-7">
+    <!-- View Club -->
+    <div class="col-sm-7" id="view-club-card">
         <div class="card shadow">
-            <div class="card-header">Edit Club</div>
+            <div class="card-header">
+                <div class="d-md-flex justify-content-md-end group-list-header">
+                    <div class="line-height-2rem">Club Info</div>
+                    <button type="button" id="edit-club-button" class="btn btn-primary btn-sm" <?= $clubIsSet ? '' : ' disabled' ?>><i class="fa-solid fa-pen-to-square"></i> Edit Club</button>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <!-- Logo and Name -->
+                <img src="<?= $clubIsSet ? base_url($club->image) : base_url('assets/images/Clubs/default.png') ?>" class="card-img-top mb-3 mx-auto d-block" style="width: 150px; height: 150px" alt="Team Logo">
+                <h4 class="card-title text-bold text-center"><?= $club->name ?? 'Select Club' ?></h4>
+
+                <br>
+                <hr class="divider">
+
+                <!-- View Description -->
+                <div class="form-group margin-bottom-1rem">
+                    <div class="mb-3 row">
+                        <label class="col-2 col-form-label" for="viewClubDescription">Description</label>
+                        <div class="col-10">
+                            <textarea class="form-control" id="viewClubDescription" rows="3" aria-label="readonly input" readonly><?= $clubIsSet ? $club->description : '' ?></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- View Email -->
+                <div class="form-group margin-bottom-1rem">
+                    <div class="mb-3 row">
+                        <label class="col-2 col-form-label" for="viewClubEmail">Email</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" id="viewClubEmail" value="<?= $clubIsSet ? $club->email : '' ?>" aria-label="readonly input" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- View Phone -->
+                <div class="form-group margin-bottom-1rem">
+                    <div class="mb-3 row">
+                        <label class="col-2 col-form-label" for="viewClubPhone">Phone</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" id="viewClubPhone" value="<?= $clubIsSet ? $club->phone : '' ?>" aria-label="readonly input" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- View Website -->
+                <div class="form-group margin-bottom-1rem">
+                    <div class="mb-3 row">
+                        <label class="col-2 col-form-label" for="viewClubWebsite">Website</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" id="viewClubWebsite" value="<?= $clubIsSet ? $club->website : '' ?>" aria-label="readonly input" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- View Facebook -->
+                <div class="form-group margin-bottom-1rem">
+                    <div class="mb-3 row">
+                        <label class="col-2 col-form-label" for="viewClubFacebook">Facebook</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" id="viewClubFacebook" value="<?= $clubIsSet ? $club->facebook : '' ?>" aria-label="readonly input" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- View Club Teams -->
+                <div class="form-group margin-bottom-1rem">
+                    <div class="mb-3 row">
+                        <label class="col-2 col-form-label" for="viewClubTeams">Club Teams</label>
+                        <div class="col-10">
+
+                            <div class="border-round">
+                                <table class="table<?= $clubIsSet && ! empty($clubTeams) ? ' table-hover' : '' ?> margin-bottom-half-rem">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Name</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <?php if (! $clubIsSet) { ?>
+                                            <tr>
+                                                <td class="col-12 view-table-data"><br></td>
+                                            </tr>
+                                        <?php } elseif (empty($clubTeams)) { ?>
+                                            <tr>
+                                                <td class="col-12 view-table-data">No teams</td>
+                                            </tr>
+                                        <?php } else { foreach ($clubTeams as $team) : ?>
+                                            <tr>
+                                                <td class="col-12 view-table-data">
+                                                    <a class="club-link" href="clubs?name=<?= str_replace(' ', '+', $team->name) ?>"><?= $team->name ?></a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- View Club Members -->
+                <div class="form-group margin-bottom-1rem">
+                    <div class="mb-3 row">
+                        <label class="col-2 col-form-label" for="viewClubTeams">Club Members</label>
+                        <div class="col-10">
+
+                            <div class="border-round">
+                                <table class="table<?= $clubIsSet && ! empty($clubMembers) ? ' table-hover' : '' ?> margin-bottom-half-rem">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Role</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <?php if (! $clubIsSet) { ?>
+                                        <tr>
+                                            <td class="col-9 view-table-data"><br></td>
+                                            <td class="col-3 view-table-data"><br></td>
+                                        </tr>
+                                    <?php } elseif (empty($clubMembers)) { ?>
+                                        <tr>
+                                            <td class="col-9 view-table-data">No members</td>
+                                            <td class="col-3 view-table-data"></td>
+                                        </tr>
+                                    <?php } else { foreach ($clubMembers as $member) : ?>
+                                        <tr>
+                                            <td class="col-9 view-table-data"><?= $member->first_name . ' ' . $member->last_name ?></td>
+                                            <td class="col-3 view-table-data">
+                                                <?php if ($member->isManager == 1) {
+                                                    echo 'Manager';
+                                                } else {
+                                                    echo 'Player';
+                                                }  ?>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Club -->
+    <div class="col-lg-7" id="edit-club-card">
+        <div class="card shadow">
+            <div class="card-header">
+                <div class="d-md-flex justify-content-md-end group-list-header">
+                    <div class="line-height-2rem">Edit Club</div>
+                    <button type="button" id="cancel-edit-club-button" class="btn btn-primary btn-sm" <?= $clubIsSet ? '' : ' disabled' ?>><i class="fa-solid fa-xmark"></i> Cancel Edit</button>
+                </div>
+            </div>
 
             <form class="card-body" method="post" action="updateClub" enctype="multipart/form-data" id="update-form">
                 <!-- Logo and Name -->
