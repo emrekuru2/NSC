@@ -1,0 +1,7 @@
+
+workflow:
+  name: '$PHP Lint'
+  
+
+before_script:
+  - DEBIAN_FRONTEND=noninteractive apt-get update -yqq
