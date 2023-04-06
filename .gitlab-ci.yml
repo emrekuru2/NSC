@@ -1,14 +1,10 @@
-stages:
-  - lint
+before_script:
+  - DEBIAN_FRONTEND=noninteractive apt-get update -yqq
+  - DEBIAN_FRONTEND=noninteractive apt-get install -yqq php-cli
+  - DEBIAN_FRONTEND=noninteractive
 
-php-lint:
-  stage: lint
-  image: php:latest
-  before_script:
-    - apt-get update -yqq
-    - apt-get install -yqq git zip unzip
-    - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-    - composer global require jakub-onderka/php-parallel-lint
-    - export PATH="$PATH:/root/.composer/vendor/bin"
+lint:
   script:
-    - parallel-lint --exclude vendor --no-colors .
+    - find . -name "*.php" -exec php -l {} \;
+  only:
+    - develop
