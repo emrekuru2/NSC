@@ -368,7 +368,7 @@
                                         <?php } else { foreach ($clubTeams as $team) : ?>
                                             <tr>
                                                 <td class="col-12 view-table-data">
-                                                    <a class="club-link" href="clubs?name=<?= str_replace(' ', '+', $team->name) ?>"><?= $team->name ?></a>
+                                                    <a class="club-link" href="teams?name=<?= str_replace(' ', '+', $team->name) ?>"><?= $team->name ?></a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; } ?>
@@ -615,19 +615,16 @@
                     <thead>
                         <tr>
                             <th scope="col" class="padding-top-0">Name</th>
-                            <th scope="col" class="padding-top-0"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?= (count($allClubs) === 0) ? '<p class="text-start margin-bottom-0">No clubs available.</p>' : null ?>
                         <?php foreach ($allClubs as $clubIndex) : ?>
                             <tr>
-                                <td class="col-11 line-height-2rem"><label for="name"><?= $clubIndex->name ?></label></td>
-                                <td class="col-1">
-                                    <form method="get" action="">
-                                        <input value="<?= $clubIndex->name ?>" name="name" id="name" hidden>
-                                        <button type="submit" class="btn btn-primary btn-sm">Edit</button>
-                                    </form>
+                                <td class="col-12 view-table-padding">
+                                    <a href="<?= '?name=' . str_replace(' ', '+', $clubIndex->name) ?>">
+                                        <label class="text-bold width-100 line-height-3rem" for="name"><?= $clubIndex->name ?></label>
+                                    </a>
                                 </td>
                             </tr>
                         <?php endforeach ?>
