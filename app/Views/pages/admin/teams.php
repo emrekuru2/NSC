@@ -131,7 +131,7 @@
                 <!-- Name -->
                 <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="newName">Name</label>
-                    <input type="text" class="form-control" name="newName" id="newName" required>
+                    <input type="text" class="form-control" name="newName" id="newName" placeholder="Team Name" required>
                 </div>
 
                 <!-- Club -->
@@ -148,7 +148,7 @@
                 <!-- Description -->
                 <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="newDescription">Description</label>
-                    <textarea class="form-control" name="newDescription" id="newDescription" rows="2" required></textarea>
+                    <textarea class="form-control" name="newDescription" id="newDescription" rows="2" placeholder="Maximum 512 characters" required></textarea>
                 </div>
 
                 <!-- Logo -->
@@ -193,7 +193,13 @@
                     <div class="mb-3 row">
                         <label class="col-2 col-form-label" for="viewTeamClub">Club</label>
                         <div class="col-10">
-                            <input class="form-control" type="text" id="viewTeamClub" value="<?= $teamIsSet ? $teamClub->name : '' ?>" aria-label="readonly input" readonly>
+                            <input class="form-control" type="text" id="viewTeamClub" value="<?php if ($teamIsSet && $teamClub != null) {
+                                echo $teamClub->name;
+                            } else if ($teamIsSet) {
+                                echo 'No Club';
+                            } else {
+                                echo '';
+                            } ?>" aria-label="readonly input" readonly<?= $teamIsSet ? '' : ' disabled' ?>>
                         </div>
                     </div>
                 </div>
@@ -203,7 +209,7 @@
                     <div class="mb-3 row">
                         <label class="col-2 col-form-label" for="viewTeamDescription">Description</label>
                         <div class="col-10">
-                            <textarea class="form-control" id="updateTeamDescription" rows="3" aria-label="readonly input" readonly><?= $teamIsSet ? $team->description : '' ?></textarea>
+                            <textarea class="form-control" id="updateTeamDescription" rows="3" aria-label="readonly input" readonly<?= $teamIsSet ? '' : ' disabled' ?>><?= $teamIsSet ? $team->description : '' ?></textarea>
                         </div>
                     </div>
                 </div>
@@ -232,7 +238,7 @@
                                         </tr>
                                     <?php } elseif (empty($teamMembers)) { ?>
                                         <tr>
-                                            <td class="col-9 view-table-data">No team members</td>
+                                            <td class="col-9 view-table-data">No members</td>
                                             <td class="col-3 view-table-data"></td>
                                         </tr>
                                     <?php } else {
@@ -291,13 +297,13 @@
                 <!-- Edit Name -->
                 <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="updateTeamName">Name</label>
-                    <input type="text" class="form-control" name="updateTeamName" id="updateTeamName" <?= $teamIsSet ? "value='" . $team->name . "'" : 'disabled' ?>>
+                    <input type="text" class="form-control" name="updateTeamName" id="updateTeamName"<?= $teamIsSet ? " placeholder='Team Name' value='" . $team->name . "'" : ' disabled' ?>>
                 </div>
 
                 <!-- Edit Club -->
                 <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="updateClubID">Club</label>
-                    <select class="form-control" name="updateClubID" id="updateClubID" aria-label="Club" <?= $teamIsSet ?: ' disabled' ?>>
+                    <select class="form-control" name="updateClubID" id="updateClubID"<?= $teamIsSet ? '' : ' disabled' ?>>
                         <?php if ($teamIsSet && ! empty($allClubs)) : ?>
                             <?php if ($team->clubID === null) : ?>
                                 <option value="none" selected>No Club</option>
@@ -319,7 +325,7 @@
                 <!-- Edit Description -->
                 <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="updateTeamDescription">Description</label>
-                    <textarea class="form-control" name="updateTeamDescription" id="updateTeamDescription" rows="3" <?= $teamIsSet ? '>' . $team->description : 'disabled>' ?></textarea>
+                    <textarea class="form-control" name="updateTeamDescription" id="updateTeamDescription" rows="3"<?= $teamIsSet ? ' placeholder="Maximum 512 characters">' . $team->description : ' disabled>' ?></textarea>
                 </div>
 
                 <!-- Edit Members -->
@@ -342,7 +348,7 @@
                             <tbody id="team-member-list" data-team-isset="<?= $teamIsSet ?>">
                                 <?php if (! $teamIsSet || empty($teamMembers)) { ?>
                                     <tr>
-                                        <td class="col-5 line-height-2rem">No team members</td>
+                                        <td class="col-5 line-height-2rem">No members</td>
                                         <td class="col-4 line-height-2rem"></td>
                                         <td class="col-2 line-height-2rem"></td>
                                         <td class="col-1 line-height-2rem"></td>
