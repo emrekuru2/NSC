@@ -367,8 +367,10 @@
                                             </tr>
                                         <?php } else { foreach ($clubTeams as $team) : ?>
                                             <tr>
-                                                <td class="col-12 view-table-data">
-                                                    <a class="club-link" href="teams?name=<?= str_replace(' ', '+', $team->name) ?>"><?= $team->name ?></a>
+                                                <td class="col-12 view-table-data view-table-padding">
+                                                    <a class="club-link" href="teams?name=<?= str_replace(' ', '+', $team->name) ?>">
+                                                        <label class="width-100 line-height-25rem pointer"><?= $team->name ?></label>
+                                                    </a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; } ?>
@@ -623,7 +625,7 @@
                             <tr>
                                 <td class="col-12 view-table-padding">
                                     <a href="<?= '?name=' . str_replace(' ', '+', $clubIndex->name) ?>">
-                                        <label class="text-bold width-100 line-height-3rem" for="name"><?= $clubIndex->name ?></label>
+                                        <label class="text-bold width-100 pointer line-height-3rem" for="name"><?= $clubIndex->name ?></label>
                                     </a>
                                 </td>
                             </tr>
