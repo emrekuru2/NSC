@@ -3,7 +3,7 @@
 <?= $this->section('adminContent') ?>
 <div class="col-lg-8">
     <div class="card shadow">
-        <div class="card-header">Create Competition Type:
+        <div class="card-header">Edit Competition:
             <button style="float:right;" type="button" class="btn btn-secondary btn-sm w-25" onclick="history.back();">Back</button>
         </div>
         <div class="card-body">

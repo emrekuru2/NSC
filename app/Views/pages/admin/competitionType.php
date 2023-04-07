@@ -67,7 +67,7 @@
                                 <?php if ($competitionType) : ?>
                                     <?php foreach ($competitionType as $row) : ?>
                                         <tr>
-                                            <td><?php echo $row['name'] ?></td>
+                                            <td><a href="<?= base_url('admin/CompetitionType/check/' . $row['id']) ?>"><?php echo $row['name'] ?></a></td>
                                             <td style=" display:flex;">
                                                 <a style="margin-right:10px;" href="<?= base_url('admin/CompetitionType/edit/' . $row['id']) ?>" class="btn btn-primary btn-sm">Edit</a>
                                                 <a href="<?= base_url('admin/CompetitionType/delete/' . $row['id']) ?>" class="btn btn-primary btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Competition Type?')">Delete</a>

@@ -60,7 +60,7 @@
                     <tbody class="table-group-divider">
                         <!-- THIS PART NEEDS TO BE DYNAMICALLY GENERATED -->
                         <?php if ($competition) : ?>
-                            <?php foreach ($competition as $row):
+                            <?php foreach ($competition as $row) :
                                 $id = $row->typeID;
                                 // Connecting to the database and querying the competition type name
                                 $conn = mysqli_connect("localhost", "root", "", "cricket");
@@ -69,7 +69,7 @@
                                 $competitionTypeName = $result1['name'];
                             ?>
                                 <tr>
-                                    <td><?php echo $row->name ?></td>
+                                    <td><a href="<?= base_url('admin/competitions/check/' . $row->id) ?>"><?php echo $row->name ?></a></td>
                                     <td><?php echo $competitionTypeName ?></td>
                                     <td><?php echo $row->yearRunning ?></td>
                                     <td style=" display:flex;">
@@ -86,7 +86,7 @@
     </div>
     <div class=" col-lg-8" style="width:50%">
         <div class="card h-100 shadow">
-            <div class="card-header">Competition details: </div>
+            <div class="card-header">Create Competition:</div>
             <div class="card-body text-center">
                 <form class="d-flex flex-column align-items-center" <?= base_url('add') ?> method="POST">
                     <div class="input-group mb-3">
