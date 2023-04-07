@@ -56,19 +56,7 @@ class CompetitionTypeController extends BaseController
         ];
         return view('pages/admin/competitionTypeCheck', $data);
     }
-
-    public function check($id = null)
-    {
-        $competitionType = new competitionTypeModel();
-
-        $data = [
-            'competitionType' => $competitionType->find($id),
-
-            'title' => 'Competitions Type'
-        ];
-        return view('pages/admin/competitionTypeCheck', $data);
-    }
-
+    
     public function update($id = null)
     {
         $competitionType = new competitionTypeModel();
