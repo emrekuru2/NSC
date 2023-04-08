@@ -18,20 +18,21 @@ class CompetitionsController extends BaseController
 
         return view('pages/admin/competitions', $data);
     }
-
-    public function store()
-    {
-        $competitionModel = new CompetitionModel();
-        $data             = [
-            'name'            => $this->request->getPost('name'),
-            'description'     => $this->request->getPost('description'),
-            'YearRunning'     => $this->request->getPost('yearRunning'),
-            'competitionType' => $this->request->getPost('competitionType'),
-
+    public function store(){
+        $competitionModel = model(CompetitionModel::class);
+        
+        $data = [
+            'typeID' => $this->request->getPost('competitionType'),
+            'name' => $this->request->getPost('name'),
+            'description' => $this->request->getPost('description'),
+            'yearRunning' => $this->request->getPost('yearRunning'),
         ];
 
-        $competitionModel->save($data);
-        header('Refresh:0');
+        $competition = new \App\Entities\Competition();
+        $competition->fill($data);
+
+        $competitionModel->save($competition);
+        header("Refresh:0");
 
         // return redirect('/admin/competitionType');
     }
@@ -65,11 +66,11 @@ class CompetitionsController extends BaseController
     public function update($id = null)
     {
         $competitionModel = new CompetitionModel();
-        $data             = [
-            'name'            => $this->request->getPost('name'),
-            'description'     => $this->request->getPost('description'),
-            'YearRunning'     => $this->request->getPost('yearRunning'),
-            'competitionType' => $this->request->getPost('competitionType'),
+        $data = [
+            'typeID' => $this->request->getPost('competitionType'),
+            'name' => $this->request->getPost('name'),
+            'description' => $this->request->getPost('description'),
+            'yearRunning' => $this->request->getPost('yearRunning'),
         ];
         $competitionModel->update($id, $data);
 
