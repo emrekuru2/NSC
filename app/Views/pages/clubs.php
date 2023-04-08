@@ -2,91 +2,101 @@
 
 <?= $this->section('mainContent') ?>
 
+<!-- Modal -->
+<div class="modal fade" id="clubsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modal-header"></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-1">
+                        <i class="fa-solid fa-newspaper" title="Description"></i>
+                    </div>
+                    <div class="col-11">
+                        <span id="modal-description"></span>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="row">
+                    <div class="col-1">
+                        <i class="fa-solid fa-envelope" title="Email"></i>
+                    </div>
+                    <div class="col-11">
+                        <a id="modal-email" href=""></a>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="row">
+                    <div class="col-1">
+                        <i class="fa-solid fa-globe" title="Website"></i>
+                    </div>
+                    <div class="col-11">
+                        <a id="modal-site" href=""></a>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="row">
+                    <div class="col-1">
+                        <i class="fa-solid fa-phone" title="Phone"></i>
+                    </div>
+                    <div class="col-11">
+                        <span id="modal-phone"></span>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="row">
+                    <div class="col-1">
+                        <i class="fa-brands fa-square-facebook" title="Facebook"></i>
+                    </div>
+                    <div class="col-11">
+                        <a id="modal-fb" href="" title="Facebook"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container my-5">
+    <section class="dark-grey-text text-center">
+        <h1 class="display-3 text-center font-weight-bold">Clubs</h1>
 
+        <br>
 
-        <!-- Section: Block Content -->
-        <section class="dark-grey-text text-center">
-
-            <h1 class="display-3 text-center font-weight-bold">Clubs</h1>
-            <br>
-
-            <!-- Grid row -->
-            <div class="row">
-                <?php if (!empty($clubs) && is_array($clubs)) : ?>
-                    <?php foreach ($clubs as $club) : ?>
+        <div class="row">
+            <?php if (!empty($clubs) && is_array($clubs)) : ?>
+                <?php foreach ($clubs as $club) : ?>
                     <div class="col-lg-4 mb-5">
                         <div class="card h-100 shadow border-0">
                             <img class="card-img-top" src="<?=base_url("/assets/images/Clubs/default.png")?>" alt="..." />
                             <div class="card-body p-4">
-                                <input type="hidden" name="club-json" value='{"cName":"<?=$club->name?>", "email":"<?=$club->email?>", "description":"<?=$club->description?>", "website":"<?=$club->website?>", "phone":"<?=$club->phone?>", "facebook":"<?=$club->facebook?>"}'>
-                                <button type="button" name="club-button" id="<?=$club->id?>" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#clubsModal"><?=$club->name?></button>                                
+                                <input type="hidden" name="club-json" value='{"cName":"<?=$club->name?>", "email":"<?= $club->email == null || $club->email == '' ? 'N/A' : $club->email ?>", "description":"<?= $club->description == null || $club->description == '' ? 'N/A' : $club->description ?>", "website":"<?= $club->website == null || $club->website == '' ? 'N/A' : $club->website ?>", "phone":"<?= $club->phone == null || $club->phone == '' ? 'N/A' : $club->phone ?>", "facebook":"<?= $club->facebook == null || $club->facebook == '' ? 'N/A' : $club->facebook ?>"}'>
+                                <button type="button" name="club-button" id="<?=$club->id?>" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#clubsModal"><?=$club->name?></button>
                             </div>
-                        </div> 
-                    </div>
-
-                        <!-- Grid column -->
-                    <?php 
-                    endforeach; 
-                    ?>
-
-                    <!-- Modal -->
-                    
-                    <div class="modal fade" id="clubsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="modal-header"></h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p id="modal-description"></p>
-                            <a id="modal-email" href=""></a>
-                            <a id="modal-site" href=""></a>
-                            <p id="modal-phone"></p>
-                            <a id="modal-fb" href=""></a>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
                         </div>
                     </div>
-                    </div>
-                <?php endif; ?>
-        
+                <?php endforeach ?>
+            <?php endif; ?>
+        </div>
+    </section>
+</div>
 
-            </div>
-
-        </section>
-        <!-- Section: Block Content -->
-
-        <script>
-
-            let clubInfoButtons = document.getElementsByName('club-button');
-            let clubJsons = document.getElementsByName('club-json');
-
-            for (let i = 0; i < clubInfoButtons.length; i++) {
-                //adds click event listener to club bottons
-                clubInfoButtons[i].addEventListener('click', runModal.bind(this, i));
-            }
-
-            function runModal(j) {
-                let json = JSON.parse(clubJsons[j].value);
-                //inserts data into tags in the modal
-                document.getElementById('modal-header').innerText = json.cName
-                document.getElementById('modal-description').innerText = json.description
-                document.getElementById('modal-email').innerText = json.email
-                document.getElementById('modal-email').href = "mailto: " + json.email
-                document.getElementById('modal-site').innerText = json.website
-                document.getElementById('modal-site').href = json.website
-                document.getElementById('modal-phone').innerText = json.phone
-                document.getElementById('modal-fb').innerText = json.facebook
-                document.getElementById('modal-fb').href = json.facebook
-            }
-        </script>
-
-
-    </div>
-
+<script type="text/javascript" src="<?= base_url('assets/js/clubs.js'); ?>"></script>
 
 <?= $this->endSection() ?>
