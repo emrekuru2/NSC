@@ -9,8 +9,7 @@
         </script>
     <?php endif; ?>
     
-    <!-- Modal Body -->
-    <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+    <!-- confirm join modal -->
     <form class="modal fade" id="confirmSubmission" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
             <div class="modal-content">
@@ -19,13 +18,31 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>You have requested to join:</p>
-                    <p id="modal-message" style="font-weight: bold;"></p>
+                    <p>You have requested to join: <span id="modal-message" style="font-weight: bold;"></span>.</p>
                     <p>Do you want to confirm?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" id="modal-submit" form="club-select-form" class="btn btn-primary">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- confirm delete modal -->
+    <form class="modal fade" id="confirmDelete" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId">Confirm deletion</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete your previous request?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" id="modal-submit" form="request-delete-form" class="btn btn-primary">Delete request</button>
                 </div>
             </div>
         </div>
@@ -50,21 +67,29 @@
         </div>
         </div>
     </div>
-
+    
     <div class="row card h-100 shadow border-0 mt-5">
         <div class="col-sm-9 col-md-7 col-lg-6 mx-auto">
             <div class="table-responsive">
-                <table class="table table-primary mt-3">
+                <table class="table table-primary mt-3 border-round">
                     <thead>
                         <tr>
                             <th scope="col">You requested to join:</th>
                             <th scope="col">Date</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="border-round">
                         <tr class="">
                             <td scope="row"><?= $previousRequest != null ? $previousRequestClub : 'none' ?></td>
                             <td><?= $previousRequest != null ? $previousRequestDate : '' ?></td>
+                            <td> <!-- Add a delete button that calls the deleteRow() function -->
+                            <?php if ($previousRequest != null): ?>
+                                <form id="request-delete-form" action="<?= site_url('delete_request') ?>" method="post">
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#confirmDelete" class="btn btn-danger"<?= $previousRequest != null ? '' : 'disabled' ?>>Delete</button>
+                                </form>
+                            <?php endif; ?>
+                        </td>
                         </tr>
                     </tbody>
                 </table>

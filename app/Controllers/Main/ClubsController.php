@@ -3,10 +3,8 @@
 namespace App\Controllers\Main;
 
 use App\Controllers\BaseController;
-use App\Entities\UserTypes\ClubUser;
 use App\Models\ClubJoinlistModel;
 use App\Models\ClubModel;
-use App\Models\UserTypes\ClubUserModel;
 
 class ClubsController extends BaseController
 {
@@ -88,6 +86,26 @@ class ClubsController extends BaseController
             }
         }   
     
+        return redirect()->back()->with('alert', $data);
+    }
+
+
+    public function deleteRequest(){
+        $clubJoinistModel = model(ClubJoinlistModel::class);
+        $previousRequestID = $clubJoinistModel->select()->where('userID', auth()->id())->first()->id;
+
+        if($clubJoinistModel->delete($previousRequestID)){
+            $data = [
+                'type'    => 'success',
+                'content' => 'Your request was deleted successfully'
+            ];
+        }else{
+            $data = [
+                'type'    => 'danger',
+                'content' => 'Failed to delete your request'
+            ];
+        }
+
         return redirect()->back()->with('alert', $data);
     }
     

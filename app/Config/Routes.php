@@ -46,6 +46,8 @@ $routes->get('news/(:num)', 'Main\NewsController::getNewsByID/$1');
 $routes->get('development/(:num)', 'Main\DevelopmentController::register/$1');
 $routes->get('club_join', 'Main\ClubsController::viewClubs');
 $routes->match(['post'], 'join_club', 'Main\ClubsController::joinClub');
+$routes->post('delete_request', 'Main\ClubsController::deleteRequest');
+
 
 // Routing for admin views and functions
 $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
