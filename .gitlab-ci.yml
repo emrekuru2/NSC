@@ -1,0 +1,9 @@
+before_script:
+  - DEBIAN_FRONTEND=noninteractive apt-get update -yqq
+  - DEBIAN_FRONTEND=noninteractive apt-get install -yqq php-cli
+  - DEBIAN_FRONTEND=noninteractive
+
+lint:
+  script:
+    - find . -name "*.php" -exec php -l {} \;
+

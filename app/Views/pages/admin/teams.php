@@ -131,7 +131,7 @@
                 <!-- Name -->
                 <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="newName">Name</label>
-                    <input type="text" class="form-control" name="newName" id="newName" required>
+                    <input type="text" class="form-control" name="newName" id="newName" placeholder="Team Name" required>
                 </div>
 
                 <!-- Club -->
@@ -148,7 +148,7 @@
                 <!-- Description -->
                 <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="newDescription">Description</label>
-                    <textarea class="form-control" name="newDescription" id="newDescription" rows="2" required></textarea>
+                    <textarea class="form-control" name="newDescription" id="newDescription" rows="2" placeholder="Maximum 512 characters" required></textarea>
                 </div>
 
                 <!-- Logo -->
@@ -169,10 +169,115 @@
 </form>
 
 <div class="row">
-    <!-- Edit Team -->
-    <div class="col-sm-7">
+
+    <!-- View Team -->
+    <div class="col-sm-7" id="view-team-card">
         <div class="card shadow">
-            <div class="card-header">Edit Team</div>
+            <div class="card-header">
+                <div class="d-md-flex justify-content-md-end group-list-header">
+                    <div class="line-height-2rem">Team Info</div>
+                    <button type="button" id="edit-team-button" class="btn btn-primary btn-sm" <?= $teamIsSet ? '' : ' disabled' ?>><i class="fa-solid fa-pen-to-square"></i> Edit Team</button>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <!-- Logo and Name -->
+                <img src="<?= $teamIsSet ? base_url($team->image) : base_url('assets/images/Teams/default.png') ?>" class="card-img-top mb-3 mx-auto d-block" style="width: 150px; height: 150px" alt="Team Logo">
+                <h4 class="card-title text-bold text-center"><?= $team->name ?? 'Select Team' ?></h4>
+
+                <br>
+                <hr class="divider">
+
+                <!-- View Club -->
+                <div class="form-group margin-bottom-1rem">
+                    <div class="mb-3 row">
+                        <label class="col-2 col-form-label" for="viewTeamClub">Club</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" id="viewTeamClub" value="<?php if ($teamIsSet && $teamClub != null) {
+                                echo $teamClub->name;
+                            } else if ($teamIsSet) {
+                                echo 'No Club';
+                            } else {
+                                echo '';
+                            } ?>" aria-label="readonly input" readonly<?= $teamIsSet ? '' : ' disabled' ?>>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- View Description -->
+                <div class="form-group margin-bottom-1rem">
+                    <div class="mb-3 row">
+                        <label class="col-2 col-form-label" for="viewTeamDescription">Description</label>
+                        <div class="col-10">
+                            <textarea class="form-control" id="updateTeamDescription" rows="3" aria-label="readonly input" readonly<?= $teamIsSet ? '' : ' disabled' ?>><?= $teamIsSet ? $team->description : '' ?></textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- View Members -->
+                <div class="form-group margin-bottom-1rem">
+                    <div class="mb-3 row">
+                        <label class="col-2 col-form-label" for="viewTeamMembers">Members</label>
+                        <div class="col-10">
+
+                            <div class="border-round">
+                                <table class="table<?= $teamIsSet && ! empty($teamMembers) ? ' table-hover' : '' ?> margin-bottom-half-rem">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Role</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody id="team-member-list" data-team-isset="<?= $teamIsSet ?>">
+                                    <?php if (! $teamIsSet) { ?>
+                                        <tr>
+                                            <td class="col-9 view-table-data"><br></td>
+                                            <td class="col-3 view-table-data"></td>
+                                        </tr>
+                                    <?php } elseif (empty($teamMembers)) { ?>
+                                        <tr>
+                                            <td class="col-9 view-table-data">No members</td>
+                                            <td class="col-3 view-table-data"></td>
+                                        </tr>
+                                    <?php } else {
+                                        foreach ($teamMembers as $member) : ?>
+                                            <tr>
+                                                <td class="col-9 view-table-data"><?= $member->first_name . ' ' . $member->last_name ?></td>
+                                                <td class="col-3 view-table-data">
+                                                    <?php if ($member->isTeamCaptain == 1) {
+                                                        echo 'Captain';
+                                                    } elseif ($member->isViceCaptain == 1) {
+                                                        echo 'Vice Captain';
+                                                    } else {
+                                                        echo 'Player';
+                                                    }  ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach;
+                                    } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Team -->
+    <div class="col-sm-7" id="edit-team-card">
+        <div class="card shadow">
+            <div class="card-header">
+                <div class="d-md-flex justify-content-md-end group-list-header">
+                    <div class="line-height-2rem">Edit Team</div>
+                    <button type="button" id="cancel-edit-team-button" class="btn btn-primary btn-sm"><i class="fa-solid fa-xmark"></i> Cancel Edit</button>
+                </div>
+            </div>
 
             <form method="post" action="updateTeam" enctype="multipart/form-data" class="card-body" id="update-form">
                 <!-- Logo and Name -->
@@ -192,13 +297,13 @@
                 <!-- Edit Name -->
                 <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="updateTeamName">Name</label>
-                    <input type="text" class="form-control" name="updateTeamName" id="updateTeamName" <?= $teamIsSet ? "value='" . $team->name . "'" : 'disabled' ?>>
+                    <input type="text" class="form-control" name="updateTeamName" id="updateTeamName"<?= $teamIsSet ? " placeholder='Team Name' value='" . $team->name . "'" : ' disabled' ?>>
                 </div>
 
                 <!-- Edit Club -->
                 <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="updateClubID">Club</label>
-                    <select class="form-control" name="updateClubID" id="updateClubID" aria-label="Club" <?= $teamIsSet ?: ' disabled' ?>>
+                    <select class="form-control" name="updateClubID" id="updateClubID"<?= $teamIsSet ? '' : ' disabled' ?>>
                         <?php if ($teamIsSet && ! empty($allClubs)) : ?>
                             <?php if ($team->clubID === null) : ?>
                                 <option value="none" selected>No Club</option>
@@ -220,7 +325,7 @@
                 <!-- Edit Description -->
                 <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="updateTeamDescription">Description</label>
-                    <textarea class="form-control" name="updateTeamDescription" id="updateTeamDescription" rows="3" <?= $teamIsSet ? '>' . $team->description : 'disabled>' ?></textarea>
+                    <textarea class="form-control" name="updateTeamDescription" id="updateTeamDescription" rows="3"<?= $teamIsSet ? ' placeholder="Maximum 512 characters">' . $team->description : ' disabled>' ?></textarea>
                 </div>
 
                 <!-- Edit Members -->
@@ -243,7 +348,7 @@
                             <tbody id="team-member-list" data-team-isset="<?= $teamIsSet ?>">
                                 <?php if (! $teamIsSet || empty($teamMembers)) { ?>
                                     <tr>
-                                        <td class="col-5 line-height-2rem">No team members</td>
+                                        <td class="col-5 line-height-2rem">No members</td>
                                         <td class="col-4 line-height-2rem"></td>
                                         <td class="col-2 line-height-2rem"></td>
                                         <td class="col-1 line-height-2rem"></td>
@@ -290,6 +395,7 @@
 
         </div>
     </div>
+
     <!-- All Teams and Search -->
     <div class="col-sm-5 mb-3 mb-sm-0">
         <div class="card shadow">
@@ -320,12 +426,10 @@
                         } else {
                             foreach ($allTeams as $teamIndex) : ?>
                             <tr>
-                                <td class="col-11 line-height-2rem"><label for="name"><?= $teamIndex->name ?></label></td>
-                                <td class="col-1">
-                                    <form method="get" action="">
-                                        <input value="<?= $teamIndex->name ?>" name="name" id="name" hidden>
-                                        <button type="submit" class="btn btn-primary btn-sm">Edit</button>
-                                    </form>
+                                <td class="col-12 view-table-padding">
+                                    <a href="<?= '?name=' . str_replace(' ', '+', $teamIndex->name) ?>">
+                                        <label class="text-bold width-100 pointer line-height-3rem" for="name"><?= $teamIndex->name ?></label>
+                                    </a>
                                 </td>
                             </tr>
                         <?php endforeach ?><?php } ?>

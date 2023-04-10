@@ -218,13 +218,13 @@
                 <!-- Name -->
                 <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="newName">Name</label>
-                    <input type="text" class="form-control" name="name" id="newName" maxlength="64" required>
+                    <input type="text" class="form-control" name="name" id="newName" maxlength="64" placeholder="Club Name" required>
                 </div>
 
                 <!-- Abbreviation -->
                 <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="newAbbr">Abbreviation</label>
-                    <input type="text" class="form-control" name="abbreviation" id="newAbbr" maxlength="64" required>
+                    <input type="text" class="form-control" name="abbreviation" id="newAbbr" maxlength="64" placeholder="CN" required>
                 </div>
 
                 <!-- Description -->
@@ -236,7 +236,7 @@
                 <!-- Email -->
                 <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="newEmail">Email</label>
-                    <input type="email" class="form-control" name="email" id="newEmail" maxlength="128">
+                    <input type="email" class="form-control" name="email" id="newEmail" maxlength="128" placeholder="club@example.com">
                 </div>
 
                 <!-- Phone -->
@@ -248,13 +248,13 @@
                 <!-- Website -->
                 <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="newWebsite">Website</label>
-                    <input type="text" class="form-control" name="website" id="newWebsite" maxlength="128">
+                    <input type="text" class="form-control" name="website" id="newWebsite" maxlength="128" placeholder="https://www.example.com">
                 </div>
 
                 <!-- Facebook -->
                 <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="newFacebook">Facebook</label>
-                    <input type="text" class="form-control" name="facebook" id="newFacebook" maxlength="256">
+                    <input type="text" class="form-control" name="facebook" id="newFacebook" maxlength="256" placeholder="https://www.facebook.com/Club-Name">
                 </div>
 
                 <!-- Logo -->
@@ -274,10 +274,173 @@
 </form>
 
 <div class="row">
-    <!-- Edit Club -->
-    <div class="col-lg-7">
+    <!-- View Club -->
+    <div class="col-sm-7" id="view-club-card">
         <div class="card shadow">
-            <div class="card-header">Edit Club</div>
+            <div class="card-header">
+                <div class="d-md-flex justify-content-md-end group-list-header">
+                    <div class="line-height-2rem">Club Info</div>
+                    <button type="button" id="edit-club-button" class="btn btn-primary btn-sm" <?= $clubIsSet ? '' : ' disabled' ?>><i class="fa-solid fa-pen-to-square"></i> Edit Club</button>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <!-- Logo and Name -->
+                <img src="<?= $clubIsSet ? base_url($club->image) : base_url('assets/images/Clubs/default.png') ?>" class="card-img-top mb-3 mx-auto d-block" style="width: 150px; height: 150px" alt="Team Logo">
+                <h4 class="card-title text-bold text-center"><?= $clubIsSet ? $club->name . ' (' . $club->abbreviation . ')' : 'Select Club' ?></h4>
+
+                <br>
+                <hr class="divider">
+
+                <!-- View Description -->
+                <div class="form-group margin-bottom-1rem">
+                    <div class="mb-3 row">
+                        <label class="col-2 col-form-label" for="viewClubDescription">Description</label>
+                        <div class="col-10">
+                            <textarea class="form-control" id="viewClubDescription" rows="3" aria-label="readonly input" readonly<?= $clubIsSet ? '' : ' disabled' ?>><?= $clubIsSet ? $club->description : '' ?></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- View Email -->
+                <div class="form-group margin-bottom-1rem">
+                    <div class="mb-3 row">
+                        <label class="col-2 col-form-label" for="viewClubEmail">Email</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" id="viewClubEmail" value="<?= $clubIsSet ? $club->email : '' ?>" aria-label="readonly input" readonly<?= $clubIsSet ? '' : ' disabled' ?>>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- View Phone -->
+                <div class="form-group margin-bottom-1rem">
+                    <div class="mb-3 row">
+                        <label class="col-2 col-form-label" for="viewClubPhone">Phone</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" id="viewClubPhone" value="<?= $clubIsSet ? $club->phone : '' ?>" aria-label="readonly input" readonly<?= $clubIsSet ? '' : ' disabled' ?>>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- View Website -->
+                <div class="form-group margin-bottom-1rem">
+                    <div class="mb-3 row">
+                        <label class="col-2 col-form-label" for="viewClubWebsite">Website</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" id="viewClubWebsite" value="<?= $clubIsSet ? $club->website : '' ?>" aria-label="readonly input" readonly<?= $clubIsSet ? '' : ' disabled' ?>>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- View Facebook -->
+                <div class="form-group margin-bottom-1rem">
+                    <div class="mb-3 row">
+                        <label class="col-2 col-form-label" for="viewClubFacebook">Facebook</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" id="viewClubFacebook" value="<?= $clubIsSet ? $club->facebook : '' ?>" aria-label="readonly input" readonly<?= $clubIsSet ? '' : ' disabled' ?>>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- View Club Teams -->
+                <div class="form-group margin-bottom-1rem">
+                    <div class="mb-3 row">
+                        <label class="col-2 col-form-label" for="viewClubTeams">Club Teams</label>
+                        <div class="col-10">
+
+                            <div class="border-round">
+                                <table class="table<?= $clubIsSet && ! empty($clubTeams) ? ' table-hover' : '' ?> margin-bottom-half-rem">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Name</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <?php if (! $clubIsSet) { ?>
+                                            <tr>
+                                                <td class="col-12 view-table-data"><br></td>
+                                            </tr>
+                                        <?php } elseif (empty($clubTeams)) { ?>
+                                            <tr>
+                                                <td class="col-12 view-table-data">No teams</td>
+                                            </tr>
+                                        <?php } else { foreach ($clubTeams as $team) : ?>
+                                            <tr>
+                                                <td class="col-12 view-table-data view-table-padding">
+                                                    <a class="club-link" href="teams?name=<?= str_replace(' ', '+', $team->name) ?>">
+                                                        <label class="width-100 line-height-25rem pointer"><?= $team->name ?></label>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- View Club Members -->
+                <div class="form-group margin-bottom-1rem">
+                    <div class="mb-3 row">
+                        <label class="col-2 col-form-label" for="viewClubTeams">Club Members</label>
+                        <div class="col-10">
+
+                            <div class="border-round">
+                                <table class="table<?= $clubIsSet && ! empty($clubMembers) ? ' table-hover' : '' ?> margin-bottom-half-rem">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Role</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <?php if (! $clubIsSet) { ?>
+                                        <tr>
+                                            <td class="col-9 view-table-data"><br></td>
+                                            <td class="col-3 view-table-data"><br></td>
+                                        </tr>
+                                    <?php } elseif (empty($clubMembers)) { ?>
+                                        <tr>
+                                            <td class="col-9 view-table-data">No members</td>
+                                            <td class="col-3 view-table-data"></td>
+                                        </tr>
+                                    <?php } else { foreach ($clubMembers as $member) : ?>
+                                        <tr>
+                                            <td class="col-9 view-table-data"><?= $member->first_name . ' ' . $member->last_name ?></td>
+                                            <td class="col-3 view-table-data">
+                                                <?php if ($member->isManager == 1) {
+                                                    echo 'Manager';
+                                                } else {
+                                                    echo 'Player';
+                                                }  ?>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Club -->
+    <div class="col-lg-7" id="edit-club-card">
+        <div class="card shadow">
+            <div class="card-header">
+                <div class="d-md-flex justify-content-md-end group-list-header">
+                    <div class="line-height-2rem">Edit Club</div>
+                    <button type="button" id="cancel-edit-club-button" class="btn btn-primary btn-sm" <?= $clubIsSet ? '' : ' disabled' ?>><i class="fa-solid fa-xmark"></i> Cancel Edit</button>
+                </div>
+            </div>
 
             <form class="card-body" method="post" action="updateClub" enctype="multipart/form-data" id="update-form">
                 <!-- Logo and Name -->
@@ -297,25 +460,25 @@
                 <!-- Edit Name -->
                 <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="updateClubName">Name</label>
-                    <input type="text" maxlength="64" class="form-control" name="updateClubName" id="updateClubName" <?= $clubIsSet ? "value='" . $club->name . "' required" : ' disabled' ?>>
+                    <input type="text" maxlength="64" class="form-control" name="updateClubName" id="updateClubName" <?= $clubIsSet ? "placeholder='Club Name' value='" . $club->name . "' required" : ' disabled' ?>>
                 </div>
 
                 <!-- Edit Name Abbreviation-->
                 <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="abbreviation">Abbreviation</label>
-                    <input type="text" maxlength="64" class="form-control" name="abbreviation" id="updateClubAbbreviation" <?= $clubIsSet ? "value='" . $club->abbreviation . "' placeholder='Name' required" : ' disabled' ?>>
+                    <input type="text" maxlength="64" class="form-control" name="abbreviation" id="updateClubAbbreviation" <?= $clubIsSet ? "placeholder='CN' value='" . $club->abbreviation . "' placeholder='Name' required" : ' disabled' ?>>
                 </div>
 
                 <!-- Edit Description -->
                 <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="updateClubDescription">Description</label>
-                    <textarea maxlength="512" class="form-control" name="description" id="updateClubDescription" rows="3" <?= $clubIsSet ? '>' . $club->description : 'disabled>' ?></textarea>
+                    <textarea maxlength="512" class="form-control" name="description" id="updateClubDescription" rows="3" <?= $clubIsSet ? 'placeholder="Maximum 512 characters">' . $club->description : 'disabled>' ?></textarea>
                 </div>
 
                 <!-- Edit Email -->
                 <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="updateClubEmail">Email</label>
-                    <input type="email" maxlength="125" class="form-control" name="email" id="updateClubEmail"<?= $clubIsSet ? "value='" . $club->email . "' placeholder='example@email.com'" : ' disabled' ?>>
+                    <input type="email" maxlength="125" class="form-control" name="email" id="updateClubEmail"<?= $clubIsSet ? "value='" . $club->email . "' placeholder='club@example.com'" : ' disabled' ?>>
                 </div>
 
                 <!-- Edit Phone -->
@@ -327,13 +490,13 @@
                 <!-- Edit Website -->
                 <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="updateClubWebsite">Website</label>
-                    <input type="text" maxlength="128" class="form-control" name="website" id="updateClubWebsite"<?= $clubIsSet ? "value='" . $club->website . "' placeholder='https://www.website.com'" : ' disabled' ?>>
+                    <input type="text" maxlength="128" class="form-control" name="website" id="updateClubWebsite"<?= $clubIsSet ? "value='" . $club->website . "' placeholder='https://www.example.com'" : ' disabled' ?>>
                 </div>
 
                 <!-- Edit Facebook -->
                 <div class="form-group margin-bottom-1rem">
                     <label class="margin-bottom-half-rem" for="updateClubFacebook">Facebook</label>
-                    <input type="text" maxlength="256" class="form-control" name="facebook" id="updateClubFacebook"<?= $clubIsSet ? "value='" . $club->facebook . "' placeholder='https://www.facebook.com/Group-Name'" : ' disabled' ?>>
+                    <input type="text" maxlength="256" class="form-control" name="facebook" id="updateClubFacebook"<?= $clubIsSet ? "value='" . $club->facebook . "' placeholder='https://www.facebook.com/Club-Name'" : ' disabled' ?>>
                 </div>
 
                 <!-- Edit Club Teams -->
@@ -394,7 +557,7 @@
                             <tbody id="club-member-list" data-club-isset="<?= $clubIsSet ?>">
                                 <?php if (! $clubIsSet || empty($clubMembers)) : ?>
                                     <tr>
-                                        <td class="col-5 line-height-2rem">No club members</td>
+                                        <td class="col-5 line-height-2rem">No members</td>
                                         <td class="col-4 line-height-2rem"></td>
                                         <td class="col-2 line-height-2rem"></td>
                                         <td class="col-1 line-height-2rem"></td>
@@ -454,19 +617,16 @@
                     <thead>
                         <tr>
                             <th scope="col" class="padding-top-0">Name</th>
-                            <th scope="col" class="padding-top-0"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?= (count($allClubs) === 0) ? '<p class="text-start margin-bottom-0">No clubs available.</p>' : null ?>
                         <?php foreach ($allClubs as $clubIndex) : ?>
                             <tr>
-                                <td class="col-11 line-height-2rem"><label for="name"><?= $clubIndex->name ?></label></td>
-                                <td class="col-1">
-                                    <form method="get" action="">
-                                        <input value="<?= $clubIndex->name ?>" name="name" id="name" hidden>
-                                        <button type="submit" class="btn btn-primary btn-sm">Edit</button>
-                                    </form>
+                                <td class="col-12 view-table-padding">
+                                    <a href="<?= '?name=' . str_replace(' ', '+', $clubIndex->name) ?>">
+                                        <label class="text-bold width-100 pointer line-height-3rem" for="name"><?= $clubIndex->name ?></label>
+                                    </a>
                                 </td>
                             </tr>
                         <?php endforeach ?>
