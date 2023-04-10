@@ -29,7 +29,7 @@
                 <hr>
                 <div class="input-group mb-3">
                     <span class="input-group-text w-25" id="role">User Role</span>
-                    <input type="text" class="form-control" placeholder="<?= esc($user->role) ?>" aria-label="role" aria-describedby="role" disabled>
+                    <input type="text" class="form-control" value="<?=esc($user->role)?>" aria-label="role" aria-describedby="role" disabled>
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text w-25" id="inTeam">Current Team</span>
@@ -48,10 +48,13 @@
                         <span class="input-group-text w-25" id="roles">User Role</span>
                         <select class="form-select" aria-label="roles" name="role">
                             <option selected>Select a role</option>
-                            <option value="manager">Manager</option>
-                            <option value="player">Player</option>
-                            <option value="Umpire">Umpire</option>
-                            <option value="guest">Guest</option>
+                            <?php foreach ($roles as $role) : ?>
+                                <?php if ($role->permission == $user->role) : ?>
+                                    <option value="<?= esc($role->permission) ?>" selected><?= esc($role->permission) ?></option>
+                                <?php else : ?>
+                                    <option value="<?= esc($role->permission) ?>"><?= esc($role->permission) ?></option>
+                                <?php endif ?>
+                            <?php endforeach ?>
                         </select>
                     </div>
                     <div class="input-group mb-3">
@@ -59,7 +62,11 @@
                         <select class="form-select" aria-label="teams" name="team">
                             <option selected>Select a team</option>
                             <?php foreach ($teams as $team) : ?>
-                                <option value="<?= esc($team->id) ?>"><?= esc($team->name) ?></option>
+                                <?php if ($team->name == $user->team) : ?>
+                                    <option value="<?= esc($team->id) ?>" selected><?= esc($team->name) ?></option>
+                                <?php else : ?>
+                                    <option value="<?= esc($team->id) ?>"><?= esc($team->name) ?></option>
+                                <?php endif ?>
                             <?php endforeach ?>
                         </select>
                     </div>
@@ -68,7 +75,11 @@
                         <select class="form-select" aria-label="clubs" name="club">
                             <option selected>Select a club</option>
                             <?php foreach ($clubs as $club) : ?>
-                                <option value="<?= esc($club->id) ?>"><?= esc($club->name) ?></option>
+                                <?php if ($club->name == $user->club) : ?>
+                                    <option value="<?= esc($club->id) ?>" selected><?= esc($club->name) ?></option>
+                                <?php else : ?>
+                                    <option value="<?= esc($club->id) ?>"><?= esc($club->name) ?></option>
+                                <?php endif ?>
                             <?php endforeach ?>
                         </select>
                     </div>
