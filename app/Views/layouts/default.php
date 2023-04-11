@@ -25,6 +25,12 @@
         <?php if (session()->getFlashdata('alert') !== null) : ?>
             <?= view_cell('\App\Libraries\Alerts::toast', ['type' => session()->getFlashdata('alert')['type'], 'content' => session()->getFlashdata('alert')['content']]) ?>
         <?php endif; ?>
+        <?php if (session()->get('alert')) : ?>
+            <div class="alert alert-warning m-2" role="alert">
+                <strong><?= session()->get('alert')['title'] ?>:</strong>
+                <?= session()->get('alert')['content'] ?>
+            </div>
+        <?php endif ?>
         <?= $this->renderSection('mainContent') ?>
     </main>
     <footer class="container-lg text-center my-3">
