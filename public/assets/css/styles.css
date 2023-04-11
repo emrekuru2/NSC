@@ -144,6 +144,10 @@
     cursor: pointer;
 }
 
+button > svg {
+    vertical-align: baseline !important;
+}
+
 /* BOOTSTRAP SPECIFIC CUSTOMIZATION */
 
 .nav-z {
