@@ -49,29 +49,30 @@
     </form>
     
     <div class="row card h-100 shadow border-0 mt-5">
-        <div class="col-sm-9 col-md-7 col-lg-6 mx-auto">
-            <h1 style="margin-top: 5vh;" >Request to join a club</h1>
-        <div style="margin-top: 5vh;" class="mb-3">
-            <form method="post" id="club-select-form" action="join_club">
-                <label for="clubs-select" class="form-label" hidden>Select club you want to join:</label>
-                <select class="form-select form-select-lg" name="clubs-select" id="clubs-select">
-                    <option selected value="0">Select club</option>
-                    <?php foreach ($clubs as $club): ?>
-                        <option value="<?= $club->name ?>"><?php echo $club->name ?></option>
-                    <?php endforeach; ?>
-                </select>
-                <!-- Modal trigger button -->
-                <button type="button"  id="submit" class="btn btn-primary btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#confirmSubmission">Submit request</button>
-            </form>
+        <div class="col-sm-9 col-md-7 col-lg-6 mx-auto mt-3 mb-4">
+            <h1>Request to join a club</h1>
 
-        </div>
+            <div class="mt-3">
+                <form method="post" id="club-select-form" action="join_club">
+                    <label for="clubs-select" class="form-label" hidden>Select club you want to join:</label>
+                    <select class="form-select form-select-lg" name="clubs-select" id="clubs-select">
+                        <option selected value="0">Select club</option>
+                        <?php foreach ($clubs as $club): ?>
+                            <option value="<?= $club->name ?>"><?php echo $club->name ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <!-- Modal trigger button -->
+                    <button type="button"  id="submit" class="btn btn-primary btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#confirmSubmission">Submit request</button>
+                </form>
+
+            </div>
         </div>
     </div>
     
     <div class="row card h-100 shadow border-0 mt-5">
         <div class="col-sm-9 col-md-7 col-lg-6 mx-auto">
-            <div class="table-responsive">
-                <table class="table table-primary mt-3 border-round">
+            <div class="border-round mt-4 mb-4">
+                <table class="table mt-1 margin-bottom-0">
                     <thead>
                         <tr>
                             <th scope="col">You requested to join:</th>
@@ -81,9 +82,9 @@
                     </thead>
                     <tbody class="border-round">
                         <tr class="">
-                            <td scope="row"><?= $previousRequest != null ? $previousRequestClub : 'none' ?></td>
-                            <td><?= $previousRequest != null ? $previousRequestDate : '' ?></td>
-                            <td> <!-- Add a delete button that calls the deleteRow() function -->
+                            <td class="col-6 line-height-2rem"><?= $previousRequest != null ? $previousRequestClub : 'none' ?></td>
+                            <td class="col-4 line-height-2rem"><?= $previousRequest != null ? $previousRequestDate : '' ?></td>
+                            <td class="col-2">
                             <?php if ($previousRequest != null): ?>
                                 <form id="request-delete-form" action="<?= site_url('delete_request') ?>" method="post">
                                     <button type="button" data-bs-toggle="modal" data-bs-target="#confirmDelete" class="btn btn-danger"<?= $previousRequest != null ? '' : 'disabled' ?>>Delete</button>
