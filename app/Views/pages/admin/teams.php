@@ -169,6 +169,48 @@
 </form>
 
 <div class="row">
+    <!-- All Teams and Search -->
+    <div class="col-lg-5 mb-3 mb-lg-0">
+        <div class="card shadow">
+
+            <div class="card-header">
+                <div class="d-md-flex justify-content-md-end group-list-header">
+                    <div class="line-height-2rem">All Teams</div>
+                    <button type="button" id="new-group-button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#groupModal"><i class="fa-solid fa-plus"></i> Create Team</button>
+                </div>
+            </div>
+
+            <div class="card-body padding-top-half-rem">
+                <?= view_cell('\App\Libraries\Contents::search', ['name' => 'Team', 'array' => $allTeams, 'fields' => ['name'], 'useName' => true, 'useDivider' => true]); ?>
+
+                <!-- Team List -->
+                <table class="table<?= ! empty($allTeams) ? ' table-hover' : '' ?> margin-bottom-half-rem">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="padding-top-0">Name</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <?php
+                    if (count($allTeams) === 0) {
+                        echo '<p class="text-start margin-bottom-0">No teams available.</p>';
+                    } else {
+                        foreach ($allTeams as $teamIndex) : ?>
+                            <tr>
+                                <td class="col-12 view-table-padding">
+                                    <a href="<?= '?name=' . str_replace(' ', '+', $teamIndex->name) ?>">
+                                        <label class="text-bold width-100 pointer line-height-3rem" for="name"><?= $teamIndex->name ?></label>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endforeach ?><?php } ?>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
 
     <!-- View Team -->
     <div class="col-sm-7" id="view-team-card">
@@ -396,49 +438,6 @@
         </div>
     </div>
 
-    <!-- All Teams and Search -->
-    <div class="col-sm-5 mb-3 mb-sm-0">
-        <div class="card shadow">
-
-            <div class="card-header">
-                <div class="d-md-flex justify-content-md-end group-list-header">
-                    <div class="line-height-2rem">All Teams</div>
-                    <button type="button" id="new-group-button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#groupModal"><i class="fa-solid fa-plus"></i> Create Team</button>
-                </div>
-            </div>
-
-            <div class="card-body padding-top-half-rem">
-                <?= view_cell('\App\Libraries\Contents::search', ['name' => 'Team', 'array' => $allTeams, 'fields' => ['name'], 'useName' => true, 'useDivider' => true]); ?>
-
-                <!-- Team List -->
-                <table class="table<?= ! empty($allTeams) ? ' table-hover' : '' ?> margin-bottom-half-rem">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="padding-top-0">Name</th>
-                            <th scope="col" class="padding-top-0"></th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <?php
-                        if (count($allTeams) === 0) {
-                            echo '<p class="text-start margin-bottom-0">No teams available.</p>';
-                        } else {
-                            foreach ($allTeams as $teamIndex) : ?>
-                            <tr>
-                                <td class="col-12 view-table-padding">
-                                    <a href="<?= '?name=' . str_replace(' ', '+', $teamIndex->name) ?>">
-                                        <label class="text-bold width-100 pointer line-height-3rem" for="name"><?= $teamIndex->name ?></label>
-                                    </a>
-                                </td>
-                            </tr>
-                        <?php endforeach ?><?php } ?>
-                    </tbody>
-                </table>
-
-            </div>
-        </div>
-    </div>
 </div>
 
 <script type="text/javascript" src="<?= base_url('assets/js/admin/teams.js'); ?>"></script>
