@@ -22,7 +22,7 @@
                             <?php endif ?>
                         </div>
                     <?php endif ?>
-                    <a href="index.php"><img src="/assets/images/logo2.png" class="img-fluid" alt="Responsive image"></a>
+                    <a href="index.php"><img src="/assets/images/General/logo2.png" class="img-fluid" alt="Responsive image"></a>
                     <hr>
                     <form action="<?= url_to('register') ?>" method="post" class="row g-3 justify-content-center my-4">
                         <div class="col-md-6">
