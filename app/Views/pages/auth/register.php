@@ -80,6 +80,7 @@
                             <label for="inputZip" class="form-label">Zip</label>
                             <input type="text" class="form-control" id="inputZip" name="zip">
                         </div>
+                        <br>
                         <button type="submit" class="btn btn-primary col-4">Register</button>
                     </form>
                     <div class="text-center">
