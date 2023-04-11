@@ -31,7 +31,7 @@
                     <hr class="text-light d-lg-none d-block">
                     <?php if (auth()->user()->inGroup('admin')) : ?>
                         <li class="nav-item">
-                            <a class="nav-link <?= ($title === 'Join Team') ? 'active' : '' ?>" href="/development">Join Team</a>
+                            <a class="nav-link <?= ($title === 'Join Club') ? 'active' : '' ?>" href="/join">Join Club</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link dropdown-toggle d-flex flex-row align-items-center gap-1" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
@@ -49,13 +49,13 @@
                         </li>
                     <?php elseif (auth()->user()->inGroup('manager')) : ?>
                         <li class="nav-item">
-                            <a class="nav-link <?= ($title === 'My Club') ? 'active' : '' ?>" href="/development">My Club</a>
+                            <a class="nav-link <?= ($title === 'My Club') ? 'active' : '' ?>" href="/clubs">My Club</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?= ($title === 'Manage Team') ? 'active' : '' ?>" href="/development">Manage Team</a>
+                            <a class="nav-link <?= ($title === 'Manage Team') ? 'active' : '' ?>" href="/teams">Manage Team</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?= ($title === 'Join Team') ? 'active' : '' ?>" href="/development">Join Team</a>
+                            <a class="nav-link <?= ($title === 'Join Club') ? 'active' : '' ?>" href="/join">Join Club</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link dropdown-toggle d-flex flex-row align-items-center gap-1" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
@@ -72,13 +72,13 @@
                         </li>
                     <?php elseif (auth()->user()->inGroup('player')) : ?>
                         <li class="nav-item">
-                            <a class="nav-link <?= ($title === 'Player Profile') ? 'active' : '' ?>" href="/development">Player Profile</a>
+                            <a class="nav-link <?= ($title === 'Player Profile') ? 'active' : '' ?>" href="#">Player Profile</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?= ($title === 'My Team') ? 'active' : '' ?>" href="/development">My Team</a>
+                            <a class="nav-link <?= ($title === 'My Team') ? 'active' : '' ?>" href="/teams">My Team</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?= ($title === 'Join Team') ? 'active' : '' ?>" href="/development">Join Team</a>
+                            <a class="nav-link <?= ($title === 'Join Club') ? 'active' : '' ?>" href="/join">Join Club</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link dropdown-toggle d-flex flex-row align-items-center gap-1" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
@@ -95,7 +95,7 @@
                         </li>
                     <?php elseif (auth()->user()->inGroup('umpire')) : ?>
                         <li class="nav-item">
-                            <a class="nav-link <?= ($title === 'Join Team') ? 'active' : '' ?>" href="/development">Join Team</a>
+                            <a class="nav-link <?= ($title === 'Join Club') ? 'active' : '' ?>" href="/join">Join Club</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link dropdown-toggle d-flex flex-row align-items-center gap-1" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
@@ -111,6 +111,9 @@
                             </ul>
                         </li>
                     <?php elseif (auth()->user()->inGroup('guest')) : ?>
+                        <li class="nav-item">
+                            <a class="nav-link <?= ($title == 'Join Club') ? "active" : "" ?>" href="/join">Join Club</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link dropdown-toggle d-flex flex-row align-items-center gap-1" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
                                 <img src="<?= auth()->user()->image ?>" width="20px" height="20px" class="bg-dark rounded-circle" alt="profile_img">

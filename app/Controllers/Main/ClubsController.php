@@ -3,7 +3,7 @@
 namespace App\Controllers\Main;
 
 use App\Controllers\BaseController;
-
+use App\Models\ClubJoinlistModel;
 use App\Models\ClubModel;
 
 class ClubsController extends BaseController

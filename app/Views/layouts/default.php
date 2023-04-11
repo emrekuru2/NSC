@@ -10,10 +10,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <!-- Bootstrap v5.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 
 <body>
+    <?php if (session()->getFlashdata('alert') !== NULL) : ?>
+        <?= view_cell('\App\Libraries\Alerts::toast', ['type' => session()->getFlashdata('alert')['type'], 'content' => session()->getFlashdata('alert')['content']]) ?>
+    <?php endif; ?>
     <header>
         <div class="d-none width-100 d-lg-flex justify-content-center align-items-center p-2">
             <img src="/assets/images/General/logo1.png" alt="logo" width="60px">
