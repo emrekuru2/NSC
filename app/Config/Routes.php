@@ -32,7 +32,7 @@ $routes->set404Override();
 
 // Routing for general views
 $routes->get('/', 'Main\HomeController::index');
-$routes->get('clubs', 'Main\ClubsController::viewClubs');
+$routes->get('clubs', 'Main\ClubsController::index');
 $routes->get('teams', 'Main\TeamsController::index');
 $routes->get('committees', 'Main\CommitteesController::index');
 $routes->get('development', 'Main\DevelopmentController::index');
@@ -44,9 +44,10 @@ $routes->match(['post'], 'contactAdmins', 'Main\ContactController::contactAdmins
 // News functional routing
 $routes->get('news/(:num)', 'Main\NewsController::getNewsByID/$1');
 $routes->get('development/(:num)', 'Main\DevelopmentController::register/$1');
-$routes->get('club_join', 'Main\ClubsController::viewClubs');
-$routes->match(['post'], 'join_club', 'Main\ClubsController::joinClub');
-$routes->post('delete_request', 'Main\ClubsController::deleteRequest');
+
+$routes->get('join', 'Main\JoinClubController::index');
+$routes->match(['post'], 'join_club', 'Main\JoinClubController::joinClub');
+$routes->match(['post'], 'delete_request', 'Main\JoinClubController::deleteRequest');
 
 
 // Routing for admin views and functions
