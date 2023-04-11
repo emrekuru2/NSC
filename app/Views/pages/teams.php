@@ -20,50 +20,6 @@
                         <span id="modal-description"></span>
                     </div>
                 </div>
-                <!--
-                <br>
-
-                <div class="row">
-                    <div class="col-1">
-                        <i class="fa-solid fa-envelope" title="Email"></i>
-                    </div>
-                    <div class="col-11">
-                        <a id="modal-email" href=""></a>
-                    </div>
-                </div>
-
-                <br>
-
-                <div class="row">
-                    <div class="col-1">
-                        <i class="fa-solid fa-globe" title="Website"></i>
-                    </div>
-                    <div class="col-11">
-                        <a id="modal-site" href=""></a>
-                    </div>
-                </div>
-
-                <br>
-
-                <div class="row">
-                    <div class="col-1">
-                        <i class="fa-solid fa-phone" title="Phone"></i>
-                    </div>
-                    <div class="col-11">
-                        <span id="modal-phone"></span>
-                    </div>
-                </div>
-
-                <br>
-
-                <div class="row">
-                    <div class="col-1">
-                        <i class="fa-brands fa-square-facebook" title="Facebook"></i>
-                    </div>
-                    <div class="col-11">
-                        <a id="modal-fb" href="" title="Facebook"></a>
-                    </div>
-                </div> -->
             </div>
 
             <div class="modal-footer">
@@ -81,7 +37,7 @@
         <div class="row">
             <?php if (! empty($teams) && is_array($teams)) : ?>
                 <?php foreach ($teams as $team) : ?>
-                    <div class="col-lg-4 mb-5">
+                    <div class="col-md w-50 p-3 mb-5">
                         <div class="card h-100 shadow border-0">
                             <img class="card-img-top" src="<?=base_url($team->image)?>" alt="Team Image"/>
                             <div class="card-body p-4">

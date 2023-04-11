@@ -82,7 +82,7 @@
         <div class="row">
             <?php if (!empty($clubs) && is_array($clubs)) : ?>
                 <?php foreach ($clubs as $club) : ?>
-                    <div class="col-lg-4 mb-5">
+                    <div class="col-md w-50 p-3 mb-5">
                         <div class="card h-100 shadow border-0">
                             <img class="card-img-top" src="<?=base_url("/assets/images/Clubs/default.png")?>" alt="..." />
                             <div class="card-body p-4">
