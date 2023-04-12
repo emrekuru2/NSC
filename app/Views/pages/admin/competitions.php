@@ -62,11 +62,15 @@
                         <?php if ($competition) : ?>
                             <?php foreach ($competition as $row) :
                                 $id = $row->typeID;
-                                // Connecting to the database and querying the competition type name
-                                $conn = mysqli_connect("localhost", "root", "", "cricket");
-                                $query = mysqli_query($conn, "SELECT name FROM nsca_competition_types WHERE id = '$id'");
-                                $result1 = mysqli_fetch_array($query);
-                                $competitionTypeName = $result1['name'];
+                                
+                                if ($competitionType) :
+                                    foreach ($competitionType as $innerRow) :
+                                        $competitionTypeID = $innerRow['id'];
+                                        if ($competitionTypeID == $id) :
+                                            $competitionTypeName = $innerRow['name'];
+                                        endif;
+                                    endforeach;
+                                endif;
                             ?>
                                 <tr>
                                     <td><a href="<?= base_url('admin/competitions/check/' . $row->id) ?>"><?php echo $row->name ?></a></td>
@@ -91,7 +95,7 @@
                 <form class="d-flex flex-column align-items-center" <?= base_url('add') ?> method="POST">
                     <div class="input-group mb-3">
                         <span class="input-group-text" style="width: 20%;" id="name">Name</span>
-                        <input type="text" class="form-control" name="name" placeholder="Name" aria-label="name" aria-describedby="name">
+                        <input type="text" class="form-control" name="name" placeholder="Name" aria-label="name" aria-describedby="name" required>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" style="width: 25%;" id="Description">Description</span>
@@ -99,30 +103,23 @@
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" style="width: 25%;" id="YearRunning">Year Running</span>
-                        <input type="text" class="form-control" name="yearRunning" placeholder="Year Running" aria-label="yearRunning" aria-describedby="email">
+                        <input type="text" class="form-control" name="yearRunning" placeholder="Year Running" aria-label="yearRunning" aria-describedby="email" required>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" style="width: 32%;" id="cT">Competition Type</span>
 
-                        <!-- php script for showing drop down menu of competition types -->
-                        <?php
-
-                        // Connecting to the database
-                        $conn = mysqli_connect("localhost", "root", "", "cricket");
-                        $result = mysqli_query($conn, "SELECT * FROM nsca_competition_types");
-
-                        ?>
-
                         <!-- Fetching data from the database and displaying the data as a dropdown menu -->
                         <select class="form-control" name="competitionType" aria-label="competitionType" aria-describedby="fb" placeholder="Competition Type">
                             <?php
-                            while ($row = mysqli_fetch_array($result)) {
+                                if ($competitionType) :
+                                    foreach ($competitionType as $innerRow) :
                             ?>
 
-                                <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
+                                <option value="<?php echo $innerRow['id']; ?>"><?php echo $innerRow['name']; ?></option>
 
                             <?php
-                            }
+                                    endforeach;
+                                endif;
                             ?>
 
                         </select>

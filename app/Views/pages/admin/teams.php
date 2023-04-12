@@ -272,7 +272,7 @@
                                     </tr>
                                     </thead>
 
-                                    <tbody id="team-member-list" data-team-isset="<?= $teamIsSet ?>">
+                                    <tbody data-team-isset="<?= $teamIsSet ?>">
                                     <?php if (! $teamIsSet) { ?>
                                         <tr>
                                             <td class="col-9 view-table-data"><br></td>

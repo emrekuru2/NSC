@@ -45,7 +45,13 @@
                         </div>
                             <div class="col-12 col-lg-6" id="endyeardiv">
                                 <div class="startyear">
-                                <label for="endyear" class="form-label">End year:</label>
+                                    <label for="endyear" class="form-label">End year:</label>
+                                </div>
+                                <?php if ($isActive) : ?>
+                                    <input type="number" class="form-control" id="endyear" name="endyear" disabled>
+                                <?php else: ?>
+                                    <input type="number" class="form-control" id="endyear" name="endyear" value=<?=esc($years[1])?>>
+                                <?php endif; ?>
                                 <div>
                                     <?php if ($isActive) : ?>
                                         <input class="form-check-input" type="checkbox"  data-status="open" id="flexCheckDefault" name="flexCheckDefault" checked>
@@ -56,12 +62,6 @@
                                     <?php endif; ?>
 
                                 </div>
-                                </div>
-                                <?php if ($isActive) : ?>
-                                    <input type="number" class="form-control" id="endyear" name="endyear" disabled>
-                                <?php else: ?>
-                                    <input type="number" class="form-control" id="endyear" name="endyear" value=<?=esc($years[1])?>>
-                                <?php endif; ?>
                             </div>
                             <label for="users[]" class="form-label">Committee members:</label>
                             <select id="users[]" name="users[]" multiple="multiple" required>
