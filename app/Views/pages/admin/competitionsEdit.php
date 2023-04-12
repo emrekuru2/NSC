@@ -26,25 +26,18 @@
                     <label for="content" class="form-label">Competition Type</label>
                     <label for="title"></label>
 
-                    <!-- php script for showing drop down menu of competition types -->
-                    <?php
-
-                    // Connecting to the database
-                    $conn = mysqli_connect("localhost", "root", "", "cricket");
-                    $result = mysqli_query($conn, "SELECT * FROM nsca_competition_types");
-
-                    ?>
-
                     <!-- Fetching data from the database and displaying the data as a dropdown menu -->
                     <select id="title" class="form-control" name="competitionType" aria-label="competitionType" aria-describedby="fb" placeholder="Competition Type" value="<?= $competition->competitionType ?>">
                         <?php
-                        while ($row = mysqli_fetch_array($result)) {
+                        if ($competitionType) :
+                            foreach ($competitionType as $innerRow) :
                         ?>
 
-                            <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
+                            <option value="<?php echo $innerRow['id']; ?>"><?php echo $innerRow['name']; ?></option>
 
                         <?php
-                        }
+                            endforeach;
+                        endif;
                         ?>
 
                     </select>
