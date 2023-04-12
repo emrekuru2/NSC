@@ -61,9 +61,42 @@ class UsersController extends BaseController
 
     public function userDetails(int $id)
     {
+        $user = model(UserModel::class)->find($id);
+
+        // get users team
+        $teamUser = model(TeamUserModel::class)->where('userID', $user->id)->first();
+        // get team ID
+        // if user is in a team, get the team name
+        if ($teamUser != null) {
+            $team = model(TeamModel::class)->where('clubID', $teamUser->teamID)->first();
+            $user->team = $team->name;
+        } else {
+            $user->team = 'none';
+        }
+        // get users club
+        $clubUser = model(ClubUserModel::class)->where('userID', $user->id)->first();
+        // get team ID
+        // if user is in a team, get the team name
+        if ($clubUser != null) {
+            $team = model(ClubModel::class)->where('id', $clubUser->clubID)->first();
+            $user->club = $team->name;
+        } else {
+            $user->club = 'none';
+        }
+
+        // get users role
+        $role = model(RoleModel::class)->where('user_id', $user->id)->first();
+        if ($role != null){
+            $user->role = $role->permission;
+        } else {
+            $user->role = 'none';
+        }
+        // get roles
+        $roles = model(RoleModel::class)->distinct()->findAll();
         $data = [
             'title' => 'User Editing',
-            'user'  => model(UserModel::class)->find($id),
+            'user'  => $user,
+            'roles' => $roles,
             'teams' => model(TeamModel::class)->findAll(),
             'clubs' => model(ClubModel::class)->findAll(),
         ];

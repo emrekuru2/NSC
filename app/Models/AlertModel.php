@@ -19,16 +19,10 @@ class AlertModel extends Model
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
 
-    // Validation
-    protected $validationRules      = [];
-    protected $validationMessages   = [];
-    protected $skipValidation       = false;
-    protected $cleanValidationRules = true;
-
     // Functions
 
-    public function deactivate(int $id)
+    public function disable(int $id): bool
     {
-        $this->update($id, ['status' => 0]);
+        return ($this->update($id, ['status' => 0])) ? true : false;
     }
 }

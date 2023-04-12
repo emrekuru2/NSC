@@ -144,6 +144,14 @@
     cursor: pointer;
 }
 
+button > svg {
+    vertical-align: baseline !important;
+}
+
+/*.align-items-center {*/
+/*    align-items: center;*/
+/*}*/
+
 /* BOOTSTRAP SPECIFIC CUSTOMIZATION */
 
 .nav-z {

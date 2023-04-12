@@ -31,19 +31,26 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 
 // Routing for general views
-$routes->get('/', 'Main\HomeController::index');
-$routes->get('clubs', 'Main\ClubsController::index');
-$routes->get('teams', 'Main\TeamsController::index');
-$routes->get('committees', 'Main\CommitteesController::index');
-$routes->get('development', 'Main\DevelopmentController::index');
-$routes->get('news', 'Main\NewsController::index');
-$routes->get('contact', 'Main\ContactController::index');
-$routes->get('faqs', 'Main\FaqsController::index');
-$routes->get('about', 'Main\AboutController::index');
-$routes->match(['post'], 'contactAdmins', 'Main\ContactController::contactAdmins');
-// News functional routing
-$routes->get('news/(:num)', 'Main\NewsController::getNewsByID/$1');
-$routes->get('development/(:num)', 'Main\DevelopmentController::register/$1');
+$routes->group('', ['filter' => 'alertfilter'], static function ($routes) {
+    $routes->get('/', 'Main\HomeController::index');
+    $routes->get('clubs', 'Main\ClubsController::index');
+    $routes->get('teams', 'Main\TeamsController::index');
+    $routes->get('committees', 'Main\CommitteesController::index');
+    $routes->get('development', 'Main\DevelopmentController::index');
+    $routes->get('news', 'Main\NewsController::index');
+    $routes->get('contact', 'Main\ContactController::index');
+    $routes->get('faqs', 'Main\FaqsController::index');
+    $routes->get('about', 'Main\AboutController::index');
+    $routes->match(['post'], 'contactAdmins', 'Main\ContactController::contactAdmins');
+    // News functional routing
+    $routes->get('news/(:num)', 'Main\NewsController::getNewsByID/$1');
+    $routes->get('development/(:num)', 'Main\DevelopmentController::register/$1');
+});
+
+$routes->get('join', 'Main\JoinClubController::index');
+$routes->match(['post'], 'join_club', 'Main\JoinClubController::joinClub');
+$routes->match(['post'], 'delete_request', 'Main\JoinClubController::deleteRequest');
+
 
 // Routing for admin views and functions
 $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
@@ -67,6 +74,10 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->get('competitions/delete/(:num)', 'Admin\CompetitionsController::delete/$1');
     $routes->get('competitions/check/(:num)', 'Admin\CompetitionsController::check/$1');
     $routes->get('CompetitionType/edit/(:num)', 'Admin\CompetitionTypeController::edit/$1');
+    $routes->get('CompetitionType/check/(:num)', 'Admin\CompetitionTypeController::check/$1');
+    $routes->get('CompetitionType/update/(:num)', 'Admin\CompetitionTypeController::update/$1');
+
+
     $routes->get('CompetitionType/edit/dashboard', 'Admin\DashController::index');
     $routes->get('CompetitionType/edit/alerts', 'Admin\AlertsController::index');
     $routes->get('CompetitionType/edit/clubs', 'Admin\ClubsController::index');
@@ -74,6 +85,8 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->get('CompetitionType/edit/competitions', 'Admin\CompetitionsController::index');
     $routes->get('CompetitionType/edit/CompetitionType', 'Admin\CompetitionTypeController::index');
     $routes->get('CompetitionType/delete/(:num)', 'Admin\CompetitionTypeController::delete/$1');
+
+
 
     // Functions
     $routes->match(['post'], 'editUser/(:num)', 'Admin\UsersController::editUser/$1');
@@ -106,12 +119,18 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->match(['post'], 'removeClubMember', 'Admin\ClubsController::removeMember');
     $routes->match(['post'], 'addTeamsToClub', 'Admin\ClubsController::addTeams');
     $routes->match(['post'], 'removeTeamFromClub', 'Admin\ClubsController::removeTeam');
-    $routes->post('setAlert', 'Admin\AlertsController::setAlert');
+    $routes->post('setAlert', 'Admin\AlertsController::set');
 
     $routes->match(['post'], 'CompetitionType', 'Admin\CompetitionTypeController::store');
     $routes->match(['post'], 'competitions', 'Admin\CompetitionsController::store');
     $routes->match(['put'], 'CompetitionType/update/(:num)', 'Admin\CompetitionTypeController::update/$1');
     $routes->match(['put'], 'competitions/update/(:num)', 'Admin\CompetitionsController::update/$1');
+    $routes->match(['post'], 'disable/(:num)', 'Admin\AlertsController::disable/$1');
+
+    $routes->match(['post'], 'createAlert', 'Admin\AlertsController::create');
+    $routes->match(['post'], 'updateAlert/(:num)', 'Admin\AlertsController::update/$1');
+    $routes->match(['get'], 'deleteAlert/(:num)', 'Admin\AlertsController::delete/$1');
+    $routes->match(['get'], 'editAlert/(:num)', 'Admin\AlertsController::editMode/$1');
 });
 
 // Codeigniter's default auth routing

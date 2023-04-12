@@ -128,9 +128,13 @@ class EmailController extends BaseController
             }
         }
 
-        $email->setFrom('testadmin@cricketnovascotia.ca', 'Confirm Registration');
+        $email->setFrom('testadmin@cricketnovascotia.ca', 'Cricket Nova Scotia Association');
         $email->setSubject($subject);
-        $email->setMessage($message);
+        $emailContent = [
+            "subject" => $subject,
+            "message" => $message
+        ];
+        $email->setMessage(view("templates/email", $emailContent));
 
         if ($email->send()) {
             $data = [

@@ -42,4 +42,4 @@
   });
 </script>
 
-<textarea id="editor" name="content"></textarea>
+<textarea id="editor" name="message"></textarea>

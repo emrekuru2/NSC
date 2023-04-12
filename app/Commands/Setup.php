@@ -77,7 +77,7 @@ class Setup extends BaseCommand
         $db_port     = CLI::prompt('Your database port', '3306', 'required');
         CLI::newLine();
 
-        if (! $this->editENV([$env, $base_url, $db_hostname, $db_name, $db_user, $db_pswd, $db_driver, $db_prefix, $db_port])) {
+        if (!$this->editENV([$env, $base_url, $db_hostname, $db_name, $db_user, $db_pswd, $db_driver, $db_prefix, $db_port])) {
             CLI::print('Settings could not be applied', 'red');
             CLI::newLine();
 
@@ -85,6 +85,18 @@ class Setup extends BaseCommand
         }
         CLI::print('Settings applied successfully!', 'green');
         CLI::newLine();
+
+        $continue = CLI::prompt('Would you like to migrate tables and seed the data?', ['y', 'n']);
+
+        if ($continue == 'n') {
+            CLI::newLine();
+            return CLI::write('Setup Completed', 'green');
+        }
+
+        if (!command('db:create ' . $db_name)) {
+            \Config\Database::forge()->dropDatabase($db_name);
+            command('db:create ' . $db_name);
+        }
 
         $this->call('migrate');
 
@@ -95,7 +107,7 @@ class Setup extends BaseCommand
         }
 
         CLI::newLine();
-        CLI::write('Setup Completed', 'blue', 'yellow');
+        CLI::write('Setup Completed', 'green');
     }
 
     public function editENV(array $props): bool
@@ -103,8 +115,8 @@ class Setup extends BaseCommand
         $baseEnv = ROOTPATH . 'env';
         $envFile = ROOTPATH . '.env';
 
-        if (! is_file($envFile)) {
-            if (! is_file($baseEnv)) {
+        if (!is_file($envFile)) {
+            if (!is_file($baseEnv)) {
                 CLI::write('Both default shipped `env` file and custom `.env` are missing.', 'yellow');
                 CLI::write('It is impossible to write the new environment type.', 'yellow');
                 CLI::newLine();
