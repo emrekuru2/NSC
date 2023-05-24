@@ -14,16 +14,20 @@
     │   ├── Libraries/      Useful classes that don't fit in another category.
     │   ├── Models/         Models work with the database to represent the business entities.
     │   ├── ThirdParty/     ThirdParty libraries that can be used in application.
-    │   └── Views/          Views make up the HTML that is displayed to the client.       
+    │   └── Views/          Views make up the HTML that is displayed to the client. 
+    ├── docker/             Docker environment for development.      
     ├── public/             Where the web server serves the application. CSS, JS, and images go here.
     ├── tests/              Application tests
     ├── vendor/             Project dependencies are stored here. CodeIgniter4 is here as well.
-    ├── .env                A file used for setting up general environment variables.
+    ├── writable/           Application cache data is stored here.
+    ├── .gitlab-ci.yml      CI/CD pipeline.
+    ├── env                 A template file used for setting up general environment variables.
     ├── .gitignore          Gitignore properties.
     ├── builds              Framework specific. Shouldn't be touched.
     ├── composer.json       Composer dependency list
     ├── composer.lock       Dependency locking
     ├── LICENSE             MIT License
+    ├── docker-compose.yml  Docker setup script
     ├── phpunit.xml.dist    Framework specific. Shouldn't be touched.
     ├── preload.php         Framework specific. Shouldn't be touched.
     └── spark               Framework specific. Shouldn't be touched.
