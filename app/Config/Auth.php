@@ -35,6 +35,22 @@ class Auth extends ShieldAuth
 
     /**
      * --------------------------------------------------------------------
+     * Database Table Customization
+     * --------------------------------------------------------------------
+     * If you want to change the default table names, you can change the table names here
+     */
+    public array $tables = [
+        'users'             => 'nsca_users',
+        'identities'        => 'auth_identities',
+        'logins'            => 'auth_logins',
+        'token_logins'      => 'auth_token_logins',
+        'remember_tokens'   => 'auth_remember_tokens',
+        'groups_users'      => 'auth_groups_users',
+        'permissions_users' => 'auth_permissions_users',
+    ];
+
+    /**
+     * --------------------------------------------------------------------
      * Redirect urLs
      * --------------------------------------------------------------------
      * The default URL that a user will be redirected to after
@@ -221,16 +237,7 @@ class Auth extends ShieldAuth
      * --------------------------------------------------------------------
      * Fields that are available to be used as credentials for login.
      */
-    public array $validFields = [
-        'first_name',
-        'last_name',
-        'email',
-        'phone',
-        'address',
-        'city',
-        'province',
-        'zip',
-    ];
+    public array $validFields = ['email'];
 
     /**
      * --------------------------------------------------------------------
@@ -346,7 +353,7 @@ class Auth extends ShieldAuth
      *
      * @var class-string<UserModel>
      */
-    public string $userProvider = 'App\Models\UserModel';
+    public string $userProvider = \App\Models\UserModel::class;
 
     /**
      * Returns the URL that a user should be redirected
