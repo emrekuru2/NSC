@@ -14,12 +14,10 @@ class Auth extends Migration
             'id'          => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
             'first_name'  => ['type' => 'varchar', 'constraint' => 30, 'null' => true],
             'last_name'   => ['type' => 'varchar', 'constraint' => 30, 'null' => true],
-            'email'       => ['type' => 'varchar', 'constraint' => 30, 'null' => true],
-            'phone'       => ['type' => 'int', 'constraint' => 30, 'null' => true],
+            'phone'       => ['type' => 'varchar', 'constraint' => 15, 'null' => true],
             'street'      => ['type' => 'varchar', 'constraint' => 30, 'null' => true],
             'city'        => ['type' => 'varchar', 'constraint' => 30, 'null' => true],
             'region'      => ['type' => 'varchar', 'constraint' => 30, 'null' => true],
-            'country'     => ['type' => 'varchar', 'constraint' => 30, 'null' => true],
             'postal'      => ['type' => 'varchar', 'constraint' => 30, 'null' => true],
             'image'       => ['type' => 'varchar', 'constraint' => 120, 'null' => false, 'default' => 'assets/images/Users/default.png'],
             'active'      => ['type' => 'tinyint', 'constraint' => 1, 'null' => 0, 'default' => 0],
@@ -28,7 +26,6 @@ class Auth extends Migration
             'updated_at'  => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
         ]);
         $this->forge->addPrimaryKey('id');
-        $this->forge->addUniqueKey('email');
         $this->forge->createTable('nsca_users');
 
         /*
@@ -39,7 +36,6 @@ class Auth extends Migration
             'id'           => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
             'user_id'      => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
             'type'         => ['type' => 'varchar', 'constraint' => 255],
-            'name'         => ['type' => 'varchar', 'constraint' => 255, 'null' => true],
             'secret'       => ['type' => 'varchar', 'constraint' => 255],
             'secret2'      => ['type' => 'varchar', 'constraint' => 255, 'null' => true],
             'expires'      => ['type' => 'datetime', 'null' => true],
