@@ -24,10 +24,14 @@
                 </div>
                 <?php
                 // Connecting to the database and querying the competition type name
-                $conn = mysqli_connect("localhost", "root", "", "cricket");
-                $query = mysqli_query($conn, "SELECT name FROM nsca_competition_types WHERE id = '$competition->typeID'");
-                $result1 = mysqli_fetch_array($query);
-                $competitionTypeName = $result1['name'];
+                    if ($competitionType) :
+                        foreach ($competitionType as $innerRow) :
+                            $competitionTypeID = $innerRow['id'];
+                            if ($competitionTypeID == $competition->typeID) :
+                                $competitionTypeName = $innerRow['name'];
+                            endif;
+                        endforeach;
+                    endif;
                 ?>
                 <div class="w-100 mb-3">
                     <label for="content" class="form-label">Competition Type</label>

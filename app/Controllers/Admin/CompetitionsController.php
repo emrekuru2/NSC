@@ -4,15 +4,18 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\CompetitionModel;
+use App\Models\competitionTypeModel;
 
 class CompetitionsController extends BaseController
 {
     public function index()
     {
         $competition = new CompetitionModel();
+        $competitionType = new competitionTypeModel();
 
         $data = [
             'competition' => $competition->findAll(),
+            'competitionType' => $competitionType->findAll(),
             'title'       => 'Competitions',
         ];
 
@@ -40,10 +43,11 @@ class CompetitionsController extends BaseController
     public function edit($id = null)
     {
         $competitionModel = new CompetitionModel();
+        $competitionTypeModel = new competitionTypeModel();
 
         $data = [
             'competition' => $competitionModel->find($id),
-
+            'competitionType' => $competitionTypeModel->findAll(),
             'title' => 'Competitions',
         ];
 
@@ -53,10 +57,11 @@ class CompetitionsController extends BaseController
     public function check($id = null)
     {
         $competitionModel = new CompetitionModel();
+        $competitionTypeModel = new competitionTypeModel();
 
         $data = [
             'competition' => $competitionModel->find($id),
-
+            'competitionType' => $competitionTypeModel->findAll(),
             'title' => 'Competitions',
         ];
 

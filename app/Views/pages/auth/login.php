@@ -38,7 +38,6 @@
                         <div class="col-md-12">
                             <label for="inputPassword" class="form-label">Password</label>
                             <input type="password" class="form-control" id="inputPassword" name="password" inputmode="text" autocomplete="current-password" placeholder="<?= lang('Auth.password') ?>" required />
-
                         </div>
                         <?php if (setting('Auth.sessionConfig')['allowRemembering']) : ?>
                             <div class="form-check">

@@ -89,11 +89,11 @@
                 <form class="d-flex flex-column align-items-center" <?= base_url('add') ?> method="POST">
                     <div class="w-100 mb-3">
                         <label for="content" class="form-label">Competition Type Name</label>
-                        <label for="title"></label><input type="text" name="name" class="form-control" id="title">
+                        <label for="title"></label><input type="text" name="name" class="form-control" id="title" required>
                     </div>
                     <div class="w-100 mb-3">
                         <label for="content" class="form-label">Description</label>
-                        <textarea class="form-control" name="description" id="content" rows="10"></textarea>
+                        <textarea class="form-control" name="description" id="content" rows="10" required></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary w-25">Create</button>
                 </form>
