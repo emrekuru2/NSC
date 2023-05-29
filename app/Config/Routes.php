@@ -120,6 +120,9 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     // Development
     $routes->get('development', 'Admin\DevelopmentController::index');
 
+    // Development
+    $routes->get('developmentTypes', 'Admin\DevelopmentTypesController::index');
+
     // Users
     $routes->get('users', 'Admin\UsersController::index');
     $routes->get('users/edit/(:num)', 'Admin\UsersController::userDetails/$1');
