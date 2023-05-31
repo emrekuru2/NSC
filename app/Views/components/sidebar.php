@@ -80,7 +80,7 @@
           <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#logout"><i class="fa-solid fa-right-from-bracket fa-lg"></i> </button>
         </div>
       </div>
-      <?= view_cell('\App\Libraries\Alerts::modal', ['content' => 'Are you sure you wan to log out?', 'id' => 'logout']) ?>
+      <?= view_cell('\App\Libraries\Alerts::modal', ['content' => 'Are you sure you want to log out?', 'id' => 'logout', "action" => "/logout"]) ?>
     </div>
   </div>
 </nav>

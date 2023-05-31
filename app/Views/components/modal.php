@@ -9,7 +9,7 @@
         <?= $content ?>
       </div>
       <div class="modal-footer">
-        <a href="/logout" class="btn btn-secondary" role="button">Yes</a>
+        <a href="<?= $action ?>" class="btn btn-secondary" role="button">Yes</a>
         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
       </div>
     </div>
