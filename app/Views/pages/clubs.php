@@ -64,6 +64,36 @@
                         <a id="modal-fb" href="" title="Facebook"></a>
                     </div>
                 </div>
+                
+                <br>
+
+                <div class="row">
+                    <!---
+                    <div class="col-1">
+                        <i class="bi bi-people" title="Teams"></i>
+                    </div>
+                    <div class="col-11">
+                        <a id="" href="" title="Teams"></a>
+                    </div>
+                    --->
+                    <?php if (!empty($clubs) && is_array($clubs)) : ?>
+                        <?php foreach ($clubs as $club) : ?>
+                        <?php if (!empty($teams)) : ?>
+                            <ul>
+                                <?php foreach ($teams as $team) : ?>
+                                    <?php if($team->clubID == $club->id): ?>
+                                        <li>
+                                            <a href="<?= base_url("/teams/{$team->id}") ?>">Team: <?= $team->name ?></a>
+                                        </li>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php else: ?>
+                            <p>No teams found.</p>
+                        <?php endif; ?>
+                        <?php endforeach ?>
+                        <?php endif; ?>
+                    </div>
             </div>
 
             <div class="modal-footer">
@@ -86,8 +116,22 @@
                         <div class="card h-100 shadow border-0">
                             <img class="card-img-top" src="<?=base_url("/assets/images/Clubs/default.png")?>" alt="..." />
                             <div class="card-body p-4">
-                                <input type="hidden" name="club-json" value='{"cName":"<?=$club->name?>", "email":"<?= $club->email == null || $club->email == '' ? 'N/A' : $club->email ?>", "description":"<?= $club->description == null || $club->description == '' ? 'N/A' : $club->description ?>", "website":"<?= $club->website == null || $club->website == '' ? 'N/A' : $club->website ?>", "phone":"<?= $club->phone == null || $club->phone == '' ? 'N/A' : $club->phone ?>", "facebook":"<?= $club->facebook == null || $club->facebook == '' ? 'N/A' : $club->facebook ?>"}'>
+                                <input type="hidden" name="club-json" value='{"cName":"<?=$club->name?>", "email":"<?= $club->email == null || $club->email == '' ? 'N/A' : $club->email ?>", "description":"<?= $club->description == null || $club->description == '' ? 'N/A' : $club->description ?>", "website":"<?= $club->website == null || $club->website == '' ? 'N/A' : $club->website ?>", "phone":"<?= $club->phone == null || $club->phone == '' ? 'N/A' : $club->phone ?>", "facebook":"<?= $club->facebook == null || $club->facebook == '' ? 'N/A' : $club->facebook ?>","teams": <?= json_encode($club->teams) ?>}'>
                                 <button type="button" name="club-button" id="<?=$club->id?>" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#clubsModal"><?=$club->name?></button>
+                                <h5>Teams:</h5>
+                                <?php if (!empty($teams)) : ?>
+                                    <ul>
+                                        <?php foreach ($teams as $team) : ?>
+                                            <?php if($team->clubID == $club->id): ?>
+                                                <li>
+                                                    <a href="<?= base_url("/teams/{$team->id}") ?>">Team: <?= $team->name ?></a>
+                                                </li>
+                                                <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                <?php else: ?>
+                                    <p>No teams found.</p>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
