@@ -44,7 +44,7 @@ class DevelopmentController extends BaseController
         }
         $dev->fill($data);
 
-        if (model(DevModel::class)->save($dev)) {
+        if (model(DevModel::class)->save($dev)) { 
             $data = [
                 'type'    => 'success',
                 'content' => 'Development program created successfully',
