@@ -7,7 +7,7 @@
     <div class="card-body">
         <?= view_cell('\App\Libraries\Contents::search', ['route' => 'users/edit', 'name' => 'User', 'array' => $users, 'fields' => ['first_name', 'last_name'], 'useName' => true, 'useDivider' => true]); ?>
     <div class="checkboxes" style="margin: 8px; font-size:16px; margin-bottom:12px; ">
-        <form method="get" action="#">
+        <form method="get" >
             <input class="checkbox-value" style="margin:5px;  height:16px; width:16px; vertical-align: middle;" type="radio" name="users[]" value="name"><b>Name</b></input>
             <input class="checkbox-value" style="margin:5px;  height:16px; width:16px; vertical-align: middle;" type="radio" name="users[]" value="surname"><b>Surname</b></input>
             <input class="checkbox-value" style="margin:5px;  height:16px; width:16px; vertical-align: middle;" type="radio" name="users[]" value="team"><b>Team</b></input>
