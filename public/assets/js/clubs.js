@@ -6,9 +6,9 @@ for (let i = 0; i < clubInfoButtons.length; i++) {
     clubInfoButtons[i].addEventListener('click', runModal.bind(this, i));
 }
 
-function runModal(j) {
+function runModal(j, buttonId) {
     let json = JSON.parse(clubJsons[j].value);
-    document.getElementById('modal-header').innerText = json.cName
+    document.getElementById('modal-header').innerText = json.cName;
 
     document.getElementById('modal-description').innerText = json.description
 
