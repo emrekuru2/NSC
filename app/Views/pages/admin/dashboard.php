@@ -1,5 +1,4 @@
 <?= $this->extend('layouts/admin') ?>
-<?= $this->extend('layouts/manager') ?>
 
 <?= $this->section('adminContent') ?>
 
