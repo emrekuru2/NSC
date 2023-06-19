@@ -41,84 +41,91 @@ class ClubsController extends BaseController
         return view('pages/admin/clubs', $data);
     }
 
-    public function updateClub()
-    {
-        helper('image');
-        $clubModel = model(ClubModel::class);
-        $userModel = model(UserEmailModel::class);
+   public function updateClub()
+{
+    helper('image');
+    $clubModel = model(ClubModel::class);
+    $userModel = model(UserEmailModel::class);
 
-        $clubID       = esc($this->request->getPost('update-club-id'));
-        $email        = esc($this->request->getPost('email'));
-        $name         = esc($this->request->getPost('updateClubName'));
-        $abbreviation = esc($this->request->getPost('abbreviation'));
-        $description  = esc($this->request->getPost('description'));
-        $website      = esc($this->request->getPost('website'));
-        $phone        = esc($this->request->getPost('phone'));
-        $facebook     = esc($this->request->getPost('facebook'));
-        $image        = $this->request->getFile('image');
+    $clubID       = esc($this->request->getPost('update-club-id'));
+    $email        = esc($this->request->getPost('email'));
+    $name         = esc($this->request->getPost('updateClubName'));
+    $abbreviation = esc($this->request->getPost('abbreviation'));
+    $description  = esc($this->request->getPost('description'));
+    $website      = esc($this->request->getPost('website'));
+    $phone        = esc($this->request->getPost('phone'));
+    $facebook     = esc($this->request->getPost('facebook'));
+    $image        = $this->request->getFile('image');
 
-        $club = $clubModel->find($clubID);
+    $club = $clubModel->find($clubID);
 
-        if ($image->getSize() > 0) {
-            // Deleting old image
-            if (! str_contains($club->image, 'default.png')) {
-                unlink($club->image);
-            }
-
-            $filepath = storeImage('Clubs', $image);
-            if (! $filepath) {
-                $filepath = 'assets/images/Clubs/default.png';
-            }
-        } else {
-            $filepath = $club->image;
+    if ($image->getSize() > 0) {
+        // Deleting old image
+        if (! str_contains($club->image, 'default.png')) {
+            unlink($club->image);
         }
 
-        try {
-            $clubModel->set('email', $email)
-                ->set('name', $name)
-                ->set('abbreviation', $abbreviation)
-                ->set('description', $description)
-                ->set('website', $website)
-                ->set('phone', $phone)
-                ->set('facebook', $facebook)
-                ->set('image', $filepath)
-                ->where('id', $clubID)
-                ->update();
-        } catch (Exception $e) {
-            return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error occurred while updating club. Please try again.']);
+        $filepath = storeImage('Clubs', $image);
+        if (! $filepath) {
+            $filepath = 'assets/images/Clubs/default.png';
+        }
+    } else {
+        $filepath = $club->image;
+    }
+
+    try {
+        $clubModel->set('email', $email)
+            ->set('name', $name)
+            ->set('abbreviation', $abbreviation)
+            ->set('description', $description)
+            ->set('website', $website)
+            ->set('phone', $phone)
+            ->set('facebook', $facebook)
+            ->set('image', $filepath)
+            ->where('id', $clubID)
+            ->update();
+    } catch (Exception $e) {
+        return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error occurred while updating club. Please try again.']);
+    }
+    if (empty($name) || empty($abbreviation) || empty($description)) {
+        return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Please fill in all required fields.']);
+    }
+
+    // ...
+
+    // Updating Club Members
+    $json = $this->request->getPost('update-members-JSON');
+
+    if ($json !== '') {
+        $clubJSON   = json_decode($json);
+        $addSuccess = 0;
+        $numMembers = count($clubJSON->members);
+
+        foreach ($clubJSON->members as $member) {
+            $memberName = $member[0];
+            $firstName  = explode('|', $memberName)[0];
+            $lastName   = explode('|', $memberName)[1];
+
+            if ($member[1] === 'manager') {
+                $isManager = $member[1] = 1;
+            } else {
+                $isManager = $member[1] = 0;
+            }
+
+            $memberID = $userModel->select('id')->where('first_name', $firstName)->where('last_name', $lastName)->first()->id;
+
+            try {
+                model(ClubUserModel::class)->set('isManager', $isManager)
+                    ->where('userID', $memberID)
+                    ->where('clubID', $clubID)
+                    ->update();
+                $addSuccess++;
+            } catch (Exception $e) {
+                echo "<script> console.log('Failed to update role for: " . $memberID . ", in club: " . $clubID . ".') </script>";
+            }
         }
 
-        // Updating Club Members
-        $json = $this->request->getPost('update-members-JSON');
 
-        if ($json !== '') {
-            $clubJSON   = json_decode($json);
-            $addSuccess = 0;
-            $numMembers = count($clubJSON->members);
-
-            foreach ($clubJSON->members as $member) {
-                $memberName = $member[0];
-                $firstName  = explode('|', $memberName)[0];
-                $lastName   = explode('|', $memberName)[1];
-
-                if ($member[1] === 'manager') {
-                    $isManager = $member[1] = 1;
-                } else {
-                    $isManager = $member[1] = 0;
-                }
-
-                $memberID = $userModel->select('id')->where('first_name', $firstName)->where('last_name', $lastName)->first()->id;
-
-                try {
-                    model(ClubUserModel::class)->set('isManager', $isManager)
-                        ->where('userID', $memberID)
-                        ->where('clubID', $clubID)
-                        ->update();
-                    $addSuccess++;
-                } catch (Exception $e) {
-                    echo "<script> console.log('Failed to update role for: ' + '" . $memberID . ', in club: ' . $clubID . ".') </script>";
-                }
-            }
 
             if ($numMembers > 0 && $addSuccess === $numMembers) {
                 return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Club updated successfully!']);

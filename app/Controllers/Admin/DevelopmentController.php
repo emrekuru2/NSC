@@ -64,6 +64,22 @@ class DevelopmentController extends BaseController
     public function createProgType()
     {
         $data    = $this->request->getPost();
+        $validationRules = [
+            'name' => 'required',
+            'min_age' => 'required',
+            'max_age' => 'required',
+            // Add validation rules for other fields that should be required
+        ];
+        
+        // Validate the input data
+        if (!$this->validate($validationRules)) {
+            $data = [
+                'type' => 'danger',
+                'content' => 'Please fill in all the required fields',
+            ];
+            return redirect()->back()->with('alert', $data);
+        }
+
         $devType = new \App\Entities\DevType();
         // combine values of days array into a string
 
