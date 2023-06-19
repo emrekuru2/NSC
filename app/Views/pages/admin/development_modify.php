@@ -79,12 +79,13 @@
                         </div>
                         <div class="col-12 col-lg-6">
                             <label for="typeID" class="form-label">Program Type:</label>
-                            <select name="typeID" id="typeID" name="typeID" required>
+                            <select name="typeID" id="typeID"  required>
                                 <?php if (! empty($devTypes) && is_array($devTypes)) : ?>
                                     <?php foreach ($devTypes as $devType) : ?>
-                                        <option value=<?= esc($devType->id) ?>>
-                                            <?= esc($devType->name) ?>
-                                        </option>
+                                        <?php $selected = ($devType->id == $program->typeID) ? 'selected' : ''; ?>
+                                            <option value="<?= esc($devType->id) ?>" <?= $selected ?>>
+                                                <?= esc($devType->name) ?>
+                                            </option>
                                     <?php endforeach ?>
                                 <?php endif ?>
                             </select>
@@ -147,6 +148,7 @@
 </div>
 <script>
     new MultiSelectTag('days[]') // id
+
 </script>
 
 
