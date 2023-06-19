@@ -33,9 +33,9 @@
                                                 <label class="form-check-label mx-1 flex-grow-1" for="<?= $alert->id ?>"><?= $alert->title ?></label>
                                                 <div class="">
                                                     <a class="btn btn-primary" href=<?= base_url('admin/editAlert/' . $alert->id) ?> role="button">Edit</a>
-                                                    <a class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#delete">Delete</a>
+                                                    <a class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#delete" >Delete</a>
                                                 </div>
-                                                    <?= view_cell('\App\Libraries\Alerts::modal', ['content' => 'Are you sure you want to delete?', 'id' => 'delete', "action" => base_url('admin/deleteAlert/' . $alert->id)]) ?>
+                                                    <?= view_cell('\App\Libraries\Alerts::modal',  ['content' => 'Are you sure you want to delete?', 'id' => 'delete' , "action" => base_url('admin/deleteAlert/' . $alert->id)]) ?>
                                                  </div>   
                                         </li>
                                     <?php endforeach ?>
