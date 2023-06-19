@@ -183,6 +183,10 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     $routes->post('deleteProgram', 'Admin\DevelopmentController::deleteProgram');
     $routes->post('modify_development', 'Admin\DevelopmentController::modify');
 
+    // Development Type
+    $routes->post('developmentTypes', 'Admim\DevelopmentTypesController::store');
+    // $routes->get('admin/developmentTypes/(:num)/edit', 'Admin\DevelopmentTypesController::edit/$1');
+
     // Users
     $routes->post('editUser/(:num)', 'Admin\UsersController::editUser/$1');
 
