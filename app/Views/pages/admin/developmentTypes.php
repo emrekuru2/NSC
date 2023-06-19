@@ -1,32 +1,112 @@
 <?= $this->extend('layouts/admin') ?>
 
-<?= $this->section('adminContent') ?>
+<?= $this->section('adminContent') ?> 
 
-<div class="col-lg-12 mb-4">
-    <div class="card shadow">
-        <div class="card-header">Create Program Type</div>
-        <div class="card-body">
-            <form method="post" action="createProgType">
-                <div class="w-100 mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" name="name">
-                </div>
+<!-- Style for the deletion success alert -->
+<style>
+    .alert {
+        padding: 10px;
+        color: white;
+        opacity: 1;
+        transition: opacity 0.6s;
+        margin-bottom: 15px;
+        width: 400px;
 
-                <div class="row">
-                    <div class="col-6 mb-3">
-                        <label for="min_age" class="form-label">Minimum Age</label>
-                        <input type="number" class="form-control" id="min_age" name="min_age">
+    }
+
+    .alert.success {
+        background-color: #4CAF50;
+    }
+
+    .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .closebtn:hover {
+        color: black;
+    }
+</style>
+
+
+<div class="row">
+    <div class="col-lg-4">
+        <div class="row-lg">
+            <div class="col-lg-12">
+
+            </div>
+            <div class="col-lg-12">
+                <div class="card shadow">
+                    <div class="card-header">Development Type List</div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Development Type Name</th>
+                                </tr>
+                            </thead>
+                            <?php
+                            if (session()->getFlashdata('status')) {
+                            ?>
+                                <div style="width:90%" id="alertMessage" class=" alert success">
+                                    <span class="closebtn" onclick="closeAlert()">×</span>
+                                    <strong>Success!</strong> Your Request Processed successfully.
+                                </div>
+                            <?php
+                            }
+
+                            ?>
+                            <tbody class="table-group-divider">
+                                <!-- THIS PART NEEDS TO BE DYNAMICALLY GENERATED -->
+                                <?php if ($devType) : ?>
+                                    <?php foreach ($devType as $row) : ?>
+                                        <tr>
+                                            <td><a href="<?= base_url('admin/developmentTypes/check/' . $row->id) ?>"><?php echo $row->name ?></a></td>
+                                            <td style=" display:flex;">
+                                                <a style="margin-right:10px;" href="<?= base_url('admin/developmentTypes/edit/' . $row->id) ?>" class="btn btn-primary btn-sm">Edit</a>
+                                                <a href="<?= base_url('admin/CompetitionType/delete/' . $row->id) ?>" class="btn btn-primary btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Competition Type?')">Delete</a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="col-6">
-                        <label for="max_age" class="form-label">Maximum Age</label>
-                        <input type="number" class="form-control" id="max_age" name="max_age">
-                    </div>
                 </div>
-
-
-                <button type="submit" class="btn btn-primary w-100">Create</button>
-            </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div class="card shadow">
+            <div class="card-header">Create Development Type: </div>
+            <div class="card-body">
+                <form class="d-flex flex-column align-items-center" <?= base_url('add') ?> method="POST">
+                    <div class="w-100 mb-3">
+                        <label for="content" class="form-label">Development Type Name</label>
+                        <label for="title"></label><input type="text" name="name" class="form-control" id="title" required>
+                    </div>
+                    <div class="w-100 mb-3">
+                        <label for="content" class="form-label">Description</label>
+                        <textarea class="form-control" name="description" id="content" rows="10" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-25">Create</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
-<?= $this->endSection() ?>
+</div>
+<!-- Script to close the deletion successful message -->
+<script>
+    function closeAlert() {
+        document.getElementById("alertMessage").style.display = 'none';
+    }
+</script>
+
+<?= $this->endSection() ?>  
