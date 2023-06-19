@@ -72,6 +72,12 @@ class CompetitionTypeController extends BaseController
     public function delete($id = null)
     {
         $competitionType = new competitionTypeModel();
+
+
+        if(sizeof($competitionType->findCompetitions($id)) != 0) {
+            return redirect()->back()->with('alert', ['type' => 'danger', 'content' => "Make sure all of the developments associated with this type are deleted first."]);
+        }
+
         $competitionType->delete($id);
 
         return redirect()->to(base_url('admin/CompetitionType'))->with('status', 'successes');
