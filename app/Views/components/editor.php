@@ -42,4 +42,4 @@
   });
 </script>
 
-<textarea id="editor" name="message"></textarea>
+<textarea id="editor" name="content"><?= $editMode ? $currentNews->content : null ?></textarea>

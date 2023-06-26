@@ -130,6 +130,7 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
 
     // News
     $routes->get('news', 'Admin\NewsController::index');
+    $routes->get('editNews/(:num)', 'Admin\NewsController::editMode/$1');
 
     // Email
     $routes->get('email', 'Admin\EmailController::index');
@@ -192,6 +193,7 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
 
     // News
     $routes->post('createNews', 'Admin\NewsController::createNews');
+    $routes->post('updateNews/(:num)', 'Admin\NewsController::update/$1');
 
     // Email
     $routes->post('sendEmail', 'Admin\EmailController::sendEmail');
