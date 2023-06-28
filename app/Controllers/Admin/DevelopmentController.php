@@ -18,7 +18,7 @@ class DevelopmentController extends BaseController
             'programs' => $model->orderBy('id', 'DESC')->paginate(10),
             'devTypes' => $devType->findAll(),
             'pager'    => $model->pager,
-            'title'    => 'Development',
+            'title'    => 'Developments',
         ];
 
         return view('pages/admin/development', $data);

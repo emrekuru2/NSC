@@ -18,7 +18,7 @@ class NewsController extends BaseController
             'title' => 'News',
         ];
 
-        return view('pages/news', $data);
+        return view('pages/main/news', $data);
     }
 
     public function getNewsByID(int $id)

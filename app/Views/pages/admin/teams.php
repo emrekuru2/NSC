@@ -181,7 +181,7 @@
             </div>
 
             <div class="card-body padding-top-half-rem">
-                <?= view_cell('\App\Libraries\Contents::search', ['name' => 'Team', 'array' => $allTeams, 'fields' => ['name'], 'useName' => true, 'useDivider' => true]); ?>
+                <?= view_cell('\App\Libraries\Contents::search', ['array' => $allTeams, 'fields' => ['name'], 'type' => 'teams']); ?>
 
                 <!-- Team List -->
                 <table class="table<?= ! empty($allTeams) ? ' table-hover' : '' ?> margin-bottom-half-rem">
@@ -199,7 +199,7 @@
                         foreach ($allTeams as $teamIndex) : ?>
                             <tr>
                                 <td class="col-12 view-table-padding">
-                                    <a href="<?= '?name=' . str_replace(' ', '+', $teamIndex->name) ?>">
+                                    <a href="<?= url_to('admin_read_team', $teamIndex->name) ?>">
                                         <label class="text-bold width-100 pointer line-height-3rem" for="name"><?= $teamIndex->name ?></label>
                                     </a>
                                 </td>

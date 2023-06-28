@@ -17,7 +17,7 @@ class Clubs extends Migration
             'abbreviation' => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
             'description'  => ['type' => 'varchar', 'constraint' => 512, 'null' => true],
             'website'      => ['type' => 'varchar', 'constraint' => 128, 'null' => true],
-            'phone'        => ['type' => 'varchar', 'constraint' => 12, 'null' => true],
+            'phone'        => ['type' => 'varchar', 'constraint' => 15, 'null' => true],
             'facebook'     => ['type' => 'varchar', 'constraint' => 256, 'null' => true],
             'image'        => ['type' => 'varchar', 'constraint' => 64, 'null' => false, 'default' => 'assets/images/Clubs/default.png'],
             'created_at'   => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],

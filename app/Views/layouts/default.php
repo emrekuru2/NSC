@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 
-<body>
+<body class="bg-light">
     <?php if (session()->getFlashdata('alert') !== NULL) : ?>
         <?= view_cell('\App\Libraries\Alerts::toast', ['type' => session()->getFlashdata('alert')['type'], 'content' => session()->getFlashdata('alert')['content']]) ?>
     <?php endif; ?>

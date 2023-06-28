@@ -26,7 +26,7 @@
             <div class="col-lg-8">
                 <!-- Featured blog post-->
                 <div class="card mb-4">
-                    <a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." style="width: 100%; height: 350px;"/></a>
+                    <a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." style="width: 100%; height: 350px;" /></a>
                     <div class="card-body">
                         <div class="small text-muted">January 1, 2023</div>
                         <h2 class="card-title">Check Out Our Clubs</h2>
@@ -74,18 +74,32 @@
             </div>
         </div>
         <div class="row gx-5">
-            <?php if (! empty($news) && is_array($news)) : ?>
+            <?php if (!empty($news) && is_array($news)) : ?>
                 <?php foreach ($news as $news_item) : ?>
+                    <?php
+                    $html_string = $news_item->content;
+                    $dom         = new DOMDocument();
+                    $dom->loadHTML($html_string);
+
+                    // Extract the contents of each element
+                    $h4_content   = $dom->getElementsByTagName('h4')->item(0)->nodeValue;
+                    $code_content = $dom->getElementsByTagName('code')->item(0)->nodeValue;
+                    $img_src      = $dom->getElementsByTagName('img')->item(0)->getAttribute('src');
+                    ?>
                     <div class="col-lg-4 mb-5">
                         <div class="card h-100 shadow border-0 d-flex align-items-center">
-                            <div class="card-body align-items-center p-4">
-                                <a class="list-group-item">
-                                    <h5 class="card-title"><?= esc($news_item->title) ?></h5>
-                                    <div class="card-footer text-muted p-2"><?= 'Posted on: ' . esc($news_item->created_at) ?></div>
-                                    <div class="text-center p-2">
-                                        <a href="news/<?= esc($news_item->id)?>" class="btn btn-primary btn-block">Find out more</a>
+                            <img class="card-img-top" src="<?= $img_src; ?>" alt="..." />
+                            <div class="card-body p-4">
+                                <div class="badge bg-primary bg-gradient rounded-pill mb-2">News</div>
+                                <h4 class="card-title mb-3"><?= $h4_content ?></h4>
+                                <p class="card-text mb-0"><?= $code_content ?></p>
+                            </div>
+                            <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+                                <div class="d-flex align-items-end justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                        <a href="news/<?= esc($news_item->id) ?>" class="btn btn-primary btn-block">Find out more</a>
                                     </div>
-                                </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -98,7 +112,8 @@
                     <div class="mb-4 mb-xl-0">
                         <div class="fs-3 fw-bold text-white">Provincial Team</div>
                         <div class="text-white-50">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-                            <br> Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec.</div>
+                            <br> Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec.
+                        </div>
                     </div>
                     <div class="ms-xl-4">
                         <div class="input-group mb-2">

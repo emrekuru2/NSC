@@ -11,7 +11,7 @@ class DevelopmentTypesController extends BaseController
         $devType = new DevTypeModel();
         $data = [
             'devType' => $devType->findAll(),
-            'title'   => 'Development Type',
+            'title'   => 'Development Types',
         ];
 
         return view('pages/admin/developmentTypes', $data);

@@ -13,7 +13,7 @@
 
 </head>
 
-<body>
+<body class="bg-light">
     <main>
         <?= $this->renderSection('authContent') ?>
     </main>

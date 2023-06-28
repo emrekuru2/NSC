@@ -25,7 +25,7 @@ class DashController extends BaseController
         return view('pages/admin/dashboard', $data);
     }
 
-    public function accept_user()
+    public function acceptUser()
     {
         // get email service
         $email = \Config\Services::email();

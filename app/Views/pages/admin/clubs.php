@@ -2,643 +2,180 @@
 
 <?= $this->section('adminContent') ?>
 
-<?php $clubIsSet = isset($club) ?>
-
-<!-- Remove Team Modal -->
-<form method="post" action="removeTeamFromClub" id="removeTeamModal" class="modal fade" tabindex="-2" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5">Remove Club</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <div class="modal-body">
-                <?php if ($clubIsSet) : ?>
-                    <label class="margin-bottom-half-rem" id="remove-team-message"><?= str_contains(strtolower($club->name), 'club') ? $club->name : $club->name . ' Club' ?></label>
-                <?php else : ?>
-                    <label class="margin-bottom-half-rem" id="remove-team-message">Select a team to remove.</label>
-                <?php endif ?>
-            </div>
-
-            <div class="modal-footer group-modal-footer">
-                <input type="hidden" value="" name="remove-team-name" id="remove-team-name">
-                <button type="submit" class="btn btn-danger" <?= $clubIsSet ? '' : ' disabled' ?>>Remove</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            </div>
-        </div>
-    </div>
-</form>
-
-<!-- Add Teams Modal -->
-<form method="post" action="addTeamsToClub" id="addTeamToClubModal" class="modal fade" tabindex="-2" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5">Add Team</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <div class="modal-body">
-                <p class="text-start">
-                    Select teams to add to the
-                    <b>
-                        <?php if ($clubIsSet) : ?>
-                            <?= str_contains(strtolower($club->name), 'club') ? $club->name : $club->name . ' Club' ?>
-                        <?php endif ?>
-                    </b>
-                </p>
-
-                <table class="table<?= $clubIsSet && ! empty($unassignedTeams) ? ' table-hover' : '' ?>" id="add-team-table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Add</th>
-                        </tr>
-                    </thead>
-
-                    <tbody id="add-team-list">
-                        <?php if (! $clubIsSet || empty($unassignedTeams)) : ?>
-                            <tr>
-                                <td class="col-11 line-height-2rem">No teams available</td>
-                                <td class="col-1"></td>
-                            </tr>
-                        <?php else : ?>
-                            <?php foreach ($unassignedTeams as $unassignedTeam) : ?>
-                                <tr>
-                                    <td class="col-11 line-height-2rem"><label for="team-check-<?= $unassignedTeam->name ?>"><?= $unassignedTeam->name ?></label></td>
-                                    <td class="col-1">
-                                        <input type="checkbox" id="team-check-<?= $unassignedTeam->name ?>" class="form-check-input shadow check-margin" value="<?= $unassignedTeam->name ?>" name="add-teams-check">
-                                    </td>
-                                </tr>
-                            <?php endforeach ?>
-                        <?php endif ?>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="modal-footer group-modal-footer">
-                <input type="hidden" value="<?= $clubIsSet ? $club->id : '' ?>" name="add-team-club-id">
-                <input type="hidden" value="" name="add-teams-JSON" id="add-teams-JSON">
-                <button type="button" id="add-teams-button" class="btn btn-primary" <?= $clubIsSet ? '' : ' disabled' ?>>Add</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            </div>
-        </div>
-    </div>
-</form>
-
-<!-- Add Member Modal -->
-<form method="post" action="addClubMembers" id="addMemberModal" class="modal fade" tabindex="-2" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5">Add Club Member</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <div class="modal-body">
-                <p class="text-start">
-                    Select members to add to the
-                    <b>
-                        <?php if ($clubIsSet) : ?>
-                            <?= str_contains(strtolower($club->name), 'club') ? $club->name : $club->name . ' Club' ?>
-                        <?php endif ?>
-                    </b>
-                </p>
-
-                <table class="table table-hover" id="add-member-table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col"></th>
-                            <th scope="col">Add</th>
-                        </tr>
-                    </thead>
-
-                    <tbody id="add-member-list">
-                        <?php if (! $clubIsSet && empty($allUsers)) : ?>
-                            <tr>
-                                <td class="col-7 line-height-2rem">No users available</td>
-                                <td class="col-4"></td>
-                                <td class="col-1"></td>
-                            </tr>
-                        <?php else : ?>
-                            <?php foreach ($allUsers as $user) : ?>
-                                <tr>
-                                    <td class="col-7 line-height-2rem"><label for="member-check-<?= $user->first_name . '-' . $user->last_name ?>"><?= $user->first_name . ' ' . $user->last_name ?></label></td>
-                                    <td class="col-4">
-                                        <select name="add-member-role" class="form-select form-select-sm">
-                                            <option value="player">Player</option>
-                                            <option value="manager">Manager</option>
-                                        </select>
-                                    </td>
-                                    <td class="col-1">
-                                        <input type="checkbox" id="member-check-<?= $user->first_name . '-' . $user->last_name ?>" class="form-check-input shadow check-margin" value="<?= $user->id ?>" data-role="player" name="add-member-check">
-                                    </td>
-                                </tr>
-                            <?php endforeach ?>
-                        <?php endif ?>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="modal-footer group-modal-footer">
-                <input type="hidden" value="<?= $clubIsSet ? $club->id : '' ?>" name="add-member-club-id">
-                <input type="hidden" value="" name="add-members-JSON" id="add-members-JSON">
-                <button type="button" id="add-member-button" class="btn btn-primary" <?= $clubIsSet ?: ' disabled' ?>>Add</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            </div>
-        </div>
-    </div>
-</form>
-
-<!-- Remove Member Modal -->
-<form method="post" action="removeClubMember" id="removeMemberModal" class="modal fade" tabindex="-2" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5">Remove Club Member</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <div class="modal-body">
-                <?php if ($clubIsSet) : ?>
-                    <label class="margin-bottom-half-rem" id="remove-member-message"><?= str_contains(strtolower($club->name), 'club') ? $club->name : $club->name . ' Club' ?></label>
-                <?php else : ?>
-                    <label class="margin-bottom-half-rem" id="remove-member-message">Select a member to remove.</label>
-                <?php endif ?>
-            </div>
-
-            <div class="modal-footer group-modal-footer">
-                <input type="hidden" value="<?= $clubIsSet ? $club->id : '' ?>" name="remove-member-club-id">
-                <input type="hidden" value="" name="remove-member-name" id="remove-member-name">
-                <button type="submit" class="btn btn-danger" <?= $clubIsSet ? '' : ' disabled' ?>>Remove</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            </div>
-        </div>
-    </div>
-</form>
-
-<!-- Delete Club Modal -->
-<form method="post" action="deleteClub" class="modal fade" id="deleteClubModal" tabindex="-2" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5">Delete Club</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <div class="modal-body">
-                <?php if ($clubIsSet) : ?>
-                    <label class="margin-bottom-half-rem">Are you sure you want to delete the <b><?= str_contains(strtolower($club->name), 'club') ? $club->name : $club->name . ' Club' ?></b>?<br>This action <u>cannot</u> be undone.</label>
-                <?php else : ?>
-                    <label class="margin-bottom-half-rem">Select a club to delete.</label>
-                <?php endif ?>
-            </div>
-
-            <div class="modal-footer group-modal-footer">
-                <input type="text" value="<?= $clubIsSet ? $club->id : '' ?>" name="deleteClubID" hidden>
-                <button type="submit" class="btn btn-danger" <?= $clubIsSet ? '' : ' disabled' ?>>Delete</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            </div>
-        </div>
-    </div>
-</form>
-
-<!-- Create Club Modal -->
-<form method="post" action="createClub" enctype="multipart/form-data" class="modal fade" id="createClubModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5">Create Club</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <div class="modal-body">
-                <!-- Name -->
-                <div class="form-group margin-bottom-1rem">
-                    <label class="margin-bottom-half-rem" for="newName">Name</label>
-                    <input type="text" class="form-control" name="name" id="newName" maxlength="64" placeholder="Club Name" required>
-                </div>
-
-                <!-- Abbreviation -->
-                <div class="form-group margin-bottom-1rem">
-                    <label class="margin-bottom-half-rem" for="newAbbr">Abbreviation</label>
-                    <input type="text" class="form-control" name="abbreviation" id="newAbbr" maxlength="64" placeholder="CN" required>
-                </div>
-
-                <!-- Description -->
-                <div class="form-group margin-bottom-1rem">
-                    <label class="margin-bottom-half-rem" for="newDescription">Description</label>
-                    <textarea class="form-control" name="description" id="newDescription" rows="2" maxlength="512" placeholder="Maximum 512 characters" required></textarea>
-                </div>
-
-                <!-- Email -->
-                <div class="form-group margin-bottom-1rem">
-                    <label class="margin-bottom-half-rem" for="newEmail">Email</label>
-                    <input type="email" class="form-control" name="email" id="newEmail" maxlength="128" placeholder="club@example.com">
-                </div>
-
-                <!-- Phone -->
-                <div class="form-group margin-bottom-1rem">
-                    <label class="margin-bottom-half-rem" for="newPhone">Phone</label>
-                    <input type="tel" class="form-control" name="phone" id="newPhone" maxlength="12" pattern="^[1-9]\d{2}-\d{3}-\d{4}" placeholder="123-456-7890">
-                </div>
-
-                <!-- Website -->
-                <div class="form-group margin-bottom-1rem">
-                    <label class="margin-bottom-half-rem" for="newWebsite">Website</label>
-                    <input type="text" class="form-control" name="website" id="newWebsite" maxlength="128" placeholder="https://www.example.com">
-                </div>
-
-                <!-- Facebook -->
-                <div class="form-group margin-bottom-1rem">
-                    <label class="margin-bottom-half-rem" for="newFacebook">Facebook</label>
-                    <input type="text" class="form-control" name="facebook" id="newFacebook" maxlength="256" placeholder="https://www.facebook.com/Club-Name">
-                </div>
-
-                <!-- Logo -->
-                <div class="form-group margin-bottom-half-rem">
-                    <label class="margin-bottom-half-rem" for="newImage">Logo</label>
-                    <input class="form-control" type="file" name="image" id="newImage">
-                    <div class="form-text">SVG filetype recommended.</div>
-                </div>
-            </div>
-
-            <div class="modal-footer group-modal-footer">
-                <button type="submit" class="btn btn-primary">Create</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            </div>
-        </div>
-    </div>
-</form>
-
-<div class="row">
+<div class="row g-3">
     <!-- All Clubs List -->
-    <div class="col-lg-5 mb-3 mb-lg-0">
-        <div class="card shadow">
-            <div class="card-header">
-                <div class="d-md-flex justify-content-md-end group-list-header">
-                    <div class="line-height-2rem">All Clubs</div>
-                    <button type="button" id="new-group-button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#createClubModal"><i class="fa-solid fa-plus"></i> Create Club</button>
-                </div>
-            </div>
-            <div class="card-body padding-top-half-rem">
-                <?= view_cell('\App\Libraries\Contents::search', ['route' => 'clubs', 'name' => 'Club', 'array' => $allClubs, 'fields' => ['name'], 'useName' => true, 'useDivider' => true]); ?>
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th scope="col" class="padding-top-0">Name</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?= (count($allClubs) === 0) ? '<p class="text-start margin-bottom-0">No clubs available.</p>' : null ?>
-                    <?php foreach ($allClubs as $clubIndex) : ?>
-                        <tr>
-                            <td class="col-12 view-table-padding">
-                                <a href="<?= '?name=' . str_replace(' ', '+', $clubIndex->name) ?>">
-                                    <label class="text-bold width-100 pointer line-height-3rem" for="name"><?= $clubIndex->name ?></label>
-                                </a>
-                            </td>
-                        </tr>
-                    <?php endforeach ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- View Club -->
-    <div class="col-sm-7" id="view-club-card">
-        <div class="card shadow">
-            <div class="card-header">
-                <div class="d-md-flex justify-content-md-end group-list-header">
-                    <div class="line-height-2rem">Club Info</div>
-                    <button type="button" id="edit-club-button" class="btn btn-primary btn-sm" <?= $clubIsSet ? '' : ' disabled' ?>><i class="fa-solid fa-pen-to-square"></i> Edit Club</button>
-                </div>
-            </div>
-
-            <div class="card-body">
-                <!-- Logo and Name -->
-                <img src="<?= $clubIsSet ? base_url($club->image) : base_url('assets/images/Clubs/default.png') ?>" class="card-img-top mb-3 mx-auto d-block" style="width: 150px; height: 150px" alt="Team Logo">
-                <h4 class="card-title text-bold text-center"><?= $clubIsSet ? $club->name . ' (' . $club->abbreviation . ')' : 'Select Club' ?></h4>
-
-                <br>
-                <hr class="divider">
-
-                <!-- View Description -->
-                <div class="form-group margin-bottom-1rem">
-                    <div class="mb-3 row">
-                        <label class="col-2 col-form-label" for="viewClubDescription">Description</label>
-                        <div class="col-10">
-                            <textarea class="form-control" id="viewClubDescription" rows="3" aria-label="readonly input" readonly<?= $clubIsSet ? '' : ' disabled' ?>><?= $clubIsSet ? $club->description : '' ?></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- View Email -->
-                <div class="form-group margin-bottom-1rem">
-                    <div class="mb-3 row">
-                        <label class="col-2 col-form-label" for="viewClubEmail">Email</label>
-                        <div class="col-10">
-                            <input class="form-control" type="text" id="viewClubEmail" value="<?= $clubIsSet ? $club->email : '' ?>" aria-label="readonly input" readonly<?= $clubIsSet ? '' : ' disabled' ?>>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- View Phone -->
-                <div class="form-group margin-bottom-1rem">
-                    <div class="mb-3 row">
-                        <label class="col-2 col-form-label" for="viewClubPhone">Phone</label>
-                        <div class="col-10">
-                            <input class="form-control" type="text" id="viewClubPhone" value="<?= $clubIsSet ? $club->phone : '' ?>" aria-label="readonly input" readonly<?= $clubIsSet ? '' : ' disabled' ?>>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- View Website -->
-                <div class="form-group margin-bottom-1rem">
-                    <div class="mb-3 row">
-                        <label class="col-2 col-form-label" for="viewClubWebsite">Website</label>
-                        <div class="col-10">
-                            <input class="form-control" type="text" id="viewClubWebsite" value="<?= $clubIsSet ? $club->website : '' ?>" aria-label="readonly input" readonly<?= $clubIsSet ? '' : ' disabled' ?>>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- View Facebook -->
-                <div class="form-group margin-bottom-1rem">
-                    <div class="mb-3 row">
-                        <label class="col-2 col-form-label" for="viewClubFacebook">Facebook</label>
-                        <div class="col-10">
-                            <input class="form-control" type="text" id="viewClubFacebook" value="<?= $clubIsSet ? $club->facebook : '' ?>" aria-label="readonly input" readonly<?= $clubIsSet ? '' : ' disabled' ?>>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- View Club Teams -->
-                <div class="form-group margin-bottom-1rem">
-                    <div class="mb-3 row">
-                        <label class="col-2 col-form-label" for="viewClubTeams">Club Teams</label>
-                        <div class="col-10">
-
-                            <div class="border-round">
-                                <table class="table<?= $clubIsSet && ! empty($clubTeams) ? ' table-hover' : '' ?> margin-bottom-half-rem">
-                                    <thead>
+    <div class="col-lg-5">
+        <div class="row-lg">
+            <div class="col-lg-12 mb-3">
+                <div class="card shadow">
+                    <div class="card-header"><i class="fa-solid fa-list"></i> Clubs List</div>
+                    <div class="card-body">
+                        <?php if (!empty($clubs)) : ?>
+                            <div class="d-flex w-100 justify-content-center mb-3">
+                                <?= view_cell('\App\Libraries\Contents::search', ['array' => $clubs, 'fields' => ['name'], 'type' => 'clubs']) ?>
+                            </div>
+                            <?= form_open(url_to('admin_enable_alert'), ['class' => 'd-flex flex-column align-items-center']) ?>
+                            <div class="border-round p-0 w-100">
+                                <table class="table table-hover table-striped align-middle m-0">
+                                    <thead class="table-primary">
                                         <tr>
                                             <th scope="col">Name</th>
+                                            <th scope="col" class="text-center">Teams</th>
+                                            <th scope="col" class="text-center">Members</th>
+                                            <th scope="col" class="text-center">Action</th>
                                         </tr>
                                     </thead>
-
                                     <tbody>
-                                        <?php if (! $clubIsSet) { ?>
+                                        <?php foreach ($clubs as $club) : ?>
                                             <tr>
-                                                <td class="col-12 view-table-data"><br></td>
-                                            </tr>
-                                        <?php } elseif (empty($clubTeams)) { ?>
-                                            <tr>
-                                                <td class="col-12 view-table-data">No teams</td>
-                                            </tr>
-                                        <?php } else { foreach ($clubTeams as $team) : ?>
-                                            <tr>
-                                                <td class="col-12 view-table-data view-table-padding">
-                                                    <a class="club-link" href="teams?name=<?= str_replace(' ', '+', $team->name) ?>">
-                                                        <label class="width-100 line-height-25rem pointer"><?= $team->name ?></label>
-                                                    </a>
+                                                <td><a href="<?= url_to('admin_read_club', $club->name) ?>"><?= $club->name ?></a></td>
+                                                <td class="text-center"><?= count($club->getTeams()) ?> </td>
+                                                <td class="text-center"><?= count($club->getMembers()) ?> </td>
+                                                <td class="text-center">
+                                                    <div class="btn-group dropend">
+                                                        <button type="button" class="btn btn-outline-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <i class="fa-solid fa-ellipsis"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><span class="dropdown-item text-danger" role="button" data-bs-toggle="modal" data-bs-target="<?= '#delete' . $club->id  ?>"><i class="fa-solid fa-trash"></i> Delete</span></li>
+                                                        </ul>
+                                                    </div>
                                                 </td>
                                             </tr>
-                                        <?php endforeach; } ?>
+                                            <?= view_cell('\App\Libraries\Alerts::modal',  ['content' => 'Are you sure you want to delete ' . $club->name, 'id' => 'delete' . $club->id, "action" => url_to('admin_delete_club', $club->id)]) ?>
+                                        <?php endforeach ?>
                                     </tbody>
                                 </table>
                             </div>
-
-                        </div>
+                            <?= form_close() ?>
+                        <?php else : ?>
+                            <h4 class="text-muted text-center">There are no clubs to show</h4>
+                        <?php endif ?>
                     </div>
                 </div>
-
-                <!-- View Club Members -->
-                <div class="form-group margin-bottom-1rem">
-                    <div class="mb-3 row">
-                        <label class="col-2 col-form-label" for="viewClubTeams">Club Members</label>
-                        <div class="col-10">
-
-                            <div class="border-round">
-                                <table class="table<?= $clubIsSet && ! empty($clubMembers) ? ' table-hover' : '' ?> margin-bottom-half-rem">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Role</th>
-                                    </tr>
-                                    </thead>
-
-                                    <tbody>
-                                    <?php if (! $clubIsSet) { ?>
-                                        <tr>
-                                            <td class="col-9 view-table-data"><br></td>
-                                            <td class="col-3 view-table-data"><br></td>
-                                        </tr>
-                                    <?php } elseif (empty($clubMembers)) { ?>
-                                        <tr>
-                                            <td class="col-9 view-table-data">No members</td>
-                                            <td class="col-3 view-table-data"></td>
-                                        </tr>
-                                    <?php } else { foreach ($clubMembers as $member) : ?>
-                                        <tr>
-                                            <td class="col-9 view-table-data"><?= $member->first_name . ' ' . $member->last_name ?></td>
-                                            <td class="col-3 view-table-data">
-                                                <?php if ($member->isManager == 1) {
-                                                    echo 'Manager';
-                                                } else {
-                                                    echo 'Player';
-                                                }  ?>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; } ?>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
             </div>
+            <?php if (isset($currentClub)) : ?>
+                <div class="col-lg-12">
+                    <?php foreach (array('Teams' => $currentClub->getTeams(), 'Members' => $currentClub->getMembers()) as $key => $value) : ?>
+                        <div class="card shadow mb-3">
+                            <div class="card-header"><i class="fa-solid fa-list"></i> <?= $key ?> for <b><?= $currentClub->name ?></b></div>
+                            <div class="card-body">
+                                <div class="d-flex p-1">
+                                    <label class="form-label flex-grow-1"><?= $key ?></label>
+                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target=<?= "#add" . $key . "Modal" ?>><i class="fa-solid fa-plus"></i> Add <?= $key ?></button>
+                                </div>
+                                <?php if (empty($value)) : ?>
+                                    <h4 class="text-muted">No <?= $key ?></h4>
+                                <?php else : ?>
+                                    <div class="border-round p-0">
+                                        <table class="table table-hover table-striped align-middle m-0">
+                                            <thead class="table-primary">
+                                                <tr>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col" class="text-center"> <?= $key === 'Teams' ? 'Players' : 'Role' ?></th>
+                                                    <?= $key === 'Members' ? '<th scope="col" class="text-center">Is Manager</th>' : null ?>
+                                                    <th scope="col" class="text-center">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php foreach ($value as $item) : ?>
+                                                    <tr>
+                                                        <td><a href="<?= url_to($key === 'Teams' ? 'admin_read_team' : 'admin_read_user', $item->name) ?>"><?= $key === 'Teams' ? $item->name : $item->getName() ?></a></td>
+                                                        <td class="text-center"><?= $key === 'Teams' ? count($value) : $item->getRole() ?></td>
+                                                        <?= $key === 'Members' ? '<td class="text-center">' . $item->isManager() . '</td>' : null ?>
+                                                        <td class="text-center">
+                                                            <div class="btn-group dropend">
+                                                                <button type="button" class="btn btn-outline-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                    <i class="fa-solid fa-ellipsis"></i>
+                                                                </button>
+                                                                <ul class="dropdown-menu">
+                                                                    <li><span class="dropdown-item text-danger" role="button" data-bs-toggle="modal" data-bs-target="<?= '#delete_' . $key . $item->id  ?>"><i class="fa-solid fa-trash"></i> Delete</span></li>
+                                                                </ul>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <?= view_cell('\App\Libraries\Alerts::modal',  ['content' => 'Are you sure you want to remove ' . $item->name . ' from ' . $currentClub->name, 'id' => 'delete_' . $key . $item->id,  "action" => url_to('admin_delete_club', $item->name)]) ?>
+                                                <?php endforeach ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                <?php endif ?>
+                                <?= view_cell('\App\Libraries\Alerts::clubModal',  ['action' => url_to('admin_club_add_team'), 'type' => $key, 'id' => 'add' . $key . 'Modal', 'currentClub' => $currentClub]) ?>
+                            </div>
+                        </div>
+                    <?php endforeach ?>
+                </div>
+            <?php endif ?>
         </div>
     </div>
-
-    <!-- Edit Club -->
-    <div class="col-lg-7" id="edit-club-card">
+    <!-- View Club -->
+    <div class="col col-lg-7" id="view-club-card">
         <div class="card shadow">
-            <div class="card-header">
-                <div class="d-md-flex justify-content-md-end group-list-header">
-                    <div class="line-height-2rem">Edit Club</div>
-                    <button type="button" id="cancel-edit-club-button" class="btn btn-primary btn-sm" <?= $clubIsSet ? '' : ' disabled' ?>><i class="fa-solid fa-xmark"></i> Cancel Edit</button>
-                </div>
+            <div class="card-header d-flex align-items-center">
+                <?php if (isset($currentClub)) : ?>
+                    <span class="flex-grow-1"><i class="fa-solid fa-circle-info"></i> Club Details</span>
+                    <div class="form-check form-switch mx-4">
+                        <input class="form-check-input" type="checkbox" role="button" id="editSwitch">
+                        <label class="form-check-label" for="editSwitch"><i class="fa-regular fa-pen-to-square"></i> Edit mode</label>
+                    </div>
+                    <?= anchor(url_to('admin_clubs'), '<i class="fa-solid fa-broom"></i> Clear', ['role' => 'button', 'class' => 'btn btn-primary']) ?>
+                <?php else : ?>
+                    <span class="flex-grow-1"><i class="fa-solid fa-pen-ruler"></i> Create Club</span>
+                <?php endif ?>
             </div>
-
-            <form class="card-body" method="post" action="updateClub" enctype="multipart/form-data" id="update-form">
-                <!-- Logo and Name -->
-                <img src="<?= $clubIsSet ? base_url($club->image) : base_url('assets/images/Clubs/default.png') ?>" class="card-img-top mb-3 mx-auto d-block" style="width: 150px; height: 150px" alt="club_image">
-                <h4 class="card-title text-bold text-center"><?= $club->name ?? 'Select Club' ?></h4>
-
-                <br>
-                <hr class="divider">
-
+            <div class="card-body">
+                <?= form_open_multipart(isset($currentClub) ? url_to('admin_update_club', $currentClub->id) : url_to('admin_create_club'), ['class' => 'row g-3 justify-content-center', 'id' => 'edit_form']) ?>
+                <?php if (isset($currentClub)) : ?>
+                    <img src="<?= base_url($currentClub->image) ?? base_url('assets/images/Clubs/default.png') ?>" class="card-img-top " style="width: 150px; height: 150px" alt="club_image">
+                    <h4 class="card-title text-bold text-center text-muted"><?= $currentClub->name ?? 'Select Club' ?></h4>
+                    <div class="divider"></div>
+                <?php endif ?>
                 <!-- Edit Logo -->
-                <div class="form-group margin-bottom-1rem">
-                    <label class="margin-bottom-half-rem" for="updateClubImage">Logo</label>
-                    <input type="file" class="form-control" name="image" id="updateClubImage" <?= $clubIsSet ? '' : ' disabled' ?>>
-                    <div class="form-text">SVG filetype recommended.</div>
+                <div class="col-md-6 ">
+                    <label class="form-label" for="image">Logo</label>
+                    <input type="file" class="form-control" name="image">
                 </div>
-
                 <!-- Edit Name -->
-                <div class="form-group margin-bottom-1rem">
-                    <label class="margin-bottom-half-rem" for="updateClubName">Name</label>
-                    <input type="text" maxlength="64" class="form-control" name="updateClubName" id="updateClubName" <?= $clubIsSet ? "placeholder='Club Name' value='" . $club->name . "' required" : ' disabled' ?>>
+                <div class="col-md-6">
+                    <label class="form-label" for="club_name">Name <i class="fa-solid fa-asterisk text-danger"></i></label>
+                    <input type="text" maxlength="64" class="form-control" name="name" value="<?= $currentClub->name ?? null ?>" required>
                 </div>
-
                 <!-- Edit Name Abbreviation-->
-                <div class="form-group margin-bottom-1rem">
-                    <label class="margin-bottom-half-rem" for="abbreviation">Abbreviation</label>
-                    <input type="text" maxlength="64" class="form-control" name="abbreviation" id="updateClubAbbreviation" <?= $clubIsSet ? "placeholder='CN' value='" . $club->abbreviation . "' placeholder='Name' required" : ' disabled' ?>>
+                <div class="col-md-6">
+                    <div class="row g-3 justify-content-center">
+                        <div class="col-12">
+                            <label class="form-label" for="abbreviation">Abbreviation <i class="fa-solid fa-asterisk text-danger"></i></label>
+                            <input type="text" maxlength="64" class="form-control" name="abbreviation" value="<?= $currentClub->abbreviation ?? null ?>" required>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" for="email">Email <i class="fa-solid fa-asterisk text-danger"></i></label>
+                            <input type="email" maxlength="125" class="form-control" name="email" value="<?= $currentClub->email ?? null ?>" required>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" for="phone">Phone <i class="fa-solid fa-asterisk text-danger"></i></label>
+                            <input type="text" class="form-control" name="phone" placeholder="Format: +1-123-456-6789" pattern="[+][0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}" value="<?= $currentClub->phone ?? null ?>" required>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" for="website">Website</label>
+                            <input type="text" maxlength="128" class="form-control" name="website" value="<?= $currentClub->website ?? null ?>">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" for="facebook">Facebook</label>
+                            <input type="text" maxlength="256" class="form-control" name="facebook" value="<?= $currentClub->facebook ?? null ?>">
+                        </div>
+                    </div>
                 </div>
-
                 <!-- Edit Description -->
-                <div class="form-group margin-bottom-1rem">
-                    <label class="margin-bottom-half-rem" for="updateClubDescription">Description</label>
-                    <textarea maxlength="512" class="form-control" name="description" id="updateClubDescription" rows="3" <?= $clubIsSet ? 'placeholder="Maximum 512 characters">' . $club->description : 'disabled>' ?></textarea>
+                <div class="col-md-6">
+                    <label class="form-label" for="description">Description <i class="fa-solid fa-asterisk text-danger"></i></label>
+                    <textarea maxlength="512" class="form-control" name="description" rows="15" style="resize: none;" required><?= $currentClub->description ?? null ?></textarea>
                 </div>
-
-                <!-- Edit Email -->
-                <div class="form-group margin-bottom-1rem">
-                    <label class="margin-bottom-half-rem" for="updateClubEmail">Email</label>
-                    <input type="email" maxlength="125" class="form-control" name="email" id="updateClubEmail"<?= $clubIsSet ? "value='" . $club->email . "' placeholder='club@example.com'" : ' disabled' ?>>
-                </div>
-
-                <!-- Edit Phone -->
-                <div class="form-group margin-bottom-1rem">
-                    <label class="margin-bottom-half-rem" for="updateClubPhone">Phone</label>
-                    <input type="tel" class="form-control" name="phone" id="updateClubPhone" maxlength="12" pattern="^[1-9]\d{2}-\d{3}-\d{4}"<?= $clubIsSet ? "value='" . $club->phone . "' placeholder='123-456-7890'" : ' disabled' ?>>
-                </div>
-
-                <!-- Edit Website -->
-                <div class="form-group margin-bottom-1rem">
-                    <label class="margin-bottom-half-rem" for="updateClubWebsite">Website</label>
-                    <input type="text" maxlength="128" class="form-control" name="website" id="updateClubWebsite"<?= $clubIsSet ? "value='" . $club->website . "' placeholder='https://www.example.com'" : ' disabled' ?>>
-                </div>
-
-                <!-- Edit Facebook -->
-                <div class="form-group margin-bottom-1rem">
-                    <label class="margin-bottom-half-rem" for="updateClubFacebook">Facebook</label>
-                    <input type="text" maxlength="256" class="form-control" name="facebook" id="updateClubFacebook"<?= $clubIsSet ? "value='" . $club->facebook . "' placeholder='https://www.facebook.com/Club-Name'" : ' disabled' ?>>
-                </div>
-
-                <!-- Edit Club Teams -->
-                <div class="form-group margin-bottom-1rem">
-                    <div class="margin-bottom-half-rem">
-                        <label>Teams</label>
-                    </div>
-
-                    <div class="border-round">
-                        <table class="table<?= $clubIsSet && ! empty($clubTeams) ? ' table-hover' : '' ?> margin-bottom-half-rem">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Options</th>
-                                </tr>
-                            </thead>
-
-                            <tbody id="club-team-list" data-club-isset="<?= $clubIsSet ?>">
-                                <?php if (! $clubIsSet || empty($clubTeams)) : ?>
-                                    <tr>
-                                        <td class="col-11 line-height-2rem">No teams</td>
-                                        <td class="col-1"></td>
-                                    </tr>
-                                <?php else : ?>
-                                    <?php foreach ($clubTeams as $team) : ?>
-                                    <tr>
-                                        <td class="col-11 line-height-2rem"><a class="club-link" href="teams?name=<?= str_replace(' ', '+', $team->name) ?>"><?= $team->name ?></a></td>
-                                        <td class="col-1">
-                                            <button type="button" name="remove-team-button" data-name="<?= $team->name ?>" data-bs-toggle="modal" data-bs-target="#removeTeamModal" class="btn btn-danger btn-sm">Remove</button>
-                                        </td>
-                                    </tr>
-                                    <?php endforeach ?>
-                                <?php endif ?>
-                            </tbody>
-                        </table>
-
-                        <button type="button" id="new-group-button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addTeamToClubModal"<?= $clubIsSet ?: ' disabled' ?>><i class="fa-solid fa-plus"></i> Add Team</button>
-                    </div>
-                </div>
-
-                <!-- Edit Club Members -->
-                <div class="form-group margin-bottom-0">
-                    <div class="margin-bottom-half-rem">
-                        <label>Members</label>
-                    </div>
-
-                    <div class="border-round">
-                        <table class="table<?= $clubIsSet && ! empty($clubMembers) ? ' table-hover' : '' ?> margin-bottom-half-rem">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Role</th>
-                                    <th scope="col"></th>
-                                    <th scope="col">Options</th>
-                                </tr>
-                            </thead>
-
-                            <tbody id="club-member-list" data-club-isset="<?= $clubIsSet ?>">
-                                <?php if (! $clubIsSet || empty($clubMembers)) : ?>
-                                    <tr>
-                                        <td class="col-5 line-height-2rem">No members</td>
-                                        <td class="col-4 line-height-2rem"></td>
-                                        <td class="col-2 line-height-2rem"></td>
-                                        <td class="col-1 line-height-2rem"></td>
-                                    </tr>
-                                <?php else : ?>
-                                    <?php foreach ($clubMembers as $member) : ?>
-                                        <tr>
-                                            <td class="col-5 line-height-2rem"><?= $member->first_name . ' ' . $member->last_name ?></td>
-                                            <td class="col-4 line-height-2rem">
-                                                <select name="role" class="form-select form-select-sm">
-                                                    <option value="player"<?= $member->isManager == 0 ? ' selected' : ''; ?>>Player</option>
-                                                    <option value="manager"<?= $member->isManager == 1 ? ' selected' : ''; ?>>Manager</option>
-                                                </select>
-                                            </td>
-                                            <td class="col-2"></td>
-                                            <td class="col-1">
-                                                <button type="button" name="remove-member-button" data-name="<?= $member->first_name . '|' . $member->last_name ?>" data-bs-toggle="modal" data-bs-target="#removeMemberModal" class="btn btn-danger btn-sm">Remove</button>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach ?>
-                                <?php endif ?>
-                            </tbody>
-                        </table>
-
-                        <button type="button" id="new-group-button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addMemberModal"<?= $clubIsSet ?: ' disabled' ?>><i class="fa-solid fa-plus"></i> Add Member</button>
-                    </div>
-                </div>
-
-                <br>
-
-                <!-- Update Club Button-->
-                <div class="form-group margin-bottom-0">
-                    <input type="hidden" value="<?= $clubIsSet ? $club->id : '' ?>" name="update-club-id" id="update-club-id">
-                    <input type="hidden" value="" name="update-members-JSON" id="update-members-JSON">
-                    <button type="button" name="update-button" id="update-button" class="btn btn-primary margin-bottom-1rem"<?= $clubIsSet ?: ' disabled' ?>>Update Club</button>
-                </div>
-
-                <hr class="divider">
-
-                <!-- Delete Team Button -->
-                <button type="button" name="delete-button" id="delete-button" data-bs-toggle="modal" data-bs-target="#deleteClubModal" class="btn btn-danger margin-bottom-0"<?= $clubIsSet ?: ' disabled' ?>>Delete Club</button>
-            </form>
+                <button type="submit" class="btn btn-primary w-50"><?= isset($currentClub) ? 'Update Club' : 'Create Club' ?></button>
+                <?= form_close() ?>
+            </div>
         </div>
     </div>
-
 </div>
 
-<script type="text/javascript" src="<?= base_url('assets/js/admin/clubs.js'); ?>"></script>
-
+<?= script_tag(['src' => base_url('assets/js/admin/editMode.js'), 'isset' => isset($currentClub), 'parent' => 'edit_form']) ?>
 <?= $this->endSection() ?>

@@ -19,7 +19,7 @@ class ClubsController extends BaseController
             'title' => 'Clubs',
         ];
 
-        return view('pages/clubs', $data);
+        return view('pages/main/clubs', $data);
     }
 
     public function getClubTeams (int $clubID) {

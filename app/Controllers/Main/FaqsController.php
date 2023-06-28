@@ -12,6 +12,6 @@ class FaqsController extends BaseController
             'title' => 'FAQs',
         ];
 
-        return view('pages/faqs', $data);
+        return view('pages/main/faqs', $data);
     }
 }
