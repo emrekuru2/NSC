@@ -43,7 +43,7 @@
             <div class="card-header">Player Waitlist</div>
             <div class="card-body">
                 <table class="table table-striped text-center table-hover">
-                    <thead>
+                    <thead class="table-primary">
                         <tr>
                             <th scope="col">Name</th>
                             <th scope="col">Club to join</th>
@@ -56,14 +56,14 @@
                                 <td><?= esc($row['first_name']) . ' ' . esc($row['last_name']) ?></td>
                                 <td><?= esc($row['club_name']) ?></td>
                                 <td>
-                                    <form method="post" action="accept_user">
-                                        <input type="hidden" value="<?=esc($row['userID'])?>" id="userID" name="userID">
-                                        <input type="hidden" value="<?=esc($row['clubID'])?>" id="clubID" name="clubID">
-                                        <input type="hidden" value="<?=esc($row['recordID'])?>" id="recordID" name="recordID">
-                                        <input type="hidden" value="<?=esc($row['club_name'])?>" id="club_name" name="club_name">
-                                        <button type="submit" name="action" value="accept" class="btn btn-primary mx-2">Accept</button>
-                                        <button type="submit" name="action" value="deny" class="btn btn-danger mx-2">Decline</button>
-                                    </form>
+                                    <?= form_open(url_to('admin_accept_user')) ?>
+                                    <input type="hidden" value="<?= esc($row['userID']) ?>" id="userID" name="userID">
+                                    <input type="hidden" value="<?= esc($row['clubID']) ?>" id="clubID" name="clubID">
+                                    <input type="hidden" value="<?= esc($row['recordID']) ?>" id="recordID" name="recordID">
+                                    <input type="hidden" value="<?= esc($row['club_name']) ?>" id="club_name" name="club_name">
+                                    <button type="submit" name="action" value="accept" class="btn btn-success mx-2"><i class="fa-solid fa-check"></i> Accept</button>
+                                    <button type="submit" name="action" value="deny" class="btn btn-danger mx-2"><i class="fa-solid fa-xmark"></i> Decline</button>
+                                    <?= form_close() ?>
                                 </td>
                             </tr>
                         <?php endforeach ?>

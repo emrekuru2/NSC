@@ -6,7 +6,7 @@
 <div class="card shadow">
     <div class="card-header">Users</div>
     <div class="card-body">
-        <?= view_cell('\App\Libraries\Contents::search', ['route' => 'users/edit', 'name' => 'User', 'array' => $users, 'fields' => ['first_name', 'last_name'], 'useName' => true, 'useDivider' => true]); ?>
+        <?= view_cell('\App\Libraries\Contents::search', ['array' => $users, 'fields' => ['first_name', 'last_name'], 'type' => 'users']); ?>
     <div id="checkboxes" style="margin: 8px; font-size:16px; margin-bottom:12px; ">
         <form id="filter_checkbox" >
             <input onclick="show_name()" class="checkbox-value" style="margin:5px;  height:16px; width:16px; vertical-align: middle;" type="radio" name="users[]" value="name"><b>Name</b></input>

@@ -12,6 +12,6 @@ class AboutController extends BaseController
             'title' => 'About',
         ];
 
-        return view('pages/about', $data);
+        return view('pages/main/about', $data);
     }
 }

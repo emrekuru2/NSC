@@ -7,37 +7,38 @@ use App\Models\AlertModel;
 
 class AlertsController extends BaseController
 {
+    protected $helpers = ['html', 'text', 'form'];
+
     public function index()
     {
         $data = [
             'title'  => 'Alerts',
             'alerts' => model(AlertModel::class)->findAll(),
             'active' => model(AlertModel::class)->where('status', 1)->first(),
-            'editMode' => false
         ];
 
         return view('pages/admin/alerts', $data);
     }
 
-    public function editMode(int $id)
+    public function read(string $param)
     {
         $data = [
             'title'  => 'Alerts',
-            'currentAlert' => model(AlertModel::class)->find($id),
+            'currentAlert' => model(AlertModel::class)->where('title', $param)->first(),
             'alerts' => model(AlertModel::class)->findAll(),
             'active' => model(AlertModel::class)->where('status', 1)->first(),
-            'editMode' => true
         ];
 
         return view('pages/admin/alerts', $data);
     }
 
-
     public function create()
     {
-        return (model(AlertModel::class)->save(new \App\Entities\User($this->request->getPost())))
-            ? redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Alert created successfully'])
-            : redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Alert could not be created']);
+        if (model(AlertModel::class)->save(new \App\Entities\User($this->request->getPost())) === false) {
+            return redirect()->back()->with('alert', ['type' => 'danger', 'content' => model(AlertModel::class)->errors()['title']]);
+        }
+
+        return  redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Alert created successfully']);
     }
 
 
@@ -48,7 +49,7 @@ class AlertsController extends BaseController
             : redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Alert could not be updated']);
     }
 
-    public function set()
+    public function enable()
     {
         $current = $this->request->getVar('flexRadioDefault');
 

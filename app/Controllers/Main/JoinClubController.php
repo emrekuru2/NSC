@@ -30,7 +30,7 @@ class JoinClubController extends BaseController
             'title' => 'Join Club',
         ];
 
-        return view('pages/club_join', $data);
+        return view('pages/main/club_join', $data);
     }
 
     public function joinClub(){

@@ -40,6 +40,28 @@ class TeamsController extends BaseController
         return view('pages/admin/teams', $data);
     }
 
+
+    public function read(string $param)
+    {
+        $clubModel = model(ClubModel::class);
+        $teamModel = model(TeamModel::class);
+        $userModel = model(UserEmailModel::class);
+
+        $team = $teamModel->select()->where('name', $param)->first();
+
+        $data = [
+            'title'       => 'Teams',
+            'team'        => $team,
+            'teamMembers' => $team != null ? $userModel->getTeamUsersByTeamId($team->id) : null,
+            'teamClub'    => $team != null && $team->clubID != null ? $clubModel->select()->where('id', $team->clubID)->first() : null,
+            'allTeams'    => $teamModel->select()->orderBy('nsca_teams.name', 'ASC')->findAll(),
+            'allClubs'    => $clubModel->select()->orderBy('nsca_clubs.name', 'ASC')->findAll(),
+            'allUsers'    => $userModel->select()->orderBy('nsca_users.last_name', 'ASC')->findAll(),
+        ];
+
+        return view('pages/admin/teams', $data);
+    }
+
     public function updateTeam()
     {
         helper('image');
@@ -60,12 +82,12 @@ class TeamsController extends BaseController
 
         if ($image->getSize() > 0) {
             // Deleting old image
-            if (! str_contains($team->image, 'default.png')) {
+            if (!str_contains($team->image, 'default.png')) {
                 unlink($team->image);
             }
 
             $filepath = storeImage('Teams', $image);
-            if (! $filepath) {
+            if (!$filepath) {
                 $filepath = 'assets/images/Teams/default.png';
             }
         } else {
@@ -151,7 +173,7 @@ class TeamsController extends BaseController
 
         $file     = $this->request->getFile('newImage');
         $filepath = storeImage('Teams', $file);
-        if (! $filepath) {
+        if (!$filepath) {
             $data['image'] = 'assets/images/Teams/default.png';
         } else {
             $data['image'] = $filepath;
@@ -179,7 +201,7 @@ class TeamsController extends BaseController
         $teamID = $this->request->getPost('deleteTeamID');
 
         $team = $teamModel->find($teamID);
-        if (file_exists($team->image) && ! str_contains($team->image, 'default.png')) {
+        if (file_exists($team->image) && !str_contains($team->image, 'default.png')) {
             unlink($team->image);
         }
 
@@ -206,7 +228,8 @@ class TeamsController extends BaseController
 
         try {
             if ($teamUserModel->where('userID', $userID)->where('teamID', $teamID)->first() === null) {
-                return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Removed member successfully!']);            }
+                return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Removed member successfully!']);
+            }
         } catch (Exception $e) {
             echo "<script> console.log('Error occurred while removing team member. " . $e->getMessage() . " ') </script>";
         }

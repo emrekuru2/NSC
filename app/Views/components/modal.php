@@ -9,7 +9,7 @@
         <?= $content ?>
       </div>
       <div class="modal-footer bg-dark">
-        <a href="<?= $action ?>" class="btn btn-secondary" role="button">Yes</a>
+        <?= anchor($action, 'Yes', ['class' => 'btn btn-secondary', 'role' => 'button'])?>
         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
       </div>
     </div>

@@ -26,7 +26,7 @@
             <div class="col-lg-8">
                 <!-- Featured blog post-->
                 <div class="card mb-4">
-                    <a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." style="width: 100%; height: 350px;"/></a>
+                    <a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." style="width: 100%; height: 350px;" /></a>
                     <div class="card-body">
                         <div class="small text-muted">January 1, 2023</div>
                         <h2 class="card-title">Check Out Our Clubs</h2>
@@ -74,7 +74,7 @@
             </div>
         </div>
         <div class="row gx-5">
-            <?php if (! empty($news) && is_array($news)) : ?>
+            <?php if (!empty($news) && is_array($news)) : ?>
                 <?php foreach ($news as $news_item) : ?>
                     <?php
                     $html_string = $news_item->content;
@@ -97,7 +97,7 @@
                             <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
                                 <div class="d-flex align-items-end justify-content-between">
                                     <div class="d-flex align-items-center">
-                                        <a href="news/<?= esc($news_item->id)?>" class="btn btn-primary btn-block">Find out more</a>
+                                        <a href="news/<?= esc($news_item->id) ?>" class="btn btn-primary btn-block">Find out more</a>
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +112,8 @@
                     <div class="mb-4 mb-xl-0">
                         <div class="fs-3 fw-bold text-white">Provincial Team</div>
                         <div class="text-white-50">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-                            <br> Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec.</div>
+                            <br> Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec.
+                        </div>
                     </div>
                     <div class="ms-xl-4">
                         <div class="input-group mb-2">

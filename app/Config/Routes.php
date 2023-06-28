@@ -32,180 +32,125 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 
 // Routing for general views
-$routes->group('', ['filter' => 'alertfilter'], static function ($routes) {
+$routes->group('', ['filter' => 'alertfilter', 'namespace' => 'App\Controllers\Main'], static function ($routes) {
 
-    /**************************** GET ROUTING ****************************/
-    // Homepage
-    $routes->get('/', 'Main\HomeController::index');
-
-    // Clubs Page
-    $routes->get('clubs', 'Main\ClubsController::index');
-
-    // Teams Page
-    $routes->get('teams', 'Main\TeamsController::index');
-
-    // Committees Page
-    $routes->get('committees', 'Main\CommitteesController::index');
-
-    // Development Page
-    $routes->get('development', 'Main\DevelopmentController::index');
-    $routes->get('development/(:num)', 'Main\DevelopmentController::register/$1');
-
-    // FAQs Page
-    $routes->get('faqs', 'Main\FaqsController::index');
-
-    // Contact Page
-    $routes->get('contact', 'Main\ContactController::index');
-
-    // About Page
-    $routes->get('about', 'Main\AboutController::index');
-
-    // News Page
-    $routes->get('news', 'Main\NewsController::index');
-    $routes->get('news/(:num)', 'Main\NewsController::getNewsByID/$1');
-
-    // Join Page
-    $routes->get('join', 'Main\JoinClubController::index');
-
-
-    /**************************** POST ROUTING ****************************/
-    // Contact Page
-    $routes->post('contactAdmins', 'Main\ContactController::contactAdmins');
-
-    // Join Page
-    $routes->post('join_club', 'Main\JoinClubController::joinClub');
-    $routes->post('delete_request', 'Main\JoinClubController::deleteRequest');
+    $routes->get('/', 'HomeController::index',                                ['as' => 'main_homepage']);
+    $routes->get('clubs', 'ClubsController::index',                           ['as' => 'main_clubs']);
+    $routes->get('teams', 'TeamsController::index',                           ['as' => 'main_teams']);
+    $routes->get('committees', 'CommitteesController::index',                 ['as' => 'main_committees']);
+    $routes->get('development', 'DevelopmentController::index',               ['as' => 'main_developments']);
+    $routes->get('development/(:num)', 'DevelopmentController::register/$1',  ['as' => 'main_developments_register']);
+    $routes->get('faqs', 'FaqsController::index',                             ['as' => 'main_faqs']);
+    $routes->get('contact', 'ContactController::index',                       ['as' => 'main_contact']);
+    $routes->get('about', 'AboutController::index',                           ['as' => 'main_about']);
+    $routes->get('news', 'NewsController::index',                             ['as' => 'main_news']);
+    $routes->get('news/(:num)', 'NewsController::getNewsByID/$1',             ['as' => 'main_news_details']);
+    $routes->get('join', 'JoinClubController::index',                         ['as' => 'main_join_page']);
+    $routes->post('contactAdmins', 'ContactController::contactAdmins',        ['as' => 'main_contact_admins']);
+    $routes->post('join_club', 'JoinClubController::joinClub',                ['as' => 'main_join_club']);
+    $routes->post('delete_request', 'JoinClubController::deleteRequest',      ['as' => 'main_delete_club_request']);
 });
 
 // Routing for admin views and functions
-$routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
+$routes->group('admin', ['filter' => 'adminfilter', 'namespace' => 'App\Controllers\Admin'], static function ($routes) {
 
-    /**************************** GET ROUTING ****************************/
-    // Dashboard
-    $routes->get('dashboard', 'Admin\DashController::index');
+    $routes->group('dashboard', static function ($routes) {
+        $routes->get('/', 'DashController::index',                            ['as' => 'admin_dashboard']);
+        $routes->post('acceptUser', 'DashController::acceptUser',             ['as' => 'admin_accept_user']);
+    });
 
-    // Alerts
-    $routes->get('alerts', 'Admin\AlertsController::index');
-    $routes->get('deleteAlert/(:num)', 'Admin\AlertsController::delete/$1');
-    $routes->get('editAlert/(:num)', 'Admin\AlertsController::editMode/$1');
+    $routes->group('alerts', static function ($routes) {
+        $routes->get('/', 'AlertsController::index',                          ['as' => 'admin_alerts']);
+        $routes->get('read/(:any)', 'AlertsController::read/$1',              ['as' => 'admin_read_alert']);
+        $routes->get('delete/(:num)', 'AlertsController::delete/$1',          ['as' => 'admin_delete_alert']);
+        $routes->post('enable', 'AlertsController::enable',                   ['as' => 'admin_enable_alert']);
+        $routes->post('disable/(:num)', 'AlertsController::disable/$1',       ['as' => 'admin_disable_alert']);
+        $routes->post('create', 'AlertsController::create',                   ['as' => 'admin_create_alert']);
+        $routes->post('update/(:num)', 'AlertsController::update/$1',         ['as' => 'admin_update_alert']);
+    });
 
-    // Clubs
-    $routes->get('clubs', 'Admin\ClubsController::index');
+    $routes->group('clubs', static function ($routes) {
+        $routes->get('/', 'ClubsController::index',                           ['as' => 'admin_clubs']);
+        $routes->get('read/(:any)', 'ClubsController::read/$1',               ['as' => 'admin_read_club']);
+        $routes->post('update', 'ClubsController::update',                    ['as' => 'admin_update_club']);
+        $routes->post('create', 'ClubsController::create',                    ['as' => 'admin_create_club']);
+        $routes->get('delete/(:any)', 'ClubsController::delete/$1',           ['as' => 'admin_delete_club']);
+        $routes->post('addMember', 'ClubsController::addMembers',             ['as' => 'admin_club_add_member']);
+        $routes->post('removeMember', 'ClubsController::removeMember',        ['as' => 'admin_club_remove_member']);
+        $routes->post('addTeam', 'ClubsController::addTeams',                 ['as' => 'admin_club_add_team']);
+        $routes->post('removeTeam', 'ClubsController::removeTeam',            ['as' => 'admin_club_remove_team']);
+    });
 
-    // Teams
-    $routes->get('teams', 'Admin\TeamsController::index');
+    $routes->group('teams', static function ($routes) {
+        $routes->get('/', 'TeamsController::index',                           ['as' => 'admin_teams']);
+        $routes->get('read/(:any)', 'TeamsController::read/$1',               ['as' => 'admin_read_team']);
+        $routes->post('update', 'TeamsController::updateTeam',                ['as' => 'admin_update_team']);
+        $routes->post('create', 'TeamsController::createTeam',                ['as' => 'admin_create_team']);
+        $routes->post('delete', 'TeamsController::deleteTeam',                ['as' => 'admin_delete_team']);
+        $routes->post('removeMember', 'TeamsController::removeMember',        ['as' => 'admin_team_remove_member']);
+        $routes->post('addMembers', 'TeamsController::addMembers',            ['as' => 'admin_team_add_member']);
+    });
 
-    // Competitions
-    $routes->get('competitions', 'Admin\CompetitionsController::index');
-    $routes->get('competitions/edit/(:num)', 'Admin\CompetitionsController::edit/$1');
-    $routes->get('competitions/delete/(:num)', 'Admin\CompetitionsController::delete/$1');
-    $routes->get('competitions/check/(:num)', 'Admin\CompetitionsController::check/$1');
+    $routes->group('competitions', static function ($routes) {
+        $routes->get('/', 'CompetitionsController::index',                    ['as' => 'admin_competitions']);
+        $routes->get('edit/(:num)', 'CompetitionsController::edit/$1',        ['as' => 'admin_edit_competition']);
+        $routes->get('delete/(:num)', 'CompetitionsController::delete/$1',    ['as' => 'admin_delete_competition']);
+        $routes->get('check/(:num)', 'CompetitionsController::check/$1',      ['as' => 'admin_check_competition']);
+        $routes->post('create', 'CompetitionsController::store',              ['as' => 'admin_create_competition']);
+        $routes->post('update/(:num)', 'CompetitionsController::update/$1',   ['as' => 'admin_update_competition']);
+    });
 
-    // Competition Types
-    $routes->get('CompetitionType', 'Admin\CompetitionTypeController::index');
-    $routes->get('CompetitionType/edit/(:num)', 'Admin\CompetitionTypeController::edit/$1');
-    $routes->get('CompetitionType/check/(:num)', 'Admin\CompetitionTypeController::check/$1');
-    $routes->get('CompetitionType/update/(:num)', 'Admin\CompetitionTypeController::update/$1');
-    $routes->get('CompetitionType/edit/dashboard', 'Admin\DashController::index');
-    $routes->get('CompetitionType/edit/alerts', 'Admin\AlertsController::index');
-    $routes->get('CompetitionType/edit/clubs', 'Admin\ClubsController::index');
-    $routes->get('CompetitionType/edit/teams', 'Admin\TeamsController::index');
-    $routes->get('CompetitionType/edit/competitions', 'Admin\CompetitionsController::index');
-    $routes->get('CompetitionType/edit/CompetitionType', 'Admin\CompetitionTypeController::index');
-    $routes->get('CompetitionType/delete/(:num)', 'Admin\CompetitionTypeController::delete/$1');
+    $routes->group('competition_types', static function ($routes) {
+        $routes->get('/', 'CompetitionTypeController::index',                 ['as' => 'admin_competition_types']);
+        $routes->get('edit/(:num)', 'CompetitionTypeController::edit/$1',     ['as' => 'admin_edit_competition_type']);
+        $routes->get('check/(:num)', 'CompetitionTypeController::check/$1',   ['as' => 'admin_check_competition_type']);
+        $routes->get('update/(:num)', 'CompetitionTypeController::update/$1', ['as' => 'admin_update_competition_type']);
+        $routes->get('delete/(:num)', 'CompetitionTypeController::delete/$1', ['as' => 'admin_delete_competition_type']);
+        $routes->post('create', 'CompetitionTypeController::store',           ['as' => 'admin_create_competition_type']);
+    });
 
-    // Committees
-    $routes->get('committees', 'Admin\CommitteesController::index');
+    $routes->group('committees', static function ($routes) {
+        $routes->get('/', 'CommitteesController::index',                      ['as' => 'admin_committees']);
+        $routes->post('create', 'CommitteesController::createCommittee',      ['as' => 'admin_create_committee']);
+        $routes->post('update', 'CommitteesController::modify',               ['as' => 'admin_update_committee']);
+        $routes->post('edit', 'CommitteesController::modifyCommittee',        ['as' => 'admin_edit_committee']);
+        $routes->post('delete', 'CommitteesController::deleteCommittee',      ['as' => 'admin_delete_committee']);
+    });
 
-    // Development
-    $routes->get('development', 'Admin\DevelopmentController::index');
+    $routes->group('developments', static function ($routes) {
+        $routes->get('/', 'DevelopmentController::index',                     ['as' => 'admin_developments']);
+        $routes->post('create', 'DevelopmentController::createDev',           ['as' => 'admin_create_development']);
+        $routes->post('update', 'DevelopmentController::modify',              ['as' => 'admin_update_development']);
+        $routes->post('edit', 'DevelopmentController::modifyProgram',         ['as' => 'admin_edit_development']);
+        $routes->post('delete', 'DevelopmentController::deleteProgram',       ['as' => 'admin_delete_development']);
+    });
 
-    // Development
-    $routes->get('developmentTypes', 'Admin\DevelopmentTypesController::index');
+    $routes->group('development_types', static function ($routes) {
+        $routes->get('/', 'DevelopmentTypesController::index',                ['as' => 'admin_development_types']);
+        $routes->post('create', 'DevelopmentTypesController::store',          ['as' => 'admin_create_development_type']);
+    });
 
-    // Users
-    $routes->get('users', 'Admin\UsersController::index');
-    $routes->get('users/edit/(:num)', 'Admin\UsersController::userDetails/$1');
-    $routes->get('users/edit', 'Admin\UsersController::searchUserDetails');
+    $routes->group('users', static function ($routes) {
+        $routes->get('/', 'UsersController::index',                           ['as' => 'admin_users']);
+        $routes->get('edit/(:any)', 'UsersController::userDetails/$1',        ['as' => 'admin_read_user']);
+        $routes->get('search', 'UsersController::searchUserDetails',          ['as' => 'admin_competition_types']);
+        $routes->post('editUser/(:num)', 'UsersController::editUser/$1',      ['as' => 'admin_competition_types']);
+    });
 
-    // News
-    $routes->get('news', 'Admin\NewsController::index');
+    $routes->group('news', static function ($routes) {
+        $routes->get('/', 'NewsController::index',                            ['as' => 'admin_news']);
+        $routes->post('create', 'NewsController::createNews',                 ['as' => 'admin_create_news']);
+    });
 
-    // Email
-    $routes->get('email', 'Admin\EmailController::index');
+    $routes->group('email', static function ($routes) {
+        $routes->get('/', 'EmailController::index',                           ['as' => 'admin_emails']);
+        $routes->post('send', 'EmailController::sendEmail',                   ['as' => 'admin_send_email']);
+    });
 
-    // Settings
-    $routes->get('settings', 'Admin\SettingsController::index');
-
-
-    /**************************** POST ROUTING ****************************/
-    // Dashboard
-    $routes->post('accept_user', 'Admin\DashController::accept_user');
-
-    // Alerts
-    $routes->post('setAlert', 'Admin\AlertsController::set');
-    $routes->post('disable/(:num)', 'Admin\AlertsController::disable/$1');
-    $routes->post('createAlert', 'Admin\AlertsController::create');
-    $routes->post('updateAlert/(:num)', 'Admin\AlertsController::update/$1');
-
-    // Clubs
-    $routes->post('updateClub', 'Admin\ClubsController::updateClub');
-    $routes->post('createClub', 'Admin\ClubsController::createClub');
-    $routes->post('deleteClub', 'Admin\ClubsController::deleteClub');
-    $routes->post('addClubMembers', 'Admin\ClubsController::addMembers');
-    $routes->post('removeClubMember', 'Admin\ClubsController::removeMember');
-    $routes->post('addTeamsToClub', 'Admin\ClubsController::addTeams');
-    $routes->post('removeTeamFromClub', 'Admin\ClubsController::removeTeam');
-
-    // Teams
-    $routes->post('updateTeam', 'Admin\TeamsController::updateTeam');
-    $routes->post('createTeam', 'Admin\TeamsController::createTeam');
-    $routes->post('deleteTeam', 'Admin\TeamsController::deleteTeam');
-    $routes->post('removeTeamMember', 'Admin\TeamsController::removeMember');
-    $routes->post('addTeamMembers', 'Admin\TeamsController::addMembers');
-
-    // Competitions
-    $routes->post('competitions', 'Admin\CompetitionsController::store');
-
-    // Competitions Type
-    $routes->post('CompetitionType', 'Admin\CompetitionTypeController::store');
-
-    // Committees
-    $routes->post('createCommittee', 'Admin\CommitteesController::createCommittee');
-    $routes->post('modify_committee', 'Admin\CommitteesController::modify');
-    $routes->post('modifyCommittee', 'Admin\CommitteesController::modifyCommittee');
-    $routes->post('deleteCommittee', 'Admin\CommitteesController::deleteCommittee');
-
-    // Development
-    $routes->post('createDev', 'Admin\DevelopmentController::createDev');
-    $routes->post('createProgType', 'Admin\DevelopmentController::createProgType');
-    $routes->post('modifyProgram', 'Admin\DevelopmentController::modifyProgram');
-    $routes->post('deleteProgram', 'Admin\DevelopmentController::deleteProgram');
-    $routes->post('modify_development', 'Admin\DevelopmentController::modify');
-
-    // Development Type
-    $routes->post('developmentTypes', 'Admim\DevelopmentTypesController::store');
-    // $routes->get('admin/developmentTypes/(:num)/edit', 'Admin\DevelopmentTypesController::edit/$1');
-
-    // Users
-    $routes->post('editUser/(:num)', 'Admin\UsersController::editUser/$1');
-
-    // News
-    $routes->post('createNews', 'Admin\NewsController::createNews');
-
-    // Email
-    $routes->post('sendEmail', 'Admin\EmailController::sendEmail');
-
-    // Settings
-
-
-    /**************************** PUT ROUTING ****************************/
-    // Competitions 
-    $routes->put('competitions/update/(:num)', 'Admin\CompetitionsController::update/$1');
-
-    // Competition Types
-    $routes->put('CompetitionType/update/(:num)', 'Admin\CompetitionTypeController::update/$1');
-
+    $routes->group('settings', static function ($routes) {
+        $routes->get('/', 'SettingsController::index',                        ['as' => 'admin_settings']);
+        $routes->get('backup', 'SettingsController::backup',                  ['as' => 'admin_settings_db_backup']);
+    });
 });
 
 // Codeigniter's default auth routing
