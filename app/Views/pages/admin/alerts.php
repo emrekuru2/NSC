@@ -37,7 +37,7 @@
                                             <th scope="col">#</th>
                                             <th scope="col">Title</th>
                                             <th scope="col">Description</th>
-                                            <th scope="col" class="text-center">Action</th>
+                                            <th scope="col" class="text-center">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -47,7 +47,15 @@
                                                 <td> <?= anchor(url_to('admin_read_alert', $alert->title), $alert->title) ?></td>
                                                 <td> <?= character_limiter($alert->content, 20); ?></td>
                                                 <td class="text-center">
-                                                    <span class="btn btn-outline-danger" role="button" data-bs-toggle="modal" data-bs-target="<?= '#delete' . $alert->id ?>"><i class="fa-solid fa-trash"></i> Delete</span>
+                                                    <div class="btn-group dropend">
+                                                        <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <i class="fa-solid fa-ellipsis"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><span class="dropdown-item text-danger" role="button" data-bs-toggle="modal" data-bs-target="<?= '#delete' . $alert->id ?>"><i class="fa-solid fa-trash"></i> Delete</span></li>
+                                                            
+                                                        </ul>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <?= view_cell('\App\Libraries\Alerts::modal',  ['content' => 'Are you sure you want to delete ' . $alert->title, 'id' => 'delete' . $alert->id, "action" => url_to('admin_delete_alert', $alert->id)]) ?>

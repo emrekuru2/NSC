@@ -9,11 +9,11 @@ use App\Models\UserEmailModel;
 use App\Models\UserTypes\ClubUserModel;
 use Exception;
 
+use function PHPUnit\Framework\isEmpty;
 use function PHPUnit\Framework\isNull;
 
 class ClubsController extends BaseController
 {
-
     protected $clubModel;
     protected $helpers = ['image', 'html', 'form', 'file'];
 
@@ -69,7 +69,6 @@ class ClubsController extends BaseController
 
     public function create()
     {
-
         $data = $this->request->getPost();
         $imageFile = $this->request->getFile('image');
         $filepath = storeImage('Clubs', $imageFile);
@@ -87,6 +86,12 @@ class ClubsController extends BaseController
 
     public function delete(int $param)
     {
+        $currentClub = $this->clubModel->find($param);
+
+        if(isEmpty($currentClub->getTeams()) || isEmpty($currentClub->getMembers())) {
+            return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Teams and Members must be removed before deleting a club.']);
+        }
+
         if ($this->clubModel->delete($param)) {
             return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Club deleted successfully!']);
         }
