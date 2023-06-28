@@ -74,7 +74,7 @@
       <hr>
       <div class="nav nav-pills d-flex gap-1">
         <div class="nav-item flex-grow-1">
-          <a href="<?= url_to('main_clubs') ?>" class="btn btn-outline-primary w-100" role="button"><i class="fa-solid fa-house fa-lg pe-3"></i>Home</a>
+          <a href="<?= url_to('main_homepage') ?>" class="btn btn-outline-primary w-100" role="button"><i class="fa-solid fa-house fa-lg pe-3"></i>Home</a>
         </div>
         <div class="nav-item">
           <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#logout"><i class="fa-solid fa-right-from-bracket fa-lg"></i> </button>

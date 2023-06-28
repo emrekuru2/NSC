@@ -9,11 +9,11 @@
         <div class="card-header d-flex">
           <span class="flex-grow-1">Alert Details</span>
           <?php if ($editMode) : ?>
-            <a href="<?= base_url('admin/news') ?>" role="button">Return back</a>
+            <a href="<?= base_url(url_to('admin_news')) ?>" role="button">Return back</a>
           <?php endif ?>
         </div>
         <div class="card-body">
-          <form method="post" action="<?= $editMode ? base_url('admin/updateNews/' . $currentNews->id) : base_url('admin/createNews') ?>">
+          <form method="post" action="<?= $editMode ?  url_to('admin_update_news', $currentNews->id) : url_to('admin_create_news') ?>">
             <div class="form-group mb-3">
               <label for="title" class="form-label">Title</label>
               <input type="text" name="title" class="form-control" value="<?= $editMode ? $currentNews->title : null ?>">
@@ -39,10 +39,10 @@
                   <h5 class="card-title"><?= esc($news_item->title) ?></h5>
                   <div class="card-footer text-muted"><?= 'Posted on: ' . esc($news_item->created_at) ?></div>
                   <div class="text-center">
-                    <a class="btn btn-secondary m-2" href="<?= base_url('admin/editNews/' . $news_item->id) ?>" role="button">Edit</a>
+                    <a class="btn btn-secondary m-2" href="<?= url_to('admin_edit_news', $news_item->id) ?>" role="button">Edit</a>
                   </div>
                 </a>
-              <?php endforeach; ?> 
+              <?php endforeach; ?>
             <?php else : ?>
               <div class="text-center">
                 <h3>No News</h3>

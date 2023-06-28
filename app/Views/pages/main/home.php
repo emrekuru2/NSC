@@ -76,30 +76,16 @@
         <div class="row gx-5">
             <?php if (!empty($news) && is_array($news)) : ?>
                 <?php foreach ($news as $news_item) : ?>
-                    <?php
-                    $html_string = $news_item->content;
-                    $dom         = new DOMDocument();
-                    $dom->loadHTML($html_string);
-
-                    // Extract the contents of each element
-                    $h4_content   = $dom->getElementsByTagName('h4')->item(0)->nodeValue;
-                    $code_content = $dom->getElementsByTagName('code')->item(0)->nodeValue;
-                    $img_src      = $dom->getElementsByTagName('img')->item(0)->getAttribute('src');
-                    ?>
                     <div class="col-lg-4 mb-5">
                         <div class="card h-100 shadow border-0 d-flex align-items-center">
-                            <img class="card-img-top" src="<?= $img_src; ?>" alt="..." />
-                            <div class="card-body p-4">
-                                <div class="badge bg-primary bg-gradient rounded-pill mb-2">News</div>
-                                <h4 class="card-title mb-3"><?= $h4_content ?></h4>
-                                <p class="card-text mb-0"><?= $code_content ?></p>
-                            </div>
-                            <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-                                <div class="d-flex align-items-end justify-content-between">
-                                    <div class="d-flex align-items-center">
-                                        <a href="news/<?= esc($news_item->id) ?>" class="btn btn-primary btn-block">Find out more</a>
+                            <div class="card-body align-items-center p-4">
+                                <a class="list-group-item">
+                                    <h5 class="card-title"><?= esc($news_item->title) ?></h5>
+                                    <div class="card-footer text-muted p-2"><?= 'Posted on: ' . esc($news_item->created_at) ?></div>
+                                    <div class="text-center p-2">
+                                        <a href="<?= url_to('main_news_details', $news_item->id) ?>" class="btn btn-primary btn-block">Find out more</a>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>

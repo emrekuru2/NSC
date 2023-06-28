@@ -36,6 +36,6 @@ class NewsController extends BaseController
             'pager'    => $comments->pager,
         ];
 
-        return view('pages/news_details', $data);
+        return view('pages/main/news_details', $data);
     }
 }

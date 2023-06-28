@@ -139,7 +139,9 @@ $routes->group('admin', ['filter' => 'adminfilter', 'namespace' => 'App\Controll
 
     $routes->group('news', static function ($routes) {
         $routes->get('/', 'NewsController::index',                            ['as' => 'admin_news']);
-        $routes->post('create', 'NewsController::createNews',                 ['as' => 'admin_create_news']);
+        $routes->get('edit/(:any)', 'NewsController::editMode/$1',            ['as' => 'admin_edit_news']);
+        $routes->post('update/(:any)', 'NewsController::update/$1',           ['as' => 'admin_update_news']);
+        $routes->post('create', 'NewsController::create',                     ['as' => 'admin_create_news']);
     });
 
     $routes->group('email', static function ($routes) {
