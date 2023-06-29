@@ -8,45 +8,43 @@
         <div class="row-lg">
             <div class="col-lg-12 mb-3">
                 <div class="card shadow">
-                    <div class="card-header"><i class="fa-solid fa-list"></i> Clubs List</div>
-                    <div class="card-body">
+                    <div class="card-header d-flex align-items-center">
+                        <span class="flex-grow-1"><i class="fa-solid fa-list"></i> Clubs List</span>
+                        <?= view_cell('\App\Libraries\Contents::search', ['array' => $clubs, 'fields' => ['name'], 'type' => 'clubs']) ?>
+                    </div>
+                    <div class="card-body p-0">
                         <?php if (!empty($clubs)) : ?>
-                            <div class="d-flex w-100 justify-content-center mb-3">
-                                <?= view_cell('\App\Libraries\Contents::search', ['array' => $clubs, 'fields' => ['name'], 'type' => 'clubs']) ?>
-                            </div>
                             <?= form_open(url_to('admin_enable_alert'), ['class' => 'd-flex flex-column align-items-center']) ?>
-                            <div class="border-round p-0 w-100">
-                                <table class="table table-hover table-striped align-middle m-0">
-                                    <thead class="table-primary">
-                                        <tr>
-                                            <th scope="col">Name</th>
-                                            <th scope="col" class="text-center">Teams</th>
-                                            <th scope="col" class="text-center">Members</th>
-                                            <th scope="col" class="text-center">Action</th>
+                            <table class="table table-hover table-striped align-middle m-0">
+                                <thead class="table-primary">
+                                    <tr>
+                                        <th scope="col" class="px-3">Name</th>
+                                        <th scope="col" class="text-center">Teams</th>
+                                        <th scope="col" class="text-center">Members</th>
+                                        <th scope="col" class="text-end px-3">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($clubs as $club) : ?>
+                                        <tr <?= isset($currentClub) ? (($currentClub->name === $club->name) ? 'class="table-success"' : null) : null ?>>
+                                            <td class="px-3"><a class="text-decoration-none" href="<?= url_to('admin_read_club', $club->name) ?>"><b><?= $club->name ?></b></a></td>
+                                            <td class="text-center"><?= count($club->getTeams()) ?> </td>
+                                            <td class="text-center"><?= count($club->getMembers()) ?> </td>
+                                            <td class="text-end px-3">
+                                                <div class="btn-group dropend">
+                                                    <button type="button" class="btn btn-outline-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="fa-solid fa-ellipsis"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><span class="dropdown-item text-danger" role="button" data-bs-toggle="modal" data-bs-target="<?= '#delete' . $club->id  ?>"><i class="fa-solid fa-trash"></i> Delete</span></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($clubs as $club) : ?>
-                                            <tr>
-                                                <td><a href="<?= url_to('admin_read_club', $club->name) ?>"><?= $club->name ?></a></td>
-                                                <td class="text-center"><?= count($club->getTeams()) ?> </td>
-                                                <td class="text-center"><?= count($club->getMembers()) ?> </td>
-                                                <td class="text-center">
-                                                    <div class="btn-group dropend">
-                                                        <button type="button" class="btn btn-outline-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                                            <i class="fa-solid fa-ellipsis"></i>
-                                                        </button>
-                                                        <ul class="dropdown-menu">
-                                                            <li><span class="dropdown-item text-danger" role="button" data-bs-toggle="modal" data-bs-target="<?= '#delete' . $club->id  ?>"><i class="fa-solid fa-trash"></i> Delete</span></li>
-                                                        </ul>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <?= view_cell('\App\Libraries\Alerts::modal',  ['content' => 'Are you sure you want to delete ' . $club->name, 'id' => 'delete' . $club->id, "action" => url_to('admin_delete_club', $club->id)]) ?>
-                                        <?php endforeach ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                                        <?= view_cell('\App\Libraries\Alerts::modal',  ['content' => 'Are you sure you want to delete ' . $club->name, 'id' => 'delete' . $club->id, "action" => url_to('admin_delete_club', $club->id)]) ?>
+                                    <?php endforeach ?>
+                                </tbody>
+                            </table>
                             <?= form_close() ?>
                         <?php else : ?>
                             <h4 class="text-muted text-center">There are no clubs to show</h4>
@@ -58,47 +56,44 @@
                 <div class="col-lg-12">
                     <?php foreach (array('Teams' => $currentClub->getTeams(), 'Members' => $currentClub->getMembers()) as $key => $value) : ?>
                         <div class="card shadow mb-3">
-                            <div class="card-header"><i class="fa-solid fa-list"></i> <?= $key ?> for <b><?= $currentClub->name ?></b></div>
-                            <div class="card-body">
-                                <div class="d-flex p-1">
-                                    <label class="form-label flex-grow-1"><?= $key ?></label>
-                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target=<?= "#add" . $key . "Modal" ?>><i class="fa-solid fa-plus"></i> Add <?= $key ?></button>
-                                </div>
+                            <div class="card-header d-flex align-items-center">
+                                <span class="flex-grow-1"><i class="fa-solid fa-people-group"></i> <?= $key ?> for <b><?= $currentClub->name ?></b></span>
+                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target=<?= "#add" . $key . "Modal" ?>><i class="fa-solid fa-plus"></i> Add <?= $key ?></button>
+                            </div>
+                            <div class="card-body p-0">
                                 <?php if (empty($value)) : ?>
                                     <h4 class="text-muted">No <?= $key ?></h4>
                                 <?php else : ?>
-                                    <div class="border-round p-0">
-                                        <table class="table table-hover table-striped align-middle m-0">
-                                            <thead class="table-primary">
+                                    <table class="table table-hover table-striped align-middle m-0">
+                                        <thead class="table-primary">
+                                            <tr>
+                                                <th scope="col" class="px-3">Name</th>
+                                                <th scope="col" class="text-center"> <?= $key === 'Teams' ? 'Players' : 'Role' ?></th>
+                                                <?= $key === 'Members' ? '<th scope="col" class="text-center">Is Manager</th>' : null ?>
+                                                <th scope="col" class="text-end px-3">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($value as $item) : ?>
                                                 <tr>
-                                                    <th scope="col">Name</th>
-                                                    <th scope="col" class="text-center"> <?= $key === 'Teams' ? 'Players' : 'Role' ?></th>
-                                                    <?= $key === 'Members' ? '<th scope="col" class="text-center">Is Manager</th>' : null ?>
-                                                    <th scope="col" class="text-center">Actions</th>
+                                                    <td class="px-3"><a class="text-decoration-none" href="<?= url_to($key === 'Teams' ? 'admin_read_team' : 'admin_read_user', $item->name) ?>"><b><?= $key === 'Teams' ? $item->name : $item->getName() ?></b></a></td>
+                                                    <td class="text-center"><?= $key === 'Teams' ? count($value) : $item->getRole() ?></td>
+                                                    <?= $key === 'Members' ? '<td class="text-center">' . $item->isManager() . '</td>' : null ?>
+                                                    <td class="text-end px-3">
+                                                        <div class="btn-group dropend">
+                                                            <button type="button" class="btn btn-outline-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <i class="fa-solid fa-ellipsis"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                                <li><span class="dropdown-item text-danger" role="button" data-bs-toggle="modal" data-bs-target="<?= '#delete_' . $key . $item->id  ?>"><i class="fa-solid fa-trash"></i> Delete</span></li>
+                                                            </ul>
+                                                        </div>
+                                                    </td>
                                                 </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php foreach ($value as $item) : ?>
-                                                    <tr>
-                                                        <td><a href="<?= url_to($key === 'Teams' ? 'admin_read_team' : 'admin_read_user', $item->name) ?>"><?= $key === 'Teams' ? $item->name : $item->getName() ?></a></td>
-                                                        <td class="text-center"><?= $key === 'Teams' ? count($value) : $item->getRole() ?></td>
-                                                        <?= $key === 'Members' ? '<td class="text-center">' . $item->isManager() . '</td>' : null ?>
-                                                        <td class="text-center">
-                                                            <div class="btn-group dropend">
-                                                                <button type="button" class="btn btn-outline-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                                                    <i class="fa-solid fa-ellipsis"></i>
-                                                                </button>
-                                                                <ul class="dropdown-menu">
-                                                                    <li><span class="dropdown-item text-danger" role="button" data-bs-toggle="modal" data-bs-target="<?= '#delete_' . $key . $item->id  ?>"><i class="fa-solid fa-trash"></i> Delete</span></li>
-                                                                </ul>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <?= view_cell('\App\Libraries\Alerts::modal',  ['content' => 'Are you sure you want to remove ' . $item->name . ' from ' . $currentClub->name, 'id' => 'delete_' . $key . $item->id,  "action" => url_to('admin_delete_club', $item->name)]) ?>
-                                                <?php endforeach ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                                <?= view_cell('\App\Libraries\Alerts::modal',  ['content' => 'Are you sure you want to remove ' . $item->name . ' from ' . $currentClub->name, 'id' => 'delete_' . $key . $item->id,  "action" => url_to('admin_delete_club', $item->name)]) ?>
+                                            <?php endforeach ?>
+                                        </tbody>
+                                    </table>
                                 <?php endif ?>
                                 <?= view_cell('\App\Libraries\Alerts::clubModal',  ['action' => url_to('admin_club_add_team'), 'type' => $key, 'id' => 'add' . $key . 'Modal', 'currentClub' => $currentClub]) ?>
                             </div>

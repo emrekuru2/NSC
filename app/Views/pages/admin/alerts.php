@@ -6,7 +6,7 @@
             <!-- Current Alert -->
             <div class="col-lg-12 mb-4">
                 <div class="card shadow">
-                    <div class="card-header"><i class="fa-solid fa-check"></i> Current Alert</div>
+                    <div class="card-header"><i class="fa-solid fa-bell"></i> Current Alert</div>
                     <div class="card-body">
                         <?php
                         if (isset($active)) : ?>
@@ -22,48 +22,46 @@
             </div>
             <!-- All Alerts -->
             <div class="col-lg-12">
-                <div class="card shadow mh-100">
-                    <div class="card-header"><i class="fa-solid fa-list"></i> Alerts List</div>
-                    <div class="card-body">
+                <div class="card shadow">
+                    <div class="card-header d-flex align-items-center">
+                        <span class="flex-grow-1"><i class="fa-solid fa-list"></i> Alerts List</span>
+                        <?= view_cell('\App\Libraries\Contents::search', ['array' => $alerts, 'fields' => ['title'], 'type' => 'alerts']) ?>
+                    </div>
+                    <div class="card-body p-0">
                         <?php if (!empty($alerts)) : ?>
-                            <div class="d-flex w-100 justify-content-center mb-3">
-                                <?= view_cell('\App\Libraries\Contents::search', ['array' => $alerts, 'fields' => ['title'], 'type' => 'alerts']) ?>
-                            </div>
                             <?= form_open(url_to('admin_enable_alert'), ['class' => 'd-flex flex-column align-items-center']) ?>
-                            <div class="border-round p-0 w-100">
-                                <table class="table table-hover table-striped m-0">
-                                    <thead class="table-primary">
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Title</th>
-                                            <th scope="col">Description</th>
-                                            <th scope="col" class="text-center">Actions</th>
+                            <table class="table table-hover table-striped align-middle m-0 ">
+                                <thead class="table-primary">
+                                    <tr>
+                                        <th scope="col" class="px-3">#</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col" class="text-end px-3">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($alerts as $alert) : ?>
+                                        <tr <?= isset($currentAlert) ? (($currentAlert->title === $alert->title) ? 'class="table-success"' : null) : null ?>>
+                                            <th scope="row" class="px-3"><input class="form-check-input" type="radio" name="flexRadioDefault" value="<?= $alert->id ?>" id="<?= $alert->id ?>"></th>
+                                            <td><a class="text-decoration-none" href="<?= url_to('admin_read_alert', $alert->title) ?>"><b><?= $alert->title ?></b></a></td>
+                                            <td> <?= character_limiter($alert->content, 20); ?></td>
+                                            <td class="text-end px-3">
+                                                <div class="btn-group dropend">
+                                                    <button type="button" class="btn btn-outline-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="fa-solid fa-ellipsis"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><span class="dropdown-item text-danger" role="button" data-bs-toggle="modal" data-bs-target="<?= '#delete' . $alert->id ?>"><i class="fa-solid fa-trash"></i> Delete</span></li>
+
+                                                    </ul>
+                                                </div>
+                                            </td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($alerts as $alert) : ?>
-                                            <tr>
-                                                <th scope="row"><input class="form-check-input" type="radio" name="flexRadioDefault" value="<?= $alert->id ?>" id="<?= $alert->id ?>"></th>
-                                                <td> <?= anchor(url_to('admin_read_alert', $alert->title), $alert->title) ?></td>
-                                                <td> <?= character_limiter($alert->content, 20); ?></td>
-                                                <td class="text-center">
-                                                    <div class="btn-group dropend">
-                                                        <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                                            <i class="fa-solid fa-ellipsis"></i>
-                                                        </button>
-                                                        <ul class="dropdown-menu">
-                                                            <li><span class="dropdown-item text-danger" role="button" data-bs-toggle="modal" data-bs-target="<?= '#delete' . $alert->id ?>"><i class="fa-solid fa-trash"></i> Delete</span></li>
-                                                            
-                                                        </ul>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <?= view_cell('\App\Libraries\Alerts::modal',  ['content' => 'Are you sure you want to delete ' . $alert->title, 'id' => 'delete' . $alert->id, "action" => url_to('admin_delete_alert', $alert->id)]) ?>
-                                        <?php endforeach ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-50 mt-3">Set selected alert</button>
+                                        <?= view_cell('\App\Libraries\Alerts::modal',  ['content' => 'Are you sure you want to delete ' . $alert->title, 'id' => 'delete' . $alert->id, "action" => url_to('admin_delete_alert', $alert->id)]) ?>
+                                    <?php endforeach ?>
+                                </tbody>
+                            </table>
+                            <button type="submit" class="btn btn-primary w-50 my-3">Set selected alert</button>
                             <?= form_close() ?>
                         <?php else : ?>
                             <h4 class="text-muted text-center">There are no alerts to show</h4>
@@ -83,7 +81,7 @@
                         <input class="form-check-input" type="checkbox" role="button" id="editSwitch">
                         <label class="form-check-label" for="editSwitch"><i class="fa-regular fa-pen-to-square"></i> Edit mode</label>
                     </div>
-                    <?= anchor(url_to('admin_alerts'), '<i class="fa-solid fa-broom"></i> Clear', ['role' => 'button', 'class' => 'btn btn-primary']) ?>
+                    <a href="<?= url_to('admin_alerts') ?>" role="button" class="btn btn-primary"><i class="fa-solid fa-broom"></i> Clear</a>
                 <?php else : ?>
                     <span class="flex-grow-1"><i class="fa-solid fa-pen-ruler"></i> Create Alert</span>
                 <?php endif ?>
