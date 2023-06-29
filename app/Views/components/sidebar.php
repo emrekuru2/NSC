@@ -9,19 +9,24 @@
       </div>
       <hr>
       <ul class="nav nav-pills flex-column  ">
+        <!-- Dashboard -->
         <li class="nav-item">
           <a href="<?= url_to('admin_dashboard') ?>" class="nav-link link-primary text-light <?= ($title === 'Dashboard') ? 'active' : '' ?>"><i class="fa-solid fa-gauge fa-lg me-3 fa-fw"></i>Dashboard</a>
         </li>
         <hr>
+        <!-- Alerts -->
         <li class="nav-item">
           <a href="<?= url_to('admin_alerts') ?>" class="nav-link link-primary text-light <?= ($title === 'Alerts') ? 'active' : '' ?>"><i class="fa-solid fa-bell fa-lg me-3 fa-fw"></i>Alerts</a>
         </li>
+        <!-- Clubs -->
         <li class="nav-item">
           <a href="<?= url_to('admin_clubs') ?>" class="nav-link link-primary text-light <?= ($title === 'Clubs') ? 'active' : '' ?>"><i class="fa-solid fa-list fa-lg me-3 fa-fw"></i>Clubs</a>
         </li>
+        <!-- Teams -->
         <li class="nav-item">
           <a href="<?= url_to('admin_teams') ?>" class="nav-link link-primary text-light <?= ($title === 'Teams') ? 'active' : '' ?>"><i class="fa-solid fa-people-group fa-lg me-3 fa-fw"></i>Teams</a>
         </li>
+        <!-- Competitions -->
         <li class="nav-item">
           <div class="accordion accordion-flush" id="competitionsDrop">
             <div class="accordion-item">
@@ -37,10 +42,13 @@
                 </div>
               </div>
             </div>
+          </div>
         </li>
+        <!-- Committees -->
         <li class="nav-item">
           <a href="<?= url_to('admin_committees') ?>" class="nav-link link-primary text-light <?= ($title === 'Committees') ? 'active' : '' ?>"><i class="fa-solid fa-users-between-lines fa-lg me-3 fa-fw"></i>Committees</a>
         </li>
+        <!-- Developments -->
         <li class="nav-item">
           <div class="accordion accordion-flush" id="developmentsDrop">
             <div class="accordion-item">
@@ -56,31 +64,37 @@
                 </div>
               </div>
             </div>
+          </div>
         </li>
+        <!-- Users -->
         <li class="nav-item">
           <a href="<?= url_to('admin_users') ?>" class="nav-link link-primary text-light <?= ($title === 'Users') ? 'active' : '' ?>"><i class="fa-solid fa-user fa-lg me-3 fa-fw"></i>Users</a>
         </li>
         <hr>
+        <!-- News -->
         <li class="nav-item">
           <a href="<?= url_to('admin_news') ?>" class="nav-link link-primary text-light <?= ($title === 'News') ? 'active' : '' ?>"><i class="fa-solid fa-bullhorn fa-lg me-3 fa-fw"></i>News</a>
         </li>
+        <!-- Emails -->
         <li class="nav-item">
           <a href="<?= url_to('admin_emails') ?>" class="nav-link link-primary text-light <?= ($title === 'Email') ? 'active' : '' ?>"><i class="fa-solid fa-envelope fa-lg me-3 fa-fw"></i>Emails</a>
         </li>
+        <!-- Settings -->
         <li class="nav-item">
           <a href="<?= url_to('admin_settings') ?>" class="nav-link link-primary text-light <?= ($title === 'Settings') ? 'active' : '' ?>"><i class="fa-solid fa-gear fa-lg me-3 fa-fw"></i>Settings</a>
         </li>
       </ul>
       <hr>
       <div class="nav nav-pills d-flex gap-1">
+        <!-- Home -->
         <div class="nav-item flex-grow-1">
           <a href="<?= url_to('main_homepage') ?>" class="btn btn-outline-primary w-100" role="button"><i class="fa-solid fa-house fa-lg pe-3"></i>Home</a>
         </div>
+        <!-- Logout -->
         <div class="nav-item">
           <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#logout"><i class="fa-solid fa-right-from-bracket fa-lg"></i> </button>
         </div>
       </div>
-      <?= view_cell('\App\Libraries\Alerts::modal', ['content' => 'Are you sure you want to log out?', 'id' => 'logout', "action" => url_to('logout')]) ?>
     </div>
   </div>
 </nav>
