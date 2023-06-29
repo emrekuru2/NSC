@@ -14,23 +14,23 @@
                     </div>
                     <div class="card-body p-0">
                         <?php if (!empty($clubs)) : ?>
-                            <?= form_open(url_to('admin_enable_alert'), ['class' => 'd-flex flex-column align-items-center']) ?>
-                            <table class="table table-hover table-striped align-middle m-0">
+                            <?= form_open(url_to('admin_enable_alert')) ?>
+                            <table class="table table-hover table-striped align-middle table-bordered display" style="margin: 0 !important;">
                                 <thead class="table-primary">
                                     <tr>
                                         <th scope="col" class="px-3">Name</th>
-                                        <th scope="col" class="text-center">Teams</th>
-                                        <th scope="col" class="text-center">Members</th>
-                                        <th scope="col" class="text-end px-3">Action</th>
+                                        <th scope="col">Teams</th>
+                                        <th scope="col">Members</th>
+                                        <th scope="col" class="no-sorting col-1 text-center px-3">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($clubs as $club) : ?>
                                         <tr <?= isset($currentClub) ? (($currentClub->name === $club->name) ? 'class="table-success"' : null) : null ?>>
                                             <td class="px-3"><a class="text-decoration-none" href="<?= url_to('admin_read_club', $club->name) ?>"><b><?= $club->name ?></b></a></td>
-                                            <td class="text-center"><?= count($club->getTeams()) ?> </td>
-                                            <td class="text-center"><?= count($club->getMembers()) ?> </td>
-                                            <td class="text-end px-3">
+                                            <td><?= count($club->getTeams()) ?> </td>
+                                            <td><?= count($club->getMembers()) ?> </td>
+                                            <td class="text-center px-3">
                                                 <div class="btn-group dropend">
                                                     <button type="button" class="btn btn-outline-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                                         <i class="fa-solid fa-ellipsis"></i>
@@ -64,22 +64,22 @@
                                 <?php if (empty($value)) : ?>
                                     <h4 class="text-muted">No <?= $key ?></h4>
                                 <?php else : ?>
-                                    <table class="table table-hover table-striped align-middle m-0">
+                                    <table class="table table-hover table-striped align-middle table-bordered display" style="margin: 0 !important;">
                                         <thead class="table-primary">
                                             <tr>
                                                 <th scope="col" class="px-3">Name</th>
-                                                <th scope="col" class="text-center"> <?= $key === 'Teams' ? 'Players' : 'Role' ?></th>
-                                                <?= $key === 'Members' ? '<th scope="col" class="text-center">Is Manager</th>' : null ?>
-                                                <th scope="col" class="text-end px-3">Actions</th>
-                                            </tr>
+                                                <th scope="col"> <?= $key === 'Teams' ? 'Players' : 'Role' ?></th>
+                                                <?= $key === 'Members' ? '<th scope="col">Is Manager</th>' : null ?>
+                                                <th scope="col" class="no-sorting col-1 text-center px-3">Actions</th>
+                                            </tr>    
                                         </thead>
                                         <tbody>
                                             <?php foreach ($value as $item) : ?>
                                                 <tr>
                                                     <td class="px-3"><a class="text-decoration-none" href="<?= url_to($key === 'Teams' ? 'admin_read_team' : 'admin_read_user', $item->name) ?>"><b><?= $key === 'Teams' ? $item->name : $item->getName() ?></b></a></td>
-                                                    <td class="text-center"><?= $key === 'Teams' ? count($value) : $item->getRole() ?></td>
-                                                    <?= $key === 'Members' ? '<td class="text-center">' . $item->isManager() . '</td>' : null ?>
-                                                    <td class="text-end px-3">
+                                                    <td><?= $key === 'Teams' ? count($value) : $item->getRole() ?></td>
+                                                    <?= $key === 'Members' ? '<td>' . $item->isManager() . '</td>' : null ?>
+                                                    <td class="text-center px-3">
                                                         <div class="btn-group dropend">
                                                             <button type="button" class="btn btn-outline-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                                                 <i class="fa-solid fa-ellipsis"></i>

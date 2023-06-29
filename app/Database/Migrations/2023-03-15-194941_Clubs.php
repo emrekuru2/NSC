@@ -37,6 +37,7 @@ class Clubs extends Migration
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->addKey(['clubID', 'userID']);
+        $this->forge->addUniqueKey(['type', 'userID']);
         $this->forge->addForeignKey('clubID', 'nsca_clubs', 'id', '', 'CASCADE');
         $this->forge->addForeignKey('userID', 'nsca_users', 'id', '', 'CASCADE');
         $this->forge->createTable('nsca_club_users');
