@@ -2,8 +2,8 @@
 
 <?= $this->section('adminContent') ?>
 
-<div class="card shadow h-100">
-    <div class="card-header">
+<div class="card shadow">
+    <div class="card-header p-0">
         <ul class="nav nav-tabs" id="settingsTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" type="button" role="tab" aria-controls="general" aria-selected="true">General</button>

@@ -39,10 +39,10 @@
 <hr>
 <div class="row">
     <div class="col-12">
-        <div class="card h-100 shadow">
-            <div class="card-header">Player Waitlist</div>
-            <div class="card-body">
-                <table class="table table-striped text-center table-hover">
+        <div class="card shadow">
+            <div class="card-header"><i class="fa-solid fa-clock-rotate-left"></i> Player Waitlist</div>
+            <div class="card-body p-0">
+                <table id="dataTable" class="table table-striped text-center table-hover align-middle">
                     <thead class="table-primary">
                         <tr>
                             <th scope="col">Name</th>
@@ -53,8 +53,8 @@
                     <tbody class="table-group-divider">
                         <?php foreach ($joinlist as $row) : ?>
                             <tr>
-                                <td><?= esc($row['first_name']) . ' ' . esc($row['last_name']) ?></td>
-                                <td><?= esc($row['club_name']) ?></td>
+                                <td><a class="text-decoration-none" href="<?= url_to('admin_read_user', $row['userID']) ?>"><b><?= esc($row['first_name']) . ' ' . esc($row['last_name']) ?></b></a></td>
+                                <td><a class="text-decoration-none" href="<?= url_to('admin_read_club', $row['club_name']) ?>"><b><?= esc($row['club_name']) ?></b></a></td>
                                 <td>
                                     <?= form_open(url_to('admin_accept_user')) ?>
                                     <input type="hidden" value="<?= esc($row['userID']) ?>" id="userID" name="userID">
@@ -73,7 +73,5 @@
         </div>
     </div>
 </div>
-
-
 
 <?= $this->endSection() ?>

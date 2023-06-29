@@ -29,23 +29,23 @@
                     </div>
                     <div class="card-body p-0">
                         <?php if (!empty($alerts)) : ?>
-                            <?= form_open(url_to('admin_enable_alert'), ['class' => 'd-flex flex-column align-items-center']) ?>
-                            <table class="table table-hover table-striped align-middle m-0 ">
+                            <?= form_open(url_to('admin_enable_alert')) ?>
+                            <table class="table table-hover table-striped align-middle table-bordered display" style="margin: 0 !important;">
                                 <thead class="table-primary">
                                     <tr>
-                                        <th scope="col" class="px-3">#</th>
+                                        <th scope="col" class="no-sorting col-1 text-center px-3"><i class="fa-solid fa-bell"></i></th>
                                         <th scope="col">Title</th>
-                                        <th scope="col">Description</th>
-                                        <th scope="col" class="text-end px-3">Actions</th>
+                                        <th scope="col" >Description</th>
+                                        <th scope="col" class="no-sorting col-1 text-center px-3">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($alerts as $alert) : ?>
                                         <tr <?= isset($currentAlert) ? (($currentAlert->title === $alert->title) ? 'class="table-success"' : null) : null ?>>
-                                            <th scope="row" class="px-3"><input class="form-check-input" type="radio" name="flexRadioDefault" value="<?= $alert->id ?>" id="<?= $alert->id ?>"></th>
+                                            <td class="text-center px-3"><input class="form-check-input" type="radio" name="flexRadioDefault" value="<?= $alert->id ?>" id="<?= $alert->id ?>"></td>
                                             <td><a class="text-decoration-none" href="<?= url_to('admin_read_alert', $alert->title) ?>"><b><?= $alert->title ?></b></a></td>
                                             <td> <?= character_limiter($alert->content, 20); ?></td>
-                                            <td class="text-end px-3">
+                                            <td class="text-center px-3">
                                                 <div class="btn-group dropend">
                                                     <button type="button" class="btn btn-outline-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                                         <i class="fa-solid fa-ellipsis"></i>
