@@ -1,5 +1,6 @@
 <div class="modal fade" id="<?= $id ?>" aria-labelledby="ClubModalLabel" aria-hidden="true">
     <?= form_open($action, ['class' => 'modal-dialog editMode']) ?>
+    <input type="hidden" value="<?= $currentClub->id ?>" name="clubID">
     <div class="modal-content">
         <div class="modal-header">
             <h1 class="modal-title fs-5">Add <?= $type ?></h1>
@@ -26,7 +27,7 @@
                                 <tr>
                                     <td class="col-11 line-height-2rem"><?= $unassignedTeam->name ?></td>
                                     <td class="col-1">
-                                        <input type="checkbox" class="form-check-input shadow check-margin" value="<?= $unassignedTeam->name ?>" name="add-teams-check">
+                                        <input type="checkbox" class="form-check-input shadow check-margin" value="<?= $unassignedTeam->name ?>" name="teams[]">
                                     </td>
                                 </tr>
                             <?php endforeach ?>
@@ -42,7 +43,7 @@
                                 <tr>
                                     <td class="col-11 line-height-2rem"><?= $unassignedMember->getFullName() ?></td>
                                     <td class="col-1">
-                                        <input type="checkbox" class="form-check-input shadow check-margin" value="<?= $unassignedMember->id ?>" name="add-members-check">
+                                        <input type="checkbox" class="form-check-input shadow check-margin" value="<?= $unassignedMember->id ?>" name="userID[]">
                                     </td>
                                 </tr>
                             <?php endforeach ?>
@@ -53,7 +54,7 @@
             </table>
         </div>
         <div class="modal-footer group-modal-footer">
-            <button type="button" id="add-teams-button" class="btn btn-primary">Add</button>
+            <button type="submit" id="add-teams-button" class="btn btn-primary">Add</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
         </div>
     </div>

@@ -42,20 +42,20 @@
         <div class="card shadow">
             <div class="card-header"><i class="fa-solid fa-clock-rotate-left"></i> Player Waitlist</div>
             <div class="card-body p-0">
-                <table id="dataTable" class="table table-striped text-center table-hover align-middle">
+                <table class="table table-striped table-hover align-middle table-bordered display" style="margin: 0 !important">
                     <thead class="table-primary">
                         <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Club to join</th>
-                            <th scope="col">Action</th>
+                            <th scope="col" class="px-3">Name</th>
+                            <th scope="col" class="px-3">Club to join</th>
+                            <th scope="col" class="no-sorting col-3 text-center">Actions</th>
                         </tr>
                     </thead>
-                    <tbody class="table-group-divider">
+                    <tbody>
                         <?php foreach ($joinlist as $row) : ?>
                             <tr>
-                                <td><a class="text-decoration-none" href="<?= url_to('admin_read_user', $row['userID']) ?>"><b><?= esc($row['first_name']) . ' ' . esc($row['last_name']) ?></b></a></td>
-                                <td><a class="text-decoration-none" href="<?= url_to('admin_read_club', $row['club_name']) ?>"><b><?= esc($row['club_name']) ?></b></a></td>
-                                <td>
+                                <td class="px-3"><a class="text-decoration-none" href="<?= url_to('admin_read_user', $row['userID']) ?>"><b><?= esc($row['first_name']) . ' ' . esc($row['last_name']) ?></b></a></td>
+                                <td class="px-3"><a class="text-decoration-none" href="<?= url_to('admin_read_club', $row['club_name']) ?>"><b><?= esc($row['club_name']) ?></b></a></td>
+                                <td class="text-center">
                                     <?= form_open(url_to('admin_accept_user')) ?>
                                     <input type="hidden" value="<?= esc($row['userID']) ?>" id="userID" name="userID">
                                     <input type="hidden" value="<?= esc($row['clubID']) ?>" id="clubID" name="clubID">

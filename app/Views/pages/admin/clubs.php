@@ -56,9 +56,10 @@
                 <div class="col-lg-12">
                     <?php foreach (array('Teams' => $currentClub->getTeams(), 'Members' => $currentClub->getMembers()) as $key => $value) : ?>
                         <div class="card shadow mb-3">
-                            <div class="card-header d-flex align-items-center">
-                                <span class="flex-grow-1"><i class="fa-solid fa-people-group"></i> <?= $key ?> for <b><?= $currentClub->name ?></b></span>
-                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target=<?= "#add" . $key . "Modal" ?>><i class="fa-solid fa-plus"></i> Add <?= $key ?></button>
+                            <div class="card-header row m-0">
+                                <div class="col-5 my-auto p-0"><i class="fa-solid fa-people-group"></i> <?= $key ?> for <b><?= $currentClub->name ?></b></div>
+                                <div class="col text-end"><?= view_cell('\App\Libraries\Contents::search', ['array' => $value, 'fields' => ['name'], 'type' => strtolower($key), 'styling' => 'w-100 m-0']) ?></div>
+                                <div class="col-1 p-0"><button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target=<?= "#add" . $key . "Modal" ?>><i class="fa-solid fa-plus"></i></button></div>
                             </div>
                             <div class="card-body p-0">
                                 <?php if (empty($value)) : ?>
@@ -71,21 +72,36 @@
                                                 <th scope="col"> <?= $key === 'Teams' ? 'Players' : 'Role' ?></th>
                                                 <?= $key === 'Members' ? '<th scope="col">Is Manager</th>' : null ?>
                                                 <th scope="col" class="no-sorting col-1 text-center px-3">Actions</th>
-                                            </tr>    
+                                            </tr>
                                         </thead>
                                         <tbody>
                                             <?php foreach ($value as $item) : ?>
                                                 <tr>
                                                     <td class="px-3"><a class="text-decoration-none" href="<?= url_to($key === 'Teams' ? 'admin_read_team' : 'admin_read_user', $item->name) ?>"><b><?= $key === 'Teams' ? $item->name : $item->getName() ?></b></a></td>
                                                     <td><?= $key === 'Teams' ? count($value) : $item->getRole() ?></td>
-                                                    <?= $key === 'Members' ? '<td>' . $item->isManager() . '</td>' : null ?>
+                                                    <?= $key === 'Members' ? '<td>' . ($item->isManager() ? 'Yes' : 'No') . '</td>' : null ?>
                                                     <td class="text-center px-3">
                                                         <div class="btn-group dropend">
                                                             <button type="button" class="btn btn-outline-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                                                 <i class="fa-solid fa-ellipsis"></i>
                                                             </button>
                                                             <ul class="dropdown-menu">
-                                                                <li><span class="dropdown-item text-danger" role="button" data-bs-toggle="modal" data-bs-target="<?= '#delete_' . $key . $item->id  ?>"><i class="fa-solid fa-trash"></i> Delete</span></li>
+                                                                <?php if ($key === 'Members') : ?>
+                                                                    <?php if ($item->isManager()) : ?>
+                                                                        <li>
+                                                                            <a href="<?= url_to('admin_club_remove_manager', $item->id) ?>" class="dropdown-item text-primary" role="button">
+                                                                                <i class="fa-solid fa-chalkboard-user fa-fw"></i> Remove manager role
+                                                                            </a>
+                                                                        </li>
+                                                                    <?php else : ?>
+                                                                        <li>
+                                                                            <a href="<?= url_to('admin_club_add_manager', $item->id) ?>" class="dropdown-item text-primary" role="button">
+                                                                                <i class="fa-solid fa-chalkboard-user fa-fw"></i> Set as manager
+                                                                            </a>
+                                                                        </li>
+                                                                    <?php endif ?>
+                                                                <?php endif ?>
+                                                                <li><span class="dropdown-item text-danger" role="button" data-bs-toggle="modal" data-bs-target="<?= '#delete_' . $key . $item->id  ?>"><i class="fa-solid fa-trash fa-fw"></i> Delete</span></li>
                                                             </ul>
                                                         </div>
                                                     </td>
@@ -95,7 +111,7 @@
                                         </tbody>
                                     </table>
                                 <?php endif ?>
-                                <?= view_cell('\App\Libraries\Alerts::clubModal',  ['action' => url_to('admin_club_add_team'), 'type' => $key, 'id' => 'add' . $key . 'Modal', 'currentClub' => $currentClub]) ?>
+                                <?= view_cell('\App\Libraries\Alerts::clubModal',  ['action' => url_to('admin_club_add_' . strtolower($key)), 'type' => $key, 'id' => 'add' . $key . 'Modal', 'currentClub' => $currentClub]) ?>
                             </div>
                         </div>
                     <?php endforeach ?>

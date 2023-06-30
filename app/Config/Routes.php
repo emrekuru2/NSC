@@ -75,10 +75,12 @@ $routes->group('admin', ['filter' => 'adminfilter', 'namespace' => 'App\Controll
         $routes->post('update', 'ClubsController::update',                    ['as' => 'admin_update_club']);
         $routes->post('create', 'ClubsController::create',                    ['as' => 'admin_create_club']);
         $routes->get('delete/(:any)', 'ClubsController::delete/$1',           ['as' => 'admin_delete_club']);
-        $routes->post('addMember', 'ClubsController::addMembers',             ['as' => 'admin_club_add_member']);
-        $routes->post('removeMember', 'ClubsController::removeMember',        ['as' => 'admin_club_remove_member']);
-        $routes->post('addTeam', 'ClubsController::addTeams',                 ['as' => 'admin_club_add_team']);
-        $routes->post('removeTeam', 'ClubsController::removeTeam',            ['as' => 'admin_club_remove_team']);
+        $routes->post('addMember', 'ClubsController::addMember',              ['as' => 'admin_club_add_members']);
+        $routes->post('removeMember', 'ClubsController::removeMember',        ['as' => 'admin_club_remove_members']);
+        $routes->post('addTeam', 'ClubsController::addTeam',                  ['as' => 'admin_club_add_teams']);
+        $routes->post('removeTeam', 'ClubsController::removeTeam',            ['as' => 'admin_club_remove_teams']);
+        $routes->get('addManager/(:any)', 'ClubsController::addManager/$1',   ['as' => 'admin_club_add_manager']);
+        $routes->get('removeManager/(:any)', 'ClubsController::removeManager/$1',['as' => 'admin_club_remove_manager']);
     });
 
     $routes->group('teams', static function ($routes) {

@@ -36,8 +36,8 @@ class ClubUser extends Entity
         return $this->user->groups[0];
     }
 
-    public function isManager(): string
+    public function isManager(): bool
     {
-        return $this->isManager === 1 ? "Yes" : "No";
+        return $this->isManager;
     }
 }

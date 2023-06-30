@@ -35,7 +35,7 @@
                                     <tr>
                                         <th scope="col" class="no-sorting col-1 text-center px-3"><i class="fa-solid fa-bell"></i></th>
                                         <th scope="col">Title</th>
-                                        <th scope="col" >Description</th>
+                                        <th scope="col">Description</th>
                                         <th scope="col" class="no-sorting col-1 text-center px-3">Actions</th>
                                     </tr>
                                 </thead>
@@ -61,7 +61,9 @@
                                     <?php endforeach ?>
                                 </tbody>
                             </table>
-                            <button type="submit" class="btn btn-primary w-50 my-3">Set selected alert</button>
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-primary w-50 my-3">Set selected alert</button>
+                            </div>
                             <?= form_close() ?>
                         <?php else : ?>
                             <h4 class="text-muted text-center">There are no alerts to show</h4>

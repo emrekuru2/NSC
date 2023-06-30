@@ -1,15 +1,13 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.7/dist/css/autoComplete.01.min.css">
+<input id="autoComplete-<?= $type ?>" class="border <?= $styling ?? null ?>">
 
-<input id="autoComplete" class="border ">
-
-<script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.7/dist/autoComplete.min.js"></script>
 <script>
-    const autoCompleteJS = new autoComplete({
+    new autoComplete({
         placeHolder: "Search",
+        selector: "<?= '#autoComplete-' . $type ?>",
         data: {
             src: [
                 <?php
-                
+
                 foreach ($array as $item) {
                     $value = '';
 
@@ -38,8 +36,18 @@
                     const selection = event.detail.selection.value;
                     window.location.href = `<?= base_url('admin/' . $type . '/read') ?>/${selection}`
                     console.log(selection)
-                }
+                },
             }
         }
+    });
+
+    const inputField<?= $type ?> = document.getElementById("autoComplete-<?= $type ?>");
+
+    inputField<?= $type ?>.addEventListener('focus', function() {
+        inputField<?= $type ?>.classList.add('border-primary');
+    });
+
+    inputField<?= $type ?>.addEventListener('blur', function() {
+        inputField<?= $type ?>.classList.remove('border-primary');
     });
 </script>

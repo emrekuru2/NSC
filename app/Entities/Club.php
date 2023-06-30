@@ -6,6 +6,8 @@ use App\Models\TeamModel;
 use App\Models\UserTypes\ClubUserModel;
 use CodeIgniter\Entity\Entity;
 
+use function PHPUnit\Framework\isEmpty;
+
 class Club extends Entity
 {
     protected $datamap = [];
@@ -56,10 +58,14 @@ class Club extends Entity
     private function filterMembers(): array
     {
         $result = [];
-
+        
+        // return array_map(function ($member) {
+        //     return model(UserModel::class)->where()
+        // }, $this->members)
+      
         foreach (model(UserModel::class)->findAll() as $user) {
             foreach ($this->members as $member) {
-                if ($member->id !== $user->id) {
+                if ($member->id === $user->id) {
                     array_push($result, $user);
                 }
             }

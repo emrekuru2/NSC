@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Entities\UserTypes\ClubUser;
 use App\Models\ClubModel;
 use App\Models\TeamModel;
 use App\Models\UserEmailModel;
@@ -88,7 +89,7 @@ class ClubsController extends BaseController
     {
         $currentClub = $this->clubModel->find($param);
 
-        if(isEmpty($currentClub->getTeams()) || isEmpty($currentClub->getMembers())) {
+        if (isEmpty($currentClub->getTeams()) || isEmpty($currentClub->getMembers())) {
             return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Teams and Members must be removed before deleting a club.']);
         }
 
@@ -118,49 +119,44 @@ class ClubsController extends BaseController
         return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error occurred while removing member. Please try again.']);
     }
 
-    public function addMembers()
+    public function addMember()
     {
-        $clubID = $this->request->getPost('add-member-club-id');
-        $json   = $this->request->getPost('add-members-JSON');
+        $clubID = $this->request->getPost('clubID');
+        $userIDs = $this->request->getPost('userID');
 
-        if ($json !== '') {
-            $usersJSON  = json_decode($json);
-            $addSuccess = 0;
-            $numMembers = count($usersJSON->members);
 
-            foreach ($usersJSON->members as $member) {
-                $data['userID'] = $member[0];
-                $data['clubID'] = $clubID;
+        $memberEntities = array_map(function ($userID) use ($clubID) {
+            $member = new ClubUser();
+            $member->userID = $userID;
+            $member->clubID = $clubID;
+            return $member;
+        }, $userIDs);
 
-                if ($member[1] === 'manager') {
-                    $data['isManager'] = 1;
-                } else {
-                    $data['isManager'] = 0;
-                }
 
-                $clubUser = new \App\Entities\UserTypes\ClubUser();
-                $clubUser->fill($data);
-
-                try {
-                    model(ClubUserModel::class)->save($clubUser);
-                    $addSuccess++;
-                } catch (Exception $e) {
-                    echo "<script> console.log('Error occurred while adding member to club. " . $e->getMessage() . ".') </script>";
-                }
-            }
-
-            if ($numMembers > 0 && $addSuccess === $numMembers) {
-                return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Members added successfully!']);
-            }
-            if ($addSuccess > 0) {
-                return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Members added successfully! Error occurred while adding some members to club.']);
-            }
-
-            return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error occurred while adding members to club.']);
+        if (model(ClubUserModel::class)->insertBatch($memberEntities)) {
+            return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Members added successfully!']);
         }
 
-        return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error: No members selected.']);
+
+        return redirect()->back()->with('alert', ['type' => 'danger', 'content' =>  'Members could not be added']);
     }
+
+    public function addManager(int $id) {
+        if (model(ClubUserModel::class)->update($id, ['isManager' => 1] )) {
+            return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Role added successfully!']);
+        }
+
+        return redirect()->back()->with('alert', ['type' => 'danger', 'content' =>  'Role could not be added']);
+    }
+
+    public function removeManager(int $id) {
+        if (model(ClubUserModel::class)->update($id, ['isManager' => 0] )) {
+            return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Role removed successfully!']);
+        }
+        
+        return redirect()->back()->with('alert', ['type' => 'danger', 'content' =>  'Role could not be removed']);
+    }
+
 
     public function removeTeam()
     {
@@ -178,7 +174,7 @@ class ClubsController extends BaseController
         return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error occurred while removing member. Please try again.']);
     }
 
-    public function addTeams()
+    public function addTeam()
     {
         $teamModel = model(TeamModel::class);
 
