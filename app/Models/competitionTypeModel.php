@@ -14,4 +14,12 @@ class competitionTypeModel extends Model
     {
         return $this->findAll();
     }
+
+    
+    public function findCompetitions(int $id) {
+        return $this->select('nsca_competitions.typeID')
+                    ->join('nsca_competitions', 'nsca_competitions.typeID = nsca_competition_types.id', 'left')
+                    ->where('nsca_competitions.typeID', $id)
+                    ->findAll();
+    }
 }

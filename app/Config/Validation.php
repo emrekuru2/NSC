@@ -43,28 +43,44 @@ class Validation extends BaseConfig
     // --------------------------------------------------------------------
     public $registration = [
         'first_name' => [
-            'label' => 'First name',
+            'label' => 'First Name',
             'rules' => 'required|max_length[30]|min_length[3]|regex_match[/\A[a-zA-Z0-9\.]+\z/]',
         ],
         'last_name' => [
-            'label' => 'Last name',
+            'label' => 'Last Name',
             'rules' => 'required|max_length[30]|min_length[3]|regex_match[/\A[a-zA-Z0-9\.]+\z/]',
         ],
         'email' => [
-            'label' => 'Email',
+            'label' => 'Email address',
             'rules' => 'required|max_length[254]|valid_email|is_unique[auth_identities.secret]',
         ],
         'phone' => [
-            'label' => 'Phone',
-            'rules' => 'required|min_length[10]|regex_match[/^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/]',
+            'label' => 'Phone number',
+            'rules' => 'required|min_length[10]',
         ],
         'password' => [
             'label' => 'Password',
             'rules' => 'required|strong_password',
         ],
         'password_confirm' => [
-            'label' => 'Confirm password',
+            'label' => 'Password Confirm',
             'rules' => 'required|matches[password]',
         ],
+        'street' => [
+            'label' => 'Street Address',
+            'rules' => 'required',
+        ],
+        'city' => [
+            'label' => 'City',
+            'rules' => 'required',
+        ],
+        'region' => [
+            'label' => 'Region',
+            'rules' => 'required',
+        ],
+        'postal' => [
+            'label' => 'Postal',
+            'rules' => 'required',
+        ]
     ];
 }

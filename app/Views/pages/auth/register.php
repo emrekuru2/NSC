@@ -25,42 +25,43 @@
                     <a href="index.php"><img src="/assets/images/General/logo2.png" class="img-fluid" alt="Responsive image"></a>
                     <hr>
                     <form action="<?= url_to('register') ?>" method="post" class="row g-3 justify-content-center my-4">
+                        <?= csrf_field() ?>
                         <div class="col-md-6">
                             <label for="inputFname" class="form-label">First name</label>
-                            <input type="text" class="form-control" id="inputFname" name="first_name">
+                            <input type="text" class="form-control" id="inputFname" name="first_name" inputmode="text" placeholder="First Name" value="<?= old('first_name') ?>" required>
                         </div>
                         <div class="col-md-6">
                             <label for="inputLname" class="form-label">Last name</label>
-                            <input type="text" class="form-control" id="inputLname" name="last_name">
+                            <input type="text" class="form-control" id="inputLname" name="last_name" inputmode="text" placeholder="Last Name" value="<?= old('last_name') ?>" required>
                         </div>
                         <div class="col-md-6">
                             <label for="inputEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="inputEmail" name="email">
+                            <input type="email" class="form-control" id="inputEmail" name="email" inputmode="email" placeholder="Email Address" value="<?= old('email') ?>" required />
                         </div>
                         <div class="col-md-6">
                             <label for="inputPhone" class="form-label">Phone number</label>
-                            <input type="tel" class="form-control" id="inputPhone" name="phone">
+                            <input type="text" class="form-control" id="inputPhone" name="phone" maxlength="15" inputmode="text" placeholder="Format: +1-123-456-6789" pattern="+[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}" value="<?= old('phone') ?>" required />
                         </div>
                         <div class="col-md-6">
                             <label for="inputPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="inputPassword" name="password">
+                            <input type="password" class="form-control" id="inputPassword" name="password" inputmode="text" placeholder="Password" required />
                         </div>
                         <div class="col-md-6">
                             <label for="inputConfirm" class="form-label">Confirm password</label>
-                            <input type="password" class="form-control" id="inputConfirm" name="password_confirm">
+                            <input type="password" class="form-control" id="inputPasswordConfirm" name="password_confirm" inputmode="text" placeholder="Password (again)" required />
                         </div>
-                        <div class="col-12">
-                            <label for="inputAddress" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="inputAddress" name="address">
+                        <div class="col-12" id="addressDiv">
+                            <label for="inputAddress" class="form-label">Street Address</label>
+                            <input type="address" class="form-control" id="inputStreet" name="street" inputmode="text" placeholder="Street Address" value="<?= old('street') ?>" required />
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <label for="inputCity" class="form-label">City</label>
-                            <input type="text" class="form-control" id="inputCity" name="city">
+                            <input type="text" class="form-control" id="inputCity" name="city" inputmode="text" placeholder="City" value="<?= old('city') ?>">
                         </div>
                         <div class="col-md-4">
-                            <label for="inputState" class="form-label">Province</label>
-                            <select id="inputState" class="form-select" name="province">
-                                <option selected>Choose...</option>
+                            <label for="inputRegion" class="form-label">Region</label>
+                            <select id="inputRegion" class="form-select" name="region" value="<?= old('region') ?>" required>
+                                <option value="" selected disabled>Choose...</option>
                                 <option value="AB">Alberta</option>
                                 <option value="BC">British Columbia</option>
                                 <option value="MB">Manitoba</option>
@@ -76,9 +77,9 @@
                                 <option value="YT">Yukon</option>
                             </select>
                         </div>
-                        <div class="col-md-2">
-                            <label for="inputZip" class="form-label">Zip</label>
-                            <input type="text" class="form-control" id="inputZip" name="zip">
+                        <div class="col-md-3">
+                            <label for="inputPostal" class="form-label">Postal Code</label>
+                            <input type="text" class="form-control" id="inputPostal" name="postal" inputmode="text" placeholder="Postal Code" value="<?= old('postal') ?>">
                         </div>
                         <br>
                         <button type="submit" class="btn btn-primary col-4">Register</button>
@@ -95,4 +96,5 @@
         </div>
     </div>
 </div>
+<script src="assets/js/addressAPI.js"></script>
 <?= $this->endSection() ?>

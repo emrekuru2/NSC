@@ -15,6 +15,6 @@ class TeamsController extends BaseController
             'title' => 'Teams',
         ];
 
-        return view('pages/teams', $data);
+        return view('pages/main/teams', $data);
     }
 }

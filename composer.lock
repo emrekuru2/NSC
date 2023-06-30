@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3a95e1f4e1f887bcda344c4438157c5b",
+    "content-hash": "489d101e00fd1a31f30e6747b2569ae2",
     "packages": [
         {
             "name": "codeigniter4/framework",
@@ -137,20 +137,20 @@
         },
         {
             "name": "codeigniter4/shield",
-            "version": "v1.0.0-beta.3",
+            "version": "v1.0.0-beta.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/codeigniter4/shield.git",
-                "reference": "5e6d5175da45b06dbe7d1deda03458d79d45a951"
+                "reference": "b5fbc784e8ab6ee8e9de103e62b15f8248c05a9f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codeigniter4/shield/zipball/5e6d5175da45b06dbe7d1deda03458d79d45a951",
-                "reference": "5e6d5175da45b06dbe7d1deda03458d79d45a951",
+                "url": "https://api.github.com/repos/codeigniter4/shield/zipball/b5fbc784e8ab6ee8e9de103e62b15f8248c05a9f",
+                "reference": "b5fbc784e8ab6ee8e9de103e62b15f8248c05a9f",
                 "shasum": ""
             },
             "require": {
-                "codeigniter4/settings": "^2.0",
+                "codeigniter4/settings": "^2.1",
                 "php": "^7.4.3 || ^8.0"
             },
             "provide": {
@@ -158,8 +158,14 @@
             },
             "require-dev": {
                 "codeigniter4/devkit": "^1.0",
-                "codeigniter4/framework": "^4.2.3",
+                "codeigniter4/framework": "^4.2.7",
+                "firebase/php-jwt": "^6.4",
+                "mikey179/vfsstream": "^1.6.7",
                 "mockery/mockery": "^1.0"
+            },
+            "suggest": {
+                "ext-curl": "Required to use the password validation rule via PwnedValidator class.",
+                "ext-openssl": "Required to use the JWT Authenticator."
             },
             "type": "library",
             "autoload": {
@@ -200,7 +206,7 @@
                 "slack": "https://codeigniterchat.slack.com",
                 "source": "https://github.com/codeigniter4/shield"
             },
-            "time": "2022-10-30T23:14:47+00:00"
+            "time": "2023-04-26T08:31:55+00:00"
         },
         {
             "name": "laminas/laminas-escaper",

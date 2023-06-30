@@ -26,4 +26,9 @@ class TeamModel extends Model
             ->orderBy('nsca_teams.name', 'ASC')
             ->findAll();
     }
+
+    public function getTeamsByClubID(int $id): array
+    {
+        return $this->where('clubID', $id)->orderBy($this->primaryKey)->findAll();
+    }
 }
