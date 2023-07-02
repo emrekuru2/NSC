@@ -12,6 +12,7 @@ class DevelopmentTypesController extends BaseController
         $data = [
             'devType' => $devType->findAll(),
             'title'   => 'Development Type',
+            'editMode' => false,
         ];
 
         return view('pages/admin/developmentTypes', $data);
@@ -21,24 +22,38 @@ class DevelopmentTypesController extends BaseController
         $devType = new DevTypeModel();
         $data                 = [
             'name'        => $this->request->getPost('name'),
-            'description' => $this->request->getPost('description'),
+            'desc' => $this->request->getPost('desc'),
+            'min_age' => $this->request->getPost('min_age'),
+            'max_age' => $this->request->getPost('max_age'),
         ];
         $devType->save($data);
-        header('Refresh:0');
-
-        // return redirect('/admin/competitionType');
+        
+        return redirect()->back();
     }
 
-    public function edit($id = null)
+    public function editMode(int $id)
+    {
+        $devType = new DevTypeModel();
+        $data = [
+            'title'  => 'Development',
+            'currentDev' => $devType->find($id),
+            'devType' => $devType->findAll(),
+            'editMode' => true,
+        ];
+
+        return view('pages/admin/developmentTypes', $data);
+    }
+
+    public function edit(int $id)
     {
         $devType = new DevTypeModel();
 
         $data = [
-            'DevType' => (object)$devType->find($id),
+            'devType' => $devType->find($id),
             'title' => 'Development Type',
         ];
 
-        return view('pages/admin/developmentTypeEdit', $data);
+        return view('pages/admin/developmentType', $data);
     }
 
     public function check($id = null)
@@ -46,24 +61,31 @@ class DevelopmentTypesController extends BaseController
         $devType = new DevTypeModel();
 
         $data = [
-            'developmentType' => $devType->find($id),
-
+            'devType' => $devType->find($id),
             'title' => 'Development Type'
         ];
         return view('pages/admin/developmentTypeCheck', $data);
     }
-    
-    public function update($id = null)
+
+    public function update(int $id)
     {
         $devType = new DevTypeModel();
-        $data            = [
-            'name'        => $this->request->getPost('name'),
-            'age'         => $this->request->getPost('min_age'),
-        ];
-        $devType->update($id, $data);
-
-        return redirect()->to(base_url('admin/developmentTypes'))->with('status', 'successes');
+        return $devType->update($id, $this->request->getPost())
+            ? redirect()->back()->with('dev', ['type' => 'success', 'content' => 'DevType updated successfully'])
+            : redirect()->back()->with('dev', ['type' => 'danger', 'content' => 'DevType could not be updated']);
     }
+
+    // public function update($id = null)
+    // {
+    //     $devType = new DevTypeModel();
+    //     $data            = [
+    //         'name'        => $this->request->getPost('name'),
+    //         'desc'         => $this->request->getPost('desc'),
+    //     ];
+    //     $devType->update($id, $data);
+
+    //     return redirect()->to(base_url('admin/developmentTypes'))->with('status', 'successes');
+    // }
 
     public function delete($id = null)
     {

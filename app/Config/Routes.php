@@ -120,8 +120,23 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
     // Development
     $routes->get('development', 'Admin\DevelopmentController::index');
 
-    // Development
+    // Development types
     $routes->get('developmentTypes', 'Admin\DevelopmentTypesController::index');
+    $routes->get('deleteDev/(:num)', 'Admin\DevelopmentTypesController::deleteDev/$1');
+
+    $routes->get('editDevType/(:num)', 'Admin\DevelopmentTypesController::editMode/$1');
+
+    $routes->get('developmentTypes/store', 'Admin\DevelopmentTypesController::store');
+    $routes->get('developmentTypes/edit/(:num)', 'Admin\DevelopmentTypesController::edit/$1');
+    $routes->get('developmentTypes/check/(:num)', 'Admin\DevelopmentTypesController::check/$1');
+    $routes->get('developmentTypes/update/(:num)', 'Admin\DevelopmentTypesController::update/$1');
+    $routes->get('developmentTypes/edit/dashboard', 'Admin\DashController::index');
+    $routes->get('developmentTypes/edit/alerts', 'Admin\AlertsController::index');
+    $routes->get('developmentTypes/edit/clubs', 'Admin\ClubsController::index');
+    $routes->get('developmentTypes/edit/teams', 'Admin\TeamsController::index');
+    $routes->get('developmentTypes/edit/developmentType', 'Admin\DevelopmentController::index');
+    $routes->get('developmentTypes/edit/developmentType', 'Admin\DevelopmentTypesController::index');
+    $routes->get('developmentTypes/delete/(:num)', 'Admin\DevelopmentTypesController::delete/$1');
 
     // Users
     $routes->get('users', 'Admin\UsersController::index');
@@ -185,7 +200,9 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
 
     // Development Type
     $routes->post('developmentTypes', 'Admim\DevelopmentTypesController::store');
-    // $routes->get('admin/developmentTypes/(:num)/edit', 'Admin\DevelopmentTypesController::edit/$1');
+    $routes->post('developmentTypes/store', 'Admin\DevelopmentTypesController::store');
+    $routes->post('developmentTypes/(:num)/edit', 'Admin\DevelopmentTypesController::edit/$1');
+    $routes->post('updateDev/(:num)', 'Admin\DevelopmentTypesController::update/$1');
 
     // Users
     $routes->post('editUser/(:num)', 'Admin\UsersController::editUser/$1');

@@ -13,6 +13,7 @@ class Developments extends Migration
         $this->forge->addField([
             'id'         => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
             'name'       => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
+            'desc'       => ['type' => 'varchar', 'constraint' => 255, 'null' => false],
             'min_age'    => ['type' => 'int', 'constraint' => 11, 'null' => false],
             'max_age'    => ['type' => 'int', 'constraint' => 11, 'null' => false],
             'created_at' => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],

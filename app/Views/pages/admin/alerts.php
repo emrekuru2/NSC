@@ -36,7 +36,7 @@
                                                     <a class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#delete" >Delete</a>
                                                 </div>
                                                     <?= view_cell('\App\Libraries\Alerts::modal',  ['content' => 'Are you sure you want to delete?', 'id' => 'delete' , "action" => base_url('admin/deleteAlert/' . $alert->id)]) ?>
-                                                 </div>   
+                                            </div>   
                                         </li>
                                     <?php endforeach ?>
                                 <?php else : ?>
