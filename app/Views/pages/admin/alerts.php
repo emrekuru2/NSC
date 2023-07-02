@@ -55,9 +55,9 @@
 
                                                     </ul>
                                                 </div>
-                                            </td>
-                                        </tr>
-                                        <?= view_cell('\App\Libraries\Alerts::modal',  ['content' => 'Are you sure you want to delete ' . $alert->title, 'id' => 'delete' . $alert->id, "action" => url_to('admin_delete_alert', $alert->id)]) ?>
+                                                    <?= view_cell('\App\Libraries\Alerts::modal',  ['content' => 'Are you sure you want to delete?', 'id' => 'delete' , "action" => base_url('admin/deleteAlert/' . $alert->id)]) ?>
+                                            </div>   
+                                        </li>
                                     <?php endforeach ?>
                                 </tbody>
                             </table>
