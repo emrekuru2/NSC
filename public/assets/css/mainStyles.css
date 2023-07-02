@@ -1,0 +1,6 @@
+.hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)),
+    url("../images/General/4650728.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}

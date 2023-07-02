@@ -31,6 +31,7 @@
     <div class="col-12 col-lg-5">
         <div class="card shadow">
             <div class="card-header">Email groups</div>
+            <div id = "groupEmail" class="card-header"></div>
             <div class="card-body">
                 <?= view_cell('\App\Libraries\Contents::accordion', ['items' => ['teams' => $teams, 'clubs' => $clubs, 'committees' => $committees, 'locations' => $locations, 'devs' => $devs]]) ?>
             </div>
