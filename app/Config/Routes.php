@@ -38,6 +38,7 @@ $routes->group('', ['filter' => 'alertfilter', 'namespace' => 'App\Controllers\M
     $routes->get('clubs', 'ClubsController::index',                           ['as' => 'main_clubs']);
     $routes->get('teams', 'TeamsController::index',                           ['as' => 'main_teams']);
     $routes->get('committees', 'CommitteesController::index',                 ['as' => 'main_committees']);
+    $routes->get('committees/view/(:num)', 'CommitteesController::view/$1', ['as' => 'main_committees_view']);
     $routes->get('development', 'DevelopmentController::index',               ['as' => 'main_developments']);
     $routes->get('development/(:num)', 'DevelopmentController::register/$1',  ['as' => 'main_developments_register']);
     $routes->get('faqs', 'FaqsController::index',                             ['as' => 'main_faqs']);
