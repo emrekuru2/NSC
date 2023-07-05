@@ -30,7 +30,7 @@ class Clubs extends Migration
         $this->forge->addField([
             'id'         => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
             'userID'     => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
-            'clubID'     => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
+            'clubID'     => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'null' => true],
             'isManager'  => ['type' => 'tinyint', 'constraint' => 1, 'null' => true, 'default' => 0],
             'created_at' => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
             'updated_at' => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],

@@ -77,9 +77,9 @@ $routes->group('admin', ['filter' => 'adminfilter', 'namespace' => 'App\Controll
         $routes->post('create', 'ClubsController::create',                    ['as' => 'admin_create_club']);
         $routes->get('delete/(:any)', 'ClubsController::delete/$1',           ['as' => 'admin_delete_club']);
         $routes->post('addMember', 'ClubsController::addMember',              ['as' => 'admin_club_add_members']);
-        $routes->post('removeMember', 'ClubsController::removeMember',        ['as' => 'admin_club_remove_members']);
+        $routes->get('removeMember/(:any)', 'ClubsController::removeMember/$1', ['as' => 'admin_club_remove_members']);
         $routes->post('addTeam', 'ClubsController::addTeam',                  ['as' => 'admin_club_add_teams']);
-        $routes->post('removeTeam', 'ClubsController::removeTeam',            ['as' => 'admin_club_remove_teams']);
+        $routes->get('removeTeam/(:any)', 'ClubsController::removeTeam/$1',            ['as' => 'admin_club_remove_teams']);
         $routes->get('addManager/(:any)', 'ClubsController::addManager/$1',   ['as' => 'admin_club_add_manager']);
         $routes->get('removeManager/(:any)', 'ClubsController::removeManager/$1',['as' => 'admin_club_remove_manager']);
     });

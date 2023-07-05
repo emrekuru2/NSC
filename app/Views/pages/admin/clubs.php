@@ -106,7 +106,7 @@
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                <?= view_cell('\App\Libraries\Alerts::modal',  ['content' => 'Are you sure you want to remove ' . $item->name . ' from ' . $currentClub->name, 'id' => 'delete_' . $key . $item->id,  "action" => url_to('admin_delete_club', $item->name)]) ?>
+                                                <?= view_cell('\App\Libraries\Alerts::modal',  ['content' => 'Are you sure you want to remove ' . $item->name . ' from ' . $currentClub->name, 'id' => 'delete_' . $key . $item->id,  "action" => url_to('admin_club_remove_' . strtolower($key), $item->id)]) ?>
                                             <?php endforeach ?>
                                         </tbody>
                                     </table>

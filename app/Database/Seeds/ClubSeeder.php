@@ -78,11 +78,6 @@ class ClubSeeder extends Seeder
                 'clubID'    => 3,
                 'isManager' => 1,
             ],
-            [
-                'userID'    => 5,
-                'clubID'    => 3,
-                'isManager' => 0,
-            ],
         ];
         $this->db->table('nsca_club_users')->insertBatch($users);
 
