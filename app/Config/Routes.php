@@ -125,6 +125,7 @@ $routes->group('admin', ['filter' => 'adminfilter'], static function ($routes) {
 
     // Users
     $routes->get('users', 'Admin\UsersController::index');
+    $routes->get('changeSearch/(:any)', 'Admin\UsersController::index/$1');
     $routes->get('users/edit/(:num)', 'Admin\UsersController::userDetails/$1');
     $routes->get('users/edit', 'Admin\UsersController::searchUserDetails');
 

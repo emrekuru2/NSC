@@ -14,7 +14,7 @@ use CodeIgniter\Shield\Models\PermissionModel;
 
 class UsersController extends BaseController
 {
-    public function index()
+    public function index(string $current_search = 'first_name')
     {
         $model = model(UserModel::class);
 
@@ -54,6 +54,7 @@ class UsersController extends BaseController
         $data = [
             'title' => 'Users',
             'users' => $users,
+            'current_search' => [$current_search]
         ];
 
         return view('pages/admin/users', $data);
@@ -106,7 +107,7 @@ class UsersController extends BaseController
 
     public function searchUserDetails()
     {
-        $name = esc($this->request->getVar('search'));
+        $name = esc($this->r4equest->getVar('search'));
 
         $firstname = explode(' ', $name)[0];
         $user      = model(UserModel::class)->where('first_name', $firstname)->first();
