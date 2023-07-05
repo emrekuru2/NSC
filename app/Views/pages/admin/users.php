@@ -2,22 +2,21 @@
 
 <?= $this->section('adminContent') ?>
 
-
 <div class="card shadow">
     <div class="card-header">Users</div>
     <div class="card-body">
-        <?= view_cell('\App\Libraries\Contents::search', ['array' => $users, 'fields' => ['first_name', 'last_name'], 'type' => 'users']); ?>
     <div id="checkboxes" style="margin: 8px; font-size:16px; margin-bottom:12px; ">
         <form id="filter_checkbox" >
-            <input onclick="show_name()" class="checkbox-value" style="margin:5px;  height:16px; width:16px; vertical-align: middle;" type="radio" name="users[]" value="name"><b>Name</b></input>
-            <input onclick="show_surname()" class="checkbox-value" style="margin:5px;  height:16px; width:16px; vertical-align: middle;" type="radio" name="users[]" value="surname"><b>Surname</b></input>
-            <input onclick="show_teams()" class="checkbox-value" style="margin:5px;  height:16px; width:16px; vertical-align: middle;" type="radio" name="users[]" value="team"><b>Team</b></input>
-            <input onclick="show_clubs()" class="checkbox-value" style="margin:5px; height:16px; width:16px; vertical-align: middle;" type="radio" name="users[]" value="club"><b>Club</b></input>
-            <input onclick="show_roles()" class="checkbox-value" style="margin:5px; height:16px; width:16px; vertical-align: middle;" type="radio" name="users[]" value="role"><b>Role</b></input>
-            
+            <a href="<?= base_url('admin/changeSearch/first_name') ?>" class="checkbox-value" style="margin:5px;  height:16px; width:16px; vertical-align: middle;" type="radio" name="users[]" value="name"   ><b>Name</b></a>
+            <a href="<?= base_url('admin/changeSearch/last_name') ?>" class="checkbox-value" style="margin:5px;  height:16px; width:16px; vertical-align: middle;" type="radio" name="users[]" value="surname"><b>Surname</b></a>
+            <a href="<?= base_url('admin/changeSearch/team') ?>" class="checkbox-value" style="margin:5px;  height:16px; width:16px; vertical-align: middle;" type="radio" name="users[]" value="team"><b>Team</b></a>
+            <a href="<?= base_url('admin/changeSearch/club') ?>" class="checkbox-value" style="margin:5px; height:16px; width:16px; vertical-align: middle;" type="radio" name="users[]" value="club"><b>Club</b></a>
+            <a href="<?= base_url('admin/changeSearch/role') ?>" class="checkbox-value" style="margin:5px; height:16px; width:16px; vertical-align: middle;" type="radio" name="users[]" value="role"><b>Role</b></a>
         </form>
        
     </div>
+        <?= view_cell('\App\Libraries\Contents::search', ['array' => $users, 'fields' => $current_search, 'type' => 'users'])?>
+   
     
         <table id="table1" class="table table-striped">
             <thead>
