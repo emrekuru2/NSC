@@ -12,7 +12,7 @@ class ContactController extends BaseController
             'title' => 'Contact',
         ];
 
-        return view('pages/contact', $data);
+        return view('pages/main/contact', $data);
     }
     public function contactAdmins(){
         $data = $this->request->getPost();

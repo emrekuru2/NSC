@@ -32,7 +32,7 @@ class DevelopmentController extends BaseController
             'title'    => 'Development',
         ];
 
-        return view('pages/development', $data);
+        return view('pages/main/development', $data);
     }
 
     public function register(int $programID)

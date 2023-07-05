@@ -1,81 +1,109 @@
 <?= $this->extend('layouts/admin') ?>
-
 <?= $this->section('adminContent') ?>
 <div class="row g-4">
-
     <div class="col-lg-5">
         <div class="row-lg">
             <!-- Current Alert -->
             <div class="col-lg-12 mb-4">
                 <div class="card shadow">
-                    <div class="card-header">Current Alert</div>
+                    <div class="card-header"><i class="fa-solid fa-bell"></i> Current Alert</div>
                     <div class="card-body">
-                        <form class="d-flex" method="post" action="disable/<?= $active->id ?? null ?>">
-                            <h4 class="card-title flex-grow-1"><?= $active->title ?? 'No alert is active' ?></h4>
-                            <button class="btn btn-outline-danger" type="submit" <?= isset($active) ? '' : "disabled='disabled'" ?>>Disable</button>
-                        </form>
+                        <?php
+                        if (isset($active)) : ?>
+                            <?= form_open(url_to('admin_disable_alert', $active->id ?? null), ['class' => 'd-flex']) ?>
+                            <h4 class="card-title flex-grow-1"><?= $active->title ?></h4>
+                            <button class="btn btn-outline-danger" type="submit" <?= isset($active) ?>>Disable</button>
+                            <?= form_close() ?>
+                        <?php else : ?>
+                            <h4 class="card-title flex-grow-1 text-muted">No alert is active</h4>
+                        <?php endif ?>
                     </div>
                 </div>
             </div>
-
             <!-- All Alerts -->
             <div class="col-lg-12">
                 <div class="card shadow">
-                    <div class="card-header">Alert List</div>
-                    <div class="card-body">
-                        <form method="post" action="<?= base_url('admin/setAlert') ?>" class="d-flex flex-column align-items-center gap-3 ">
-                            <ul class="list-group w-100">
-                                <?php if (isset($alerts)) : ?>
+                    <div class="card-header d-flex align-items-center">
+                        <span class="flex-grow-1"><i class="fa-solid fa-list"></i> Alerts List</span>
+                        <?= view_cell('\App\Libraries\Contents::search', ['array' => $alerts, 'fields' => ['title'], 'type' => 'alerts']) ?>
+                    </div>
+                    <div class="card-body p-0">
+                        <?php if (!empty($alerts)) : ?>
+                            <?= form_open(url_to('admin_enable_alert')) ?>
+                            <table class="table table-hover table-striped align-middle table-bordered display" style="margin: 0 !important;">
+                                <thead class="table-primary">
+                                    <tr>
+                                        <th scope="col" class="no-sorting col-1 text-center px-3"><i class="fa-solid fa-bell"></i></th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col" class="no-sorting col-1 text-center px-3">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                     <?php foreach ($alerts as $alert) : ?>
-                                        <li class="list-group-item">
-                                            <div class="form-check d-flex align-items-center">
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault" value="<?= $alert->id ?>" id="<?= $alert->id ?>">
-                                                <label class="form-check-label mx-1 flex-grow-1" for="<?= $alert->id ?>"><?= $alert->title ?></label>
-                                                <div class="">
-                                                    <a class="btn btn-primary" href=<?= base_url('admin/editAlert/' . $alert->id) ?> role="button">Edit</a>
-                                                    <a class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#delete" >Delete</a>
+                                        <tr <?= isset($currentAlert) ? (($currentAlert->title === $alert->title) ? 'class="table-success"' : null) : null ?>>
+                                            <td class="text-center px-3"><input class="form-check-input" type="radio" name="flexRadioDefault" value="<?= $alert->id ?>" id="<?= $alert->id ?>"></td>
+                                            <td><a class="text-decoration-none" href="<?= url_to('admin_read_alert', $alert->title) ?>"><b><?= $alert->title ?></b></a></td>
+                                            <td> <?= character_limiter($alert->content, 20); ?></td>
+                                            <td class="text-center px-3">
+                                                <div class="btn-group dropend">
+                                                    <button type="button" class="btn btn-outline-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="fa-solid fa-ellipsis"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><span class="dropdown-item text-danger" role="button" data-bs-toggle="modal" data-bs-target="<?= '#delete' . $alert->id ?>"><i class="fa-solid fa-trash"></i> Delete</span></li>
+
+                                                    </ul>
                                                 </div>
                                                     <?= view_cell('\App\Libraries\Alerts::modal',  ['content' => 'Are you sure you want to delete?', 'id' => 'delete' , "action" => base_url('admin/deleteAlert/' . $alert->id)]) ?>
-                                                 </div>   
+                                            </div>   
                                         </li>
                                     <?php endforeach ?>
-                                <?php else : ?>
-                                    <span>There are no alerts</span>
-                                <?php endif ?>
-                            </ul>
-                            <button type="submit" class="btn btn-primary w-50">Set the current alert</button>
-                        </form>
+                                </tbody>
+                            </table>
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-primary w-50 my-3">Set selected alert</button>
+                            </div>
+                            <?= form_close() ?>
+                        <?php else : ?>
+                            <h4 class="text-muted text-center">There are no alerts to show</h4>
+                        <?php endif ?>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- New Alert -->
+    <!-- New Alert or Update Alert -->
     <div class="col-lg-7">
         <div class="card shadow">
-            <div class="card-header d-flex">
-                <span class="flex-grow-1">Alert Details</span>
-                <?php if ($editMode) : ?>
-                    <a href=<?= base_url('admin/alerts') ?> role="button">Return back</a>
+            <div class="card-header d-flex align-items-center">
+                <?php if (isset($currentAlert)) : ?>
+                    <span class="flex-grow-1"><i class="fa-solid fa-circle-info"></i> Alert Details</span>
+                    <div class="form-check form-switch mx-4">
+                        <input class="form-check-input" type="checkbox" role="button" id="editSwitch">
+                        <label class="form-check-label" for="editSwitch"><i class="fa-regular fa-pen-to-square"></i> Edit mode</label>
+                    </div>
+                    <a href="<?= url_to('admin_alerts') ?>" role="button" class="btn btn-primary"><i class="fa-solid fa-broom"></i> Clear</a>
+                <?php else : ?>
+                    <span class="flex-grow-1"><i class="fa-solid fa-pen-ruler"></i> Create Alert</span>
                 <?php endif ?>
             </div>
             <div class="card-body">
-                <form class="d-flex flex-column align-items-center" method="post" action="<?= $editMode ? base_url('admin/updateAlert/' . $currentAlert->id) : base_url('admin/createAlert') ?>">
-                    <div class="w-100 mb-3">
-                        <label for="title" class="form-label">Title</label>
-                        <input type="text" class="form-control" name="title" id="title" value="<?= $editMode ? $currentAlert->title : null ?>">
-                    </div>
-                    <div class="w-100 mb-3">
-                        <label for="content" class="form-label">Content</label>
-                        <textarea class="form-control" id="content" name="content" rows="10"><?= $editMode ? $currentAlert->content : null ?></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-50"><?= $editMode ? "Update" : "Create" ?> the alert</button>
-                </form>
+                <?= form_open(isset($currentAlert) ? url_to('admin_update_alert', $currentAlert->id) : url_to('admin_create_alert'), ['class' => 'd-flex flex-column align-items-center', 'id' => 'editForm']) ?>
+                <div class="w-100 mb-3">
+                    <label for="title" class="form-label">Title <i class="fa-solid fa-asterisk text-danger"></i></label>
+                    <?= form_input(['class' => 'form-control', 'name' => 'title', 'id' => 'title', 'required' => true], $currentAlert->title ?? '') ?>
+                </div>
+                <div class="w-100 mb-3">
+                    <label for="content" class="form-label">Content <i class="fa-solid fa-asterisk text-danger"></i></label>
+                    <?= form_textarea(['class' => 'form-control', 'name' => 'content', 'id' => 'content', 'rows' => 15, 'required' => true, 'style' => "resize:none"], $currentAlert->content ?? '') ?>
+                </div>
+                <button type="submit" class="btn btn-primary w-50"><?= isset($currentAlert) ? "Update" : "Create" ?> alert</button>
+                <?= form_close() ?>
             </div>
         </div>
     </div>
-
 </div>
 
+<?= script_tag(['src' => base_url('assets/js/admin/editMode.js'), 'isset' => isset($currentAlert), 'parent' => 'editForm']) ?>
 <?= $this->endSection() ?>

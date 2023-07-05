@@ -17,7 +17,7 @@ class Clubs extends Migration
             'abbreviation' => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
             'description'  => ['type' => 'varchar', 'constraint' => 512, 'null' => true],
             'website'      => ['type' => 'varchar', 'constraint' => 128, 'null' => true],
-            'phone'        => ['type' => 'varchar', 'constraint' => 12, 'null' => true],
+            'phone'        => ['type' => 'varchar', 'constraint' => 15, 'null' => true],
             'facebook'     => ['type' => 'varchar', 'constraint' => 256, 'null' => true],
             'image'        => ['type' => 'varchar', 'constraint' => 64, 'null' => false, 'default' => 'assets/images/Clubs/default.png'],
             'created_at'   => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
@@ -37,6 +37,7 @@ class Clubs extends Migration
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->addKey(['clubID', 'userID']);
+        $this->forge->addUniqueKey(['type', 'userID']);
         $this->forge->addForeignKey('clubID', 'nsca_clubs', 'id', '', 'CASCADE');
         $this->forge->addForeignKey('userID', 'nsca_users', 'id', '', 'CASCADE');
         $this->forge->createTable('nsca_club_users');
