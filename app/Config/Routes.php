@@ -139,7 +139,7 @@ $routes->group('admin', ['filter' => 'adminfilter', 'namespace' => 'App\Controll
     $routes->group('users', static function ($routes) {
         $routes->get('/', 'UsersController::index',                           ['as' => 'admin_users']);
         $routes->get('edit/(:any)', 'UsersController::userDetails/$1',        ['as' => 'admin_read_user']);
-        $routes->get('search', 'UsersController::searchUserDetails',          ['as' => 'admin_competition_types']);
+        $routes->get('search/(:any)', 'UsersController::index/$1',            ['as' => 'admin_search_user']);
         $routes->post('editUser/(:num)', 'UsersController::editUser/$1',      ['as' => 'admin_competition_types']);
     });
 

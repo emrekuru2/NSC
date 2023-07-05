@@ -37,7 +37,7 @@ class UsersController extends BaseController
             // if user is in a team, get the team name
             if ($clubUser != null) {
                 $team = model(ClubModel::class)->where('id', $clubUser->clubID)->first();
-                $user->club = $team->name;
+                $user->club = $team->name ?? 'none';
             } else {
                 $user->club = 'none';
             }
