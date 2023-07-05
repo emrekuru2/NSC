@@ -12,16 +12,19 @@ class DevelopmentSeeder extends Seeder
         $types = [
             [
                 'name'    => 'Kids',
+                'description' => 'decription for dev type',
                 'min_age' => 5,
                 'max_age' => 12,
             ],
             [
                 'name'    => 'Youth',
+                'description' => 'decription for dev type',
                 'min_age' => 13,
                 'max_age' => 18,
             ],
             [
                 'name'    => 'Adult',
+                'description' => 'decription for dev type',
                 'min_age' => 19,
                 'max_age' => 100,
             ],

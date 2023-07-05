@@ -130,7 +130,10 @@ $routes->group('admin', ['filter' => 'adminfilter', 'namespace' => 'App\Controll
 
     $routes->group('development_types', static function ($routes) {
         $routes->get('/', 'DevelopmentTypesController::index',                ['as' => 'admin_development_types']);
-        $routes->post('create', 'DevelopmentTypesController::store',          ['as' => 'admin_create_development_type']);
+        $routes->post('create', 'DevelopmentTypesController::create',         ['as' => 'admin_create_development_type']);
+        $routes->get('edit/(:any)', 'DevelopmentTypesController::edit/$1',    ['as' => 'admin_edit_development_type']);
+        $routes->post('update/(:any)', 'DevelopmentTypesController::update/$1', ['as' => 'admin_update_development_type']);
+        $routes->get('delete/(:any)', 'DevelopmentTypesController::delete/$1',['as' => 'admin_delete_development_type']);
     });
 
     $routes->group('users', static function ($routes) {

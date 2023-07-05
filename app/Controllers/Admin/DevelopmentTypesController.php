@@ -4,6 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\DevTypeModel;
+
 class DevelopmentTypesController extends BaseController
 {
     public function index()
@@ -17,43 +18,27 @@ class DevelopmentTypesController extends BaseController
 
         return view('pages/admin/developmentTypes', $data);
     }
-    public function store()
+    public function create()
     {
-        $devType = new DevTypeModel();
-        $data                 = [
-            'name'        => $this->request->getPost('name'),
-            'desc' => $this->request->getPost('desc'),
-            'min_age' => $this->request->getPost('min_age'),
-            'max_age' => $this->request->getPost('max_age'),
-        ];
-        $devType->save($data);
-        
-        return redirect()->back();
+        $devType = new \App\Entities\DevType();
+        $devType->fill($this->request->getPost());
+
+        return model(DevTypeModel::class)->save($devType)
+            ? redirect()->back()->with('alert', ['type' => 'success', 'content' => 'DevType created successfully'])
+            : redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'DevType could not be created']);
     }
 
-    public function editMode(int $id)
+    public function edit(int $id)
     {
         $devType = new DevTypeModel();
         $data = [
-            'title'  => 'Development',
+            'title'  => 'Development Types',
             'currentDev' => $devType->find($id),
             'devType' => $devType->findAll(),
             'editMode' => true,
         ];
 
         return view('pages/admin/developmentTypes', $data);
-    }
-
-    public function edit(int $id)
-    {
-        $devType = new DevTypeModel();
-
-        $data = [
-            'devType' => $devType->find($id),
-            'title' => 'Development Type',
-        ];
-
-        return view('pages/admin/developmentType', $data);
     }
 
     public function check($id = null)
@@ -71,27 +56,15 @@ class DevelopmentTypesController extends BaseController
     {
         $devType = new DevTypeModel();
         return $devType->update($id, $this->request->getPost())
-            ? redirect()->back()->with('dev', ['type' => 'success', 'content' => 'DevType updated successfully'])
-            : redirect()->back()->with('dev', ['type' => 'danger', 'content' => 'DevType could not be updated']);
+            ? redirect()->back()->with('alert', ['type' => 'success', 'content' => 'DevType updated successfully'])
+            : redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'DevType could not be updated']);
     }
-
-    // public function update($id = null)
-    // {
-    //     $devType = new DevTypeModel();
-    //     $data            = [
-    //         'name'        => $this->request->getPost('name'),
-    //         'desc'         => $this->request->getPost('desc'),
-    //     ];
-    //     $devType->update($id, $data);
-
-    //     return redirect()->to(base_url('admin/developmentTypes'))->with('status', 'successes');
-    // }
 
     public function delete($id = null)
     {
         $devType = new DevTypeModel();
-        $devType->delete($id);
-
-        return redirect()->to(base_url('admin/developmentTypes'))->with('status', 'successes');
+        return $devType->delete($id)
+            ? redirect()->back()->with('alert', ['type' => 'success', 'content' => 'DevType deleted successfully'])
+            : redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'DevType could not be deleted']);
     }
 }
