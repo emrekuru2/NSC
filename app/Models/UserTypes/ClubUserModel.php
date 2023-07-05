@@ -19,8 +19,13 @@ class ClubUserModel extends Model
     protected $updatedField  = 'updated_at';
 
     // Functions
-    public function deleteClubUsers(int $clubID)
+    public function deleteClubUsers(int $id): void
     {
-        $this->where('clubID', $clubID)->delete();
+        $this->where('clubID', $id)->delete();
+    }
+
+    public function getMembersByID(int $id): array
+    {
+        return $this->where('clubID', $id)->orderBy($this->primaryKey)->findAll();
     }
 }

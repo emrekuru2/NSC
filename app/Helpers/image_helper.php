@@ -1,14 +1,19 @@
 <?php
 
-function storeImage($folder, $file)
+function storeImage($folder, $file): string
 {
-    if ($file->isValid() && ! $file->hasMoved() && str_contains($file->getMimeType(), 'image')) {
+    if (!isset($file)) {
+        return null;
+    }
+
+    $path = 'assets/images/' . $folder . '/';
+
+    if ($file->isValid() && !$file->hasMoved()) {
         $newName = $file->getRandomName();
-        $path    = 'assets/images/' . $folder . '/';
         $file->move($path, $newName);
 
         return $path . $newName;
     }
 
-    return false;
+    return $path . "default.png";
 }

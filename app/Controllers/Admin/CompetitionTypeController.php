@@ -13,7 +13,7 @@ class CompetitionTypeController extends BaseController
 
         $data = [
             'competitionType' => $competitionType->findAll(),
-            'title'           => 'Competitions Type',
+            'title'           => 'Competition Types',
         ];
 
         return view('pages/admin/competitionType', $data);

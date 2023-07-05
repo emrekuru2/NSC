@@ -13,7 +13,7 @@
                 <div class="card shadow">
                     <div class="card-header">All Committees</div>
                     <div class="card-body">
-                        <?= view_cell('\App\Libraries\Contents::search', ['route' => 'modify_committee', 'name' => 'Committee', 'array' => $committiees, 'fields' => ['name'], 'method' => 'post', 'useName' => true, 'useDivider' => true]) ?>
+                        <?= view_cell('\App\Libraries\Contents::search', ['array' => $committiees, 'fields' => ['name'], 'type' => 'committees']) ?>
 
                         <table class="table table-striped">
                             <thead>

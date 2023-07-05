@@ -9,9 +9,9 @@ class Contents
         return view('components/accordion', $content);
     }
 
-    public function editor()
+    public function editor($content)
     {
-        return view('components/editor');
+        return view('components/editor', $content);
     }
 
     public function comment($content)

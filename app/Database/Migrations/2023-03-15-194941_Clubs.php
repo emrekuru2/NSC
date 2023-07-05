@@ -17,7 +17,7 @@ class Clubs extends Migration
             'abbreviation' => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
             'description'  => ['type' => 'varchar', 'constraint' => 512, 'null' => true],
             'website'      => ['type' => 'varchar', 'constraint' => 128, 'null' => true],
-            'phone'        => ['type' => 'varchar', 'constraint' => 12, 'null' => true],
+            'phone'        => ['type' => 'varchar', 'constraint' => 15, 'null' => true],
             'facebook'     => ['type' => 'varchar', 'constraint' => 256, 'null' => true],
             'image'        => ['type' => 'varchar', 'constraint' => 64, 'null' => false, 'default' => 'assets/images/Clubs/default.png'],
             'created_at'   => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
@@ -30,13 +30,14 @@ class Clubs extends Migration
         $this->forge->addField([
             'id'         => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
             'userID'     => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
-            'clubID'     => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
+            'clubID'     => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'null' => true],
             'isManager'  => ['type' => 'tinyint', 'constraint' => 1, 'null' => true, 'default' => 0],
             'created_at' => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
             'updated_at' => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->addKey(['clubID', 'userID']);
+        $this->forge->addUniqueKey(['type', 'userID']);
         $this->forge->addForeignKey('clubID', 'nsca_clubs', 'id', '', 'CASCADE');
         $this->forge->addForeignKey('userID', 'nsca_users', 'id', '', 'CASCADE');
         $this->forge->createTable('nsca_club_users');
