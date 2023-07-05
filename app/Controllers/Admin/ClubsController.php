@@ -100,23 +100,12 @@ class ClubsController extends BaseController
         return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error occurred while deleting club.']);
     }
 
-    public function removeMember()
+    public function removeMember(int $param)
     {
-        $clubUserModel = model(ClubUserModel::class);
-        $userModel     = model(UserEmailModel::class);
 
-        $clubID   = esc($this->request->getPost('remove-member-club-id'));
-        $fullName = esc($this->request->getPost('remove-member-name'));
-        $fullName = explode('|', $fullName);
-
-        $userID = $userModel->select()->where('first_name', $fullName[0])->where('last_name', $fullName[1])->first()->id;
-        $clubUserModel->where('userID', $userID)->where('clubID', $clubID)->delete();
-
-        if ($clubUserModel->where('userID', $userID)->where('clubID', $clubID)->first() === null) {
-            return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Removed member successfully!']);
-        }
-
-        return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error occurred while removing member. Please try again.']);
+        return model(ClubUserModel::class)->whereIn('userID', [$param])->set(['clubID' => NULL])->update()
+            ? redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Removed member successfully!'])
+            : redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error occurred while removing member. Please try again.']);
     }
 
     public function addMember()
@@ -141,37 +130,32 @@ class ClubsController extends BaseController
         return redirect()->back()->with('alert', ['type' => 'danger', 'content' =>  'Members could not be added']);
     }
 
-    public function addManager(int $id) {
-        if (model(ClubUserModel::class)->update($id, ['isManager' => 1] )) {
+    public function addManager(int $id)
+    {
+        if (model(ClubUserModel::class)->update($id, ['isManager' => 1])) {
             return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Role added successfully!']);
         }
 
         return redirect()->back()->with('alert', ['type' => 'danger', 'content' =>  'Role could not be added']);
     }
 
-    public function removeManager(int $id) {
-        if (model(ClubUserModel::class)->update($id, ['isManager' => 0] )) {
+    public function removeManager(int $id)
+    {
+        if (model(ClubUserModel::class)->update($id, ['isManager' => 0])) {
             return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Role removed successfully!']);
         }
-        
+
         return redirect()->back()->with('alert', ['type' => 'danger', 'content' =>  'Role could not be removed']);
     }
 
 
-    public function removeTeam()
+    public function removeTeam(int $param)
     {
-        $teamModel = model(TeamModel::class);
 
-        $teamName = esc($this->request->getPost('remove-team-name'));
-        $teamID   = $teamModel->select()->where('name', $teamName)->first()->id;
-
-        $teamModel->set('clubID', null)->where('id', $teamID)->update();
-
-        if ($teamModel->where('id', $teamID)->first()->clubID === null) {
-            return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Removed member successfully!']);
-        }
-
-        return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error occurred while removing member. Please try again.']);
+        return model(TeamModel::class)->update($param, ['clubID' => NULL]) 
+        ? redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Removed team successfully!'])
+        : redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error occurred while removing team.']);
+  
     }
 
     public function addTeam()
