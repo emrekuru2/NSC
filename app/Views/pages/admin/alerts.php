@@ -42,7 +42,7 @@
                                 <tbody>
                                     <?php foreach ($alerts as $alert) : ?>
                                         <tr <?= isset($currentAlert) ? (($currentAlert->title === $alert->title) ? 'class="table-success"' : null) : null ?>>
-                                            <td class="text-center px-3"><input class="form-check-input" type="radio" name="flexRadioDefault" value="<?= $alert->id ?>" id="<?= $alert->id ?>"></td>
+                                            <td class="text-center px-3"><input class="form-check-input" type="radio" name="selectedAlert" value="<?= $alert->id ?>" id="<?= $alert->id ?>"></td>
                                             <td><a class="text-decoration-none" href="<?= url_to('admin_read_alert', $alert->title) ?>"><b><?= $alert->title ?></b></a></td>
                                             <td> <?= character_limiter($alert->content, 20); ?></td>
                                             <td class="text-center px-3">
@@ -52,12 +52,11 @@
                                                     </button>
                                                     <ul class="dropdown-menu">
                                                         <li><span class="dropdown-item text-danger" role="button" data-bs-toggle="modal" data-bs-target="<?= '#delete' . $alert->id ?>"><i class="fa-solid fa-trash"></i> Delete</span></li>
-
                                                     </ul>
                                                 </div>
-                                                    <?= view_cell('\App\Libraries\Alerts::modal',  ['content' => 'Are you sure you want to delete?', 'id' => 'delete' , "action" => base_url('admin/deleteAlert/' . $alert->id)]) ?>
-                                            </div>   
-                                        </li>
+                                                <?= view_cell('\App\Libraries\Alerts::modal',  ['content' => 'Are you sure you want to delete ' . $alert->title . ' ?', 'id' => 'delete' . $alert->id, "action" => url_to('admin_delete_alert', $alert->id)]) ?>
+                                            </td>
+                                        </tr>
                                     <?php endforeach ?>
                                 </tbody>
                             </table>
