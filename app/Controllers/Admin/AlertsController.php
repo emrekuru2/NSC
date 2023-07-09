@@ -4,81 +4,119 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\AlertModel;
+use \App\Entities\Alert;
 
 class AlertsController extends BaseController
 {
     protected $helpers = ['html', 'text', 'form'];
+    protected $alertModel;
+    protected $activeAlert;
+    protected $totalAlerts;
 
+    public function __construct()
+    {
+        $this->alertModel  = new AlertModel();
+        $this->totalAlerts = $this->alertModel->findAll();
+        $this->activeAlert = $this->alertModel->where('status', 1)->first();
+    }
+
+    /**
+     * @return string
+     */
     public function index()
     {
         $data = [
             'title'  => 'Alerts',
-            'alerts' => model(AlertModel::class)->findAll(),
-            'active' => model(AlertModel::class)->where('status', 1)->first(),
+            'alerts' => $this->totalAlerts,
+            'active' => $this->activeAlert,
         ];
 
         return view('pages/admin/alerts', $data);
     }
 
+    /**
+     * @param string $param
+     * 
+     * @return string
+     */
     public function read(string $param)
     {
         $data = [
-            'title'  => 'Alerts',
-            'currentAlert' => model(AlertModel::class)->where('title', $param)->first(),
-            'alerts' => model(AlertModel::class)->findAll(),
-            'active' => model(AlertModel::class)->where('status', 1)->first(),
+            'title'        => 'Alerts',
+            'alerts'       => $this->totalAlerts,
+            'active'       => $this->activeAlert,
+            'currentAlert' => $this->alertModel->where('title', $param)->first(),
         ];
 
         return view('pages/admin/alerts', $data);
     }
 
+    /**
+     * @return RedirectResponse
+     */
     public function create()
     {
-        if (model(AlertModel::class)->save(new \App\Entities\User($this->request->getPost())) === false) {
-            return redirect()->back()->with('alert', ['type' => 'danger', 'content' => model(AlertModel::class)->errors()['title']]);
-        }
+        $newAlert = new Alert($this->request->getPost());
 
-        return  redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Alert created successfully']);
+        return ($this->alertModel->save($newAlert))
+            ? toast('success', lang('Admin.alerts.create.success'))
+            : toast('danger', lang('Admin.alerts.create.error'));
     }
 
 
+    /**
+     * @param int $id
+     * 
+     * @return RedirectResponse
+     */
     public function update(int $id)
     {
-        return (model(AlertModel::class)->update($id, $this->request->getPost()))
-            ? redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Alert updated successfully'])
-            : redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Alert could not be updated']);
+        return ($this->alertModel->update($id, $this->request->getPost()))
+            ? toast('success', lang('Admin.alerts.update.success'))
+            : toast('danger', lang('Admin.alerts.update.error'));
     }
 
+    /**
+     * @return RedirectResponse
+     */
     public function enable()
     {
-        $current = $this->request->getVar('flexRadioDefault');
+        $selectedAlert = $this->request->getVar('selectedAlert');
 
-        if (!isset($current)) {
-            return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'No alert was selected']);
+        if (!isset($selectedAlert)) {
+            return toast('danger', lang('Admin.alerts.enable.isset'));
         }
 
-        $active  = model(AlertModel::class)->where('status', 1)->first();
-
-        if ($active) {
-            model(AlertModel::class)->disable($active->id);
+        if (isset($this->activeAlert)) {
+            $this->alertModel->disable($this->activeAlert->id);
         }
 
-        return (model(AlertModel::class)->update($current, ['status' => 1]))
-            ? redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Alert set successfully'])
-            : redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Alert could not be set']);
+        return ($this->alertModel->update($selectedAlert, ['status' => 1]))
+            ? toast('success', lang('Admin.alerts.enable.success'))
+            : toast('danger', lang('Admin.alerts.enable.error'));
     }
 
+    /**
+     * @param int $id
+     * 
+     * @return RedirectResponse
+     */
     public function disable(int $id)
     {
-        return (model(AlertModel::class)->disable($id))
-            ? redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Alert disabled successfully'])
-            : redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Alert could not be disabled']);
+        return ($this->alertModel->disable($id))
+            ? toast('success', lang('Admin.alerts.disable.success'))
+            : toast('danger', lang('Admin.alerts.disable.error'));
     }
 
+    /**
+     * @param int $id
+     * 
+     * @return RedirectResponse
+     */
     public function delete(int $id)
     {
-        return (model(AlertModel::class)->delete($id))
-            ? redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Alert deleted successfully'])
-            : redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Alert could not be deleted']);
+        return ($this->alertModel->delete($id))
+            ? toast('success', lang('Admin.alerts.delete.success'))
+            : toast('danger', lang('Admin.alerts.delete.error'));
     }
 }
