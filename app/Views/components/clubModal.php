@@ -27,7 +27,7 @@
                                 <tr>
                                     <td class="col-11 line-height-2rem"><?= $unassignedTeam->name ?></td>
                                     <td class="col-1">
-                                        <input type="checkbox" class="form-check-input shadow check-margin" value="<?= $unassignedTeam->name ?>" name="teams[]">
+                                        <input type="checkbox" class="form-check-input shadow check-margin" value="<?= $unassignedTeam->id ?>" name="teamID[]">
                                     </td>
                                 </tr>
                             <?php endforeach ?>

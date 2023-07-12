@@ -59,8 +59,8 @@ class AlertsController extends BaseController
         $newAlert = new Alert($this->request->getPost());
 
         return ($this->alertModel->save($newAlert))
-            ? toast('success', lang('Admin.alerts.create.success'))
-            : toast('danger', lang('Admin.alerts.create.error'));
+            ? toast('success', lang('Admin.alert.create.success'))
+            : toast('danger', lang('Admin.alert.create.error'));
     }
 
 
@@ -72,8 +72,8 @@ class AlertsController extends BaseController
     public function update(int $id)
     {
         return ($this->alertModel->update($id, $this->request->getPost()))
-            ? toast('success', lang('Admin.alerts.update.success'))
-            : toast('danger', lang('Admin.alerts.update.error'));
+            ? toast('success', lang('Admin.alert.update.success'))
+            : toast('danger', lang('Admin.alert.update.error'));
     }
 
     /**
@@ -84,7 +84,7 @@ class AlertsController extends BaseController
         $selectedAlert = $this->request->getVar('selectedAlert');
 
         if (!isset($selectedAlert)) {
-            return toast('danger', lang('Admin.alerts.enable.isset'));
+            return toast('danger', lang('Admin.alert.isset'));
         }
 
         if (isset($this->activeAlert)) {
@@ -92,8 +92,8 @@ class AlertsController extends BaseController
         }
 
         return ($this->alertModel->update($selectedAlert, ['status' => 1]))
-            ? toast('success', lang('Admin.alerts.enable.success'))
-            : toast('danger', lang('Admin.alerts.enable.error'));
+            ? toast('success', lang('Admin.alert.enable.success'))
+            : toast('danger', lang('Admin.alert.enable.error'));
     }
 
     /**
@@ -104,8 +104,8 @@ class AlertsController extends BaseController
     public function disable(int $id)
     {
         return ($this->alertModel->disable($id))
-            ? toast('success', lang('Admin.alerts.disable.success'))
-            : toast('danger', lang('Admin.alerts.disable.error'));
+            ? toast('success', lang('Admin.alert.disable.success'))
+            : toast('danger', lang('Admin.alert.disable.error'));
     }
 
     /**
@@ -116,7 +116,7 @@ class AlertsController extends BaseController
     public function delete(int $id)
     {
         return ($this->alertModel->delete($id))
-            ? toast('success', lang('Admin.alerts.delete.success'))
-            : toast('danger', lang('Admin.alerts.delete.error'));
+            ? toast('success', lang('Admin.alert.delete.success'))
+            : toast('danger', lang('Admin.alert.delete.error'));
     }
 }

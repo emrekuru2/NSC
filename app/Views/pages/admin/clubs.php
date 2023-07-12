@@ -47,7 +47,7 @@
                             </table>
                             <?= form_close() ?>
                         <?php else : ?>
-                            <h4 class="text-muted text-center">There are no clubs to show</h4>
+                            <h4 class="text-muted text-center p-2">There are no clubs to show</h4>
                         <?php endif ?>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                             </div>
                             <div class="card-body p-0">
                                 <?php if (empty($value)) : ?>
-                                    <h4 class="text-muted">No <?= $key ?></h4>
+                                    <h4 class="text-muted text-center p-2">No <?= $key ?></h4>
                                 <?php else : ?>
                                     <table class="table table-hover table-striped align-middle table-bordered display" style="margin: 0 !important;">
                                         <thead class="table-primary">

@@ -3,10 +3,9 @@
 namespace App\Entities;
 
 use App\Models\TeamModel;
+use App\Models\UserModel;
 use App\Models\UserTypes\ClubUserModel;
 use CodeIgniter\Entity\Entity;
-
-use function PHPUnit\Framework\isEmpty;
 
 class Club extends Entity
 {
@@ -39,16 +38,12 @@ class Club extends Entity
     {
         $teamModel = model(TeamModel::class);
 
-        return $teamModel->where('clubID !=', $this->id)->findAll();
+        return $teamModel->where('clubID', NULL)->findAll();
     }
 
     public function getUnassignedMembers(): array
     {
-        $clubUserModel = model(ClubUserModel::class);
-
-        $clubUsers = $clubUserModel->where('clubID !=', $this->id)->findAll();
-
-        if (sizeof($clubUsers) > 0) {
+        if (empty($this->members)) {
             return model(UserModel::class)->findAll();
         } else {
             return $this->filterMembers();
@@ -57,21 +52,25 @@ class Club extends Entity
 
     private function filterMembers(): array
     {
-        $result = [];
-        
-        // return array_map(function ($member) {
-        //     return model(UserModel::class)->where()
-        // }, $this->members)
-      
-        foreach (model(UserModel::class)->findAll() as $user) {
+        $totalUsers = model(UserModel::class)->findAll();
+        $nonMembers = [];
+
+        foreach ($totalUsers as $user) {
+            $isMember = false;
+
             foreach ($this->members as $member) {
-                if ($member->id === $user->id) {
-                    array_push($result, $user);
+                if ($member->userID === $user->id) {
+                    $isMember = true;
+                    break;
                 }
+            }
+
+            if (!$isMember) {
+                array_push($nonMembers, $user);
             }
         }
 
-        return $result;
+        return $nonMembers;
     }
 
     public function getTeams(): array
