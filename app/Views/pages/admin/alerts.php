@@ -65,7 +65,7 @@
                             </div>
                             <?= form_close() ?>
                         <?php else : ?>
-                            <h4 class="text-muted text-center">There are no alerts to show</h4>
+                            <h4 class="text-muted text-center p-2">There are no alerts to show</h4>
                         <?php endif ?>
                     </div>
                 </div>

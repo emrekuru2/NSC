@@ -1,28 +1,36 @@
 <?php
 
 return [
-    'alerts' => [
-        'create' => [
-            'success' => 'Alert created succesfully!',
-            'error'   => 'Alert could not be created'
+    ...operationsEN(
+        'Alert',
+        [
+            'create',
+            'update',
+            'delete',
+            'enable',
+            'disable'
         ],
-        'update' => [
-            'success' => 'Alert updated succesfully!',
-            'error'   => 'Alert could not be updated'
+        ['isset' => 'Please select an alert to activate']
+    ),
+    ...operationsEN(
+        'Club',
+        [
+            'create',
+            'update',
+            'delete',
+            'addMember',
+            'removeMember',
+            'addTeam',
+            'removeTeam',
+            'addManager',
+            'removeManager'
         ],
-        'enable' => [
-            'isset'   => 'No alert was selected',
-            'success' => 'Alert enabled succesfully!',
-            'error'   => 'Alert could not be enabled'
-        ],
-        'disable' => [
-            'success' => 'Alert disabled succesfully!',
-            'error'   => 'Alert could not be disabled'
-        ],
-        'delete' => [
-            'success' => 'Alert deleted succesfully!',
-            'error'   => 'Alert could not be deleted'
-        ],
+        [
+            'foreignKey' => 'Teams and Members must be removed before deleting a club.',
+            'requiredTeams' => 'Please select at least one team to proceed',
+            'requiredUsers' => 'Please select at least one user to proceed',
+        ]
+    ),
 
-    ]
+
 ];

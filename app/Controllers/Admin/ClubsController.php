@@ -6,28 +6,29 @@ use App\Controllers\BaseController;
 use App\Entities\UserTypes\ClubUser;
 use App\Models\ClubModel;
 use App\Models\TeamModel;
-use App\Models\UserEmailModel;
 use App\Models\UserTypes\ClubUserModel;
-use Exception;
-
-use function PHPUnit\Framework\isEmpty;
-use function PHPUnit\Framework\isNull;
 
 class ClubsController extends BaseController
 {
-    protected $clubModel;
     protected $helpers = ['image', 'html', 'form', 'file'];
+    protected $clubUserModel;
+    protected $clubModel;
+    protected $teamModel;
+    protected $totalClubs;
 
     public function __construct()
     {
-        $this->clubModel = new ClubModel();
+        $this->clubModel     = new ClubModel();
+        $this->teamModel     = new TeamModel();
+        $this->clubUserModel = new ClubUserModel();
+        $this->totalClubs    = $this->clubModel->findAll();
     }
 
     public function index()
     {
         $data = [
             'title'   => 'Clubs',
-            'clubs'   => $this->clubModel->findAll(),
+            'clubs'   => $this->totalClubs
         ];
 
         return view('pages/admin/clubs', $data);
@@ -37,8 +38,8 @@ class ClubsController extends BaseController
     {
         $data = [
             'title'           => 'Clubs',
-            'clubs'           => $this->clubModel->findAll(),
-            'currentClub'     => $this->clubModel->select()->where('name', $param)->first(),
+            'clubs'           => $this->totalClubs,
+            'currentClub'     => $this->clubModel->where('name', $param)->first(),
         ];
 
         return view('pages/admin/clubs', $data);
@@ -50,22 +51,14 @@ class ClubsController extends BaseController
         $data = $this->request->getPost();
         $club = $this->clubModel->where('name', $data['name'])->first();
 
-        // Delete the old image
-        if (!isNull($club->image)) {
-            unlink($club->image);
-        }
-
         //Update the image
         $imageFile = $this->request->getFile('image');
         $filepath = storeImage('Clubs', $imageFile);
         $data['image'] = $filepath;
 
-
-        if ($this->clubModel->update($club->id, $data)) {
-            return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Club updated successfully!']);
-        }
-
-        return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error occurred while updating club.']);
+        return ($this->clubModel->update($club->id, $data))
+            ? toast('success', lang('Admin.club.update.success'))
+            : toast('danger',  lang('Admin.club.update.error'));
     }
 
     public function create()
@@ -78,34 +71,29 @@ class ClubsController extends BaseController
         $club = new \App\Entities\Club();
         $club->fill($data);
 
-        if (model(ClubModel::class)->save($club)) {
-            return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Club created successfully!']);
-        }
-
-        return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error occurred while creating club.']);
+        return ($this->clubModel->save($club))
+            ? toast('success', lang('Admin.club.create.succes'))
+            : toast('danger',  lang('Admin.club.create.error'));
     }
 
     public function delete(int $param)
     {
         $currentClub = $this->clubModel->find($param);
 
-        if (isEmpty($currentClub->getTeams()) || isEmpty($currentClub->getMembers())) {
-            return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Teams and Members must be removed before deleting a club.']);
+        if (!empty($currentClub->getTeams()) || !empty($currentClub->getMembers())) {
+            return toast('danger', lang('Admin.club.foreignKey'));
         }
 
-        if ($this->clubModel->delete($param)) {
-            return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Club deleted successfully!']);
-        }
-
-        return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error occurred while deleting club.']);
+        return ($this->clubModel->delete($param))
+            ? toast('success', lang('Admin.club.update.success'))
+            : toast('danger',  lang('Admin.club.update.error'));
     }
 
     public function removeMember(int $param)
     {
-
-        return model(ClubUserModel::class)->whereIn('userID', [$param])->set(['clubID' => NULL])->update()
-            ? redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Removed member successfully!'])
-            : redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error occurred while removing member. Please try again.']);
+        return ($this->clubUserModel->delete($param))
+            ? toast('success', lang('Admin.club.removeMember.success'))
+            : toast('danger',  lang('Admin.club.removeMember.error'));
     }
 
     public function addMember()
@@ -113,6 +101,9 @@ class ClubsController extends BaseController
         $clubID = $this->request->getPost('clubID');
         $userIDs = $this->request->getPost('userID');
 
+        if (empty($userIDs)) {
+            return toast('danger', lang('Admin.club.requiredUsers'));
+        }
 
         $memberEntities = array_map(function ($userID) use ($clubID) {
             $member = new ClubUser();
@@ -121,76 +112,50 @@ class ClubsController extends BaseController
             return $member;
         }, $userIDs);
 
-
-        if (model(ClubUserModel::class)->insertBatch($memberEntities)) {
-            return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Members added successfully!']);
-        }
-
-
-        return redirect()->back()->with('alert', ['type' => 'danger', 'content' =>  'Members could not be added']);
+        return ($this->clubUserModel->insertBatch($memberEntities))
+            ? toast('success', lang('Admin.club.addMember.success'))
+            : toast('danger',  lang('Admin.club.addMember.error'));
     }
 
     public function addManager(int $id)
     {
-        if (model(ClubUserModel::class)->update($id, ['isManager' => 1])) {
-            return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Role added successfully!']);
-        }
-
-        return redirect()->back()->with('alert', ['type' => 'danger', 'content' =>  'Role could not be added']);
+        return ($this->clubUserModel->update($id, ['isManager' => 1]))
+            ? toast('success', lang('Admin.club.addManager.success'))
+            : toast('danger',  lang('Admin.club.addManager.error'));
     }
 
     public function removeManager(int $id)
     {
-        if (model(ClubUserModel::class)->update($id, ['isManager' => 0])) {
-            return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Role removed successfully!']);
-        }
-
-        return redirect()->back()->with('alert', ['type' => 'danger', 'content' =>  'Role could not be removed']);
+        return ($this->clubUserModel->update($id, ['isManager' => 0]))
+            ? toast('success', lang('Admin.club.removeManager.success'))
+            : toast('danger',  lang('Admin.club.removeManager.error'));
     }
-
 
     public function removeTeam(int $param)
     {
-
-        return model(TeamModel::class)->update($param, ['clubID' => NULL]) 
-        ? redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Removed team successfully!'])
-        : redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error occurred while removing team.']);
-  
+        return ($this->teamModel->update($param, ['clubID' => NULL]))
+            ? toast('success', lang('Admin.club.removeTeam.success'))
+            : toast('danger',  lang('Admin.club.removeTeam.error'));
     }
 
     public function addTeam()
     {
-        $teamModel = model(TeamModel::class);
+        $clubID  = $this->request->getPost('clubID');
+        $teamIDs = $this->request->getPost('teamID');
+        $successCount = 0;
 
-        $clubID = $this->request->getPost('add-team-club-id');
-
-        $json       = $this->request->getPost('add-teams-JSON');
-        $addSuccess = 0;
-        $numTeams   = -1;
-
-        if ($json !== '') {
-            $teamsJSON = json_decode($json);
-            $numTeams  = count($teamsJSON->teams);
-
-            foreach ($teamsJSON->teams as $teamName) {
-                $teamID = $teamModel->select()->where('name', $teamName)->first()->id;
-
-                try {
-                    $teamModel->set('clubID', $clubID)->where('id', $teamID)->update();
-                    $addSuccess++;
-                } catch (Exception $e) {
-                    echo "<script> console.log('Error occurred while adding team to club. " . $e->getMessage() . ".') </script>";
-                }
-            }
+        if (empty($teamIDs)) {
+            return toast('danger', lang('Admin.club.requiredTeams'));
         }
 
-        if ($addSuccess === $numTeams && $numTeams > 1) {
-            return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Added teams successfully!']);
-        }
-        if ($addSuccess === $numTeams && $numTeams === 1) {
-            return redirect()->back()->with('alert', ['type' => 'success', 'content' => 'Added team successfully!']);
+        foreach ($teamIDs as $teamID) {
+            if ($this->teamModel->update($teamID, ['clubID' => $clubID])) {
+                $successCount++;
+            };
         }
 
-        return redirect()->back()->with('alert', ['type' => 'danger', 'content' => 'Error occurred while adding teams.']);
+        return (sizeof($teamIDs) === $successCount)
+            ? toast('success', lang('Admin.club.addTeam.success'))
+            : toast('danger',  lang('Admin.club.addTeam.error'));
     }
 }
