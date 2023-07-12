@@ -38,7 +38,7 @@ $routes->group('', ['filter' => 'alertfilter', 'namespace' => 'App\Controllers\M
     $routes->get('clubs', 'ClubsController::index',                           ['as' => 'main_clubs']);
     $routes->get('teams', 'TeamsController::index',                           ['as' => 'main_teams']);
     $routes->get('committees', 'CommitteesController::index',                 ['as' => 'main_committees']);
-    $routes->get('committees/view/(:num)', 'CommitteesController::view/$1', ['as' => 'main_committees_view']);
+    $routes->get('committees/view/(:num)', 'CommitteesController::view/$1',   ['as' => 'main_committees_view']);
     $routes->get('development', 'DevelopmentController::index',               ['as' => 'main_developments']);
     $routes->get('development/(:num)', 'DevelopmentController::register/$1',  ['as' => 'main_developments_register']);
     $routes->get('faqs', 'FaqsController::index',                             ['as' => 'main_faqs']);
@@ -51,6 +51,16 @@ $routes->group('', ['filter' => 'alertfilter', 'namespace' => 'App\Controllers\M
     $routes->post('join_club', 'JoinClubController::joinClub',                ['as' => 'main_join_club']);
     $routes->post('delete_request', 'JoinClubController::deleteRequest',      ['as' => 'main_delete_club_request']);
 });
+
+$routes->group('guest', ['namespace' => 'App\Controllers\Guest'], static function ($routes) {
+    $routes->group('profile', static function ($routes) {
+        $routes->get('/', 'ProfileController::index',                             ['as' => 'guest_profile']);
+        $routes->post('update', 'ProfileController::update',                      ['as' => 'guest_update_profile']);
+    });
+    
+});
+
+
 
 // Routing for admin views and functions
 $routes->group('admin', ['filter' => 'adminfilter', 'namespace' => 'App\Controllers\Admin'], static function ($routes) {
