@@ -2,7 +2,7 @@
 
 function toast($type, $content)
 {
-    return redirect()->back()->with('alert', ['type' => $type, 'content' => $content]);
+    return redirect()->back()->with('toast', ['type' => $type, 'content' => $content]);
 }
 
 function operationsEN($type, $operations, $custom = null)

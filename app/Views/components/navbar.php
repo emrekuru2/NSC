@@ -45,7 +45,7 @@ $GROUPS = ['admin', 'manager', 'player', 'umpire', 'guest'];
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-lg-end">
                                     <?php if ($group !== 'admin' && $group !== 'manager') : ?>
-                                        <li><a class="dropdown-item" href="<?= url_to($group . '_profile') ?>">My Profile</a></li>
+                                        <li><a class="dropdown-item" href="<?= url_to($group .'_profile') ?>">My Profile</a></li>
                                     <?php else : ?>
                                         <li><a class="dropdown-item" href="<?= url_to($group . '_dashboard') ?>">Dashboard</a></li>
                                     <?php endif ?>

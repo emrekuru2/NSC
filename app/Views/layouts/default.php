@@ -17,8 +17,8 @@
 </head>
 
 <body class="bg-light">
-    <?php if (session()->getFlashdata('alert') !== NULL) : ?>
-        <?= view_cell('\App\Libraries\Alerts::toast', ['type' => session()->getFlashdata('alert')['type'], 'content' => session()->getFlashdata('alert')['content']]) ?>
+    <?php if (session()->getFlashdata('toast') !== NULL) : ?>
+        <?= view_cell('\App\Libraries\Alerts::toast', ['type' => session()->getFlashdata('toast')['type'], 'content' => session()->getFlashdata('toast')['content']]) ?>
     <?php endif; ?>
     <header>
         <div class="d-none width-100 d-lg-flex justify-content-center align-items-center p-2">
