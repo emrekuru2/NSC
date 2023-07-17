@@ -41,17 +41,6 @@ class DevelopmentTypesController extends BaseController
         return view('pages/admin/developmentTypes', $data);
     }
 
-    public function check($id = null)
-    {
-        $devType = new DevTypeModel();
-
-        $data = [
-            'devType' => $devType->find($id),
-            'title' => 'Development Type'
-        ];
-        return view('pages/admin/developmentTypeCheck', $data);
-    }
-
     public function update(int $id)
     {
         $devType = new DevTypeModel();
