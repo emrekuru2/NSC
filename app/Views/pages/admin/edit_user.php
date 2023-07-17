@@ -5,9 +5,10 @@
 <div class="row">
     <div class="col-12 col-lg-5">
         <div class="card shadow">
-            <div class="card-header">User Details</div>
-            <div class="card-body d-flex flex-column align-items-center">
-                <img class="border user-image" src="<?= base_url(esc($user->image)) ?>">
+            <div class="card-header ">User Details</div>
+            <div class="card-body d-flex flex-column align-items-center ">
+            <img src="<?= base_url(auth()->user()->image) ?>"   class="bg-dark" alt="profile" width="100px" height="100px">
+
                 <h4 class="mt-3"> <?= esc($user->first_name) . ' ' . esc($user->last_name) ?></h4>
                 <hr class="w-100">
                 <ul class="list-group w-100">
