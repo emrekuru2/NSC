@@ -38,7 +38,7 @@
             <div class="col-12 col-lg-6">
                 <h4>Update Profile</h4>
                 <hr />
-                <?= form_open('updateProfile', ['class' => 'row g-3 justify-content-center']) ?>
+                <?= form_open(url_to('admin_change_info'), ['class' => 'row g-3 justify-content-center']) ?>
                 <div class="col-md-6">
                     <label for="inputFname" class="form-label">First name</label>
                     <input type="text" class="form-control" id="inputFname" name="first_name" inputmode="text" placeholder="First Name" value="<?= esc($user->first_name) ?>" required>
@@ -91,7 +91,7 @@
             <div class="col-12 col-lg-6">
                 <h4>Update Password</h4>
                 <hr />
-                <?= form_open('updatePassword', ['class' => 'row g-3 justify-content-center']) ?>
+                <?= form_open(url_to('admin_change_password'), ['class' => 'row g-3 justify-content-center']) ?>
                 <div class="col-12 col-lg-6">
                     <div class="row g-3">
                         <div class="col-12">

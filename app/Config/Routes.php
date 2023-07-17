@@ -158,7 +158,11 @@ $routes->group('admin', ['filter' => 'adminfilter', 'namespace' => 'App\Controll
     $routes->group('settings', static function ($routes) {
         $routes->get('/', 'SettingsController::index',                        ['as' => 'admin_settings']);
         $routes->get('backup', 'SettingsController::backup',                  ['as' => 'admin_settings_db_backup']);
+        // Additional routes for changing password and info
+        $routes->post('changePassword', 'SettingsController::updatePassword', ['as' => 'admin_change_password']);
+        $routes->post('updateInfo', 'SettingsController::updateInformation',       ['as' => 'admin_change_info']);
     });
+     
 });
 
 // Codeigniter's default auth routing
