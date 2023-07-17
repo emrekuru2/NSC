@@ -22,12 +22,14 @@
       <!-- Modal Footer -->
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <?php if ((auth()->loggedIn()) ) : ?>
-        <a href="/development/<?= esc($program->id) ?>" class="btn btn-primary">Register</a>
-        <?php elseif ((auth()->loggedIn()) && esc($program->is_registered) === 1) : ?>
-        <a class="btn btn-secondary">Already registered</a>
+        <?php if (auth()->loggedIn()) : ?>
+          <?php if ($program->is_registered == 0) : ?>
+          <a href="/development/<?= esc($program->id) ?>" class="btn btn-primary">Register</a>
+          <?php else : ?>
+          <a class="btn btn-secondary">Already registered</a>
+          <?php endif ?>
         <?php else : ?>
-        <a href="/login" class="btn btn-primary">Login to Register</a>
+          <a href="<?= url_to('login')?>" class="btn btn-primary">Login to Register</a>
         <?php endif ?>
 
       </div>
