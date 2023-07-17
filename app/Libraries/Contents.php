@@ -23,4 +23,9 @@ class Contents
     {
         return view('components/search', $content);
     }
+
+    public function mainDevelopmentModal($content)
+    {
+        return view('components/mainDevelopmentModal', $content);
+    }
 }
