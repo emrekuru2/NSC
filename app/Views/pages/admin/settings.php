@@ -21,8 +21,7 @@
     </div>
     <div class="card-body">
         <div class="tab-content" id="settingsTabContent">
-            <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab" tabindex="0">...</div>
-            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" tabindex="0"><?= view_cell("App\Libraries\Settings::profileSettings", ['user' => $user])?></div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" tabindex="0"><?= view_cell("SettingsCell", ['tab' => 'profile'])?></div>
             <div class="tab-pane fade" id="email" role="tabpanel" aria-labelledby="email-tab" tabindex="0">...</div>
             <div class="tab-pane fade" id="database" role="tabpanel" aria-labelledby="database-tab" tabindex="0"><a type="button" class="btn btn-primary" href="<?= url_to("admin_settings_db_backup")?>">Database Backup</a></div>
         </div>

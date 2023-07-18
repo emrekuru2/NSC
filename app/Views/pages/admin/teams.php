@@ -181,7 +181,7 @@
             </div>
 
             <div class="card-body padding-top-half-rem">
-                <?= view_cell('\App\Libraries\Contents::search', ['array' => $allTeams, 'fields' => ['name'], 'type' => 'teams']); ?>
+                <?= view_cell('SearchCell', ['data' => $allTeams, 'fields' => ['name'], 'type' => 'teams']); ?>
 
                 <!-- Team List -->
                 <table class="table<?= ! empty($allTeams) ? ' table-hover' : '' ?> margin-bottom-half-rem">

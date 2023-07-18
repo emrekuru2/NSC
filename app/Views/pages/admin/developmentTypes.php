@@ -23,7 +23,7 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <?= view_cell('\App\Libraries\Alerts::modal',  ['content' => 'Are you sure you want to remove ' . $row->name, 'id' => 'delete_devType' . $row->id,  "action" => url_to('admin_delete_development_type', $row->id)]) ?>
+                                    <?= view_cell('ModalCell',  ['type' => 'prompt', 'content' => 'Are you sure you want to remove ' . $row->name, 'id' => 'delete_devType' . $row->id,  "action" => url_to('admin_delete_development_type', $row->id)]) ?>
                                 <?php endforeach ?>
                             <?php else : ?>
                             <?php endif ?>

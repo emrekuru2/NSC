@@ -4,8 +4,8 @@
   <div class="collapse navbar-collapse" id="toggle" style="width: 280px;">
     <div class="w-100 d-flex flex-column p-3 bg-dark text-light vh-100 overflow-auto">
       <div class="d-flex flex-column align-items-center">
-        <img src="<?= base_url(auth()->user()->image) ?>" alt="profile" width="100px" height="100px">
-        <span class="fs-4"><?= auth()->user()->getFullName() ?></span>
+        <img src="<?= base_url($user->image) ?>" alt="profile" width="100px" height="100px">
+        <span class="fs-4"><?= $user->getFullName() ?></span>
       </div>
       <hr>
       <ul class="nav nav-pills flex-column  ">

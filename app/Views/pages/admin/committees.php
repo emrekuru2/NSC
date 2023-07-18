@@ -13,7 +13,7 @@
                 <div class="card shadow">
                     <div class="card-header">All Committees</div>
                     <div class="card-body">
-                        <?= view_cell('\App\Libraries\Contents::search', ['array' => $committiees, 'fields' => ['name'], 'type' => 'committees']) ?>
+                        <?= view_cell('SearchCell', ['data' => $committiees, 'fields' => ['name'], 'type' => 'committees']) ?>
 
                         <table class="table table-striped">
                             <thead>

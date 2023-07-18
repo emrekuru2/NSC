@@ -31,7 +31,6 @@
         <?php else : ?>
           <a href="<?= url_to('login')?>" class="btn btn-primary">Login to Register</a>
         <?php endif ?>
-
       </div>
     </div>
   </div>

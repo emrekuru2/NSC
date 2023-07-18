@@ -1,8 +1,3 @@
-<?php
-helper('html');
-$GROUPS = ['admin', 'manager', 'player', 'umpire', 'guest'];
-?>
-
 <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="fa-solid fa-bars"></i></button>
@@ -30,18 +25,18 @@ $GROUPS = ['admin', 'manager', 'player', 'umpire', 'guest'];
                 <li class="nav-item">
                     <a class="nav-link <?= ($title === 'News') ? 'active' : '' ?>" href="<?= url_to('main_news') ?>"><i class="fa-solid fa-newspaper me-2"></i>News</a>
                 </li>
-                <?php if (auth()->loggedIn()) : ?>
+                <?php if ($isLoggedIn) : ?>
                     <div class="vr text-light d-lg-block d-none"></div>
                     <li class="nav-item">
                         <a class="nav-link <?= ($title === 'Join Club') ? 'active' : '' ?>" href="/join">Join Club</a>
                     </li>
                     <div class="vr text-light d-lg-block d-none"></div>
-                    <?php foreach ($GROUPS as $group) : ?>
-                        <?php if (auth()->user()->inGroup($group)) : ?>
+                    <?php foreach ($groups as $group) : ?>
+                        <?php if ($user->inGroup($group)) : ?>
                             <li class="nav-item">
                                 <a class="nav-link dropdown-toggle d-flex flex-row align-items-center gap-1" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" role="button">
-                                    <?= img(['src' => auth()->user()->image, 'alt' => 'Profile Image', 'class' => 'bg-dark rounded-circle', 'width' => '20', 'height' => '20']) ?>
-                                    <span><?= auth()->user()->getFullName() ?></span>
+                                    <img src="<?= $user->image ?>" alt="Profile Image" class="bg-dark rounded-circle" width="20" height="20" /> 
+                                    <span><?= $user->getFullName() ?></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-lg-end">
                                     <?php if ($group !== 'admin' && $group !== 'manager') : ?>

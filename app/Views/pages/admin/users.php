@@ -15,7 +15,7 @@
             </form>
 
         </div>
-        <?= view_cell('\App\Libraries\Contents::search', ['array' => $users, 'fields' => $current_search, 'type' => 'users']) ?>
+        <?= view_cell('SearchCell', ['data' => $users, 'fields' => $current_search, 'type' => 'users']) ?>
 
 
         <table id="table1" class="table table-striped">
@@ -29,30 +29,34 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <?php foreach ($users as $user) : ?>
-                    <tr>
-                        <td><?= esc($user->first_name) ?></td>
-                        <td><?= esc($user->last_name) ?></td>
-                        <!-- if no team show not in team in red
-                        if in team show team name in green -->
-                        <?php if ($user->team != 'none') : ?>
-                            <td><?= esc($user->team) ?></td>
-                        <?php else : ?>
-                            <td class="text-danger font-weight-bold">Not in a team</td>
-                        <?php endif ?>
-                        <?php if ($user->club != 'none') : ?>
-                            <td><?= esc($user->club) ?></td>
-                        <?php else : ?>
-                            <td class="text-danger font-weight-bold">Not in a club</td>
-                        <?php endif ?>
-                        <?php if ($user->role != 'none') : ?>
-                            <td><?= esc($user->role) ?></td>
-                        <?php else : ?>
-                            <td class="text-danger font-weight-bold">No assigned role</td>
-                        <?php endif ?>
-                        <td><a href="users/edit/<?= esc($user->id) ?>">Edit</a></td>
-                    </tr>
-                <?php endforeach ?>
+                <?php if (!is_null($users)) : ?>
+                    <?php foreach ($users as $user) : ?>
+                        <tr>
+                            <td><?= esc($user->first_name) ?></td>
+                            <td><?= esc($user->last_name) ?></td>
+                            <!-- if no team show not in team in red
+                            if in team show team name in green -->
+                            <?php if ($user->team != 'none') : ?>
+                                <td><?= esc($user->team) ?></td>
+                            <?php else : ?>
+                                <td class="text-danger font-weight-bold">Not in a team</td>
+                            <?php endif ?>
+                            <?php if ($user->club != 'none') : ?>
+                                <td><?= esc($user->club) ?></td>
+                            <?php else : ?>
+                                <td class="text-danger font-weight-bold">Not in a club</td>
+                            <?php endif ?>
+                            <?php if ($user->role != 'none') : ?>
+                                <td><?= esc($user->role) ?></td>
+                            <?php else : ?>
+                                <td class="text-danger font-weight-bold">No assigned role</td>
+                            <?php endif ?>
+                            <td><a href="users/edit/<?= esc($user->id) ?>">Edit</a></td>
+                        </tr>
+                    <?php endforeach ?>
+                <?php else : ?>
+                    <span> No users to show </span>
+                <?php endif ?>
             </tbody>
         </table>
     </div>
