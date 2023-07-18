@@ -1,13 +1,8 @@
 stages:
-  - format 
   - qa
 
 include:
   - template: Dependency-Scanning.gitlab-ci.yml
-
-format:
-  stage: format
-  script: vendor/bin/php-cs-fixer fix --verbose
 
 dependency_scanning:
   stage: qa
