@@ -18,7 +18,7 @@
             <input type="text" name="title" class="form-control" value="<?= $editMode ? $currentNews->title : null ?>">
           </div>
           <div class="form-group mb-3">
-            <?= view_cell('\App\Libraries\Contents::editor', [$editMode ? $currentNews->content : null]) ?>
+            <?= view_cell('EditorCell', ['content' => $currentNews->content ?? null]) ?>
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block"><?= $editMode ? "Update" : "Submit" ?></button>

@@ -17,23 +17,16 @@
 </head>
 
 <body class="bg-light">
-    <?php if (session()->getFlashdata('toast') !== NULL) : ?>
-        <?= view_cell('\App\Libraries\Alerts::toast', ['type' => session()->getFlashdata('toast')['type'], 'content' => session()->getFlashdata('toast')['content']]) ?>
-    <?php endif; ?>
+    <?= view_cell('ToastCell') ?>
     <header>
         <div class="d-none width-100 d-lg-flex justify-content-center align-items-center p-2">
             <img src="/assets/images/General/logo1.png" alt="logo" width="60px">
             <h2>Nova Scotia Cricket Association</h2>
         </div>
-        <?= view_cell('\App\Libraries\Navigations::navbar') ?>
+        <?= view_cell('NavbarCell', ['title' => $title]) ?>
     </header>
     <main>
-        <?php if (session()->get('alert')) : ?>
-            <div class="alert alert-warning m-2" role="alert">
-                <strong><?= session()->get('alert')['title'] ?>:</strong>
-                <?= session()->get('alert')['content'] ?>
-            </div>
-        <?php endif ?>
+        <?= view_cell('AlertCell') ?>
         <?= $this->renderSection('mainContent') ?>
     </main>
     <footer class="container-lg text-center my-3">

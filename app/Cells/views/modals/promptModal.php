@@ -14,7 +14,7 @@
 
       <!-- Modal Footer -->
       <div class="modal-footer">
-        <?= anchor($action, 'Yes', ['class' => 'btn btn-secondary', 'role' => 'button']) ?>
+        <a href="<?= base_url($action) ?>" class="btn btn-secondary"  role="button">Yes</a>
         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
       </div>
     </div>

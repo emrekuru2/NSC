@@ -3,11 +3,11 @@
     <input type="hidden" value="<?= $currentClub->id ?>" name="clubID">
     <div class="modal-content">
         <div class="modal-header">
-            <h1 class="modal-title fs-5">Add <?= $type ?></h1>
+            <h1 class="modal-title fs-5">Add <?= $selection ?></h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <p class="text-start">Select <?= $type ?> to add to the <b><?= $currentClub->name ?></b></p>
+            <p class="text-start">Select <?= $selection ?> to add to the <b><?= $currentClub->name ?></b></p>
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -16,10 +16,10 @@
                     </tr>
                 </thead>
                 <tbody id="add-team-list">
-                    <?php if ($type === 'Teams') : ?>
+                    <?php if ($selection === 'Teams') : ?>
                         <?php if (empty($currentClub->getUnassignedTeams())) : ?>
                             <tr>
-                                <td class="col-11 line-height-2rem">No <?= $type ?> available</td>
+                                <td class="col-11 line-height-2rem">No <?= $selection ?> available</td>
                                 <td class="col-1"></td>
                             </tr>
                         <?php else : ?>
@@ -35,7 +35,7 @@
                     <?php else : ?>
                         <?php if (empty($currentClub->getUnassignedMembers())) : ?>
                             <tr>
-                                <td class="col-11 line-height-2rem">No <?= $type ?> available</td>
+                                <td class="col-11 line-height-2rem">No <?= $selection ?> available</td>
                                 <td class="col-1"></td>
                             </tr>
                         <?php else : ?>

@@ -23,11 +23,14 @@ class EmailController extends BaseController
 
         $data = [
             'title'      => 'Email',
-            'clubs'      => $clubModel->findAll(),
-            'teams'      => $teamModel->findAll(),
-            'committees' => $committeeModel->findAll(),
-            'locations'  => $locationModel->findAll(),
-            'devs'       => $devModel->findAll(),
+            'items'      => [
+                'clubs'      => $clubModel->findAll(),
+                'teams'      => $teamModel->findAll(),
+                'committees' => $committeeModel->findAll(),
+                'locations'  => $locationModel->findAll(),
+                'devs'       => $devModel->findAll(),
+            ]
+
         ];
 
         return view('pages/admin/email', $data);

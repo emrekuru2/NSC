@@ -10,7 +10,7 @@
                 <div class="card shadow">
                     <div class="card-header d-flex align-items-center">
                         <span class="flex-grow-1"><i class="fa-solid fa-list"></i> Clubs List</span>
-                        <?= view_cell('\App\Libraries\Contents::search', ['array' => $clubs, 'fields' => ['name'], 'type' => 'clubs']) ?>
+                        <?= view_cell('SearchCell', ['data' => $clubs, 'fields' => ['name'], 'type' => 'clubs']) ?>
                     </div>
                     <div class="card-body p-0">
                         <?php if (!empty($clubs)) : ?>
@@ -41,7 +41,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <?= view_cell('\App\Libraries\Alerts::modal',  ['content' => 'Are you sure you want to delete ' . $club->name, 'id' => 'delete' . $club->id, "action" => url_to('admin_delete_club', $club->id)]) ?>
+                                        <?= view_cell('ModalCell',  ['type' => 'prompt', 'content' => 'Are you sure you want to delete ' . $club->name, 'id' => 'delete' . $club->id, "action" => url_to('admin_delete_club', $club->id)]) ?>
                                     <?php endforeach ?>
                                 </tbody>
                             </table>
@@ -58,7 +58,7 @@
                         <div class="card shadow mb-3">
                             <div class="card-header row m-0">
                                 <div class="col-5 my-auto p-0"><i class="fa-solid fa-people-group"></i> <?= $key ?> for <b><?= $currentClub->name ?></b></div>
-                                <div class="col text-end"><?= view_cell('\App\Libraries\Contents::search', ['array' => $value, 'fields' => ['name'], 'type' => strtolower($key), 'styling' => 'w-100 m-0']) ?></div>
+                                <div class="col text-end"><?= view_cell('SearchCell', ['data' => $value, 'fields' => ['name'], 'type' => strtolower($key), 'styling' => 'w-100 m-0']) ?></div>
                                 <div class="col-1 p-0"><button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target=<?= "#add" . $key . "Modal" ?>><i class="fa-solid fa-plus"></i></button></div>
                             </div>
                             <div class="card-body p-0">
@@ -106,12 +106,12 @@
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                <?= view_cell('\App\Libraries\Alerts::modal',  ['content' => 'Are you sure you want to remove ' . $item->name . ' from ' . $currentClub->name, 'id' => 'delete_' . $key . $item->id,  "action" => url_to('admin_club_remove_' . strtolower($key), $item->id)]) ?>
+                                                <?= view_cell('ModalCell', ['type' => 'prompt', 'content' => 'Are you sure you want to remove ' . $item->name . ' from ' . $currentClub->name, 'id' => 'delete_' . $key . $item->id,  "action" => url_to('admin_club_remove_' . strtolower($key), $item->id)]) ?>
                                             <?php endforeach ?>
                                         </tbody>
                                     </table>
                                 <?php endif ?>
-                                <?= view_cell('\App\Libraries\Alerts::clubModal',  ['action' => url_to('admin_club_add_' . strtolower($key)), 'type' => $key, 'id' => 'add' . $key . 'Modal', 'currentClub' => $currentClub]) ?>
+                                <?= view_cell('ModalCell', ['type' => 'club', 'action' => url_to('admin_club_add_' . strtolower($key)), 'selection' => $key, 'id' => 'add' . $key . 'Modal', 'currentClub' => $currentClub]) ?>
                             </div>
                         </div>
                     <?php endforeach ?>

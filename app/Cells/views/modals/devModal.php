@@ -29,7 +29,6 @@
         <?php else : ?>
         <a href="/login" class="btn btn-primary">Login to Register</a>
         <?php endif ?>
-
       </div>
     </div>
   </div>

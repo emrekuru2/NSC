@@ -25,7 +25,7 @@
                 <div class="card shadow">
                     <div class="card-header d-flex align-items-center">
                         <span class="flex-grow-1"><i class="fa-solid fa-list"></i> Alerts List</span>
-                        <?= view_cell('\App\Libraries\Contents::search', ['array' => $alerts, 'fields' => ['title'], 'type' => 'alerts']) ?>
+                        <?= view_cell('SearchCell', ['data' => $alerts, 'fields' => ['title'], 'type' => 'alerts']) ?>
                     </div>
                     <div class="card-body p-0">
                         <?php if (!empty($alerts)) : ?>
@@ -54,7 +54,7 @@
                                                         <li><span class="dropdown-item text-danger" role="button" data-bs-toggle="modal" data-bs-target="<?= '#delete' . $alert->id ?>"><i class="fa-solid fa-trash"></i> Delete</span></li>
                                                     </ul>
                                                 </div>
-                                                <?= view_cell('\App\Libraries\Alerts::modal',  ['content' => 'Are you sure you want to delete ' . $alert->title . ' ?', 'id' => 'delete' . $alert->id, "action" => url_to('admin_delete_alert', $alert->id)]) ?>
+                                                <?= view_cell('ModalCell', ['type' => 'prompt', 'content' => 'Are you sure you want to delete ' . $alert->title . ' ?', 'id' => 'delete' . $alert->id, "action" => url_to('admin_delete_alert', $alert->id)]) ?>
                                             </td>
                                         </tr>
                                     <?php endforeach ?>
