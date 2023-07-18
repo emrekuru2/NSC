@@ -1,16 +1,16 @@
 stages:
-  - format
-  - test
+  - format 
+  - qa
 
 include:
   - template: Dependency-Scanning.gitlab-ci.yml
 
 format:
   stage: format
-  script: composer format
+  script: vendor/bin/php-cs-fixer fix --verbose
 
 dependency_scanning:
-  stage: test
+  stage: qa
   variables:
     CI_DEBUG_TRACE: 'true'
     DS_EXCLUDED_ANALYZERS: "bundler-audit, gemnasium-maven, gemnasium-python, retire.js"
