@@ -31,7 +31,6 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-// Routing for general views
 $routes->group('', ['filter' => 'alertfilter', 'namespace' => 'App\Controllers\Main'], static function ($routes) {
 
     $routes->get('/', 'HomeController::index',                                ['as' => 'main_homepage']);
@@ -57,12 +56,8 @@ $routes->group('guest', ['namespace' => 'App\Controllers\Guest'], static functio
         $routes->get('/', 'ProfileController::index',                             ['as' => 'guest_profile']);
         $routes->post('update', 'ProfileController::update',                      ['as' => 'guest_update_profile']);
     });
-    
 });
 
-
-
-// Routing for admin views and functions
 $routes->group('admin', ['filter' => 'adminfilter', 'namespace' => 'App\Controllers\Admin'], static function ($routes) {
 
     $routes->group('dashboard', static function ($routes) {
@@ -91,7 +86,7 @@ $routes->group('admin', ['filter' => 'adminfilter', 'namespace' => 'App\Controll
         $routes->post('addTeam', 'ClubsController::addTeam',                  ['as' => 'admin_club_add_teams']);
         $routes->get('removeTeam/(:any)', 'ClubsController::removeTeam/$1',            ['as' => 'admin_club_remove_teams']);
         $routes->get('addManager/(:any)', 'ClubsController::addManager/$1',   ['as' => 'admin_club_add_manager']);
-        $routes->get('removeManager/(:any)', 'ClubsController::removeManager/$1',['as' => 'admin_club_remove_manager']);
+        $routes->get('removeManager/(:any)', 'ClubsController::removeManager/$1', ['as' => 'admin_club_remove_manager']);
     });
 
     $routes->group('teams', static function ($routes) {
@@ -106,20 +101,18 @@ $routes->group('admin', ['filter' => 'adminfilter', 'namespace' => 'App\Controll
 
     $routes->group('competitions', static function ($routes) {
         $routes->get('/', 'CompetitionsController::index',                    ['as' => 'admin_competitions']);
-        $routes->get('edit/(:num)', 'CompetitionsController::edit/$1',        ['as' => 'admin_edit_competition']);
-        $routes->get('delete/(:num)', 'CompetitionsController::delete/$1',    ['as' => 'admin_delete_competition']);
-        $routes->get('check/(:num)', 'CompetitionsController::check/$1',      ['as' => 'admin_check_competition']);
-        $routes->post('create', 'CompetitionsController::store',              ['as' => 'admin_create_competition']);
+        $routes->get('read/(:any)', 'CompetitionsController::read/$1',        ['as' => 'admin_read_competition']);
         $routes->post('update/(:num)', 'CompetitionsController::update/$1',   ['as' => 'admin_update_competition']);
+        $routes->post('create', 'CompetitionsController::create',             ['as' => 'admin_create_competition']);
+        $routes->get('delete/(:num)', 'CompetitionsController::delete/$1',    ['as' => 'admin_delete_competition']);
     });
 
     $routes->group('competition_types', static function ($routes) {
         $routes->get('/', 'CompetitionTypeController::index',                 ['as' => 'admin_competition_types']);
-        $routes->get('edit/(:num)', 'CompetitionTypeController::edit/$1',     ['as' => 'admin_edit_competition_type']);
-        $routes->get('check/(:num)', 'CompetitionTypeController::check/$1',   ['as' => 'admin_check_competition_type']);
-        $routes->get('update/(:num)', 'CompetitionTypeController::update/$1', ['as' => 'admin_update_competition_type']);
+        $routes->get('read/(:any)', 'CompetitionTypeController::read/$1',     ['as' => 'admin_read_competition_type']);
+        $routes->post('update/(:num)', 'CompetitionTypeController::update/$1', ['as' => 'admin_update_competition_type']);
         $routes->get('delete/(:num)', 'CompetitionTypeController::delete/$1', ['as' => 'admin_delete_competition_type']);
-        $routes->post('create', 'CompetitionTypeController::store',           ['as' => 'admin_create_competition_type']);
+        $routes->post('create', 'CompetitionTypeController::create',           ['as' => 'admin_create_competition_type']);
     });
 
     $routes->group('committees', static function ($routes) {
@@ -143,7 +136,7 @@ $routes->group('admin', ['filter' => 'adminfilter', 'namespace' => 'App\Controll
         $routes->post('create', 'DevelopmentTypesController::create',         ['as' => 'admin_create_development_type']);
         $routes->get('edit/(:any)', 'DevelopmentTypesController::edit/$1',    ['as' => 'admin_edit_development_type']);
         $routes->post('update/(:any)', 'DevelopmentTypesController::update/$1', ['as' => 'admin_update_development_type']);
-        $routes->get('delete/(:any)', 'DevelopmentTypesController::delete/$1',['as' => 'admin_delete_development_type']);
+        $routes->get('delete/(:any)', 'DevelopmentTypesController::delete/$1', ['as' => 'admin_delete_development_type']);
     });
 
     $routes->group('users', static function ($routes) {

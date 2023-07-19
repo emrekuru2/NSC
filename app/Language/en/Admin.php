@@ -31,6 +31,25 @@ return [
             'requiredUsers' => 'Please select at least one user to proceed',
         ]
     ),
+    ...operationsEN(
+        'Competition',
+        [
+            'create',
+            'update',
+            'delete',
+        ]
+    ),
+    ...operationsEN(
+        'Competition_Type',
+        [
+            'create',
+            'update',
+            'delete',
+        ],
+        [
+            'foreignKey' => 'Competitions must be removed before deleting a club.',
+        ]
+    ),
 
 
 ];

@@ -15,7 +15,6 @@
                 selection: (event) => {
                     const selection = event.detail.selection.value;
                     window.location.href = `<?= base_url('admin/' . $type . '/read') ?>/${selection}`
-                    console.log(selection)
                 },
             }
         }
