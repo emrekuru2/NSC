@@ -49,6 +49,7 @@ $routes->group('', ['filter' => 'alertfilter', 'namespace' => 'App\Controllers\M
     $routes->post('contactAdmins', 'ContactController::contactAdmins',        ['as' => 'main_contact_admins']);
     $routes->post('join_club', 'JoinClubController::joinClub',                ['as' => 'main_join_club']);
     $routes->post('delete_request', 'JoinClubController::deleteRequest',      ['as' => 'main_delete_club_request']);
+    $routes->get('teams/players/(:num)', 'TeamsController::players/$1',  ['as' => 'main_players_view']);
 });
 
 $routes->group('guest', ['namespace' => 'App\Controllers\Guest'], static function ($routes) {
