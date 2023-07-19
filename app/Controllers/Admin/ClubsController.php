@@ -3,12 +3,15 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Models\UserTypes\ClubUserModel;
 use App\Entities\UserTypes\ClubUser;
+use App\Entities\Club;
+use App\Interfaces\CRUD;
+use App\Interfaces\Clubs;
 use App\Models\ClubModel;
 use App\Models\TeamModel;
-use App\Models\UserTypes\ClubUserModel;
 
-class ClubsController extends BaseController
+class ClubsController extends BaseController implements CRUD, Clubs
 {
     protected $helpers = ['image', 'html', 'form', 'file'];
     protected $clubUserModel;
@@ -34,29 +37,33 @@ class ClubsController extends BaseController
         return view('pages/admin/clubs', $data);
     }
 
-    public function read(string $param)
+    public function read(string|int $param)
     {
+        if (is_string($param)) {
+            $currentClub = $this->clubModel->where('name', $param)->first();
+        } else {
+            $currentClub = $this->clubModel->find($param);
+        }
+
         $data = [
             'title'           => 'Clubs',
             'clubs'           => $this->totalClubs,
-            'currentClub'     => $this->clubModel->where('name', $param)->first(),
+            'currentClub'     => $currentClub,
         ];
 
         return view('pages/admin/clubs', $data);
     }
 
-    public function update()
+    public function update(int $param)
     {
-
         $data = $this->request->getPost();
-        $club = $this->clubModel->where('name', $data['name'])->first();
 
         //Update the image
         $imageFile = $this->request->getFile('image');
         $filepath = storeImage('Clubs', $imageFile);
         $data['image'] = $filepath;
 
-        return ($this->clubModel->update($club->id, $data))
+        return ($this->clubModel->update($param, $data))
             ? toast('success', lang('Admin.club.update.success'))
             : toast('danger',  lang('Admin.club.update.error'));
     }
@@ -68,7 +75,7 @@ class ClubsController extends BaseController
         $filepath = storeImage('Clubs', $imageFile);
         $data['image'] = $filepath;
 
-        $club = new \App\Entities\Club();
+        $club = new Club();
         $club->fill($data);
 
         return ($this->clubModel->save($club))

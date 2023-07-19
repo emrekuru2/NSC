@@ -5,8 +5,10 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use App\Models\AlertModel;
 use \App\Entities\Alert;
+use App\Interfaces\CRUD;
+use App\Interfaces\Alerts;
 
-class AlertsController extends BaseController
+class AlertsController extends BaseController implements CRUD, Alerts
 {
     protected $helpers = ['html', 'text', 'form'];
     protected $alertModel;

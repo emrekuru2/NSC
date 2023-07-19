@@ -14,7 +14,6 @@
                     </div>
                     <div class="card-body p-0">
                         <?php if (!empty($clubs)) : ?>
-                            <?= form_open(url_to('admin_enable_alert')) ?>
                             <table class="table table-hover table-striped align-middle table-bordered display" style="margin: 0 !important;">
                                 <thead class="table-primary">
                                     <tr>
@@ -45,7 +44,6 @@
                                     <?php endforeach ?>
                                 </tbody>
                             </table>
-                            <?= form_close() ?>
                         <?php else : ?>
                             <h4 class="text-muted text-center p-2">There are no clubs to show</h4>
                         <?php endif ?>

@@ -10,7 +10,7 @@ class CompetitionModel extends Model
     protected $primaryKey       = 'id';
     protected $foreignkey       = "typeID";
     protected $returnType       = \App\Entities\Competition::class;
-    protected $allowedFields    = ['typeID', 'name','description','yearRunning'];
+    protected $allowedFields    = ['typeID', 'name', 'description', 'yearRunning'];
 
     // Dates
     protected $useTimestamps = true;
