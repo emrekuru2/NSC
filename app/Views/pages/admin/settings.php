@@ -27,7 +27,8 @@
 
 
       <div class="tab-pane fade" id="database" role="tabpanel" aria-labelledby="database-tab" tabindex="0">
-        <table class="table">
+        <table class="table table-hover table-striped align-middle table-bordered display"
+          style="margin: 0 !important;">
           <thead>
             <tr>
               <th scope="col">File Name</th>
@@ -49,7 +50,8 @@
             <?php endif; ?>
           </tbody>
         </table>
-        <a type="button" class="btn btn-primary" href="<?= url_to("admin_settings_db_backup")?>">Database Backup</a>
+        <a type="button" class="btn btn-primary mt-3" href="<?= url_to("admin_settings_db_backup")?>">Database
+          Backup</a>
       </div>
     </div>
   </div>
