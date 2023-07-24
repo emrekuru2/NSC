@@ -12,6 +12,7 @@ class ModalCell extends Cell
     public $currentClub;
     public $selection;
     public $program;
+    public $committee;
     protected string $view;
 
     public function mount(?string $type)
@@ -28,6 +29,8 @@ class ModalCell extends Cell
                 return 'views/modals/clubModal';
             case 'dev':
                 return 'views/modals/devModal';
+            case  'committee':
+                return 'views/modals/committeeModal';
         }
     }
 }
