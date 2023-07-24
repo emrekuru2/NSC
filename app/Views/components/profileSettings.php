@@ -93,20 +93,21 @@
                 <hr />
                 <?= form_open(url_to('admin_change_password'), ['class' => 'row g-3 justify-content-center']) ?>
                 <div class="col-12 col-lg-6">
-                    <div class="row g-3">
-                        <div class="col-12">
-                            <label for="oldPassword" class="form-label">Old Password</label>
-                            <input type="password" class="form-control" id="oldPassword" />
-                        </div>
-                        <div class="col-12">
-                            <label for="newPassword" class="form-label">New Password</label>
-                            <input type="password" class="form-control" id="newPassword" />
-                        </div>
-                        <div class="col-12">
-                            <label for="newConfirmPassword" class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" id="newConfirmPassword" />
-                        </div>
-                    </div>
+                <div class="row g-3">ƒ
+                <div class="col-12">
+                <label for="oldPassword" class="form-label">Old Password</label>
+                <input type="password" class="form-control" id="oldPassword" name="oldPassword" />
+                </div>
+                <div class="col-12">
+                <label for="newPassword" class="form-label">New Password</label>
+                <input type="password" class="form-control" id="newPassword" name="newPassword" />
+                </div>
+                <div class="col-12">
+                <label for="newConfirmPassword" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="newConfirmPassword" name="newConfirmPassword" />
+                </div>
+                </div>
+
                 </div>
                 <div class="col-12 col-lg-6">
                     <p class="mb-2">Password requirements</p>

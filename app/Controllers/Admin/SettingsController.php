@@ -3,7 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use CodeIgniter\Shield\Model\UserEntityModel;
+use CodeIgniter\Shield\Model\UserIdentityModel;
 
 class SettingsController extends BaseController
 {
@@ -35,7 +35,7 @@ class SettingsController extends BaseController
 
     public function updatePassword()
 {
-    $model = model(UserEntityModel::class);
+    $model = model(UserIdentityModel::class);
 
     $rules = [
         'oldPassword' => [
@@ -68,7 +68,7 @@ class SettingsController extends BaseController
     $newPassword = $this->request->getPost('newPassword');
    
 
-    $model->whereIn('userID', auth()->user()->id)->set('secret2', password_hash($newPassword, PASSWORD_DEFAULT))->update();
+    $model->whereIn('user_id', [auth()->user()->id])->set(['secret2' => password_hash($newPassword, PASSWORD_DEFAULT)])->update();
 
     session()->setFlashdata('message', 'Password updated successfully');
     return redirect()->back();
