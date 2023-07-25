@@ -38,7 +38,7 @@
             <div class="col-12 col-lg-6">
                 <h4>Update Profile</h4>
                 <hr />
-                <?= form_open('updateProfile', ['class' => 'row g-3 justify-content-center']) ?>
+                <?= form_open(url_to('admin_change_info'), ['class' => 'row g-3 justify-content-center']) ?>
                 <div class="col-md-6">
                     <label for="inputFname" class="form-label">First name</label>
                     <input type="text" class="form-control" id="inputFname" name="first_name" inputmode="text" placeholder="First Name" value="<?= esc($user->first_name) ?>" required>
@@ -91,22 +91,23 @@
             <div class="col-12 col-lg-6">
                 <h4>Update Password</h4>
                 <hr />
-                <?= form_open('updatePassword', ['class' => 'row g-3 justify-content-center']) ?>
+                <?= form_open(url_to('admin_change_password'), ['class' => 'row g-3 justify-content-center']) ?>
                 <div class="col-12 col-lg-6">
-                    <div class="row g-3">
-                        <div class="col-12">
-                            <label for="oldPassword" class="form-label">Old Password</label>
-                            <input type="password" class="form-control" id="oldPassword" />
-                        </div>
-                        <div class="col-12">
-                            <label for="newPassword" class="form-label">New Password</label>
-                            <input type="password" class="form-control" id="newPassword" />
-                        </div>
-                        <div class="col-12">
-                            <label for="newConfirmPassword" class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" id="newConfirmPassword" />
-                        </div>
-                    </div>
+                <div class="row g-3">ƒ
+                <div class="col-12">
+                <label for="oldPassword" class="form-label">Old Password</label>
+                <input type="password" class="form-control" id="oldPassword" name="oldPassword" />
+                </div>
+                <div class="col-12">
+                <label for="newPassword" class="form-label">New Password</label>
+                <input type="password" class="form-control" id="newPassword" name="newPassword" />
+                </div>
+                <div class="col-12">
+                <label for="newConfirmPassword" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="newConfirmPassword" name="newConfirmPassword" />
+                </div>
+                </div>
+
                 </div>
                 <div class="col-12 col-lg-6">
                     <p class="mb-2">Password requirements</p>
