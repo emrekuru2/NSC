@@ -16,7 +16,6 @@ class SettingsController extends BaseController
 
         return view('pages/admin/settings', $data);
     }
-
     public function backup()
     {
         helper('filesystem');
