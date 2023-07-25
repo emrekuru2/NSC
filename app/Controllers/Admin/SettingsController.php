@@ -18,8 +18,6 @@ class SettingsController extends BaseController
         return view('pages/admin/settings', $data);
     }
 
-   public function backup()
-
     public function backup()
     {
         helper('filesystem');
@@ -38,66 +36,64 @@ class SettingsController extends BaseController
         return $this->response->download($path . $filename . '.sql', null);
     }
 
-private function getBackupFiles(): array
-{
-    helper('filesystem');
-    $path = WRITEPATH . 'uploads/';
-    $fileData = array();
-    $fileNames = get_filenames($path);
+    private function getBackupFiles(): array
+    {
+        helper('filesystem');
+        $path = WRITEPATH . 'uploads/';
+        $fileData = array();
+        $fileNames = get_filenames($path);
 
-    foreach ($fileNames as $fileName) {
-        if (pathinfo($fileName, PATHINFO_EXTENSION) === 'sql') {
-        $filePath = $path . $fileName;
-        $fileData[] = array(
-                'filename' => $fileName,
-                'date' => date('Y-m-d H:i:s', filemtime($filePath))
-            );
+        foreach ($fileNames as $fileName) {
+            if (pathinfo($fileName, PATHINFO_EXTENSION) === 'sql') {
+                $filePath = $path . $fileName;
+                $fileData[] = array(
+                    'filename' => $fileName,
+                    'date' => date('Y-m-d H:i:s', filemtime($filePath))
+                );
+            }
+        }
+        return $fileData;
     }
-}
-    return $fileData;
+
     public function updatePassword()
-{
-    $model = model(UserIdentityModel::class);
+    {
+        $model = model(UserIdentityModel::class);
 
-    $rules = [
-        'oldPassword' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => 'You must provide your old password.'
+        $rules = [
+            'oldPassword' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'You must provide your old password.'
+                ]
+            ],
+            'newPassword' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'You must provide a new password.'
+                ]
+            ],
+            'newConfirmPassword' => [
+                'rules' => 'required|matches[newPassword]',
+                'errors' => [
+                    'required' => 'You must confirm your new password.',
+                    'matches' => 'The confirmation password does not match the new password.'
+                ]
             ]
-        ],
-        'newPassword' => [
-            'rules' => 'required',
-            'errors' => [
-                'required' => 'You must provide a new password.'
-            ]
-        ],
-        'newConfirmPassword' => [
-            'rules' => 'required|matches[newPassword]',
-            'errors' => [
-                'required' => 'You must confirm your new password.',
-                'matches' => 'The confirmation password does not match the new password.'
-            ]
-        ]
-    ];
+        ];
 
-    if (!$this->validate($rules)) {
-        // validation failed, handle error here
-        return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        if (!$this->validate($rules)) {
+            // validation failed, handle error here
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
+        $oldPassword = $this->request->getPost('oldPassword');
+        $newPassword = $this->request->getPost('newPassword');
+
+        $model->whereIn('user_id', [auth()->user()->id])->set(['secret2' => password_hash($newPassword, PASSWORD_DEFAULT)])->update();
+
+        session()->setFlashdata('message', 'Password updated successfully');
+        return redirect()->back();
     }
-
-    $oldPassword = $this->request->getPost('oldPassword');
-    $newPassword = $this->request->getPost('newPassword');
-   
-
-    $model->whereIn('user_id', [auth()->user()->id])->set(['secret2' => password_hash($newPassword, PASSWORD_DEFAULT)])->update();
-
-    session()->setFlashdata('message', 'Password updated successfully');
-    return redirect()->back();
-}
-
-    
-
 
     public function updateInformation()
     {
@@ -111,11 +107,8 @@ private function getBackupFiles(): array
             'city' => $this->request->getPost('city'),
             'region' => $this->request->getPost('region'),
             'postal' => $this->request->getPost('postal'),
-        
         ];
         model(UserModel::class)->update($user->id, $data);
         return redirect()->back()->with('message', 'Information updated successfully');
     }
-}
-
 }
