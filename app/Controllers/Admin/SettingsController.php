@@ -2,11 +2,8 @@
 
 namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
-<<<<<<< HEAD
-=======
 use CodeIgniter\Shield\Model\UserIdentityModel;
 
->>>>>>> new-feature
 class SettingsController extends BaseController
 {
     protected $helpers = ['form', 'file'];
@@ -20,13 +17,10 @@ class SettingsController extends BaseController
         ];
         return view('pages/admin/settings', $data);
     }
-<<<<<<< HEAD
 
    public function backup()
 
-=======
     public function backup()
->>>>>>> new-feature
     {
         helper('filesystem');
         $db = \Config\Database::connect();
@@ -44,7 +38,6 @@ class SettingsController extends BaseController
         return $this->response->download($path . $filename . '.sql', null);
     }
 
-<<<<<<< HEAD
 private function getBackupFiles(): array
 {
     helper('filesystem');
@@ -62,7 +55,6 @@ private function getBackupFiles(): array
     }
 }
     return $fileData;
-=======
     public function updatePassword()
 {
     $model = model(UserIdentityModel::class);
@@ -124,7 +116,6 @@ private function getBackupFiles(): array
         model(UserModel::class)->update($user->id, $data);
         return redirect()->back()->with('message', 'Information updated successfully');
     }
->>>>>>> new-feature
 }
 
 }
