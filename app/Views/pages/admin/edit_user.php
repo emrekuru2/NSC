@@ -49,13 +49,16 @@
                         <span class="input-group-text w-25" id="roles">User Role</span>
                         <select class="form-select" aria-label="roles" name="role">
                             <option selected>Select a role</option>
+                            <?php if (isset($role)) : ?>
                             <?php foreach ($roles as $role) : ?>
+                                
                                 <?php if ($role->permission == $user->role) : ?>
                                     <option value="<?= esc($role->permission) ?>" selected><?= esc($role->permission) ?></option>
                                 <?php else : ?>
                                     <option value="<?= esc($role->permission) ?>"><?= esc($role->permission) ?></option>
                                 <?php endif ?>
                             <?php endforeach ?>
+                            <?php endif ?>
                         </select>
                     </div>
                     <div class="input-group mb-3">

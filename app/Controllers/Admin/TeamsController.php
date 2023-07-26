@@ -6,18 +6,27 @@ use App\Controllers\BaseController;
 use App\Models\ClubModel;
 use App\Models\TeamModel;
 
+
 use App\Models\UserTypes\TeamUserModel;
+use App\Models\UserModel;
 
 class TeamsController extends BaseController 
 {
     protected $teamModel;
     protected $clubModel;
+
+    protected $teamUserModel;
+    protected $userModel;
     protected $helpers = ['image', 'html', 'form', 'file'];
 
     public function __construct() 
     {
         $this->teamModel = model(TeamModel::class);
-        $this->clubModel = model(ClubModel::class); 
+        $this->clubModel = model(ClubModel::class);
+        $this->teamUserModel = model(TeamUserModel::class);
+        $this->userModel = model(UserModel::class);
+
+
     }
 
     public function index()
@@ -25,7 +34,9 @@ class TeamsController extends BaseController
         $data = [
             'title'       => 'Teams',
             'teams'       => $this->teamModel->findAll(),
-            'clubs'       => $this->clubModel->findAll()
+            'clubs'       => $this->clubModel->findAll(),
+            'teamUsers'    => $this->teamUserModel->findAll(),
+            'users'        => $this->userModel->findAll()
         ];
         
 
@@ -40,7 +51,9 @@ class TeamsController extends BaseController
             'title'       => 'Teams',
             'teams'       => $this->teamModel->findAll(),
             'currentTeam' => $this->teamModel->where('name', $param)->first(),
-            'clubs'       => $this->clubModel->findAll()
+            'clubs'       => $this->clubModel->findAll(),
+            'teamUsers'    => $this->teamUserModel->findAll(),
+            'users'        => $this->userModel->findAll()
         ];
 
         return view('pages/admin/teams', $data);
