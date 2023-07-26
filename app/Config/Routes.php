@@ -122,10 +122,7 @@ $routes->group('admin', ['filter' => 'adminfilter', 'namespace' => 'App\Controll
         $routes->post('create', 'CommitteesController::create',                    ['as' => 'admin_create_committee']);
         $routes->post('addMember', 'CommitteesController::addMember',              ['as' => 'admin_committee_add_members']);
         $routes->get('removeMember/(:any)', 'CommitteesController::removeMember/$1', ['as' => 'admin_committee_remove_members']);
-        // $routes->post('create', 'CommitteesController::createCommittee',      ['as' => 'admin_create_committee']);
         $routes->post('edit', 'CommitteesController::editCommittee',          ['as' => 'admin_edit_committee']);
-        // $routes->post('update/(:num)', 'CommitteesController::updateCommittee/$1', ['as' => 'admin_update_committee']);
-        // $routes->post('delete', 'CommitteesController::delete',      ['as' => 'admin_delete_committee']);
         $routes->get('delete/(:any)', 'CommitteesController::delete/$1',           ['as' => 'admin_delete_committee']);
     });
     
