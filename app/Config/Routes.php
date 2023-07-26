@@ -118,8 +118,10 @@ $routes->group('admin', ['filter' => 'adminfilter', 'namespace' => 'App\Controll
     $routes->group('committees', static function ($routes) {
         $routes->get('/', 'CommitteesController::index',                      ['as' => 'admin_committees']);
         $routes->get('read/(:any)', 'CommitteesController::read/$1',               ['as' => 'admin_read_committee']);
-        $routes->post('update', 'CommitteesController::update',                    ['as' => 'admin_update_committee']);
+        $routes->post('update/(:any)', 'CommitteesController::update/$1',                    ['as' => 'admin_update_committee']);
         $routes->post('create', 'CommitteesController::create',                    ['as' => 'admin_create_committee']);
+        $routes->post('addMember', 'CommitteesController::addMember',              ['as' => 'admin_committee_add_members']);
+        $routes->get('removeMember/(:any)', 'CommitteesController::removeMember/$1', ['as' => 'admin_committee_remove_members']);
         // $routes->post('create', 'CommitteesController::createCommittee',      ['as' => 'admin_create_committee']);
         $routes->post('edit', 'CommitteesController::editCommittee',          ['as' => 'admin_edit_committee']);
         // $routes->post('update/(:num)', 'CommitteesController::updateCommittee/$1', ['as' => 'admin_update_committee']);
