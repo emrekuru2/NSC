@@ -1,3 +1,28 @@
+## Project structure
+```
+.
+└── cricket-nova-scotia/
+    ├── app/                Main application. Source files are here!
+    │   ├── Cells/          Modular, reusable components with business logic.
+    │   ├── Config/         Stores the configuration files.
+    │   ├── Controllers/    Controllers determine the program flow.
+    │   ├── Database/       Stores the database migrations and seeds files.
+    │   ├── Filters/        Stores filter classes that can run before and after controller.
+    │   ├── Helpers/        Helpers store collections of standalone functions.
+    │   ├── Language/       Multiple language support reads the language strings from here.
+    │   ├── Interfaces/     Helps mantain cleaner and encapsulated code.
+    │   ├── Models/         Models work with the database to represent the business entities.
+    │   └── Views/          Views make up the HTML that is displayed to the client. 
+    ├── public/             Where the web server serves the application. CSS, JS, and images go here.
+    ├── vendor/             Project dependencies are stored here. CodeIgniter4 core files are here as well.
+    ├── writable/           Application cache and upload data is stored here.
+    ├── env                 A template file used for setting up environment variables.
+    ├── composer.json       Composer dependency list. Dev list will not be included.
+    ├── LICENSE             MIT License
+    ├── preload.php         Configurations for preoloading project files.
+    └── spark               Spark CLI class.
+```
+
 # CNS Setup Instructions
 This tutorial will guide the users, starting from the requirements of the project to the full production environment setup.
 
