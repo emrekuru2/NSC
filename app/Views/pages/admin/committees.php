@@ -2,8 +2,6 @@
 
 <?= $this->section('adminContent') ?>
 
-
-
 <div class="row g-4">
     <!-- All Committees -->
     <div class="col-lg-5">

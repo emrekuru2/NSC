@@ -28,4 +28,12 @@ class CommitteeUser extends Entity
         return $this->user->getFullName();
     }
 
+    public function getFullName() 
+    {
+        $user = model(UserModel::class)->find($this->userID);
+        return $user->getFullName();
+
+    }
+
+
 }

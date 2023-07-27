@@ -47,10 +47,9 @@ class Committee extends Entity
         return $nonMembers;
     }
 
-    public function getMembers(): array
-    {
-        $this->populateMembers();
-
-        return $this->members;
+    public function getMembers() {
+        $members = model(CommitteeUserModel::class)->where('committeeID', $this->id)->findAll();
+        return $members;
     }
+
 }
