@@ -12,6 +12,7 @@ class ModalCell extends Cell
     public $currentClub;
     public $selection;
     public $program;
+    public $currentTeam;
     public $committee;
     protected string $view;
 
@@ -29,8 +30,11 @@ class ModalCell extends Cell
                 return 'views/modals/clubModal';
             case 'dev':
                 return 'views/modals/devModal';
+            case 'teamUser':
+                return 'views/modals/teamUserModal';
             case  'committee':
                 return 'views/modals/committeeModal';
+
         }
     }
 }
