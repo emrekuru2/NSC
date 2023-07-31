@@ -51,7 +51,41 @@
         </div>
       </div>
     </div>
+
+    <div class="card shadow">
+    <div class>
+            <div class="mt-1">
+                <div class="card-body">
+                    <form method="get" action="<?= current_url() ?>">
+                        <div class="form-group">
+                            <label for="order_by">Filter:</label>
+                            <select class="form-control" name="order_by" id="order_by">
+                                <option value="latest" <?= ($orderBy == 'latest') ? 'selected' : '' ?>>Latest News</option>
+                                <option value="oldest" <?= ($orderBy == 'oldest') ? 'selected' : '' ?>>Oldest News</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="start_date">Start Date:</label>
+                            <input type="date" class="form-control" name="start_date" id="start_date" value="<?= isset($startDate) ? esc($startDate) : '' ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="end_date">End Date:</label>
+                            <input type="date" class="form-control" name="end_date" id="end_date" value="<?= isset($endDate) ? esc($endDate) : '' ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="search_title">Search by Title:</label>
+                            <input type="text" class="form-control" name="search_title" id="search_title" value="<?= isset($searchTitle) ? esc($searchTitle) : '' ?>">
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-2">Apply Filter</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
   </div>
+
+  
+
 </div>
 
 <?= $this->endSection() ?>

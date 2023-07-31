@@ -18,7 +18,6 @@ class NewsController extends BaseController
 
         $startDate = $this->request->getGet('start_date');
         $endDate = $this->request->getGet('end_date');
-        $postedBy = $this->request->getGet('posted_by');
         $searchTitle = $this->request->getGet('search_title');
 
         $data = [
@@ -28,7 +27,6 @@ class NewsController extends BaseController
             'orderBy'     => $orderBy,
             'startDate'   => $startDate,
             'endDate'     => $endDate,
-            'postedBy'    => $postedBy,
             'searchTitle' => $searchTitle,
             'userList'    => $userModel->findAll(),
         ];
