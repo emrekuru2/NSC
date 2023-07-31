@@ -91,7 +91,9 @@ class SettingsController extends BaseController
 
         $model->whereIn('user_id', [auth()->user()->id])->set(['secret2' => password_hash($newPassword, PASSWORD_DEFAULT)])->update();
 
-        session()->setFlashdata('message', 'Password updated successfully');
+        session()->setFlashdata('toast', ['content' => 'Password changed successfully!', 'type' => 'success']);
+    
+        // Redirect to the settings page or wherever you want to show the toast
         return redirect()->back();
     }
 
@@ -108,7 +110,7 @@ class SettingsController extends BaseController
             'region' => $this->request->getPost('region'),
             'postal' => $this->request->getPost('postal'),
         ];
-        model(UserModel::class)->update($user->id, $data);
-        return redirect()->back()->with('message', 'Information updated successfully');
+        session()->setFlashdata('toast', ['content' => 'Information updated successfully', 'type' => 'success']);
+        return redirect()->back();
     }
 }

@@ -2,7 +2,18 @@
 
 <?= $this->section('adminContent') ?>
 
-
+<?php if (session()->getFlashdata('toast')) : 
+        $toast = session()->getFlashdata('toast'); ?>
+        <div id="emailToast" class="toast bottom-0 end-0 m-2 position-fixed text-bg-<?= $toast['type'] ?> " role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <?= $toast['content'] ?>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+        <script type='text/javascript' src="/assets/js/toast.js"></script>
+    <?php endif ?>
 <div class="card shadow">
   <div class="card-header p-0">
     <ul class="nav nav-tabs" id="settingsTab" role="tablist">
