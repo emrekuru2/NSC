@@ -9,12 +9,28 @@ class NewsController extends BaseController
     public function index()
     {
         $newsModel = new \App\Models\NewsModel();
+        $newsModel1 = model(NewsModel::class);
+        $userModel = model(userModel::class);
         $news = $newsModel->getNews()->findAll();
+
+        $orderBy = $this->request->getGet('order_by');
+        $orderBy = in_array($orderBy, ['latest', 'oldest']) ? $orderBy : 'latest';
+
+        $startDate = $this->request->getGet('start_date');
+        $endDate = $this->request->getGet('end_date');
+        $postedBy = $this->request->getGet('posted_by');
+        $searchTitle = $this->request->getGet('search_title');
 
         $data = [
             'title' => 'News',
-            'news'  => $news,
-            'editMode' => false
+            'news'  => $newsModel1->getFilteredNews($orderBy, $startDate, $endDate, $postedBy, $searchTitle)->paginate(5),
+            'editMode' => false,
+            'orderBy' => $orderBy,
+            'startDate' => $startDate,
+            'endDate' => $endDate,
+            'postedBy' => $postedBy,
+            'searchTitle' => $searchTitle,
+            'userList' => $userModel->findAll(),
         ];
 
         return view('pages/admin/news', $data);
