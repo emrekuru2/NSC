@@ -4,14 +4,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class competitionTypeModel extends Model
+class CompetitionTypeModel extends Model
 {
     protected $table         = 'nsca_competition_types';
     protected $primaryKey    = 'id';
+    protected $returnType    = \App\Entities\CompetitionType::class;
+    protected $protectFields = true;
     protected $allowedFields = ['name', 'description'];
 
-    public function getAllClubs()
-    {
-        return $this->findAll();
-    }
+    // Dates
+    protected $useTimestamps = false;
+    protected $dateFormat    = 'datetime';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
 }

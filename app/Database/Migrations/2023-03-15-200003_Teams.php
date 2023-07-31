@@ -28,7 +28,7 @@ class Teams extends Migration
         $this->forge->addField([
             'id'            => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
             'userID'        => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
-            'teamID'        => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
+            'teamID'        => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'null' => true],
             'isTeamCaptain' => ['type' => 'tinyint', 'constraint' => 1, 'null' => 0, 'default' => 0],
             'isViceCaptain' => ['type' => 'tinyint', 'constraint' => 1, 'null' => 0, 'default' => 0],
             'created_at'    => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],

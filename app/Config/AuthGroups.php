@@ -32,7 +32,7 @@ class AuthGroups extends ShieldAuthGroups
         ],
         'manager' => [
             'title'       => 'Manager',
-            'description' => 'Minimal Access + Can see `My club`, `Manage team` and `Join A Team`',
+            'description' => 'Full Access (adding, editing, and deleting news, clubs, alert, subcommittees, development programs, user roles, team application and team list) through admin dashboard ',
         ],
         'player' => [
             'title'       => 'Player',
@@ -81,6 +81,7 @@ class AuthGroups extends ShieldAuthGroups
         'users.delete'      => 'Can delete non-admin users',
         // Locations
         'admin.access'         => 'Can access the `Admin Panel` page',
+        'manager.access'       => 'Can access the `Manager Panel` page',
         'myClub.access'        => 'Can access `My Club` page',
         'myTeam.access'        => 'Can access `My Team` page',
         'manageTeam.access'    => 'Can access `Manage Team` page',
@@ -105,16 +106,23 @@ class AuthGroups extends ShieldAuthGroups
             'users.*',
             'profile.*',
             'playerProfile.*',
-
         ],
         'manager' => [
-            'myClub.access',
-            'manageTeam.access',
-            'teams.accept',
-            'teams.reject',
-            'teams.add',
-            'teams.remove',
-            'profile.access',
+            'manager.*',
+            'clubs.*',
+            'committees.*',
+            'devs.*',
+            'teams.*',
+            'users.*',
+            'profile.*',
+            'playerProfile.*',
+            // 'myClub.access',
+            // 'manageTeam.access',
+            // 'teams.accept',
+            // 'teams.reject',
+            // 'teams.add',
+            // 'teams.remove',
+            // 'profile.access',
         ],
         'player' => [
             'teams.join',

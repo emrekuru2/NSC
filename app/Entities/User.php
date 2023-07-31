@@ -10,5 +10,7 @@ class User extends ShieldUser
     protected $dates   = ['created_at', 'updated_at'];
     protected $casts   = [];
 
-
+    public function getFullName(): string {
+        return $this->first_name . ' ' . $this->last_name;
+    }
 }

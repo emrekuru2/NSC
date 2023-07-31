@@ -18,7 +18,7 @@ class DevelopmentController extends BaseController
             'programs' => $model->orderBy('id', 'DESC')->paginate(10),
             'devTypes' => $devType->findAll(),
             'pager'    => $model->pager,
-            'title'    => 'Development',
+            'title'    => 'Developments',
         ];
 
         return view('pages/admin/development', $data);
@@ -44,7 +44,7 @@ class DevelopmentController extends BaseController
         }
         $dev->fill($data);
 
-        if (model(DevModel::class)->save($dev)) {
+        if (model(DevModel::class)->save($dev)) { 
             $data = [
                 'type'    => 'success',
                 'content' => 'Development program created successfully',
@@ -64,6 +64,22 @@ class DevelopmentController extends BaseController
     public function createProgType()
     {
         $data    = $this->request->getPost();
+        $validationRules = [
+            'name' => 'required',
+            'min_age' => 'required',
+            'max_age' => 'required',
+            // Add validation rules for other fields that should be required
+        ];
+        
+        // Validate the input data
+        if (!$this->validate($validationRules)) {
+            $data = [
+                'type' => 'danger',
+                'content' => 'Please fill in all the required fields',
+            ];
+            return redirect()->back()->with('alert', $data);
+        }
+
         $devType = new \App\Entities\DevType();
         // combine values of days array into a string
 

@@ -3,6 +3,7 @@
 namespace App\Controllers\Main;
 
 use App\Controllers\BaseController;
+use App\Models\TeamModel;
 
 class TeamsController extends BaseController
 {
@@ -15,6 +16,14 @@ class TeamsController extends BaseController
             'title' => 'Teams',
         ];
 
-        return view('pages/teams', $data);
+        return view('pages/main/teams', $data);
     }
+    public function players($teamID)
+    {
+        $model = new TeamModel();
+        $players = $model->getPlayersByTeamID($teamID);
+
+        return $this->response->setJSON($players);
+    }
+
 }

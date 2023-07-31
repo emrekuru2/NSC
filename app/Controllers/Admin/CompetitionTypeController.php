@@ -3,77 +3,71 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use App\Models\competitionTypeModel;
+use App\Entities\CompetitionType;
+use App\Models\CompetitionTypeModel;
+use App\Interfaces\CRUD;
 
-class CompetitionTypeController extends BaseController
+class CompetitionTypeController extends BaseController implements CRUD
 {
+    protected $compTypeModel;
+    protected $helpers = ['html', 'form', 'text'];
+
+    public function __construct()
+    {
+        $this->compTypeModel = new CompetitionTypeModel();
+    }
+
     public function index()
     {
-        $competitionType = new competitionTypeModel();
-
         $data = [
-            'competitionType' => $competitionType->findAll(),
-            'title'           => 'Competitions Type',
+            'title' => 'Competition Types',
+            'types' => $this->compTypeModel->findAll()
         ];
 
-        return view('pages/admin/competitionType', $data);
+        return view('pages/admin/competitionTypes', $data);
     }
 
-    public function store()
+    public function read(string $param)
     {
-        $competitionTypeModel = new competitionTypeModel();
-        $data                 = [
-            'name'        => $this->request->getPost('name'),
-            'description' => $this->request->getPost('description'),
-        ];
-        $competitionTypeModel->save($data);
-        header('Refresh:0');
-
-        // return redirect('/admin/competitionType');
-    }
-
-    public function edit($id = null)
-    {
-        $competitionType = new competitionTypeModel();
-
         $data = [
-            'competitionType' => $competitionType->find($id),
-
-            'title' => 'Competitions Type',
+            'title'       => 'Competition Types',
+            'types'       => $this->compTypeModel->findAll(),
+            'currentType' => $this->compTypeModel->where('name', $param)->first(),
         ];
 
-        return view('pages/admin/competitionTypeEdit', $data);
+        return view('pages/admin/competitionTypes', $data);
     }
 
-    public function check($id = null)
+    public function update(int $id)
     {
-        $competitionType = new competitionTypeModel();
+        $data = $this->request->getPost();
 
-        $data = [
-            'competitionType' => $competitionType->find($id),
-
-            'title' => 'Competitions Type'
-        ];
-        return view('pages/admin/competitionTypeCheck', $data);
-    }
-    
-    public function update($id = null)
-    {
-        $competitionType = new competitionTypeModel();
-        $data            = [
-            'name'        => $this->request->getPost('name'),
-            'description' => $this->request->getPost('description'),
-        ];
-        $competitionType->update($id, $data);
-
-        return redirect()->to(base_url('admin/CompetitionType'))->with('status', 'successes');
+        return ($this->compTypeModel->update($id, $data))
+            ? toast('success', lang('Admin.competition_type.update.success'))
+            : toast('danger', lang('Admin.competition_type.update.error'));
     }
 
-    public function delete($id = null)
+    public function create()
     {
-        $competitionType = new competitionTypeModel();
-        $competitionType->delete($id);
+        $data = $this->request->getPost();
+        $newType = new CompetitionType();
+        $newType->fill($data);
 
-        return redirect()->to(base_url('admin/CompetitionType'))->with('status', 'successes');
+        return ($this->compTypeModel->save($newType))
+            ? toast('success', lang('Admin.competition_type.create.success'))
+            : toast('danger',  lang('Admin.competition_type.create.error'));
+    }
+
+    public function delete(int $id)
+    {
+        $currentType = $this->compTypeModel->find($id);
+
+        if (!empty($currentType->getCompetitions())) {
+            return toast('danger', lang('Admin.competition_type.foreignKey'));
+        }
+
+        return ($this->compTypeModel->delete($id))
+            ? toast('success', lang('Admin.competition_type.delete.success'))
+            : toast('danger',  lang('Admin.competition_type.delete.error'));
     }
 }

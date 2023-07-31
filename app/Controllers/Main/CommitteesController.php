@@ -15,6 +15,7 @@ class CommitteesController extends BaseController
             'title'      => 'Committees',
         ];
 
-        return view('pages/committees', $data);
+        return view('pages/main/committees', $data);
     }
+    
 }

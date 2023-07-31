@@ -3,90 +3,70 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Entities\Competition;
+use App\Interfaces\CRUD;
 use App\Models\CompetitionModel;
-use App\Models\competitionTypeModel;
+use App\Models\CompetitionTypeModel;
 
-class CompetitionsController extends BaseController
+class CompetitionsController extends BaseController implements CRUD
 {
+    protected $compModel;
+    protected $compTypeModel;
+    protected $helpers = ['html', 'form', 'text'];
+
+    public function __construct()
+    {
+        $this->compModel     = new CompetitionModel();
+        $this->compTypeModel = new CompetitionTypeModel();
+    }
+
     public function index()
     {
-        $competition = new CompetitionModel();
-        $competitionType = new competitionTypeModel();
-
         $data = [
-            'competition' => $competition->findAll(),
-            'competitionType' => $competitionType->findAll(),
-            'title'       => 'Competitions',
+            'title'        => 'Competitions',
+            'competitions' => $this->compModel->findAll(),
+            'compTypes'    => $this->compTypeModel->findAll(),
         ];
 
         return view('pages/admin/competitions', $data);
     }
-    public function store(){
-        $competitionModel = model(CompetitionModel::class);
-        
+
+    public function read(string $param)
+    {
         $data = [
-            'typeID' => $this->request->getPost('competitionType'),
-            'name' => $this->request->getPost('name'),
-            'description' => $this->request->getPost('description'),
-            'yearRunning' => $this->request->getPost('yearRunning'),
+            'title'        => 'Competitions',
+            'competitions' => $this->compModel->findAll(),
+            'compTypes'    => $this->compTypeModel->findAll(),
+            'currentComp'  => $this->compModel->where('name', $param)->first(),
         ];
 
-        $competition = new \App\Entities\Competition();
+        return view('pages/admin/competitions', $data);
+    }
+
+    public function update(int $id)
+    {
+        $data = $this->request->getPost();
+
+        return ($this->compModel->update($id, $data))
+            ? toast('success', lang('Admin.competition.update.success'))
+            : toast('danger', lang('Admin.competition.update.error'));
+    }
+
+    public function create()
+    {
+        $data = $this->request->getPost();
+        $competition = new Competition();
         $competition->fill($data);
 
-        $competitionModel->save($competition);
-        header("Refresh:0");
-
-        // return redirect('/admin/competitionType');
+        return ($this->compModel->save($competition))
+            ? toast('success', lang('Admin.competition.create.succes'))
+            : toast('danger',  lang('Admin.competition.create.error'));
     }
 
-    public function edit($id = null)
+    public function delete(int $id)
     {
-        $competitionModel = new CompetitionModel();
-        $competitionTypeModel = new competitionTypeModel();
-
-        $data = [
-            'competition' => $competitionModel->find($id),
-            'competitionType' => $competitionTypeModel->findAll(),
-            'title' => 'Competitions',
-        ];
-
-        return view('pages/admin/competitionsEdit', $data);
-    }
-
-    public function check($id = null)
-    {
-        $competitionModel = new CompetitionModel();
-        $competitionTypeModel = new competitionTypeModel();
-
-        $data = [
-            'competition' => $competitionModel->find($id),
-            'competitionType' => $competitionTypeModel->findAll(),
-            'title' => 'Competitions',
-        ];
-
-        return view('pages/admin/competitionCheck', $data);
-    }
-
-    public function update($id = null)
-    {
-        $competitionModel = new CompetitionModel();
-        $data = [
-            'typeID' => $this->request->getPost('competitionType'),
-            'name' => $this->request->getPost('name'),
-            'description' => $this->request->getPost('description'),
-            'yearRunning' => $this->request->getPost('yearRunning'),
-        ];
-        $competitionModel->update($id, $data);
-
-        return redirect()->to(base_url('admin/competitions'))->with('status', 'successes');
-    }
-
-    public function delete($id = null)
-    {
-        $competitionModel = new CompetitionModel();
-        $competitionModel->delete($id);
-
-        return redirect()->to(base_url('admin/competitions'))->with('status', 'successes');
+        return ($this->compModel->delete($id))
+            ? toast('success', lang('Admin.competition.delete.success'))
+            : toast('danger',  lang('Admin.competition.delete.error'));
     }
 }

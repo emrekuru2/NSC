@@ -3,30 +3,43 @@
 namespace App\Controllers\Main;
 
 use App\Controllers\BaseController;
-
 use App\Models\NewsModel;
+use App\Models\UserModel;
 
 class NewsController extends BaseController
 {
     public function index()
     {
         $model = model(NewsModel::class);
+        $userModel = model(UserModel::class);
+
+        $orderBy = $this->request->getGet('order_by');
+        $orderBy = in_array($orderBy, ['latest', 'oldest']) ? $orderBy : 'latest';
+
+        $startDate = $this->request->getGet('start_date');
+        $endDate = $this->request->getGet('end_date');
+        $searchTitle = $this->request->getGet('search_title');
 
         $data = [
-            'news'  => $model->getNews()->paginate(5),
-            'pager' => $model->pager,
-            'title' => 'News',
+            'news'        => $model->getFilteredNews($orderBy, $startDate, $endDate, $postedBy, $searchTitle)->paginate(5),
+            'pager'       => $model->pager,
+            'title'       => 'News',
+            'orderBy'     => $orderBy,
+            'startDate'   => $startDate,
+            'endDate'     => $endDate,
+            'searchTitle' => $searchTitle,
+            'userList'    => $userModel->findAll(),
         ];
 
-        return view('pages/news', $data);
+        return view('pages/main/news', $data);
     }
 
     public function getNewsByID(int $id)
     {
-        $newsModel     = model(NewsModel::class);
+        $newsModel = model(NewsModel::class);
         $commentsModel = model(CommentModel::class);
 
-        $news     = $newsModel->getNewsByID($id);
+        $news = $newsModel->getNewsByID($id);
         $comments = $commentsModel->getComments($id);
 
         $data = [
@@ -36,6 +49,6 @@ class NewsController extends BaseController
             'pager'    => $comments->pager,
         ];
 
-        return view('pages/news_details', $data);
+        return view('pages/main/news_details', $data);
     }
 }

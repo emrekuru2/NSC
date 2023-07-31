@@ -36,12 +36,16 @@ function clearList() {
 }
 
 function listVisibility(state) {
-    const listClass = document.getElementById("addressList").classList;
+    const addressList = document.getElementById("addressList");
 
-    if (state) {
-        listClass.remove("invisible");
-    } else {
-        listClass.add("invisible");
+    if (addressList) {
+        const listClass = addressList.classList;
+
+        if (state) {
+            listClass.remove("invisible");
+        } else {
+            listClass.add("invisible");
+        }
     }
 }
 
@@ -63,7 +67,7 @@ document.addEventListener("click", function (e) {
     }
 });
 
-input.addEventListener("input", function (e) {
+input.addEventListener("keydown", function (e) {
     const currentValue = this.value;
 
     if (currentTimeout) {
