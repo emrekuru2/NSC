@@ -44,13 +44,18 @@ class TeamsController extends BaseController
     }
 
 
-    public function read(string $param)
+    public function read(string|int $param)
     {
+        if (is_string($param)) {
+            $currentTeam = $this->teamModel->where('name', $param)->first();
+        } else {
+            $currentTeam = $this->teamModel->find($param);
+        }
        
         $data = [
             'title'       => 'Teams',
             'teams'       => $this->teamModel->findAll(),
-            'currentTeam' => $this->teamModel->where('name', $param)->first(),
+            'currentTeam' => $currentTeam,
             'clubs'       => $this->clubModel->findAll(),
             'teamUsers'    => $this->teamUserModel->findAll(),
             'users'        => $this->userModel->findAll()

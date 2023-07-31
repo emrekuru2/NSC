@@ -147,4 +147,23 @@ class UsersController extends BaseController
 
         return redirect()->back();
     }
+
+    public function read(string $name)
+    {
+        $firstname = explode(' ', $name)[0];
+        $user      = model(UserModel::class)->where('first_name', $firstname)->first();
+
+        if ($user === null) {
+            return redirect()->back();
+        }
+
+        $data = [
+            'title' => 'User Editing',
+            'user'  => $user,
+            'teams' => model(TeamModel::class)->findAll(),
+            'clubs' => model(ClubModel::class)->findAll(),
+        ];
+
+        return view('pages/admin/edit_user', $data);
+    }
 }

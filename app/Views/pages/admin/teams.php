@@ -83,8 +83,11 @@
                         <div class="col text-end">
                             <?= view_cell('SearchCell', ['data' => $users, 'fields' => ['first_name'], 'type' => 'users', 'styling' => 'w-100 m-0']) ?>
                         </div>
-                        <div class="col-1 p-0"><button type="button" class="btn btn-primary w-100" data-bs-toggle="modal"
-                                data-bs-target=<?= "#add" . "Modal" ?>><i class="fa-solid fa-plus"></i></button></div>
+                        <div class="col-1 p-0">
+                            <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal"
+                                data-bs-target=<?= "#add" .'users'.'Modal'?>><i class="fa-solid fa-plus"></i></button>
+                                <?= view_cell('ModalCell', ['type' => 'teamUser', 'action' => url_to('admin_team_add_member'), 'selection' => 'users', 'id' => 'add' . 'users' . 'Modal', 'currentTeam' => $currentTeam]) ?>
+                               </div>
                     </div>
                     <div class="card-body p-0">
                         <!-- <?php if (empty($teamUsers)): ?>
