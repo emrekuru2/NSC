@@ -5,9 +5,10 @@
 <div class="row">
     <div class="col-12 col-lg-5">
         <div class="card shadow">
-            <div class="card-header">User Details</div>
-            <div class="card-body d-flex flex-column align-items-center">
-                <img class="border user-image" src="<?= base_url(esc($user->image)) ?>">
+            <div class="card-header ">User Details</div>
+            <div class="card-body d-flex flex-column align-items-center ">
+            <img src="<?= base_url(auth()->user()->image) ?>"   class="bg-dark" alt="profile" width="100px" height="100px">
+
                 <h4 class="mt-3"> <?= esc($user->first_name) . ' ' . esc($user->last_name) ?></h4>
                 <hr class="w-100">
                 <ul class="list-group w-100">
@@ -48,13 +49,16 @@
                         <span class="input-group-text w-25" id="roles">User Role</span>
                         <select class="form-select" aria-label="roles" name="role">
                             <option selected>Select a role</option>
+                            <?php if (isset($role)) : ?>
                             <?php foreach ($roles as $role) : ?>
+                                
                                 <?php if ($role->permission == $user->role) : ?>
                                     <option value="<?= esc($role->permission) ?>" selected><?= esc($role->permission) ?></option>
                                 <?php else : ?>
                                     <option value="<?= esc($role->permission) ?>"><?= esc($role->permission) ?></option>
                                 <?php endif ?>
                             <?php endforeach ?>
+                            <?php endif ?>
                         </select>
                     </div>
                     <div class="input-group mb-3">

@@ -28,11 +28,9 @@
 
 <body class="bg-light">
     <main class="d-flex">
-        <?php if (session()->getFlashdata('alert') !== null) : ?>
-            <?= view_cell('\App\Libraries\Alerts::toast', ['type' => session()->getFlashdata('alert')['type'], 'content' => session()->getFlashdata('alert')['content']]) ?>
-        <?php endif; ?>
+        <?= view_cell('ToastCell') ?>
         <aside class="col-12 col-lg-2 position-fixed nav-z">
-            <?= view_cell('\App\Libraries\Navigations::sidebar') ?>
+            <?= view_cell('SidebarCell', ['title' => $title]) ?>
         </aside>
         <section class="col-12 col-lg-10 offset-lg-2 p-4 custom-margin">
             <div class="d-none d-lg-block">
@@ -42,7 +40,7 @@
             <?= $this->renderSection('adminContent') ?>
         </section>
     </main>
-    <?= view_cell('\App\Libraries\Alerts::modal', ['content' => 'Are you sure you want to log out?', 'id' => 'logout', "action" => url_to('logout')]) ?>
+    <?= view_cell('ModalCell', ['type' => 'prompt', 'content' => 'Are you sure you want to log out?', 'id' => 'logout', "action" => url_to('logout')]) ?>
 </body>
 
 </html>

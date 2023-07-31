@@ -1,4 +1,4 @@
-
+<!-- 
 <?= $this->extend('layouts/admin') ?>
 
 <?= $this->section('adminContent') ?> 
@@ -25,4 +25,4 @@
         </div>
     </div>
 </div>
-<?= $this->endSection() ?>  
+<?= $this->endSection() ?>   -->

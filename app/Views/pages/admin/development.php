@@ -13,7 +13,7 @@
                 <div class="card shadow">
                     <div class="card-header">All Programs</div>
                     <div class="card-body">
-                        <?= view_cell('\App\Libraries\Contents::search', ['array' => $programs, 'fields' => ['name'], 'type' => 'developments']) ?>
+                        <?= view_cell('SearchCell', ['data' => $programs, 'fields' => ['name'], 'type' => 'developments']) ?>
 
                         <table class="table table-striped">
 

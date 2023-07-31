@@ -86,18 +86,18 @@ class UsersController extends BaseController
         }
 
         // get users role
-        $role = model(RoleModel::class)->where('user_id', $user->id)->first();
+        $role = model(UserModel::class)->find($user->id);
         if ($role != null){
             $user->role = $role->permission;
         } else {
             $user->role = 'none';
         }
         // get roles
-        $roles = model(RoleModel::class)->distinct()->findAll();
+       
         $data = [
             'title' => 'User Editing',
             'user'  => $user,
-            'roles' => $roles,
+            'roles' => null,
             'teams' => model(TeamModel::class)->findAll(),
             'clubs' => model(ClubModel::class)->findAll(),
         ];
@@ -146,5 +146,24 @@ class UsersController extends BaseController
         }
 
         return redirect()->back();
+    }
+
+    public function read(string $name)
+    {
+        $firstname = explode(' ', $name)[0];
+        $user      = model(UserModel::class)->where('first_name', $firstname)->first();
+
+        if ($user === null) {
+            return redirect()->back();
+        }
+
+        $data = [
+            'title' => 'User Editing',
+            'user'  => $user,
+            'teams' => model(TeamModel::class)->findAll(),
+            'clubs' => model(ClubModel::class)->findAll(),
+        ];
+
+        return view('pages/admin/edit_user', $data);
     }
 }
