@@ -15,6 +15,8 @@ class Committees extends Migration
             'name'        => ['type' => 'varchar', 'constraint' => 64, 'null' => true],
             'description' => ['type' => 'varchar', 'constraint' => 512, 'null' => true],
             'years'       => ['type' => 'varchar', 'constraint' => 32, 'null' => false],
+            'start_date'  => ['type' => 'year','null'=>false],
+            'end_date'    => ['type' => 'year','null'=>true],
             'image'       => ['type' => 'varchar', 'constraint' => 120, 'null' => false, 'default' => 'assets/images/Commitee/default.png'],
             'created_at'  => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],
             'updated_at'  => ['type' => 'datetime', 'null' => false, 'default' => Time::now()],

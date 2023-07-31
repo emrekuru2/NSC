@@ -1,4 +1,4 @@
-<?= $this->extend('layouts/admin') ?>
+<!-- <?= $this->extend('layouts/admin') ?>
 
 <?= $this->section('adminContent') ?>
 <div class="col-lg-8">
@@ -23,4 +23,4 @@
         </div>
     </div>
 </div>
-<?= $this->endSection() ?>
+<?= $this->endSection() ?> -->

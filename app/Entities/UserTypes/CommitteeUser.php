@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entities\UserTypes;
-
+use CodeIgniter\Entities\User;
 use CodeIgniter\Entity\Entity;
 use App\Entities\User;
 class CommitteeUser extends Entity
