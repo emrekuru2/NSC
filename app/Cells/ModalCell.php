@@ -13,6 +13,7 @@ class ModalCell extends Cell
     public $selection;
     public $program;
     public $currentTeam;
+    public $committee;
     protected string $view;
 
     public function mount(?string $type)
@@ -31,6 +32,9 @@ class ModalCell extends Cell
                 return 'views/modals/devModal';
             case 'teamUser':
                 return 'views/modals/teamUserModal';
+            case  'committee':
+                return 'views/modals/committeeModal';
+
         }
     }
 }

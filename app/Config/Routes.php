@@ -118,11 +118,15 @@ $routes->group('admin', ['filter' => 'adminfilter', 'namespace' => 'App\Controll
 
     $routes->group('committees', static function ($routes) {
         $routes->get('/', 'CommitteesController::index',                      ['as' => 'admin_committees']);
-        $routes->post('create', 'CommitteesController::createCommittee',      ['as' => 'admin_create_committee']);
-        $routes->post('update', 'CommitteesController::modify',               ['as' => 'admin_update_committee']);
-        $routes->post('edit', 'CommitteesController::modifyCommittee',        ['as' => 'admin_edit_committee']);
-        $routes->post('delete', 'CommitteesController::deleteCommittee',      ['as' => 'admin_delete_committee']);
+        $routes->get('read/(:any)', 'CommitteesController::read/$1',               ['as' => 'admin_read_committee']);
+        $routes->post('update/(:any)', 'CommitteesController::update/$1',                    ['as' => 'admin_update_committee']);
+        $routes->post('create', 'CommitteesController::create',                    ['as' => 'admin_create_committee']);
+        $routes->post('addMember', 'CommitteesController::addMember',              ['as' => 'admin_committee_add_members']);
+        $routes->get('removeMember/(:any)', 'CommitteesController::removeMember/$1', ['as' => 'admin_committee_remove_members']);
+        $routes->post('edit', 'CommitteesController::editCommittee',          ['as' => 'admin_edit_committee']);
+        $routes->get('delete/(:any)', 'CommitteesController::delete/$1',           ['as' => 'admin_delete_committee']);
     });
+    
 
     $routes->group('developments', static function ($routes) {
         $routes->get('/', 'DevelopmentController::index',                     ['as' => 'admin_developments']);
@@ -163,7 +167,11 @@ $routes->group('admin', ['filter' => 'adminfilter', 'namespace' => 'App\Controll
     $routes->group('settings', static function ($routes) {
         $routes->get('/', 'SettingsController::index',                        ['as' => 'admin_settings']);
         $routes->get('backup', 'SettingsController::backup',                  ['as' => 'admin_settings_db_backup']);
+        // Additional routes for changing password and info
+        $routes->post('changePassword', 'SettingsController::updatePassword', ['as' => 'admin_change_password']);
+        $routes->post('updateInfo', 'SettingsController::updateInformation',       ['as' => 'admin_change_info']);
     });
+     
 });
 
 // Codeigniter's default auth routing

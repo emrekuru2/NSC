@@ -37,7 +37,7 @@ class ClubsController extends BaseController implements CRUD, Clubs
         return view('pages/admin/clubs', $data);
     }
 
-    public function read(string|int $param)
+    public function read(string $param)
     {
         if (is_string($param)) {
             $currentClub = $this->clubModel->where('name', $param)->first();
