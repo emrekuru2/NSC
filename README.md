@@ -77,7 +77,6 @@ Here are the optional extensions. We recommend enabling them since the project p
 # Setup Instructions for a shared hosting service using CPanel
 
 <details><summary>Click to expand</summary>
-### Extensions management on CPanel
 
 > **Note**: CPanel UI and layout might change based on different providers but the title names and functionalities are mostly the same. The images used in this tutorials are gathered from the internet.
 
