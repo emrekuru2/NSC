@@ -74,9 +74,9 @@ Here are the optional extensions. We recommend enabling them since the project p
 > -   [memcached](https://www.php.net/manual/en/memcached.requirements.php)  (if you use  [Cache](https://codeigniter4.github.io/userguide/libraries/caching.html)  class MemcachedHandler with Memcached)   
 > -   [redis](https://github.com/phpredis/phpredis)  (if you use  [Cache](https://codeigniter4.github.io/userguide/libraries/caching.html)  class RedisHandler)
 
+# Setup Instructions for a shared hosting service using CPanel
 
-<details><summary>Click to expand details on setup instructions</summary>
-### Extensions management on CPanel
+<details><summary>Click to expand</summary>
 
 > **Note**: CPanel UI and layout might change based on different providers but the title names and functionalities are mostly the same. The images used in this tutorials are gathered from the internet.
 
